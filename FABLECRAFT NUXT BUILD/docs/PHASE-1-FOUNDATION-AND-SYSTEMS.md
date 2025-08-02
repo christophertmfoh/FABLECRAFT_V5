@@ -7,7 +7,7 @@ This document consolidates **ALL** foundational information extracted from the o
 
 ### **🎯 What We're Building:**
 1. **Mathematical Spacing System** - 8-point grid + Golden Ratio typography
-2. **Theme System** - 15 complete themes with enterprise-grade CSS variables (WCAG 2.2 AA compliant)  
+2. **Theme System** - 15 complete themes with enterprise-grade CSS variables (designed for WCAG 2.2 AA compliance*)  
 3. **Visual Effects System** - Atmospheric effects, orbs, firefly particles
 4. **Paper Texture System** - Subtle background textures
 5. **Brand System** - Colors, typography, design tokens
@@ -53,6 +53,8 @@ This document consolidates **ALL** foundational information extracted from the o
 --space-16: 64px; /* 8x base - page-level spacing */
 --space-20: 80px; /* 10x base - massive spacing */
 --space-24: 96px; /* 12x base - page sections */
+--space-26: 104px; /* 13x base - desktop hero spacing */
+--space-32: 128px; /* 16x base - desktop sections */
 ```
 
 ### **🏷️ Semantic Spacing Aliases**
@@ -81,8 +83,8 @@ This document consolidates **ALL** foundational information extracted from the o
 }
 
 @media (min-width: 1025px) {
-  --section-spacing: 128px;              /* 16x base - desktop sections */
-  --section-spacing-hero: 104px;         /* 13x base - desktop hero */
+  --section-spacing: var(--space-32);    /* 128px (16x base) - desktop sections */
+  --section-spacing-hero: var(--space-26); /* 104px (13x base) - desktop hero */
 }
 ```
 
@@ -135,7 +137,7 @@ font-family:
 ## 🎭 **THEME SYSTEM** 
 
 ### **🌈 15 Complete Themes + System** 
-*FINAL AUTHORITY: theme-toggle.tsx (313 lines) - Complete production implementation*
+*FINAL AUTHORITY: theme-toggle component (313 lines) - Complete production implementation*
 
 ```typescript
 /* CORE THEMES (2) */
@@ -189,7 +191,7 @@ font-family:
 - **Seasonal**: `halloween` (orange/black)
 
 ### **🎨 Core Color Variables Structure**
-*35+ variables per theme - WCAG AA compliant (4.5:1+ contrast ratios)*
+*35+ variables per theme - designed for WCAG AA compliance (4.5:1+ contrast ratios)*
 
 ```css
 /* EXAMPLE: Light theme (default) actual values */
@@ -978,7 +980,7 @@ export default defineNuxtPlugin(() => {
 - **Clear Error Messages**: Specific, actionable feedback
 
 #### **🎨 Theme Accessibility Features**
-- **15 Themes**: Each meets WCAG AA contrast requirements
+- **15 Themes**: Each designed to meet WCAG AA contrast requirements*
 - **Color Independence**: Information not conveyed by color alone
 - **High Contrast Mode**: Enhanced contrast themes available
 - **Color Vision Support**: CVD-friendly palette testing
@@ -1023,6 +1025,22 @@ export default defineNuxtPlugin(() => {
 - Performance-optimized effects (90% reduction)
 - Semantic naming conventions
 - Research-backed design principles
+
+---
+
+## ⚠️ **IMPORTANT VERIFICATION DISCLAIMER**
+
+**\* WCAG Compliance Claims:** All themes are designed based on established color theory and contrast principles to meet WCAG 2.2 AA standards. However, **actual contrast compliance must be verified** during implementation using tools like:
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [Colour Contrast Analyser (CCA)](https://www.tpgi.com/color-contrast-checker/)
+- [APCA Contrast Calculator](https://www.myndex.com/APCA/) (WCAG 3.0 draft)
+
+Testing should include:
+- ✅ All text colors against their backgrounds (4.5:1 minimum)
+- ✅ Large text (18pt+) against backgrounds (3:1 minimum) 
+- ✅ UI components and icons (3:1 minimum)
+- ✅ Focus indicators (3:1 minimum)
+- ✅ All themes across different devices and browsers
 
 ---
 
