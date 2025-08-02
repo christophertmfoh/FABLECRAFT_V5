@@ -7,5 +7,8 @@ export default defineNuxtConfig({
   devServer: {
     port: 4269,
     host: '0.0.0.0' // Allow external connections for port forwarding
-  }
+  },
+
+  // CSS
+  css: ['~/assets/css/main.css']
 })
