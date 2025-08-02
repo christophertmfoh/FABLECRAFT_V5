@@ -299,7 +299,7 @@ NUXT_PUBLIC_SITE_URL="http://localhost:3000"
 
 ### 2. Update package.json with comprehensive scripts:
 
-Add these scripts to your package.json file for an efficient development workflow.
+Add these scripts to your package.json file for a complete development workflow.
 
 ```json
 "scripts": {
@@ -310,11 +310,15 @@ Add these scripts to your package.json file for an efficient development workflo
   "lint": "eslint .",
   "lint:fix": "eslint . --fix",
   "typecheck": "nuxt typecheck",
+  "clean": "rm -rf .nuxt .output dist",
   "db:start": "supabase start",
   "db:stop": "supabase stop",
   "db:reset": "supabase db reset",
   "db:push": "supabase db push",
-  "db:types": "supabase gen types typescript --local > types/supabase.ts"
+  "db:pull": "supabase db pull",
+  "db:diff": "supabase db diff",
+  "db:types": "supabase gen types typescript --local > types/supabase.ts",
+  "db:status": "supabase status"
 }
 ```
 
