@@ -7,7 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "nuxt typecheck",
+    "clean": "rm -rf .nuxt node_modules/.cache dist .output",
+    "clean:install": "pnpm clean && pnpm install"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.53.0",
@@ -32,12 +37,14 @@
     "@nuxtjs/google-fonts": "3.2.0",
     "@nuxtjs/supabase": "1.6.0",
     "@nuxtjs/tailwindcss": "6.14.0",
+    "@nuxtjs/web-vitals": "0.2.7",
     "@pinia/nuxt": "0.11.2",
     "@tailwindcss/typography": "0.5.16",
     "@types/node": "20.14.15",
     "@vueuse/nuxt": "13.6.0",
     "shadcn-nuxt": "2.2.0",
     "tailwindcss-animate": "1.0.7",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vue-tsc": "3.0.5"
   }
 }
