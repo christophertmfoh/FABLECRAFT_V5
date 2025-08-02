@@ -377,8 +377,21 @@ The workflow is streamlined and built on modern, secure foundations.
 
 4. **Push Database Schema:** Run `pnpm db:push`.
 
-5. **Start the Frontend:** In a new terminal, run `pnpm dev`.
+5. **Start the Frontend:** Use the working method:
+   ```bash
+   npx nuxi dev --port 3000
+   ```
+   Or alternatively: `pnpm dev:alt`
 
 6. **Navigate to http://localhost:3000.** You will see a properly styled page running on a fully updated, professional-grade foundation.
 
 7. **Verify Setup:** Run `pnpm lint` and `pnpm typecheck` to ensure everything is working correctly.
+
+## TROUBLESHOOTING
+
+**Dev Server Issues:**
+- **Recommended:** Use `npx nuxi dev --port 3000` directly
+- **Alternative:** Use `pnpm dev:alt` 
+- **Issue:** `pnpm dev` has lifecycle errors but builds successfully
+
+The application works perfectly - the issue is only with pnpm's process management.

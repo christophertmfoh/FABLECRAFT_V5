@@ -1,75 +1,59 @@
-# Nuxt Minimal Starter
+# Fablecraft Foundation
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modernized Nuxt 3 + Supabase foundation built to industry standards.
 
-## Setup
-
-Make sure to install dependencies:
+## Quick Start
 
 ```bash
-# npm
-npm install
+# Start the development server (RECOMMENDED)
+npx nuxi dev --port 3000
 
-# pnpm
-pnpm install
+# Alternative method
+pnpm dev:alt
 
-# yarn
-yarn install
-
-# bun
-bun install
+# Navigate to http://localhost:3000
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Development Scripts
 
 ```bash
-# npm
-npm run dev
+# Development
+pnpm dev:alt          # Start dev server (alternative method)
+npx nuxi dev          # Start dev server (direct method)
 
-# pnpm
-pnpm dev
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm lint:fix         # Fix ESLint issues
+pnpm typecheck        # Run TypeScript checks
 
-# yarn
-yarn dev
+# Database (Supabase)
+pnpm db:start         # Start local Supabase
+pnpm db:stop          # Stop local Supabase
+pnpm db:push          # Push schema changes
+pnpm db:status        # Check database status
 
-# bun
-bun run dev
+# Build
+pnpm build            # Build for production
+pnpm preview          # Preview production build
 ```
 
-## Production
+## Setup Complete
 
-Build the application for production:
+✅ Nuxt 3 with modern configuration  
+✅ Tailwind CSS with optimized setup  
+✅ Supabase for backend services  
+✅ TypeScript with strict mode  
+✅ ESLint for code quality  
+✅ Husky + Commitlint for git hooks  
+✅ VSCode settings for consistent development  
 
-```bash
-# npm
-npm run build
+## Foundation Status
 
-# pnpm
-pnpm build
+This project has completed all 5 phases of the foundation setup:
+- Phase 1: Project & Dependencies
+- Phase 2: Core Configuration  
+- Phase 3: Essential Files
+- Phase 4: Backend Foundation
+- Phase 5: Workflow & Finalization
 
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Ready for feature development! 🚀
