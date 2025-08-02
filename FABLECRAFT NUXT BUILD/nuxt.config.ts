@@ -10,5 +10,13 @@ export default defineNuxtConfig({
   },
 
   // CSS
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+
+  // Google Fonts
+  googleFonts: {
+    families: {
+      Inter: [400, 500, 600, 700],
+      'JetBrains+Mono': [400, 500]
+    }
+  }
 })
