@@ -2,6 +2,12 @@
 
 A modernized Nuxt 3 + Supabase foundation built to industry standards.
 
+## ⚠️ SAFETY WARNING
+
+**🚨 NEVER RUN `kill node` OR `pkill node` COMMANDS 🚨**
+
+These commands destroy the entire development environment. Use `Ctrl+C` to stop processes safely.
+
 ## Quick Start
 
 ```bash

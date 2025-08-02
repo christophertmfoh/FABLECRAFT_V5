@@ -1,6 +1,24 @@
 # FABLECRAFT - THE MODERNIZED FOUNDATION
 
-**GOAL:** Establish a production-grade, unopinionated foundation for a Nuxt 3 + Supabase application, built with current, stable, and secure dependencies. The result will be a blank white page, with all core technologies correctly installed and configured according to 2025 industry best practices.
+## ⚠️ CRITICAL SAFETY WARNING ⚠️
+
+**🚨 NEVER RUN `kill node` OR `pkill node` COMMANDS 🚨**
+
+These commands will destroy the entire development environment and break the build:
+- `kill node` - DESTROYS all Node.js processes 
+- `pkill node` - KILLS all Node.js applications
+- `killall node` - TERMINATES entire Node.js ecosystem
+
+**SAFE ALTERNATIVES:**
+- To stop dev server: `Ctrl+C` in the terminal
+- To restart: Simply run the start command again
+- To kill specific process: Use process ID, not blanket node killing
+
+**Previous incidents:** Multiple Cursor agents have run these commands and broken builds. This warning prevents future damage.
+
+---
+
+GOAL: Establish a production-grade, unopinionated foundation for a Nuxt 3 + Supabase application, built with current, stable, and secure dependencies. The result will be a blank white page, with all core technologies correctly installed and configured according to 2025 industry best practices. This plan incorporates critical updates based on a professional audit.
 
 This plan incorporates critical updates based on professional audit and real-world implementation.
 
@@ -393,5 +411,24 @@ The workflow is streamlined and built on modern, secure foundations.
 - **Recommended:** Use `npx nuxi dev --port 3000` directly
 - **Alternative:** Use `pnpm dev:alt` 
 - **Issue:** `pnpm dev` has lifecycle errors but builds successfully
+
+**🚨 CRITICAL: NEVER USE DESTRUCTIVE COMMANDS 🚨**
+- **NEVER:** `kill node` / `pkill node` / `killall node`
+- **THESE DESTROY:** Your entire development environment
+- **USE INSTEAD:** `Ctrl+C` to stop processes safely
+- **FOR STUCK PROCESSES:** Find specific PID and kill individually
+
+**Safe Process Management:**
+```bash
+# Safe way to stop dev server
+Ctrl+C
+
+# If process is stuck, find specific process
+ps aux | grep "nuxi dev"
+kill [specific-pid-number]
+
+# Check what's running on port 3000
+lsof -i :3000
+```
 
 The application works perfectly - the issue is only with pnpm's process management.

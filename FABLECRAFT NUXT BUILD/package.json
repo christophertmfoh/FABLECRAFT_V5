@@ -2,6 +2,7 @@
   "name": "fablecraft-foundation",
   "private": true,
   "type": "module",
+  "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "dev": "npx nuxi dev",
     "dev:alt": "npx nuxi dev --port 3000",
