@@ -486,3 +486,192 @@ style={{
 - **No focus management** despite cursor pointer styling
 - **Decorative icons** lack `aria-hidden='true'`
 - **No screen reader content** for star ratings beyond visual representation
+
+### 3.6 PricingSection (Component Analysis Complete)
+
+**File**: `src/features-modern/landing/components/pricing-section.tsx` (337 lines)
+
+#### **STRUCTURE**
+
+**Function Signature & Architecture**:
+```typescript
+export const PricingSection = memo(
+  ({
+    tiers = defaultPricingTiers,
+    className = '',
+    onSelectPlan,
+    isAuthenticated = false,
+    onAuth,
+    onNavigate,
+  }: PricingSectionProps) => { ... }
+)
+```
+
+**Props Interface (`PricingSectionProps`)**:
+- `tiers?: PricingTier[]` - Override default pricing tiers (defaults to 4-tier structure)
+- `className?: string` - Additional CSS classes for root container
+- `onSelectPlan?: (tierId: string) => void` - Plan selection handler
+- `isAuthenticated?: boolean` - Authentication state (defaults to false)
+- `onAuth?: () => void` - Authentication trigger callback
+- `onNavigate?: (view: string) => void` - Navigation handler for authenticated users
+
+**TypeScript Interfaces**:
+- **`PricingTier`**: `{ id: string, name: string, price: string, period?: string, description: string, features: PricingFeature[], isPopular?: boolean, ctaText: string }`
+- **`PricingFeature`**: `{ id: string, text: string, included: boolean }`
+
+**External Dependencies**:
+- **React**: `memo` for performance optimization
+- **UI Components**: `Card`, `CardContent` from `@/components/ui/card`, `Badge` from `@/components/ui/badge`, `Button` from `@/components/ui/button`
+- **Icons**: `CheckCircle` from Lucide React
+
+**Component Architecture**:
+1. **Main Container**: `PricingSection` (memo-wrapped with 6 props)
+2. **Sub-Component**: `PricingCard` (separate memo-wrapped component with complex event handling)
+3. **Header Section**: Badge with pulse animation + Main heading + Description paragraph
+4. **Card Layout**: Flexible row layout (mobile stacked → desktop horizontal)
+
+**Default Data Structure**:
+- **4-Tier Pricing**: Free, Starter ($15/month), Creative Studio ($29/month - Popular), Enterprise (Contact)
+- **Comprehensive Features**: 5-7 features per tier with detailed descriptions
+- **Popular Tier Highlighting**: Creative Studio marked as "Most Popular"
+
+#### **STATE MANAGEMENT & LOGIC**
+
+**Architecture Pattern**: **Dual-Component Memo Pattern with Complex Event Handling**
+- **No Local State**: Both components are purely props-driven with no `useState` or `useEffect` hooks
+- **Double React.memo**: Both main component and sub-component wrapped in `React.memo`
+- **Complex Event Logic**: Authentication-aware CTA button handling with multiple callback paths
+
+**Event Handling Logic in PricingCard**:
+```typescript
+const handleCTAClick = () => {
+  if (onSelectPlan) {
+    onSelectPlan(tier.id);
+  } else if (isAuthenticated && onNavigate) {
+    onNavigate('projects');
+  } else if (onAuth) {
+    onAuth();
+  }
+};
+```
+
+**Conditional Logic Patterns**:
+- **Authentication Flow**: Different CTA behavior based on `isAuthenticated` state
+- **Popular Tier Styling**: `tier.isPopular` controls border color and "Most Popular" badge
+- **Period Display**: Conditional rendering of pricing period (`tier.period && (...)`)
+- **Flexible Layout**: `flex flex-col lg:flex-row` responsive card arrangement
+
+**Data Processing**:
+- **Feature Mapping**: Maps over `tier.features` array with index-based spacing
+- **Tier Mapping**: Maps over `tiers` array with full prop drilling to sub-components
+- **Dynamic CTA Text**: Uses `tier.ctaText` for button customization per tier
+
+**Performance Architecture**:
+- **Prop Drilling**: All event handlers passed down to sub-components
+- **Static Data**: Default pricing tiers defined outside component scope (182 lines of data)
+- **Shallow Comparison**: Both memo components use default shallow prop comparison
+
+#### **STYLING & VISUAL EFFECTS**
+
+**Root Container Styling**:
+```typescript
+className={`relative z-10 max-w-7xl mx-auto px-8 section-spacing-compact ${className}`}
+```
+- **Layout**: Centered container with fixed horizontal padding (`px-8`)
+- **Z-Index**: `z-10` for proper layering above background elements
+- **Spacing**: Mathematical section spacing integration
+
+**Advanced Card Layout System**:
+```typescript
+'flex flex-col lg:flex-row gap-6 max-w-7xl mx-auto mt-acquaintances overflow-x-auto lg:overflow-visible'
+```
+- **Responsive Flex**: Mobile stacked → desktop horizontal layout
+- **Horizontal Scroll**: `overflow-x-auto` for mobile card browsing
+- **Equal Height**: Cards use `h-full flex flex-col` for consistent height
+
+**Complex Visual Effects System**:
+
+**Popular Tier Highlighting**:
+```typescript
+className={`... ${tier.isPopular ? 'border-primary' : ''}`}
+```
+
+**Orb Gradient Background Effect**:
+```typescript
+style={{
+  background: 'linear-gradient(135deg, hsl(var(--orb-primary) / 0.05) 0%, hsl(var(--orb-secondary) / 0.03) 50%, hsl(var(--orb-primary) / 0.02) 100%)'
+}}
+```
+
+**Card Animation System**:
+```typescript
+'group surface-elevated backdrop-blur-lg border-border hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-2 cursor-pointer overflow-hidden relative'
+```
+
+**Mathematical Spacing Integration**:
+- **Friendship Spacing**: `mt-best-friends`, `mt-friends`, `mt-acquaintances` for content relationships
+- **Section Spacing**: `section-spacing-compact` for consistent vertical rhythm
+- **Feature Spacing**: `mt-2` for feature list items, `gap-3` for icon spacing
+
+**Advanced Button Styling**:
+```typescript
+'w-full btn-enhanced gradient-primary text-primary-foreground px-6 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl rounded-2xl focus-ring'
+```
+
+**Visual Effect Components**:
+1. **Popular Badge**: Positioned absolutely with `z-20` layering (`top-2 right-2`)
+2. **Backdrop Blur**: `backdrop-blur-lg` on card containers
+3. **Surface Elevation**: `surface-elevated` theme class integration
+4. **Gradient Overlays**: Dynamic orb-based gradient backgrounds
+5. **Card Flexbox**: `flex-grow` pushes CTA button to bottom for equal heights
+6. **Enhanced Buttons**: Custom `btn-enhanced gradient-primary` styling
+7. **Drop Shadows**: Complex text drop shadows with dark mode variants
+
+**Theme Variable Usage**:
+- **Orb Variables**: `--orb-primary`, `--orb-secondary` for gradient effects
+- **Heading Colors**: `text-heading-primary` for titles and prices
+- **Standard Variables**: `text-foreground`, `text-muted-foreground`, `bg-card/95`
+- **Border Integration**: `border-border`, `border-primary` for popular tier
+
+#### **ACCESSIBILITY & PERFORMANCE**
+
+**ARIA Implementation**:
+- **Missing ARIA**: No `aria-labelledby`, `role`, or `aria-label` attributes on main section
+- **Button Accessibility**: CTA buttons are proper `<Button>` elements with text content
+- **Semantic Structure**: Relies on semantic HTML rather than explicit ARIA
+- **Missing Focus Context**: No section-level accessibility labels
+
+**Semantic HTML Structure**:
+- **Section Element**: `<section>` for main container
+- **Heading Hierarchy**: `<h2>` for main title, `<h3>` for tier names
+- **Card Components**: Semantic `<Card>` and `<CardContent>` structure
+- **Button Elements**: Proper `<Button>` usage for CTAs with click handlers
+
+**Keyboard Navigation & Focus Management**:
+- **Focus States**: `focus-ring` class on CTA buttons for keyboard users
+- **Interactive Elements**: Buttons properly focusable with click handlers
+- **Card Focus**: Cards have `cursor-pointer` but no keyboard interaction
+
+**Performance Optimizations**:
+1. **React.memo (Double)**: Both main and sub-components memoized for optimal re-render prevention
+2. **Component Separation**: PricingCard isolation prevents unnecessary re-renders when individual tiers change
+3. **Static Data**: Large default pricing structure (182 lines) defined outside component scope
+4. **Event Handler Optimization**: `handleCTAClick` defined inside sub-component (could be optimized with useCallback)
+5. **CSS-Based Animations**: All hover effects handled via CSS for optimal performance
+6. **Minimal Dependencies**: Uses shared UI components and single Lucide icon
+
+**Performance Characteristics**:
+- **Large Data Structure**: 182 lines of default pricing data may impact initial load
+- **Complex Prop Drilling**: Multiple callback props passed to sub-components
+- **Authentication Logic**: Conditional rendering based on auth state
+- **Responsive Layout**: Efficient flexbox with overflow handling
+
+**Event Handling Optimization Opportunities**:
+- **useCallback**: `handleCTAClick` could be memoized to prevent sub-component re-renders
+- **Event Delegation**: Could potentially use event delegation for multiple CTA buttons
+- **Prop Stability**: Authentication and navigation callbacks could benefit from useCallback in parent
+
+**Layout Performance**:
+- **Equal Height Cards**: Flexbox layout ensures visual consistency
+- **Responsive Overflow**: Horizontal scroll on mobile prevents layout breaking
+- **Z-Index Management**: Proper layering with popular badge and gradient overlays
