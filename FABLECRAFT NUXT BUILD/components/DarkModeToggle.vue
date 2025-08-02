@@ -14,14 +14,20 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+
 const isDark = ref(false)
 
 onMounted(() => {
-  isDark.value = document.documentElement.classList.contains('dark')
+  if (process.client) {
+    isDark.value = document.documentElement.classList.contains('dark')
+  }
 })
 
 const toggleDarkMode = () => {
-  isDark.value = !isDark.value
-  document.documentElement.classList.toggle('dark')
+  if (process.client) {
+    isDark.value = !isDark.value
+    document.documentElement.classList.toggle('dark')
+  }
 }
 </script>
