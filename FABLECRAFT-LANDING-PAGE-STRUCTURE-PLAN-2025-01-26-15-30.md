@@ -25,7 +25,7 @@
 
 ## **📊 COMPLETE INVENTORY - WHAT WE NEED TO MAKE**
 
-### **🔬 ATOMS** *(5 files)* - Basic building blocks
+### **🔬 ATOMS** *(6 files)* - Basic building blocks
 | **File** | **What It Does** | **Used In** |
 |----------|------------------|-------------|
 | `Button.vue` | CTA buttons, navigation buttons | ALL 8 sections |
@@ -33,14 +33,17 @@
 | `Card.vue` | Base wrapper for content containers | 7 sections |
 | `Icon.vue` | All Lucide icons (stars, arrows, zap, etc.) | ALL sections |
 | `Input.vue` | Form inputs for newsletter signup | Footer section |
+| `Utils.ts` | cn() function, formatters, helpers | Foundation utility |
 
-### **🧪 MOLECULES** *(4 files)* - Simple combinations
+### **🧪 MOLECULES** *(6 files)* - Simple combinations
 | **File** | **What It Does** | **Combines** |
 |----------|------------------|--------------|
+| `BadgeWithDot.vue` | Animated badge with pulsing dot | Badge + pulse animation |
 | `FeatureCard.vue` | Individual feature with icon + description | Icon + Card + text |
 | `TestimonialCard.vue` | Customer quote with rating stars | Card + Icon + text |
 | `PricingCard.vue` | Pricing tier with features list | Card + Button + Badge |
-| `ProcessStep.vue` | Individual workflow step | Icon + text + numbering |
+| `ProcessStepCard.vue` | Individual numbered workflow step | Icon + text + numbering |
+| `SocialLinks.vue` | Social media icons grid | Icons + links + ARIA |
 
 ### **🦣 ORGANISMS** *(8 files)* - Complete page sections
 | **File** | **What It Does** | **Contains** |
@@ -54,12 +57,28 @@
 | `CTASection.vue` | Final call-to-action | Badge + heading + buttons |
 | `FooterSection.vue` | Site footer | Links + newsletter + social |
 
+### **🎭 SPECIAL FEATURES** *(4 files)* - Visual effects & advanced components
+| **File** | **What It Does** | **Purpose** |
+|----------|------------------|-------------|
+| `FireflyEffect.vue` | 142 animated firefly particles | Atmospheric background animation |
+| `BackgroundOrbs.vue` | Floating gradient orbs system | Dynamic background elements |
+| `ThemeToggle.vue` | 14-theme selection component | Advanced theme switching UI |
+| `NavigationDropdown.vue` | Authentication dropdown menu | User menu with 4 sections |
+
+### **🎨 GLOBAL CSS SYSTEMS** *(4 files)* - Advanced styling systems
+| **File** | **What It Does** | **Purpose** |
+|----------|------------------|-------------|
+| `mathematical-spacing.css` | Golden Ratio + Friendship spacing | 373 lines of custom spacing |
+| `theme-system.css` | 14 themes with 490+ variables | Complete theming system |
+| `visual-effects.css` | Atmospheric + hover effects | 350+ lines of effects |
+| `paper-texture.css` | Background texture system | Paper-like texture integration |
+
 ### **🧠 LOGIC & UTILITIES** *(4 files)* - Behind-the-scenes functionality
 | **File** | **What It Does** | **Purpose** |
 |----------|------------------|-------------|
 | `useTheme.ts` | Theme switching logic | Light/dark mode toggle |
 | `useNavigation.ts` | Navigation helpers | Smooth scroll, menu actions |
-| `utils.ts` | Helper functions | CSS class merging, formatters |
+| `useNewsletter.ts` | Newsletter signup logic | Email validation, submission |
 | `data.ts` | Content data | Pricing info, testimonials, features |
 
 ### **📄 PAGES** *(1 file)* - The actual webpage
@@ -91,10 +110,12 @@ FABLECRAFT NUXT BUILD/
 │   └── organisms/             # 🔲 CREATE THIS FOLDER
 ```
 
-#### **Step 2: Create Logic & Utility Folders**
+#### **Step 2: Create Additional Component & System Folders**
 ```
 FABLECRAFT NUXT BUILD/
-├── lib/                       # 🔲 CREATE THIS FOLDER
+├── components/
+│   └── effects/               # 🔲 CREATE THIS FOLDER
+├── assets/css/                # ✅ EXISTS - will enhance with more files
 ├── composables/               # 🔲 CREATE THIS FOLDER (may exist)
 └── constants/                 # 🔲 CREATE THIS FOLDER
 ```
@@ -106,16 +127,19 @@ components/atoms/
 ├── 🔲 Badge.vue               # CREATE - Status badges with variants
 ├── 🔲 Card.vue                # CREATE - Base card container
 ├── 🔲 Icon.vue                # CREATE - Lucide icon wrapper
-└── 🔲 Input.vue               # CREATE - Form input component
+├── 🔲 Input.vue               # CREATE - Form input component
+└── 🔲 Utils.ts                # CREATE - Helper functions (cn, formatters)
 ```
 
 #### **Step 4: Create Molecule Components**
 ```
 components/molecules/
+├── 🔲 BadgeWithDot.vue        # CREATE - Animated badge with pulse dot
 ├── 🔲 FeatureCard.vue         # CREATE - Feature display card
 ├── 🔲 TestimonialCard.vue     # CREATE - Customer testimonial
 ├── 🔲 PricingCard.vue         # CREATE - Pricing tier display
-└── 🔲 ProcessStep.vue         # CREATE - Workflow step item
+├── 🔲 ProcessStepCard.vue     # CREATE - Numbered workflow step
+└── 🔲 SocialLinks.vue         # CREATE - Social media icons grid
 ```
 
 #### **Step 5: Create Organism Components**
@@ -131,23 +155,40 @@ components/organisms/
 └── 🔲 FooterSection.vue       # CREATE - Site footer
 ```
 
-#### **Step 6: Create Logic & Utility Files**
+#### **Step 6: Create Special Features**
 ```
-lib/
-└── 🔲 utils.ts                # CREATE - Helper functions
+components/effects/
+├── 🔲 FireflyEffect.vue       # CREATE - 142 animated firefly particles
+├── 🔲 BackgroundOrbs.vue      # CREATE - Floating gradient orbs
+├── 🔲 ThemeToggle.vue         # CREATE - 14-theme selection component
+└── 🔲 NavigationDropdown.vue  # CREATE - Authentication dropdown menu
+```
 
+#### **Step 7: Create Global CSS Systems**
+```
+assets/css/
+├── ✅ main.css                # ENHANCE - Basic setup exists
+├── 🔲 mathematical-spacing.css # CREATE - Golden Ratio + Friendship spacing
+├── 🔲 theme-system.css        # CREATE - 14 themes with 490+ variables
+├── 🔲 visual-effects.css      # CREATE - Atmospheric + hover effects
+└── 🔲 paper-texture.css       # CREATE - Background texture system
+```
+
+#### **Step 8: Create Logic & Utility Files**
+```
 composables/
 ├── 🔲 useTheme.ts             # CREATE - Theme switching logic
-└── 🔲 useNavigation.ts        # CREATE - Navigation helpers
+├── 🔲 useNavigation.ts        # CREATE - Navigation helpers
+└── 🔲 useNewsletter.ts        # CREATE - Newsletter signup logic
 
 constants/
 └── 🔲 data.ts                 # CREATE - Content data
 ```
 
-#### **Step 7: Enhance Existing Page**
+#### **Step 9: Enhance Existing Page**
 ```
 pages/
-└── ✅ index.vue               # ENHANCE - Add all organisms
+└── ✅ index.vue               # ENHANCE - Add all organisms + special features
 ```
 
 ---
@@ -155,30 +196,45 @@ pages/
 ## **🎯 BUILD ORDER RECOMMENDATION**
 
 ### **Phase 1: Foundation** *(Create structure)*
-1. Create all folder directories
-2. Create all empty .vue and .ts files
-3. Verify structure is correct
+1. Create all folder directories (components, effects, assets, composables, constants)
+2. Create all empty .vue, .ts, and .css files
+3. Install dependencies (`lucide-vue-next`, `clsx`, `tailwind-merge`)
+4. Verify structure is correct
 
-### **Phase 2: Atoms** *(Build building blocks)*
-1. Start with `Button.vue` (used everywhere)
-2. Build `Icon.vue` (used everywhere)
-3. Build `Card.vue` (base for many components)
-4. Build `Badge.vue` and `Input.vue`
+### **Phase 2: Atoms & Utilities** *(Build building blocks)*
+1. Start with `Utils.ts` (needed by everything)
+2. Build `Button.vue` (used everywhere)
+3. Build `Icon.vue` (used everywhere)
+4. Build `Card.vue`, `Badge.vue`, `Input.vue`
 
 ### **Phase 3: Molecules** *(Combine atoms)*
-1. Build molecules one by one
-2. Test each molecule as you build it
-3. Verify they work with the atoms
+1. Build `BadgeWithDot.vue`, `SocialLinks.vue`
+2. Build content molecules (`FeatureCard.vue`, `TestimonialCard.vue`)
+3. Build interactive molecules (`PricingCard.vue`, `ProcessStepCard.vue`)
+4. Test each molecule as you build it
 
-### **Phase 4: Organisms** *(Complete sections)*
+### **Phase 4: Global CSS Systems** *(Styling foundation)*
+1. Build `mathematical-spacing.css` (Golden Ratio + Friendship spacing)
+2. Build `theme-system.css` (14 themes with 490+ variables)
+3. Build `visual-effects.css` (atmospheric + hover effects)
+4. Build `paper-texture.css` (background texture system)
+
+### **Phase 5: Organisms** *(Complete sections)*
 1. Start with `HeroSection.vue` (most visible)
-2. Build sections one by one
-3. Test each section in isolation
+2. Build `NavigationHeader.vue`, `FooterSection.vue`
+3. Build content sections (`FeatureCards.vue`, `TestimonialsSection.vue`)
+4. Build interactive sections (`PricingSection.vue`, `CTASection.vue`, `ProcessSteps.vue`)
 
-### **Phase 5: Assembly** *(Put it all together)*
-1. Update `pages/index.vue` to use all organisms
-2. Add logic files (`useTheme.ts`, etc.)
-3. Add content data (`data.ts`)
+### **Phase 6: Special Features** *(Advanced effects)*
+1. Build `ThemeToggle.vue` (14-theme selection)
+2. Build `NavigationDropdown.vue` (authentication dropdown)
+3. Build `FireflyEffect.vue` (142 animated particles)
+4. Build `BackgroundOrbs.vue` (floating gradient orbs)
+
+### **Phase 7: Logic & Assembly** *(Put it all together)*
+1. Build composables (`useTheme.ts`, `useNavigation.ts`, `useNewsletter.ts`)
+2. Add content data (`data.ts`)
+3. Update `pages/index.vue` to use all organisms + special features
 4. Final testing and polish
 
 ---
@@ -187,15 +243,17 @@ pages/
 
 | **Category** | **File Count** | **Status** |
 |--------------|---------------:|------------|
-| **Atoms** | 5 files | 🔲 To create |
-| **Molecules** | 4 files | 🔲 To create |
+| **Atoms** | 6 files | 🔲 To create |
+| **Molecules** | 6 files | 🔲 To create |
 | **Organisms** | 8 files | 🔲 To create |
-| **Logic** | 4 files | 🔲 To create |
+| **Special Features** | 4 files | 🔲 To create |
+| **Global CSS Systems** | 4 files | 🔲 To create (1 exists, needs enhancement) |
+| **Logic & Utilities** | 4 files | 🔲 To create |
 | **Pages** | 1 file | ✅ Exists (needs enhancement) |
 
-**TOTAL NEW FILES TO CREATE: 21 files**
+**TOTAL NEW FILES TO CREATE: 32 files**
 
-**EXISTING FILES TO ENHANCE: 1 file**
+**EXISTING FILES TO ENHANCE: 2 files** (index.vue + main.css)
 
 ---
 
