@@ -7,7 +7,7 @@ This document consolidates **ALL** foundational information extracted from the o
 
 ### **🎯 What We're Building:**
 1. **Mathematical Spacing System** - 8-point grid + Golden Ratio typography
-2. **Theme System** - 14 themes with enterprise-grade CSS variables  
+2. **Theme System** - 9 themes with enterprise-grade CSS variables (WCAG AA compliant)  
 3. **Visual Effects System** - Atmospheric effects, orbs, firefly particles
 4. **Paper Texture System** - Subtle background textures
 5. **Brand System** - Colors, typography, design tokens
@@ -114,55 +114,83 @@ font-family:
 
 ## 🎭 **THEME SYSTEM** 
 
-### **🌈 14 Complete Themes**
+### **🌈 9 Complete Themes** 
+*CORRECTED: Actual implementation from REF_BUILD (WCAG AA compliant)*
+
 ```css
-/* Base Theme Categories */
-1. light           /* Default parchment classic */
-2. dark            /* Rich charcoal */
-3. arctic-focus    /* Cool blues and whites */
-4. golden-hour     /* Warm yellows */
-5. midnight-ink    /* Deep blue-black */
-6. forest-manuscript /* Earth greens */
-7. starlit-prose   /* Purple nights */
-8. coffee-house    /* Warm browns */
-9. sunset-coral    /* Modern coral */
-10. lavender-dusk  /* Modern purple */
-11. moonlit-garden /* Modern green */
-12. cherry-lacquer /* Modern red */
-13. dragons-hoard  /* Fantasy gold */
-14. cosmic-purple  /* Cosmic theme */
+/* LIGHT THEMES (5 themes) - Productivity & Clarity */
+1. light           /* Default: Parchment classic with burgundy accents */
+2. arctic-focus    /* Cool blues and whites - minimal, clean */
+3. golden-hour     /* Warm yellows optimized for inspiration */
+4. sunset-coral    /* Warm coral and soft gold */
+5. lavender-dusk   /* Soft lavender and warm grey */
+
+/* DARK THEMES (6 themes) - Focus & Comfort */
+6. dark            /* Default: Rich charcoal with warm amber accents */
+7. midnight-ink    /* Deep blue-black for focused writing */
+8. forest-manuscript /* Deep greens for nature-inspired writing */
+9. starlit-prose   /* Deep purple night sky theme */
+10. coffee-house   /* Warm browns for cozy writing sessions */
+11. halloween      /* Orange and black spooky theme - seasonal */
 ```
 
-### **🎨 Core Color Variables (per theme)**
-```css
-/* Essential CSS Variables (35+ per theme) */
---background: [HSL];
---foreground: [HSL];
---card: [HSL];
---card-foreground: [HSL];
---popover: [HSL];
---popover-foreground: [HSL];
---primary: [HSL];
---primary-foreground: [HSL];
---secondary: [HSL];
---secondary-foreground: [HSL];
---muted: [HSL];
---muted-foreground: [HSL];
---accent: [HSL];
---accent-foreground: [HSL];
---destructive: [HSL];
---destructive-foreground: [HSL];
---border: [HSL];
---input: [HSL];
---ring: [HSL];
+### **🎯 Theme Classification & Usage**
+- **Defaults**: `light` (burgundy/parchment) & `dark` (amber/charcoal)
+- **Focus modes**: `arctic-focus` (minimal) & `midnight-ink` (deep blue)
+- **Creative moods**: `golden-hour` (inspiration) & `coffee-house` (cozy)
+- **Nature themes**: `forest-manuscript` (green) & `sunset-coral` (coral)
+- **Calm themes**: `lavender-dusk` (purple-grey) & `starlit-prose` (purple-night)  
+- **Seasonal**: `halloween` (orange/black)
 
-/* Special Variables */
---orb-primary: [HSL];      /* Background orb colors */
---orb-secondary: [HSL];
---orb-tertiary: [HSL];
---texture-grain: [HSL];    /* Paper texture colors */
---texture-fiber: [HSL];
---auth-button-primary: [HSL]; /* Button colors */
+### **🎨 Core Color Variables Structure**
+*35+ variables per theme - WCAG AA compliant (4.5:1+ contrast ratios)*
+
+```css
+/* EXAMPLE: Light theme (default) actual values */
+:root, [data-theme="light"] {
+  /* Core UI Colors */
+  --background: 45 25% 96%;      /* Warm parchment */
+  --foreground: 15 25% 15%;      /* Dark brown (8.1:1) */
+  --card: 45 20% 93%;            /* Card surface */
+  --card-foreground: 15 25% 15%; /* Dark brown text */
+  --popover: 45 20% 90%;         /* Popover background */
+  --popover-foreground: 15 25% 15%; /* Dark text */
+  
+  /* Brand Colors */
+  --primary: 350 70% 40%;        /* Burgundy */
+  --primary-foreground: 0 0% 98%; /* White text */
+  --secondary: 35 40% 85%;       /* Warm beige */
+  --secondary-foreground: 15 25% 15%; /* Dark text */
+  
+  /* State Colors */
+  --muted: 40 15% 88%;           /* Muted background */
+  --muted-foreground: 15 20% 40%; /* Softer text (4.9:1) */
+  --accent: 35 45% 80%;          /* Accent beige */
+  --accent-foreground: 15 25% 15%; /* Dark text */
+  --destructive: 0 65% 50%;      /* Error red */
+  --destructive-foreground: 0 0% 98%; /* White */
+  
+  /* Form Elements */
+  --border: 35 20% 85%;          /* Border color */
+  --input: 35 20% 85%;           /* Input border */
+  --ring: 350 70% 40%;           /* Focus ring */
+  --radius: 0.5rem;              /* Border radius */
+
+  /* Special Theme Variables */
+  --orb-primary: 350 70% 40%;    /* Burgundy orb */
+  --orb-secondary: 35 40% 70%;   /* Beige orb */
+  --auth-button-primary: 350 70% 35%;       /* Burgundy button */
+  --auth-button-primary-hover: 350 70% 30%; /* Darker burgundy */
+}
+
+/* Dark theme example */
+[data-theme="dark"] {
+  --background: 220 15% 13%;     /* Rich charcoal */
+  --foreground: 45 15% 90%;      /* Warm white (7.5:1) */
+  --primary: 35 75% 55%;         /* Warm amber */
+  --orb-primary: 35 75% 55%;     /* Amber orb */
+  /* ...35+ more variables per theme */
+}
 ```
 
 ### **🔄 Theme Implementation Strategy**
@@ -308,7 +336,7 @@ body::before {
 assets/css/
 ├── main.css                  /* Import point for all CSS systems */
 ├── mathematical-spacing.css  /* Phase 1a - Core spacing system */
-├── theme-system.css          /* Phase 1b - All 14 themes */
+├── theme-system.css          /* Phase 1b - All 9 themes with light/dark modes */
 ├── visual-effects.css        /* Phase 1c - Orbs, fireflies, glow */
 └── paper-texture.css         /* Phase 1d - Background textures */
 
@@ -337,7 +365,7 @@ plugins/                     /* NEW - Nuxt-specific initialization */
 // composables/useTheme.ts - Nuxt pattern
 export const useTheme = () => {
   // SSR-safe state using useState
-  const currentTheme = useState('theme', () => 'theme-default')
+  const currentTheme = useState('theme', () => 'light')
   
   // Client-only localStorage sync
   const initTheme = () => {
@@ -374,7 +402,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-        'data-theme': 'theme-default', // Default theme for SSR
+        'data-theme': 'light', // Default theme for SSR
       }
     }
   },
@@ -421,7 +449,7 @@ export default defineNuxtPlugin(() => {
 
 ### **✅ Phase 1 Complete When:**
 1. ✅ Mathematical spacing system working
-2. ✅ All 14 themes switching properly  
+2. ✅ All 9 themes switching properly (light/dark modes)  
 3. ✅ Golden ratio typography scaling
 4. ✅ Visual effects rendering smoothly
 5. ✅ Paper texture blending correctly
