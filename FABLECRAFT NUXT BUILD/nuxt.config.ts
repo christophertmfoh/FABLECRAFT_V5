@@ -24,6 +24,32 @@ export default defineNuxtConfig({
     }
   },
 
+  // Performance optimizations
+  nitro: {
+    compressPublicAssets: true,
+  },
+
+  // Better error handling - explicit SSR
+  ssr: true,
+  
+  // Add head defaults
+  app: {
+    head: {
+      title: 'Fablecraft',
+      meta: [
+        { name: 'description', content: 'Modern development foundation for scalable web applications' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      ]
+    }
+  },
+
+  // Build optimizations
+  vite: {
+    build: {
+      target: 'esnext'
+    }
+  },
+
   // Enable TypeScript strict mode for code quality
   typescript: {
     strict: true,
