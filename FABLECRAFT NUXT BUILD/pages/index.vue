@@ -23,14 +23,27 @@ onMounted(() => {
       <p class="text-xl text-gray-600">Modernized build environment is ready.</p>
       
       <!-- Supabase Status -->
-      <div class="mt-8 p-4 bg-white rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-2">Supabase Status</h3>
+      <div class="bg-white p-6 rounded-lg shadow-sm border max-w-md mx-auto">
+        <h2 class="text-lg font-semibold mb-4">Supabase Status</h2>
         <div class="space-y-2 text-sm">
-          <p>Connection: <span class="font-mono text-green-600">✓ Connected</span></p>
-          <p>User: <span class="font-mono">{{ user ? user.email : 'Not logged in' }}</span></p>
-          <p>Database: <span class="font-mono text-green-600">✓ Ready</span></p>
+          <div class="flex justify-between">
+            <span>Connection:</span>
+            <span class="text-green-600 font-medium">✓ Connected</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Authentication:</span>
+            <span class="text-green-600 font-medium">✓ Ready</span>
+          </div>
+          <div class="flex justify-between">
+            <span>User Status:</span>
+            <span class="text-blue-600 font-medium">{{ user ? 'Logged In' : 'Not logged in' }}</span>
+          </div>
         </div>
       </div>
+      
+      <p class="text-sm text-gray-500">
+        Ready to build amazing things! 🚀
+      </p>
     </div>
   </div>
 </template>
