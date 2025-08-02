@@ -1,12 +1,9 @@
+<!-- file: pages/index.vue -->
 <template>
-  <div class="min-h-screen bg-background text-foreground flex items-center justify-center">
-    <DarkModeToggle />
-    <div class="text-center space-y-6">
-      <h1 class="text-4xl font-bold text-primary">Welcome to Fablecraft</h1>
-      <p class="text-lg text-muted-foreground">Your creative writing platform</p>
-      <button class="px-6 py-3 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-        Get Started
-      </button>
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="text-center">
+      <h1 class="text-2xl font-semibold">Fablecraft Foundation</h1>
+      <p class="text-gray-600 mt-2">Modernized build environment is ready.</p>
     </div>
   </div>
 </template>

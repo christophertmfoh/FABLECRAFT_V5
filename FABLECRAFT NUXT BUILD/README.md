@@ -1,75 +1,65 @@
-# Nuxt Minimal Starter
+# Fablecraft Foundation
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A modernized Nuxt 3 + Supabase foundation built to industry standards.
 
-## Setup
+## ⚠️ SAFETY WARNING
 
-Make sure to install dependencies:
+**🚨 NEVER RUN `kill node` OR `pkill node` COMMANDS 🚨**
 
-```bash
-# npm
-npm install
+These commands destroy the entire development environment. Use `Ctrl+C` to stop processes safely.
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Quick Start
 
 ```bash
-# npm
-npm run dev
+# Start the development server (RECOMMENDED)
+npx nuxi dev --port 3000
 
-# pnpm
-pnpm dev
+# Alternative method
+pnpm dev:alt
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
+# Navigate to http://localhost:3000
 ```
 
-## Production
-
-Build the application for production:
+## Development Scripts
 
 ```bash
-# npm
-npm run build
+# Development
+pnpm dev:alt          # Start dev server (alternative method)
+npx nuxi dev          # Start dev server (direct method)
 
-# pnpm
-pnpm build
+# Code Quality
+pnpm lint             # Run ESLint
+pnpm lint:fix         # Fix ESLint issues
+pnpm typecheck        # Run TypeScript checks
 
-# yarn
-yarn build
+# Database (Supabase)
+pnpm db:start         # Start local Supabase
+pnpm db:stop          # Stop local Supabase
+pnpm db:push          # Push schema changes
+pnpm db:status        # Check database status
 
-# bun
-bun run build
+# Build
+pnpm build            # Build for production
+pnpm preview          # Preview production build
 ```
 
-Locally preview production build:
+## Setup Complete
 
-```bash
-# npm
-npm run preview
+✅ Nuxt 3 with modern configuration  
+✅ Tailwind CSS with optimized setup  
+✅ Supabase for backend services  
+✅ TypeScript with strict mode  
+✅ ESLint for code quality  
+✅ Husky + Commitlint for git hooks  
+✅ VSCode settings for consistent development  
 
-# pnpm
-pnpm preview
+## Foundation Status
 
-# yarn
-yarn preview
+This project has completed all 5 phases of the foundation setup:
+- Phase 1: Project & Dependencies
+- Phase 2: Core Configuration  
+- Phase 3: Essential Files
+- Phase 4: Backend Foundation
+- Phase 5: Workflow & Finalization
 
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Ready for feature development! 🚀

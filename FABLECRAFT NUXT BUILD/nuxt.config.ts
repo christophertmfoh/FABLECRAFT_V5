@@ -1,22 +1,35 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // Required for Nuxt 3.18+ to ensure future compatibility
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-  
-  // Development server configuration
-  devServer: {
-    port: 4269,
-    host: '0.0.0.0' // Allow external connections for port forwarding
-  },
 
-  // CSS
+  // Enable essential modules for the core stack
+  modules: [
+    '@nuxtjs/supabase',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+    '@nuxt/eslint'
+  ],
+
+  // Explicitly load the global stylesheet
   css: ['~/assets/css/main.css'],
 
-  // Google Fonts
-  googleFonts: {
-    families: {
-      Inter: [400, 500, 600, 700],
-      'JetBrains+Mono': [400, 500]
+  // Supabase configuration for authentication redirects
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      exclude: [], // No pages excluded by default
     }
-  }
+  },
+
+  // Enable TypeScript strict mode for code quality
+  typescript: {
+    strict: true,
+    typeCheck: false, // Temporarily disabled due to Vite plugin compatibility
+  },
+
+  // Enable Nuxt DevTools for development
+  devtools: { enabled: true }
 })
