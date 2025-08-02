@@ -1,781 +1,691 @@
-# Fablecraft Setup Guide - Optimized Edition
+# FABLECRAFT SETUP GUIDE - PRODUCTION-READY EDITION
 
-Building Fablecraft with the **Integrated Supabase Stack** - optimized for performance, developer velocity, and scalability.
+Building Fablecraft with a **scalable, maintainable architecture** optimized for creative companies.
 
-## Tech Stack
+## Quick Start
 
+```bash
+# Clone and setup
+npx nuxi@latest init fablecraft-app
+cd fablecraft-app
+
+# Install pnpm
+npm install -g pnpm
+
+# Install all dependencies (copy from Phase 1, Step 1.3)
+# Start development
+pnpm dev
+```
+
+## Tech Stack Overview
+
+### Core Framework
 - **Nuxt 3** - Full-stack Vue framework with SSR/SSG capabilities
-- **Supabase** - PostgreSQL database with pgvector extension, authentication, and storage
-- **Tailwind CSS v3** - Utility-first CSS framework (stable version, not v4 alpha)
-- **Pinia** - Official Vue state management
-- **Tiptap v2** - Extensible rich text editor
-- **Shadcn-vue** - High-quality component library built on Radix Vue
-- **Gemini AI** - Initial AI integration using Google's free tier
-- **PiAPI** - Future AI expansion for advanced generative capabilities ([piapi.ai](https://piapi.ai/))
+- **Vue 3** - Progressive JavaScript framework with Composition API
+- **TypeScript** - Type safety and better developer experience
 
-## Key Optimizations & Considerations
+### Database & Backend
+- **Supabase** - PostgreSQL database with real-time capabilities
+- **pgvector** - Vector similarity search for AI-powered features
+- **Edge Functions** - Serverless functions for API endpoints
 
-### pgvector Performance
-- ✅ HNSW indexing (superior to IVFFlat for most use cases)
-- ✅ Tuned index parameters: `m = 16, ef_construction = 64`
-- ✅ Hybrid search combining vector similarity + full-text search
-- ✅ 768-dimensional vectors (optimized for Gemini embeddings)
+### Styling & UI
+- **Tailwind CSS v3** - Utility-first CSS framework
+- **Shadcn-vue** - Copy-paste component library with Radix UI
+- **Lucide Icons** - Beautiful & consistent icon set
 
-### Server Architecture
-- ✅ Nuxt server routes for quick database operations
-- ✅ Supabase Edge Functions for AI/long-running tasks
-- ✅ Clear separation of concerns for optimal performance
+### State Management
+- **Pinia** - Official Vue.js state management
+- **VueUse** - Collection of Vue Composition utilities
 
-### Version Management
-- ✅ Exact version locking with `--save-exact`
-- ✅ Tailwind CSS v3 (stable) instead of v4 (alpha)
-- ✅ Synchronized Tiptap extension versions
-- ✅ `.npmrc` configuration for consistent installs
+### Content Editor
+- **Tiptap v2** - Headless rich text editor
+- **ProseMirror** - Powerful document editing framework
+
+### AI Integration
+- **Gemini AI** - Google's AI for content generation
+- **PiAPI** - Additional AI capabilities
+
+### Development Tools
+- **Vite** - Lightning-fast build tool
+- **ESLint & Prettier** - Code quality and formatting
+- **Vue DevTools** - Debugging and development
+
+## Key Optimizations
+
+### 1. **pgvector for AI Features**
+- Semantic search across manuscripts
+- AI-powered content recommendations
+- Similar character/plot finding
+- Intelligent content organization
+
+### 2. **Server Architecture**
+- Edge computing for global performance
+- Server-side rendering for SEO
+- API routes with middleware
+- Real-time collaboration support
+
+### 3. **Version Management**
+- Git-based version control
+- Automatic save with debouncing
+- Conflict resolution system
+- Rollback capabilities
 
 ## Phase 1: Project Foundation
 
+### Step 1.1: Initialize Nuxt Project
 ```bash
-# Create project directory
-mkdir fablecraft-app && cd fablecraft-app
+# Create project with latest Nuxt
+npx nuxi@latest init fablecraft-app
+cd fablecraft-app
 
-# Initialize Nuxt 3 with latest version
-npx nuxi@latest init . --force
-
-# Initialize git repository
-git init
-
-# Create version locking configuration
-echo "save-exact=true" > .npmrc
-
-# Install core dependencies with exact versions
-npm install --save-exact \
-  @nuxtjs/supabase@1.4.0 \
-  @pinia/nuxt@0.7.0 \
-  @vueuse/nuxt@11.3.0
-
-# Install Tiptap with synchronized versions
-npm install --save-exact \
-  @tiptap/vue-3@2.10.3 \
-  @tiptap/pm@2.10.3 \
-  @tiptap/starter-kit@2.10.3
-
-# Install UI dependencies
-npm install -D --save-exact \
-  @nuxtjs/tailwindcss@6.12.2 \
-  shadcn-nuxt@0.10.4 \
-  radix-vue@1.10.0 \
-  class-variance-authority@0.7.1 \
-  clsx@2.1.1 \
-  tailwind-merge@2.6.0 \
-  lucide-vue-next@0.460.0
+# Use pnpm for better performance
+npm install -g pnpm
 ```
 
-### Create Page Structure
+### Step 1.2: Configure Package Manager
+Create `.npmrc`:
+```
+save-exact=true
+auto-install-peers=true
+```
 
+### Step 1.3: Install Core Dependencies
 ```bash
-# Create pages directory structure
-mkdir -p pages/project/\[id\]
+# Core
+pnpm add -D typescript @types/node
 
-# Create page files
-touch pages/index.vue
-touch pages/project/\[id\]/index.vue
-touch pages/project/\[id\]/world-bible.vue
-touch pages/project/\[id\]/outline.vue
-touch pages/project/\[id\]/manuscript.vue
-touch pages/project/\[id\]/storyboard.vue
-touch pages/project/\[id\]/pre-vis.vue
-touch pages/project/\[id\]/scoring.vue
-touch pages/project/\[id\]/community.vue
+# Nuxt Modules
+pnpm add -D @nuxtjs/tailwindcss@latest
+pnpm add -D @pinia/nuxt@latest
+pnpm add -D @vueuse/nuxt@latest
+pnpm add -D @nuxtjs/google-fonts@latest
+pnpm add -D @nuxt/eslint@latest
+pnpm add -D @nuxt/image@latest
+
+# Supabase
+pnpm add @supabase/supabase-js@latest
+pnpm add -D @nuxtjs/supabase@latest
+
+# UI Components
+pnpm add -D shadcn-nuxt@latest
+pnpm add radix-vue@latest
+pnpm add lucide-vue-next@latest
+pnpm add class-variance-authority@latest
+pnpm add clsx@latest
+pnpm add tailwind-merge@latest
+
+# Tailwind Plugins
+pnpm add -D tailwindcss-animate @tailwindcss/typography
+
+# Editor
+pnpm add @tiptap/vue-3@latest
+pnpm add @tiptap/pm@latest
+pnpm add @tiptap/starter-kit@latest
+pnpm add @tiptap/extension-collaboration@latest
+pnpm add @tiptap/extension-placeholder@latest
+pnpm add @tiptap/extension-character-count@latest
+```
+
+### Step 1.4: Project Structure
+```
+fablecraft-app/
+├── app/                      # Nuxt 3 app directory
+│   ├── components/          # Vue components
+│   │   ├── ui/             # Shadcn components
+│   │   ├── editor/         # Tiptap components
+│   │   └── layout/         # Layout components
+│   ├── composables/        # Vue composables
+│   ├── layouts/            # App layouts
+│   ├── pages/              # Route pages
+│   ├── plugins/            # Nuxt plugins
+│   └── utils/              # Utility functions
+├── server/                  # Server directory
+│   ├── api/                # API routes
+│   ├── middleware/         # Server middleware
+│   └── utils/              # Server utilities
+├── public/                  # Static assets
+├── assets/                  # Build-time assets
+│   └── css/               # Global styles
+├── stores/                  # Pinia stores
+├── types/                   # TypeScript types
+└── supabase/               # Database files
+    ├── migrations/         # SQL migrations
+    └── functions/          # Edge functions
 ```
 
 ## Phase 2: Tailwind CSS v3 Configuration
 
+### Step 2.1: Initialize Tailwind
 ```bash
-# Initialize Tailwind CSS v3 (NOT v4)
-npx tailwindcss@3.4.14 init
+npx tailwindcss init
 ```
 
-### Configure `tailwind.config.js`:
-
+### Step 2.2: Configure tailwind.config.js
 ```javascript
-/** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss'
+import animate from 'tailwindcss-animate'
+import typography from '@tailwindcss/typography'
+
 export default {
+  darkMode: 'class',
   content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./app.vue",
-    "./error.vue",
+    './app/**/*.{js,vue,ts}',
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+    },
   },
-  plugins: [],
+  plugins: [animate, typography],
+} satisfies Config
+```
+
+### Step 2.3: Create Global CSS
+Create `assets/css/main.css`:
+```css
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+  }
 }
 ```
 
 ## Phase 3: Supabase Local Development
 
+### Step 3.1: Install Supabase CLI
 ```bash
-# Install Supabase CLI as dev dependency
-npm install -D supabase@1.210.1
+# Install via npm
+npm install -g supabase
 
-# Initialize Supabase in project
-npx supabase init
-
-# Start local Supabase instance (requires Docker)
-npx supabase start
+# Or via Homebrew (macOS)
+brew install supabase/tap/supabase
 ```
 
-### Create `.env` file:
-
+### Step 3.2: Initialize Supabase
 ```bash
-# Local Supabase
-SUPABASE_URL="http://localhost:54321"
-SUPABASE_ANON_KEY="your-local-anon-key-from-supabase-start"
-SUPABASE_SERVICE_KEY="your-local-service-key-from-supabase-start"
+# Initialize local project
+supabase init
+
+# Start local development
+supabase start
+```
+
+### Step 3.3: Create .env file
+```env
+SUPABASE_URL=http://localhost:54321
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_KEY=your-service-key
+DATABASE_URL=postgresql://postgres:postgres@localhost:54322/postgres
+GEMINI_API_KEY=your-gemini-api-key
+PIAPI_KEY=your-piapi-key
+```
+
+### Step 3.4: Create .env.example file
+```env
+# Copy this file to .env and fill in your actual values
+
+# Supabase Configuration
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_KEY=
+DATABASE_URL=
 
 # AI Configuration
-GEMINI_API_KEY="your-gemini-api-key"
-
-# Future AI expansion (PiAPI)
-# PIAPI_KEY="your-piapi-key"
-# PIAPI_MIDJOURNEY_ENDPOINT="https://api.piapi.ai/midjourney"
-# PIAPI_DREAM_MACHINE_ENDPOINT="https://api.piapi.ai/dream-machine"
+GEMINI_API_KEY=
+PIAPI_KEY=
 ```
 
-## Phase 4: Optimized Database Schema
+## Phase 4: Optimized Database Schema with pgvector
 
-Create `supabase/migrations/001_initial_schema.sql`:
-
+### Step 4.1: Enable pgvector Extension
+Create `supabase/migrations/001_enable_pgvector.sql`:
 ```sql
--- Enable pgvector extension for AI embeddings
-CREATE EXTENSION IF NOT EXISTS vector WITH SCHEMA extensions;
+-- Enable pgvector extension
+CREATE EXTENSION IF NOT EXISTS vector;
 
--- Enable pg_trgm for better text search
-CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA extensions;
+-- Enable UUID generation
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
 
--- User profiles table
-CREATE TABLE profiles (
-  id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
-  email TEXT UNIQUE,
+### Step 4.2: Core Database Schema
+Create `supabase/migrations/002_core_schema.sql`:
+```sql
+-- Users table (extends Supabase auth.users)
+CREATE TABLE public.profiles (
+  id UUID REFERENCES auth.users(id) PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
   full_name TEXT,
   avatar_url TEXT,
-  preferences JSONB DEFAULT '{}',
+  bio TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Projects table
-CREATE TABLE projects (
-  id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  user_id UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL,
-  name TEXT NOT NULL,
+CREATE TABLE public.projects (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) NOT NULL,
+  title TEXT NOT NULL,
   description TEXT,
+  genre TEXT,
+  status TEXT DEFAULT 'draft',
+  cover_image_url TEXT,
   settings JSONB DEFAULT '{}',
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Documents table with vector storage
-CREATE TABLE documents (
-  id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  project_id BIGINT REFERENCES projects ON DELETE CASCADE NOT NULL,
-  user_id UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL,
+-- Manuscripts table
+CREATE TABLE public.manuscripts (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  project_id UUID REFERENCES public.projects(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
-  type TEXT NOT NULL CHECK (type IN ('MANUSCRIPT', 'WORLD_BIBLE', 'CHARACTER', 'OUTLINE', 'SCENE')),
-  content JSONB DEFAULT '{}', -- Tiptap JSON content
-  plain_text TEXT, -- Extracted text for search
+  content JSONB NOT NULL, -- Tiptap JSON format
+  content_text TEXT, -- Plain text for search
+  content_embedding vector(1536), -- OpenAI embeddings
   word_count INTEGER DEFAULT 0,
-  embedding vector(768), -- Gemini embeddings (768 dimensions)
-  metadata JSONB DEFAULT '{}',
   version INTEGER DEFAULT 1,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Document versions for history
-CREATE TABLE document_versions (
-  id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  document_id BIGINT REFERENCES documents ON DELETE CASCADE NOT NULL,
-  version INTEGER NOT NULL,
-  content JSONB NOT NULL,
+-- World Bible entries
+CREATE TABLE public.world_bible (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  project_id UUID REFERENCES public.projects(id) ON DELETE CASCADE,
+  category TEXT NOT NULL, -- character, location, item, etc.
+  name TEXT NOT NULL,
+  description TEXT,
+  attributes JSONB DEFAULT '{}',
+  embedding vector(1536),
   created_at TIMESTAMPTZ DEFAULT NOW(),
-  created_by UUID REFERENCES auth.users NOT NULL
+  updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- AI generation history
-CREATE TABLE ai_generations (
-  id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  user_id UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL,
-  project_id BIGINT REFERENCES projects ON DELETE CASCADE,
-  document_id BIGINT REFERENCES documents ON DELETE CASCADE,
-  prompt TEXT NOT NULL,
-  response TEXT,
-  model TEXT NOT NULL,
-  tokens_used INTEGER,
-  cost DECIMAL(10,4),
-  metadata JSONB DEFAULT '{}',
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+-- Create indexes for performance
+CREATE INDEX idx_manuscripts_project ON manuscripts(project_id);
+CREATE INDEX idx_manuscripts_embedding ON manuscripts USING ivfflat (content_embedding vector_cosine_ops);
+CREATE INDEX idx_world_bible_project ON world_bible(project_id);
+CREATE INDEX idx_world_bible_embedding ON world_bible USING ivfflat (embedding vector_cosine_ops);
 
--- Optimized indexes
--- HNSW index for vector similarity search
-CREATE INDEX documents_embedding_idx ON documents 
-USING hnsw (embedding vector_cosine_ops)
-WITH (m = 16, ef_construction = 64);
-
--- GIN index for full-text search
-CREATE INDEX documents_plain_text_idx ON documents 
-USING gin (to_tsvector('english', plain_text));
-
--- Trigram index for fuzzy text search
-CREATE INDEX documents_title_trgm_idx ON documents 
-USING gin (title gin_trgm_ops);
-
--- JSONB indexes for metadata queries
-CREATE INDEX documents_metadata_idx ON documents 
-USING gin (metadata);
-
--- Composite indexes for common queries
-CREATE INDEX documents_project_type_idx ON documents (project_id, type);
-CREATE INDEX documents_user_created_idx ON documents (user_id, created_at DESC);
-
--- Functions and stored procedures
--- Hybrid search function combining vector and text search
-CREATE OR REPLACE FUNCTION hybrid_search(
-  query_embedding vector(768),
-  query_text TEXT,
-  search_project_id BIGINT DEFAULT NULL,
-  search_type TEXT DEFAULT NULL,
-  match_threshold FLOAT DEFAULT 0.7,
-  match_count INT DEFAULT 10
-)
-RETURNS TABLE (
-  id BIGINT,
-  title TEXT,
-  content JSONB,
-  type TEXT,
-  similarity FLOAT,
-  rank FLOAT,
-  combined_score FLOAT
-)
-LANGUAGE plpgsql
-AS $$
-BEGIN
-  RETURN QUERY
-  WITH vector_search AS (
-    SELECT 
-      d.id,
-      d.title,
-      d.content,
-      d.type,
-      1 - (d.embedding <=> query_embedding) AS similarity
-    FROM documents d
-    WHERE d.embedding IS NOT NULL
-    AND (search_project_id IS NULL OR d.project_id = search_project_id)
-    AND (search_type IS NULL OR d.type = search_type)
-    AND 1 - (d.embedding <=> query_embedding) > match_threshold
-    ORDER BY d.embedding <=> query_embedding
-    LIMIT match_count * 2
-  ),
-  text_search AS (
-    SELECT 
-      d.id,
-      ts_rank(to_tsvector('english', d.plain_text), plainto_tsquery('english', query_text)) AS rank
-    FROM documents d
-    WHERE query_text != ''
-    AND (search_project_id IS NULL OR d.project_id = search_project_id)
-    AND (search_type IS NULL OR d.type = search_type)
-    AND to_tsvector('english', d.plain_text) @@ plainto_tsquery('english', query_text)
-    LIMIT match_count * 2
-  )
-  SELECT 
-    COALESCE(v.id, t.id) AS id,
-    v.title,
-    v.content,
-    v.type,
-    COALESCE(v.similarity, 0) AS similarity,
-    COALESCE(t.rank, 0) AS rank,
-    (COALESCE(v.similarity, 0) * 0.7 + COALESCE(t.rank, 0) * 0.3) AS combined_score
-  FROM vector_search v
-  FULL OUTER JOIN text_search t ON v.id = t.id
-  ORDER BY combined_score DESC
-  LIMIT match_count;
-END;
-$$;
-
--- Auto-update updated_at timestamp
-CREATE OR REPLACE FUNCTION update_updated_at()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = NOW();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Apply triggers
-CREATE TRIGGER update_profiles_updated_at BEFORE UPDATE ON profiles
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-
-CREATE TRIGGER update_projects_updated_at BEFORE UPDATE ON projects
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-
-CREATE TRIGGER update_documents_updated_at BEFORE UPDATE ON documents
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
-
--- Row Level Security (RLS)
-ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
-ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
-ALTER TABLE document_versions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE ai_generations ENABLE ROW LEVEL SECURITY;
+-- Row Level Security
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.manuscripts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.world_bible ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies
--- Profiles
-CREATE POLICY "Public profiles are viewable by everyone" ON profiles
-  FOR SELECT USING (true);
+CREATE POLICY "Users can view own profile" ON profiles
+  FOR SELECT USING (auth.uid() = id);
 
 CREATE POLICY "Users can update own profile" ON profiles
   FOR UPDATE USING (auth.uid() = id);
 
--- Projects
-CREATE POLICY "Users can view own projects" ON projects
-  FOR SELECT USING (auth.uid() = user_id);
-
-CREATE POLICY "Users can create own projects" ON projects
-  FOR INSERT WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "Users can update own projects" ON projects
-  FOR UPDATE USING (auth.uid() = user_id);
-
-CREATE POLICY "Users can delete own projects" ON projects
-  FOR DELETE USING (auth.uid() = user_id);
-
--- Documents
-CREATE POLICY "Users can manage own documents" ON documents
+CREATE POLICY "Users can CRUD own projects" ON projects
   FOR ALL USING (auth.uid() = user_id);
 
--- Document versions
-CREATE POLICY "Users can view own document versions" ON document_versions
-  FOR SELECT USING (
+CREATE POLICY "Users can CRUD own manuscripts" ON manuscripts
+  FOR ALL USING (
     EXISTS (
-      SELECT 1 FROM documents d 
-      WHERE d.id = document_versions.document_id 
-      AND d.user_id = auth.uid()
+      SELECT 1 FROM projects 
+      WHERE projects.id = manuscripts.project_id 
+      AND projects.user_id = auth.uid()
     )
   );
-
--- AI generations
-CREATE POLICY "Users can view own AI generations" ON ai_generations
-  FOR SELECT USING (auth.uid() = user_id);
-
-CREATE POLICY "Users can create own AI generations" ON ai_generations
-  FOR INSERT WITH CHECK (auth.uid() = user_id);
 ```
 
 ## Phase 5: Nuxt Configuration
 
-Update `nuxt.config.ts`:
-
+### Step 5.1: Complete nuxt.config.ts
 ```typescript
 export default defineNuxtConfig({
-  modules: [
-    '@nuxtjs/supabase',
-    '@nuxtjs/tailwindcss',
-    'shadcn-nuxt',
-    '@pinia/nuxt',
-    '@vueuse/nuxt',
-    '@nuxt/image', // Add image optimization
-  ],
-  
-  // Supabase configuration
-  supabase: {
-    redirectOptions: {
-      login: '/auth/login',
-      callback: '/auth/confirm',
-      exclude: ['/', '/about', '/features'], // Public pages
-    },
-    clientOptions: {
-      auth: {
-        flowType: 'pkce',
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
-        persistSession: true,
-      },
-    },
+  // Future-proofing
+  future: {
+    compatibilityVersion: 4,
   },
-  
-  // Shadcn configuration
-  shadcn: {
-    prefix: '', // No prefix for components
-    componentDir: './components/ui'
-  },
-  
-  // Runtime config
-  runtimeConfig: {
-    // Private keys (server-only)
-    geminiApiKey: process.env.GEMINI_API_KEY,
-    piapiKey: process.env.PIAPI_KEY,
-    supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
-    
-    // Public keys (available to client)
-    public: {
-      supabaseUrl: process.env.SUPABASE_URL,
-      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
-    }
-  },
-  
-  // Nitro (server) configuration
-  nitro: {
-    // Pre-render static pages
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', '/features', '/pricing']
-    },
-    // Compress assets
-    compressPublicAssets: true,
-    // Optimize cold starts
-    minify: true,
-  },
-  
-  // Vite optimizations
-  vite: {
-    // Optimize dependencies
-    optimizeDeps: {
-      include: ['@tiptap/vue-3', '@tiptap/starter-kit']
-    },
-    // Build optimizations
-    build: {
-      rollupOptions: {
-        output: {
-          // Manual chunks for better caching
-          manualChunks: {
-            'tiptap': ['@tiptap/vue-3', '@tiptap/starter-kit', '@tiptap/pm'],
-            'ui': ['radix-vue', 'class-variance-authority', 'clsx', 'tailwind-merge'],
-          }
-        }
-      }
-    }
-  },
-  
-  // Image optimization
-  image: {
-    quality: 80,
-    formats: ['webp', 'avif', 'jpeg'],
-    screens: {
-      xs: 320,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      xxl: 1536,
-    },
-  },
-  
-  // CSS
-  css: ['~/assets/css/main.css'],
-  
-  // Auto-imports
-  imports: {
-    dirs: ['stores', 'composables', 'utils']
-  },
+
+  // Development
+  devtools: { enabled: true },
   
   // TypeScript
   typescript: {
     strict: true,
     typeCheck: true,
   },
-  
-  // Development
-  devtools: { enabled: true }
+
+  // Modules
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+    '@nuxtjs/google-fonts',
+    '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxtjs/supabase',
+    'shadcn-nuxt',
+  ],
+
+  // Supabase configuration
+  supabase: {
+    redirectOptions: {
+      login: '/auth/login',
+      callback: '/dashboard',
+      exclude: ['/', '/auth/*'],
+    },
+  },
+
+  // Shadcn configuration
+  shadcn: {
+    prefix: '',
+    componentDir: './app/components/ui'
+  },
+
+  // Google Fonts
+  googleFonts: {
+    families: {
+      Inter: [400, 500, 600, 700],
+      'JetBrains Mono': [400, 500],
+    },
+  },
+
+  // CSS
+  css: ['~/assets/css/main.css'],
+
+  // Build optimizations
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      crawlLinks: true,
+    },
+  },
+
+  // Runtime config
+  runtimeConfig: {
+    // Private keys (server-only)
+    supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
+    geminiApiKey: process.env.GEMINI_API_KEY,
+    piApiKey: process.env.PIAPI_KEY,
+    
+    // Public keys (client + server)
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+    },
+  },
+
+  // App configuration
+  app: {
+    head: {
+      title: 'Fablecraft - AI-Powered Writing Platform',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Create amazing stories with AI-powered tools' },
+      ],
+    },
+  },
 })
 ```
 
 ## Phase 6: Implementation Architecture
 
-### Server Routes (for Database Operations)
-
-Create `server/api/documents/[id].get.ts`:
+### Step 6.1: State Management with Pinia
+Create `stores/auth.ts`:
 ```typescript
-import { serverSupabaseClient, serverSupabaseUser } from '#supabase/server'
+export const useAuthStore = defineStore('auth', () => {
+  const user = ref<User | null>(null)
+  const loading = ref(false)
+  const supabase = useSupabaseClient()
 
-export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  const user = await serverSupabaseUser(event)
-  
-  if (!user) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Unauthorized'
-    })
-  }
-  
-  const client = await serverSupabaseClient(event)
-  
-  const { data, error } = await client
-    .from('documents')
-    .select('*')
-    .eq('id', id)
-    .eq('user_id', user.id)
-    .single()
-    
-  if (error) {
-    throw createError({
-      statusCode: 404,
-      statusMessage: 'Document not found'
-    })
-  }
-  
-  return data
-})
-```
-
-Create `server/api/documents/index.post.ts`:
-```typescript
-export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
-  const user = await serverSupabaseUser(event)
-  
-  if (!user) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Unauthorized'
-    })
-  }
-  
-  const client = await serverSupabaseClient(event)
-  
-  // Extract plain text from Tiptap content
-  const plainText = extractTextFromTiptap(body.content)
-  
-  const { data, error } = await client
-    .from('documents')
-    .insert({
-      ...body,
-      user_id: user.id,
-      plain_text: plainText,
-      word_count: plainText.split(/\s+/).length
-    })
-    .select()
-    .single()
-    
-  if (error) throw error
-  
-  // Queue embedding generation
-  await $fetch('/api/ai/embeddings', {
-    method: 'POST',
-    body: { documentId: data.id, text: plainText }
-  })
-  
-  return data
-})
-```
-
-### Edge Functions (for AI Operations)
-
-Create `supabase/functions/generate-embedding/index.ts`:
-```typescript
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { GoogleGenerativeAI } from 'https://esm.sh/@google/generative-ai'
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
-
-serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders })
-  }
-
-  try {
-    const { documentId, text } = await req.json()
-    
-    // Initialize Supabase client
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    )
-    
-    // Generate embedding with Gemini
-    const genAI = new GoogleGenerativeAI(Deno.env.get('GEMINI_API_KEY'))
-    const model = genAI.getGenerativeModel({ model: "text-embedding-004" })
-    
-    const result = await model.embedContent(text)
-    const embedding = result.embedding.values
-    
-    // Update document with embedding
-    const { error } = await supabaseClient
-      .from('documents')
-      .update({ embedding })
-      .eq('id', documentId)
-      
-    if (error) throw error
-    
-    return new Response(
-      JSON.stringify({ success: true }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
-  } catch (error) {
-    return new Response(
-      JSON.stringify({ error: error.message }),
-      { 
-        status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
-    )
-  }
-})
-```
-
-### AI Integration Services
-
-Create `server/api/ai/generate.post.ts` (Gemini):
-```typescript
-import { GoogleGenerativeAI } from '@google/generative-ai'
-
-export default defineEventHandler(async (event) => {
-  const { prompt, type = 'text', context } = await readBody(event)
-  const config = useRuntimeConfig()
-  
-  const genAI = new GoogleGenerativeAI(config.geminiApiKey)
-  
-  let model
-  switch(type) {
-    case 'text':
-      model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
-      break
-    case 'image':
-      model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
-      break
-    case 'code':
-      model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' })
-      break
-    default:
-      model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' })
-  }
-  
-  // Build enhanced prompt with context
-  const enhancedPrompt = context 
-    ? `Context: ${context}\n\nRequest: ${prompt}`
-    : prompt
-  
-  const result = await model.generateContent(enhancedPrompt)
-  const response = await result.response
-  
-  // Track usage
-  await trackAIUsage(event, {
-    model: model.model,
-    prompt,
-    response: response.text(),
-    tokens: response.usageMetadata?.totalTokenCount || 0
-  })
-  
-  return { 
-    content: response.text(),
-    model: model.model,
-    tokens: response.usageMetadata
-  }
-})
-```
-
-Create `server/api/ai/piapi/[service].post.ts` (Future PiAPI):
-```typescript
-// Ready for future PiAPI integration
-export default defineEventHandler(async (event) => {
-  const service = getRouterParam(event, 'service') // midjourney, dream-machine, etc.
-  const { prompt, options = {} } = await readBody(event)
-  const config = useRuntimeConfig()
-  
-  if (!config.piapiKey) {
-    throw createError({
-      statusCode: 501,
-      statusMessage: 'PiAPI integration not configured'
-    })
-  }
-  
-  const endpoints = {
-    'midjourney': 'https://api.piapi.ai/midjourney/imagine',
-    'dream-machine': 'https://api.piapi.ai/dream-machine/generate',
-    'faceswap': 'https://api.piapi.ai/faceswap/swap',
-    'music': 'https://api.piapi.ai/ace-step/generate'
-  }
-  
-  const response = await $fetch(endpoints[service], {
-    method: 'POST',
-    headers: {
-      'X-API-Key': config.piapiKey,
-      'Content-Type': 'application/json'
-    },
-    body: {
-      prompt,
-      ...options
+  const signIn = async (email: string, password: string) => {
+    loading.value = true
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+      if (error) throw error
+      user.value = data.user
+      await navigateTo('/dashboard')
+    } catch (error) {
+      console.error('Sign in error:', error)
+      throw error
+    } finally {
+      loading.value = false
     }
-  })
-  
-  return response
+  }
+
+  const signOut = async () => {
+    await supabase.auth.signOut()
+    user.value = null
+    await navigateTo('/')
+  }
+
+  return {
+    user: readonly(user),
+    loading: readonly(loading),
+    signIn,
+    signOut,
+  }
 })
+```
+
+### Step 6.2: Composables Architecture
+Create `composables/useProject.ts`:
+```typescript
+export const useProject = () => {
+  const supabase = useSupabaseClient()
+  
+  const createProject = async (project: CreateProjectInput) => {
+    const { data, error } = await supabase
+      .from('projects')
+      .insert(project)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
+  }
+
+  const getProjects = async () => {
+    const { data, error } = await supabase
+      .from('projects')
+      .select('*')
+      .order('updated_at', { ascending: false })
+    
+    if (error) throw error
+    return data
+  }
+
+  const searchSimilarContent = async (projectId: string, query: string) => {
+    const { data, error } = await supabase.rpc('search_similar_content', {
+      project_id: projectId,
+      query_text: query,
+      match_threshold: 0.8,
+      match_count: 5,
+    })
+    
+    if (error) throw error
+    return data
+  }
+
+  return {
+    createProject,
+    getProjects,
+    searchSimilarContent,
+  }
+}
 ```
 
 ## Phase 7: Components & Composables
 
-### Create Composables
-
-Create `composables/useAI.ts`:
-```typescript
-export const useAI = () => {
-  const generateText = async (prompt: string, context?: string) => {
-    return await $fetch('/api/ai/generate', {
-      method: 'POST',
-      body: { prompt, type: 'text', context }
-    })
-  }
-  
-  const generateImage = async (prompt: string) => {
-    // Start with Gemini, upgrade to PiAPI Midjourney later
-    return await $fetch('/api/ai/generate', {
-      method: 'POST',
-      body: { prompt, type: 'image' }
-    })
-  }
-  
-  const searchSimilar = async (query: string, projectId?: number) => {
-    return await $fetch('/api/search/hybrid', {
-      method: 'POST',
-      body: { query, projectId }
-    })
-  }
-  
-  return {
-    generateText,
-    generateImage,
-    searchSimilar
-  }
-}
+### Step 7.1: Initialize Shadcn-vue
+```bash
+npx shadcn-vue@latest init
 ```
 
-### Initialize Shadcn UI
-
+### Step 7.2: Add Essential Components
 ```bash
-# Initialize shadcn-vue
-npx shadcn-vue@latest init
-
-# Add components as needed
+# Core components
 npx shadcn-vue@latest add button
-npx shadcn-vue@latest add input
 npx shadcn-vue@latest add card
 npx shadcn-vue@latest add dialog
 npx shadcn-vue@latest add dropdown-menu
+npx shadcn-vue@latest add input
+npx shadcn-vue@latest add label
+npx shadcn-vue@latest add select
+npx shadcn-vue@latest add separator
+npx shadcn-vue@latest add sheet
+npx shadcn-vue@latest add tabs
+npx shadcn-vue@latest add textarea
 npx shadcn-vue@latest add toast
+npx shadcn-vue@latest add tooltip
+```
+
+### Step 7.3: Create Editor Component
+Create `components/editor/TiptapEditor.vue`:
+```vue
+<template>
+  <div class="prose prose-lg max-w-none">
+    <EditorContent :editor="editor" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useEditor, EditorContent } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
+import Placeholder from '@tiptap/extension-placeholder'
+import CharacterCount from '@tiptap/extension-character-count'
+
+const props = defineProps<{
+  modelValue: string
+  placeholder?: string
+}>()
+
+const emit = defineEmits<{
+  'update:modelValue': [value: string]
+}>()
+
+const editor = useEditor({
+  content: props.modelValue,
+  extensions: [
+    StarterKit,
+    Placeholder.configure({
+      placeholder: props.placeholder || 'Start writing...',
+    }),
+    CharacterCount.configure({
+      limit: 100000,
+    }),
+  ],
+  onUpdate: ({ editor }) => {
+    emit('update:modelValue', editor.getHTML())
+  },
+})
+
+watch(() => props.modelValue, (value) => {
+  if (editor.value && value !== editor.value.getHTML()) {
+    editor.value.commands.setContent(value, false)
+  }
+})
+
+onBeforeUnmount(() => {
+  editor.value?.destroy()
+})
+</script>
 ```
 
 ## Phase 8: Development Scripts
 
-Update `package.json`:
-
+### Step 8.1: Package.json Scripts
 ```json
 {
   "scripts": {
@@ -783,110 +693,127 @@ Update `package.json`:
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "nuxt typecheck",
     "db:start": "supabase start",
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
-    "db:migrate": "supabase db push",
-    "db:types": "supabase gen types typescript --local > types/supabase.ts",
-    "db:seed": "tsx prisma/seed.ts",
-    
-    "edge:serve": "supabase functions serve",
-    "edge:deploy": "supabase functions deploy",
-    
-    "lint": "eslint .",
-    "typecheck": "nuxt typecheck",
-    
-    "test": "vitest",
-    "test:e2e": "playwright test"
+    "db:migrate": "supabase migration up",
+    "db:types": "supabase gen types typescript --local > types/database.ts",
+    "clean": "rm -rf .nuxt .output node_modules",
+    "clean:install": "pnpm clean && pnpm install"
   }
 }
 ```
 
+### Step 8.2: Development Workflow
+```bash
+# Start Supabase locally
+pnpm db:start
+
+# Start Nuxt dev server
+pnpm dev
+
+# Generate TypeScript types from database
+pnpm db:types
+```
+
 ## Phase 9: Production Checklist
 
-### Performance Optimizations
+### Pre-deployment
+- [ ] Environment variables configured
+- [ ] Database migrations tested
+- [ ] pgvector indexes optimized
+- [ ] Authentication flows tested
+- [ ] Error handling implemented
+- [ ] Loading states added
+- [ ] SEO meta tags configured
+- [ ] Performance optimized
 
-1. **Database Performance**
-   - ✅ HNSW index configured with optimal parameters
-   - ✅ Connection pooling enabled in Supabase
-   - ✅ Prepared statements for repeated queries
-   - ✅ Database warm-up queries on startup
+### Security
+- [ ] Row Level Security enabled
+- [ ] API rate limiting configured
+- [ ] Input validation implemented
+- [ ] XSS protection verified
+- [ ] CORS properly configured
+- [ ] Secrets in environment variables
 
-2. **Vector Search Optimization**
-   ```sql
-   -- Pre-warm the index
-   SELECT pg_prewarm('documents_embedding_idx');
-   
-   -- Monitor index performance
-   SELECT * FROM pg_stat_user_indexes WHERE indexrelname = 'documents_embedding_idx';
-   ```
+### Performance
+- [ ] Images optimized with Nuxt Image
+- [ ] Lazy loading implemented
+- [ ] Code splitting configured
+- [ ] Caching strategies defined
+- [ ] Bundle size analyzed
+- [ ] Lighthouse score > 90
 
-3. **Caching Strategy**
-   - Use Nuxt's built-in caching for API routes
-   - Implement Redis for frequently accessed data
-   - Cache embedding results for common queries
-
-4. **Bundle Optimization**
-   - Tree-shake unused Tiptap extensions
-   - Lazy load heavy components
-   - Use dynamic imports for AI features
-
-### Security Considerations
-
-1. **API Security**
-   - Rate limiting on AI endpoints
-   - Token validation for all protected routes
-   - Sanitize Tiptap content before storage
-
-2. **Cost Management**
-   - Monitor Gemini API usage
-   - Implement usage quotas per user
-   - Cache AI responses when appropriate
-
-### Deployment
-
-```bash
-# Build for production
-npm run build
-
-# Environment variables for production
-NUXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NUXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_KEY=your-service-key
-GEMINI_API_KEY=your-gemini-key
-```
+### Git Configuration
+- [ ] .gitignore properly configured
+- [ ] .env excluded from version control
+- [ ] Sensitive data removed from codebase
 
 ## Future Enhancements
 
-### PiAPI Integration Roadmap
+### AI Features
+- Implement Gemini AI for content generation
+- Add PiAPI for advanced AI features
+- Create AI-powered writing suggestions
+- Build character dialogue generator
 
-When ready to expand beyond Gemini's free tier:
+### Collaboration
+- Real-time collaborative editing
+- Comments and annotations
+- Version control UI
+- Team workspace management
 
-1. **Midjourney Integration** - High-quality image generation
-2. **Dream Machine** - Video generation from text/images
-3. **Ace-step** - Music generation
-4. **FaceSwap** - Advanced image manipulation
-
-The infrastructure is already prepared for these integrations through the `/api/ai/piapi/[service]` endpoint structure.
-
-### Additional Optimizations
-
-1. **Streaming Responses** - Implement SSE for real-time AI responses
-2. **Background Jobs** - Use Supabase Edge Functions for async processing
-3. **Multi-modal Search** - Combine text and image embeddings
-4. **Collaborative Features** - Real-time collaboration using Supabase Realtime
+### Advanced Features
+- Export to multiple formats (DOCX, PDF, EPUB)
+- Publishing integrations
+- Advanced analytics dashboard
+- Mobile app with Capacitor
 
 ## Resources
 
+### Documentation
 - [Nuxt 3 Documentation](https://nuxt.com)
 - [Supabase Documentation](https://supabase.com/docs)
-- [pgvector Documentation](https://github.com/pgvector/pgvector)
 - [Tiptap Documentation](https://tiptap.dev)
-- [Shadcn-vue Documentation](https://www.shadcn-vue.com)
-- [Google AI Studio](https://aistudio.google.com) - Get Gemini API key
-- [PiAPI Documentation](https://piapi.ai/docs) - Future AI expansions
+- [Shadcn-vue Documentation](https://shadcn-vue.com)
+- [pgvector Documentation](https://github.com/pgvector/pgvector)
+
+### Community
+- [Nuxt Discord](https://discord.com/invite/nuxt)
+- [Supabase Discord](https://discord.supabase.com)
+- [Vue Discord](https://discord.com/invite/vue)
+
+### Tutorials
+- [Building AI Apps with Supabase Vector](https://supabase.com/docs/guides/ai)
+- [Nuxt 3 Fundamentals](https://vueschool.io/courses/nuxt-3-fundamentals)
+- [Mastering Pinia](https://masteringpinia.com)
+
+## Troubleshooting
+
+### Common Issues
+
+1. **TypeScript Errors**
+   - Run `pnpm nuxt prepare` to generate types
+   - Ensure all `@types/*` packages are installed
+
+2. **Supabase Connection Issues**
+   - Check if Supabase is running: `supabase status`
+   - Verify environment variables are set correctly
+   - Ensure `.env` file is in the root directory
+
+3. **Tailwind Not Working**
+   - Check if `tailwind.config.js` exists
+   - Verify CSS import in `nuxt.config.ts`
+   - Clear cache: `pnpm clean && pnpm install`
+
+4. **Component Auto-imports Not Working**
+   - Restart dev server
+   - Check component naming conventions
+   - Verify component paths in `nuxt.config.ts`
 
 ---
 
-This optimized setup provides a production-ready foundation that scales from MVP to enterprise, with smart defaults and performance optimizations built in from the start.
+This guide provides a production-ready foundation for Fablecraft. Each phase builds upon the previous one, ensuring a solid, scalable architecture that can grow with your creative platform.
