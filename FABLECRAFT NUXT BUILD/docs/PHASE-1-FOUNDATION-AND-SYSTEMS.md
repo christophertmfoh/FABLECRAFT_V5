@@ -263,35 +263,143 @@ body::before {
 --fable-orange-light: #f5a662;
 ```
 
-### **🎯 Design Tokens Priority**
+### **🎯 Design Tokens Priority (Nuxt-Optimized)**
 ```css
-/* Implementation Order */
-1. CSS Custom Properties (CSS variables)
-2. Mathematical spacing utilities
-3. Golden ratio typography classes
-4. Theme switching mechanism
-5. Visual effects system
-6. Paper texture implementation
+/* Nuxt-Specific Implementation Order */
+1. Setup main.css import strategy (Nuxt CSS patterns)
+2. CSS Custom Properties with SSR considerations
+3. Mathematical spacing utilities (8-point grid)
+4. SSR-safe theme switching (useState + plugins)
+5. Golden ratio typography classes
+6. Visual effects system (optimized performance)
+7. Paper texture implementation
+8. SSR validation & performance testing
 ```
+
+### **⚠️ CRITICAL DIFFERENCES FROM REACT**
+- **SSR First**: All theme logic must work server-side
+- **Auto-imports**: No manual component/composable imports needed
+- **useState()**: Different from React - this is Nuxt's SSR-safe state
+- **Plugins**: Use `.client.ts` plugins for browser-only initialization
+- **CSS Strategy**: Import through main.css, not component-level CSS
+- **Theme Persistence**: Must handle server → client hydration correctly
 
 ---
 
 ## 🛠️ **IMPLEMENTATION STRATEGY**
 
-### **📁 File Structure**
+### **🔧 NUXT-SPECIFIC CONSIDERATIONS**
+*Key differences from React implementations - CRITICAL for proper Nuxt setup*
+
+#### **🌐 SSR (Server-Side Rendering) Requirements**
+- **Theme persistence**: Themes must hydrate correctly from server to client
+- **CSS variables**: Must be available during SSR to prevent layout shift
+- **localStorage**: Cannot be accessed during SSR - need fallback strategies
+- **Process.client checks**: Required for browser-only operations
+
+#### **⚡ Auto-Imports & Composables**
+- **Composables auto-import**: Files in `composables/` are automatically available
+- **Components auto-import**: No manual imports needed for `components/` files
+- **useState vs React state**: Nuxt's `useState` is SSR-safe, React's isn't
+- **Theme switching**: Use `useState` instead of React's `useState` for SSR compatibility
+
+#### **📁 Nuxt-Specific File Structure**
 ```
 assets/css/
+├── main.css                  /* Import point for all CSS systems */
 ├── mathematical-spacing.css  /* Phase 1a - Core spacing system */
 ├── theme-system.css          /* Phase 1b - All 14 themes */
 ├── visual-effects.css        /* Phase 1c - Orbs, fireflies, glow */
 └── paper-texture.css         /* Phase 1d - Background textures */
 
 composables/
-├── useTheme.ts              /* Phase 1e - Theme switching logic */
+├── useTheme.ts              /* Phase 1e - SSR-safe theme switching */
 └── useNavigation.ts         /* Phase 1f - Navigation helpers */
 
 constants/
 └── data.ts                  /* Phase 1g - Theme data & config */
+
+plugins/                     /* NEW - Nuxt-specific initialization */
+└── theme-init.client.ts     /* Phase 1h - Client-side theme setup */
+```
+
+#### **🎨 CSS Import Strategy (Nuxt-Specific)**
+```css
+/* assets/css/main.css - Main import file */
+@import './mathematical-spacing.css';
+@import './theme-system.css';
+@import './visual-effects.css';
+@import './paper-texture.css';
+```
+
+#### **🔄 SSR-Safe Theme Implementation**
+```typescript
+// composables/useTheme.ts - Nuxt pattern
+export const useTheme = () => {
+  // SSR-safe state using useState
+  const currentTheme = useState('theme', () => 'theme-default')
+  
+  // Client-only localStorage sync
+  const initTheme = () => {
+    if (process.client) {
+      const stored = localStorage.getItem('theme')
+      if (stored) currentTheme.value = stored
+    }
+  }
+  
+  // Update both state and localStorage
+  const setTheme = (theme: string) => {
+    currentTheme.value = theme
+    if (process.client) {
+      localStorage.setItem('theme', theme)
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+  }
+  
+  return { currentTheme, setTheme, initTheme }
+}
+```
+
+#### **⚙️ Nuxt Config Enhancements**
+```typescript
+// nuxt.config.ts - Phase 1 specific setup
+export default defineNuxtConfig({
+  // CSS import strategy
+  css: ['@/assets/css/main.css'],
+  
+  // SSR configuration for themes
+  ssr: true,
+  
+  // App head defaults to prevent layout shift
+  app: {
+    head: {
+      htmlAttrs: {
+        'data-theme': 'theme-default', // Default theme for SSR
+      }
+    }
+  },
+  
+  // Tailwind integration
+  modules: ['@nuxtjs/tailwindcss'],
+  
+  // Performance optimizations
+  nitro: {
+    compressPublicAssets: true
+  }
+})
+```
+
+#### **🔌 Client-Side Initialization**
+```typescript
+// plugins/theme-init.client.ts - Initialize themes on client
+export default defineNuxtPlugin(() => {
+  const { initTheme } = useTheme()
+  
+  // Initialize theme from localStorage on client mount
+  onMounted(() => {
+    initTheme()
+  })
+})
 ```
 
 ### **⚡ Performance Targets**
@@ -349,4 +457,37 @@ constants/
 
 ---
 
-**🎯 NEXT STEP: Start implementing `assets/css/mathematical-spacing.css` first, then build up the foundation layer by layer.**
+**🎯 NEXT STEP: Start implementing `assets/css/main.css` with proper Nuxt import structure, then build the SSR-safe foundation layer by layer.**
+
+---
+
+## 🚀 **NUXT-READY FOUNDATION CHECKLIST**
+
+### **✅ Before You Start Phase 1:**
+- [ ] Understand the difference between Nuxt `useState` and React state
+- [ ] Know when to use `process.client` checks for browser-only code
+- [ ] Familiar with Nuxt auto-imports (no manual imports needed)
+- [ ] Understand SSR → client hydration for themes
+
+### **✅ Phase 1 Complete When (Nuxt-Specific):**
+- [ ] Themes work correctly during SSR (no layout shift)
+- [ ] Theme switching persists across page refreshes
+- [ ] All CSS systems import through main.css properly
+- [ ] Auto-imports work for all composables
+- [ ] Client-side plugin initializes themes correctly
+- [ ] No hydration mismatches in browser console
+- [ ] Performance targets met for SSR + client rendering
+
+### **🔧 Nuxt Development Commands:**
+```bash
+# Development with theme debugging
+pnpm dev
+
+# Build and test SSR theme persistence
+pnpm build && pnpm preview
+
+# Type check (including theme composables)
+pnpm typecheck
+```
+
+**Ready to build a rock-solid, SSR-compatible foundation! 🏗️**
