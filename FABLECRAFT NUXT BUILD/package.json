@@ -12,7 +12,14 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck",
     "clean": "rm -rf .nuxt node_modules/.cache dist .output",
-    "clean:install": "pnpm clean && pnpm install"
+    "clean:install": "pnpm clean && pnpm install",
+    "analyze": "nuxt analyze",
+    "info": "nuxt info",
+    "upgrade:nuxt": "nuxi upgrade",
+    "upgrade:deps": "pnpm update",
+    "size": "du -sh .nuxt .output node_modules",
+    "test:types": "vue-tsc --noEmit",
+    "prepare": "nuxt prepare"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.53.0",
