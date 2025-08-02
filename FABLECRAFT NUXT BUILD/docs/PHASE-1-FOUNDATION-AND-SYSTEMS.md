@@ -15,60 +15,69 @@ This document consolidates **ALL** foundational information extracted from the o
 ---
 
 ## 🎨 **MATHEMATICAL SPACING SYSTEM**
+*Replacing non-standard "friendship spacing" with industry standard 8-point grid*
 
 ### **📐 Core Foundation**
 ```css
-/* 8-Point Grid Foundation */
---space-unit: 8px;
---golden-ratio: 1.618;
+/* Industry Standard 8-Point Grid Foundation */
+--space-base: 8px;        /* Base unit used by Figma, Adobe, Material Design */
+--golden-ratio: 1.618;    /* For typography scaling */
 ```
 
-### **🔢 Spacing Scale (8px base)**
+### **✅ Why 8-Point Grid?**
+- **Universal Standard**: Used by Figma, Adobe Creative Suite, Material Design, Bootstrap
+- **Perfect Divisibility**: 8px divides evenly into most screen sizes
+- **Mobile-First**: Works perfectly on mobile (4x density = 2dp on Android)
+- **Designer-Developer Alignment**: Designers and developers use same system
+- **Proven at Scale**: Battle-tested by Google, Adobe, Apple, and thousands of apps
+
+### **🔢 Industry Standard 8-Point Grid**
+*Used by Figma, Adobe Creative Suite, Material Design, Bootstrap*
+
 ```css
-/* Mathematical Progression */
---space-1: 1px;    /* Borders, fine details */
---space-2: 2px;    /* Tiny separators */
---space-4: 4px;    /* Small spacing */
---space-8: 8px;    /* Base unit */
---space-12: 12px;  /* Component spacing */
---space-16: 16px;  /* Element spacing */
---space-20: 20px;  /* Medium spacing */
---space-24: 24px;  /* Section spacing */
---space-32: 32px;  /* Component boundaries */
---space-40: 40px;  /* Large spacing */
---space-48: 48px;  /* Distinct sections */
---space-64: 64px;  /* Major sections */
---space-80: 80px;  /* Page sections */
---space-96: 96px;  /* Hero sections */
---space-128: 128px; /* Page dividers */
+/* Core 8-Point Grid System */
+--space-1: 4px;   /* Half unit - fine details, borders */
+--space-2: 8px;   /* Base unit - icons, small gaps */
+--space-3: 12px;  /* 1.5x base - tight spacing */
+--space-4: 16px;  /* 2x base - standard spacing */
+--space-5: 20px;  /* 2.5x base - comfortable spacing */
+--space-6: 24px;  /* 3x base - section spacing */
+--space-8: 32px;  /* 4x base - large spacing */
+--space-10: 40px; /* 5x base - major spacing */
+--space-12: 48px; /* 6x base - hero spacing */
+--space-16: 64px; /* 8x base - page-level spacing */
+--space-20: 80px; /* 10x base - massive spacing */
+--space-24: 96px; /* 12x base - page sections */
 ```
 
-### **👥 Friendship Spacing (Semantic System)**
+### **🏷️ Semantic Spacing Aliases**
 ```css
-/* Relationship-Based Spacing */
-.mt-best-friends { margin-top: 32px; }    /* Close relationship */
-.mt-friends { margin-top: 24px; }         /* Good relationship */
-.mt-acquaintances { margin-top: 16px; }   /* Casual relationship */
-.mt-neighbors { margin-top: 12px; }       /* Adjacent relationship */
-.mt-strangers { margin-top: 8px; }        /* Minimal relationship */
+/* Readable names mapping to 8-point grid */
+--space-micro: var(--space-1);    /* 4px - borders, fine details */
+--space-tiny: var(--space-2);     /* 8px - icon padding, small gaps */
+--space-small: var(--space-4);    /* 16px - text spacing, buttons */
+--space-medium: var(--space-6);   /* 24px - section spacing */
+--space-large: var(--space-8);    /* 32px - major spacing */
+--space-xlarge: var(--space-12);  /* 48px - hero spacing */
+--space-massive: var(--space-16); /* 64px - page-level spacing */
 ```
 
-### **📱 Responsive Scaling**
+### **📱 Responsive Scaling (8-Point Grid)**
 ```css
-/* Mobile-first scaling */
+/* Mobile-first responsive scaling */
 @media (max-width: 480px) {
-  --section-spacing: 64px;
-  --section-spacing-hero: 48px;
+  --section-spacing: var(--space-16);    /* 64px - mobile sections */
+  --section-spacing-hero: var(--space-12); /* 48px - mobile hero */
 }
 
 @media (min-width: 769px) {
-  --section-spacing: 128px;
-  --section-spacing-hero: 96px;
+  --section-spacing: var(--space-24);    /* 96px - tablet sections */
+  --section-spacing-hero: var(--space-20); /* 80px - tablet hero */
 }
 
 @media (min-width: 1025px) {
-  --section-spacing: 160px;
-  --section-spacing-hero: 120px;
+  --section-spacing: 128px;              /* 16x base - desktop sections */
+  --section-spacing-hero: 104px;         /* 13x base - desktop hero */
 }
 ```
 
