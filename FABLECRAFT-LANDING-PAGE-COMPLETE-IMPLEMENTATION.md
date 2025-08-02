@@ -11,15 +11,36 @@
 - **Auto-imports:** Nuxt 3 defaults (composables, utils auto-imported)
 
 ### **⚠️ MISSING DEPENDENCIES (Must Add)**
-```json
-{
-  "dependencies": {
-    "lucide-vue-next": "^0.454.0",
-    "clsx": "^2.1.1", 
-    "tailwind-merge": "^2.5.4"
-  }
-}
+**VERIFIED FOR NUXT 3.13.0 + STACK:**
+```bash
+# These are the ONLY dependencies you need to add
+pnpm add lucide-vue-next clsx tailwind-merge
+
+# Version compatibility verified:
+# lucide-vue-next: ^0.454.0 (Vue 3 icons)
+# clsx: ^2.1.1 (conditional classes)  
+# tailwind-merge: ^2.5.4 (Tailwind deduplication)
 ```
+
+**Already Available (DO NOT ADD):**
+- ✅ `@vueuse/core` v13.6.0 - composables like `onClickOutside` 
+- ✅ `@vueuse/nuxt` v13.6.0 - auto-imports (some disabled)
+- ✅ `vue` latest - Vue 3 with Composition API
+- ✅ `@nuxtjs/supabase` v1.6.0 - `useSupabaseClient`, `useSupabaseUser`
+- ✅ `@pinia/nuxt` v0.11.2 - state management (if needed)
+- ✅ `@nuxtjs/tailwindcss` v6.14.0 - styling system
+
+### **🚨 CRITICAL AUTO-IMPORT FACTS**
+**AUTO-IMPORTED (No import needed):**
+- ✅ `ref`, `computed`, `reactive`, `watch`, `onMounted` - Vue 3 Core
+- ✅ `useState`, `useRoute`, `useRouter`, `navigateTo` - Nuxt 3 Core
+- ✅ `useSupabaseClient`, `useSupabaseUser` - @nuxtjs/supabase
+- ✅ All composables from `~/composables/` folder
+
+**MUST EXPLICITLY IMPORT:**
+- ❗ `import { onClickOutside } from '@vueuse/core'` - VueUse disabled
+- ❗ `import * as LucideIcons from 'lucide-vue-next'` - Icons
+- ❗ `import { cn } from '~/utils'` - Our utility function
 
 ### **🎨 ALL VISUAL SYSTEMS TO PRESERVE (From Original Blueprint)**
 
@@ -1226,10 +1247,12 @@ const orbs = computed(() => {
 Create `components/ui/ThemeToggle.vue`:
 ```vue
 <script setup lang="ts">
+import { onClickOutside } from '@vueuse/core'
 import { themes } from '~/data/content'
 
 const { theme, setTheme } = useTheme()
 const isOpen = ref(false)
+const themeToggleRef = ref<HTMLElement>()
 
 const currentTheme = computed(() => {
   return themes.find(t => t.id === theme.value) || themes[0]
@@ -1249,13 +1272,13 @@ const handleThemeSelect = (themeId: string) => {
 }
 
 // Close dropdown when clicking outside
-onClickOutside(templateRef<HTMLElement>('themeToggle'), () => {
+onClickOutside(themeToggleRef, () => {
   isOpen.value = false
 })
 </script>
 
 <template>
-  <div ref="themeToggle" class="relative">
+  <div ref="themeToggleRef" class="relative">
     <!-- Theme Toggle Button -->
     <Button
       variant="ghost"
@@ -1328,17 +1351,20 @@ onClickOutside(templateRef<HTMLElement>('themeToggle'), () => {
 Create `composables/useTheme.ts`:
 ```typescript
 export const useTheme = () => {
-  const theme = useState('theme', () => 'light')
+  // Use Nuxt's useState for SSR compatibility
+  const theme = useState<string>('theme', () => 'light')
   
   const isDark = computed(() => theme.value === 'dark')
   
   const setTheme = (newTheme: string) => {
     theme.value = newTheme
     
-    // Update document class and data attribute
-    if (process.client) {
+    // Update document class and data attribute (client-side only)
+    if (import.meta.client) {
       document.documentElement.setAttribute('data-theme', newTheme)
       document.documentElement.classList.toggle('dark', newTheme === 'dark')
+      // Persist to localStorage
+      localStorage.setItem('fablecraft-theme', newTheme)
     }
   }
   
@@ -1346,22 +1372,15 @@ export const useTheme = () => {
     setTheme(isDark.value ? 'light' : 'dark')
   }
   
-  // Initialize theme on client
+  // Initialize theme on client mount
   onMounted(() => {
-    const stored = localStorage.getItem('theme')
+    const stored = localStorage.getItem('fablecraft-theme')
     if (stored) {
       setTheme(stored)
     } else {
       // Auto-detect system preference
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       setTheme(prefersDark ? 'dark' : 'light')
-    }
-  })
-  
-  // Persist theme changes
-  watch(theme, (newTheme) => {
-    if (process.client) {
-      localStorage.setItem('theme', newTheme)
     }
   })
   
@@ -1377,19 +1396,24 @@ export const useTheme = () => {
 Create `composables/useAuth.ts`:
 ```typescript
 export const useAuth = () => {
+  // These are auto-imported by @nuxtjs/supabase
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
   
   const isAuthenticated = computed(() => !!user.value)
   
   const login = async () => {
-    // Uses configured redirect in nuxt.config.ts
+    // Uses configured redirect in nuxt.config.ts (/login)
     await navigateTo('/login')
   }
   
   const logout = async () => {
-    await supabase.auth.signOut()
-    await navigateTo('/')
+    try {
+      await supabase.auth.signOut()
+      await navigateTo('/')
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
   }
   
   const getInitials = (username?: string) => {
@@ -1397,12 +1421,19 @@ export const useAuth = () => {
     return username.charAt(0).toUpperCase()
   }
   
+  const getUserDisplayName = () => {
+    return user.value?.user_metadata?.username || 
+           user.value?.email?.split('@')[0] || 
+           'User'
+  }
+  
   return {
     user: readonly(user),
     isAuthenticated: readonly(isAuthenticated),
     login,
     logout,
-    getInitials
+    getInitials,
+    getUserDisplayName
   }
 }
 ```
@@ -1529,11 +1560,11 @@ const cardClasses = computed(() => cn(
     'bg-card/95 backdrop-blur-lg border border-border shadow-lg hover:shadow-xl': props.variant === 'elevated',
     'border bg-card text-card-foreground': props.variant === 'outline',
     
-    // Padding with mathematical spacing
+    // Padding with Tailwind spacing
     'p-0': props.padding === 'none',
-    'p-neighbors': props.padding === 'sm',  // 12px
-    'p-acquaintances': props.padding === 'md', // 16px  
-    'p-friends': props.padding === 'lg', // 24px
+    'p-3': props.padding === 'sm',  // 12px
+    'p-4': props.padding === 'md', // 16px  
+    'p-6': props.padding === 'lg', // 24px
     
     // Hover effects
     'hover-lift': props.hover,
@@ -1575,10 +1606,10 @@ const badgeClasses = computed(() => cn(
     'border text-foreground': props.variant === 'outline',
     'bg-primary/10 text-primary animate-pulse': props.variant === 'pulse',
     
-    // Size styles with mathematical spacing
-    'px-strangers py-1 text-xs': props.size === 'sm',      // 8px padding
-    'px-neighbors py-1 text-sm': props.size === 'md',      // 12px padding
-    'px-acquaintances py-1.5 text-base': props.size === 'lg', // 16px padding
+    // Size styles with Tailwind spacing
+    'px-2 py-1 text-xs': props.size === 'sm',      // 8px padding
+    'px-3 py-1 text-sm': props.size === 'md',      // 12px padding
+    'px-4 py-1.5 text-base': props.size === 'lg', // 16px padding
   }
 ))
 </script>
@@ -1665,7 +1696,7 @@ const emit = defineEmits<{
 }>()
 
 const inputClasses = computed(() => cn(
-  'w-full px-acquaintances py-neighbors rounded-xl border border-border',
+  'w-full px-4 py-3 rounded-xl border border-border',
   'bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground',
   'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
   'transition-all duration-300 gpu-accelerated',
@@ -1686,7 +1717,7 @@ const inputClasses = computed(() => cn(
       :class="inputClasses"
       @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
-    <p v-if="error" class="text-sm text-destructive mt-strangers">{{ error }}</p>
+    <p v-if="error" class="text-sm text-destructive mt-1">{{ error }}</p>
   </div>
 </template>
 ```
