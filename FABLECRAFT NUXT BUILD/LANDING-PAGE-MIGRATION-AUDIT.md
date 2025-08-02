@@ -4,6 +4,48 @@ Hello Cursor,
 
 The following is a guided, micro-stepped blueprint for auditing the Fablecraft landing page. We will work together, step-by-step, to analyze the old React build and create a professional migration plan. Your role is to be a static code analysis tool, providing raw data based on specific commands.
 
+## TECHNOLOGY STACKS
+
+### 🔴 OLD STACK (React Build - Source for Analysis)
+⚡ **Vite 7.0** - Lightning fast build tool with native ESM  
+⚛️ **React 18.2** - Modern React with concurrent features  
+📘 **TypeScript 5.8** - Strict type safety and latest features  
+🎨 **Tailwind CSS 3.4** - Utility-first styling with custom theme  
+🧩 **Radix UI** - Accessible component primitives  
+🔀 **React Router 6** - Client-side routing  
+🏪 **Zustand** - Lightweight state management  
+📝 **React Hook Form** - Performant forms with validation  
+✅ **Zod** - Schema validation  
+🧪 **Vitest** - Fast unit testing  
+
+### 🟢 NEW STACK (Nuxt Build - Migration Target)
+⚡ **Nuxt 3.18** - Full-stack Vue framework with SSR/SSG  
+🔷 **Vue 3** - Composition API and modern reactivity  
+📘 **TypeScript 5.5** - Strict type safety with Vue support  
+🎨 **Tailwind CSS 3.4** - Consistent utility-first styling  
+🛠️ **@vueuse/core** - Vue composition utilities  
+🗂️ **Pinia** - Official Vue state management  
+📝 **Vue composables** - Native form handling patterns  
+✅ **Zod** - Schema validation (carried over)  
+🧪 **Vitest** - Testing framework (carried over)  
+🔧 **@nuxt/eslint** - Code quality and standards  
+
+### ⚠️ CRITICAL MIGRATION PRINCIPLE
+
+**🚨 NO DIRECT CODE TRANSFER 🚨**
+
+Code from the React build **CANNOT** be brought over directly. Every component, pattern, and implementation **MUST BE RE-WORKED** during the audit phase to:
+
+- Utilize Vue 3 Composition API patterns
+- Leverage Nuxt 3 framework capabilities  
+- Implement proper SSR/SSG considerations
+- Follow Vue ecosystem best practices
+- Optimize for performance and maintainability
+
+This is a **translation and optimization process**, not a copy-paste migration.
+
+---
+
 ## Core Principles:
 
 **Static Analysis Only:** You will only read and analyze the code in the /old-react-build directory. Do not attempt to run it.
