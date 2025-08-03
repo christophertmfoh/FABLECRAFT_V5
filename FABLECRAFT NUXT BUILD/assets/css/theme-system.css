@@ -175,6 +175,15 @@
   /* ✅ NEW: Dedicated Firefly Variables for Arctic Focus */
   --firefly-color: hsl(210 40% 30% / 0.75); /* Deep blue mote, more visible on white */
   --firefly-glow-color: hsl(210 70% 45% / 0.35); /* More prominent blue glow matching primary */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Arctic Focus */
+  --glow-primary: 200 60% 80%;      /* Cool blue */
+  --glow-secondary: 220 40% 85%;    /* Lighter blue */
+  --glow-opacity-primary: 0.07;
+  --glow-opacity-secondary: 0.05;
+  --glow-blend-mode: multiply;
+  --glow-size-primary: 40%;
+  --glow-size-secondary: 60%;
 }
 
 /* Golden Hour - Warm yellows optimized for inspiration */
@@ -210,6 +219,15 @@
   /* ✅ NEW: Dedicated Firefly Variables for Golden Hour */
   --firefly-color: hsl(35 50% 30% / 0.7); /* A darker, warm brown mote with increased visibility */
   --firefly-glow-color: hsl(45 90% 60% / 0.3); /* A more visible golden glow */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Golden Hour */
+  --glow-primary: 45 100% 70%;      /* Warm orange */
+  --glow-secondary: 25 80% 75%;     /* Soft yellow */
+  --glow-opacity-primary: 0.06;    /* Very subtle for light bg */
+  --glow-opacity-secondary: 0.04;
+  --glow-blend-mode: multiply;      /* Darkens instead of lightens */
+  --glow-size-primary: 45%;
+  --glow-size-secondary: 65%;
 }
 
 /* ========================================
@@ -251,6 +269,15 @@
   /* ✅ NEW: Dedicated Firefly Variables for Midnight Ink */
   --firefly-color: hsl(210 80% 70%); /* A crisp, bright blue spark */
   --firefly-glow-color: hsl(210 80% 70% / 0.5); /* Brighter blue glow matching the spark */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Midnight Ink */
+  --glow-primary: 220 80% 60%;      /* Bright blue */
+  --glow-secondary: 280 70% 65%;    /* Bright purple */
+  --glow-opacity-primary: 0.25;
+  --glow-opacity-secondary: 0.15;
+  --glow-blend-mode: screen;
+  --glow-size-primary: 35%;
+  --glow-size-secondary: 55%;
 }
 
 /* Forest Manuscript - Deep greens for nature-inspired writing */
@@ -380,6 +407,15 @@
   /* Auth button colors */
   --auth-button-primary: 15 75% 50%; /* Coral */
   --auth-button-primary-hover: 15 75% 40%; /* Darker coral */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Sunset Coral */
+  --glow-primary: 15 75% 65%;      /* Warm coral */
+  --glow-secondary: 45 85% 70%;    /* Soft gold */
+  --glow-opacity-primary: 0.08;
+  --glow-opacity-secondary: 0.05;
+  --glow-blend-mode: multiply;
+  --glow-size-primary: 40%;
+  --glow-size-secondary: 60%;
 }
 
 /* Lavender Dusk - Soft lavender and warm grey */
@@ -411,6 +447,15 @@
   /* Auth button colors */
   --auth-button-primary: 280 35% 45%; /* Lavender */
   --auth-button-primary-hover: 280 35% 35%; /* Darker lavender */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Lavender Dusk */
+  --glow-primary: 280 40% 75%;     /* Soft lavender */
+  --glow-secondary: 320 35% 80%;   /* Light pink */
+  --glow-opacity-primary: 0.06;
+  --glow-opacity-secondary: 0.04;
+  --glow-blend-mode: multiply;
+  --glow-size-primary: 45%;
+  --glow-size-secondary: 65%;
 }
 
 /* Moonlit Garden - Fantasy light theme with mystical blues */
@@ -443,6 +488,15 @@
   /* Auth button colors */
   --auth-button-primary: 95 60% 40%; /* Moonlit teal */
   --auth-button-primary-hover: 95 60% 35%; /* Darker moonlit */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Moonlit Garden */
+  --glow-primary: 95 50% 70%;      /* Mystical teal */
+  --glow-secondary: 85 45% 75%;    /* Garden green */
+  --glow-opacity-primary: 0.07;
+  --glow-opacity-secondary: 0.05;
+  --glow-blend-mode: multiply;
+  --glow-size-primary: 42%;
+  --glow-size-secondary: 62%;
 }
 
 /* ========================================
@@ -583,6 +637,15 @@
   /* ✅ NEW: Dedicated Firefly Variables for Netrunner */
   --firefly-color: hsl(50 100% 50%); /* Electric yellow particle */
   --firefly-glow-color: hsl(180 100% 50% / 0.4); /* Brighter contrasting cyan glow */
+  
+  /* ✅ NEW: Atmospheric Glow Variables for Netrunner */
+  --glow-primary: 180 100% 50%;     /* Cyan */
+  --glow-secondary: 300 100% 50%;   /* Magenta */
+  --glow-opacity-primary: 0.3;
+  --glow-opacity-secondary: 0.2;
+  --glow-blend-mode: screen;
+  --glow-size-primary: 30%;
+  --glow-size-secondary: 45%;
 }
 
 /* ========================================

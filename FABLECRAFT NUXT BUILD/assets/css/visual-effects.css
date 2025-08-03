@@ -307,20 +307,55 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: var(--atmospheric-opacity, var(--effect-opacity-subtle));
-  background: 
-    radial-gradient(
-      ellipse at top,
-      hsl(var(--orb-primary) / 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at bottom,
-      hsl(var(--orb-secondary) / 0.1) 0%,
-      transparent 50%
-    );
-  mix-blend-mode: var(--atmospheric-blend, screen);
   z-index: 2;
+  will-change: opacity;
+  
+  /* Multi-layer approach for better theme compatibility */
+  background-image: 
+    /* Primary glow - top */
+    radial-gradient(
+      ellipse var(--glow-size-primary, 35%) var(--glow-size-primary, 35%) at 20% 10%,
+      hsl(var(--glow-primary, var(--orb-primary)) / var(--glow-opacity-primary, 0.15)),
+      transparent 70%
+    ),
+    /* Secondary glow - bottom right */
+    radial-gradient(
+      ellipse var(--glow-size-secondary, 50%) var(--glow-size-secondary, 50%) at 80% 90%,
+      hsl(var(--glow-secondary, var(--orb-secondary)) / var(--glow-opacity-secondary, 0.1)),
+      transparent 70%
+    ),
+    /* Subtle overall wash */
+    linear-gradient(
+      135deg,
+      hsl(var(--glow-primary, var(--orb-primary)) / calc(var(--glow-opacity-primary, 0.15) * 0.3)) 0%,
+      transparent 30%,
+      transparent 70%,
+      hsl(var(--glow-secondary, var(--orb-secondary)) / calc(var(--glow-opacity-secondary, 0.1) * 0.3)) 100%
+    );
+  
+  mix-blend-mode: var(--glow-blend-mode, screen);
+  
+  /* GPU acceleration */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  
+  /* Performance optimizations */
+  contain: layout style paint;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .atmospheric-gradient {
+    background-size: 150% 150%, 120% 120%, 100% 100%;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .atmospheric-gradient {
+    animation: none;
+    opacity: calc(var(--glow-opacity-primary, 0.15) * 0.5);
+  }
 }
 
 .atmospheric-glow {
