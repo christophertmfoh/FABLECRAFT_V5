@@ -1,4 +1,19 @@
-/* file: assets/css/main.css */
+/*
+ * MAIN CSS - FABLECRAFT NUXT PROJECT
+ * Foundation-first import strategy for optimal cascade
+ * Phase 1: Mathematical Foundation Systems
+ */
+
+/* ========================================
+   PHASE 1A: MATHEMATICAL SPACING FOUNDATION
+   Must load first - all other systems depend on these variables
+======================================== */
+@import './mathematical-spacing.css';
+
+/* ========================================
+   TAILWIND CSS LAYERS
+   Integrated after our foundation systems
+======================================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
