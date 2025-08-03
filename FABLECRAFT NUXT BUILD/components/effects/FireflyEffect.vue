@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="isClient"
     ref="containerRef"
     class="effects-container firefly-container"
     :class="{ initialized: isInitialized }"
@@ -8,7 +7,7 @@
     aria-hidden="true"
   >
     <div
-      v-for="firefly in visibleFireflies"
+      v-for="firefly in fireflies"
       :key="firefly.id"
       class="firefly"
       :class="firefly.sizeClass"
@@ -41,7 +40,6 @@ const props = withDefaults(defineProps<FireflyProps>(), {
   performanceMode: 'medium'
 })
 
-const isClient = ref(false)
 const containerRef = ref<HTMLElement>()
 const isInitialized = ref(false)
 const isVisible = ref(false)
@@ -75,11 +73,20 @@ const fireflyPositions = [
   { x: 85, variant: 'small', delay: 26.8 }
 ]
 
-// Create fireflies based on count
+// Create fireflies based on count - computed so it's reactive
 const fireflies = computed<Firefly[]>(() => {
-  const actualCount = Math.min(props.count, 12) // Max 12 for performance
+  if (!props.enabled || !isVisible.value) return []
   
-  return fireflyPositions.slice(0, actualCount).map((pos, index) => {
+  const actualCount = Math.min(props.count, 12) // Max 12 for performance
+  const limits = {
+    low: 4,
+    medium: 8,
+    high: 12
+  }
+  const limit = limits[props.performanceMode] || 8
+  const finalCount = Math.min(limit, actualCount)
+  
+  return fireflyPositions.slice(0, finalCount).map((pos, index) => {
     const durations = {
       small: 18,
       normal: 14,
@@ -101,28 +108,15 @@ const fireflies = computed<Firefly[]>(() => {
   })
 })
 
-// Filter fireflies based on visibility and performance mode
-const visibleFireflies = computed(() => {
-  if (!props.enabled || !isVisible.value) return []
-  
-  const limits = {
-    low: 4,
-    medium: 8,
-    high: 12
-  }
-  
-  const limit = limits[props.performanceMode] || 8
-  return fireflies.value.slice(0, Math.min(limit, props.count))
-})
-
 // Intersection observer for performance
 let observer: IntersectionObserver | null = null
 
 onMounted(() => {
-  isClient.value = true
-  
   if (import.meta.client && containerRef.value) {
-    // Create intersection observer
+    // Start visible for immediate effect
+    isVisible.value = true
+    
+    // Create intersection observer for performance optimization
     observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         isVisible.value = entry.isIntersecting
@@ -133,7 +127,7 @@ onMounted(() => {
     
     observer.observe(containerRef.value)
     
-    // Initialize after a small delay
+    // Initialize animations
     setTimeout(() => {
       isInitialized.value = true
     }, 100)
@@ -145,11 +139,6 @@ onUnmounted(() => {
     observer.unobserve(containerRef.value)
     observer.disconnect()
   }
-})
-
-// Watch for performance mode changes
-watch(() => props.performanceMode, () => {
-  // Fireflies will automatically adjust based on computed property
 })
 </script>
 
@@ -163,14 +152,19 @@ watch(() => props.performanceMode, () => {
   pointer-events: none;
   z-index: 5;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .firefly-container.initialized {
   opacity: 1;
 }
 
-.firefly {
-  opacity: 0;
-  animation-fill-mode: both;
+/* Fireflies are only animated on client side */
+@media (prefers-reduced-motion: no-preference) {
+  .firefly {
+    opacity: 0;
+    animation-fill-mode: both;
+  }
 }
 </style>

@@ -64,15 +64,17 @@ if (isDevelopment) {
 <template>
   <div class="min-h-screen bg-background text-foreground transition-colors duration-300">
     <!-- Background Visual Effects -->
-    <EffectsBackgroundOrbs 
-      v-if="orbsEnabled"
-      :performance-mode="performanceMode"
-    />
-    <EffectsFireflyEffect 
-      v-if="firefliesEnabled"
-      :count="fireflyCount" 
-      :performance-mode="performanceMode"
-    />
+    <ClientOnly>
+      <EffectsBackgroundOrbs 
+        :enabled="orbsEnabled"
+        :performance-mode="performanceMode"
+      />
+      <EffectsFireflyEffect 
+        :enabled="firefliesEnabled"
+        :count="fireflyCount" 
+        :performance-mode="performanceMode"
+      />
+    </ClientOnly>
     <div v-if="atmosphericEnabled" class="atmospheric-gradient" />
     
     <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">

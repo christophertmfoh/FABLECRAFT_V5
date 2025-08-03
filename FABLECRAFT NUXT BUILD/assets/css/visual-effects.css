@@ -15,7 +15,7 @@
   --effect-duration-normal: 0.6s;
   --effect-duration-slow: 2s;
   --effect-duration-firefly: 15s;
-  --effect-duration-orb: 20s;
+  --effect-duration-orb: 25s;
   
   /* Easing Functions */
   --effect-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
@@ -27,7 +27,7 @@
   --effect-opacity-strong: 0.9;
   
   /* Performance Hints */
-  --effect-blur-amount: 4px;
+  --effect-blur-amount: 80px;
   --effect-glow-spread: 20px;
 }
 
@@ -223,13 +223,11 @@
 
 /* Primary orb - largest */
 .orb--primary {
-  width: 600px;
-  height: 600px;
+  width: 320px;
+  height: 320px;
   background: radial-gradient(
     circle at center,
-    hsl(var(--orb-primary) / 0.8) 0%,
-    hsl(var(--orb-primary) / 0.4) 40%,
-    hsl(var(--orb-primary) / 0.1) 70%,
+    hsl(var(--orb-primary) / 0.3) 0%,
     transparent 100%
   );
   animation: orb-float-primary var(--effect-duration-orb) ease-in-out infinite;
@@ -237,13 +235,11 @@
 
 /* Secondary orb - medium */
 .orb--secondary {
-  width: 400px;
-  height: 400px;
+  width: 220px;
+  height: 220px;
   background: radial-gradient(
     circle at center,
-    hsl(var(--orb-secondary) / 0.6) 0%,
-    hsl(var(--orb-secondary) / 0.3) 40%,
-    hsl(var(--orb-secondary) / 0.1) 70%,
+    hsl(var(--orb-secondary) / 0.25) 0%,
     transparent 100%
   );
   animation: orb-float-secondary calc(var(--effect-duration-orb) * 1.2) ease-in-out infinite;
@@ -251,12 +247,11 @@
 
 /* Tertiary orb - small accent */
 .orb--tertiary {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   background: radial-gradient(
     circle at center,
-    hsl(var(--orb-primary) / 0.4) 0%,
-    hsl(var(--orb-primary) / 0.2) 40%,
+    hsl(var(--orb-primary) / 0.15) 0%,
     transparent 100%
   );
   animation: orb-float-tertiary calc(var(--effect-duration-orb) * 0.8) ease-in-out infinite;
@@ -265,13 +260,16 @@
 /* GPU-accelerated orb animations */
 @keyframes orb-float-primary {
   0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translateY(0px) translateX(0px) scale(1);
   }
-  33% {
-    transform: translate3d(30px, -20px, 0) scale(1.05);
+  25% {
+    transform: translateY(-25px) translateX(15px) scale(1.05);
   }
-  66% {
-    transform: translate3d(-20px, 10px, 0) scale(0.95);
+  50% {
+    transform: translateY(0px) translateX(-15px) scale(0.95);
+  }
+  75% {
+    transform: translateY(15px) translateX(8px) scale(1.02);
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="isClient && enabled"
+    v-show="enabled"
     ref="containerRef"
     class="effects-container orb-container"
     :class="{ initialized: isInitialized }"
@@ -8,7 +8,7 @@
     aria-hidden="true"
   >
     <div
-      v-for="orb in visibleOrbs"
+      v-for="orb in orbs"
       :key="orb.id"
       class="orb"
       :class="orb.className"
@@ -38,7 +38,6 @@ const props = withDefaults(defineProps<OrbProps>(), {
   performanceMode: 'medium'
 })
 
-const isClient = ref(false)
 const containerRef = ref<HTMLElement>()
 const isInitialized = ref(false)
 const isVisible = ref(true)
@@ -69,8 +68,8 @@ const orbConfigs: OrbConfig[] = [
 ]
 
 // Create orbs based on performance mode
-const visibleOrbs = computed(() => {
-  if (!props.enabled || !isVisible.value) return []
+const orbs = computed(() => {
+  if (!isVisible.value) return []
   
   // Performance mode determines how many orbs to show
   const orbLimits = {
@@ -86,9 +85,7 @@ const visibleOrbs = computed(() => {
     className: `orb--${config.type}`,
     style: {
       ...config.position,
-      '--orb-delay': `${config.delay}s`,
-      width: `${config.size}px`,
-      height: `${config.size}px`
+      '--orb-delay': `${config.delay}s`
     }
   }))
 })
@@ -97,8 +94,6 @@ const visibleOrbs = computed(() => {
 let observer: IntersectionObserver | null = null
 
 onMounted(() => {
-  isClient.value = true
-  
   if (import.meta.client && containerRef.value) {
     // Create intersection observer for performance optimization
     observer = new IntersectionObserver((entries) => {
@@ -111,7 +106,7 @@ onMounted(() => {
     
     observer.observe(containerRef.value)
     
-    // Initialize after a small delay for smooth loading
+    // Initialize animations after a small delay for smooth loading
     setTimeout(() => {
       isInitialized.value = true
     }, 100)
@@ -123,11 +118,6 @@ onUnmounted(() => {
     observer.unobserve(containerRef.value)
     observer.disconnect()
   }
-})
-
-// Watch for performance mode changes
-watch(() => props.performanceMode, () => {
-  // Orbs will automatically adjust based on computed property
 })
 </script>
 
@@ -141,15 +131,25 @@ watch(() => props.performanceMode, () => {
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .orb-container.initialized {
   opacity: 1;
 }
 
+/* Orbs with animation-fill-mode to keep final state */
 .orb {
   opacity: 0.2;
   animation-delay: var(--orb-delay, 0s);
   animation-fill-mode: both;
+}
+
+/* Only animate on client side with motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  .initialized .orb {
+    animation-play-state: running;
+  }
 }
 </style>
