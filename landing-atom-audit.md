@@ -513,6 +513,144 @@ This document contains the complete, deduplicated list of atomic UI elements to 
 - Type: `always` (always show scrollbar)
 - Used in theme toggle dropdown
 
+### 8. Section Container
+**Base Component**: `<section>` / `<div>` / `<article>` / `<main>` (polymorphic)
+**Visual Specifications**:
+- Base: `relative z-10`
+- Centering: `mx-auto`
+
+**Spacing Variants**:
+- `default`: `section-spacing` (128px standard sections)
+- `hero`: `section-spacing-hero` (96px hero sections)  
+- `compact`: `section-spacing-compact` (64px compact sections)
+- `custom`: No spacing class
+
+**Width Variants**:
+- `default`: `max-w-7xl`
+- `narrow`: `max-w-5xl`
+- `wide`: `max-w-screen-2xl`
+- `full`: `w-full`
+
+**Padding Variants**:
+- `default`: `px-4 sm:px-6 lg:px-8`
+- `loose`: `px-6 sm:px-8 lg:px-12`
+- `tight`: `px-4`
+- `none`: No padding
+
+### 9. Section Content
+**Base Component**: `<div>` inner wrapper
+**Visual Specifications**:
+- Alignment: `text-left`, `text-center`, `text-right`
+- Max width: Custom via `maxWidth` prop and `mx-auto`
+
+**Spacing Variants**:
+- `tight`: `space-y-8`
+- `default`: `space-y-12 lg:space-y-16`
+- `loose`: `space-y-16 lg:space-y-20`
+
+### 10. Grid Container
+**Base Component**: `<div>` with CSS Grid
+**Visual Specifications**:
+- Base: `grid`
+- Gap: `grid-normal` (custom spacing)
+- Responsive columns:
+  - 2 columns: `grid-cols-1 sm:grid-cols-2`
+  - 3 columns: `grid-cols-1 md:grid-cols-3`
+  - 4 columns: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`
+  - 6 columns: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6`
+- Auto-responsive: `grid-cols-1 md:grid-cols-2 lg:grid-cols-4`
+
+### 11. Flex Container
+**Base Component**: `<div>` with Flexbox
+**Visual Specifications**:
+- Base: `flex`
+- Direction: `flex-col`, `flex-row`, `flex-col sm:flex-row`, `flex-col md:flex-row`, `flex-col lg:flex-row`
+- Alignment: `items-center`, `justify-center`, `justify-between`
+- Gap variants: `gap-2`, `gap-3`, `gap-4`, `gap-6`, `gap-12`, `gap-friends`
+- Wrap: `overflow-x-auto lg:overflow-visible`
+
+### 12. Space Container
+**Base Component**: `<div>` with spacing utilities
+**Visual Specifications**:
+- Vertical spacing: `space-y-1`, `space-y-2`, `space-y-3`, `space-y-4`, `space-y-6`
+- Horizontal spacing: `space-x-1`
+- Custom mathematical spacing: `mt-best-friends`, `mt-friends`, `mt-acquaintances`
+
+### 13. Heading Group
+**Base Component**: `<div>` wrapper for headings
+**Visual Specifications**:
+- Classes: `heading-group flex flex-col items-center`
+- Text alignment: `text-center`
+- Max width constraint: `max-w-5xl mx-auto`
+- Used to group heading, subheading, and description
+
+### 14. Action Group
+**Base Component**: `<div>` wrapper for CTAs
+**Visual Specifications**:
+- Classes: `action-group gap-friends flex-col sm:flex-row justify-center items-center`
+- Max width: `max-w-lg mx-auto sm:max-w-none`
+- Spacing: `mt-acquaintances`
+- Responsive flex direction
+
+### 15. Content Wrapper
+**Base Component**: `<div>` generic wrapper
+**Visual Specifications**:
+- Common patterns:
+  - Centered: `mx-auto`
+  - Max width variants: `max-w-4xl`, `max-w-5xl`, `max-w-7xl`
+  - Padding: Various responsive padding patterns
+  - Text alignment inheritance
+
+### 16. Overflow Container
+**Base Component**: `<div>` with overflow control
+**Visual Specifications**:
+- Horizontal scroll: `overflow-x-auto lg:overflow-visible`
+- Used for responsive card layouts
+- Prevents layout breaking on small screens
+
+## List Atoms
+
+### 1. Unordered List
+**Base Component**: `<ul>`
+**Visual Specifications**:
+- Vertical spacing: `space-y-2`, `space-y-3`
+- No default list styling (bullets removed)
+- Used in footer navigation
+
+### 2. List Item
+**Base Component**: `<li>`
+**Visual Specifications**:
+- No default styling
+- Content determines visual appearance
+- Often contains buttons or links
+
+### 3. Feature List Item
+**Base Component**: `<div>` (not semantic list)
+**Visual Specifications**:
+- Container: `flex items-center gap-3`
+- Spacing: `mt-2` (except first item)
+- Icon: `CheckCircle` with `w-5 h-5 text-primary flex-shrink-0`
+- Text: `text-foreground`
+- Used in pricing feature lists
+
+### 4. Navigation List
+**Base Component**: `<ul>` with navigation items
+**Visual Specifications**:
+- Container: `space-y-3`
+- Item: `<li>` containing interactive element
+- Button inside: `text-sm text-foreground/60 hover:text-foreground transition-colors duration-200`
+
+### 5. Social Links List
+**Base Component**: `<div>` with flex layout
+**Visual Specifications**:
+- Container: `flex items-center gap-4`
+- No semantic list markup
+- Contains icon buttons
+
+## Table Atoms
+
+*No table atoms were found in the landing page components. Tables are not used as atomic elements in this design system.*
+
 ## Utility Atoms
 
 ### 1. VisuallyHidden (Screen Reader Only)
