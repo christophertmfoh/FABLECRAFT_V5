@@ -17,6 +17,7 @@ const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
+const paperTextureEnabled = useState('paper-texture-enabled', () => true)
 
 // Dropdown states for sections
 const showSystemStatus = ref(true) // Start expanded
@@ -26,7 +27,7 @@ const showTypography = ref(false) // Start collapsed for typography
 
 // Computed property to check if all effects are enabled
 const allEffectsEnabled = computed(() => {
-  return orbsEnabled.value && firefliesEnabled.value
+  return orbsEnabled.value && firefliesEnabled.value && paperTextureEnabled.value
 })
 
 // Toggle all effects on/off
@@ -34,6 +35,7 @@ const toggleAllEffects = () => {
   const newState = !allEffectsEnabled.value
   orbsEnabled.value = newState
   firefliesEnabled.value = newState
+  paperTextureEnabled.value = newState
 }
 
 // Device info for performance
@@ -86,6 +88,9 @@ if (isDevelopment) {
         :enabled="firefliesEnabled"
         :count="fireflyCount" 
         :performance-mode="performanceMode"
+      />
+      <EffectsPaperTexture 
+        :enabled="paperTextureEnabled"
       />
     </ClientOnly>
     
@@ -169,6 +174,15 @@ if (isDevelopment) {
               class="rounded"
             >
             <span>Fireflies ({{ fireflyCount }} elements)</span>
+          </label>
+          
+          <label class="flex items-center gap-2">
+            <input 
+              v-model="paperTextureEnabled" 
+              type="checkbox"
+              class="rounded"
+            >
+            <span>Paper Texture</span>
           </label>
         </div>
         
