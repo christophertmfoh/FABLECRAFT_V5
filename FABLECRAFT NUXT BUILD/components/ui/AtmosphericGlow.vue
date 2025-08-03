@@ -1,10 +1,11 @@
-<!-- components/ui/AtmosphericGlow.vue -->
 <template>
-  <div 
-    v-if="enabled && !reducedMotion"
-    class="atmospheric-gradient"
-    aria-hidden="true"
-  />
+  <ClientOnly>
+    <div 
+      v-if="enabled && !reducedMotion && isMounted"
+      class="atmospheric-gradient"
+      aria-hidden="true"
+    />
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -16,11 +17,13 @@ const props = withDefaults(defineProps<Props>(), {
   enabled: true
 })
 
-// Respect user preferences
 const reducedMotion = usePreferredReducedMotion()
+const isMounted = ref(false)
 
-// SSR-safe implementation
 onMounted(() => {
-  // Any client-side initialization
+  // Critical: Wait for next frame to ensure CSS variables are loaded
+  requestAnimationFrame(() => {
+    isMounted.value = true
+  })
 })
 </script>
