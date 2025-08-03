@@ -7,7 +7,7 @@
     "safe-stop": "./scripts/safe-stop.sh",
     "list-dev": "./scripts/list-dev-servers.sh",
     "dev": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev",
-    "dev:alt": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev --port 3002",
+    "dev:alt": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev --port 3050",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

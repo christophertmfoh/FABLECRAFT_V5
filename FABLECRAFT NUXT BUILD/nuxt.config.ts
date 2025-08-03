@@ -33,7 +33,9 @@ export default defineNuxtConfig({
       exclude: [
         '/', 
         '/login', 
-        '/confirm'
+        '/confirm',
+        '/supabase-test',
+        '/api-test'
       ], // Exclude public pages from auth redirect
     }
   },

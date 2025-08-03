@@ -30,7 +30,7 @@ npm run safe-stop                    # Recommended: Smart stop script
 kill -TERM [specific_dev_pid]        # Kill specific dev server PID
 kill -INT [specific_dev_pid]         # Interrupt specific dev server
 lsof -ti:3000 | xargs kill -TERM    # Kill only process on port 3000
-lsof -ti:3002 | xargs kill -TERM    # Kill only process on port 3002
+lsof -ti:3050 | xargs kill -TERM    # Kill only process on port 3050
 ```
 
 ## ✅ SAFE ALTERNATIVES
@@ -46,7 +46,7 @@ lsof -ti:3002 | xargs kill -TERM    # Kill only process on port 3002
 
 3. **Use a different port** if the current one is stuck:
    ```bash
-   npm run dev:alt  # Uses port 3002 instead of 3000
+   npm run dev:alt  # Uses port 3050 instead of 3000
    ```
 
 ### To Check What's Running:
@@ -55,7 +55,7 @@ lsof -ti:3002 | xargs kill -TERM    # Kill only process on port 3002
 # View only (safe):
 ps aux | grep node
 lsof -i :3000
-lsof -i :3002
+lsof -i :3050
 ```
 
 ### If Port is Already in Use:

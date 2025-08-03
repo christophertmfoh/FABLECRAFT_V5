@@ -8,11 +8,11 @@ echo "🛑 Stopping Nuxt development server safely..."
 # Find ONLY the Nuxt dev server process (not system Node)
 NUXT_PID=$(lsof -ti:3000 2>/dev/null | head -1)
 if [ -z "$NUXT_PID" ]; then
-    NUXT_PID=$(lsof -ti:3002 2>/dev/null | head -1)
+    NUXT_PID=$(lsof -ti:3050 2>/dev/null | head -1)
 fi
 
 if [ -z "$NUXT_PID" ]; then
-    echo "✅ No Nuxt dev server running on ports 3000 or 3002"
+    echo "✅ No Nuxt dev server running on ports 3000 or 3050"
     exit 0
 fi
 
