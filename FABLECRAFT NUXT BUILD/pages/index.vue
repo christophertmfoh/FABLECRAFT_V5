@@ -503,7 +503,7 @@ if (isDevelopment) {
               <div :class="testClasses" class="text-sm">
                 This div uses cn() to merge classes
               </div>
-              <p class="text-xs text-muted-foreground mt-1">
+              <p class="text-sm text-muted-foreground mt-2">
                 Classes: {{ testClasses }}
               </p>
             </div>
@@ -520,79 +520,6 @@ if (isDevelopment) {
             <div class="mb-4">
               <h4 class="text-xs font-semibold mb-2">Testing useComponentId():</h4>
               <p class="text-sm">Component ID: {{ componentId }}</p>
-            </div>
-          </div>
-
-          <!-- Phase 2 Component Tests -->
-          <div class="border-t border-border pt-4">
-            <h3 class="text-sm font-medium text-primary mb-4">Phase 2 Components:</h3>
-            
-            <!-- Icon Component -->
-            <div class="mb-6">
-              <h4 class="text-xs font-semibold mb-2">Icon Component:</h4>
-              <div class="flex gap-2 items-center">
-                <Icon name="i-lucide-zap" size="xs" />
-                <Icon name="i-lucide-heart" size="sm" />
-                <Icon name="i-lucide-star" size="md" />
-                <Icon name="i-lucide-sun" size="lg" />
-                <Icon name="i-lucide-moon" size="xl" />
-              </div>
-            </div>
-
-            <!-- Button Component -->
-            <div class="mb-6">
-              <h4 class="text-xs font-semibold mb-2">Button Component:</h4>
-              <div class="flex flex-wrap gap-2">
-                <Button variant="primary" size="sm">Primary</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="destructive">Destructive</Button>
-                <Button variant="outline">Outline</Button>
-                <Button variant="ghost">Ghost</Button>
-                <Button variant="link">Link</Button>
-                <Button variant="primary" size="icon">
-                  <Icon name="i-lucide-plus" size="sm" />
-                </Button>
-                <Button variant="primary" :loading="true">Loading</Button>
-              </div>
-            </div>
-
-            <!-- GradientButton Component -->
-            <div class="mb-6">
-              <h4 class="text-xs font-semibold mb-2">GradientButton Component:</h4>
-              <div class="flex gap-2">
-                <GradientButton>Default Gradient</GradientButton>
-                <GradientButton variant="secondary">Secondary Gradient</GradientButton>
-              </div>
-            </div>
-
-            <!-- Spinner Component -->
-            <div class="mb-6">
-              <h4 class="text-xs font-semibold mb-2">Spinner Component:</h4>
-              <div class="flex gap-4 items-center">
-                <Spinner size="xs" />
-                <Spinner size="sm" />
-                <Spinner size="md" />
-                <Spinner size="lg" />
-                <Spinner size="xl" />
-              </div>
-            </div>
-
-            <!-- Card Component -->
-            <div class="mb-6">
-              <h4 class="text-xs font-semibold mb-2">Card Component:</h4>
-              <Card class="max-w-sm">
-                <CardHeader>
-                  <CardTitle>Card Title</CardTitle>
-                  <CardDescription>This is a card description that provides context.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>Card content goes here. You can add any content you want.</p>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" size="sm">Cancel</Button>
-                  <Button variant="primary" size="sm" class="ml-2">Save</Button>
-                </CardFooter>
-              </Card>
             </div>
           </div>
         </div>
