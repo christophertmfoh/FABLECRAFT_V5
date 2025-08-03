@@ -23,6 +23,19 @@ const atmosphericEnabled = useState('atmospheric-enabled', () => true)
 const showTypography = ref(false)
 const showEffectsControls = ref(false)
 
+// Computed property to check if all effects are enabled
+const allEffectsEnabled = computed(() => {
+  return orbsEnabled.value && firefliesEnabled.value && atmosphericEnabled.value
+})
+
+// Toggle all effects on/off
+const toggleAllEffects = () => {
+  const newState = !allEffectsEnabled.value
+  orbsEnabled.value = newState
+  firefliesEnabled.value = newState
+  atmosphericEnabled.value = newState
+}
+
 // Device info for performance
 const deviceInfo = ref({
   memory: null as number | null,
@@ -105,9 +118,9 @@ if (isDevelopment) {
         </button>
         <button 
           class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
-          @click="toggleOrbs"
+          @click="toggleAllEffects"
         >
-          {{ orbsEnabled ? '✨ Effects On' : '○ Effects Off' }}
+          {{ allEffectsEnabled ? '✨ Effects On' : '○ Effects Off' }}
         </button>
       </div>
 
