@@ -17,6 +17,7 @@ const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
+const themeGlowEnabled = useState('theme-glow-enabled', () => true)
 
 // Dropdown states for sections
 const showSystemStatus = ref(true) // Start expanded
@@ -26,7 +27,7 @@ const showTypography = ref(false) // Start collapsed for typography
 
 // Computed property to check if all effects are enabled
 const allEffectsEnabled = computed(() => {
-  return orbsEnabled.value && firefliesEnabled.value
+  return orbsEnabled.value && firefliesEnabled.value && themeGlowEnabled.value
 })
 
 // Toggle all effects on/off
@@ -34,6 +35,7 @@ const toggleAllEffects = () => {
   const newState = !allEffectsEnabled.value
   orbsEnabled.value = newState
   firefliesEnabled.value = newState
+  themeGlowEnabled.value = newState
 }
 
 // Device info for performance
@@ -130,9 +132,10 @@ if (isDevelopment) {
 
 
 
-      <!-- Visual Effects Controls Dropdown with Glow -->
-      <UiThemeGlow size="md" position="center" :intensity="0.6" :interactive="true">
-        <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
+      <!-- Visual Effects Controls Dropdown -->
+      <template v-if="themeGlowEnabled">
+        <UiThemeGlow size="md" position="center" :intensity="0.6" :interactive="true">
+          <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
           <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
             🎮 Visual Effects Controls
           </summary>
@@ -172,6 +175,15 @@ if (isDevelopment) {
             >
             <span>Fireflies ({{ fireflyCount }} elements)</span>
           </label>
+          
+          <label class="flex items-center gap-2">
+            <input 
+              v-model="themeGlowEnabled" 
+              type="checkbox"
+              class="rounded"
+            >
+            <span>Theme Glow</span>
+          </label>
         </div>
         
         <!-- Firefly Count -->
@@ -209,7 +221,114 @@ if (isDevelopment) {
         </div>
         </div>
       </details>
-      </UiThemeGlow>
+        </UiThemeGlow>
+      </template>
+      
+      <!-- Without glow -->
+      <details v-else :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🎮 Visual Effects Controls
+        </summary>
+        
+        <div class="space-y-6">
+          <!-- Quick Toggle All Effects -->
+          <div class="flex justify-center">
+            <button 
+              class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
+              @click="toggleAllEffects"
+            >
+              {{ allEffectsEnabled ? '✨ All Effects On' : '○ All Effects Off' }}
+            </button>
+          </div>
+        
+          <!-- Performance Mode -->
+          <div>
+            <label class="block text-sm font-medium mb-2">Performance Mode</label>
+            <select 
+              :value="performanceMode" 
+              class="w-full px-3 py-2 bg-background border rounded"
+              @change="setPerformanceMode($event.target.value as 'low' | 'medium' | 'high')"
+            >
+              <option value="low">Low (Mobile)</option>
+              <option value="medium">Medium (Default)</option>
+              <option value="high">High (Desktop)</option>
+            </select>
+          </div>
+          
+          <!-- Effect Toggles -->
+          <div class="space-y-2">
+            <label class="flex items-center gap-2">
+              <input 
+                v-model="firefliesEnabled" 
+                type="checkbox"
+                class="rounded"
+              >
+              <span>Fireflies ({{ fireflyCount }} elements)</span>
+            </label>
+            
+            <label class="flex items-center gap-2">
+              <input 
+                v-model="orbsEnabled" 
+                type="checkbox"
+                class="rounded"
+              >
+              <span>Background Orbs</span>
+            </label>
+            
+            <label class="flex items-center gap-2">
+              <input 
+                v-model="orbsEnabled" 
+                type="checkbox"
+                class="rounded"
+              >
+              <span>Background Orbs</span>
+            </label>
+            
+            <label class="flex items-center gap-2">
+              <input 
+                v-model="themeGlowEnabled" 
+                type="checkbox"
+                class="rounded"
+              >
+              <span>Theme Glow</span>
+            </label>
+          </div>
+          
+          <!-- Firefly Count -->
+          <div v-if="firefliesEnabled">
+            <label class="block text-sm font-medium mb-2">
+              Firefly Count: {{ fireflyCount }}
+            </label>
+            <input 
+              v-model.number="fireflyCount"
+              type="range"
+              min="5"
+              max="15"
+              class="w-full"
+            >
+          </div>
+          
+          <!-- Device Info -->
+          <div class="border-t pt-4 space-y-1 text-xs text-muted-foreground">
+          <div>
+            <span class="font-medium">Memory:</span>
+            <span class="ml-2">{{ deviceInfo.memory || 'Unknown' }} GB</span>
+          </div>
+          <div>
+            <span class="font-medium">CPU Cores:</span>
+            <span class="ml-2">{{ deviceInfo.cores || 'Unknown' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Reduced Motion:</span>
+            <span class="ml-2">{{ deviceInfo.reducedMotion ? 'Yes' : 'No' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Performance:</span>
+            <span class="ml-2">{{ performanceMode }}</span>
+          </div>
+        </div>
+        </div>
+      </details>
 
       <!-- Typography Showcase Dropdown -->
       <details :open="showTypography" class="bg-card p-8 rounded-lg border shadow-sm">
