@@ -1,108 +1,108 @@
 /*
- * MATHEMATICAL SPACING SYSTEM - PHASE 1A
- * Foundation-first approach: 8-point grid + Golden Ratio typography
- * Research-verified for Nuxt 3.18.0 + Tailwind CSS + SSR compatibility
+ * MATHEMATICAL SPACING SYSTEM
+ * Foundation-first approach: 8-point grid with Golden Ratio typography
+ * Verified for Nuxt 3.18.0 + Tailwind CSS + SSR compatibility
  */
 
 /* ========================================
-   🎯 CORE 8-POINT GRID FOUNDATION
+   CORE 8-POINT GRID FOUNDATION
 ======================================== */
 
 :root {
-  /* Base 8-Point Grid System - Industry Standard */
+  /* Base 8-Point Grid System */
   --space-base: 8px;
   
   /* Core Spacing Variables */
-  --space-1: 4px;     /* Half unit - fine details, borders */
-  --space-2: 8px;     /* Base unit - icons, small gaps */
-  --space-3: 12px;    /* 1.5x base - tight spacing */
-  --space-4: 16px;    /* 2x base - standard spacing */
-  --space-5: 20px;    /* 2.5x base - comfortable spacing */
-  --space-6: 24px;    /* 3x base - section spacing */
-  --space-8: 32px;    /* 4x base - large spacing */
-  --space-10: 40px;   /* 5x base - major spacing */
-  --space-12: 48px;   /* 6x base - hero spacing */
-  --space-16: 64px;   /* 8x base - page-level spacing */
-  --space-20: 80px;   /* 10x base - massive spacing */
-  --space-24: 96px;   /* 12x base - page sections */
-  --space-26: 104px;  /* 13x base - desktop hero spacing */
-  --space-32: 128px;  /* 16x base - desktop sections */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-26: 104px;
+  --space-32: 128px;
   
   /* Mathematical Golden Ratio Base */
-  --golden-ratio: 1.618;        /* φ (phi) - Nature's perfect proportion */
-  --golden-ratio-inverse: 0.618; /* 1/φ - Inverse ratio */
+  --golden-ratio: 1.618;
+  --golden-ratio-inverse: 0.618;
 }
 
 /* ========================================
-   🏷️ SEMANTIC SPACING ALIASES
+   SEMANTIC SPACING ALIASES
 ======================================== */
 
 :root {
   /* Micro Spacing */
-  --space-micro: var(--space-1);  /* 4px - borders, fine details */
-  --space-tiny: var(--space-2);   /* 8px - icon padding, small gaps */
+  --space-micro: var(--space-1);
+  --space-tiny: var(--space-2);
   
   /* Standard Spacing */
-  --space-small: var(--space-4);  /* 16px - text spacing, buttons */
-  --space-medium: var(--space-6); /* 24px - section spacing */
-  --space-large: var(--space-8);  /* 32px - major spacing */
-  --space-huge: var(--space-12);  /* 48px - hero elements */
+  --space-small: var(--space-4);
+  --space-medium: var(--space-6);
+  --space-large: var(--space-8);
+  --space-huge: var(--space-12);
   
   /* Layout Spacing */
-  --space-section: var(--space-16); /* 64px - section gaps */
-  --space-page: var(--space-20);    /* 80px - page-level spacing */
-  --space-massive: var(--space-24); /* 96px - major page sections */
+  --space-section: var(--space-16);
+  --space-page: var(--space-20);
+  --space-massive: var(--space-24);
   
-  /* Responsive Section Spacing (Mobile First) */
-  --section-spacing: var(--space-8);      /* 32px - mobile sections */
-  --section-spacing-hero: var(--space-12); /* 48px - mobile hero */
+  /* Responsive Section Spacing */
+  --section-spacing: var(--space-8);
+  --section-spacing-hero: var(--space-12);
 }
 
 /* ========================================
-   📱 RESPONSIVE SCALING SYSTEM
+   RESPONSIVE SCALING SYSTEM
 ======================================== */
 
 /* Tablet: Enhanced spacing for medium screens */
 @media (min-width: 769px) {
   :root {
-    --section-spacing: var(--space-24);      /* 96px - tablet sections */
-    --section-spacing-hero: var(--space-20); /* 80px - tablet hero */
+    --section-spacing: var(--space-24);
+    --section-spacing-hero: var(--space-20);
   }
 }
 
 /* Desktop: Maximum spacing for large screens */
 @media (min-width: 1025px) {
   :root {
-    --section-spacing: var(--space-32);      /* 128px (16x base) - desktop sections */
-    --section-spacing-hero: var(--space-26); /* 104px (13x base) - desktop hero */
+    --section-spacing: var(--space-32);
+    --section-spacing-hero: var(--space-26);
   }
 }
 
 /* ========================================
-   📏 GOLDEN RATIO TYPOGRAPHY SYSTEM
+   GOLDEN RATIO TYPOGRAPHY SYSTEM
 ======================================== */
 
 :root {
   /* Base Typography Foundation */
-  --text-base-size: 1rem;              /* 16px base - browser default */
-  --text-scale-factor: var(--golden-ratio); /* 1.618 scaling */
+  --text-base-size: 1rem;
+  --text-scale-factor: var(--golden-ratio);
   
-  /* Golden Ratio Typography Scale - SSR Safe */
-  --text-golden-xs: 0.618rem;    /* 9.88px - calc(1rem / 1.618) */
-  --text-golden-sm: 0.854rem;    /* 13.67px - Small text */
-  --text-golden-base: 1rem;      /* 16px - Base text size */
-  --text-golden-lg: 1.618rem;    /* 25.88px - Large text */
-  --text-golden-xl: 2.618rem;    /* 41.89px - Extra large */
-  --text-golden-2xl: 4.236rem;   /* 67.78px - Headings */
-  --text-golden-3xl: 6.854rem;   /* 109.66px - Big headings */
-  --text-golden-4xl: 11.09rem;   /* 177.44px - Hero headings */
-  --text-golden-5xl: 17.944rem;  /* 287.1px - Massive display */
-  --text-golden-6xl: 29.034rem;  /* 464.54px - Ultra display */
+  /* Golden Ratio Typography Scale */
+  --text-golden-xs: 0.618rem;
+  --text-golden-sm: 0.854rem;
+  --text-golden-base: 1rem;
+  --text-golden-lg: 1.618rem;
+  --text-golden-xl: 2.618rem;
+  --text-golden-2xl: 4.236rem;
+  --text-golden-3xl: 6.854rem;
+  --text-golden-4xl: 11.09rem;
+  --text-golden-5xl: 17.944rem;
+  --text-golden-6xl: 29.034rem;
   
   /* Typography System Ratios */
-  --line-height-tight: 1.25;    /* Tight line spacing */
-  --line-height-normal: 1.5;    /* Standard line spacing */
-  --line-height-relaxed: 1.75;  /* Relaxed line spacing */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
   
   /* Font Weight Scale */
   --font-weight-light: 300;
@@ -115,7 +115,7 @@
 }
 
 /* ========================================
-   🎨 FONT FAMILY SYSTEM
+   FONT FAMILY SYSTEM
 ======================================== */
 
 :root {
@@ -159,10 +159,9 @@
 }
 
 /* ========================================
-   🔧 NUXT SSR OPTIMIZATION
+   NUXT SSR OPTIMIZATION
 ======================================== */
 
-/* Prevent flash of unstyled content */
 html {
   font-family: var(--font-sans);
   font-size: var(--text-base-size);
@@ -172,12 +171,10 @@ html {
   text-rendering: optimizeLegibility;
 }
 
-/* Ensure consistent spacing during SSR hydration */
 * {
   box-sizing: border-box;
 }
 
-/* Prevent layout shift during font loading */
 body {
   margin: 0;
   padding: 0;
@@ -187,21 +184,18 @@ body {
   font-weight: var(--font-weight-normal);
 }
 
-/* Ensure all text elements maintain baseline grid */
 h1, h2, h3, h4, h5, h6, p, li, td, th {
   line-height: var(--line-height-normal);
 }
 
-/* Headings with tighter line-height for better visual hierarchy */
 h1, h2, h3 {
   line-height: var(--line-height-tight);
 }
 
 /* ========================================
-   ✅ VALIDATION & DEBUG HELPERS
+   VALIDATION HELPERS
 ======================================== */
 
-/* Test element for validating spacing in browser dev tools */
 .spacing-test {
   width: var(--space-16);
   height: var(--space-16);
@@ -211,7 +205,6 @@ h1, h2, h3 {
   border: var(--space-1) solid #007bff;
 }
 
-/* Typography test for validating golden ratio scaling */
 .typography-test h1 { font-size: var(--text-golden-4xl); }
 .typography-test h2 { font-size: var(--text-golden-3xl); }
 .typography-test h3 { font-size: var(--text-golden-2xl); }
@@ -221,38 +214,21 @@ h1, h2, h3 {
 .typography-test small { font-size: var(--text-golden-sm); }
 
 /* ========================================
-   📊 PERFORMANCE OPTIMIZATIONS
+   PERFORMANCE OPTIMIZATIONS
 ======================================== */
 
-/* Reduce layout thrashing with transform/opacity animations only */
 .smooth-spacing {
   transition: transform 0.2s ease, opacity 0.2s ease;
   will-change: transform, opacity;
 }
 
-/* GPU acceleration for spacing-heavy layouts */
 .accelerated-layout {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
-/* Optimize font rendering for better performance */
 .optimized-text {
   font-display: swap;
   text-rendering: optimizeSpeed;
 }
-
-/*
- * ========================================
- * 🎯 FOUNDATION COMPLETE
- * This mathematical spacing system provides:
- * - Industry-standard 8-point grid
- * - Golden ratio typography scaling
- * - SSR-safe rem units for Nuxt
- * - Semantic aliases for maintainability
- * - Responsive scaling across breakpoints
- * - Performance optimizations
- * - Debug and validation tools
- * ========================================
- */
