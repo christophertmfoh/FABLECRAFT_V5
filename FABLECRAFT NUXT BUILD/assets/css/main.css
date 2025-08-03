@@ -1,44 +1,29 @@
 /*
  * MAIN CSS - FABLECRAFT NUXT PROJECT
- * Optimized for Nuxt 3 + Tailwind CSS v3 + SSR
- * Uses CSS Cascade Layers to ensure consistent order
+ * Foundation-first import strategy for optimal cascade
+ * Phase 1: Mathematical Foundation Systems
  */
 
 /* ========================================
-   LAYER DEFINITIONS
-   Define cascade layers to control specificity order
-   regardless of how Nuxt chunks the CSS
+   CSS IMPORTS MUST COME FIRST
+   Required by CSS specification
 ======================================== */
-@layer reset, base, tokens, themes, components, utilities;
+@import './design-tokens.css';
+@import './theme-system.css';
+@import './visual-effects.css';
+@import './paper-texture.css';
 
 /* ========================================
-   TAILWIND BASE LAYERS
-   Must come first for proper cascade
+   TAILWIND CSS LAYERS
+   Standard Tailwind v3 imports for @nuxtjs/tailwindcss
 ======================================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ========================================
-   CUSTOM CSS IMPORTS
-   Wrapped in layers to ensure consistent ordering
-======================================== */
-@layer tokens {
-  @import './design-tokens.css';
-}
-
-@layer themes {
-  @import './theme-system.css';
-}
-
-@layer components {
-  @import './visual-effects.css';
-  @import './paper-texture.css';
-}
-
-/* ========================================
    THEME TRANSITION EFFECTS
-   Outside layers to ensure highest specificity
+   Smooth transitions when switching themes
 ======================================== */
 .theme-transition,
 .theme-transition *,
@@ -50,20 +35,4 @@
     color 300ms ease-in-out,
     fill 300ms ease-in-out,
     stroke 300ms ease-in-out !important;
-}
-
-/* ========================================
-   DEVELOPMENT HELPERS
-   CSS custom property debugging
-======================================== */
-@layer base {
-  /* Ensure CSS variables are available globally */
-  :root {
-    /* Fallback values for critical variables */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    /* These will be overridden by design-tokens.css */
-  }
 }
