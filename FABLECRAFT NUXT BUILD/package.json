@@ -5,7 +5,7 @@
   "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "dev": "npx nuxi dev",
-    "dev:alt": "npx nuxi dev --port 3000",
+    "dev:alt": "npx nuxi dev --port 3002",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

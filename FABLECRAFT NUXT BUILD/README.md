@@ -12,12 +12,12 @@ These commands destroy the entire development environment. Use `Ctrl+C` to stop 
 
 ```bash
 # Start the development server (RECOMMENDED)
-npx nuxi dev --port 3000
+npx nuxi dev --port 3002
 
 # Alternative method
 pnpm dev:alt
 
-# Navigate to http://localhost:3000
+# Navigate to http://localhost:3002
 ```
 
 ## Development Scripts
