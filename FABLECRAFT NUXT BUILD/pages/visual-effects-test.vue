@@ -141,7 +141,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 
 // Theme management
@@ -152,11 +152,11 @@ const orbsEnabled = ref(true)
 const firefliesEnabled = ref(true)
 const atmosphericEnabled = ref(true)
 const fireflyCount = ref(12)
-const performanceMode = ref('medium')
+const performanceMode = ref<'low' | 'medium' | 'high'>('medium')
 
 // Device info
-const deviceMemory = ref(null)
-const cpuCores = ref(null)
+const deviceMemory = ref<number | null>(null)
+const cpuCores = ref<number | null>(null)
 const reducedMotion = ref(false)
 
 // Background orbs composable
@@ -171,7 +171,8 @@ const updatePerformance = () => {
 onMounted(() => {
   if (process.client) {
     // Device memory
-    deviceMemory.value = (navigator as any).deviceMemory || null
+    const nav = navigator as any
+    deviceMemory.value = nav.deviceMemory || null
     
     // CPU cores
     cpuCores.value = navigator.hardwareConcurrency || null

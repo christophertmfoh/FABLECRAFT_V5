@@ -33,7 +33,8 @@ export const useBackgroundOrbs = () => {
     }
     
     // Check device memory (if available)
-    const memory = (navigator as any).deviceMemory
+    const nav = navigator as any
+    const memory = nav.deviceMemory
     if (memory) {
       if (memory < 4) return 'low'
       if (memory >= 8) return 'high'

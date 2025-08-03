@@ -117,7 +117,8 @@ const detectPerformanceMode = () => {
   }
   
   // Simple performance detection based on device memory
-  const memory = (navigator as any).deviceMemory
+  const nav = navigator as any
+  const memory = nav.deviceMemory
   if (memory && memory < 4) return 'low'
   if (memory && memory >= 8) return 'high'
   
