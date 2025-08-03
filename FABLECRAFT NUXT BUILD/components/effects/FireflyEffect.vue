@@ -70,18 +70,22 @@ const fireflyPositions = [
   { x: 54, variant: 'small', delay: 23.7 },
   { x: 67, variant: 'small', delay: 20.5 },
   { x: 77, variant: 'bright', delay: 25.3 },
-  { x: 85, variant: 'small', delay: 26.8 }
+  { x: 85, variant: 'small', delay: 26.8 },
+  // Additional positions for 13-15 fireflies
+  { x: 10, variant: 'bright', delay: 28.1 },
+  { x: 42, variant: 'normal', delay: 29.7 },
+  { x: 95, variant: 'small', delay: 31.2 }
 ]
 
 // Create fireflies based on count - computed so it's reactive
 const fireflies = computed<Firefly[]>(() => {
   if (!props.enabled || !isVisible.value) return []
   
-  const actualCount = Math.min(props.count, 12) // Max 12 for performance
+  const actualCount = Math.min(props.count, 15) // Max 15 (sweet spot)
   const limits = {
-    low: 4,
-    medium: 8,
-    high: 12
+    low: 5,
+    medium: 10,
+    high: 15
   }
   const limit = limits[props.performanceMode] || 8
   const finalCount = Math.min(limit, actualCount)

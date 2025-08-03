@@ -16,7 +16,7 @@ const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
-const fireflyCount = useState('firefly-count', () => 12)
+const fireflyCount = useState('firefly-count', () => 15)
 const atmosphericEnabled = useState('atmospheric-enabled', () => true)
 
 // Typography showcase
