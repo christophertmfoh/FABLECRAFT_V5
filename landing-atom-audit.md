@@ -1144,6 +1144,153 @@ This comprehensive audit represents every atomic UI element found in the landing
 - Disabled state: `data-[disabled]:*`
 - Side positioning: `data-[side=*]:*`
 
+### 5. Ring Offset
+**Base Component**: Focus ring spacing
+**Visual Specifications**:
+- Background: `ring-offset-background`
+- Width: `ring-offset-2`
+- Used with focus rings for better visual separation
+
+### 6. Inset Modifier
+**Base Component**: Indentation utility
+**Visual Specifications**:
+- Padding left: `pl-8` when `inset` prop is true
+- Used in dropdown menus for hierarchical items
+
+### 7. Absolute Positioning Patterns
+**Base Component**: Positioned overlays and elements
+**Visual Specifications**:
+- Full overlay: `absolute inset-0`
+- Top left badge: `absolute -top-2 -left-2`
+- Top right badge: `absolute top-2 right-2`
+- Progress line: `absolute top-16 left-0 right-0`
+- Check/Radio indicator: `absolute left-2`
+
+## Text Enhancement Atoms
+
+### 1. Text Transform
+**Base Component**: Text case modifications
+**Visual Specifications**:
+- Uppercase: `uppercase`
+- Used for: Navigation items, section labels, headings
+- Often combined with: `tracking-wide` or `tracking-wider`
+
+### 2. Font Style
+**Base Component**: Text styling
+**Visual Specifications**:
+- Italic: `italic`
+- Used for: Testimonial quotes, emphasis
+
+### 3. Text Wrapping
+**Base Component**: Text overflow control
+**Visual Specifications**:
+- No wrap: `whitespace-nowrap`
+- Used for: Buttons, badges, labels that shouldn't break
+
+### 4. Enhanced Drop Shadow
+**Base Component**: Advanced text shadows
+**Visual Specifications**:
+- Light mode: `drop-shadow-[0_3px_6px_rgba(0,0,0,0.3)]`
+- Dark mode: `dark:drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)]`
+- Subtle: `drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]`
+- Dark subtle: `dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]`
+- Used for: Large headings, important text
+
+## Visual Effect Atoms
+
+### 1. Popular/Featured Badge
+**Base Component**: Absolute positioned badge
+**Visual Specifications**:
+- Position: `absolute top-2 right-2`
+- Background: `bg-primary`
+- Text: `text-primary-foreground`
+- Padding: `px-3 py-1`
+- Border radius: `rounded-lg`
+- Font: `text-sm font-semibold`
+- Z-index: `z-20`
+- Content: "Popular" or similar
+
+### 2. Step Number Badge
+**Base Component**: Circular number indicator
+**Visual Specifications**:
+- Position: `absolute -top-2 -left-2`
+- Size: `w-6 h-6`
+- Background: `bg-primary`
+- Text: `text-primary-foreground`
+- Shape: `rounded-full`
+- Display: `flex items-center justify-center`
+- Font: `text-xs font-bold`
+- Z-index: `z-20`
+
+### 3. Progress Connector Line
+**Base Component**: Visual connection between steps
+**Visual Specifications**:
+- Position: `absolute top-16 left-0 right-0`
+- Height: `h-1`
+- Background: `bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20`
+- Shape: `rounded-full`
+- Display: `hidden lg:block`
+
+### 4. Hover Overlay
+**Base Component**: Interactive overlay effect
+**Visual Specifications**:
+- Position: `absolute inset-0`
+- Background varies:
+  - Gradient: `bg-gradient-to-r from-white/20 to-transparent`
+  - Solid: `bg-primary/5`
+  - Custom gradients with HSL
+- Opacity: `opacity-0 group-hover:opacity-100`
+- Transition: `transition-opacity duration-300` or `duration-500` or `duration-700`
+- Border radius: Matches parent element
+
+### 5. Check/Radio Indicator Position
+**Base Component**: Form control indicator placement
+**Visual Specifications**:
+- Position: `absolute left-2`
+- Container: `flex h-3.5 w-3.5 items-center justify-center`
+- Used in: Checkbox and radio components
+
+## Composite Visual Patterns
+
+### 1. Navigation Item Pattern
+**Base Component**: Consistent nav link styling
+**Visual Specifications**:
+- Base: `text-sm font-semibold`
+- Color: `text-foreground/80 hover:text-foreground`
+- Transition: `transition-colors duration-200`
+- Tracking: `tracking-wide`
+- Cursor: `cursor-pointer`
+- Transform: `uppercase`
+
+### 2. Section Header Pattern
+**Base Component**: Consistent section titles
+**Visual Specifications**:
+- Font: `text-sm font-semibold`
+- Color: `text-foreground`
+- Transform: `uppercase`
+- Tracking: `tracking-wider`
+- Used in: Footer sections, dropdown sections
+
+### 3. Glass Card Hover Pattern
+**Base Component**: Enhanced card interactions
+**Visual Specifications**:
+- Transform: `hover:scale-105 hover:-translate-y-2`
+- Shadow: `hover:shadow-2xl`
+- Transition: `transition-all duration-500`
+- Cursor: `cursor-pointer`
+- Overflow: `overflow-hidden`
+- Position: `relative`
+
+### 4. Badge Enhancement Pattern
+**Base Component**: Consistent badge styling across contexts
+**Visual Specifications**:
+- Base: `bg-card/95 text-foreground border-border`
+- Font: `font-semibold` or `font-bold`
+- Effects: `backdrop-blur-md`
+- Shadow: `shadow-md hover:shadow-lg`
+- Transition: `transition-shadow duration-300`
+- Size: `text-base px-4 py-2`
+
 ## Final Implementation Notes
 
 1. **Interactive states are comprehensive** - Hover, focus, active, disabled states all defined
@@ -1152,5 +1299,9 @@ This comprehensive audit represents every atomic UI element found in the landing
 4. **Form helpers are minimal but complete** - Basic error and helper text patterns
 5. **State management uses modern patterns** - Data attributes and peer modifiers
 6. **All interactive elements are keyboard accessible** - TabIndex and focus management included
+7. **Visual effects use theme colors** - No hardcoded colors, all using CSS variables
+8. **Text shadows adapt to theme** - Different intensities for light/dark modes
+9. **Positioning patterns are reusable** - Consistent absolute positioning for overlays and badges
+10. **All patterns maintain theme compatibility** - Every atom works with the 15-theme system
 
 This completes the comprehensive audit of all atomic UI elements in the landing page ecosystem.
