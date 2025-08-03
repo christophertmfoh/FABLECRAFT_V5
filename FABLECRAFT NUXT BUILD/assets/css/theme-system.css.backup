@@ -282,7 +282,8 @@
   --firefly-color: hsl(210 80% 70%); /* A crisp, bright blue spark */
   --firefly-glow-color: hsl(210 80% 70% / 0.5); /* Brighter blue glow matching the spark */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Midnight Ink */
+  --glow-primary: 220deg 80% 60%;      /* No commas! */
   --glow-secondary: 280deg 70% 65%;    /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -319,7 +320,8 @@
   --auth-button-primary: 140 50% 45%; /* Emerald */
   --auth-button-primary-hover: 140 50% 40%; /* Darker emerald */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Forest Manuscript */
+  --glow-primary: 140deg 50% 50%;      /* No commas! */
   --glow-secondary: 150deg 15% 35%;    /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -356,7 +358,8 @@
   --auth-button-primary: 270 65% 60%; /* Bright purple */
   --auth-button-primary-hover: 270 65% 55%; /* Darker purple */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Starlit Prose */
+  --glow-primary: 270deg 65% 65%;      /* No commas! */
   --glow-secondary: 260deg 20% 35%;    /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -393,7 +396,8 @@
   --auth-button-primary: 25 60% 45%; /* Warm caramel */
   --auth-button-primary-hover: 25 60% 40%; /* Darker caramel */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Coffee House */
+  --glow-primary: 25deg 60% 50%;       /* No commas! */
   --glow-secondary: 25deg 15% 35%;     /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -435,7 +439,8 @@
   --auth-button-primary: 15 75% 50%; /* Coral */
   --auth-button-primary-hover: 15 75% 40%; /* Darker coral */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Sunset Coral */
+  --glow-primary: 15deg 75% 60%;       /* No commas! */
   --glow-secondary: 45deg 85% 65%;     /* No commas! */
   --glow-opacity-primary: 0.25;        /* Higher for light themes */
   --glow-opacity-secondary: 0.15;      /* Higher for light themes */
@@ -472,7 +477,8 @@
   --auth-button-primary: 280 35% 45%; /* Lavender */
   --auth-button-primary-hover: 280 35% 35%; /* Darker lavender */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Lavender Dusk */
+  --glow-primary: 280deg 40% 65%;      /* No commas! */
   --glow-secondary: 320deg 35% 70%;    /* No commas! */
   --glow-opacity-primary: 0.25;        /* Higher for light themes */
   --glow-opacity-secondary: 0.15;      /* Higher for light themes */
@@ -510,7 +516,8 @@
   --auth-button-primary: 95 60% 40%; /* Moonlit teal */
   --auth-button-primary-hover: 95 60% 35%; /* Darker moonlit */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Moonlit Garden */
+  --glow-primary: 95deg 50% 60%;       /* No commas! */
   --glow-secondary: 85deg 45% 65%;     /* No commas! */
   --glow-opacity-primary: 0.25;        /* Higher for light themes */
   --glow-opacity-secondary: 0.15;      /* Higher for light themes */
@@ -552,7 +559,8 @@
   --auth-button-primary: 350 75% 45%; /* Cherry red */
   --auth-button-primary-hover: 350 75% 35%; /* Darker red */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Cherry Lacquer */
+  --glow-primary: 350deg 75% 60%;      /* No commas! */
   --glow-secondary: 15deg 60% 65%;     /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -590,7 +598,8 @@
   --auth-button-primary: 45 95% 50%; /* Dragon gold */
   --auth-button-primary-hover: 45 95% 45%; /* Darker gold */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Dragon's Hoard */
+  --glow-primary: 45deg 95% 65%;       /* No commas! */
   --glow-secondary: 35deg 85% 60%;     /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -632,7 +641,8 @@
   --auth-button-primary: 25 100% 50%; /* Halloween orange */
   --auth-button-primary-hover: 25 100% 40%; /* Darker orange */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Halloween */
+  --glow-primary: 25deg 100% 65%;      /* No commas! */
   --glow-secondary: 45deg 90% 60%;     /* No commas! */
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
@@ -674,7 +684,8 @@
   --firefly-color: hsl(50 100% 50%); /* Electric yellow particle */
   --firefly-glow-color: hsl(180 100% 50% / 0.4); /* Brighter contrasting cyan glow */
   
-  /* Atmospheric Glow Variables - REMOVED */
+  /* ✅ NEW: Atmospheric Glow Variables for Netrunner */
+  --glow-primary: 180deg 100% 50%;     /* No commas! */
   --glow-secondary: 300deg 100% 50%;   /* No commas! */
   --glow-opacity-primary: 0.35;
   --glow-opacity-secondary: 0.25;

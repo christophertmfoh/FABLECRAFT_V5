@@ -296,85 +296,11 @@
 }
 
 /* ========================================
-   ATMOSPHERIC EFFECTS
-   Subtle gradients and glows
+   ATMOSPHERIC EFFECTS - REMOVED
+   Feature removed due to cross-theme compatibility issues
 ======================================== */
 
-.atmospheric-gradient {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  
-  /* CRITICAL: Use fixed pixel sizes, NOT percentages with variables */
-  background: 
-    /* Primary glow - MUST use fixed pixel sizes */
-    radial-gradient(
-      ellipse 800px 600px at 25% 30%, 
-      hsl(var(--glow-primary) / var(--glow-opacity-primary, 0.15)),
-      transparent 70%
-    ),
-    /* Secondary glow - MUST use fixed pixel sizes */
-    radial-gradient(
-      ellipse 600px 500px at 75% 70%, 
-      hsl(var(--glow-secondary) / var(--glow-opacity-secondary, 0.1)),
-      transparent 70%
-    ),
-    /* Overall wash - percentages work here because they're literal, not variables */
-    radial-gradient(
-      ellipse 120% 80% at 50% 50%, 
-      hsl(var(--glow-primary) / calc(var(--glow-opacity-primary, 0.15) * 0.3)),
-      transparent 90%
-    );
-  
-  mix-blend-mode: var(--glow-blend-mode, screen);
-  
-  /* Keep these optimizations */
-  will-change: opacity;
-  transform: translateZ(0);
-  contain: layout style paint;
-}
-
-/* Reduced motion compliance */
-@media (prefers-reduced-motion: reduce) {
-  .atmospheric-gradient {
-    opacity: 0.5;
-  }
-}
-
-/* Mobile optimization */
-@media (max-width: 768px) {
-  .atmospheric-gradient {
-    background-size: 120% 120%, 100% 100%;
-  }
-}
-
-/* High DPI optimization */
-@media (-webkit-min-device-pixel-ratio: 2) {
-  .atmospheric-gradient {
-    transform: translateZ(0) scale(0.99);
-  }
-}
-
-.atmospheric-glow {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(var(--effect-glow-spread));
-  opacity: var(--effect-opacity-subtle);
-  background: hsl(var(--orb-primary) / 0.3);
-  animation: glow-pulse var(--effect-duration-slow) ease-in-out infinite alternate;
-}
-
-@keyframes glow-pulse {
-  from {
-    transform: scale(1);
-    opacity: var(--effect-opacity-subtle);
-  }
-  to {
-    transform: scale(1.1);
-    opacity: var(--effect-opacity-normal);
-  }
-}
+/* Atmospheric gradient removed - feature was not working correctly across all themes */
 
 /* ========================================
    PERFORMANCE MODES
@@ -388,11 +314,7 @@
   opacity: var(--effect-opacity-subtle);
 }
 
-/* Disable complex effects on low-end devices */
-.effects-container[data-performance="low"] .atmospheric-gradient,
-.effects-container[data-performance="low"] .atmospheric-glow {
-  display: none;
-}
+
 
 /* High performance mode */
 .effects-container[data-performance="high"] .firefly {
