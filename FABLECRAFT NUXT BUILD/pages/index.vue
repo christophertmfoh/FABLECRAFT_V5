@@ -32,22 +32,18 @@ import type { ComponentSize, ComponentVariant } from '~/types'
 
 // Foundation test variables
 const testClasses = cn(
-  'p-4 rounded-lg',
+  'p-4 rounded-md',
   'bg-primary text-primary-foreground',
-  { 'opacity-50': false, 'shadow-lg': true },
-  ['border', 'border-primary']
+  'hover:bg-primary/90'
 )
 
+// Test formatCurrency
 const formattedUSD = formatCurrency(1234.56)
-const formattedEUR = formatCurrency(1234.56, { currency: 'EUR', locale: 'de-DE' })
+const formattedEUR = formatCurrency(1234.56, { currency: 'EUR' })
 const formattedJPY = formatCurrency(1234, { currency: 'JPY', locale: 'ja-JP' })
 
-const id1 = useComponentId('test')
-const id2 = useComponentId('test')
-const id3 = useComponentId()
-
-const testSize: ComponentSize = 'md'
-const testVariant: ComponentVariant = 'primary'
+// Test useComponentId
+const componentId = useComponentId('test')
 
 // Background orbs composable
 const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
@@ -515,61 +511,90 @@ if (isDevelopment) {
             <!-- Test formatCurrency utility -->
             <div class="mb-4">
               <h4 class="text-xs font-semibold mb-2">Testing formatCurrency():</h4>
-              <div class="text-sm space-y-1">
-                <p>USD: {{ formattedUSD }}</p>
-                <p>EUR: {{ formattedEUR }}</p>
-                <p>JPY: {{ formattedJPY }}</p>
-              </div>
+              <p class="text-sm">USD: {{ formattedUSD }}</p>
+              <p class="text-sm">EUR: {{ formattedEUR }}</p>
+              <p class="text-sm">JPY: {{ formattedJPY }}</p>
             </div>
 
             <!-- Test useComponentId -->
             <div class="mb-4">
               <h4 class="text-xs font-semibold mb-2">Testing useComponentId():</h4>
-              <div class="text-sm space-y-1">
-                <p>Generated ID 1: {{ id1 }}</p>
-                <p>Generated ID 2: {{ id2 }}</p>
-                <p>Generated ID 3: {{ id3 }}</p>
-              </div>
-            </div>
-
-            <!-- Test Icon from @nuxt/icon -->
-            <div class="mb-4">
-              <h4 class="text-xs font-semibold mb-2">Testing @nuxt/icon:</h4>
-              <div class="flex gap-2">
-                <Icon name="i-lucide-check" class="text-success" />
-                <Icon name="i-lucide-x" class="text-danger" />
-                <Icon name="i-lucide-info" class="text-primary" />
-                <Icon name="i-lucide-alert-triangle" class="text-warning" />
-              </div>
-            </div>
-
-            <!-- Test types -->
-            <div class="mb-4">
-              <h4 class="text-xs font-semibold mb-2">Testing Types:</h4>
-              <div class="text-sm">
-                <p>Size: {{ testSize }} (type: ComponentSize)</p>
-                <p>Variant: {{ testVariant }} (type: ComponentVariant)</p>
-              </div>
+              <p class="text-sm">Component ID: {{ componentId }}</p>
             </div>
           </div>
-          
-          <!-- Foundation Architecture Summary -->
+
+          <!-- Phase 2 Component Tests -->
           <div class="border-t border-border pt-4">
-            <h3 class="text-sm font-medium text-primary mb-2">Phase 1 Foundation Complete:</h3>
-            <div class="text-xs font-mono bg-muted p-3 rounded border space-y-1">
-              <div>✅ Step 1: Mathematical spacing (4-point grid)</div>
-              <div>✅ Step 2: Theme system (15 themes + SSR)</div>
-              <div>✅ Step 3: Typography (Golden ratio + rem units)</div>
-              <div>✅ Step 4: Visual effects (GPU-accelerated)</div>
-              <div>✅ Supabase integration configured</div>
-              <div>✅ ESLint + TypeScript configured</div>
-              <div>✅ Production build optimized</div>
+            <h3 class="text-sm font-medium text-primary mb-4">Phase 2 Components:</h3>
+            
+            <!-- Icon Component -->
+            <div class="mb-6">
+              <h4 class="text-xs font-semibold mb-2">Icon Component:</h4>
+              <div class="flex gap-2 items-center">
+                <Icon name="i-lucide-zap" size="xs" />
+                <Icon name="i-lucide-heart" size="sm" />
+                <Icon name="i-lucide-star" size="md" />
+                <Icon name="i-lucide-sun" size="lg" />
+                <Icon name="i-lucide-moon" size="xl" />
+              </div>
+            </div>
+
+            <!-- Button Component -->
+            <div class="mb-6">
+              <h4 class="text-xs font-semibold mb-2">Button Component:</h4>
+              <div class="flex flex-wrap gap-2">
+                <Button variant="primary" size="sm">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="destructive">Destructive</Button>
+                <Button variant="outline">Outline</Button>
+                <Button variant="ghost">Ghost</Button>
+                <Button variant="link">Link</Button>
+                <Button variant="primary" size="icon">
+                  <Icon name="i-lucide-plus" size="sm" />
+                </Button>
+                <Button variant="primary" :loading="true">Loading</Button>
+              </div>
+            </div>
+
+            <!-- GradientButton Component -->
+            <div class="mb-6">
+              <h4 class="text-xs font-semibold mb-2">GradientButton Component:</h4>
+              <div class="flex gap-2">
+                <GradientButton>Default Gradient</GradientButton>
+                <GradientButton variant="secondary">Secondary Gradient</GradientButton>
+              </div>
+            </div>
+
+            <!-- Spinner Component -->
+            <div class="mb-6">
+              <h4 class="text-xs font-semibold mb-2">Spinner Component:</h4>
+              <div class="flex gap-4 items-center">
+                <Spinner size="xs" />
+                <Spinner size="sm" />
+                <Spinner size="md" />
+                <Spinner size="lg" />
+                <Spinner size="xl" />
+              </div>
+            </div>
+
+            <!-- Card Component -->
+            <div class="mb-6">
+              <h4 class="text-xs font-semibold mb-2">Card Component:</h4>
+              <Card class="max-w-sm">
+                <CardHeader>
+                  <CardTitle>Card Title</CardTitle>
+                  <CardDescription>This is a card description that provides context.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>Card content goes here. You can add any content you want.</p>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" size="sm">Cancel</Button>
+                  <Button variant="primary" size="sm" class="ml-2">Save</Button>
+                </CardFooter>
+              </Card>
             </div>
           </div>
-
-          <p class="text-xs text-muted-foreground">
-            Open browser dev tools → Elements → Computed styles to inspect CSS variables
-          </p>
         </div>
       </details>
 
