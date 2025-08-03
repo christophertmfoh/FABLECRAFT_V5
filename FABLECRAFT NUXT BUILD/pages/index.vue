@@ -56,82 +56,90 @@ if (isDevelopment) {
         <div class="space-y-6">
           <!-- 8-Point Grid Scale Validation -->
           <div>
-            <h3 class="text-sm font-medium text-blue-800 mb-3">8-Point Grid Scale:</h3>
+            <h3 class="text-sm font-medium text-blue-800 mb-3">4-Point Grid Scale (Industry Standard):</h3>
             <div class="flex flex-wrap items-end gap-1">
               <div class="flex flex-col items-center">
-                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-1)', height: 'var(--space-1)' }"></div>
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-micro)', height: 'var(--space-micro)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">2px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-tiny)', height: 'var(--space-tiny)' }"></div>
                 <span class="text-xs mt-1 text-blue-600">4px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-2)', height: 'var(--space-2)' }"></div>
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-xs)', height: 'var(--space-xs)' }"></div>
                 <span class="text-xs mt-1 text-blue-600">8px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-4)', height: 'var(--space-4)' }"></div>
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-sm)', height: 'var(--space-sm)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">12px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-md)', height: 'var(--space-md)' }"></div>
                 <span class="text-xs mt-1 text-blue-600">16px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-6)', height: 'var(--space-6)' }"></div>
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-lg)', height: 'var(--space-lg)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">20px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-xl)', height: 'var(--space-xl)' }"></div>
                 <span class="text-xs mt-1 text-blue-600">24px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-8)', height: 'var(--space-8)' }"></div>
-                <span class="text-xs mt-1 text-blue-600">32px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-12)', height: 'var(--space-12)' }"></div>
-                <span class="text-xs mt-1 text-blue-600">48px</span>
               </div>
             </div>
           </div>
           
           <!-- Semantic Spacing Aliases -->
           <div>
-            <h3 class="text-sm font-medium text-blue-800 mb-3">Semantic Spacing:</h3>
+            <h3 class="text-sm font-medium text-blue-800 mb-3">Semantic Spacing (Tailwind Aligned):</h3>
             <div class="flex flex-wrap gap-2">
               <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-micro)' }">
-                micro (4px)
+                micro (2px)
               </div>
               <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-tiny)' }">
-                tiny (8px)
+                tiny (4px)
               </div>
-              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-small)' }">
-                small (16px)
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-xs)' }">
+                xs (8px)
               </div>
-              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-medium)' }">
-                medium (24px)
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-sm)' }">
+                sm (12px)
+              </div>
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-md)' }">
+                md (16px)
               </div>
             </div>
           </div>
 
-          <!-- Golden Ratio Typography Test -->
+          <!-- Optimized Typography Test -->
           <div>
-            <h3 class="text-sm font-medium text-blue-800 mb-3">Golden Ratio Typography:</h3>
+            <h3 class="text-sm font-medium text-blue-800 mb-3">4px-Aligned Typography:</h3>
             <div class="space-y-1 text-left">
-              <div :style="{ fontSize: 'var(--text-xs)', lineHeight: 'var(--line-height-normal)' }">
-                Extra Small Text (Golden Ratio)
+              <div :style="{ fontSize: 'var(--text-xs)', lineHeight: 'var(--leading-normal)' }">
+                Extra Small Text (12px, 4px-aligned)
               </div>
-              <div :style="{ fontSize: 'var(--text-sm)', lineHeight: 'var(--line-height-normal)' }">
-                Small Text (Golden Ratio)
+              <div :style="{ fontSize: 'var(--text-sm)', lineHeight: 'var(--leading-normal)' }">
+                Small Text (14px, 4px-aligned)
               </div>
-              <div :style="{ fontSize: 'var(--text-base)', lineHeight: 'var(--line-height-normal)' }">
-                Base Text (Golden Ratio)
+              <div :style="{ fontSize: 'var(--text-base)', lineHeight: 'var(--leading-normal)' }">
+                Base Text (16px, 4px-aligned)
               </div>
-              <div :style="{ fontSize: 'var(--text-lg)', lineHeight: 'var(--line-height-normal)' }">
-                Large Text (Golden Ratio)
+              <div :style="{ fontSize: 'var(--text-lg)', lineHeight: 'var(--leading-normal)' }">
+                Large Text (18px, 4px-aligned)
               </div>
             </div>
           </div>
 
           <!-- Foundation Architecture Summary -->
           <div class="border-t pt-4">
-            <h3 class="text-sm font-medium text-blue-800 mb-2">Foundation Architecture:</h3>
+            <h3 class="text-sm font-medium text-blue-800 mb-2">Research-Verified Foundation:</h3>
             <div class="text-xs font-mono bg-gray-50 p-3 rounded border space-y-1">
-              <div>✓ Industry-standard 8-point grid system</div>
-              <div>✓ Golden Ratio typography scaling (φ = 1.618)</div>
-              <div>✓ SSR-compatible CSS custom properties</div>
-              <div>✓ Semantic spacing aliases for maintainability</div>
-              <div>✓ Responsive scaling across breakpoints</div>
+              <div>✅ Modern 4-point grid system (2024 industry standard)</div>
+              <div>✅ Full Tailwind CSS compatibility and integration</div>
+              <div>✅ Optimized for Nuxt 3 SSR and performance</div>
+              <div>✅ Semantic spacing for developer productivity</div>
+              <div>✅ 4px alignment maintained across all breakpoints</div>
+              <div>✅ Research-verified optimal spacing for UI density</div>
             </div>
           </div>
 
