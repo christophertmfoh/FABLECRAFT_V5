@@ -1305,3 +1305,378 @@ This comprehensive audit represents every atomic UI element found in the landing
 10. **All patterns maintain theme compatibility** - Every atom works with the 15-theme system
 
 This completes the comprehensive audit of all atomic UI elements in the landing page ecosystem.
+
+## Utility Display Atoms
+
+### 1. Min Height Utilities
+**Base Component**: Minimum height constraints
+**Visual Specifications**:
+- Screen height: `min-h-screen`
+- Fixed heights: `min-h-[400px]`
+- Used for: Full page layouts, error boundaries
+
+### 2. Max Width Utilities
+**Base Component**: Maximum width constraints
+**Visual Specifications**:
+- Content widths: `max-w-xs`, `max-w-sm`, `max-w-md`, `max-w-lg`, `max-w-xl`, `max-w-2xl`, `max-w-3xl`, `max-w-4xl`, `max-w-5xl`, `max-w-7xl`
+- Screen width: `max-w-screen-2xl`
+- Full width: `w-full`
+- Centering: Always paired with `mx-auto`
+
+### 3. Max Height Utilities
+**Base Component**: Maximum height constraints
+**Visual Specifications**:
+- Fixed heights: `max-h-32`, `max-h-96`
+- Used for: Scrollable areas, overflow content
+
+### 4. Min Width Utilities
+**Base Component**: Minimum width constraints
+**Visual Specifications**:
+- Fixed widths: `min-w-[8rem]`, `min-w-[280px]`
+- Used for: Dropdown menus, cards
+
+### 5. Display Utilities
+**Base Component**: Display property control
+**Visual Specifications**:
+- Inline flex: `inline-flex`
+- Block: `block` (implicit default)
+- Hidden: `hidden` (responsive: `hidden lg:block`)
+- Flex: `flex`
+
+### 6. Overflow Utilities
+**Base Component**: Overflow behavior
+**Visual Specifications**:
+- Hidden: `overflow-hidden`
+- Auto: `overflow-auto`
+- Axis-specific: `overflow-x-auto`, `overflow-y-auto`
+- Responsive: `overflow-x-auto lg:overflow-visible`
+
+### 7. Position Utilities
+**Base Component**: Element positioning
+**Visual Specifications**:
+- Relative: `relative`
+- Absolute: `absolute`
+- Sticky: `sticky top-0`
+- Z-index: `z-10`, `z-20`, `z-50`
+
+### 8. Visibility Control
+**Base Component**: Element visibility
+**Visual Specifications**:
+- Screen reader only: `sr-only`
+- Aria hidden: `aria-hidden='true'`
+- Invisible but present: `invisible`
+
+## SVG Primitive Atoms
+
+### 1. Icon SVG Wrapper
+**Base Component**: Lucide icon components
+**Visual Specifications**:
+- Size control: `[&_svg]:size-4` (16px square)
+- Pointer events: `[&_svg]:pointer-events-none`
+- Shrink control: `[&_svg]:shrink-0`
+
+### 2. SVG Icons Used
+**Base Component**: Specific icon imports
+**Icons Found**:
+- `Check` - Checkmark icon
+- `ChevronRight` - Right arrow
+- `ChevronDown` - Down arrow  
+- `Circle` - Circle shape
+- `CheckCircle` - Checked circle
+- `Zap` - Lightning bolt
+- `Film` - Film/video icon
+- `Share2` - Share icon
+- `Globe` - Globe/world icon
+- `Palette` - Color palette
+- `Lightbulb` - Idea/lightbulb
+- `PenTool` - Pen/writing tool
+- `Camera` - Camera icon
+- `Music` - Music note
+- `Sparkles` - Sparkle effects
+- `ArrowRight` - Right arrow
+- `Star` - Star shape
+- `Heart` - Heart shape
+- `Mail` - Email icon
+- `Phone` - Phone icon
+- `MapPin` - Location pin
+- `User` - User profile
+- `Users` - Multiple users
+- `LogOut` - Logout icon
+- `UserCircle` - User circle avatar
+- `Feather` - Feather/quill icon
+- `BookOpen` - Open book
+- `AlertTriangle` - Warning triangle
+- `RefreshCw` - Refresh/reload
+- `Loader2` - Loading spinner
+
+### 3. SVG Fill Patterns
+**Base Component**: SVG fill control
+**Visual Specifications**:
+- Current color: `fill-current`
+- Specific color: `fill-primary`
+- Used in: Star ratings, circle indicators
+
+### 4. Linear Gradient Pattern
+**Base Component**: CSS gradient as content
+**Visual Specifications**:
+- Example: `linear-gradient(135deg, hsl(var(--orb-primary) / 0.05) 0%, hsl(var(--orb-secondary) / 0.03) 50%, hsl(var(--orb-primary) / 0.02) 100%)`
+- Direction variants: `to right`, `45deg`, `-45deg`, `135deg`
+- Used for: Visual effects, overlays
+
+## Special Purpose Atoms
+
+### 1. Idea Sparks Container
+**Base Component**: Firefly effect container
+**Visual Specifications**:
+- Class: `idea-sparks`
+- Aria hidden: `aria-hidden='true'`
+- Contains multiple spark elements
+
+### 2. Spark Element
+**Base Component**: Individual firefly/spark
+**Visual Specifications**:
+- Base class: `spark`
+- Variants: `spark-small`, `spark-bright`
+- Positioning: Inline style with `left` percentage
+- Animation: Inline `animationDelay`
+
+### 3. Error Details Component
+**Base Component**: `<details>` element
+**Visual Specifications**:
+- Container: `mt-4 p-4 bg-muted rounded-lg text-left`
+- Summary: `cursor-pointer font-medium text-sm text-foreground mb-2`
+- Content: `<pre>` with `text-xs text-muted-foreground overflow-auto max-h-32`
+- Only shown in development
+
+### 4. Hero Ambient Glow
+**Base Component**: Visual effect class
+**Visual Specifications**:
+- Class: `hero-ambient-glow`
+- Applied to hero section containers
+
+### 5. Surface Elevated
+**Base Component**: Elevated surface effect
+**Visual Specifications**:
+- Class: `surface-elevated`
+- Creates premium elevated appearance
+- Used with glass cards
+
+### 6. Natural Depth
+**Base Component**: Depth effect utility
+**Visual Specifications**:
+- Class: `natural-depth`
+- Creates subtle 3D appearance
+
+### 7. Gentle Hover
+**Base Component**: Hover transition utility
+**Visual Specifications**:
+- Class: `gentle-hover`
+- Smooth hover transitions
+
+## Semantic HTML5 Atoms
+
+### 1. Navigation Element
+**Base Component**: `<nav>`
+**Visual Specifications**:
+- Role: `role='navigation'`
+- Aria label: `aria-label='Main navigation'`
+- Sticky positioning: `sticky top-0`
+- Z-index: `z-50`
+- Background: `bg-background/80 backdrop-blur-xl`
+- Border: `border-b border-border/20`
+- Shadow: `shadow-sm`
+
+### 2. Main Element
+**Base Component**: `<main>` or `role='main'`
+**Visual Specifications**:
+- Min height: `min-h-screen`
+- Background: `bg-background`
+- Text color: `text-foreground`
+- Aria label: `aria-label='Fablecraft landing page'`
+
+### 3. Section Element
+**Base Component**: `<section>`
+**Visual Specifications**:
+- Spacing: Uses section spacing system
+- Position: `relative z-10`
+- Max width: Various (`max-w-7xl`, etc.)
+- Padding: Responsive padding system
+- Can be polymorphic (as prop)
+
+### 4. Article Element
+**Base Component**: `<article>` or `role='article'`
+**Visual Specifications**:
+- Used for: Card content, blog posts
+- Role attribute when not semantic
+- Aria labels for context
+
+### 5. Header Element
+**Base Component**: Card headers
+**Visual Specifications**:
+- Component: `CardHeader`
+- Spacing: `flex flex-col space-y-1.5 p-6`
+- Text alignment options
+
+### 6. Footer Element
+**Base Component**: Card footers and page footer
+**Visual Specifications**:
+- Component: `CardFooter`
+- Spacing: `flex items-center p-6 pt-0`
+- Page footer: Complex multi-column layout
+
+### 7. Figure Element
+**Base Component**: Not found in current implementation
+**Note**: Could be used for images with captions
+
+### 8. Time Element
+**Base Component**: Not found in current implementation
+**Note**: Could be used for timestamps
+
+### 9. Mark Element
+**Base Component**: Not found in current implementation
+**Note**: Could be used for highlighted text
+
+### 10. Details/Summary Elements
+**Base Component**: `<details>` and `<summary>`
+**Visual Specifications**:
+- Used in: Error boundary (dev mode)
+- Details container: `mt-4 p-4 bg-muted rounded-lg text-left`
+- Summary: `cursor-pointer font-medium text-sm text-foreground mb-2`
+- Collapsible content pattern
+
+### 11. Pre Element
+**Base Component**: `<pre>` for code display
+**Visual Specifications**:
+- Text: `text-xs text-muted-foreground`
+- Overflow: `overflow-auto`
+- Max height: `max-h-32`
+- Used in: Error stack traces
+
+### 12. List Elements
+**Base Component**: `<ul>`, `<li>`, with roles
+**Visual Specifications**:
+- Role: `role='list'` when needed
+- List item: `role='listitem'`
+- Used in: Navigation, feature lists
+
+## Flexbox Utility Atoms
+
+### 1. Flex Grow/Shrink
+**Base Component**: Flex item sizing
+**Visual Specifications**:
+- Grow: `flex-grow`, `flex-1`
+- Shrink: `flex-shrink-0`
+- Used for: Responsive layouts, button groups
+
+### 2. Flex Alignment
+**Base Component**: Flexbox alignment utilities
+**Visual Specifications**:
+- Items center: `items-center`
+- Items start: `items-start`
+- Items end: `items-end`
+- Justify center: `justify-center`
+- Justify between: `justify-between`
+- Justify start: `justify-start`
+- Justify end: `justify-end`
+
+### 3. Self Alignment
+**Base Component**: Individual flex item alignment
+**Visual Specifications**:
+- Not found in current implementation
+- Could use: `self-start`, `self-center`, `self-end`
+
+## Gradient Utility Atoms
+
+### 1. Gradient Directions
+**Base Component**: CSS gradient directions
+**Visual Specifications**:
+- To right: `bg-gradient-to-r`
+- To bottom right: `bg-gradient-to-br`
+- To top: `bg-gradient-to-t`
+- To bottom: `bg-gradient-to-b`
+
+### 2. Gradient Color Stops
+**Base Component**: Gradient color positions
+**Visual Specifications**:
+- From: `from-primary`, `from-white/20`, `from-primary/30`, `from-card`, `from-foreground`, `from-muted/30`
+- Via: `via-primary/80`, `via-card/95`, `via-foreground/90`, `via-secondary/20`
+- To: `to-primary/60`, `to-transparent`, `to-accent/30`, `to-foreground/70`, `to-secondary`
+
+### 3. Opacity Modifiers
+**Base Component**: Color opacity utilities
+**Visual Specifications**:
+- Background: `/20`, `/30`, `/50`, `/60`, `/70`, `/80`, `/90`, `/95`
+- Text: Same opacity scale
+- Border: Same opacity scale
+
+## Additional Display Utilities
+
+### 1. Ring Utilities
+**Base Component**: Focus ring system
+**Visual Specifications**:
+- Ring width: `ring-2`
+- Ring color: `ring-primary`, `ring-ring`
+- Ring offset: `ring-offset-2`
+- Ring offset background: `ring-offset-background`
+
+### 2. File Input Utilities
+**Base Component**: File input styling
+**Visual Specifications**:
+- File border: `file:border-0`
+- File background: `file:bg-transparent`
+- File text: `file:text-sm file:font-medium`
+
+### 3. Placeholder Utilities
+**Base Component**: Input placeholder styling
+**Visual Specifications**:
+- Color: `placeholder:text-muted-foreground`
+
+### 4. Focus Within Utilities
+**Base Component**: Parent focus state
+**Visual Specifications**:
+- Ring: `focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2`
+
+### 5. Data State Animations
+**Base Component**: Radix UI animations
+**Visual Specifications**:
+- Animate in: `data-[state=open]:animate-in`
+- Animate out: `data-[state=closed]:animate-out`
+- Fade: `data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0`
+- Zoom: `data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95`
+- Slide from: `data-[side=bottom]:slide-in-from-top-2`, etc.
+
+## CSS Custom Patterns
+
+### 1. Gradient Text
+**Base Component**: Gradient text effect
+**Visual Specifications**:
+- Background clip: `bg-clip-text`
+- Text transparent: `text-transparent`
+- Combined with gradient background
+
+### 2. Backdrop Filters
+**Base Component**: Background effects
+**Visual Specifications**:
+- Backdrop blur: `backdrop-blur-sm`, `backdrop-blur-md`, `backdrop-blur-lg`, `backdrop-blur-xl`
+- Combined with semi-transparent backgrounds
+
+### 3. Custom Spacing
+**Base Component**: Mathematical spacing system
+**Visual Specifications**:
+- Already documented in spacing system
+- `mt-best-friends`, `mt-friends`, `mt-acquaintances`
+
+## Final Comprehensive Notes
+
+1. **All utilities follow Tailwind conventions** - Standard naming and behavior
+2. **Responsive modifiers available** - `sm:`, `md:`, `lg:`, `xl:` prefixes
+3. **Dark mode variants** - `dark:` prefix for theme-aware styling
+4. **Hover/Focus variants** - Interactive state prefixes
+5. **Group modifiers** - Parent-child interaction patterns
+6. **No custom CSS required** - Everything uses utility classes
+7. **Theme colors used throughout** - No hardcoded color values
+8. **Consistent opacity scale** - `/20` through `/95` for transparency
+9. **Animation system integrated** - Radix UI compatible animations
+10. **Accessibility utilities included** - Screen reader, ARIA, focus management
+
+This completes the exhaustive audit of all atomic UI elements, utilities, and patterns in the landing page ecosystem.
