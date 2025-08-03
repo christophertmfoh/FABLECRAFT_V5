@@ -197,12 +197,11 @@ h1, h2, h3 {
 ======================================== */
 
 .spacing-test {
-  width: var(--space-16);
-  height: var(--space-16);
   background: rgba(0, 123, 255, 0.3);
-  margin: var(--space-4);
-  padding: var(--space-2);
   border: var(--space-1) solid #007bff;
+  font-weight: 600;
+  font-size: 10px;
+  text-align: center;
 }
 
 .typography-test h1 { font-size: var(--text-golden-4xl); }

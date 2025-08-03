@@ -43,45 +43,49 @@ onMounted(() => {
 
       <!-- Validation Tests - Collapsible Section -->
       <details class="bg-blue-50 p-6 rounded-lg shadow-sm border max-w-2xl mx-auto text-left">
-        <summary class="text-lg font-semibold text-blue-900 cursor-pointer hover:text-blue-700">
+        <summary class="text-lg font-semibold text-blue-900 cursor-pointer hover:text-blue-700 mb-4">
           Phase 1A: Mathematical Spacing System Tests
         </summary>
         
-        <div class="mt-4 space-y-4">
+        <div class="mt-6 space-y-6">
           <!-- 8-Point Grid Test -->
-          <div>
-            <h3 class="text-sm font-medium text-blue-800 mb-2">8-Point Grid Variables:</h3>
+          <div class="space-y-3">
+            <h3 class="text-sm font-medium text-blue-800">8-Point Grid Variables:</h3>
             <div class="flex flex-wrap gap-2 text-xs">
-              <div class="spacing-test" style="width: var(--space-4); height: var(--space-4);">4px</div>
-              <div class="spacing-test" style="width: var(--space-8); height: var(--space-8);">8px</div>
-              <div class="spacing-test" style="width: var(--space-16); height: var(--space-16);">16px</div>
-              <div class="spacing-test" style="width: var(--space-24); height: var(--space-24);">24px</div>
+              <div class="spacing-test" style="width: var(--space-4); height: var(--space-4); display: flex; align-items: center; justify-content: center;">4px</div>
+              <div class="spacing-test" style="width: var(--space-8); height: var(--space-8); display: flex; align-items: center; justify-content: center;">8px</div>
+              <div class="spacing-test" style="width: var(--space-16); height: var(--space-16); display: flex; align-items: center; justify-content: center;">16px</div>
+              <div class="spacing-test" style="width: var(--space-24); height: var(--space-24); display: flex; align-items: center; justify-content: center;">24px</div>
             </div>
           </div>
           
           <!-- Golden Ratio Typography Test -->
-          <div class="typography-test">
-            <h3 class="text-sm font-medium text-blue-800 mb-2">Golden Ratio Typography:</h3>
-            <div style="font-size: var(--text-golden-xs);">XS Text (Golden Ratio)</div>
-            <div style="font-size: var(--text-golden-sm);">Small Text (Golden Ratio)</div>
-            <div style="font-size: var(--text-golden-base);">Base Text (Golden Ratio)</div>
-            <div style="font-size: var(--text-golden-lg);">Large Text (Golden Ratio)</div>
-          </div>
-          
-          <!-- Semantic Spacing Test -->
-          <div>
-            <h3 class="text-sm font-medium text-blue-800 mb-2">Semantic Spacing:</h3>
-            <div class="flex flex-wrap gap-1 text-xs">
-              <div style="padding: var(--space-micro); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6;">micro</div>
-              <div style="padding: var(--space-tiny); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6;">tiny</div>
-              <div style="padding: var(--space-small); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6;">small</div>
-              <div style="padding: var(--space-medium); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6;">medium</div>
+          <div class="typography-test space-y-3">
+            <h3 class="text-sm font-medium text-blue-800">Golden Ratio Typography:</h3>
+            <div class="space-y-2">
+              <div style="font-size: var(--text-golden-xs); line-height: 1.4;">XS Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-golden-sm); line-height: 1.4;">Small Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-golden-base); line-height: 1.4;">Base Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-golden-lg); line-height: 1.4;">Large Text (Golden Ratio)</div>
             </div>
           </div>
           
-          <p class="text-xs text-blue-600 mt-3">
-            Open browser dev tools → Elements → Computed styles to verify CSS variables
-          </p>
+          <!-- Semantic Spacing Test -->
+          <div class="space-y-3">
+            <h3 class="text-sm font-medium text-blue-800">Semantic Spacing:</h3>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <div style="padding: var(--space-micro); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">micro</div>
+              <div style="padding: var(--space-tiny); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">tiny</div>
+              <div style="padding: var(--space-small); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">small</div>
+              <div style="padding: var(--space-medium); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">medium</div>
+            </div>
+          </div>
+          
+          <div class="mt-4 pt-4 border-t border-blue-200">
+            <p class="text-xs text-blue-600">
+              Open browser dev tools → Elements → Computed styles to verify CSS variables
+            </p>
+          </div>
         </div>
       </details>
       
