@@ -14,10 +14,10 @@ const { themes, themeCategories, currentTheme, setTheme } = useTheme()
 // Background orbs composable
 const { orbsEnabled, toggleOrbs, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 
-// Visual effects controls
-const firefliesEnabled = ref(true)
-const fireflyCount = ref(12)
-const atmosphericEnabled = ref(true)
+// Visual effects controls using useState for SSR-safe state
+const firefliesEnabled = useState('fireflies-enabled', () => true)
+const fireflyCount = useState('firefly-count', () => 12)
+const atmosphericEnabled = useState('atmospheric-enabled', () => true)
 
 // Typography showcase
 const showTypography = ref(false)

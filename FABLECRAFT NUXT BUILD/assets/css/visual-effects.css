@@ -81,54 +81,124 @@
   position: absolute;
   width: 3px;
   height: 3px;
-  background: hsl(var(--orb-primary));
+  background: radial-gradient(
+    circle,
+    hsl(var(--orb-primary) / 0.9) 0%,
+    hsl(var(--orb-secondary) / 0.6) 50%,
+    transparent 70%
+  );
   border-radius: 50%;
-  opacity: 0;
+  opacity: 0.8;
   
   /* Custom properties for dynamic positioning */
   left: var(--firefly-x);
-  bottom: var(--firefly-y);
+  bottom: -10px;
   
-  /* GPU-accelerated animation */
-  animation: firefly-drift var(--effect-duration-firefly) var(--firefly-delay) linear infinite;
+  /* GPU-accelerated animations */
+  animation: 
+    firefly-drift var(--effect-duration-firefly) var(--firefly-delay) linear infinite,
+    firefly-glow 4s var(--firefly-delay) ease-in-out infinite;
   
   /* Glow effect */
-  box-shadow: 0 0 6px hsl(var(--orb-primary) / 0.8);
+  box-shadow: 0 0 4px hsl(var(--orb-primary) / 0.5);
   
   /* Force GPU acceleration */
   transform: translateZ(0);
+  will-change: transform, opacity, bottom;
+  z-index: 5;
 }
 
 /* Firefly size variants */
 .firefly--small {
-  transform: scale(0.6) translateZ(0);
-  box-shadow: 0 0 4px hsl(var(--orb-primary) / 0.6);
+  width: 2px;
+  height: 2px;
+  opacity: 0.4;
+  animation-duration: 18s, 5s;
+  box-shadow: 0 0 3px hsl(var(--orb-primary) / 0.3);
 }
 
 .firefly--normal {
-  transform: scale(1) translateZ(0);
+  /* Default size already defined */
+  animation-duration: 14s, 4s;
 }
 
 .firefly--bright {
-  transform: scale(1.4) translateZ(0);
-  box-shadow: 0 0 12px hsl(var(--orb-primary));
+  width: 4px;
+  height: 4px;
+  opacity: 0.8;
+  animation-duration: 10s, 3s;
+  box-shadow: 
+    0 0 6px hsl(var(--orb-primary) / 0.6),
+    0 0 12px hsl(var(--orb-secondary) / 0.2);
 }
 
-/* GPU-accelerated firefly animation */
+/* GPU-accelerated firefly animation - upward drift from bottom */
 @keyframes firefly-drift {
   0% {
+    bottom: -10px;
+    transform: translateX(0px) scale(1);
     opacity: 0;
-    transform: translate3d(0, 0, 0);
   }
-  10% {
-    opacity: var(--effect-opacity-normal);
+  5% {
+    opacity: 0.6;
+    bottom: 8vh;
+    transform: translateX(15px) scale(1);
   }
-  90% {
-    opacity: var(--effect-opacity-normal);
+  15% {
+    bottom: 20vh;
+    transform: translateX(-25px) scale(1);
+  }
+  25% {
+    bottom: 35vh;
+    transform: translateX(40px) scale(1);
+  }
+  35% {
+    bottom: 50vh;
+    transform: translateX(-30px) scale(1);
+  }
+  45% {
+    bottom: 62vh;
+    transform: translateX(20px) scale(1);
+  }
+  55% {
+    bottom: 75vh;
+    transform: translateX(-15px) scale(1);
+    opacity: 0.5;
+  }
+  65% {
+    bottom: 85vh;
+    transform: translateX(25px) scale(1);
+  }
+  75% {
+    bottom: 92vh;
+    transform: translateX(-10px) scale(1);
+    opacity: 0.3;
+  }
+  85% {
+    bottom: 96vh;
+    transform: translateX(5px) scale(1);
+    opacity: 0.2;
   }
   100% {
+    bottom: 100vh;
+    transform: translateX(0px) scale(0.5);
     opacity: 0;
-    transform: translate3d(50px, -100vh, 0);
+  }
+}
+
+/* Subtle firefly glow - breathing effect */
+@keyframes firefly-glow {
+  0%, 100% {
+    opacity: 0.4;
+    filter: brightness(1);
+  }
+  30% {
+    opacity: 0.8;
+    filter: brightness(1.3);
+  }
+  70% {
+    opacity: 0.6;
+    filter: brightness(1.1);
   }
 }
 
@@ -248,6 +318,7 @@
     transparent 50%
   );
   mix-blend-mode: screen;
+  z-index: 2;
 }
 
 .atmospheric-glow {

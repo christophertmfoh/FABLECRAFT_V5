@@ -20,116 +20,136 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
-interface FireflyConfig {
-  id: number
-  x: number
-  y: number
-  size: 'small' | 'normal' | 'bright'
-  speed: number
-  delay: number
-}
-
-interface Props {
-  count?: number
+interface FireflyProps {
   enabled?: boolean
+  count?: number
   performanceMode?: 'low' | 'medium' | 'high'
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  count: 12, // Max 12 for performance
+interface Firefly {
+  id: number
+  x: number
+  delay: number
+  duration: number
+  sizeClass: string
+  style: Record<string, string>
+}
+
+const props = withDefaults(defineProps<FireflyProps>(), {
   enabled: true,
+  count: 12,
   performanceMode: 'medium'
 })
 
-// SSR-safe client detection
 const isClient = ref(false)
-const isInitialized = ref(false)
 const containerRef = ref<HTMLElement>()
+const isInitialized = ref(false)
 const isVisible = ref(false)
-const observer = ref<IntersectionObserver>()
 
-// Firefly configuration (non-reactive for performance)
-const fireflies = ref<FireflyConfig[]>([])
+// Predefined positions similar to old build (spread across width)
+const fireflyPositions = [
+  { x: 8, variant: 'normal', delay: 0 },
+  { x: 16, variant: 'small', delay: 3.2 },
+  { x: 28, variant: 'bright', delay: 1.8 },
+  { x: 37, variant: 'small', delay: 7.1 },
+  { x: 49, variant: 'normal', delay: 2.5 },
+  { x: 62, variant: 'bright', delay: 5.7 },
+  { x: 73, variant: 'small', delay: 8.9 },
+  { x: 84, variant: 'normal', delay: 4.3 },
+  { x: 93, variant: 'small', delay: 9.6 },
+  { x: 12, variant: 'small', delay: 11.2 },
+  { x: 23, variant: 'normal', delay: 13.8 },
+  { x: 34, variant: 'bright', delay: 15.4 },
+  { x: 45, variant: 'small', delay: 17.1 },
+  { x: 56, variant: 'normal', delay: 19.5 },
+  { x: 67, variant: 'bright', delay: 21.2 },
+  { x: 78, variant: 'small', delay: 23.8 },
+  { x: 89, variant: 'normal', delay: 25.4 },
+  { x: 4, variant: 'small', delay: 18.2 },
+  { x: 19, variant: 'small', delay: 22.4 },
+  { x: 33, variant: 'small', delay: 19.8 },
+  { x: 46, variant: 'normal', delay: 24.1 },
+  { x: 54, variant: 'small', delay: 23.7 },
+  { x: 67, variant: 'small', delay: 20.5 },
+  { x: 77, variant: 'bright', delay: 25.3 },
+  { x: 85, variant: 'small', delay: 26.8 }
+]
 
-// Initialize fireflies with random properties
-const initializeFireflies = () => {
-  if (!import.meta.client) return
+// Create fireflies based on count
+const fireflies = computed<Firefly[]>(() => {
+  const actualCount = Math.min(props.count, 12) // Max 12 for performance
   
-  const newFireflies: FireflyConfig[] = []
-  const sizes: Array<'small' | 'normal' | 'bright'> = ['small', 'normal', 'bright']
-  
-  for (let i = 0; i < props.count; i++) {
-    newFireflies.push({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 20 + 80, // Start from bottom 20% of container
-      size: sizes[i % 3],
-      speed: 10 + Math.random() * 10, // 10-20s duration
-      delay: Math.random() * 15 // 0-15s delay
-    })
-  }
-  
-  fireflies.value = newFireflies
-}
-
-// Compute visible fireflies based on visibility and enabled state
-const visibleFireflies = computed(() => {
-  if (!props.enabled || !isVisible.value || !isClient.value) return []
-  
-  return fireflies.value.map(firefly => ({
-    id: firefly.id,
-    sizeClass: `firefly--${firefly.size}`,
-    style: {
-      '--firefly-x': `${firefly.x}%`,
-      '--firefly-y': `${firefly.y}%`,
-      '--effect-duration-firefly': `${firefly.speed}s`,
-      '--firefly-delay': `${firefly.delay}s`
+  return fireflyPositions.slice(0, actualCount).map((pos, index) => {
+    const durations = {
+      small: 18,
+      normal: 14,
+      bright: 10
     }
-  }))
+    
+    return {
+      id: index,
+      x: pos.x,
+      delay: pos.delay,
+      duration: durations[pos.variant] || 14,
+      sizeClass: `firefly--${pos.variant}`,
+      style: {
+        '--firefly-x': `${pos.x}%`,
+        '--firefly-delay': `${pos.delay}s`,
+        '--firefly-duration': `${durations[pos.variant]}s`
+      }
+    }
+  })
 })
 
-// Setup intersection observer for performance
-const setupIntersectionObserver = () => {
-  if (!import.meta.client || !containerRef.value) return
+// Filter fireflies based on visibility and performance mode
+const visibleFireflies = computed(() => {
+  if (!props.enabled || !isVisible.value) return []
   
-  observer.value = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        isVisible.value = entry.isIntersecting
-      })
-    },
-    {
-      threshold: 0,
-      rootMargin: '50px' // Start animating slightly before visible
-    }
-  )
+  const limits = {
+    low: 4,
+    medium: 8,
+    high: 12
+  }
   
-  observer.value.observe(containerRef.value)
-}
+  const limit = limits[props.performanceMode] || 8
+  return fireflies.value.slice(0, Math.min(limit, props.count))
+})
 
-// Lifecycle hooks
+// Intersection observer for performance
+let observer: IntersectionObserver | null = null
+
 onMounted(() => {
   isClient.value = true
   
-  // Initialize after a short delay to ensure smooth page load
-  setTimeout(() => {
-    initializeFireflies()
-    setupIntersectionObserver()
-    isInitialized.value = true
-  }, 100)
+  if (import.meta.client && containerRef.value) {
+    // Create intersection observer
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isVisible.value = entry.isIntersecting
+      })
+    }, {
+      threshold: 0.1
+    })
+    
+    observer.observe(containerRef.value)
+    
+    // Initialize after a small delay
+    setTimeout(() => {
+      isInitialized.value = true
+    }, 100)
+  }
 })
 
 onUnmounted(() => {
-  if (observer.value) {
-    observer.value.disconnect()
+  if (observer && containerRef.value) {
+    observer.unobserve(containerRef.value)
+    observer.disconnect()
   }
 })
 
-// Watch for enabled prop changes
-watch(() => props.enabled, (newValue) => {
-  if (newValue && fireflies.value.length === 0) {
-    initializeFireflies()
-  }
+// Watch for performance mode changes
+watch(() => props.performanceMode, () => {
+  // Fireflies will automatically adjust based on computed property
 })
 </script>
 
@@ -140,9 +160,17 @@ watch(() => props.enabled, (newValue) => {
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  z-index: 5;
   overflow: hidden;
-  z-index: 1; /* Behind content but above background */
 }
 
-/* Additional scoped styles if needed */
+.firefly-container.initialized {
+  opacity: 1;
+}
+
+.firefly {
+  opacity: 0;
+  animation-fill-mode: both;
+}
 </style>
