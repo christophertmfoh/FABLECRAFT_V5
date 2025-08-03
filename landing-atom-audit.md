@@ -798,27 +798,92 @@ All interactive atoms must support:
 - Additional: `shadow-xl hover:shadow-2xl`
 - Creates premium button appearance
 
-## Additional Implementation Notes
+### 5. Focus Ring Utility
+**Visual Specifications**:
+- Class: `focus-ring`
+- Used on buttons for consistent focus states
+- Part of the design system's accessibility features
+
+## Error Handling Atoms
+
+### 1. Error Boundary Fallback
+**Base Component**: Error display container
+**Visual Specifications**:
+- Container: `min-h-[400px] flex items-center justify-center p-8`
+- Content wrapper: `text-center space-y-6 max-w-md mx-auto`
+- Icon container: `w-16 h-16 bg-destructive/10 rounded-2xl flex items-center justify-center mx-auto`
+- Icon: `AlertTriangle` with `w-8 h-8 text-destructive`
+- Heading: `text-2xl font-bold text-foreground`
+- Description: `text-muted-foreground`
+- Action buttons container: `flex flex-col sm:flex-row gap-3 justify-center`
+
+### 2. Error Details (Dev Only)
+**Base Component**: `<details>` element
+**Visual Specifications**:
+- Container: `mt-4 p-4 bg-muted rounded-lg text-left`
+- Summary: `cursor-pointer font-medium text-sm text-foreground mb-2`
+- Pre block: `text-xs text-muted-foreground overflow-auto max-h-32`
+
+## Composite Atoms (Built from other atoms)
+
+### 1. HeadingGroup Component
+**Base Component**: Structured heading wrapper
+**Combines**: Badge, Heading, Description
+**Visual Specifications**:
+- Container: `heading-group` class
+- Centered variant: `text-center`
+- Badge section: `flex items-center justify-center gap-2`
+- Spacing: Uses mathematical spacing (`mt-best-friends`, `mt-friends`)
+
+**Size Variants for Heading**:
+- `default`: `text-golden-3xl sm:text-golden-4xl lg:text-golden-5xl xl:text-6xl`
+- `large`: `text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl`
+- `medium`: `text-golden-2xl sm:text-golden-3xl lg:text-golden-4xl`
+- `small`: `text-golden-xl sm:text-golden-2xl lg:text-golden-3xl`
+- `compact`: `text-2xl sm:text-3xl lg:text-4xl`
+
+**Size Variants for Description**:
+- `default`: `text-golden-lg sm:text-golden-xl lg:text-golden-2xl`
+- `large`: `text-golden-xl sm:text-golden-2xl lg:text-golden-3xl`
+- `medium`: `text-golden-md sm:text-golden-lg lg:text-golden-xl`
+- `small`: `text-golden-sm sm:text-golden-md lg:text-golden-lg`
+- `compact`: `text-base sm:text-lg`
+
+### 2. BadgeWithDot Component
+**Already documented in Text & Typography Atoms as enhanced Badge**
+
+## Additional CSS Utility Classes
+
+These utility classes act as styling atoms that can be applied to various components:
 
 ### Gradient Utilities
-The codebase uses several gradient utility classes that should be implemented:
-- `gradient-primary`: Primary color gradient
-- `gradient-primary-br`: Primary gradient to bottom-right
+- `gradient-primary`: Primary gradient background
+- `gradient-primary-br`: Primary gradient bottom-right
 - `gradient-primary-text`: Gradient text effect
+- `bg-gradient-to-r`, `bg-gradient-to-br`, `bg-gradient-to-t`: Directional gradients
+- `from-*`, `via-*`, `to-*`: Gradient color stops using theme colors
 
-### Dropdown Patterns
-Dropdown menus follow a consistent pattern:
-- Trigger button with chevron that rotates on hover
-- Backdrop blur on the dropdown content
-- Section headers with uppercase labels
-- Items with icon + text layout
-- Hover states on individual items
+### Effect Utilities
+- `natural-depth`: Natural shadow depth
+- `gentle-hover`: Gentle hover transition
+- `surface-elevated`: Elevated surface appearance
+- `btn-enhanced`: Enhanced button styling
+- `focus-ring`: Focus ring for accessibility
 
-### Navigation Patterns
-Navigation header includes:
-- Logo with hover scale effect
-- Theme toggle button
-- User menu dropdown with sections
-- Responsive design considerations
+### Mathematical Spacing Utilities
+- `section-spacing`: 128px standard sections
+- `section-spacing-hero`: 96px hero sections
+- `section-spacing-compact`: 64px compact sections
+- `grid-normal`: Standard grid gap
+- `p-comfortable`: Comfortable padding
 
-This list represents all unique atoms needed for the landing page implementation. Each component should be built as a reusable Vue component with proper TypeScript types and theme system integration.
+## Implementation Notes
+
+1. **All colors use CSS variables** - No hardcoded colors found
+2. **Responsive patterns are consistent** - Using Tailwind breakpoints (sm, md, lg, xl)
+3. **Animation timings are standardized** - duration-200, duration-300, duration-500, duration-700
+4. **Spacing follows mathematical system** - Custom spacing tokens integrated throughout
+5. **Accessibility is built-in** - Focus states, ARIA labels, semantic HTML
+6. **Theme integration is complete** - All atoms work with the 15-theme system
+
+This comprehensive audit represents every atomic UI element found in the landing page ecosystem. Each atom is documented with its complete visual specifications while maintaining theme system compatibility.
