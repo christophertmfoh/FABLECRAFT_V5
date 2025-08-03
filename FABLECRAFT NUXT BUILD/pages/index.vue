@@ -12,7 +12,40 @@ const isLoggedIn = computed(() => !!user.value)
 const { themes, themeCategories, currentTheme, setTheme } = useTheme()
 
 // Background orbs composable
-const { orbsEnabled, toggleOrbs } = useBackgroundOrbs()
+const { orbsEnabled, toggleOrbs, performanceMode, setPerformanceMode } = useBackgroundOrbs()
+
+// Visual effects controls
+const firefliesEnabled = ref(true)
+const fireflyCount = ref(12)
+const atmosphericEnabled = ref(true)
+
+// Typography showcase
+const showTypography = ref(false)
+const showEffectsControls = ref(false)
+
+// Device info for performance
+const deviceInfo = ref({
+  memory: null as number | null,
+  cores: null as number | null,
+  reducedMotion: false
+})
+
+// Extended Navigator interface for deviceMemory
+interface NavigatorWithMemory extends Navigator {
+  deviceMemory?: number
+}
+
+// Detect device capabilities
+onMounted(() => {
+  if (import.meta.client) {
+    const nav = navigator as NavigatorWithMemory
+    deviceInfo.value = {
+      memory: nav.deviceMemory || null,
+      cores: navigator.hardwareConcurrency || null,
+      reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    }
+  }
+})
 
 // Development-only debugging (excluded from production)
 if (isDevelopment) {
@@ -20,17 +53,27 @@ if (isDevelopment) {
   console.log('🎯 Design tokens available:', {
     primitive: 'var(--space-1) through var(--space-32)',
     semantic: 'var(--space-micro) through var(--space-massive)',
-    typography: 'var(--text-xs) through var(--text-6xl)'
+    typography: 'var(--text-xs) through var(--text-6xl)',
+    golden: 'var(--text-golden-xs) through var(--text-golden-5xl)'
   })
   console.log('🎨 Theme system loaded with', themes.length, 'themes')
+  console.log('✨ Visual effects system initialized')
 }
 </script>
 
 <template>
   <div class="min-h-screen bg-background text-foreground transition-colors duration-300">
     <!-- Background Visual Effects -->
-    <BackgroundOrbs />
-    <FireflyEffect :count="8" />
+    <BackgroundOrbs 
+      v-if="orbsEnabled"
+      :performance-mode="performanceMode"
+    />
+    <FireflyEffect 
+      v-if="firefliesEnabled"
+      :count="fireflyCount" 
+      :performance-mode="performanceMode"
+    />
+    <div v-if="atmosphericEnabled" class="atmospheric-gradient" />
     
     <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
       
@@ -39,25 +82,132 @@ if (isDevelopment) {
         <h1 class="text-4xl font-bold">Fablecraft Foundation</h1>
         <p class="text-xl text-muted-foreground">Modernized build environment with 15 production themes</p>
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-lg border">
-          <div class="w-3 h-3 rounded-full bg-primary"/>
+          <div class="w-3 h-3 rounded-full bg-primary" />
           <span class="text-sm font-medium">Current Theme: {{ currentTheme }}</span>
         </div>
       </div>
 
-      <!-- Navigation to Test Pages -->
+      <!-- Quick Controls -->
       <div class="flex flex-wrap justify-center gap-4">
-        <NuxtLink 
-          to="/typography-test" 
+        <button 
+          @click="showTypography = !showTypography"
           class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
         >
-          Typography Test →
-        </NuxtLink>
-        <NuxtLink 
-          to="/visual-effects-test" 
+          {{ showTypography ? 'Hide' : 'Show' }} Typography
+        </button>
+        <button 
+          @click="showEffectsControls = !showEffectsControls"
           class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
         >
-          Visual Effects Test →
-        </NuxtLink>
+          {{ showEffectsControls ? 'Hide' : 'Show' }} Effects Controls
+        </button>
+        <button 
+          @click="toggleOrbs"
+          class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
+        >
+          {{ orbsEnabled ? '✨ Effects On' : '○ Effects Off' }}
+        </button>
+      </div>
+
+      <!-- Visual Effects Controls -->
+      <div v-show="showEffectsControls" class="bg-card p-6 rounded-lg border space-y-6">
+        <h2 class="text-2xl font-semibold mb-4">Visual Effects Controls</h2>
+        
+        <!-- Performance Mode -->
+        <div>
+          <label class="block text-sm font-medium mb-2">Performance Mode</label>
+          <select 
+            :value="performanceMode" 
+            @change="setPerformanceMode($event.target.value as 'low' | 'medium' | 'high')"
+            class="w-full px-3 py-2 bg-background border rounded"
+          >
+            <option value="low">Low (Mobile)</option>
+            <option value="medium">Medium (Default)</option>
+            <option value="high">High (Desktop)</option>
+          </select>
+        </div>
+        
+        <!-- Effect Toggles -->
+        <div class="space-y-2">
+          <label class="flex items-center gap-2">
+            <input 
+              type="checkbox" 
+              v-model="firefliesEnabled"
+              class="rounded"
+            >
+            <span>Fireflies ({{ fireflyCount }} elements)</span>
+          </label>
+          
+          <label class="flex items-center gap-2">
+            <input 
+              type="checkbox" 
+              v-model="atmosphericEnabled"
+              class="rounded"
+            >
+            <span>Atmospheric Gradient</span>
+          </label>
+        </div>
+        
+        <!-- Firefly Count -->
+        <div v-if="firefliesEnabled">
+          <label class="block text-sm font-medium mb-2">
+            Firefly Count: {{ fireflyCount }}
+          </label>
+          <input 
+            v-model.number="fireflyCount"
+            type="range" 
+            min="1"
+            max="12"
+            class="w-full"
+          >
+        </div>
+
+        <!-- Device Info -->
+        <div class="grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <span class="font-medium">Device Memory:</span>
+            <span class="ml-2">{{ deviceInfo.memory || 'Unknown' }} GB</span>
+          </div>
+          <div>
+            <span class="font-medium">CPU Cores:</span>
+            <span class="ml-2">{{ deviceInfo.cores || 'Unknown' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Reduced Motion:</span>
+            <span class="ml-2">{{ deviceInfo.reducedMotion ? 'Yes' : 'No' }}</span>
+          </div>
+          <div>
+            <span class="font-medium">Performance:</span>
+            <span class="ml-2">{{ performanceMode }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Showcase -->
+      <div v-show="showTypography" class="bg-card p-8 rounded-lg border space-y-8">
+        <h2 class="text-2xl font-bold mb-6">Typography System</h2>
+        
+        <!-- Golden Ratio Scale -->
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold mb-4">Golden Ratio Typography Scale (1.618)</h3>
+          <p class="text-golden-xs">text-golden-xs: The quick brown fox jumps over the lazy dog (9.88px)</p>
+          <p class="text-golden-sm">text-golden-sm: The quick brown fox jumps over the lazy dog (12.23px)</p>
+          <p class="text-golden-base">text-golden-base: The quick brown fox jumps over the lazy dog (16px)</p>
+          <p class="text-golden-lg">text-golden-lg: The quick brown fox jumps over the lazy dog (25.88px)</p>
+          <p class="text-golden-xl">text-golden-xl: The quick brown fox jumps over the lazy dog (41.85px)</p>
+          <p class="text-golden-2xl">text-golden-2xl: The quick brown fox (67.67px)</p>
+          <p class="text-golden-3xl">text-golden-3xl: The quick brown (109.46px)</p>
+        </div>
+
+        <!-- Letter Spacing -->
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold mb-4">Letter Spacing Examples</h3>
+          <p class="tracking-tighter text-2xl">tracking-tighter: Display Text</p>
+          <p class="tracking-tight text-xl">tracking-tight: Heading Text</p>
+          <p class="tracking-normal">tracking-normal: Body text with normal spacing</p>
+          <p class="tracking-wide text-sm">tracking-wide: Small text with wide spacing</p>
+          <p class="tracking-wider text-sm uppercase">tracking-wider: UPPERCASE TEXT</p>
+        </div>
       </div>
 
       <!-- Theme Showcase Section -->
@@ -78,6 +228,7 @@ if (isDevelopment) {
               <button
                 v-for="theme in themes.filter(t => t.category === category)"
                 :key="theme.name"
+                @click="setTheme(theme.name)"
                 :class="[
                   'p-4 rounded-lg border-2 transition-all duration-200 text-left',
                   'hover:scale-105 hover:shadow-md',
@@ -85,7 +236,6 @@ if (isDevelopment) {
                     ? 'border-primary bg-primary/10 shadow-lg' 
                     : 'border-border bg-muted/50 hover:border-primary/50'
                 ]"
-                @click="setTheme(theme.name)"
               >
                 <div class="font-medium text-sm">{{ theme.label }}</div>
                 <div class="text-xs text-muted-foreground mt-1">{{ theme.name }}</div>
@@ -142,20 +292,10 @@ if (isDevelopment) {
             </button>
           </div>
 
-          <!-- Visual Effects Toggle -->
-          <div class="flex justify-center">
-            <button 
-              class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
-              @click="toggleOrbs"
-            >
-              {{ orbsEnabled ? '✨ Effects On' : '○ Effects Off' }}
-            </button>
-          </div>
-
           <!-- Floating Orbs -->
           <div class="relative h-32 bg-muted/30 rounded-lg overflow-hidden">
-            <div class="floating-orb--primary absolute top-4 left-8 w-16 h-16 rounded-full"/>
-            <div class="floating-orb--secondary absolute bottom-4 right-8 w-12 h-12 rounded-full"/>
+            <div class="floating-orb--primary absolute top-4 left-8 w-16 h-16 rounded-full" />
+            <div class="floating-orb--secondary absolute bottom-4 right-8 w-12 h-12 rounded-full" />
             <div class="absolute inset-0 flex items-center justify-center">
               <span class="text-sm text-muted-foreground">Theme-reactive floating orbs</span>
             </div>
@@ -165,10 +305,10 @@ if (isDevelopment) {
 
       <!-- Supabase Status -->
       <div class="bg-card p-6 rounded-lg border shadow-sm max-w-md mx-auto">
-        <h2 class="text-lg font-semibold mb-4">Supabase Status</h2>
+        <h2 class="text-lg font-semibold mb-4">System Status</h2>
         <div class="space-y-2 text-sm">
           <div class="flex justify-between">
-            <span>Connection:</span>
+            <span>Supabase:</span>
             <span class="text-green-600 font-medium">✓ Connected</span>
           </div>
           <div class="flex justify-between">
@@ -179,63 +319,31 @@ if (isDevelopment) {
             <span>Environment:</span>
             <span class="font-mono text-xs">{{ isDevelopment ? 'Development' : 'Production' }}</span>
           </div>
+          <div class="flex justify-between">
+            <span>Visual Effects:</span>
+            <span class="font-medium">{{ orbsEnabled ? 'Active' : 'Disabled' }}</span>
+          </div>
         </div>
       </div>
 
       <!-- Development-Only Validation Tests -->
       <details v-if="isDevelopment" class="bg-card p-6 rounded-lg border shadow-sm text-left">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🔧 Design Token Validation Tests
+          🔧 Foundation Systems Check
         </summary>
         
-        <div class="space-y-6">
-          <!-- 4-Point Grid Scale Validation -->
-          <div>
-            <h3 class="text-sm font-medium text-primary mb-3">4-Point Grid Scale (Industry Standard):</h3>
-            <div class="flex flex-wrap items-end gap-1">
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-micro)', height: 'var(--space-micro)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">2px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-tiny)', height: 'var(--space-tiny)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">4px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-xs)', height: 'var(--space-xs)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">8px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-sm)', height: 'var(--space-sm)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">12px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-md)', height: 'var(--space-md)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">16px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-lg)', height: 'var(--space-lg)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">20px</span>
-              </div>
-              <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-xl)', height: 'var(--space-xl)' }"/>
-                <span class="text-xs mt-1 text-muted-foreground">24px</span>
-              </div>
-            </div>
-          </div>
-          
+        <div class="space-y-6">          
           <!-- Foundation Architecture Summary -->
           <div class="border-t border-border pt-4">
-            <h3 class="text-sm font-medium text-primary mb-2">Research-Verified Foundation Complete:</h3>
+            <h3 class="text-sm font-medium text-primary mb-2">Phase 1 Foundation Complete:</h3>
             <div class="text-xs font-mono bg-muted p-3 rounded border space-y-1">
-              <div>✅ Modern 4-point grid system (2024 industry standard)</div>
-              <div>✅ 15 complete themes + system preference support</div>
-              <div>✅ WCAG 2.2 AA compliant contrast ratios</div>
-              <div>✅ SSR-compatible theme switching</div>
-              <div>✅ Theme-reactive orbs and auth buttons</div>
-              <div>✅ LocalStorage persistence with system detection</div>
-              <div>✅ GPU-accelerated visual effects (60 FPS)</div>
-              <div>✅ Golden ratio typography system</div>
+              <div>✅ Step 1: Mathematical spacing (4-point grid)</div>
+              <div>✅ Step 2: Theme system (15 themes + SSR)</div>
+              <div>✅ Step 3: Typography (Golden ratio + rem units)</div>
+              <div>✅ Step 4: Visual effects (GPU-accelerated)</div>
+              <div>✅ Supabase integration configured</div>
+              <div>✅ ESLint + TypeScript configured</div>
+              <div>✅ Production build optimized</div>
             </div>
           </div>
 
@@ -245,7 +353,9 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <p class="text-center text-sm text-muted-foreground">Ready to build amazing things with 15 production-ready themes!</p>
+      <p class="text-center text-sm text-muted-foreground">
+        Fablecraft Foundation - Production-ready with all systems operational
+      </p>
     </div>
   </div>
 </template>
