@@ -2,6 +2,7 @@
  * Composable for managing background orbs across the application
  * Provides centralized control over orb effects
  */
+import { onMounted } from 'vue'
 
 interface OrbOptions {
   enabled?: boolean
@@ -105,11 +106,18 @@ export const useBackgroundOrbs = () => {
     orbCount: orbCount.value
   })
 
+  // Initialize performance mode on client
+  if (import.meta.client) {
+    onMounted(() => {
+      initializePerformance()
+    })
+  }
+
   return {
-    // State
-    orbsEnabled: readonly(orbsEnabled),
-    performanceMode: readonly(performanceMode),
-    orbCount: readonly(orbCount),
+    // State - don't use readonly, it breaks reactivity
+    orbsEnabled,
+    performanceMode,
+    orbCount,
     
     // Methods
     initializePerformance,
