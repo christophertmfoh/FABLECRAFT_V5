@@ -90,20 +90,20 @@ if (isDevelopment) {
       <!-- Quick Controls -->
       <div class="flex flex-wrap justify-center gap-4">
         <button 
-          @click="showTypography = !showTypography"
           class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          @click="showTypography = !showTypography"
         >
           {{ showTypography ? 'Hide' : 'Show' }} Typography
         </button>
         <button 
-          @click="showEffectsControls = !showEffectsControls"
           class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          @click="showEffectsControls = !showEffectsControls"
         >
           {{ showEffectsControls ? 'Hide' : 'Show' }} Effects Controls
         </button>
         <button 
-          @click="toggleOrbs"
           class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
+          @click="toggleOrbs"
         >
           {{ orbsEnabled ? '✨ Effects On' : '○ Effects Off' }}
         </button>
@@ -118,8 +118,8 @@ if (isDevelopment) {
           <label class="block text-sm font-medium mb-2">Performance Mode</label>
           <select 
             :value="performanceMode" 
-            @change="setPerformanceMode($event.target.value as 'low' | 'medium' | 'high')"
             class="w-full px-3 py-2 bg-background border rounded"
+            @change="setPerformanceMode($event.target.value as 'low' | 'medium' | 'high')"
           >
             <option value="low">Low (Mobile)</option>
             <option value="medium">Medium (Default)</option>
@@ -131,8 +131,8 @@ if (isDevelopment) {
         <div class="space-y-2">
           <label class="flex items-center gap-2">
             <input 
-              type="checkbox" 
-              v-model="firefliesEnabled"
+              v-model="firefliesEnabled" 
+              type="checkbox"
               class="rounded"
             >
             <span>Fireflies ({{ fireflyCount }} elements)</span>
@@ -140,8 +140,8 @@ if (isDevelopment) {
           
           <label class="flex items-center gap-2">
             <input 
-              type="checkbox" 
-              v-model="atmosphericEnabled"
+              v-model="atmosphericEnabled" 
+              type="checkbox"
               class="rounded"
             >
             <span>Atmospheric Gradient</span>
@@ -228,7 +228,6 @@ if (isDevelopment) {
               <button
                 v-for="theme in themes.filter(t => t.category === category)"
                 :key="theme.name"
-                @click="setTheme(theme.name)"
                 :class="[
                   'p-4 rounded-lg border-2 transition-all duration-200 text-left',
                   'hover:scale-105 hover:shadow-md',
@@ -236,6 +235,7 @@ if (isDevelopment) {
                     ? 'border-primary bg-primary/10 shadow-lg' 
                     : 'border-border bg-muted/50 hover:border-primary/50'
                 ]"
+                @click="setTheme(theme.name)"
               >
                 <div class="font-medium text-sm">{{ theme.label }}</div>
                 <div class="text-xs text-muted-foreground mt-1">{{ theme.name }}</div>
