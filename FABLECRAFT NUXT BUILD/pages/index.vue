@@ -392,6 +392,7 @@ details {
 details summary {
   list-style: none;
   user-select: none;
+  cursor: pointer;
 }
 
 details summary::-webkit-details-marker {
@@ -407,6 +408,13 @@ details summary::before {
 
 details[open] summary::before {
   transform: rotate(90deg);
+}
+
+/* Ensure buttons inside details are clickable */
+details button {
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* Development-only styles - excluded from production */

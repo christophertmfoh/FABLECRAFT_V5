@@ -2,10 +2,10 @@
 // SSR-safe theme initialization
 const { currentTheme } = useTheme()
 
-// Apply theme from cookie on SSR
+// Apply theme from cookie on SSR - make it reactive
 useHead({
   htmlAttrs: {
-    'data-theme': currentTheme
+    'data-theme': () => currentTheme.value
   }
 })
 </script>
