@@ -62,11 +62,11 @@ onMounted(() => {
           <!-- Golden Ratio Typography Test -->
           <div class="typography-test space-y-3">
             <h3 class="text-sm font-medium text-blue-800">Golden Ratio Typography:</h3>
-            <div class="space-y-2">
-              <div style="font-size: var(--text-golden-xs); line-height: 1.4;">XS Text (Golden Ratio)</div>
-              <div style="font-size: var(--text-golden-sm); line-height: 1.4;">Small Text (Golden Ratio)</div>
-              <div style="font-size: var(--text-golden-base); line-height: 1.4;">Base Text (Golden Ratio)</div>
-              <div style="font-size: var(--text-golden-lg); line-height: 1.4;">Large Text (Golden Ratio)</div>
+            <div class="space-y-1">
+              <div style="font-size: var(--text-golden-xs);">XS Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-golden-sm);">Small Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-golden-base);">Base Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-golden-lg);">Large Text (Golden Ratio)</div>
             </div>
           </div>
           

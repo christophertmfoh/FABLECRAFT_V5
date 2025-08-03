@@ -204,13 +204,14 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.typography-test h1 { font-size: var(--text-golden-4xl); }
-.typography-test h2 { font-size: var(--text-golden-3xl); }
-.typography-test h3 { font-size: var(--text-golden-2xl); }
-.typography-test h4 { font-size: var(--text-golden-xl); }
-.typography-test h5 { font-size: var(--text-golden-lg); }
-.typography-test p { font-size: var(--text-golden-base); }
-.typography-test small { font-size: var(--text-golden-sm); }
+.typography-test h1 { font-size: var(--text-golden-4xl); line-height: var(--line-height-tight); }
+.typography-test h2 { font-size: var(--text-golden-3xl); line-height: var(--line-height-tight); }
+.typography-test h3 { font-size: var(--text-golden-2xl); line-height: var(--line-height-tight); }
+.typography-test h4 { font-size: var(--text-golden-xl); line-height: var(--line-height-normal); }
+.typography-test h5 { font-size: var(--text-golden-lg); line-height: var(--line-height-normal); }
+.typography-test p { font-size: var(--text-golden-base); line-height: var(--line-height-normal); }
+.typography-test small { font-size: var(--text-golden-sm); line-height: var(--line-height-normal); }
+.typography-test div { line-height: var(--line-height-normal); margin-bottom: var(--space-2); }
 
 /* ========================================
    PERFORMANCE OPTIMIZATIONS
