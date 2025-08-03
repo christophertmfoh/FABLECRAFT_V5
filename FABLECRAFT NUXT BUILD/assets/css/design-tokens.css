@@ -170,28 +170,6 @@ p, li, td, th {
   line-height: var(--leading-normal);
 }
 
-/* ========================================
-   TAILWIND INTEGRATION UTILITIES
-   Semantic aliases that work with Tailwind's system
-======================================== */
-
-/* These map to Tailwind's spacing scale for consistency */
-:root {
-  /* Semantic spacing that developers can easily understand */
-  --spacing-micro: theme('spacing.0.5');    /* 2px */
-  --spacing-tiny: theme('spacing.1');       /* 4px */
-  --spacing-xs: theme('spacing.2');         /* 8px */
-  --spacing-sm: theme('spacing.3');         /* 12px */
-  --spacing-md: theme('spacing.4');         /* 16px */
-  --spacing-lg: theme('spacing.5');         /* 20px */
-  --spacing-xl: theme('spacing.6');         /* 24px */
-  --spacing-2xl: theme('spacing.8');        /* 32px */
-  --spacing-3xl: theme('spacing.10');       /* 40px */
-  --spacing-4xl: theme('spacing.12');       /* 48px */
-  --spacing-5xl: theme('spacing.14');       /* 56px */
-  --spacing-6xl: theme('spacing.16');       /* 64px */
-}
-
 /*
  * FOUNDATION COMPLETE
  * This design token system provides:
