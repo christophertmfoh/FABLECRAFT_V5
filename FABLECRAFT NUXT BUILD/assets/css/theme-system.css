@@ -48,8 +48,9 @@
   --auth-button-primary-hover: 350 70% 30%; /* Darker burgundy */
   
   /* ✅ NEW: Dedicated Firefly Variables for Light Mode */
-  --firefly-color: hsl(var(--foreground) / 0.5); /* A semi-transparent, darker mote of dust/light */
-  --firefly-glow-color: hsl(var(--primary) / 0.2); /* A very subtle glow using the theme's primary color */
+  /* Increased alpha channel for more brightness/visibility */
+  --firefly-color: hsl(var(--foreground) / 0.7); /* A semi-transparent, darker mote of dust/light */
+  --firefly-glow-color: hsl(var(--primary) / 0.3); /* A more visible glow using the theme's primary color */
   
   /* DEPRECATED: Old firefly variables - will be removed in future */
   --firefly-core: rgba(40, 30, 60, 0.9);
@@ -109,8 +110,9 @@
   --auth-button-primary-hover: 35 75% 45%; /* Darker amber */
   
   /* ✅ NEW: Dedicated Firefly Variables for Dark Mode */
+  /* Increased alpha channel for a brighter glow */
   --firefly-color: hsl(var(--orb-primary)); /* A bright, vibrant particle using the theme's orb color */
-  --firefly-glow-color: hsl(var(--orb-primary) / 0.4); /* A more prominent glow */
+  --firefly-glow-color: hsl(var(--orb-primary) / 0.5); /* A more prominent glow with increased brightness */
   
   /* DEPRECATED: Old firefly variables - will be removed in future */
   --firefly-core: rgba(255, 255, 200, 0.9);
@@ -171,8 +173,8 @@
   --auth-button-primary-hover: 210 70% 35%; /* Darker blue */
   
   /* ✅ NEW: Dedicated Firefly Variables for Arctic Focus */
-  --firefly-color: hsl(210 40% 30% / 0.6); /* Deep blue mote, visible on white */
-  --firefly-glow-color: hsl(210 70% 45% / 0.25); /* Subtle blue glow matching primary */
+  --firefly-color: hsl(210 40% 30% / 0.75); /* Deep blue mote, more visible on white */
+  --firefly-glow-color: hsl(210 70% 45% / 0.35); /* More prominent blue glow matching primary */
 }
 
 /* Golden Hour - Warm yellows optimized for inspiration */
@@ -206,8 +208,8 @@
   --auth-button-primary-hover: 45 85% 40%; /* Darker gold */
   
   /* ✅ NEW: Dedicated Firefly Variables for Golden Hour */
-  --firefly-color: hsl(35 50% 30% / 0.6); /* A darker, warm brown mote */
-  --firefly-glow-color: hsl(45 90% 60% / 0.2); /* A faint golden glow */
+  --firefly-color: hsl(35 50% 30% / 0.7); /* A darker, warm brown mote with increased visibility */
+  --firefly-glow-color: hsl(45 90% 60% / 0.3); /* A more visible golden glow */
 }
 
 /* ========================================
@@ -248,7 +250,7 @@
   
   /* ✅ NEW: Dedicated Firefly Variables for Midnight Ink */
   --firefly-color: hsl(210 80% 70%); /* A crisp, bright blue spark */
-  --firefly-glow-color: hsl(210 80% 70% / 0.4); /* Blue glow matching the spark */
+  --firefly-glow-color: hsl(210 80% 70% / 0.5); /* Brighter blue glow matching the spark */
 }
 
 /* Forest Manuscript - Deep greens for nature-inspired writing */
@@ -580,7 +582,7 @@
   
   /* ✅ NEW: Dedicated Firefly Variables for Netrunner */
   --firefly-color: hsl(50 100% 50%); /* Electric yellow particle */
-  --firefly-glow-color: hsl(180 100% 50% / 0.3); /* Contrasting cyan glow */
+  --firefly-glow-color: hsl(180 100% 50% / 0.4); /* Brighter contrasting cyan glow */
 }
 
 /* ========================================
