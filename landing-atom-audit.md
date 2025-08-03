@@ -188,6 +188,221 @@ This document contains the complete, deduplicated list of atomic UI elements to 
 - Spinner: Size medium
 - Text: `text-sm text-muted-foreground`
 
+### 5. Icon Container (Display Box)
+**Base Component**: `<div>` wrapper for icons
+**Visual Specifications**:
+- **Small variant** (Trust Indicators):
+  - Size: `w-12 h-12`
+  - Background: `bg-primary/10 hover:bg-primary/20`
+  - Border Radius: `rounded-xl`
+  - Display: `flex items-center justify-center mx-auto`
+  - Transitions: `transition-all duration-300`
+  - Hover: `group-hover:scale-110 group-hover:rotate-3`
+  - Icon inside: `w-6 h-6 text-primary`
+
+- **Large variant** (Process Steps):
+  - Container: `w-24 h-24 lg:w-28 lg:h-28`
+  - Background: `bg-card/90 backdrop-blur-sm`
+  - Border Radius: `rounded-2xl lg:rounded-3xl`
+  - Border: `border border-border`
+  - Shadow: `shadow-lg`
+  - Hover: `group-hover:shadow-xl group-hover:scale-105 group-hover:-translate-y-2 group-hover:rotate-3`
+  - Inner icon box: `w-12 h-12 lg:w-16 lg:h-16 bg-primary/10 hover:bg-primary/20 rounded-xl lg:rounded-2xl`
+  - Icon inside: `w-6 h-6 lg:w-8 lg:h-8 text-primary`
+
+### 6. Step Number Indicator
+**Base Component**: `<div>`
+**Visual Specifications**:
+- Position: `absolute -top-2 -left-2`
+- Size: `w-6 h-6`
+- Background: `bg-primary`
+- Text Color: `text-primary-foreground`
+- Shape: `rounded-full`
+- Display: `flex items-center justify-center`
+- Font: `text-xs font-bold`
+- Z-index: `z-20`
+
+### 7. Star Rating
+**Base Component**: Array of Star icons
+**Visual Specifications**:
+- Icon: Lucide `Star`
+- Size: `w-5 h-5`
+- Fill: `fill-primary`
+- Color: `text-primary`
+- Container: `flex space-x-1`
+- Renders based on rating number (1-5)
+
+## Media & Visual Atoms
+
+### 1. Icon (Base SVG Wrapper)
+**Already documented in Display & Feedback Atoms**
+
+### 2. Social Media Icon Button
+**Base Component**: `<button>` with icon
+**Visual Specifications**:
+- Button classes: `text-foreground/60 hover:text-primary transition-colors duration-200`
+- Icon inside: `w-4 h-4`
+- Group hover support
+- Aria-label for accessibility
+
+### 3. Feature Icon Display
+**Base Component**: Icon with enhanced container
+**Visual Specifications**:
+- Uses Icon Container (Display Box) as wrapper
+- Icon classes vary by context
+- Supports group hover animations
+- Always includes `aria-hidden="true"`
+
+### 4. Logo Icon
+**Base Component**: Feather icon
+**Visual Specifications**:
+- Size: `w-6 h-6`
+- Color: `text-primary-foreground`
+- Used in footer branding
+
+## Progress & Loading Atoms
+
+### 1. Spinner (Loading Indicator)
+**Base Component**: `<div>` with CSS animation
+**Visual Specifications**:
+- Size: `w-8 h-8`
+- Border: `border-2 border-primary border-t-transparent`
+- Shape: `rounded-full`
+- Animation: `animate-spin`
+- Center: `mx-auto`
+
+### 2. LoadingFallback Component
+**Base Component**: Container with spinner and text
+**Visual Specifications**:
+- Container: `flex items-center justify-center py-20`
+- Inner wrapper: `space-y-4 text-center`
+- Contains: Spinner (as above) + Loading text
+- Text: `text-sm text-muted-foreground`
+- Text content: "Loading content..."
+
+### 3. Hover Progress Effects
+**Base Component**: CSS-based visual feedback
+**Visual Specifications**:
+- Background overlay: `absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100`
+- Transition: `transition-opacity duration-500`
+- Used on interactive elements to show hover state
+
+### 4. Animated Pulse (BadgeWithDot)
+**Base Component**: `<div>` with pulse animation
+**Visual Specifications**:
+- Size: `w-4 h-4`
+- Shape: `rounded-full`
+- Background: `bg-primary`
+- Animation: `animate-pulse`
+- Used alongside badges for attention
+
+## Visual Effects & Overlays
+
+### 1. Gradient Overlay (Glass Effect)
+**Base Component**: `<div>` with gradient
+**Visual Specifications**:
+- Position: `absolute inset-0`
+- Background: Various gradients using HSL with opacity
+- Example: `linear-gradient(135deg, hsl(var(--orb-primary) / 0.05) 0%, hsl(var(--orb-secondary) / 0.03) 50%, hsl(var(--orb-primary) / 0.02) 100%)`
+- Used on cards for visual depth
+
+### 2. Backdrop Blur
+**Base Component**: CSS backdrop-filter
+**Visual Specifications**:
+- Classes: `backdrop-blur-sm`, `backdrop-blur-md`, `backdrop-blur-lg`
+- Often combined with semi-transparent backgrounds
+- Example: `bg-card/90 backdrop-blur-sm`
+
+### 3. Shadow Effects
+**Base Component**: CSS box-shadow
+**Visual Specifications**:
+- Base: `shadow-sm`, `shadow-md`, `shadow-lg`, `shadow-xl`
+- Hover states: `hover:shadow-lg`, `hover:shadow-xl`, `hover:shadow-2xl`
+- Drop shadows for text: `drop-shadow-sm`, `drop-shadow-[0_3px_6px_rgba(0,0,0,0.3)]`
+
+### 4. Firefly/Spark Effect
+**Base Component**: `<div>` with animation
+**Visual Specifications**:
+- Class: `spark` (with variants `spark-small`, `spark-bright`)
+- Container: `idea-sparks`
+- Position: Absolute with left percentage
+- Animation delay: Inline style with varying delays (0s to 36.1s)
+- Creates floating light effect across the page
+- Aria-hidden for accessibility
+
+### 5. Progress Line
+**Base Component**: `<div>` with gradient
+**Visual Specifications**:
+- Position: `absolute top-16 left-0 right-0`
+- Height: `h-1`
+- Background: `bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20`
+- Shape: `rounded-full`
+- Display: `hidden lg:block`
+- Used to connect process steps visually
+
+### 6. Gradient Text Effect
+**Base Component**: `<span>` with gradient clip
+**Visual Specifications**:
+- Background: `bg-gradient-to-r from-primary via-primary/80 to-primary/60`
+- Text effect: `bg-clip-text text-transparent`
+- Alternative: `from-foreground via-foreground/90 to-foreground/70`
+- Used for emphasis in headings
+
+### 7. Avatar/Profile Image Container
+**Base Component**: `<div>` with gradient background
+**Visual Specifications**:
+- Size: `w-10 h-10`
+- Background: `bg-gradient-to-br from-primary to-primary/60`
+- Shape: `rounded-full`
+- Display: `flex items-center justify-center`
+- Contains initials or icon
+
+### 8. Surface Elevation Effect
+**Base Component**: Class modifier
+**Visual Specifications**:
+- Class: `surface-elevated`
+- Combined with: `backdrop-blur-lg`
+- Creates elevated card appearance
+- Used on testimonial and pricing cards
+
+### 9. Button Gradient Overlay
+**Base Component**: `<div>` overlay
+**Visual Specifications**:
+- Position: `absolute inset-0`
+- Background: `bg-gradient-to-r from-white/20 to-transparent`
+- Opacity: `opacity-0 group-hover:opacity-100`
+- Transition: `transition-opacity duration-300`
+- Shape: Matches button border radius
+- Z-index consideration for text visibility
+
+## Status Indicators
+
+### 1. Trust Indicator Card
+**Base Component**: Card with icon and metrics
+**Visual Specifications**:
+- Uses standard Card component
+- Contains: Icon Container + Metric Display
+- Metric number: `text-2xl sm:text-3xl font-bold text-foreground`
+- Metric label: `text-sm font-medium text-muted-foreground`
+- Description: `text-xs text-muted-foreground mt-2`
+- Hover effects on all text elements
+
+### 2. Process Step Card
+**Base Component**: Interactive card with number badge
+**Visual Specifications**:
+- Contains: Step Number Indicator + Icon Container + Content
+- Title: `font-bold text-base lg:text-lg text-foreground`
+- Description: `text-sm text-muted-foreground`
+- Category badge: Uses standard Badge component
+- Group hover effects throughout
+
+### 3. Metric Display Pattern
+**Base Component**: Text-based metric display
+**Visual Specifications**:
+- Value: Large, bold text with hover color change
+- Label: Smaller, muted text below
+- Pattern used in multiple contexts (trust indicators, pricing, etc.)
+
 ## Layout & Structure Atoms
 
 ### 1. Card
@@ -282,3 +497,77 @@ All interactive atoms must support:
 6. **Utility**: VisuallyHidden, Container, Divider
 
 This list represents all unique atoms needed for the landing page implementation. Each component should be built as a reusable Vue component with proper TypeScript types and theme system integration.
+
+## Animation Atoms
+
+### 1. Spin Animation
+**Base Component**: CSS animation class
+**Visual Specifications**:
+- Class: `animate-spin`
+- Used on loading spinners
+- Continuous rotation
+
+### 2. Pulse Animation
+**Base Component**: CSS animation class
+**Visual Specifications**:
+- Class: `animate-pulse`
+- Used on dots and indicators
+- Creates attention-grabbing effect
+
+### 3. Scale Transform
+**Base Component**: CSS transform
+**Visual Specifications**:
+- Base: `scale-100` (implicit)
+- Hover: `hover:scale-105`, `hover:scale-110`
+- Group hover: `group-hover:scale-105`, `group-hover:scale-110`
+- Often combined with transitions
+
+### 4. Translate Transform
+**Base Component**: CSS transform
+**Visual Specifications**:
+- Hover up: `hover:-translate-y-0.5`, `hover:-translate-y-1`, `hover:-translate-y-2`
+- Group hover: `group-hover:-translate-y-1`, `group-hover:-translate-y-2`
+- Creates lifting effect on hover
+
+### 5. Rotate Transform
+**Base Component**: CSS transform
+**Visual Specifications**:
+- Hover: `hover:rotate-3`, `group-hover:rotate-3`
+- Adds playful tilt on interaction
+- Often combined with scale
+
+### 6. Transition Timing
+**Base Component**: CSS transition
+**Visual Specifications**:
+- Fast: `duration-200` (200ms)
+- Standard: `duration-300` (300ms)
+- Slow: `duration-500` (500ms)
+- Very slow: `duration-700` (700ms)
+- Applied to: `transition-all`, `transition-colors`, `transition-transform`, `transition-opacity`, `transition-shadow`
+
+## Special Visual Patterns
+
+### 1. Group Hover Pattern
+**Usage**: Parent-child hover relationships
+**Implementation**:
+- Parent: `group` class
+- Child: `group-hover:*` modifiers
+- Enables coordinated hover effects
+
+### 2. Focus Ring Pattern
+**Visual Specifications**:
+- Classes: `focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2`
+- Alternative: `focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`
+- Provides keyboard navigation feedback
+
+### 3. Natural Depth Pattern
+**Visual Specifications**:
+- Class combinations: `natural-depth gentle-hover`
+- Creates subtle 3D effect
+- Used on cards and interactive elements
+
+### 4. Enhanced Button Pattern
+**Visual Specifications**:
+- Classes: `btn-enhanced gradient-primary`
+- Additional: `shadow-xl hover:shadow-2xl`
+- Creates premium button appearance
