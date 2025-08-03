@@ -47,28 +47,34 @@ const themeCategories = [
 
 // Theme switching function
 const setTheme = (themeName: string) => {
+  console.log('🎨 Setting theme to:', themeName)
   currentTheme.value = themeName
   
   // Apply theme to document element
   if (process.client) {
     document.documentElement.setAttribute('data-theme', themeName)
     localStorage.setItem('theme', themeName)
+    console.log('✅ Theme applied:', themeName)
+    console.log('📍 Current data-theme attribute:', document.documentElement.getAttribute('data-theme'))
   }
 }
 
 // Initialize theme on client side
 onMounted(() => {
   if (process.client) {
-    // Check for saved theme or default to system preference
-    const savedTheme = localStorage.getItem('theme') || 'system'
+    // Check for saved theme
+    const savedTheme = localStorage.getItem('theme')
+    console.log('💾 Saved theme from localStorage:', savedTheme)
     
-    if (savedTheme === 'system') {
-      // Detect system preference
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches
-      const systemTheme = prefersLight ? 'light' : 'dark'
-      setTheme(systemTheme)
+    if (savedTheme && savedTheme !== 'system') {
+      // Apply the saved theme directly
+      currentTheme.value = savedTheme
+      console.log('🔄 Applied saved theme:', savedTheme)
     } else {
-      setTheme(savedTheme)
+      // Get the current theme from the document
+      const currentDataTheme = document.documentElement.getAttribute('data-theme') || 'light'
+      currentTheme.value = currentDataTheme
+      console.log('📄 Using current document theme:', currentDataTheme)
     }
   }
 })
@@ -109,7 +115,7 @@ if (isDevelopment) {
         <!-- Theme Categories -->
         <div class="space-y-8">
           <div v-for="category in themeCategories" :key="category" class="space-y-4">
-            <h3 class="text-lg font-semibold text-accent-foreground border-b border-border pb-2">
+            <h3 class="text-lg font-semibold text-foreground border-b border-border pb-2">
               {{ category }} ({{ themes.filter(t => t.category === category).length }})
             </h3>
             

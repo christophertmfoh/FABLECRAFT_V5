@@ -678,13 +678,14 @@
 /* Auth buttons */
 .auth-button {
   background-color: hsl(var(--auth-button-primary));
-  color: hsl(var(--auth-button-primary-hover));
+  color: hsl(0 0% 98%); /* White text for contrast */
   border: 1px solid hsl(var(--auth-button-primary));
 }
 
 .auth-button:hover {
   background-color: hsl(var(--auth-button-primary-hover));
   border-color: hsl(var(--auth-button-primary-hover));
+  color: hsl(0 0% 98%); /* Maintain white text on hover */
 }
 
 /*
