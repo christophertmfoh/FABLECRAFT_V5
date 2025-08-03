@@ -11,72 +11,12 @@ const config = useRuntimeConfig()
 const isLoggedIn = computed(() => !!user.value)
 const supabaseUrl = computed(() => config.public.supabase?.url)
 
-// Theme system state management
-const currentTheme = ref('light')
+// Use centralized theme composable
+const { themes, themeCategories, currentTheme, setTheme, initializeTheme } = useTheme()
 
-// Available themes from our theme system
-const themes = [
-  { name: 'light', label: 'Light', category: 'Core' },
-  { name: 'dark', label: 'Dark', category: 'Core' },
-  { name: 'arctic-focus', label: 'Arctic Focus', category: 'Classic Light' },
-  { name: 'golden-hour', label: 'Golden Hour', category: 'Classic Light' },
-  { name: 'midnight-ink', label: 'Midnight Ink', category: 'Classic Dark' },
-  { name: 'forest-manuscript', label: 'Forest Manuscript', category: 'Classic Dark' },
-  { name: 'starlit-prose', label: 'Starlit Prose', category: 'Classic Dark' },
-  { name: 'coffee-house', label: 'Coffee House', category: 'Classic Dark' },
-  { name: 'sunset-coral', label: 'Sunset Coral', category: 'Modern Light' },
-  { name: 'lavender-dusk', label: 'Lavender Dusk', category: 'Modern Light' },
-  { name: 'moonlit-garden', label: 'Moonlit Garden', category: 'Modern Light' },
-  { name: 'cherry-lacquer', label: 'Cherry Lacquer', category: 'Modern Dark' },
-  { name: 'dragons-hoard', label: 'Dragon\'s Hoard', category: 'Modern Dark' },
-  { name: 'halloween', label: 'Halloween', category: 'Specialty' },
-  { name: 'netrunner', label: 'Netrunner', category: 'Specialty' },
-  { name: 'system', label: 'System', category: 'Auto' }
-]
-
-// Theme categories for organization
-const themeCategories = [
-  'Core',
-  'Classic Light', 
-  'Classic Dark',
-  'Modern Light',
-  'Modern Dark',
-  'Specialty',
-  'Auto'
-]
-
-// Theme switching function
-const setTheme = (themeName: string) => {
-  console.log('🎨 Setting theme to:', themeName)
-  currentTheme.value = themeName
-  
-  // Apply theme to document element
-  if (process.client) {
-    document.documentElement.setAttribute('data-theme', themeName)
-    localStorage.setItem('theme', themeName)
-    console.log('✅ Theme applied:', themeName)
-    console.log('📍 Current data-theme attribute:', document.documentElement.getAttribute('data-theme'))
-  }
-}
-
-// Initialize theme on client side
+// Initialize theme on client mount
 onMounted(() => {
-  if (process.client) {
-    // Check for saved theme
-    const savedTheme = localStorage.getItem('theme')
-    console.log('💾 Saved theme from localStorage:', savedTheme)
-    
-    if (savedTheme && savedTheme !== 'system') {
-      // Apply the saved theme directly
-      currentTheme.value = savedTheme
-      console.log('🔄 Applied saved theme:', savedTheme)
-    } else {
-      // Get the current theme from the document
-      const currentDataTheme = document.documentElement.getAttribute('data-theme') || 'light'
-      currentTheme.value = currentDataTheme
-      console.log('📄 Using current document theme:', currentDataTheme)
-    }
-  }
+  initializeTheme()
 })
 
 // Development-only debugging (excluded from production)
