@@ -29,6 +29,24 @@ This document contains the complete, deduplicated list of atomic UI elements to 
 - Line Height: `leading-none`
 - Disabled state: `peer-disabled:cursor-not-allowed peer-disabled:opacity-70`
 
+### 3. Checkbox (Found in DropdownMenu)
+**Base Component**: `<input type="checkbox">`
+**Visual Specifications**:
+- Container: `relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2`
+- Font Size: `text-sm`
+- Focus: `focus:bg-accent focus:text-accent-foreground`
+- Disabled: `data-[disabled]:pointer-events-none data-[disabled]:opacity-50`
+- Check indicator position: `absolute left-2`
+
+### 4. Radio (Found in DropdownMenu)
+**Base Component**: `<input type="radio">`
+**Visual Specifications**:
+- Container: `relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2`
+- Font Size: `text-sm`
+- Focus: `focus:bg-accent focus:text-accent-foreground`
+- Disabled: `data-[disabled]:pointer-events-none data-[disabled]:opacity-50`
+- Circle indicator position: `absolute left-2`
+
 ## Button & Clickable Atoms
 
 ### 1. Button
@@ -145,6 +163,26 @@ This document contains the complete, deduplicated list of atomic UI elements to 
 
 **Enhanced Landing Page Style**:
 - Override classes: `bg-card/95 text-foreground border-border font-semibold backdrop-blur-md shadow-md hover:shadow-lg transition-shadow duration-300 text-base px-4 py-2`
+
+### 4. Dropdown Menu Label
+**Base Component**: `<div>` label in dropdown
+**Visual Specifications**:
+- Padding: `px-2 py-1.5`
+- Font Size: `text-sm`
+- Font Weight: `font-semibold`
+- Inset variant: `pl-8` when `inset` prop is true
+- Used as section headers in dropdowns
+
+### 5. Section Label
+**Base Component**: `<div>` uppercase label
+**Visual Specifications**:
+- Font Size: `text-xs`
+- Font Weight: `font-semibold`
+- Color: `text-muted-foreground`
+- Text Transform: `uppercase`
+- Letter Spacing: `tracking-wider`
+- Margin: `mb-2`
+- Used in navigation dropdown sections
 
 ## Display & Feedback Atoms
 
@@ -436,6 +474,45 @@ This document contains the complete, deduplicated list of atomic UI elements to 
 - Margin: Configurable
 - Width: `w-full`
 
+### 4. Separator/Divider
+**Base Component**: `<hr>` or `<div>`
+**Visual Specifications**:
+- Height: `h-px`
+- Background: `bg-muted`
+- Margin: `-mx-1 my-1` (in dropdowns)
+- Alternative: `border-t border-border` (general use)
+- Width: `w-full`
+
+### 5. Dropdown Menu Container
+**Base Component**: `<div>` portal
+**Visual Specifications**:
+- Background: `bg-card/95`
+- Backdrop: `backdrop-blur-xl`
+- Border: `border border-border`
+- Shadow: `shadow-xl`
+- Border Radius: `rounded-xl`
+- Margin Top: `mt-2`
+- Width variants: `w-64` (common)
+
+### 6. Dropdown Menu Item
+**Base Component**: `<div>` interactive item
+**Visual Specifications**:
+- Padding: `py-3 px-4`
+- Border Radius: `rounded-lg`
+- Cursor: `cursor-pointer`
+- Hover: `hover:bg-accent/10`
+- Transition: `transition-colors`
+- Focus: `focus:bg-accent focus:text-accent-foreground`
+- With icon: Icon has `mr-3 h-4 w-4 text-primary`
+
+### 7. Scroll Area
+**Base Component**: Custom scrollable container
+**Visual Specifications**:
+- Max Height: `max-h-96`
+- Width: `w-full`
+- Type: `always` (always show scrollbar)
+- Used in theme toggle dropdown
+
 ## Utility Atoms
 
 ### 1. VisuallyHidden (Screen Reader Only)
@@ -450,6 +527,17 @@ This document contains the complete, deduplicated list of atomic UI elements to 
 - Max width variants
 - Padding variants
 - Centering: `mx-auto`
+
+### 3. Logo Container
+**Base Component**: `<div>` with gradient
+**Visual Specifications**:
+- Size: `w-12 h-12`
+- Background: `gradient-primary-br` (gradient to bottom-right)
+- Border Radius: `rounded-xl`
+- Display: `flex items-center justify-center`
+- Shadow: `shadow-lg`
+- Hover: `group-hover:shadow-xl group-hover:scale-105`
+- Transition: `transition-all duration-300`
 
 ## Theme System Integration
 
@@ -478,6 +566,7 @@ Custom spacing tokens to implement:
 - `hover:-translate-y-0.5`
 - `animate-spin`
 - `animate-pulse`
+- `hover:rotate-180` (for chevron icons)
 
 ## Accessibility Requirements
 All interactive atoms must support:
@@ -487,16 +576,15 @@ All interactive atoms must support:
 - Focus visible states
 - Keyboard navigation
 - Screen reader announcements
+- `sr-only` class for screen reader only content
 
 ## Implementation Priority
-1. **Core Form**: Input, Label, Button
-2. **Typography**: Heading, Text, Badge
-3. **Display**: Icon, Spinner, Dot
-4. **Layout**: Card (with sub-components)
-5. **Enhanced**: GlassCard, GradientButton
-6. **Utility**: VisuallyHidden, Container, Divider
-
-This list represents all unique atoms needed for the landing page implementation. Each component should be built as a reusable Vue component with proper TypeScript types and theme system integration.
+1. **Core Form**: Input, Label, Button, Checkbox, Radio
+2. **Typography**: Heading, Text, Badge, Labels
+3. **Display**: Icon, Spinner, Dot, Icon Container
+4. **Layout**: Card (with sub-components), Separator, Dropdown components
+5. **Enhanced**: GlassCard, GradientButton, Visual Effects
+6. **Utility**: VisuallyHidden, Container, Divider, Logo Container
 
 ## Animation Atoms
 
@@ -571,3 +659,28 @@ This list represents all unique atoms needed for the landing page implementation
 - Classes: `btn-enhanced gradient-primary`
 - Additional: `shadow-xl hover:shadow-2xl`
 - Creates premium button appearance
+
+## Additional Implementation Notes
+
+### Gradient Utilities
+The codebase uses several gradient utility classes that should be implemented:
+- `gradient-primary`: Primary color gradient
+- `gradient-primary-br`: Primary gradient to bottom-right
+- `gradient-primary-text`: Gradient text effect
+
+### Dropdown Patterns
+Dropdown menus follow a consistent pattern:
+- Trigger button with chevron that rotates on hover
+- Backdrop blur on the dropdown content
+- Section headers with uppercase labels
+- Items with icon + text layout
+- Hover states on individual items
+
+### Navigation Patterns
+Navigation header includes:
+- Logo with hover scale effect
+- Theme toggle button
+- User menu dropdown with sections
+- Responsive design considerations
+
+This list represents all unique atoms needed for the landing page implementation. Each component should be built as a reusable Vue component with proper TypeScript types and theme system integration.
