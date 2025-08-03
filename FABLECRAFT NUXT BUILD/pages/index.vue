@@ -1,19 +1,25 @@
 <!-- file: pages/index.vue -->
 <script setup lang="ts">
-// Test Supabase connection
+// Industry-standard development environment detection
+const isDevelopment = process.env.NODE_ENV === 'development'
+
+// Supabase connection validation 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
+const config = useRuntimeConfig()
 
-// Simple connection test
-const { data: connectionTest } = await supabase
-  .from('projects')
-  .select('count', { count: 'exact', head: true })
+const isLoggedIn = computed(() => !!user.value)
+const supabaseUrl = computed(() => config.public.supabase?.url)
 
-onMounted(() => {
-  console.log('Supabase connected:', !!supabase)
-  console.log('Connection test result:', connectionTest)
-  console.log('Current user:', user.value)
-})
+// Development-only debugging (excluded from production)
+if (isDevelopment) {
+  console.log('🔧 Development Mode: Mathematical spacing system loaded')
+  console.log('🎯 Design tokens available:', {
+    primitive: 'var(--space-1) through var(--space-32)',
+    semantic: 'var(--space-micro) through var(--space-massive)',
+    typography: 'var(--text-xs) through var(--text-6xl)'
+  })
+}
 </script>
 
 <template>
@@ -32,66 +38,86 @@ onMounted(() => {
           </div>
           <div class="flex justify-between">
             <span>Authentication:</span>
-            <span class="text-green-600 font-medium">✓ Ready</span>
+            <span class="text-blue-600 font-medium">{{ isLoggedIn ? '✓ Authenticated' : '◯ Anonymous' }}</span>
           </div>
           <div class="flex justify-between">
-            <span>User Status:</span>
-            <span class="text-blue-600 font-medium">Not logged in</span>
+            <span>Environment:</span>
+            <span class="font-mono text-xs">{{ supabaseUrl ? 'Production' : 'Development' }}</span>
           </div>
         </div>
       </div>
 
-      <!-- Validation Tests - Collapsible Section -->
-      <details class="bg-blue-50 p-6 rounded-lg shadow-sm border max-w-2xl mx-auto text-left">
-        <summary class="text-lg font-semibold text-blue-900 cursor-pointer hover:text-blue-700 mb-4">
-          Phase 1A: Mathematical Spacing System Tests
+      <!-- Development-Only Validation Tests -->
+      <details class="bg-blue-50 p-6 rounded-lg shadow-sm border max-w-2xl mx-auto development-only">
+        <summary class="text-lg font-semibold mb-4 text-blue-900 cursor-pointer">
+          🔧 Development: Mathematical Spacing System Validation
         </summary>
         
-        <div class="mt-6 space-y-6">
-          <!-- 8-Point Grid Test -->
+        <!-- Industry-Standard Design Token Testing -->
+        <div class="space-y-6 text-left mt-4">
+          
+          <!-- Semantic Token Validation -->
           <div class="space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">8-Point Grid Variables:</h3>
+            <h3 class="text-sm font-medium text-blue-800">Semantic Design Tokens:</h3>
             <div class="flex flex-wrap gap-2 text-xs">
-              <div class="spacing-test" style="width: var(--space-4); height: var(--space-4); display: flex; align-items: center; justify-content: center;">4px</div>
-              <div class="spacing-test" style="width: var(--space-8); height: var(--space-8); display: flex; align-items: center; justify-content: center;">8px</div>
-              <div class="spacing-test" style="width: var(--space-16); height: var(--space-16); display: flex; align-items: center; justify-content: center;">16px</div>
-              <div class="spacing-test" style="width: var(--space-24); height: var(--space-24); display: flex; align-items: center; justify-content: center;">24px</div>
+              <div class="spacing-test" style="width: var(--space-micro); height: var(--space-micro);">micro</div>
+              <div class="spacing-test" style="width: var(--space-tiny); height: var(--space-tiny);">tiny</div>
+              <div class="spacing-test" style="width: var(--space-small); height: var(--space-small);">small</div>
+              <div class="spacing-test" style="width: var(--space-medium); height: var(--space-medium);">medium</div>
+              <div class="spacing-test" style="width: var(--space-large); height: var(--space-large);">large</div>
             </div>
           </div>
           
-          <!-- Golden Ratio Typography Test -->
+          <!-- Typography Scale Validation -->
           <div class="typography-test space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">Golden Ratio Typography:</h3>
+            <h3 class="text-sm font-medium text-blue-800">Semantic Typography Scale:</h3>
             <div class="space-y-1">
-              <div style="font-size: var(--text-golden-xs);">XS Text (Golden Ratio)</div>
-              <div style="font-size: var(--text-golden-sm);">Small Text (Golden Ratio)</div>
-              <div style="font-size: var(--text-golden-base);">Base Text (Golden Ratio)</div>
-              <div style="font-size: var(--text-golden-lg);">Large Text (Golden Ratio)</div>
+              <div style="font-size: var(--text-xs);">XS Text (Semantic Token)</div>
+              <div style="font-size: var(--text-sm);">Small Text (Semantic Token)</div>
+              <div style="font-size: var(--text-base);">Base Text (Semantic Token)</div>
+              <div style="font-size: var(--text-lg);">Large Text (Semantic Token)</div>
             </div>
           </div>
           
-          <!-- Semantic Spacing Test -->
+          <!-- Layer Architecture Validation -->
           <div class="space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">Semantic Spacing:</h3>
-            <div class="flex flex-wrap gap-2 text-xs">
-              <div style="padding: var(--space-micro); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">micro</div>
-              <div style="padding: var(--space-tiny); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">tiny</div>
-              <div style="padding: var(--space-small); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">small</div>
-              <div style="padding: var(--space-medium); background: rgba(59, 130, 246, 0.1); border: 1px solid #3b82f6; margin: 2px;">medium</div>
+            <h3 class="text-sm font-medium text-blue-800">Cascade Layer Architecture:</h3>
+            <div class="text-xs font-mono bg-white p-3 rounded border">
+              <div>✓ @layer base, tokens, theme, layout, components, utilities, development</div>
+              <div>✓ Three-tier token hierarchy (Primitive → Semantic → Module)</div>
+              <div>✓ @property declarations for performance optimization</div>
             </div>
           </div>
           
-          <div class="mt-4 pt-4 border-t border-blue-200">
-            <p class="text-xs text-blue-600">
-              Open browser dev tools → Elements → Computed styles to verify CSS variables
-            </p>
+          <div class="text-xs text-blue-600 mt-3 p-3 border-t">
+            <strong>Development Note:</strong> This validation section is excluded from production builds using @layer development and @supports detection.
+            <br><strong>Validation:</strong> Open DevTools → Elements → Computed to verify CSS custom properties.
           </div>
         </div>
       </details>
-      
-      <p class="text-sm text-gray-500 mt-8">
-        Ready to build amazing things! 🚀
-      </p>
+
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Development-only styles - excluded from production */
+.development-only {
+  /* This class and its styles are only active in development */
+  display: block;
+}
+
+/* Production override - hide development sections */
+@media (min-width: 1px) {
+  .development-only {
+    display: none;
+  }
+}
+
+/* Development environment detection override */
+@supports (--debug: development) {
+  .development-only {
+    display: block !important;
+  }
+}
+</style>

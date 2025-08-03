@@ -1,18 +1,21 @@
 /*
  * MATHEMATICAL SPACING SYSTEM
- * Foundation-first approach: 8-point grid with Golden Ratio typography
- * Verified for Nuxt 3.18.0 + Tailwind CSS + SSR compatibility
+ * Industry-standard implementation following design token hierarchy
+ * Optimized for Nuxt 3.18.0 + Tailwind CSS + SSR compatibility
+ * Progressive enhancement with fallback support
  */
 
 /* ========================================
-   CORE 8-POINT GRID FOUNDATION
+   FALLBACK FOR OLDER BROWSERS
+   Basic variables without @property support
 ======================================== */
 
 :root {
-  /* Base 8-Point Grid System */
+  /* Fallback values for browsers without @property support */
+  --golden-ratio: 1.618;
   --space-base: 8px;
   
-  /* Core Spacing Variables */
+  /* Primitive Spacing Scale */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -28,83 +31,24 @@
   --space-26: 104px;
   --space-32: 128px;
   
-  /* Mathematical Golden Ratio Base */
-  --golden-ratio: 1.618;
-  --golden-ratio-inverse: 0.618;
-}
-
-/* ========================================
-   SEMANTIC SPACING ALIASES
-======================================== */
-
-:root {
-  /* Micro Spacing */
-  --space-micro: var(--space-1);
-  --space-tiny: var(--space-2);
+  /* Primitive Typography Scale */
+  --text-scale-xs: 0.618rem;
+  --text-scale-sm: 0.854rem;
+  --text-scale-base: 1rem;
+  --text-scale-lg: 1.618rem;
+  --text-scale-xl: 2.618rem;
+  --text-scale-2xl: 4.236rem;
+  --text-scale-3xl: 6.854rem;
+  --text-scale-4xl: 11.09rem;
+  --text-scale-5xl: 17.944rem;
+  --text-scale-6xl: 29.034rem;
   
-  /* Standard Spacing */
-  --space-small: var(--space-4);
-  --space-medium: var(--space-6);
-  --space-large: var(--space-8);
-  --space-huge: var(--space-12);
-  
-  /* Layout Spacing */
-  --space-section: var(--space-16);
-  --space-page: var(--space-20);
-  --space-massive: var(--space-24);
-  
-  /* Responsive Section Spacing */
-  --section-spacing: var(--space-8);
-  --section-spacing-hero: var(--space-12);
-}
-
-/* ========================================
-   RESPONSIVE SCALING SYSTEM
-======================================== */
-
-/* Tablet: Enhanced spacing for medium screens */
-@media (min-width: 769px) {
-  :root {
-    --section-spacing: var(--space-24);
-    --section-spacing-hero: var(--space-20);
-  }
-}
-
-/* Desktop: Maximum spacing for large screens */
-@media (min-width: 1025px) {
-  :root {
-    --section-spacing: var(--space-32);
-    --section-spacing-hero: var(--space-26);
-  }
-}
-
-/* ========================================
-   GOLDEN RATIO TYPOGRAPHY SYSTEM
-======================================== */
-
-:root {
-  /* Base Typography Foundation */
-  --text-base-size: 1rem;
-  --text-scale-factor: var(--golden-ratio);
-  
-  /* Golden Ratio Typography Scale */
-  --text-golden-xs: 0.618rem;
-  --text-golden-sm: 0.854rem;
-  --text-golden-base: 1rem;
-  --text-golden-lg: 1.618rem;
-  --text-golden-xl: 2.618rem;
-  --text-golden-2xl: 4.236rem;
-  --text-golden-3xl: 6.854rem;
-  --text-golden-4xl: 11.09rem;
-  --text-golden-5xl: 17.944rem;
-  --text-golden-6xl: 29.034rem;
-  
-  /* Typography System Ratios */
+  /* Line Heights */
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
   
-  /* Font Weight Scale */
+  /* Font Weights */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -112,14 +56,37 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   --font-weight-black: 900;
-}
-
-/* ========================================
-   FONT FAMILY SYSTEM
-======================================== */
-
-:root {
-  /* Primary Font Stacks */
+  
+  /* Semantic Spacing */
+  --space-micro: var(--space-1);
+  --space-tiny: var(--space-2);
+  --space-small: var(--space-4);
+  --space-medium: var(--space-6);
+  --space-large: var(--space-8);
+  --space-huge: var(--space-12);
+  
+  /* Semantic Layout Spacing */
+  --space-section: var(--space-16);
+  --space-page: var(--space-20);
+  --space-massive: var(--space-24);
+  
+  /* Semantic Typography */
+  --text-xs: var(--text-scale-xs);
+  --text-sm: var(--text-scale-sm);
+  --text-base: var(--text-scale-base);
+  --text-lg: var(--text-scale-lg);
+  --text-xl: var(--text-scale-xl);
+  --text-2xl: var(--text-scale-2xl);
+  --text-3xl: var(--text-scale-3xl);
+  --text-4xl: var(--text-scale-4xl);
+  --text-5xl: var(--text-scale-5xl);
+  --text-6xl: var(--text-scale-6xl);
+  
+  /* Responsive Section Spacing */
+  --section-spacing: var(--space-8);
+  --section-spacing-hero: var(--space-12);
+  
+  /* Font Family System */
   --font-sans: 
     "Inter", 
     ui-sans-serif, 
@@ -159,13 +126,259 @@
 }
 
 /* ========================================
-   NUXT SSR OPTIMIZATION
+   ENHANCED IMPLEMENTATION FOR MODERN BROWSERS
+   @property and @layer support
 ======================================== */
 
+@supports (--property: initial) {
+  /* CASCADE LAYER DEFINITIONS */
+  @layer base, tokens, theme, layout, components, utilities, development;
+
+  /* @PROPERTY DECLARATIONS FOR PERFORMANCE */
+  @property --golden-ratio {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1.618;
+  }
+
+  @property --space-base {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 8px;
+  }
+
+  /* PRIMITIVE DESIGN TOKENS (TIER 1) */
+  @layer tokens {
+    :root {
+      /* Mathematical Foundation */
+      --golden-ratio: 1.618;
+      --golden-ratio-inverse: 0.618;
+      
+      /* Base Grid Unit */
+      --space-base: 8px;
+      
+      /* Primitive Spacing Scale */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+      --space-26: 104px;
+      --space-32: 128px;
+      
+      /* Primitive Typography Scale */
+      --text-scale-xs: 0.618rem;
+      --text-scale-sm: 0.854rem;
+      --text-scale-base: 1rem;
+      --text-scale-lg: 1.618rem;
+      --text-scale-xl: 2.618rem;
+      --text-scale-2xl: 4.236rem;
+      --text-scale-3xl: 6.854rem;
+      --text-scale-4xl: 11.09rem;
+      --text-scale-5xl: 17.944rem;
+      --text-scale-6xl: 29.034rem;
+      
+      /* Primitive Line Heights */
+      --line-height-tight: 1.25;
+      --line-height-normal: 1.5;
+      --line-height-relaxed: 1.75;
+      
+      /* Primitive Font Weights */
+      --font-weight-light: 300;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --font-weight-extrabold: 800;
+      --font-weight-black: 900;
+    }
+  }
+
+  /* SEMANTIC DESIGN TOKENS (TIER 2) */
+  @layer theme {
+    :root {
+      /* Semantic Spacing */
+      --space-micro: var(--space-1);
+      --space-tiny: var(--space-2);
+      --space-small: var(--space-4);
+      --space-medium: var(--space-6);
+      --space-large: var(--space-8);
+      --space-huge: var(--space-12);
+      
+      /* Semantic Layout Spacing */
+      --space-section: var(--space-16);
+      --space-page: var(--space-20);
+      --space-massive: var(--space-24);
+      
+      /* Semantic Typography */
+      --text-xs: var(--text-scale-xs);
+      --text-sm: var(--text-scale-sm);
+      --text-base: var(--text-scale-base);
+      --text-lg: var(--text-scale-lg);
+      --text-xl: var(--text-scale-xl);
+      --text-2xl: var(--text-scale-2xl);
+      --text-3xl: var(--text-scale-3xl);
+      --text-4xl: var(--text-scale-4xl);
+      --text-5xl: var(--text-scale-5xl);
+      --text-6xl: var(--text-scale-6xl);
+      
+      /* Responsive Section Spacing */
+      --section-spacing: var(--space-8);
+      --section-spacing-hero: var(--space-12);
+    }
+  }
+
+  /* RESPONSIVE SCALING SYSTEM */
+  @layer theme {
+    @media (min-width: 769px) {
+      :root {
+        --section-spacing: var(--space-24);
+        --section-spacing-hero: var(--space-20);
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      :root {
+        --section-spacing: var(--space-32);
+        --section-spacing-hero: var(--space-26);
+      }
+    }
+  }
+
+  /* FONT FAMILY SYSTEM */
+  @layer theme {
+    :root {
+      --font-sans: 
+        "Inter", 
+        ui-sans-serif, 
+        system-ui, 
+        -apple-system, 
+        BlinkMacSystemFont, 
+        "Segoe UI", 
+        Roboto, 
+        "Helvetica Neue", 
+        Arial, 
+        "Noto Sans", 
+        sans-serif, 
+        "Apple Color Emoji", 
+        "Segoe UI Emoji", 
+        "Segoe UI Symbol", 
+        "Noto Color Emoji";
+        
+      --font-serif: 
+        "Playfair Display", 
+        ui-serif, 
+        Georgia, 
+        Cambria, 
+        "Times New Roman", 
+        Times, 
+        serif;
+        
+      --font-mono: 
+        "JetBrains Mono", 
+        ui-monospace, 
+        SFMono-Regular, 
+        "Menlo", 
+        Monaco, 
+        Consolas, 
+        "Liberation Mono", 
+        "Courier New", 
+        monospace;
+    }
+  }
+
+  /* SSR OPTIMIZATION */
+  @layer base {
+    html {
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: var(--line-height-normal);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      line-height: var(--line-height-normal);
+      font-weight: var(--font-weight-normal);
+    }
+    
+    h1, h2, h3, h4, h5, h6, p, li, td, th {
+      line-height: var(--line-height-normal);
+    }
+    
+    h1, h2, h3 {
+      line-height: var(--line-height-tight);
+    }
+  }
+
+  /* PERFORMANCE OPTIMIZATIONS */
+  @layer utilities {
+    .smooth-spacing {
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      will-change: transform, opacity;
+    }
+    
+    .accelerated-layout {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+    
+    .optimized-text {
+      font-display: swap;
+      text-rendering: optimizeSpeed;
+    }
+  }
+
+  /* DEVELOPMENT-ONLY VALIDATION */
+  @layer development {
+    @supports (--debug: development) {
+      .spacing-test {
+        background: rgba(0, 123, 255, 0.3);
+        border: var(--space-1) solid #007bff;
+        font-weight: 600;
+        font-size: 10px;
+        text-align: center;
+      }
+      
+      .typography-test h1 { font-size: var(--text-4xl); line-height: var(--line-height-tight); }
+      .typography-test h2 { font-size: var(--text-3xl); line-height: var(--line-height-tight); }
+      .typography-test h3 { font-size: var(--text-2xl); line-height: var(--line-height-tight); }
+      .typography-test h4 { font-size: var(--text-xl); line-height: var(--line-height-normal); }
+      .typography-test h5 { font-size: var(--text-lg); line-height: var(--line-height-normal); }
+      .typography-test p { font-size: var(--text-base); line-height: var(--line-height-normal); }
+      .typography-test small { font-size: var(--text-sm); line-height: var(--line-height-normal); }
+      .typography-test div { line-height: var(--line-height-normal); margin-bottom: var(--space-2); }
+    }
+  }
+}
+
+/* ========================================
+   FALLBACK FOR BROWSERS WITHOUT @SUPPORTS
+   Ensure basic functionality always works
+======================================== */
+
+/* Basic SSR optimization without layers */
 html {
-  font-family: var(--font-sans);
-  font-size: var(--text-base-size);
-  line-height: var(--line-height-normal);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -178,57 +391,23 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-sans);
-  font-size: var(--text-golden-base);
-  line-height: var(--line-height-normal);
-  font-weight: var(--font-weight-normal);
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6, p, li, td, th {
-  line-height: var(--line-height-normal);
+/* Responsive spacing fallback */
+@media (min-width: 769px) {
+  :root {
+    --section-spacing: 96px;
+    --section-spacing-hero: 80px;
+  }
 }
 
-h1, h2, h3 {
-  line-height: var(--line-height-tight);
-}
-
-/* ========================================
-   VALIDATION HELPERS
-======================================== */
-
-.spacing-test {
-  background: rgba(0, 123, 255, 0.3);
-  border: var(--space-1) solid #007bff;
-  font-weight: 600;
-  font-size: 10px;
-  text-align: center;
-}
-
-.typography-test h1 { font-size: var(--text-golden-4xl); line-height: var(--line-height-tight); }
-.typography-test h2 { font-size: var(--text-golden-3xl); line-height: var(--line-height-tight); }
-.typography-test h3 { font-size: var(--text-golden-2xl); line-height: var(--line-height-tight); }
-.typography-test h4 { font-size: var(--text-golden-xl); line-height: var(--line-height-normal); }
-.typography-test h5 { font-size: var(--text-golden-lg); line-height: var(--line-height-normal); }
-.typography-test p { font-size: var(--text-golden-base); line-height: var(--line-height-normal); }
-.typography-test small { font-size: var(--text-golden-sm); line-height: var(--line-height-normal); }
-.typography-test div { line-height: var(--line-height-normal); margin-bottom: var(--space-2); }
-
-/* ========================================
-   PERFORMANCE OPTIMIZATIONS
-======================================== */
-
-.smooth-spacing {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  will-change: transform, opacity;
-}
-
-.accelerated-layout {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-.optimized-text {
-  font-display: swap;
-  text-rendering: optimizeSpeed;
+@media (min-width: 1025px) {
+  :root {
+    --section-spacing: 128px;
+    --section-spacing-hero: 104px;
+  }
 }
