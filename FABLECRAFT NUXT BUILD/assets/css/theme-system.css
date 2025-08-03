@@ -46,6 +46,11 @@
   --orb-secondary: 35 40% 70%;   /* Beige orb */
   --auth-button-primary: 350 70% 35%;       /* Burgundy button */
   --auth-button-primary-hover: 350 70% 30%; /* Darker burgundy */
+  
+  /* Firefly Enhancements */
+  --firefly-brightness: 1.5;      /* 50% brighter in light mode */
+  --firefly-glow-intensity: 0.7;  /* Stronger glow in light mode */
+  --firefly-contrast: 1.2;        /* More contrast in light mode */
 }
 
 /* ========================================
@@ -82,6 +87,11 @@
   /* Auth button colors */
   --auth-button-primary: 35 75% 50%; /* Warm amber */
   --auth-button-primary-hover: 35 75% 45%; /* Darker amber */
+  
+  /* Firefly Enhancements */
+  --firefly-brightness: 1.0;      /* Normal brightness in dark mode */
+  --firefly-glow-intensity: 0.5;  /* Subtle glow in dark mode */
+  --firefly-contrast: 1.0;        /* Normal contrast in dark mode */
 }
 
 /* ========================================
@@ -119,6 +129,11 @@
   /* Auth button colors */
   --auth-button-primary: 210 70% 40%; /* Professional blue */
   --auth-button-primary-hover: 210 70% 35%; /* Darker blue */
+  
+  /* Firefly Enhancements */
+  --firefly-brightness: 1.4;      /* Bright but not overwhelming */
+  --firefly-glow-intensity: 0.6;  /* Moderate glow for arctic feel */
+  --firefly-contrast: 1.1;        /* Slight contrast boost */
 }
 
 /* Golden Hour - Warm yellows optimized for inspiration */
@@ -150,6 +165,11 @@
   /* Auth button colors */
   --auth-button-primary: 45 85% 45%; /* Golden */
   --auth-button-primary-hover: 45 85% 40%; /* Darker gold */
+  
+  /* Firefly Enhancements */
+  --firefly-brightness: 1.6;      /* Extra bright for golden hour */
+  --firefly-glow-intensity: 0.8;  /* Strong warm glow */
+  --firefly-contrast: 1.3;        /* Higher contrast for warmth */
 }
 
 /* ========================================
@@ -187,6 +207,11 @@
   /* Auth button colors */
   --auth-button-primary: 210 80% 55%; /* Bright blue */
   --auth-button-primary-hover: 210 80% 50%; /* Darker blue */
+  
+  /* Firefly Enhancements */
+  --firefly-brightness: 1.1;      /* Subtle brightness for dark theme */
+  --firefly-glow-intensity: 0.6;  /* Moderate glow in midnight */
+  --firefly-contrast: 1.0;        /* Normal contrast */
 }
 
 /* Forest Manuscript - Deep greens for nature-inspired writing */

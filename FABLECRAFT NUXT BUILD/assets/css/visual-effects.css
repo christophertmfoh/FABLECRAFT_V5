@@ -83,8 +83,9 @@
   height: 3px;
   background: radial-gradient(
     circle,
-    hsl(var(--orb-primary) / 0.9) 0%,
-    hsl(var(--orb-secondary) / 0.6) 50%,
+    hsl(var(--orb-primary) / calc(0.9 * var(--firefly-brightness, 1))) 0%,
+    hsl(var(--orb-primary) / calc(0.7 * var(--firefly-brightness, 1))) 30%,
+    hsl(var(--orb-secondary) / calc(0.6 * var(--firefly-brightness, 1))) 50%,
     transparent 70%
   );
   border-radius: 50%;
@@ -99,12 +100,18 @@
     firefly-drift var(--effect-duration-firefly) var(--firefly-delay) linear infinite,
     firefly-glow 4s var(--firefly-delay) ease-in-out infinite;
   
-  /* Glow effect */
-  box-shadow: 0 0 4px hsl(var(--orb-primary) / 0.5);
+  /* Enhanced glow with theme-aware intensity */
+  box-shadow: 
+    0 0 calc(4px * var(--firefly-glow-intensity, 0.5)) hsl(var(--orb-primary) / 0.5),
+    0 0 calc(8px * var(--firefly-glow-intensity, 0.5)) hsl(var(--orb-primary) / 0.3);
+  
+  /* Theme-aware brightness and contrast */
+  filter: brightness(var(--firefly-brightness, 1)) 
+          contrast(var(--firefly-contrast, 1));
   
   /* Force GPU acceleration */
   transform: translateZ(0);
-  will-change: transform, opacity, bottom;
+  will-change: transform, opacity, bottom, filter;
   z-index: 5;
 }
 
@@ -186,19 +193,22 @@
   }
 }
 
-/* Subtle firefly glow - breathing effect */
+/* Subtle firefly glow - breathing effect with theme awareness */
 @keyframes firefly-glow {
   0%, 100% {
-    opacity: 0.4;
-    filter: brightness(1);
+    opacity: calc(0.4 * var(--firefly-brightness, 1));
+    filter: brightness(var(--firefly-brightness, 1));
+    transform: scale(1);
   }
   30% {
-    opacity: 0.8;
-    filter: brightness(1.3);
+    opacity: calc(0.9 * var(--firefly-brightness, 1));
+    filter: brightness(calc(1.5 * var(--firefly-brightness, 1)));
+    transform: scale(1.2);
   }
   70% {
-    opacity: 0.6;
-    filter: brightness(1.1);
+    opacity: calc(0.7 * var(--firefly-brightness, 1));
+    filter: brightness(calc(1.2 * var(--firefly-brightness, 1)));
+    transform: scale(1.1);
   }
 }
 
