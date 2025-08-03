@@ -887,3 +887,270 @@ These utility classes act as styling atoms that can be applied to various compon
 6. **Theme integration is complete** - All atoms work with the 15-theme system
 
 This comprehensive audit represents every atomic UI element found in the landing page ecosystem. Each atom is documented with its complete visual specifications while maintaining theme system compatibility.
+
+## Interactive Enhancement Atoms
+
+### 1. Dropdown Menu Animations
+**Base Component**: Animation classes for dropdown menus
+**Visual Specifications**:
+- Open animations: `data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95`
+- Close animations: `data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95`
+- Slide animations by side:
+  - Bottom: `data-[side=bottom]:slide-in-from-top-2`
+  - Left: `data-[side=left]:slide-in-from-right-2`
+  - Right: `data-[side=right]:slide-in-from-left-2`
+  - Top: `data-[side=top]:slide-in-from-bottom-2`
+
+### 2. Interactive Focus States
+**Base Component**: Focus enhancement classes
+**Visual Specifications**:
+- Focus visible: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`
+- Focus within: `focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2`
+- Focus background: `focus:bg-accent`
+- Data state focus: `data-[state=open]:bg-accent`
+
+### 3. Interactive Card Enhancement
+**Base Component**: Clickable card with tab navigation
+**Visual Specifications**:
+- TabIndex: `tabIndex={0}` for keyboard navigation
+- Role: `role='article'` or appropriate semantic role
+- Cursor: `cursor-pointer`
+- Full interactive state management
+
+### 4. Theme Toggle Component
+**Base Component**: Theme switcher button
+**Visual Specifications**:
+- Button variant: `ghost`
+- Size: `icon`
+- Icon: Current theme icon with `h-5 w-5 transition-all`
+- Screen reader text: `<span className='sr-only'>Toggle theme</span>`
+- Dropdown trigger with theme options
+
+### 5. Hover State Enhancements
+**Base Component**: Interactive hover patterns
+**Visual Specifications**:
+- Group hover: Parent `group` class enables child `group-hover:*` states
+- Scale on hover: `hover:scale-105`, `hover:scale-110`
+- Translate on hover: `hover:-translate-y-0.5`, `hover:-translate-y-1`, `hover:-translate-y-2`
+- Rotate on hover: `hover:rotate-3`, `hover:rotate-180` (for chevrons)
+- Shadow on hover: `hover:shadow-lg`, `hover:shadow-xl`, `hover:shadow-2xl`
+
+## Form Helper Atoms
+
+### 1. Newsletter Form Container
+**Base Component**: Form wrapper for newsletter signup
+**Visual Specifications**:
+- Container: `space-y-3`
+- Input group: `flex gap-2`
+- Input styling: `text-sm` with standard Input atom styling
+- Button: `size='sm'` with `px-4 whitespace-nowrap`
+- Helper text: `text-xs text-foreground/50`
+
+### 2. Form Error Display
+**Base Component**: Error message container
+**Visual Specifications**:
+- Container: `text-sm text-destructive`
+- Spacing: `mt-2`
+- Icon optional: Error icon with `w-4 h-4 mr-1`
+- Role: `role='alert'`
+
+### 3. Form Helper Text
+**Base Component**: Helper/hint text below inputs
+**Visual Specifications**:
+- Text size: `text-xs` or `text-sm`
+- Color: `text-muted-foreground` or `text-foreground/50`
+- Spacing: `mt-1` or `mt-2`
+- Used for disclaimers, hints, or additional context
+
+### 4. Input Group
+**Base Component**: Container for input with button
+**Visual Specifications**:
+- Container: `flex gap-2`
+- Responsive: Can stack on mobile with `flex-col sm:flex-row`
+- Button alignment: Maintains height parity with input
+
+## Accessibility Atoms
+
+### 1. Screen Reader Only Text
+**Base Component**: `<span>` for screen reader content
+**Visual Specifications**:
+- Class: `sr-only`
+- Usage: Labels, instructions, or context only for screen readers
+- Example: `<span className='sr-only'>Toggle theme</span>`
+
+### 2. ARIA Live Region
+**Base Component**: Dynamic content announcer
+**Visual Specifications**:
+- Role: `role='alert'` or `role='status'`
+- Live region: `aria-live='assertive'` or `aria-live='polite'`
+- Atomic updates: `aria-atomic='true'` when needed
+
+### 3. Accessible Icon
+**Base Component**: Icon with accessibility attributes
+**Visual Specifications**:
+- Hidden from screen readers: `aria-hidden='true'`
+- Size classes maintained: `w-4 h-4`, `w-5 h-5`, etc.
+- Always paired with visible or screen-reader text
+
+### 4. Focus Management Container
+**Base Component**: Container with focus trap capabilities
+**Visual Specifications**:
+- TabIndex: `tabIndex={0}` for programmatic focus
+- Focus visible states: Consistent ring system
+- Keyboard navigation: Proper tab order maintained
+
+### 5. Accessible Button/Link
+**Base Component**: Interactive element with full accessibility
+**Visual Specifications**:
+- ARIA label: `aria-label` when text isn't descriptive enough
+- ARIA expanded: `aria-expanded` for toggles
+- ARIA haspopup: `aria-haspopup='menu'` for dropdowns
+- ARIA pressed: `aria-pressed` for toggle buttons
+- ARIA busy: `aria-busy` for loading states
+
+### 6. Landmark Regions
+**Base Component**: Semantic HTML with ARIA roles
+**Visual Specifications**:
+- Navigation: `role='navigation'` with `aria-label`
+- Main: `role='main'`
+- Banner: `role='banner'`
+- Region: `role='region'` with `aria-labelledby`
+- List: `role='list'` and `role='listitem'` when needed
+
+### 7. Accessible Form Field
+**Base Component**: Form input with full accessibility
+**Visual Specifications**:
+- Label association: Proper `for` attribute or wrapping
+- Error association: `aria-describedby` for error messages
+- Required: `aria-required='true'`
+- Invalid: `aria-invalid='true'` when in error state
+- Placeholder as hint only, not label replacement
+
+### 8. Skip Link
+**Base Component**: Hidden navigation skip link
+**Visual Specifications**:
+- Position: `absolute -top-full left-0`
+- Focus state: `focus:top-0`
+- Styling: Matches site theme when visible
+- Z-index: High enough to overlay content
+- *Note: Not found in current implementation but recommended*
+
+### 9. Accessible Heading Structure
+**Base Component**: Semantic heading with ID
+**Visual Specifications**:
+- ID for linking: `id='section-heading'`
+- Used with: `aria-labelledby='section-heading'`
+- Proper hierarchy: h1 → h2 → h3, etc.
+- Screen reader only headings when needed: Combined with `sr-only`
+
+### 10. Accessible Description
+**Base Component**: Description text linked to elements
+**Visual Specifications**:
+- ID for reference: `id='element-description'`
+- Referenced by: `aria-describedby='element-description'`
+- Can be visually hidden if needed
+
+## Interactive State Atoms
+
+### 1. Disabled State
+**Base Component**: Disabled element styling
+**Visual Specifications**:
+- Pointer events: `disabled:pointer-events-none`
+- Opacity: `disabled:opacity-50`
+- Cursor: `disabled:cursor-not-allowed`
+- Applied to buttons, inputs, and interactive elements
+
+### 2. Loading State
+**Base Component**: Loading state indicators
+**Visual Specifications**:
+- Cursor: `cursor-wait`
+- Opacity: `opacity-70`
+- Spinner: `animate-spin` with border styling
+- ARIA busy: `aria-busy={true}`
+
+### 3. Selection Control
+**Base Component**: User selection behavior
+**Visual Specifications**:
+- No select: `select-none`
+- Touch control: `touch-none`
+- Cursor types: `cursor-pointer`, `cursor-default`, `cursor-wait`
+
+### 4. Pointer Events Control
+**Base Component**: Interaction control
+**Visual Specifications**:
+- None: `pointer-events-none`
+- Often used with: `[&_svg]:pointer-events-none` for icons
+- Data state control: `data-[disabled]:pointer-events-none`
+
+### 5. Peer State Modifiers
+**Base Component**: State-based styling for related elements
+**Visual Specifications**:
+- Peer disabled: `peer-disabled:cursor-not-allowed peer-disabled:opacity-70`
+- Used on labels related to form inputs
+
+## Animation Enhancement Atoms
+
+### 1. Transition Timing Functions
+**Base Component**: Animation easing
+**Visual Specifications**:
+- Default easing (not specified, uses browser default)
+- Combined with duration for smooth animations
+
+### 2. Transform Origin
+**Base Component**: Transform anchor point
+**Visual Specifications**:
+- Default origin (center)
+- Used with scale and rotate transforms
+
+### 3. Animation Fill Mode
+**Base Component**: Animation state persistence
+**Visual Specifications**:
+- Implicit in Tailwind animations
+- Maintains final state after animation
+
+### 4. Gradient Animation Duration
+**Base Component**: Animated gradient timing
+**Visual Specifications**:
+- Custom duration: Can be overridden with `duration-*` classes
+- Default: `duration-300`
+- Extended: `duration-500`, `duration-700`, `duration-1000`
+
+## Additional Utility Atoms
+
+### 1. Z-Index Management
+**Base Component**: Layer ordering
+**Visual Specifications**:
+- Relative positioning: `relative z-10`, `relative z-20`, `relative z-50`
+- Used for dropdowns, modals, and overlays
+
+### 2. Overflow Control
+**Base Component**: Content overflow behavior
+**Visual Specifications**:
+- Hidden: `overflow-hidden`
+- Auto: `overflow-auto`
+- Specific axis: `overflow-x-auto`, `overflow-y-auto`
+
+### 3. Backdrop Effects
+**Base Component**: Background blur and filters
+**Visual Specifications**:
+- Blur levels: `backdrop-blur-sm`, `backdrop-blur-md`, `backdrop-blur-lg`, `backdrop-blur-xl`
+- Often combined with semi-transparent backgrounds
+
+### 4. Data Attribute Styling
+**Base Component**: State-based styling using data attributes
+**Visual Specifications**:
+- Open state: `data-[state=open]:*`
+- Closed state: `data-[state=closed]:*`
+- Disabled state: `data-[disabled]:*`
+- Side positioning: `data-[side=*]:*`
+
+## Final Implementation Notes
+
+1. **Interactive states are comprehensive** - Hover, focus, active, disabled states all defined
+2. **Accessibility is deeply integrated** - ARIA attributes, roles, and semantic HTML throughout
+3. **Animation system is consistent** - Standard durations and easing functions
+4. **Form helpers are minimal but complete** - Basic error and helper text patterns
+5. **State management uses modern patterns** - Data attributes and peer modifiers
+6. **All interactive elements are keyboard accessible** - TabIndex and focus management included
+
+This completes the comprehensive audit of all atomic UI elements in the landing page ecosystem.
