@@ -3,13 +3,14 @@
 // Industry-standard development environment detection
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-// Supabase connection validation 
-const supabase = useSupabaseClient()
-const user = useSupabaseUser()
+// Supabase connection validation - SSR safe
 const config = useRuntimeConfig()
-
-const isLoggedIn = computed(() => !!user.value)
 const supabaseUrl = computed(() => config.public.supabase?.url)
+
+// Client-only Supabase initialization for SSR safety
+const supabase = process.client ? useSupabaseClient() : null
+const user = process.client ? useSupabaseUser() : ref(null)
+const isLoggedIn = computed(() => process.client && !!user.value)
 
 // Theme system state management
 const currentTheme = ref('light')

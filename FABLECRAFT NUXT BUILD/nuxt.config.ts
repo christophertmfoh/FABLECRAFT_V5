@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   // Enable essential modules for the core stack
   modules: [
-    '@nuxtjs/supabase',
+    // '@nuxtjs/supabase', // Temporarily disabled for Nuxt 3.18 compatibility testing
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vueuse/nuxt',
@@ -16,20 +16,24 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   // Supabase configuration for authentication redirects
-  supabase: {
-    redirectOptions: {
-      login: '/login',
-      callback: '/confirm',
-      exclude: ['/', '/login', '/confirm'], // Exclude public pages from auth redirect
-    }
-  },
+  // supabase: {
+  //   redirectOptions: {
+  //     login: '/login',
+  //     callback: '/confirm',
+  //     exclude: ['/', '/login', '/confirm'], // Exclude public pages from auth redirect
+  //   }
+  // },
 
   // Performance optimizations
   nitro: {
     compressPublicAssets: true,
+    // Add SSR error handling for Nuxt 3.18
+    experimental: {
+      wasm: true
+    }
   },
 
-  // Better error handling - explicit SSR
+  // Better error handling - explicit SSR with 3.18 fixes
   ssr: true,
   
   // Add head defaults
@@ -43,10 +47,14 @@ export default defineNuxtConfig({
     }
   },
 
-  // Build optimizations
+  // Build optimizations for 3.18 compatibility
   vite: {
     build: {
       target: 'esnext'
+    },
+    // Add SSR-specific optimizations
+    ssr: {
+      noExternal: ['@nuxtjs/supabase']
     }
   },
 
@@ -54,6 +62,12 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
     typeCheck: false, // Temporarily disabled due to Vite plugin compatibility
+  },
+
+  // Enhanced error handling for 3.18
+  experimental: {
+    payloadExtraction: false,
+    renderJsonPayloads: true
   },
 
   // Enable Nuxt DevTools for development
