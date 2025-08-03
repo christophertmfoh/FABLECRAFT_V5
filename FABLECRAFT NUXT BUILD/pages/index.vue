@@ -12,7 +12,7 @@ const isLoggedIn = computed(() => !!user.value)
 const { themes, themeCategories, currentTheme, setTheme } = useTheme()
 
 // Background orbs composable
-const { orbsEnabled, toggleOrbs, performanceMode, setPerformanceMode } = useBackgroundOrbs()
+const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
