@@ -1,22 +1,47 @@
 #!/bin/bash
 
-# Safe Stop Script - Use this instead of kill commands
+# Safe Stop Script - Gracefully stops Nuxt dev server
+# NEVER kills Node processes directly
 
-echo "🚨 SAFETY REMINDER: Never use 'kill node' or 'pkill node' commands!"
-echo ""
-echo "✅ SAFE WAYS TO STOP YOUR DEV SERVER:"
-echo ""
-echo "1. Press Ctrl+C in the terminal where the server is running"
-echo "2. Close the terminal tab/window"
-echo "3. Use a different port if the current one is stuck:"
-echo "   npx nuxi dev --port 3003"
-echo ""
-echo "📍 Currently running Node processes (view only):"
-ps aux | grep node | grep -v grep
+echo "🛑 Stopping Nuxt development server safely..."
+
+# Find the Nuxt dev server process
+NUXT_PID=$(lsof -ti:3000 2>/dev/null || lsof -ti:3002 2>/dev/null)
+
+if [ -z "$NUXT_PID" ]; then
+    echo "✅ No Nuxt server running"
+    exit 0
+fi
+
+echo "📍 Found Nuxt server on PID: $NUXT_PID"
+
+# Send SIGTERM for graceful shutdown
+echo "📤 Sending graceful shutdown signal..."
+kill -TERM $NUXT_PID 2>/dev/null
+
+# Wait up to 10 seconds for graceful shutdown
+COUNTER=0
+while [ $COUNTER -lt 10 ] && kill -0 $NUXT_PID 2>/dev/null; do
+    echo -n "."
+    sleep 1
+    COUNTER=$((COUNTER + 1))
+done
 
 echo ""
-echo "📍 What's using port 3002:"
-lsof -i :3002 2>/dev/null || echo "Port 3002 is free"
 
-echo ""
-echo "🔴 Remember: kill/pkill commands will DESTROY your environment!"
+# Check if process is still running
+if kill -0 $NUXT_PID 2>/dev/null; then
+    echo "⚠️  Process still running, sending SIGINT..."
+    kill -INT $NUXT_PID 2>/dev/null
+    sleep 2
+fi
+
+# Final check
+if kill -0 $NUXT_PID 2>/dev/null; then
+    echo "❌ Failed to stop server gracefully"
+    echo "💡 TIP: Use Ctrl+C in the terminal where the server is running"
+    exit 1
+else
+    echo "✅ Server stopped successfully"
+    exit 0
+fi

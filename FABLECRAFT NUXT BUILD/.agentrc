@@ -1,0 +1,37 @@
+# Agent Command Restrictions Configuration
+# This file prevents destructive commands that kill Node processes
+
+# FORBIDDEN COMMANDS - These will be intercepted and prevented
+FORBIDDEN_COMMANDS=(
+  "kill node"
+  "killall node"
+  "pkill node"
+  "kill -9"
+  "killall -9"
+  "pkill -9"
+  "kill $(pgrep node)"
+  "kill \$(pgrep node)"
+  "ps aux | grep node | awk '{print $2}' | xargs kill"
+  "ps aux | grep node | awk '{print \$2}' | xargs kill"
+  "kill -KILL"
+  "killall -KILL"
+  "pkill -KILL"
+)
+
+# SAFE ALTERNATIVES
+SAFE_ALTERNATIVES=(
+  "Use: npm run safe-stop"
+  "Use: Ctrl+C in the terminal"
+  "Use: npm run dev:alt (for different port)"
+  "Use: Close the terminal window"
+)
+
+# WARNING MESSAGE
+WARNING_MESSAGE="
+⚠️  COMMAND BLOCKED: Attempting to kill Node processes!
+❌ This command would disconnect you from the server.
+✅ Instead, use one of these safe alternatives:
+   - npm run safe-stop
+   - Ctrl+C in the terminal
+   - npm run dev:alt (to use a different port)
+"

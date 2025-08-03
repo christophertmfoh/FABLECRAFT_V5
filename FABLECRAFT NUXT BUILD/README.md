@@ -24,9 +24,32 @@ A modernized Nuxt 3 + Supabase foundation built to industry standards.
 ### ✅ SAFE WAYS TO STOP THE DEV SERVER
 
 ```bash
-# Method 1: Press Ctrl+C in the terminal running the server
-# Method 2: Close the terminal tab/window
-# Method 3: Use pnpm db:stop for Supabase only
+# Method 1: Use our safe-stop script
+npm run safe-stop
+
+# Method 2: Press Ctrl+C in the terminal running the server
+
+# Method 3: Use alternative port if current is stuck
+npm run dev:alt
+
+# Method 4: Close the terminal tab/window
+# Method 5: Use pnpm db:stop for Supabase only
+```
+
+### 🛡️ NEW SAFETY MECHANISMS IN PLACE
+
+1. **Safe Stop Script**: `npm run safe-stop` - Gracefully stops the server
+2. **Command Interceptor**: Dangerous commands are now blocked
+3. **Pre-commit Hooks**: Prevents committing dangerous commands
+4. **Agent Safety Guide**: See [AGENT_SAFETY_README.md](./AGENT_SAFETY_README.md)
+
+### 📍 Check Port Status
+
+```bash
+# Safe commands to check what's running:
+lsof -i :3000
+lsof -i :3002
+ps aux | grep node  # View only, don't pipe to kill!
 ```
 
 ---
