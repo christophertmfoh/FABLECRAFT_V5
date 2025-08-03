@@ -12,12 +12,7 @@ const isLoggedIn = computed(() => !!user.value)
 const supabaseUrl = computed(() => config.public.supabase?.url)
 
 // Use centralized theme composable
-const { themes, themeCategories, currentTheme, setTheme, initializeTheme } = useTheme()
-
-// Initialize theme on client mount
-onMounted(() => {
-  initializeTheme()
-})
+const { themes, themeCategories, currentTheme, setTheme } = useTheme()
 
 // Development-only debugging (excluded from production)
 if (isDevelopment) {
