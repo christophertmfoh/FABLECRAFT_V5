@@ -378,6 +378,31 @@ if (isDevelopment) {
         </div>
       </details>
 
+      <!-- Test Pages Navigation -->
+      <div class="bg-card p-8 rounded-lg border shadow-sm">
+        <h2 class="text-lg font-semibold mb-4">🧪 Test Pages</h2>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <NuxtLink
+            to="/theme-test"
+            class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Theme Persistence Test
+          </NuxtLink>
+          <NuxtLink
+            to="/typography-test"
+            class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Typography Test
+          </NuxtLink>
+          <NuxtLink
+            to="/visual-effects-test"
+            class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Visual Effects Test
+          </NuxtLink>
+        </div>
+      </div>
+
       <p class="text-center text-sm text-muted-foreground">
         Fablecraft Foundation - Production-ready with all systems operational
       </p>

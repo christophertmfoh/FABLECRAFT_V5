@@ -30,7 +30,14 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
-      exclude: ['/', '/login', '/confirm'], // Exclude public pages from auth redirect
+      exclude: [
+        '/', 
+        '/login', 
+        '/confirm',
+        '/theme-test',
+        '/typography-test',
+        '/visual-effects-test'
+      ], // Exclude public pages and test pages from auth redirect
     }
   },
 

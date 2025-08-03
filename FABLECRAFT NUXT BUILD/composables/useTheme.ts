@@ -1,4 +1,6 @@
 // Centralized theme management composable for SSR-safe theming
+import { themes, themeCategories, getTheme, isThemeDark, themeTransition } from '../constants/data'
+
 export const useTheme = () => {
   // Use cookie for SSR persistence
   const themeCookie = useCookie<string>('theme', {
@@ -7,37 +9,6 @@ export const useTheme = () => {
     secure: false, // Set to true in production
     maxAge: 60 * 60 * 24 * 365 // 1 year
   })
-  
-  // Available themes from the theme system
-  const themes = [
-    { name: 'light', label: 'Light', category: 'Core' },
-    { name: 'dark', label: 'Dark', category: 'Core' },
-    { name: 'arctic-focus', label: 'Arctic Focus', category: 'Classic Light' },
-    { name: 'golden-hour', label: 'Golden Hour', category: 'Classic Light' },
-    { name: 'midnight-ink', label: 'Midnight Ink', category: 'Classic Dark' },
-    { name: 'forest-manuscript', label: 'Forest Manuscript', category: 'Classic Dark' },
-    { name: 'starlit-prose', label: 'Starlit Prose', category: 'Classic Dark' },
-    { name: 'coffee-house', label: 'Coffee House', category: 'Classic Dark' },
-    { name: 'sunset-coral', label: 'Sunset Coral', category: 'Modern Light' },
-    { name: 'lavender-dusk', label: 'Lavender Dusk', category: 'Modern Light' },
-    { name: 'moonlit-garden', label: 'Moonlit Garden', category: 'Modern Light' },
-    { name: 'cherry-lacquer', label: 'Cherry Lacquer', category: 'Modern Dark' },
-    { name: 'dragons-hoard', label: 'Dragon\'s Hoard', category: 'Modern Dark' },
-    { name: 'halloween', label: 'Halloween', category: 'Specialty' },
-    { name: 'netrunner', label: 'Netrunner', category: 'Specialty' },
-    { name: 'system', label: 'System', category: 'Auto' }
-  ]
-  
-  // Theme categories
-  const themeCategories = [
-    'Core',
-    'Classic Light', 
-    'Classic Dark',
-    'Modern Light',
-    'Modern Dark',
-    'Specialty',
-    'Auto'
-  ]
   
   // Current theme state
   const currentTheme = useState<string>('currentTheme', () => {
@@ -81,11 +52,49 @@ export const useTheme = () => {
     }
   }
   
+  // Add theme transition class
+  const addThemeTransition = () => {
+    if (!import.meta.client) return
+    
+    document.documentElement.classList.add(themeTransition.class)
+    setTimeout(() => {
+      document.documentElement.classList.remove(themeTransition.class)
+    }, themeTransition.duration)
+  }
+  
+  // Enhanced setTheme with transition
+  const setThemeWithTransition = (themeName: string) => {
+    addThemeTransition()
+    setTheme(themeName)
+  }
+  
+  // Get current theme object
+  const currentThemeObject = computed(() => {
+    return getTheme(currentTheme.value) || themes[0]
+  })
+  
+  // Check if current theme is dark
+  const isDark = computed(() => {
+    return isThemeDark(currentTheme.value)
+  })
+  
+  // Toggle between light and dark
+  const toggleTheme = () => {
+    const newTheme = isDark.value ? 'light' : 'dark'
+    setThemeWithTransition(newTheme)
+  }
+  
   return {
-    themes,
-    themeCategories,
+    themes: readonly(themes),
+    themeCategories: readonly(themeCategories),
     currentTheme: readonly(currentTheme),
+    currentThemeObject: readonly(currentThemeObject),
+    isDark: readonly(isDark),
     setTheme,
-    initializeTheme
+    setThemeWithTransition,
+    toggleTheme,
+    initializeTheme,
+    getTheme,
+    isThemeDark
   }
 }
