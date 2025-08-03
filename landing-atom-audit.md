@@ -1,356 +1,284 @@
-# Landing Page Atom Audit
+# Landing Page Atoms - Consolidated Implementation List
 
-This document catalogs all atomic UI elements found in the legacy React landing page codebase.
+This document contains the complete, deduplicated list of atomic UI elements to be implemented in Nuxt/Vue, organized by atom type. Each atom is listed only once with all its visual specifications from the legacy React codebase.
 
 ## Form Input Atoms
 
-### 1. Email Input (Newsletter)
-- **Location**: `footer-section.tsx` (line 129-133)
-- **Component**: `<Input />`
-- **Type**: `email`
-- **Visual Specifications**:
-  - Height: `h-10` (40px)
-  - Width: `w-full`
-  - Border: `border border-input` (1px, uses CSS variable --input)
-  - Border Radius: `rounded-md` (6px)
-  - Background: `bg-background` (theme-aware)
-  - Padding: `px-3 py-2` (12px horizontal, 8px vertical)
-  - Font Size: `text-sm` (14px)
-  - Text Color: Default text color (inherits)
-  - Placeholder: `placeholder:text-muted-foreground`
-  - Focus State: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`
-  - Disabled State: `disabled:cursor-not-allowed disabled:opacity-50`
-  - Placeholder Text: "Enter your email"
-  - Additional Classes: `text-sm` override
+### 1. Input
+**Base Component**: `<input>`
+**Visual Specifications**:
+- Height: `h-10` (40px)
+- Width: `w-full`
+- Border: `border border-input`
+- Border Radius: `rounded-md`
+- Background: `bg-background`
+- Padding: `px-3 py-2`
+- Font Size: `text-sm`
+- Placeholder: `placeholder:text-muted-foreground`
+- Focus: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`
+- Disabled: `disabled:cursor-not-allowed disabled:opacity-50`
+- File variant: `file:border-0 file:bg-transparent file:text-sm file:font-medium`
+
+**Types to support**: text, email, password, number, tel, url, search, date, time, file
+
+### 2. Label
+**Base Component**: `<label>`
+**Visual Specifications**:
+- Font Size: `text-sm`
+- Font Weight: `font-medium`
+- Line Height: `leading-none`
+- Disabled state: `peer-disabled:cursor-not-allowed peer-disabled:opacity-70`
 
 ## Button & Clickable Atoms
 
-### 1. Primary CTA Button (Hero Section)
-- **Location**: `hero-section.tsx` (lines 92-111)
-- **Component**: `<Button />`
-- **Visual Specifications**:
-  - Size: `size='lg'`
-  - Background: `bg-primary hover:bg-primary/90`
-  - Text Color: `text-primary-foreground`
-  - Padding: `p-neighbors` (custom spacing)
-  - Font Size: `text-golden-2xl`
-  - Font Weight: `font-semibold`
-  - Border Radius: `rounded-xl` (12px)
-  - Shadow: `shadow-lg hover:shadow-xl`
-  - Transitions: `transition-all duration-300`
-  - Hover Effects: `hover:scale-105 hover:-translate-y-0.5`
-  - Focus: `focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`
-  - Width: `w-full sm:w-auto`
-  - Icon: `<Zap />` icon (h-5 w-5, mr-3)
-  - Text: "Start Creating Free"
-  - Gradient Overlay: `from-white/20 to-transparent` on hover
+### 1. Button
+**Base Component**: `<button>` / `<a>` (polymorphic)
+**Visual Specifications**:
+- Base classes: `inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0`
 
-### 2. Secondary/Outline Button (Hero Section)
-- **Location**: `hero-section.tsx` (lines 113-132)
-- **Component**: `<Button />`
-- **Visual Specifications**:
-  - Size: `size='lg'`
-  - Variant: `variant='outline'`
-  - Border: `border-border`
-  - Background: `hover:bg-accent`
-  - Text Color: `hover:text-accent-foreground`
-  - Padding: `p-neighbors`
-  - Font Size: `text-golden-2xl`
-  - Font Weight: `font-semibold`
-  - Border Radius: `rounded-xl` (12px)
-  - Shadow: `shadow-md hover:shadow-lg`
-  - Transitions: `transition-all duration-300`
-  - Hover Effects: `hover:scale-105 hover:-translate-y-0.5`
-  - Focus: `focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`
-  - Width: `w-full sm:w-auto`
-  - Icon: `<Sparkles />` icon (h-5 w-5, mr-3)
-  - Text: "Explore Examples"
+**Size Variants**:
+- `sm`: `h-9 rounded-md px-3`
+- `default`: `h-10 px-4 py-2`
+- `lg`: `h-11 rounded-md px-8`
+- `icon`: `h-10 w-10`
 
-### 3. Newsletter Submit Button
-- **Location**: `footer-section.tsx` (lines 134-136)
-- **Component**: `<Button />`
-- **Visual Specifications**:
-  - Size: `size='sm'`
-  - Classes: `px-4 whitespace-nowrap`
-  - Text: Dynamic from `newsletterContent.buttonText` ("Subscribe")
-  - Default button styling applies
+**Style Variants**:
+- `default/primary`: `bg-primary text-primary-foreground hover:bg-primary/90`
+- `secondary`: `bg-secondary text-secondary-foreground hover:bg-secondary/80`
+- `destructive`: `bg-destructive text-destructive-foreground hover:bg-destructive/90`
+- `outline`: `border border-input bg-background hover:bg-accent hover:text-accent-foreground`
+- `ghost`: `hover:bg-accent hover:text-accent-foreground`
+- `link`: `text-primary underline-offset-4 hover:underline`
 
-### 4. Pricing CTA Button
-- **Location**: `pricing-section.tsx` (lines 265-270)
-- **Component**: `<Button />`
-- **Visual Specifications**:
-  - Size: `size='lg'`
-  - Width: `w-full`
-  - Variant: Dynamic based on `tier.highlighted`
-  - Text: Dynamic from `tier.cta`
+**Special Features**:
+- Loading state support
+- Icon left/right support
+- Full width option
+- Polymorphic (can be button, anchor, or router link)
 
-### 5. Footer Link Buttons
-- **Location**: `footer-section.tsx` (multiple instances)
-- **Component**: Native `<button>`
-- **Visual Specifications**:
-  - Font Size: `text-sm` (14px)
-  - Text Color: `text-foreground/60 hover:text-foreground`
-  - Transitions: `transition-colors duration-200`
-  - No background, border, or padding
-  - Examples: "Privacy Policy", "Terms of Service", "About Us", etc.
+### 2. IconButton
+**Base Component**: Button with `size="icon"`
+**Visual Specifications**:
+- Fixed dimensions: `h-10 w-10`
+- Icon centered
+- All button variants apply
 
-### 6. CTA Section Buttons
-- **Location**: `cta-section.tsx` (lines 109-131)
-- **Two button variants similar to hero section**:
-  - Primary button with gradient overlay
-  - Outline button variant
-
-### 7. Social Media Icon Buttons
-- **Location**: `footer-section.tsx` (lines 166-171, 182-188)
-- **Component**: Native `<button>`
-- **Visual Specifications**:
-  - Classes: `text-foreground/60 hover:text-primary transition-colors duration-200`
-  - Icon wrapper for social media icons
-  - Aria-label for accessibility
+### 3. GradientButton
+**Base Component**: Enhanced Button
+**Additional Specifications**:
+- Gradient overlay: `bg-gradient-to-r from-white/20 to-transparent`
+- Overlay opacity: `opacity-0 group-hover:opacity-100`
+- Overlay transition: `transition-opacity duration-300`
+- Group hover effects on children
 
 ## Text & Typography Atoms
 
-### 1. Hero Heading (H1)
-- **Location**: `hero-section.tsx` (lines 59-72)
-- **Visual Specifications**:
-  - Tag: `<h1>`
-  - Font Weight: `font-black` (900)
-  - Line Height: `leading-[1.1]`
-  - Letter Spacing: `tracking-tight`
-  - Drop Shadow: `drop-shadow-sm`
-  - Margin Top: `mt-best-friends` (custom spacing)
-  - Font Size (Compact): `text-3xl sm:text-4xl lg:text-5xl`
-  - Font Size (Default): `text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl`
-  - Color Structure:
-    - First part: `text-foreground`
-    - Second part: `bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent`
-  - Text Content: "Where Creative Visions Become Reality"
+### 1. Heading
+**Base Component**: `<h1>` through `<h6>` (polymorphic)
+**Visual Specifications**:
 
-### 2. Hero Description (Paragraph)
-- **Location**: `hero-section.tsx` (lines 75-88)
-- **Visual Specifications**:
-  - Tag: `<p>`
-  - Text Color: `text-muted-foreground`
-  - Max Width: `max-w-4xl`
-  - Margin: `mx-auto`
-  - Line Height: `leading-relaxed`
-  - Font Weight: `font-medium`
-  - Margin Top: `mt-friends`
-  - Font Size (Compact): `text-base sm:text-lg`
-  - Font Size (Default): `text-golden-lg sm:text-golden-xl lg:text-golden-2xl`
+**H1 Variant**:
+- Font Weight: `font-black`
+- Line Height: `leading-[1.1]`
+- Letter Spacing: `tracking-tight`
+- Drop Shadow: `drop-shadow-sm`
+- Responsive sizes:
+  - Compact: `text-3xl sm:text-4xl lg:text-5xl`
+  - Default: `text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl`
+- Gradient text support: `bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent`
 
-### 3. Section Heading (H2)
-- **Location**: `feature-cards.tsx` (lines 143-153)
-- **Visual Specifications**:
-  - Tag: `<h2>`
-  - Font Weight: `font-black`
-  - Text Color: `text-foreground`
-  - Line Height: `leading-[1.2]`
-  - Letter Spacing: `tracking-tight`
-  - Drop Shadow: `drop-shadow-sm`
-  - Margin Top: `mt-best-friends`
-  - Font Size (Compact): `text-2xl sm:text-3xl lg:text-4xl`
-  - Font Size (Default): `text-golden-3xl sm:text-golden-4xl lg:text-golden-5xl xl:text-6xl`
+**H2 Variant**:
+- Font Weight: `font-black`
+- Line Height: `leading-[1.2]`
+- Letter Spacing: `tracking-tight`
+- Drop Shadow: `drop-shadow-sm`
+- Responsive sizes:
+  - Compact: `text-2xl sm:text-3xl lg:text-4xl`
+  - Default: `text-golden-3xl sm:text-golden-4xl lg:text-golden-5xl xl:text-6xl`
+- Alternative style: `text-4xl md:text-5xl` with enhanced drop shadow
 
-### 4. Section Description
-- **Location**: `feature-cards.tsx` (lines 155-161)
-- **Visual Specifications**:
-  - Tag: `<p>`
-  - Text Color: `text-muted-foreground`
-  - Max Width: `max-w-4xl mx-auto`
-  - Line Height: `leading-relaxed`
-  - Font Weight: `font-medium`
-  - Margin Top: `mt-friends`
-  - Font Size (Compact): `text-base sm:text-lg`
-  - Font Size (Default): `text-golden-lg sm:text-golden-xl lg:text-golden-2xl`
+**H3 Variant**:
+- Font Size: `text-2xl`
+- Font Weight: `font-bold`
+- Color: `text-heading-primary`
 
-### 5. Card Title (H4)
-- **Location**: `feature-cards.tsx` (lines 268-273)
-- **Visual Specifications**:
-  - Tag: `<h4>`
-  - Font Size: `text-golden-lg`
-  - Font Weight: `font-bold`
-  - Text Color: `text-foreground group-hover:text-primary`
-  - Transition: `transition-colors duration-300`
+**H4 Variant**:
+- Font Size: `text-golden-lg`
+- Font Weight: `font-bold`
 
-### 6. Badge Text (Default Variant)
-- **Location**: `badge-variants.ts` (lines 10-28)
-- **Component**: `<Badge />`
-- **Visual Specifications**:
-  - Display: `inline-flex items-center`
-  - Border Radius: `rounded-full`
-  - Border: `border`
-  - Padding: `px-2.5 py-0.5` (10px horizontal, 2px vertical)
-  - Font Size: `text-xs` (12px)
-  - Font Weight: `font-semibold`
-  - Transitions: `transition-colors`
-  - Focus: `focus:ring-2 focus:ring-ring focus:ring-offset-2`
-  - Default Variant: `border-transparent bg-primary text-primary-foreground hover:bg-primary/80`
-  - Secondary Variant: `border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80`
-  - Destructive Variant: `border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80`
-  - Outline Variant: `text-foreground` (border visible)
+**Small Headings (H3 for sections)**:
+- Font Size: `text-sm`
+- Font Weight: `font-semibold`
+- Text Transform: `uppercase`
+- Letter Spacing: `tracking-wider`
 
-### 7. Enhanced Badge (Landing Page Override)
-- **Location**: Multiple landing page instances
-- **Visual Override Classes**:
-  - Background: `bg-card/95`
-  - Text Color: `text-foreground`
-  - Border: `border-border`
-  - Font Weight: `font-semibold` (reinforced)
-  - Backdrop Filter: `backdrop-blur-md`
-  - Shadow: `shadow-md hover:shadow-lg`
-  - Transition: `transition-shadow duration-300`
-  - Font Size: `text-base` (16px - override from xs)
-  - Padding: `px-4 py-2` (16px horizontal, 8px vertical - override)
+### 2. Text
+**Base Component**: `<p>` / `<span>` (polymorphic)
+**Visual Specifications**:
 
-### 8. Footer Heading (H3)
-- **Location**: `footer-section.tsx` (multiple instances)
-- **Visual Specifications**:
-  - Tag: `<h3>`
-  - Font Size: `text-sm`
-  - Font Weight: `font-semibold`
-  - Text Color: `text-foreground`
-  - Text Transform: `uppercase`
-  - Letter Spacing: `tracking-wider`
+**Body Text**:
+- Color: `text-muted-foreground`
+- Line Height: `leading-relaxed`
+- Font Weight: `font-medium`
+- Responsive sizes:
+  - Compact: `text-base sm:text-lg`
+  - Default: `text-golden-lg sm:text-golden-xl lg:text-golden-2xl`
 
-### 9. Footer Text
-- **Location**: `footer-section.tsx` (multiple instances)
-- **Visual Specifications**:
-  - Font Size: `text-sm` or `text-xs`
-  - Text Color: `text-foreground/60` or `text-foreground/70`
-  - Line Height: `leading-relaxed` (for descriptions)
-  - Various opacity levels: `/50`, `/60`, `/70`
+**Small Text**:
+- Font Size: `text-sm` or `text-xs`
+- Color variations: `text-foreground/50`, `text-foreground/60`, `text-foreground/70`
 
-### 10. Logo Text
-- **Location**: `footer-section.tsx` (line 58)
-- **Visual Specifications**:
-  - Tag: `<span>`
-  - Font Size: `text-2xl`
-  - Font Weight: `font-bold`
-  - Text Color: `gradient-primary-text` (custom gradient class)
+**Display Text (Metrics)**:
+- Value: `text-2xl sm:text-3xl font-bold`
+- Label: `text-sm font-medium text-muted-foreground`
 
-### 11. Metric Display Text
-- **Location**: `feature-cards.tsx` (lines 209-213)
-- **Visual Specifications**:
-  - Value: `text-2xl sm:text-3xl font-bold text-foreground`
-  - Label: `text-sm font-medium text-muted-foreground`
-  - Hover: `group-hover:text-primary` and `group-hover:text-foreground`
-  - Transition: `transition-colors duration-300`
+### 3. Badge
+**Base Component**: `<div>`
+**Visual Specifications**:
+- Base classes: `inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2`
 
-### 12. Small Print / Disclaimer
-- **Location**: Various locations
-- **Visual Specifications**:
-  - Font Size: `text-xs`
-  - Text Color: `text-muted-foreground` or `text-foreground/50`
-  - Examples: Newsletter disclaimer, metric descriptions
+**Variants**:
+- `default`: `border-transparent bg-primary text-primary-foreground hover:bg-primary/80`
+- `secondary`: `border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80`
+- `destructive`: `border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80`
+- `outline`: `text-foreground`
 
-### 13. Pricing Tier Title (H3)
-- **Location**: `pricing-section.tsx` (line 232)
-- **Visual Specifications**:
-  - Tag: `<h3>`
-  - Font Size: `text-2xl`
-  - Font Weight: `font-bold`
-  - Text Color: `text-heading-primary`
+**Enhanced Landing Page Style**:
+- Override classes: `bg-card/95 text-foreground border-border font-semibold backdrop-blur-md shadow-md hover:shadow-lg transition-shadow duration-300 text-base px-4 py-2`
 
-### 14. Pricing Value Display
-- **Location**: `pricing-section.tsx` (line 238)
-- **Visual Specifications**:
-  - Tag: `<div>`
-  - Font Size: `text-4xl`
-  - Font Weight: `font-bold`
-  - Text Color: `text-heading-primary`
+## Display & Feedback Atoms
 
-### 15. Large Section Heading (H2 - Alternative Style)
-- **Location**: `testimonials-section.tsx` (line 132), `pricing-section.tsx` (line 306)
-- **Visual Specifications**:
-  - Tag: `<h2>`
-  - Font Size: `text-4xl md:text-5xl`
-  - Font Weight: `font-black`
-  - Text Color: `text-heading-primary`
-  - Drop Shadow: `drop-shadow-[0_3px_6px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_3px_6px_rgba(0,0,0,0.5)]`
-  - Line Height: `leading-[1.2]`
-  - Letter Spacing: `tracking-tight`
-  - Margin Top: `mt-best-friends`
+### 1. Icon
+**Base Component**: SVG icon wrapper
+**Visual Specifications**:
+- Display: `inline-block shrink-0`
+- Sizes: `size-4` (16px), `size-5` (20px), `size-6` (24px)
+- Color: `currentColor` by default
+- Hover animations: `group-hover:scale-110 transition-transform duration-300`
 
-### 16. Screen Reader Only Text
-- **Location**: `feature-cards.tsx` (lines 177, 235)
-- **Visual Specifications**:
-  - Class: `sr-only`
-  - Purpose: Accessibility labels for screen readers
-  - Examples: "Trust indicators", "Key benefits"
+**Required Icons** (from Lucide):
+- Zap, Sparkles, Feather, Mail, Phone, MapPin
+- CheckCircle, ArrowRight, Star, Heart
+- Film, Share2, Globe, Palette
+- Lightbulb, PenTool, Camera, Music
+- ChevronDown, User, LogOut, UserCircle
+- Loader2 (for loading states)
 
-## Additional Atoms Found
+### 2. Spinner
+**Base Component**: Animated icon
+**Visual Specifications**:
+- Icon: Loader2
+- Animation: `animate-spin`
+- Sizes: Follow icon sizing system
+- Color: `text-current`
 
-### BadgeWithDot Component (Molecule)
-- **Location**: `badge-with-dot.tsx`
-- **Component**: Custom component combining Badge + Dot
-- **Visual Specifications**:
-  - Wrapper: `flex items-center justify-center gap-2`
-  - Dot: `w-4 h-4 rounded-full animate-pulse bg-primary`
-  - Badge: Uses enhanced badge styling (see Enhanced Badge above)
-  - Note: This is technically a molecule (Badge + Dot indicator)
+### 3. Dot (Pulsing Indicator)
+**Base Component**: `<div>`
+**Visual Specifications**:
+- Size: `w-4 h-4` (can be configurable)
+- Shape: `rounded-full`
+- Background: `bg-primary`
+- Animation: `animate-pulse`
+- Aria: `aria-hidden="true"`
 
-### Pulsing Dot Atom
-- **Location**: Used within BadgeWithDot
-- **Visual Specifications**:
-  - Size: `w-4 h-4` (16x16px)
-  - Shape: `rounded-full`
-  - Background: `bg-primary`
-  - Animation: `animate-pulse`
-  - Aria: `aria-hidden='true'`
+### 4. LoadingFallback
+**Base Component**: Container with spinner
+**Visual Specifications**:
+- Container: `space-y-4 text-center`
+- Spinner: Size medium
+- Text: `text-sm text-muted-foreground`
 
-### Icons Used
-- **Zap** - Hero primary button (5x5)
-- **Sparkles** - Hero secondary button (5x5)
-- **Feather** - Footer logo (6x6)
-- **Mail** - Footer contact
-- **Phone** - Footer contact (4x4)
-- **MapPin** - Footer location
-- **CheckCircle** - Feature cards
-- **ArrowRight** - CTA buttons
-- **Star** - Testimonials rating
-- Various feature icons: Film, Share2, Globe, Palette, Lightbulb, PenTool, Camera, Music
+## Layout & Structure Atoms
 
-## Color Variables Referenced
-- `primary` / `primary-foreground`
-- `secondary` / `secondary-foreground`
-- `accent` / `accent-foreground`
-- `background`
-- `foreground`
-- `muted` / `muted-foreground`
-- `card` / `card-foreground`
-- `border`
-- `input`
-- `ring`
-- `destructive` / `destructive-foreground`
-- `heading-primary` (custom for headings)
+### 1. Card
+**Base Component**: `<div>`
+**Visual Specifications**:
+- Base: `rounded-lg border bg-card text-card-foreground shadow-sm`
+
+**Sub-components**:
+- **CardHeader**: `flex flex-col space-y-1.5 p-6`
+- **CardTitle**: `text-2xl font-semibold leading-none tracking-tight`
+- **CardDescription**: `text-sm text-muted-foreground`
+- **CardContent**: `p-6 pt-0`
+- **CardFooter**: `flex items-center p-6 pt-0`
+
+### 2. GlassCard
+**Base Component**: Enhanced Card
+**Visual Specifications**:
+- Base: `rounded-xl border transition-all duration-300`
+
+**Variants**:
+- `light`: `bg-card/95 backdrop-blur-md border-border/30 shadow-md hover:shadow-lg`
+- `heavy`: `bg-card/90 backdrop-blur-lg border-border/30 shadow-lg hover:shadow-xl`
+- `elevated`: `surface-elevated backdrop-blur-lg border-border/30 shadow-xl hover:shadow-2xl`
+
+**Hover effect option**: `hover:scale-[1.02]`
+
+### 3. Divider
+**Base Component**: `<hr>` or `<div>`
+**Visual Specifications**:
+- Border: `border-t border-border`
+- Margin: Configurable
+- Width: `w-full`
+
+## Utility Atoms
+
+### 1. VisuallyHidden (Screen Reader Only)
+**Base Component**: `<span>`
+**Visual Specifications**:
+- Class: `sr-only`
+- Purpose: Accessibility content
+
+### 2. Container
+**Base Component**: `<div>`
+**Visual Specifications**:
+- Max width variants
+- Padding variants
+- Centering: `mx-auto`
+
+## Theme System Integration
+
+All atoms must use CSS variables for colors:
+- `--primary` / `--primary-foreground`
+- `--secondary` / `--secondary-foreground`
+- `--accent` / `--accent-foreground`
+- `--background` / `--foreground`
+- `--muted` / `--muted-foreground`
+- `--card` / `--card-foreground`
+- `--destructive` / `--destructive-foreground`
+- `--border`
+- `--input`
+- `--ring`
+- `--heading-primary` (custom)
 
 ## Spacing System
-- Custom spacing tokens used:
-  - `mt-best-friends`
-  - `mt-friends`
-  - `mt-acquaintances`
-  - `p-neighbors`
-  - `gap-friends`
-- Golden ratio text sizes:
-  - `text-golden-lg`
-  - `text-golden-xl`
-  - `text-golden-2xl`
-  - `text-golden-3xl`
-  - `text-golden-4xl`
-  - `text-golden-5xl`
-  - `text-golden-6xl`
-  - `text-golden-7xl`
+Custom spacing tokens to implement:
+- `best-friends`, `friends`, `acquaintances`, `neighbors`
+- Golden ratio sizes: `golden-lg` through `golden-7xl`
 
-## Animation & Transitions
-- Standard duration: `duration-200`, `duration-300`
-- Hover transforms: `hover:scale-105`, `hover:scale-110`
-- Hover translate: `hover:-translate-y-0.5`
-- Transition types: `transition-all`, `transition-colors`, `transition-transform`, `transition-shadow`, `transition-opacity`
-- Animations: `animate-pulse`
+## Animation Presets
+- `transition-colors duration-200`
+- `transition-all duration-300`
+- `hover:scale-105`
+- `hover:-translate-y-0.5`
+- `animate-spin`
+- `animate-pulse`
 
-## Accessibility Attributes
-- `aria-label` - Used extensively on buttons and interactive elements
-- `aria-labelledby` - Used to associate sections with their headings
-- `aria-hidden` - Used on decorative elements like icons
-- `sr-only` - Screen reader only text for additional context
+## Accessibility Requirements
+All interactive atoms must support:
+- `aria-label` / `aria-labelledby`
+- `aria-describedby`
+- `aria-hidden` for decorative elements
+- Focus visible states
+- Keyboard navigation
+- Screen reader announcements
+
+## Implementation Priority
+1. **Core Form**: Input, Label, Button
+2. **Typography**: Heading, Text, Badge
+3. **Display**: Icon, Spinner, Dot
+4. **Layout**: Card (with sub-components)
+5. **Enhanced**: GlassCard, GradientButton
+6. **Utility**: VisuallyHidden, Container, Divider
+
+This list represents all unique atoms needed for the landing page implementation. Each component should be built as a reusable Vue component with proper TypeScript types and theme system integration.
