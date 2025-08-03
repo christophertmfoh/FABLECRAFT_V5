@@ -306,27 +306,26 @@
   pointer-events: none;
   z-index: 1;
   
-  /* Single optimized gradient for better performance */
+  /* Fixed: Use actual theme variables with proper syntax */
   background: 
+    /* Primary glow - positioned better */
     radial-gradient(
-      ellipse 70% 50% at 20% 20%, 
-      hsl(var(--glow-primary, 220 100% 50%) / var(--glow-opacity-primary, 0.15)) 0%,
-      transparent 50%
+      ellipse var(--glow-size-primary, 60%) var(--glow-size-primary, 60%) at 30% 25%, 
+      hsla(var(--glow-primary), var(--glow-opacity-primary, 0.15)) 0%,
+      transparent 70%
     ),
+    /* Secondary glow - positioned better */
     radial-gradient(
-      ellipse 60% 40% at 80% 80%, 
-      hsl(var(--glow-secondary, 280 100% 50%) / var(--glow-opacity-secondary, 0.1)) 0%,
-      transparent 50%
+      ellipse var(--glow-size-secondary, 50%) var(--glow-size-secondary, 50%) at 70% 75%, 
+      hsla(var(--glow-secondary), var(--glow-opacity-secondary, 0.1)) 0%,
+      transparent 70%
     );
   
   mix-blend-mode: var(--glow-blend-mode, screen);
   
-  /* Optimized GPU acceleration */
+  /* Performance optimizations */
   will-change: opacity;
   transform: translateZ(0);
-  backface-visibility: hidden;
-  
-  /* Performance containment */
   contain: layout style paint;
 }
 

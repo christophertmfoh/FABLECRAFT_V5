@@ -90,6 +90,8 @@ if (isDevelopment) {
         :performance-mode="performanceMode"
       />
       <UiAtmosphericGlow :enabled="atmosphericEnabled" />
+      <!-- Debug component to show CSS variables -->
+      <UiAtmosphericGlowDebug />
     </ClientOnly>
     
     <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
