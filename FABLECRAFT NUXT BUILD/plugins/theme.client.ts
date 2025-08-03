@@ -6,7 +6,7 @@ export default defineNuxtPlugin(() => {
   initializeTheme()
   
   // Watch for system preference changes
-  if (process.client) {
+  if (import.meta.client) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     
     // Listen for changes to system color scheme

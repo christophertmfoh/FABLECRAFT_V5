@@ -14,7 +14,7 @@
     />
     
     <!-- Atmospheric Effects -->
-    <div v-if="atmosphericEnabled" class="atmospheric-gradient"></div>
+    <div v-if="atmosphericEnabled" class="atmospheric-gradient"/>
     
     <!-- Content -->
     <div class="relative z-10 p-8 max-w-4xl mx-auto">
@@ -42,8 +42,8 @@
         <div class="space-y-2">
           <label class="flex items-center gap-2">
             <input 
-              type="checkbox" 
-              v-model="orbsEnabled"
+              v-model="orbsEnabled" 
+              type="checkbox"
               class="rounded"
             >
             <span>Background Orbs</span>
@@ -51,8 +51,8 @@
           
           <label class="flex items-center gap-2">
             <input 
-              type="checkbox" 
-              v-model="firefliesEnabled"
+              v-model="firefliesEnabled" 
+              type="checkbox"
               class="rounded"
             >
             <span>Fireflies ({{ fireflyCount }} elements)</span>
@@ -60,8 +60,8 @@
           
           <label class="flex items-center gap-2">
             <input 
-              type="checkbox" 
-              v-model="atmosphericEnabled"
+              v-model="atmosphericEnabled" 
+              type="checkbox"
               class="rounded"
             >
             <span>Atmospheric Gradient</span>
@@ -74,8 +74,8 @@
             Firefly Count: {{ fireflyCount }}
           </label>
           <input 
-            type="range" 
-            v-model.number="fireflyCount"
+            v-model.number="fireflyCount" 
+            type="range"
             min="1"
             max="12"
             class="w-full"
@@ -113,8 +113,8 @@
           <button 
             v-for="theme in themes.slice(0, 8)" 
             :key="theme.name"
-            @click="setTheme(theme.name)"
             class="px-4 py-2 bg-primary text-primary-foreground rounded hover:opacity-90"
+            @click="setTheme(theme.name)"
           >
             {{ theme.label }}
           </button>
@@ -142,7 +142,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+
+// Extended Navigator interface for deviceMemory
+interface NavigatorWithMemory extends Navigator {
+  deviceMemory?: number
+}
 
 // Theme management
 const { themes, currentTheme, setTheme } = useTheme()
@@ -169,9 +174,9 @@ const updatePerformance = () => {
 
 // Detect device capabilities
 onMounted(() => {
-  if (process.client) {
+  if (import.meta.client) {
     // Device memory
-    const nav = navigator as any
+    const nav = navigator as NavigatorWithMemory
     deviceMemory.value = nav.deviceMemory || null
     
     // CPU cores

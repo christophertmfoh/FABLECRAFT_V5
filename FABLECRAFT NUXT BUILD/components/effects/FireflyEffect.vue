@@ -53,7 +53,7 @@ const fireflies = ref<FireflyConfig[]>([])
 
 // Initialize fireflies with random properties
 const initializeFireflies = () => {
-  if (!process.client) return
+  if (!import.meta.client) return
   
   const newFireflies: FireflyConfig[] = []
   const sizes: Array<'small' | 'normal' | 'bright'> = ['small', 'normal', 'bright']
@@ -90,7 +90,7 @@ const visibleFireflies = computed(() => {
 
 // Setup intersection observer for performance
 const setupIntersectionObserver = () => {
-  if (!process.client || !containerRef.value) return
+  if (!import.meta.client || !containerRef.value) return
   
   observer.value = new IntersectionObserver(
     (entries) => {
@@ -105,24 +105,6 @@ const setupIntersectionObserver = () => {
   )
   
   observer.value.observe(containerRef.value)
-}
-
-// Detect performance capability
-const detectPerformanceMode = () => {
-  if (!process.client) return 'medium'
-  
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return 'low'
-  }
-  
-  // Simple performance detection based on device memory
-  const nav = navigator as any
-  const memory = nav.deviceMemory
-  if (memory && memory < 4) return 'low'
-  if (memory && memory >= 8) return 'high'
-  
-  return 'medium'
 }
 
 // Lifecycle hooks

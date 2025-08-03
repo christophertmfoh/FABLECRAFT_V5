@@ -153,7 +153,7 @@ const visibleOrbs = computed(() => {
 
 // Setup intersection observer
 const setupIntersectionObserver = () => {
-  if (!process.client || !containerRef.value) return
+  if (!import.meta.client || !containerRef.value) return
   
   observer.value = new IntersectionObserver(
     (entries) => {

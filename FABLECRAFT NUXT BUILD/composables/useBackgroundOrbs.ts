@@ -13,6 +13,11 @@ interface OrbOptions {
   }
 }
 
+// Extended Navigator interface for deviceMemory
+interface NavigatorWithMemory extends Navigator {
+  deviceMemory?: number
+}
+
 export const useBackgroundOrbs = () => {
   // Global orb state
   const orbsEnabled = useState<boolean>('orbs-enabled', () => true)
@@ -25,7 +30,7 @@ export const useBackgroundOrbs = () => {
 
   // Auto-detect performance mode
   const detectPerformance = () => {
-    if (!process.client) return 'medium'
+    if (!import.meta.client) return 'medium'
     
     // Check for reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -33,7 +38,7 @@ export const useBackgroundOrbs = () => {
     }
     
     // Check device memory (if available)
-    const nav = navigator as any
+    const nav = navigator as NavigatorWithMemory
     const memory = nav.deviceMemory
     if (memory) {
       if (memory < 4) return 'low'
@@ -52,7 +57,7 @@ export const useBackgroundOrbs = () => {
 
   // Initialize performance mode
   const initializePerformance = () => {
-    if (process.client && performanceMode.value === 'medium') {
+    if (import.meta.client && performanceMode.value === 'medium') {
       performanceMode.value = detectPerformance() as 'low' | 'medium' | 'high'
     }
   }

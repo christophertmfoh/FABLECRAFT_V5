@@ -4,15 +4,15 @@
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 // Supabase connection validation 
-const supabase = useSupabaseClient()
 const user = useSupabaseUser()
-const config = useRuntimeConfig()
 
 const isLoggedIn = computed(() => !!user.value)
-const supabaseUrl = computed(() => config.public.supabase?.url)
 
 // Use centralized theme composable
 const { themes, themeCategories, currentTheme, setTheme } = useTheme()
+
+// Background orbs composable
+const { orbsEnabled, toggleOrbs } = useBackgroundOrbs()
 
 // Development-only debugging (excluded from production)
 if (isDevelopment) {
@@ -28,16 +28,36 @@ if (isDevelopment) {
 
 <template>
   <div class="min-h-screen bg-background text-foreground transition-colors duration-300">
-    <div class="max-w-7xl mx-auto p-6 space-y-12">
+    <!-- Background Visual Effects -->
+    <BackgroundOrbs />
+    <FireflyEffect :count="8" />
+    
+    <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
       
       <!-- Header with Current Theme Display -->
       <div class="text-center space-y-4">
         <h1 class="text-4xl font-bold">Fablecraft Foundation</h1>
         <p class="text-xl text-muted-foreground">Modernized build environment with 15 production themes</p>
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-lg border">
-          <div class="w-3 h-3 rounded-full bg-primary"></div>
+          <div class="w-3 h-3 rounded-full bg-primary"/>
           <span class="text-sm font-medium">Current Theme: {{ currentTheme }}</span>
         </div>
+      </div>
+
+      <!-- Navigation to Test Pages -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <NuxtLink 
+          to="/typography-test" 
+          class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+        >
+          Typography Test →
+        </NuxtLink>
+        <NuxtLink 
+          to="/visual-effects-test" 
+          class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+        >
+          Visual Effects Test →
+        </NuxtLink>
       </div>
 
       <!-- Theme Showcase Section -->
@@ -58,7 +78,6 @@ if (isDevelopment) {
               <button
                 v-for="theme in themes.filter(t => t.category === category)"
                 :key="theme.name"
-                @click="setTheme(theme.name)"
                 :class="[
                   'p-4 rounded-lg border-2 transition-all duration-200 text-left',
                   'hover:scale-105 hover:shadow-md',
@@ -66,6 +85,7 @@ if (isDevelopment) {
                     ? 'border-primary bg-primary/10 shadow-lg' 
                     : 'border-border bg-muted/50 hover:border-primary/50'
                 ]"
+                @click="setTheme(theme.name)"
               >
                 <div class="font-medium text-sm">{{ theme.label }}</div>
                 <div class="text-xs text-muted-foreground mt-1">{{ theme.name }}</div>
@@ -122,10 +142,20 @@ if (isDevelopment) {
             </button>
           </div>
 
+          <!-- Visual Effects Toggle -->
+          <div class="flex justify-center">
+            <button 
+              class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
+              @click="toggleOrbs"
+            >
+              {{ orbsEnabled ? '✨ Effects On' : '○ Effects Off' }}
+            </button>
+          </div>
+
           <!-- Floating Orbs -->
           <div class="relative h-32 bg-muted/30 rounded-lg overflow-hidden">
-            <div class="floating-orb--primary absolute top-4 left-8 w-16 h-16 rounded-full"></div>
-            <div class="floating-orb--secondary absolute bottom-4 right-8 w-12 h-12 rounded-full"></div>
+            <div class="floating-orb--primary absolute top-4 left-8 w-16 h-16 rounded-full"/>
+            <div class="floating-orb--secondary absolute bottom-4 right-8 w-12 h-12 rounded-full"/>
             <div class="absolute inset-0 flex items-center justify-center">
               <span class="text-sm text-muted-foreground">Theme-reactive floating orbs</span>
             </div>
@@ -164,31 +194,31 @@ if (isDevelopment) {
             <h3 class="text-sm font-medium text-primary mb-3">4-Point Grid Scale (Industry Standard):</h3>
             <div class="flex flex-wrap items-end gap-1">
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-micro)', height: 'var(--space-micro)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-micro)', height: 'var(--space-micro)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">2px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-tiny)', height: 'var(--space-tiny)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-tiny)', height: 'var(--space-tiny)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">4px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-xs)', height: 'var(--space-xs)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-xs)', height: 'var(--space-xs)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">8px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-sm)', height: 'var(--space-sm)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-sm)', height: 'var(--space-sm)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">12px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-md)', height: 'var(--space-md)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-md)', height: 'var(--space-md)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">16px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-lg)', height: 'var(--space-lg)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-lg)', height: 'var(--space-lg)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">20px</span>
               </div>
               <div class="flex flex-col items-center">
-                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-xl)', height: 'var(--space-xl)' }"></div>
+                <div class="bg-primary border border-primary/50" :style="{ width: 'var(--space-xl)', height: 'var(--space-xl)' }"/>
                 <span class="text-xs mt-1 text-muted-foreground">24px</span>
               </div>
             </div>
@@ -204,6 +234,8 @@ if (isDevelopment) {
               <div>✅ SSR-compatible theme switching</div>
               <div>✅ Theme-reactive orbs and auth buttons</div>
               <div>✅ LocalStorage persistence with system detection</div>
+              <div>✅ GPU-accelerated visual effects (60 FPS)</div>
+              <div>✅ Golden ratio typography system</div>
             </div>
           </div>
 

@@ -8,8 +8,8 @@
           <button 
             v-for="theme in themes.slice(0, 6)" 
             :key="theme.name"
-            @click="setTheme(theme.name)"
             class="px-4 py-2 bg-primary text-primary-foreground rounded hover:opacity-90"
+            @click="setTheme(theme.name)"
           >
             {{ theme.label }}
           </button>
@@ -82,7 +82,7 @@ const { themes, currentTheme, setTheme } = useTheme()
 const cssVars = ref({})
 
 onMounted(() => {
-  if (process.client) {
+  if (import.meta.client) {
     const computedStyle = getComputedStyle(document.documentElement)
     cssVars.value = {
       goldenRatio: computedStyle.getPropertyValue('--golden-ratio'),

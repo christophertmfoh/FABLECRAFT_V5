@@ -58,7 +58,7 @@ export const useTheme = () => {
     themeCookie.value = themeName
     
     // Update DOM if on client
-    if (process.client) {
+    if (import.meta.client) {
       document.documentElement.setAttribute('data-theme', themeName)
       // Also update localStorage for redundancy
       localStorage.setItem('theme', themeName)
@@ -67,7 +67,7 @@ export const useTheme = () => {
   
   // Initialize theme on client
   const initializeTheme = () => {
-    if (!process.client) return
+    if (!import.meta.client) return
     
     const savedTheme = themeCookie.value || localStorage.getItem('theme')
     
