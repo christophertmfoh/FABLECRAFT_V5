@@ -59,19 +59,19 @@ details[open] summary::before {
 }
 ```
 
-### Removed Elements
-- Removed individual toggle buttons for Typography and Effects Controls
-- Simplified Quick Controls to only show "All Effects On/Off" button
+### UI Adjustments
+- Moved "All Effects On/Off" button into Visual Effects Controls dropdown
+- Fixed Theme System dropdown alignment to be consistent with other dropdowns
+- Removed Quick Controls section entirely for cleaner interface
 
 ## Organization Structure
 
 1. **Header** (Title, description, theme badge)
 2. **System Status** (New position - top dropdown)
-3. **Quick Controls** (Single effects toggle button)
-4. **Visual Effects Controls** (Dropdown)
-5. **Typography System** (Dropdown)
-6. **Interactive Theme System** (Dropdown)
-7. **Foundation Systems Check** (Development only dropdown)
+3. **Visual Effects Controls** (Dropdown - includes effects toggle button)
+4. **Typography System** (Dropdown)
+5. **Interactive Theme System** (Dropdown)
+6. **Foundation Systems Check** (Development only dropdown)
 
 ## Benefits
 - Cleaner, more organized interface
