@@ -8,7 +8,9 @@
    PHASE 1A: MATHEMATICAL SPACING FOUNDATION
    Must load first - all other systems depend on these variables
 ======================================== */
-@import './design-tokens.css';
+@import "tailwindcss";
+@import "./design-tokens.css";
+@import "./theme-system.css";
 
 /* ========================================
    TAILWIND CSS LAYERS
