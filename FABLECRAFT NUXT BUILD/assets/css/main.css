@@ -10,6 +10,7 @@
 ======================================== */
 @import './design-tokens.css';
 @import './theme-system.css';
+@import './visual-effects.css';
 
 /* ========================================
    TAILWIND CSS LAYERS
