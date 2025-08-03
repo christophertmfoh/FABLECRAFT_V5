@@ -33,11 +33,8 @@ export default defineNuxtConfig({
       exclude: [
         '/', 
         '/login', 
-        '/confirm',
-        '/theme-test',
-        '/typography-test',
-        '/visual-effects-test'
-      ], // Exclude public pages and test pages from auth redirect
+        '/confirm'
+      ], // Exclude public pages from auth redirect
     }
   },
 

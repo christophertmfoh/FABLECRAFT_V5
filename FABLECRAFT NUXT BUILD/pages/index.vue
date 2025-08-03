@@ -8,8 +8,22 @@ const user = useSupabaseUser()
 
 const isLoggedIn = computed(() => !!user.value)
 
-// Use centralized theme composable
-const { themes, themeCategories, currentTheme, setTheme } = useTheme()
+// Use centralized theme composable with all features
+const { 
+  themes, 
+  themeCategories, 
+  currentTheme, 
+  currentThemeObject,
+  isDark,
+  setTheme,
+  setThemeWithTransition,
+  toggleTheme,
+  getTheme,
+  isThemeDark
+} = useTheme()
+
+// Import theme helper functions
+import { getThemesByCategory } from '../constants/data'
 
 // Background orbs composable
 const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
@@ -251,43 +265,144 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <!-- Interactive Theme System Dropdown -->
+      <!-- Interactive Theme System & Persistence Test -->
       <details :open="showThemeSystem" class="bg-card p-8 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🎨 Interactive Theme System
+          🎨 Interactive Theme System & Persistence Test
         </summary>
         
-        <div class="space-y-4">
-          <p class="text-center text-muted-foreground">
-            Click any theme below to see our complete design system in action
-          </p>
-        
-        <!-- Theme Categories -->
-        <div class="space-y-8">
-          <div v-for="category in themeCategories" :key="category" class="space-y-4">
-            <h3 class="text-lg font-semibold text-foreground border-b border-border pb-2">
-              {{ category }} ({{ themes.filter(t => t.category === category).length }})
-            </h3>
+        <div class="space-y-6">
+          <!-- Current Theme Information -->
+          <div class="bg-muted/30 rounded-lg p-4 border">
+            <h3 class="font-semibold text-sm mb-3">Current Theme Information</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div>
+                <span class="text-muted-foreground">Name:</span>
+                <span class="ml-2 font-medium">{{ currentTheme }}</span>
+              </div>
+              <div>
+                <span class="text-muted-foreground">Label:</span>
+                <span class="ml-2 font-medium">{{ currentThemeObject.label }}</span>
+              </div>
+              <div>
+                <span class="text-muted-foreground">Category:</span>
+                <span class="ml-2 font-medium">{{ currentThemeObject.category }}</span>
+              </div>
+              <div>
+                <span class="text-muted-foreground">Dark Mode:</span>
+                <span class="ml-2 font-medium">{{ isDark ? 'Yes' : 'No' }}</span>
+              </div>
+            </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              <button
-                v-for="theme in themes.filter(t => t.category === category)"
-                :key="theme.name"
-                :class="[
-                  'p-4 rounded-lg border-2 transition-all duration-200 text-left',
-                  'hover:scale-105 hover:shadow-md',
-                  currentTheme === theme.name 
-                    ? 'border-primary bg-primary/10 shadow-lg' 
-                    : 'border-border bg-muted/50 hover:border-primary/50'
-                ]"
-                @click="setTheme(theme.name)"
-              >
-                <div class="font-medium text-sm">{{ theme.label }}</div>
-                <div class="text-xs text-muted-foreground mt-1">{{ theme.name }}</div>
-              </button>
+            <!-- Theme Preview Colors -->
+            <div v-if="currentThemeObject.preview" class="mt-3 flex items-center gap-2">
+              <span class="text-sm text-muted-foreground">Preview:</span>
+              <div 
+                class="w-6 h-6 rounded shadow-sm" 
+                :style="{ backgroundColor: currentThemeObject.preview.primary }"
+                title="Primary"
+              ></div>
+              <div 
+                class="w-6 h-6 rounded shadow-sm" 
+                :style="{ backgroundColor: currentThemeObject.preview.secondary }"
+                title="Secondary"
+              ></div>
+              <div 
+                class="w-6 h-6 rounded shadow-sm border" 
+                :style="{ backgroundColor: currentThemeObject.preview.background }"
+                title="Background"
+              ></div>
             </div>
           </div>
-        </div>
+
+          <!-- Quick Actions -->
+          <div class="bg-muted/20 rounded-lg p-4 border">
+            <h3 class="font-semibold text-sm mb-3">Quick Actions & Persistence Test</h3>
+            <div class="flex flex-wrap gap-3">
+              <button
+                @click="toggleTheme"
+                class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+              >
+                Toggle Light/Dark
+              </button>
+              <button
+                @click="setThemeWithTransition('light')"
+                class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+              >
+                Set Light
+              </button>
+              <button
+                @click="setThemeWithTransition('dark')"
+                class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+              >
+                Set Dark
+              </button>
+              <button
+                @click="() => window.location.reload()"
+                class="px-4 py-2 bg-accent text-accent-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+              >
+                🔄 Refresh Page
+              </button>
+            </div>
+            
+            <div class="mt-3 p-3 bg-background/50 rounded text-xs text-muted-foreground">
+              <strong>Persistence Test:</strong> Select a theme, then click "Refresh Page" or press F5. The theme should persist across page refreshes and navigation.
+            </div>
+          </div>
+        
+          <!-- Theme Selection Grid -->
+          <div class="space-y-6">
+            <p class="text-center text-muted-foreground text-sm">
+              Click any theme below to instantly switch. Themes persist using cookies (SSR) + localStorage.
+            </p>
+            
+            <div v-for="category in themeCategories" :key="category" class="space-y-3">
+              <h3 class="text-base font-semibold text-foreground border-b border-border pb-2">
+                {{ category }} ({{ getThemesByCategory(category).length }})
+              </h3>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <button
+                  v-for="theme in getThemesByCategory(category)"
+                  :key="theme.name"
+                  :class="[
+                    'p-3 rounded-lg border-2 transition-all duration-200 text-left relative overflow-hidden',
+                    'hover:scale-105 hover:shadow-md',
+                    currentTheme === theme.name 
+                      ? 'border-primary bg-primary/10 shadow-lg ring-2 ring-primary/20' 
+                      : 'border-border bg-muted/50 hover:border-primary/50'
+                  ]"
+                  @click="setThemeWithTransition(theme.name)"
+                >
+                  <!-- Active indicator -->
+                  <div v-if="currentTheme === theme.name" class="absolute top-1 right-1">
+                    <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  </div>
+                  
+                  <div class="font-medium text-sm">{{ theme.label }}</div>
+                  <div v-if="theme.description" class="text-xs text-muted-foreground mt-1 line-clamp-2">
+                    {{ theme.description }}
+                  </div>
+                  
+                  <!-- Theme preview colors -->
+                  <div v-if="theme.preview" class="flex gap-1 mt-2">
+                    <div 
+                      class="w-4 h-4 rounded-full shadow-sm" 
+                      :style="{ backgroundColor: theme.preview.primary }"
+                    ></div>
+                    <div 
+                      class="w-4 h-4 rounded-full shadow-sm" 
+                      :style="{ backgroundColor: theme.preview.secondary }"
+                    ></div>
+                    <div 
+                      class="w-4 h-4 rounded-full shadow-sm border" 
+                      :style="{ backgroundColor: theme.preview.background }"
+                    ></div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
 
         <!-- Theme Demo Content -->
         <div class="mt-12 space-y-6">
@@ -378,32 +493,7 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <!-- Test Pages Navigation -->
-      <div class="bg-card p-8 rounded-lg border shadow-sm">
-        <h2 class="text-lg font-semibold mb-4">🧪 Test Pages</h2>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <NuxtLink
-            to="/theme-test"
-            class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Theme Persistence Test
-          </NuxtLink>
-          <NuxtLink
-            to="/typography-test"
-            class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Typography Test
-          </NuxtLink>
-          <NuxtLink
-            to="/visual-effects-test"
-            class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          >
-            Visual Effects Test
-          </NuxtLink>
-        </div>
-      </div>
-
-      <p class="text-center text-sm text-muted-foreground">
+      <p class="text-center text-sm text-muted-foreground mt-8">
         Fablecraft Foundation - Production-ready with all systems operational
       </p>
     </div>
