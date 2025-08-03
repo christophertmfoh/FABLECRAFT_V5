@@ -7,10 +7,19 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/supabase',
     '@nuxtjs/tailwindcss',
+    '@nuxt/icon',
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxt/eslint'
   ],
+
+  // Icon module configuration
+  icon: {
+    size: '24px',
+    class: 'icon',
+    mode: 'css',
+    collections: ['lucide']
+  },
 
   // Explicitly load the global stylesheet
   css: ['~/assets/css/main.css'],
@@ -35,7 +44,8 @@ export default defineNuxtConfig({
         '/login', 
         '/confirm',
         '/supabase-test',
-        '/api-test'
+        '/api-test',
+        '/test-foundation'
       ], // Exclude public pages from auth redirect
     }
   },
