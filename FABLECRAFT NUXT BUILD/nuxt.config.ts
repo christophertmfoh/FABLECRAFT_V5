@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   // Enable essential modules for the core stack
   modules: [
-    // '@nuxtjs/supabase', // Temporarily disabled for Nuxt 3.18 compatibility testing
+    '@nuxtjs/supabase',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@vueuse/nuxt',
@@ -16,13 +16,13 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   // Supabase configuration for authentication redirects
-  // supabase: {
-  //   redirectOptions: {
-  //     login: '/login',
-  //     callback: '/confirm',
-  //     exclude: ['/', '/login', '/confirm'], // Exclude public pages from auth redirect
-  //   }
-  // },
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirm',
+      exclude: ['/', '/login', '/confirm'], // Exclude public pages from auth redirect
+    }
+  },
 
   // Performance optimizations
   nitro: {
