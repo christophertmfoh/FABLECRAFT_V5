@@ -42,74 +42,106 @@ if (isDevelopment) {
           </div>
           <div class="flex justify-between">
             <span>Environment:</span>
-            <span class="font-mono text-xs">{{ supabaseUrl ? 'Production' : 'Development' }}</span>
+            <span class="font-mono text-xs">{{ isDevelopment ? 'Development' : 'Production' }}</span>
           </div>
         </div>
       </div>
 
       <!-- Development-Only Validation Tests -->
-      <details class="bg-blue-50 p-6 rounded-lg shadow-sm border max-w-2xl mx-auto development-only">
-        <summary class="text-lg font-semibold mb-4 text-blue-900 cursor-pointer">
-          🔧 Development: Mathematical Spacing System Validation
+      <details v-if="isDevelopment" class="bg-white p-6 rounded-lg shadow-sm border max-w-4xl mx-auto text-left">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-blue-600">
+          Design Token Validation Tests
         </summary>
         
-        <!-- Industry-Standard Design Token Testing -->
-        <div class="space-y-6 text-left mt-4">
-          
+        <div class="space-y-6">
           <!-- 8-Point Grid Scale Validation -->
-          <div class="space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">8-Point Grid Scale:</h3>
-            <div class="flex flex-wrap gap-2 text-xs items-end">
-              <div class="spacing-test" style="width: var(--space-1); height: var(--space-1);"><span>4px</span></div>
-              <div class="spacing-test" style="width: var(--space-2); height: var(--space-2);"><span>8px</span></div>
-              <div class="spacing-test" style="width: var(--space-4); height: var(--space-4);"><span>16px</span></div>
-              <div class="spacing-test" style="width: var(--space-6); height: var(--space-6);"><span>24px</span></div>
-              <div class="spacing-test" style="width: var(--space-8); height: var(--space-8);"><span>32px</span></div>
-              <div class="spacing-test" style="width: var(--space-12); height: var(--space-12);"><span>48px</span></div>
+          <div>
+            <h3 class="text-sm font-medium text-blue-800 mb-3">8-Point Grid Scale:</h3>
+            <div class="flex flex-wrap items-end gap-1">
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-1)', height: 'var(--space-1)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">4px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-2)', height: 'var(--space-2)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">8px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-4)', height: 'var(--space-4)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">16px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-6)', height: 'var(--space-6)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">24px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-8)', height: 'var(--space-8)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">32px</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="bg-blue-500 border border-blue-600" :style="{ width: 'var(--space-12)', height: 'var(--space-12)' }"></div>
+                <span class="text-xs mt-1 text-blue-600">48px</span>
+              </div>
             </div>
           </div>
           
-          <!-- Semantic Token Validation -->
-          <div class="space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">Semantic Design Tokens:</h3>
-            <div class="flex flex-wrap gap-2 text-xs items-end">
-              <div class="spacing-test" style="width: var(--space-micro); height: var(--space-micro);"><span>micro</span></div>
-              <div class="spacing-test" style="width: var(--space-tiny); height: var(--space-tiny);"><span>tiny</span></div>
-              <div class="spacing-test" style="width: var(--space-small); height: var(--space-small);"><span>small</span></div>
-              <div class="spacing-test" style="width: var(--space-medium); height: var(--space-medium);"><span>medium</span></div>
-              <div class="spacing-test" style="width: var(--space-large); height: var(--space-large);"><span>large</span></div>
+          <!-- Semantic Spacing Aliases -->
+          <div>
+            <h3 class="text-sm font-medium text-blue-800 mb-3">Semantic Spacing:</h3>
+            <div class="flex flex-wrap gap-2">
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-micro)' }">
+                micro (4px)
+              </div>
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-tiny)' }">
+                tiny (8px)
+              </div>
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-small)' }">
+                small (16px)
+              </div>
+              <div class="bg-green-100 border border-green-400 text-green-800 text-xs font-medium rounded px-2 py-1" :style="{ margin: 'var(--space-medium)' }">
+                medium (24px)
+              </div>
             </div>
           </div>
-          
-          <!-- Typography Scale Validation -->
-          <div class="typography-test space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">Semantic Typography Scale:</h3>
-            <div class="space-y-1">
-              <div style="font-size: var(--text-xs);">XS Text (Semantic Token)</div>
-              <div style="font-size: var(--text-sm);">Small Text (Semantic Token)</div>
-              <div style="font-size: var(--text-base);">Base Text (Semantic Token)</div>
-              <div style="font-size: var(--text-lg);">Large Text (Semantic Token)</div>
+
+          <!-- Golden Ratio Typography Test -->
+          <div>
+            <h3 class="text-sm font-medium text-blue-800 mb-3">Golden Ratio Typography:</h3>
+            <div class="space-y-1 text-left">
+              <div :style="{ fontSize: 'var(--text-xs)', lineHeight: 'var(--line-height-normal)' }">
+                Extra Small Text (Golden Ratio)
+              </div>
+              <div :style="{ fontSize: 'var(--text-sm)', lineHeight: 'var(--line-height-normal)' }">
+                Small Text (Golden Ratio)
+              </div>
+              <div :style="{ fontSize: 'var(--text-base)', lineHeight: 'var(--line-height-normal)' }">
+                Base Text (Golden Ratio)
+              </div>
+              <div :style="{ fontSize: 'var(--text-lg)', lineHeight: 'var(--line-height-normal)' }">
+                Large Text (Golden Ratio)
+              </div>
             </div>
           </div>
-          
-          <!-- Foundation Architecture -->
-          <div class="space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">Foundation Architecture:</h3>
-            <div class="text-xs font-mono bg-white p-3 rounded border">
+
+          <!-- Foundation Architecture Summary -->
+          <div class="border-t pt-4">
+            <h3 class="text-sm font-medium text-blue-800 mb-2">Foundation Architecture:</h3>
+            <div class="text-xs font-mono bg-gray-50 p-3 rounded border space-y-1">
               <div>✓ Industry-standard 8-point grid system</div>
               <div>✓ Golden Ratio typography scaling (φ = 1.618)</div>
-              <div>✓ Semantic spacing aliases for developer clarity</div>
-              <div>✓ Cross-browser compatible CSS variables</div>
+              <div>✓ SSR-compatible CSS custom properties</div>
+              <div>✓ Semantic spacing aliases for maintainability</div>
+              <div>✓ Responsive scaling across breakpoints</div>
             </div>
           </div>
-          
-          <div class="text-xs text-blue-600 mt-3 p-3 border-t">
-            <strong>Development Note:</strong> This validation section is excluded from production builds using @layer development and @supports detection.
-            <br><strong>Validation:</strong> Open DevTools → Elements → Computed to verify CSS custom properties.
-          </div>
+
+          <p class="text-xs text-blue-600">
+            Open browser dev tools → Elements → Computed styles to inspect CSS variables
+          </p>
         </div>
       </details>
 
+      <p class="text-sm text-gray-500">Ready to build amazing things!</p>
     </div>
   </div>
 </template>
