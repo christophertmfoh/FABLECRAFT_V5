@@ -81,34 +81,79 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Format currency with locale support
+ * Format currency with Intl.NumberFormat
+ * SSR-safe implementation
  */
 export function formatCurrency(
   amount: number | string,
-  currency: string = 'USD',
-  locale: string = 'en-US'
+  options: {
+    currency?: string
+    locale?: string
+    minimumFractionDigits?: number
+    maximumFractionDigits?: number
+  } = {}
 ): string {
+  const {
+    currency = 'USD',
+    locale = 'en-US',
+    minimumFractionDigits = 0,
+    maximumFractionDigits = 2
+  } = options
+  
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount
+  
+  if (isNaN(numAmount)) {
+    return ''
+  }
+  
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
+    minimumFractionDigits,
+    maximumFractionDigits
   }).format(numAmount)
+}
+
+/**
+ * Debounce function for input handlers
+ */
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null
+  
+  return (...args: Parameters<T>) => {
+    if (timeout) clearTimeout(timeout)
+    timeout = setTimeout(() => func(...args), wait)
+  }
 }
 ```
 
 ### **Step 2: Create Core Composables**
 
-#### Create `composables/useId.ts`:
+#### Create `composables/useComponentId.ts`:
 ```typescript
 /**
- * Generate SSR-safe unique IDs for accessibility
+ * SSR-safe unique ID generator
+ * Uses Nuxt 3.10+ built-in useId when available
  */
-export function useId(prefix: string = 'fc'): string {
-  const instance = getCurrentInstance()
+export const useComponentId = (prefix: string = 'fc'): string => {
+  // Check if Nuxt 3.10+ useId is available
+  if (typeof useId === 'function') {
+    return useId()
+  }
   
-  // Use instance UID if available (SSR-safe)
-  const id = instance?.uid || Math.random().toString(36).substring(2, 9)
-  return `${prefix}-${id}`
+  // Fallback for older Nuxt versions
+  if (process.server) {
+    // Use a counter in SSR for deterministic IDs
+    const counter = useState(`id-counter-${prefix}`, () => 0)
+    counter.value++
+    return `${prefix}-ssr-${counter.value}`
+  }
+  
+  // Client-side random ID
+  return `${prefix}-${Math.random().toString(36).substring(2, 9)}`
 }
 ```
 
@@ -117,33 +162,51 @@ export function useId(prefix: string = 'fc'): string {
 import { computed, type Ref, type ComputedRef } from 'vue'
 import type { ComponentSize, ComponentVariant } from '~/types'
 
-export function useComponentClasses(
-  size: Ref<ComponentSize>,
-  variant: Ref<ComponentVariant>
-): ComputedRef<Record<string, string>> {
-  return computed(() => ({
-    // Size classes
-    xs: 'text-xs px-2 py-1',
-    sm: 'text-sm px-3 py-1.5',
-    md: 'text-base px-4 py-2',
-    lg: 'text-lg px-6 py-3',
-    xl: 'text-xl px-8 py-4',
+interface ClassMap {
+  sizes: Record<ComponentSize, string>
+  variants: Record<ComponentVariant, string>
+}
 
-    // Variant classes using CSS variables
-    primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
-    accent: 'bg-accent text-accent-foreground hover:bg-accent/90',
-    ghost: 'hover:bg-accent hover:text-accent-foreground',
-    outline: 'border-2 border-current hover:bg-accent hover:text-accent-foreground',
-  }))
+export const useComponentClasses = (
+  size: Ref<ComponentSize>,
+  variant: Ref<ComponentVariant>,
+  classMap: ClassMap
+): ComputedRef<string> => {
+  return computed(() => {
+    const sizeClass = classMap.sizes[size.value] || ''
+    const variantClass = classMap.variants[variant.value] || ''
+    return `${sizeClass} ${variantClass}`.trim()
+  })
 }
 ```
 
 ### **Step 3: Install Dependencies**
 ```bash
-# Run this command
-pnpm add lucide-vue-next clsx tailwind-merge @vueuse/core
+# Install icon module and dependencies
+pnpm add @nuxt/icon @iconify-json/lucide clsx tailwind-merge
+
+# Install dev dependencies
 pnpm add -D @types/node vitest @vue/test-utils @testing-library/vue
+```
+
+#### Update `nuxt.config.ts`:
+```typescript
+export default defineNuxtConfig({
+  modules: [
+    '@nuxt/icon',
+    '@nuxtjs/tailwindcss'
+  ],
+  icon: {
+    size: '24px',
+    class: 'icon',
+    mode: 'css', // Use CSS mode for better performance
+    collections: ['lucide']
+  },
+  typescript: {
+    strict: true,
+    typeCheck: true
+  }
+})
 ```
 
 ---
@@ -155,17 +218,14 @@ pnpm add -D @types/node vitest @vue/test-utils @testing-library/vue
 #### Update `components/atoms/Icon.vue`:
 ```vue
 <template>
-  <component
-    :is="iconComponent"
+  <Icon 
+    :name="iconName" 
+    :size="sizeValue"
     :class="iconClasses"
-    :width="sizeValue"
-    :height="sizeValue"
-    aria-hidden="true"
   />
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from 'vue'
 import type { ComponentSize } from '~/types'
 import { cn } from './Utils'
 
@@ -179,41 +239,88 @@ const props = withDefaults(defineProps<IconProps>(), {
   size: 'md'
 })
 
-// Dynamic icon import from lucide-vue-next
-const iconComponent = computed(() => 
-  defineAsyncComponent(() => 
-    import('lucide-vue-next').then(module => module[props.name])
-  )
-)
+// Use Nuxt Icon's naming convention
+const iconName = computed(() => {
+  // Support both formats: 'Zap' and 'i-lucide-zap'
+  if (props.name.startsWith('i-')) return props.name
+  return `i-lucide-${props.name.toLowerCase()}`
+})
 
-// Size mappings using CSS variables
-const sizeMap: Record<ComponentSize, number> = {
-  xs: 16,  // --space-2
-  sm: 20,  // --space-2.5
-  md: 24,  // --space-3
-  lg: 32,  // --space-4
-  xl: 40   // --space-5
+// Size in pixels for Nuxt Icon
+const sizeMap: Record<ComponentSize, string> = {
+  xs: '16px',
+  sm: '20px',
+  md: '24px',
+  lg: '32px',
+  xl: '40px'
 }
 
 const sizeValue = computed(() => sizeMap[props.size])
 
 const iconClasses = computed(() => 
-  cn(
-    'inline-block',
-    'text-current',
-    props.class
-  )
+  cn('inline-block', props.class)
 )
 </script>
 ```
 
 **Icons Required (44 total)**:
-- Navigation: ChevronDown, ChevronRight, Check, Circle, X, Menu, ArrowRight
-- Features: Zap, Sparkles, Lightbulb, PenTool, Palette, Camera, Music, Share2, Film, Globe, CheckCircle, Star
-- Brand: Feather, BookOpen, Users, User, UserCircle, LogOut
-- Theme: Sun, Moon, Monitor
-- Social: Twitter, Facebook, Instagram, Linkedin, Youtube
-- Utility: AlertTriangle, RefreshCw, Home, Download, Heart, Mail, Loader2
+```typescript
+// All 44 icons with correct Lucide names
+export const ICON_LIST = {
+  // Navigation
+  'ChevronDown': 'i-lucide-chevron-down',
+  'ChevronRight': 'i-lucide-chevron-right',
+  'Check': 'i-lucide-check',
+  'Circle': 'i-lucide-circle',
+  'X': 'i-lucide-x',
+  'Menu': 'i-lucide-menu',
+  'ArrowRight': 'i-lucide-arrow-right',
+  
+  // Features
+  'Zap': 'i-lucide-zap',
+  'Sparkles': 'i-lucide-sparkles',
+  'Lightbulb': 'i-lucide-lightbulb',
+  'PenTool': 'i-lucide-pen-tool',
+  'Palette': 'i-lucide-palette',
+  'Camera': 'i-lucide-camera',
+  'Music': 'i-lucide-music',
+  'Share2': 'i-lucide-share-2',
+  'Film': 'i-lucide-film',
+  'Globe': 'i-lucide-globe',
+  'CheckCircle': 'i-lucide-check-circle',
+  'Star': 'i-lucide-star',
+  
+  // Brand
+  'Feather': 'i-lucide-feather',
+  'BookOpen': 'i-lucide-book-open',
+  'Users': 'i-lucide-users',
+  'User': 'i-lucide-user',
+  'UserCircle': 'i-lucide-user-circle',
+  'LogOut': 'i-lucide-log-out',
+  
+  // Theme
+  'Sun': 'i-lucide-sun',
+  'Moon': 'i-lucide-moon',
+  'Monitor': 'i-lucide-monitor',
+  
+  // Social (using brand icons)
+  'Twitter': 'i-lucide-twitter',
+  'Facebook': 'i-lucide-facebook',
+  'Instagram': 'i-lucide-instagram',
+  'Linkedin': 'i-lucide-linkedin',
+  'Youtube': 'i-lucide-youtube',
+  
+  // Utility
+  'AlertTriangle': 'i-lucide-alert-triangle',
+  'RefreshCw': 'i-lucide-refresh-cw',
+  'Home': 'i-lucide-home',
+  'Download': 'i-lucide-download',
+  'Heart': 'i-lucide-heart',
+  'Mail': 'i-lucide-mail',
+  'Loader2': 'i-lucide-loader-2',
+  'Info': 'i-lucide-info'
+} as const
+```
 
 ### **Step 5: Button & GradientButton**
 
@@ -222,19 +329,21 @@ const iconClasses = computed(() =>
 <template>
   <component
     :is="componentTag"
-    :type="type"
+    :type="componentTag === 'button' ? type : undefined"
     :to="to"
     :href="href"
+    :target="target"
     :disabled="disabled || loading"
     :aria-busy="loading"
     :aria-disabled="disabled"
     :class="buttonClasses"
     @click="handleClick"
   >
-    <Spinner
+    <Icon
       v-if="loading"
+      name="i-lucide-loader-circle"
       :size="iconSize"
-      class="mr-2"
+      class="mr-2 animate-spin"
     />
     <Icon
       v-else-if="iconLeft"
@@ -243,7 +352,9 @@ const iconClasses = computed(() =>
       class="mr-2"
     />
     
-    <slot />
+    <span :class="{ 'opacity-0': loading && !$slots.default }">
+      <slot />
+    </span>
     
     <Icon
       v-if="iconRight && !loading"
@@ -270,6 +381,7 @@ interface ButtonProps {
   iconRight?: string
   to?: RouteLocationRaw
   href?: string
+  target?: '_blank' | '_self' | '_parent' | '_top'
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -285,39 +397,44 @@ const emit = defineEmits<{
   click: [event: MouseEvent]
 }>()
 
-// Computed component type
+// Polymorphic component resolution
+const NuxtLink = resolveComponent('NuxtLink')
 const componentTag = computed(() => {
-  if (props.to) return resolveComponent('NuxtLink')
+  if (props.to) return NuxtLink
   if (props.href) return 'a'
   return 'button'
 })
 
-// Size classes
-const sizeClasses = {
-  sm: 'h-9 px-3 text-sm',
-  md: 'h-10 px-4 text-base',
-  lg: 'h-11 px-8 text-lg',
-  icon: 'h-10 w-10 p-0'
+// Size classes aligned with design system
+const sizeClasses: Record<ComponentSize, string> = {
+  xs: 'h-7 px-2 text-xs gap-1',
+  sm: 'h-9 px-3 text-sm gap-1.5',
+  md: 'h-10 px-4 text-base gap-2',
+  lg: 'h-11 px-6 text-lg gap-2',
+  xl: 'h-12 px-8 text-xl gap-3'
 }
 
 // Icon size mapping
-const iconSize = computed(() => {
-  const sizes: Record<ComponentSize, ComponentSize> = {
-    sm: 'xs',
-    md: 'sm',
-    lg: 'sm',
-    icon: 'md'
-  }
-  return sizes[props.size] || 'sm'
-})
+const iconSizeMap: Record<ComponentSize, ComponentSize> = {
+  xs: 'xs',
+  sm: 'xs',
+  md: 'sm',
+  lg: 'sm',
+  xl: 'md'
+}
+
+const iconSize = computed(() => iconSizeMap[props.size])
 
 // Variant classes using CSS variables
-const variantClasses = {
-  primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
-  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
-  danger: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-  ghost: 'hover:bg-accent hover:text-accent-foreground',
-  outline: 'border-2 border-current bg-transparent hover:bg-accent'
+const variantClasses: Record<ComponentVariant, string> = {
+  primary: 'bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary',
+  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90 focus-visible:ring-secondary',
+  accent: 'bg-accent text-accent-foreground hover:bg-accent/90 focus-visible:ring-accent',
+  danger: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive',
+  success: 'bg-success text-success-foreground hover:bg-success/90 focus-visible:ring-success',
+  warning: 'bg-warning text-warning-foreground hover:bg-warning/90 focus-visible:ring-warning',
+  ghost: 'hover:bg-accent hover:text-accent-foreground focus-visible:ring-accent',
+  outline: 'border-2 border-current bg-transparent hover:bg-accent focus-visible:ring-current'
 }
 
 // Combined classes
@@ -327,10 +444,9 @@ const buttonClasses = computed(() =>
     'inline-flex items-center justify-center',
     'rounded-xl font-semibold',
     'transition-all duration-300',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
     'disabled:pointer-events-none disabled:opacity-50',
-    'hover:scale-105 hover:-translate-y-0.5',
-    'shadow-md hover:shadow-lg active:shadow-sm',
+    'active:scale-95',
     
     // Size
     sizeClasses[props.size],
@@ -341,7 +457,7 @@ const buttonClasses = computed(() =>
     // Full width
     props.fullWidth && 'w-full',
     
-    // Loading
+    // Loading state
     props.loading && 'cursor-wait'
   )
 )
@@ -376,6 +492,7 @@ const handleClick = (event: MouseEvent) => {
 </template>
 
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router'
 import type { ComponentSize, ComponentVariant } from '~/types'
 import { cn } from './Utils'
 
@@ -390,6 +507,7 @@ interface GradientButtonProps {
   iconRight?: string
   to?: RouteLocationRaw
   href?: string
+  target?: '_blank' | '_self' | '_parent' | '_top'
   showGradientOverlay?: boolean
   gradientColors?: string
   gradientDuration?: string
@@ -422,28 +540,11 @@ const gradientClasses = computed(() =>
 #### Create `components/atoms/Spinner.vue`:
 ```vue
 <template>
-  <svg
+  <Icon
+    name="i-lucide-loader-circle"
+    :size="size"
     :class="spinnerClasses"
-    :width="sizeValue"
-    :height="sizeValue"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      class="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      stroke-width="4"
-    />
-    <path
-      class="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-    />
-  </svg>
+  />
 </template>
 
 <script setup lang="ts">
@@ -458,16 +559,6 @@ interface SpinnerProps {
 const props = withDefaults(defineProps<SpinnerProps>(), {
   size: 'md'
 })
-
-const sizeMap: Record<ComponentSize, number> = {
-  xs: 16,
-  sm: 16,
-  md: 24,
-  lg: 32,
-  xl: 48
-}
-
-const sizeValue = computed(() => sizeMap[props.size])
 
 const spinnerClasses = computed(() =>
   cn(
@@ -493,98 +584,145 @@ const spinnerClasses = computed(() =>
 import { cn } from './Utils'
 
 interface CardProps {
+  variant?: 'elevated' | 'outlined' | 'flat'
   class?: string
 }
 
-const props = defineProps<CardProps>()
+const props = withDefaults(defineProps<CardProps>(), {
+  variant: 'elevated'
+})
+
+const variantClasses = {
+  elevated: 'shadow-md hover:shadow-lg',
+  outlined: 'border-2',
+  flat: ''
+}
 
 const cardClasses = computed(() =>
   cn(
-    'rounded-lg border bg-card text-card-foreground shadow-sm',
+    'rounded-lg bg-card text-card-foreground',
+    'transition-shadow duration-200',
+    variantClasses[props.variant],
     props.class
   )
 )
 </script>
 ```
 
-Create additional card sub-components in the same file:
+Create additional card sub-components:
 
 ```vue
-<!-- Add these components to Card.vue -->
+<!-- components/atoms/CardHeader.vue -->
 <template>
-  <div :class="cardClasses">
+  <div :class="headerClasses">
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-// ... existing Card component code ...
+import { cn } from './Utils'
 
-// Export sub-components
-export const CardHeader = defineComponent({
-  name: 'CardHeader',
-  props: {
-    class: String
-  },
-  setup(props, { slots }) {
-    const classes = computed(() =>
-      cn('flex flex-col space-y-1.5 p-6', props.class)
-    )
-    return () => h('div', { class: classes.value }, slots.default?.())
-  }
-})
+interface CardHeaderProps {
+  class?: string
+}
 
-export const CardTitle = defineComponent({
-  name: 'CardTitle',
-  props: {
-    class: String
-  },
-  setup(props, { slots }) {
-    const classes = computed(() =>
-      cn('text-2xl font-semibold leading-none tracking-tight', props.class)
-    )
-    return () => h('h3', { class: classes.value }, slots.default?.())
-  }
-})
+const props = defineProps<CardHeaderProps>()
 
-export const CardDescription = defineComponent({
-  name: 'CardDescription',
-  props: {
-    class: String
-  },
-  setup(props, { slots }) {
-    const classes = computed(() =>
-      cn('text-sm text-muted-foreground', props.class)
-    )
-    return () => h('p', { class: classes.value }, slots.default?.())
-  }
-})
+const headerClasses = computed(() =>
+  cn('flex flex-col space-y-1.5 p-6', props.class)
+)
+</script>
+```
 
-export const CardContent = defineComponent({
-  name: 'CardContent',
-  props: {
-    class: String
-  },
-  setup(props, { slots }) {
-    const classes = computed(() =>
-      cn('p-6 pt-0', props.class)
-    )
-    return () => h('div', { class: classes.value }, slots.default?.())
-  }
-})
+```vue
+<!-- components/atoms/CardTitle.vue -->
+<template>
+  <h3 :class="titleClasses">
+    <slot />
+  </h3>
+</template>
 
-export const CardFooter = defineComponent({
-  name: 'CardFooter',
-  props: {
-    class: String
-  },
-  setup(props, { slots }) {
-    const classes = computed(() =>
-      cn('flex items-center p-6 pt-0', props.class)
-    )
-    return () => h('div', { class: classes.value }, slots.default?.())
-  }
-})
+<script setup lang="ts">
+import { cn } from './Utils'
+
+interface CardTitleProps {
+  class?: string
+}
+
+const props = defineProps<CardTitleProps>()
+
+const titleClasses = computed(() =>
+  cn('text-2xl font-semibold leading-none tracking-tight', props.class)
+)
+</script>
+```
+
+```vue
+<!-- components/atoms/CardDescription.vue -->
+<template>
+  <p :class="descriptionClasses">
+    <slot />
+  </p>
+</template>
+
+<script setup lang="ts">
+import { cn } from './Utils'
+
+interface CardDescriptionProps {
+  class?: string
+}
+
+const props = defineProps<CardDescriptionProps>()
+
+const descriptionClasses = computed(() =>
+  cn('text-sm text-muted-foreground', props.class)
+)
+</script>
+```
+
+```vue
+<!-- components/atoms/CardContent.vue -->
+<template>
+  <div :class="contentClasses">
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { cn } from './Utils'
+
+interface CardContentProps {
+  class?: string
+}
+
+const props = defineProps<CardContentProps>()
+
+const contentClasses = computed(() =>
+  cn('p-6 pt-0', props.class)
+)
+</script>
+```
+
+```vue
+<!-- components/atoms/CardFooter.vue -->
+<template>
+  <div :class="footerClasses">
+    <slot />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { cn } from './Utils'
+
+interface CardFooterProps {
+  class?: string
+}
+
+const props = defineProps<CardFooterProps>()
+
+const footerClasses = computed(() =>
+  cn('flex items-center p-6 pt-0', props.class)
+)
 </script>
 ```
 
@@ -604,7 +742,8 @@ export const CardFooter = defineComponent({
     :placeholder="placeholder"
     :disabled="disabled"
     :readonly="readonly"
-    :aria-invalid="error"
+    :required="required"
+    :aria-invalid="error || undefined"
     :aria-describedby="error ? `${inputId}-error` : undefined"
     :class="inputClasses"
     @input="handleInput"
@@ -619,11 +758,12 @@ import { cn } from './Utils'
 
 interface InputProps {
   modelValue?: string | number
-  type?: 'text' | 'email' | 'password' | 'number' | 'search'
+  type?: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url'
   placeholder?: string
   size?: ComponentSize
   disabled?: boolean
   readonly?: boolean
+  required?: boolean
   error?: boolean
   id?: string
 }
@@ -633,6 +773,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   size: 'md',
   disabled: false,
   readonly: false,
+  required: false,
   error: false
 })
 
@@ -642,14 +783,16 @@ const emit = defineEmits<{
   'focus': [event: FocusEvent]
 }>()
 
-// Generate SSR-safe ID
-const inputId = computed(() => props.id || useId('input'))
+// Use Nuxt 3.10+ useId for SSR-safe IDs
+const inputId = computed(() => props.id || useId())
 
 // Size classes
-const sizeClasses = {
+const sizeClasses: Record<ComponentSize, string> = {
+  xs: 'h-7 px-2 text-xs',
   sm: 'h-9 px-3 text-sm',
   md: 'h-10 px-4 text-base',
-  lg: 'h-11 px-4 text-lg'
+  lg: 'h-11 px-4 text-lg',
+  xl: 'h-12 px-5 text-xl'
 }
 
 // Combined classes
@@ -670,14 +813,20 @@ const inputClasses = computed(() =>
     
     // States
     props.error && 'border-destructive focus:ring-destructive',
-    props.disabled && 'cursor-not-allowed opacity-50'
+    props.disabled && 'cursor-not-allowed opacity-50',
+    props.readonly && 'cursor-default'
   )
 )
 
-// Input handler
+// Input handler with proper type conversion
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  const value = props.type === 'number' ? Number(target.value) : target.value
+  let value: string | number = target.value
+  
+  if (props.type === 'number' && value !== '') {
+    value = Number(value)
+  }
+  
   emit('update:modelValue', value)
 }
 </script>
@@ -689,11 +838,11 @@ const handleInput = (event: Event) => {
 ```vue
 <template>
   <label
-    :for="for"
+    :for="htmlFor"
     :class="labelClasses"
   >
     <slot />
-    <span v-if="required" class="text-destructive ml-1">*</span>
+    <span v-if="required" class="text-destructive ml-1" aria-label="required">*</span>
   </label>
 </template>
 
@@ -711,6 +860,9 @@ const props = withDefaults(defineProps<LabelProps>(), {
   required: false,
   error: false
 })
+
+// Use 'htmlFor' to avoid reserved word
+const htmlFor = computed(() => props.for)
 
 const labelClasses = computed(() =>
   cn(
@@ -816,9 +968,11 @@ const variantClasses = {
   default: 'bg-secondary text-secondary-foreground',
   primary: 'bg-primary text-primary-foreground',
   secondary: 'bg-secondary text-secondary-foreground',
+  accent: 'bg-accent text-accent-foreground',
   success: 'bg-success text-success-foreground',
   warning: 'bg-warning text-warning-foreground',
   danger: 'bg-destructive text-destructive-foreground',
+  ghost: 'bg-transparent',
   outline: 'border border-current bg-transparent'
 }
 
@@ -912,29 +1066,33 @@ interface HeadingProps {
 
 const props = withDefaults(defineProps<HeadingProps>(), {
   as: 'h2',
-  size: 'lg'
+  size: 'lg',
+  gradient: false
 })
 
 const tag = computed(() => props.as)
 
-// Golden ratio sizing
-const sizeClasses = {
-  xs: 'text-golden-xs',
-  sm: 'text-golden-sm',
-  md: 'text-golden-md',
-  lg: 'text-golden-lg',
-  xl: 'text-golden-xl',
-  '2xl': 'text-golden-2xl',
-  '3xl': 'text-golden-3xl',
-  '4xl': 'text-golden-4xl',
-  '5xl': 'text-golden-5xl'
+// Use CSS custom properties for golden ratio
+const sizeClasses: Record<string, string> = {
+  xs: 'text-[length:var(--text-golden-xs)]',
+  sm: 'text-[length:var(--text-golden-sm)]',
+  md: 'text-[length:var(--text-golden-md)]',
+  lg: 'text-[length:var(--text-golden-lg)]',
+  xl: 'text-[length:var(--text-golden-xl)]',
+  '2xl': 'text-[length:var(--text-golden-2xl)]',
+  '3xl': 'text-[length:var(--text-golden-3xl)]',
+  '4xl': 'text-[length:var(--text-golden-4xl)]',
+  '5xl': 'text-[length:var(--text-golden-5xl)]'
 }
 
 const headingClasses = computed(() =>
   cn(
     'font-bold leading-tight tracking-tight',
     sizeClasses[props.size],
-    props.gradient && 'bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent',
+    props.gradient && [
+      'bg-gradient-to-r from-primary via-primary/80 to-primary/60',
+      'bg-clip-text text-transparent'
+    ],
     props.class
   )
 )
@@ -992,8 +1150,9 @@ const textClasses = computed(() =>
     :is="componentTag"
     :to="to"
     :href="href"
+    :target="linkTarget"
+    :rel="linkRel"
     :class="linkClasses"
-    v-bind="linkAttrs"
   >
     <slot />
   </component>
@@ -1016,20 +1175,14 @@ const props = withDefaults(defineProps<LinkProps>(), {
   underline: true
 })
 
+const NuxtLink = resolveComponent('NuxtLink')
 const componentTag = computed(() => {
-  if (props.to) return resolveComponent('NuxtLink')
+  if (props.to) return NuxtLink
   return 'a'
 })
 
-const linkAttrs = computed(() => {
-  if (props.external && props.href) {
-    return {
-      target: '_blank',
-      rel: 'noopener noreferrer'
-    }
-  }
-  return {}
-})
+const linkTarget = computed(() => props.external && props.href ? '_blank' : undefined)
+const linkRel = computed(() => props.external && props.href ? 'noopener noreferrer' : undefined)
 
 const linkClasses = computed(() =>
   cn(
@@ -1048,7 +1201,7 @@ const linkClasses = computed(() =>
 ```vue
 <template>
   <div :class="avatarClasses">
-    <img
+    <NuxtImg
       v-if="src"
       :src="src"
       :alt="alt"
@@ -1090,10 +1243,12 @@ const initials = computed(() => {
     .slice(0, 2)
 })
 
-const sizeClasses = {
+const sizeClasses: Record<ComponentSize, string> = {
+  xs: 'w-6 h-6 text-xs',
   sm: 'w-8 h-8 text-xs',
   md: 'w-10 h-10 text-sm',
-  lg: 'w-12 h-12 text-base'
+  lg: 'w-12 h-12 text-base',
+  xl: 'w-14 h-14 text-lg'
 }
 
 const avatarClasses = computed(() =>
@@ -1478,10 +1633,11 @@ const imageClasses = computed(() =>
           </div>
 
           <div class="flex flex-wrap gap-4">
+            <Button size="xs">Extra Small</Button>
             <Button size="sm">Small</Button>
             <Button size="md">Medium</Button>
             <Button size="lg">Large</Button>
-            <Button size="icon"><Icon name="Heart" /></Button>
+            <Button size="xl">Extra Large</Button>
           </div>
 
           <div class="flex flex-wrap gap-4">
@@ -1634,6 +1790,10 @@ components/
     ├── BadgeWithDot.vue
     ├── Button.vue ✓
     ├── Card.vue ✓
+    ├── CardContent.vue
+    ├── CardDescription.vue
+    ├── CardFooter.vue
+    ├── CardHeader.vue
     ├── Container.vue
     ├── Divider.vue
     ├── FormMessage.vue
@@ -1652,8 +1812,8 @@ components/
 
 composables/
 ├── useComponentClasses.ts
-├── useId.ts
-└── useVariants.ts
+├── useComponentId.ts
+└── useVariants.ts (optional)
 
 types/
 └── index.ts ✓
