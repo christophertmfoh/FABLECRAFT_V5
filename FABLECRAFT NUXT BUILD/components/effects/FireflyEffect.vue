@@ -12,6 +12,7 @@
       class="firefly"
       :class="firefly.sizeClass"
       :style="firefly.style"
+      style="position: relative;"
     />
   </div>
 </template>

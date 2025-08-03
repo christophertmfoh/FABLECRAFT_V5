@@ -47,11 +47,28 @@
   --auth-button-primary: 350 70% 35%;       /* Burgundy button */
   --auth-button-primary-hover: 350 70% 30%; /* Darker burgundy */
   
-  /* Firefly Enhancements */
-  --firefly-brightness: 0.7;      /* Darker for visibility on light bg */
-  --firefly-glow-intensity: 0.8;  /* Stronger glow in light mode */
-  --firefly-contrast: 1.5;        /* Higher contrast in light mode */
-  --firefly-opacity-boost: 1.4;   /* Boost opacity for light backgrounds */
+  /* Firefly Core Colors - Light Mode */
+  --firefly-core: rgba(40, 30, 60, 0.9);      /* Dark purple core */
+  --firefly-mid: rgba(80, 60, 120, 0.6);      /* Mid purple */
+  --firefly-outer: rgba(120, 100, 160, 0.3);  /* Light purple edge */
+  
+  /* Firefly Glow System - Light Mode */
+  --firefly-inner-glow: rgba(120, 80, 200, 0.8);   /* Purple inner glow */
+  --firefly-outer-glow: rgba(200, 150, 100, 0.4);  /* Warm outer glow */
+  --firefly-contrast-shadow: rgba(0, 0, 0, 0.2);   /* Dark contrast shadow */
+  
+  /* Firefly Enhancement Values - Light Mode */
+  --firefly-brightness: 0.7;        /* Slightly darker for contrast */
+  --firefly-glow-intensity: 1.2;    /* Enhanced glow */
+  --firefly-contrast: 2.0;          /* High contrast */
+  --firefly-opacity-boost: 1.8;     /* Strong opacity */
+  --firefly-blend-mode: multiply;   /* Darken blend for visibility */
+  
+  /* Shadow Layer Configuration - Light Mode */
+  --firefly-shadow-opacity: 0.5;    /* Stronger shadow */
+  --firefly-shadow-blur: 6px;       /* Wider halo */
+  --firefly-shadow-spread: 2px;     /* Shadow spread */
+  --firefly-halo-opacity: 0.6;      /* Pseudo-element halo */
   
   /* Atmospheric Effects */
   --atmospheric-blend: overlay;   /* Better visibility on light bg */
@@ -93,11 +110,28 @@
   --auth-button-primary: 35 75% 50%; /* Warm amber */
   --auth-button-primary-hover: 35 75% 45%; /* Darker amber */
   
-  /* Firefly Enhancements */
-  --firefly-brightness: 1.0;      /* Normal brightness in dark mode */
-  --firefly-glow-intensity: 0.5;  /* Subtle glow in dark mode */
-  --firefly-contrast: 1.0;        /* Normal contrast in dark mode */
-  --firefly-opacity-boost: 1.0;   /* No boost needed for dark mode */
+  /* Firefly Core Colors - Dark Mode */
+  --firefly-core: rgba(255, 255, 200, 0.9);   /* Light yellow core */
+  --firefly-mid: rgba(255, 200, 150, 0.6);    /* Warm mid tone */
+  --firefly-outer: rgba(200, 150, 255, 0.3);  /* Purple edge */
+  
+  /* Firefly Glow System - Dark Mode */
+  --firefly-inner-glow: rgba(100, 200, 255, 0.6);  /* Blue inner glow */
+  --firefly-outer-glow: rgba(255, 200, 100, 0.5);  /* Warm outer glow */
+  --firefly-contrast-shadow: rgba(0, 0, 0, 0);     /* No contrast shadow needed */
+  
+  /* Firefly Enhancement Values - Dark Mode */
+  --firefly-brightness: 1.2;        /* Brighter for dark bg */
+  --firefly-glow-intensity: 0.8;    /* Moderate glow */
+  --firefly-contrast: 1.0;          /* Normal contrast */
+  --firefly-opacity-boost: 1.0;     /* No boost needed */
+  --firefly-blend-mode: screen;     /* Additive blend for glow */
+  
+  /* Shadow Layer Configuration - Dark Mode */
+  --firefly-shadow-opacity: 0;      /* No shadow needed */
+  --firefly-shadow-blur: 8px;       /* Wider glow */
+  --firefly-shadow-spread: 0;       /* No spread */
+  --firefly-halo-opacity: 0.4;      /* Subtle halo */
   
   /* Atmospheric Effects */
   --atmospheric-blend: screen;    /* Additive for dark bg */
@@ -140,11 +174,28 @@
   --auth-button-primary: 210 70% 40%; /* Professional blue */
   --auth-button-primary-hover: 210 70% 35%; /* Darker blue */
   
-  /* Firefly Enhancements */
-  --firefly-brightness: 0.6;      /* Darker for arctic white bg */
-  --firefly-glow-intensity: 0.7;  /* Moderate glow for arctic feel */
-  --firefly-contrast: 1.4;        /* Higher contrast boost */
-  --firefly-opacity-boost: 1.5;   /* Strong boost for white background */
+  /* Firefly Core Colors - Arctic Light */
+  --firefly-core: rgba(30, 40, 80, 0.9);      /* Deep blue core */
+  --firefly-mid: rgba(60, 80, 140, 0.6);      /* Mid blue */
+  --firefly-outer: rgba(100, 120, 180, 0.3);  /* Light blue edge */
+  
+  /* Firefly Glow System - Arctic Light */
+  --firefly-inner-glow: rgba(80, 120, 200, 0.8);   /* Blue inner glow */
+  --firefly-outer-glow: rgba(150, 180, 220, 0.4);  /* Cool outer glow */
+  --firefly-contrast-shadow: rgba(0, 0, 20, 0.25); /* Deep contrast shadow */
+  
+  /* Firefly Enhancement Values - Arctic Light */
+  --firefly-brightness: 0.6;        /* Darker for arctic white */
+  --firefly-glow-intensity: 1.3;    /* Strong glow for white bg */
+  --firefly-contrast: 2.2;          /* Very high contrast */
+  --firefly-opacity-boost: 2.0;     /* Maximum opacity */
+  --firefly-blend-mode: multiply;   /* Darken blend */
+  
+  /* Shadow Layer Configuration - Arctic Light */
+  --firefly-shadow-opacity: 0.6;    /* Strong shadow */
+  --firefly-shadow-blur: 8px;       /* Wide halo */
+  --firefly-shadow-spread: 3px;     /* More spread */
+  --firefly-halo-opacity: 0.7;      /* Strong halo */
 }
 
 /* Golden Hour - Warm yellows optimized for inspiration */
@@ -177,11 +228,28 @@
   --auth-button-primary: 45 85% 45%; /* Golden */
   --auth-button-primary-hover: 45 85% 40%; /* Darker gold */
   
-  /* Firefly Enhancements */
-  --firefly-brightness: 0.5;      /* Darker for golden bg */
-  --firefly-glow-intensity: 0.9;  /* Strong warm glow */
-  --firefly-contrast: 1.6;        /* High contrast for warmth */
-  --firefly-opacity-boost: 1.6;   /* Strong boost for warm background */
+  /* Firefly Core Colors - Golden Light */
+  --firefly-core: rgba(60, 40, 20, 0.9);      /* Dark amber core */
+  --firefly-mid: rgba(120, 80, 40, 0.6);      /* Mid amber */
+  --firefly-outer: rgba(180, 140, 80, 0.3);   /* Light gold edge */
+  
+  /* Firefly Glow System - Golden Light */
+  --firefly-inner-glow: rgba(200, 120, 60, 0.8);   /* Amber inner glow */
+  --firefly-outer-glow: rgba(255, 200, 100, 0.4);  /* Golden outer glow */
+  --firefly-contrast-shadow: rgba(40, 20, 0, 0.2); /* Brown contrast shadow */
+  
+  /* Firefly Enhancement Values - Golden Light */
+  --firefly-brightness: 0.5;        /* Much darker for golden bg */
+  --firefly-glow-intensity: 1.4;    /* Very strong glow */
+  --firefly-contrast: 2.4;          /* Maximum contrast */
+  --firefly-opacity-boost: 2.2;     /* Very strong opacity */
+  --firefly-blend-mode: multiply;   /* Darken blend */
+  
+  /* Shadow Layer Configuration - Golden Light */
+  --firefly-shadow-opacity: 0.5;    /* Strong shadow */
+  --firefly-shadow-blur: 7px;       /* Wide halo */
+  --firefly-shadow-spread: 2px;     /* Moderate spread */
+  --firefly-halo-opacity: 0.65;     /* Strong warm halo */
 }
 
 /* ========================================
@@ -220,11 +288,28 @@
   --auth-button-primary: 210 80% 55%; /* Bright blue */
   --auth-button-primary-hover: 210 80% 50%; /* Darker blue */
   
-  /* Firefly Enhancements */
-  --firefly-brightness: 1.1;      /* Subtle brightness for dark theme */
-  --firefly-glow-intensity: 0.6;  /* Moderate glow in midnight */
-  --firefly-contrast: 1.0;        /* Normal contrast */
-  --firefly-opacity-boost: 1.0;   /* No boost needed for dark theme */
+  /* Firefly Core Colors - Midnight Dark */
+  --firefly-core: rgba(200, 220, 255, 0.9);   /* Bright blue-white core */
+  --firefly-mid: rgba(150, 180, 255, 0.6);    /* Blue mid tone */
+  --firefly-outer: rgba(100, 150, 255, 0.3);  /* Deep blue edge */
+  
+  /* Firefly Glow System - Midnight Dark */
+  --firefly-inner-glow: rgba(120, 160, 255, 0.7);  /* Blue inner glow */
+  --firefly-outer-glow: rgba(80, 120, 220, 0.5);   /* Deep blue outer glow */
+  --firefly-contrast-shadow: rgba(0, 0, 0, 0);     /* No contrast shadow */
+  
+  /* Firefly Enhancement Values - Midnight Dark */
+  --firefly-brightness: 1.3;        /* Brighter for deep blue bg */
+  --firefly-glow-intensity: 0.9;    /* Moderate glow */
+  --firefly-contrast: 1.1;          /* Slight contrast boost */
+  --firefly-opacity-boost: 1.0;     /* No boost needed */
+  --firefly-blend-mode: screen;     /* Additive blend */
+  
+  /* Shadow Layer Configuration - Midnight Dark */
+  --firefly-shadow-opacity: 0;      /* No shadow */
+  --firefly-shadow-blur: 10px;      /* Wide glow */
+  --firefly-shadow-spread: 0;       /* No spread */
+  --firefly-halo-opacity: 0.5;      /* Moderate halo */
 }
 
 /* Forest Manuscript - Deep greens for nature-inspired writing */
