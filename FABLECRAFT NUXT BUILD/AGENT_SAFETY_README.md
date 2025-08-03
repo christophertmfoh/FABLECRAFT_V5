@@ -1,23 +1,36 @@
 # 🚨 CRITICAL: AGENT SAFETY GUIDELINES 🚨
 
-## ⚠️ NEVER KILL NODE PROCESSES ⚠️
+## ⚠️ PROTECT CURSOR'S NODE CONNECTION ⚠️
 
-**IMPORTANT**: Killing Node processes will disconnect you from the server and halt all progress!
+**IMPORTANT**: Mass killing Node processes will disconnect you from Cursor's server!
 
-## ❌ FORBIDDEN COMMANDS (DO NOT USE)
+## ❌ FORBIDDEN COMMANDS (BREAK CURSOR CONNECTION)
 
-The following commands are **STRICTLY FORBIDDEN** and will break your connection:
+The following commands are **STRICTLY FORBIDDEN** as they kill ALL Node processes:
 
 ```bash
-# NEVER USE THESE:
-kill node
-killall node
-pkill node
-kill -9 [any process]
-killall -9 node
-pkill -9 node
-kill $(pgrep node)
-ps aux | grep node | awk '{print $2}' | xargs kill
+# NEVER USE THESE - They kill Cursor's Node:
+killall node          # Kills ALL Node processes
+pkill node            # Kills ALL Node processes  
+kill -9 node          # Force kills ALL Node
+killall -9 node       # Force kills ALL Node
+pkill -9 node         # Force kills ALL Node
+kill $(pgrep node)    # Kills ALL Node PIDs
+ps aux | grep node | xargs kill  # Kills ALL Node
+kill -f node          # Force kills Node
+```
+
+## ✅ ALLOWED: DEV SERVER MANAGEMENT
+
+You CAN safely manage the dev server with these commands:
+
+```bash
+# SAFE - Only affects dev server:
+npm run safe-stop                    # Recommended: Smart stop script
+kill -TERM [specific_dev_pid]        # Kill specific dev server PID
+kill -INT [specific_dev_pid]         # Interrupt specific dev server
+lsof -ti:3000 | xargs kill -TERM    # Kill only process on port 3000
+lsof -ti:3002 | xargs kill -TERM    # Kill only process on port 3002
 ```
 
 ## ✅ SAFE ALTERNATIVES

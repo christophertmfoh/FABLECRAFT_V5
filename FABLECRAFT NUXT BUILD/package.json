@@ -5,8 +5,9 @@
   "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "safe-stop": "./scripts/safe-stop.sh",
-    "dev": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use kill node! ⚠️' && npx nuxi dev",
-    "dev:alt": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use kill node! ⚠️' && npx nuxi dev --port 3002",
+    "list-dev": "./scripts/list-dev-servers.sh",
+    "dev": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev",
+    "dev:alt": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev --port 3002",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
