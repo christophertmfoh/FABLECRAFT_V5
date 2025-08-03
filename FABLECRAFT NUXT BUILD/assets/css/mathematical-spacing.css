@@ -2,7 +2,6 @@
  * MATHEMATICAL SPACING SYSTEM - PHASE 1A
  * Foundation-first approach: 8-point grid + Golden Ratio typography
  * Research-verified for Nuxt 3.18.0 + Tailwind CSS + SSR compatibility
- * Based on industry standards: Figma, Adobe, Material Design, Bootstrap
  */
 
 /* ========================================
@@ -11,49 +10,48 @@
 
 :root {
   /* Base 8-Point Grid System - Industry Standard */
-  --space-base: 8px;                 /* Base unit - foundation for all spacing */
+  --space-base: 8px;
   
   /* Core Spacing Variables */
-  --space-1: 4px;                    /* Half unit - fine details, borders */
-  --space-2: 8px;                    /* Base unit - icons, small gaps */
-  --space-3: 12px;                   /* 1.5x base - tight spacing */
-  --space-4: 16px;                   /* 2x base - standard spacing */
-  --space-5: 20px;                   /* 2.5x base - comfortable spacing */
-  --space-6: 24px;                   /* 3x base - section spacing */
-  --space-8: 32px;                   /* 4x base - large spacing */
-  --space-10: 40px;                  /* 5x base - major spacing */
-  --space-12: 48px;                  /* 6x base - hero spacing */
-  --space-16: 64px;                  /* 8x base - page-level spacing */
-  --space-20: 80px;                  /* 10x base - massive spacing */
-  --space-24: 96px;                  /* 12x base - page sections */
-  --space-26: 104px;                 /* 13x base - desktop hero spacing */
-  --space-32: 128px;                 /* 16x base - desktop sections */
+  --space-1: 4px;     /* Half unit - fine details, borders */
+  --space-2: 8px;     /* Base unit - icons, small gaps */
+  --space-3: 12px;    /* 1.5x base - tight spacing */
+  --space-4: 16px;    /* 2x base - standard spacing */
+  --space-5: 20px;    /* 2.5x base - comfortable spacing */
+  --space-6: 24px;    /* 3x base - section spacing */
+  --space-8: 32px;    /* 4x base - large spacing */
+  --space-10: 40px;   /* 5x base - major spacing */
+  --space-12: 48px;   /* 6x base - hero spacing */
+  --space-16: 64px;   /* 8x base - page-level spacing */
+  --space-20: 80px;   /* 10x base - massive spacing */
+  --space-24: 96px;   /* 12x base - page sections */
+  --space-26: 104px;  /* 13x base - desktop hero spacing */
+  --space-32: 128px;  /* 16x base - desktop sections */
   
   /* Mathematical Golden Ratio Base */
-  --golden-ratio: 1.618;             /* φ (phi) - Nature's perfect proportion */
-  --golden-ratio-inverse: 0.618;     /* 1/φ - Inverse ratio */
+  --golden-ratio: 1.618;        /* φ (phi) - Nature's perfect proportion */
+  --golden-ratio-inverse: 0.618; /* 1/φ - Inverse ratio */
 }
 
 /* ========================================
    🏷️ SEMANTIC SPACING ALIASES
-   Human-readable names mapping to grid
 ======================================== */
 
 :root {
   /* Micro Spacing */
-  --space-micro: var(--space-1);     /* 4px - borders, fine details */
-  --space-tiny: var(--space-2);      /* 8px - icon padding, small gaps */
+  --space-micro: var(--space-1);  /* 4px - borders, fine details */
+  --space-tiny: var(--space-2);   /* 8px - icon padding, small gaps */
   
   /* Standard Spacing */
-  --space-small: var(--space-4);     /* 16px - text spacing, buttons */
-  --space-medium: var(--space-6);    /* 24px - section spacing */
-  --space-large: var(--space-8);     /* 32px - major spacing */
-  --space-huge: var(--space-12);     /* 48px - hero elements */
+  --space-small: var(--space-4);  /* 16px - text spacing, buttons */
+  --space-medium: var(--space-6); /* 24px - section spacing */
+  --space-large: var(--space-8);  /* 32px - major spacing */
+  --space-huge: var(--space-12);  /* 48px - hero elements */
   
   /* Layout Spacing */
-  --space-section: var(--space-16);  /* 64px - section gaps */
-  --space-page: var(--space-20);     /* 80px - page-level spacing */
-  --space-massive: var(--space-24);  /* 96px - major page sections */
+  --space-section: var(--space-16); /* 64px - section gaps */
+  --space-page: var(--space-20);    /* 80px - page-level spacing */
+  --space-massive: var(--space-24); /* 96px - major page sections */
   
   /* Responsive Section Spacing (Mobile First) */
   --section-spacing: var(--space-8);      /* 32px - mobile sections */
@@ -62,13 +60,12 @@
 
 /* ========================================
    📱 RESPONSIVE SCALING SYSTEM
-   Mobile-first breakpoints with 8-point grid consistency
 ======================================== */
 
 /* Tablet: Enhanced spacing for medium screens */
 @media (min-width: 769px) {
   :root {
-    --section-spacing: var(--space-24);    /* 96px - tablet sections */
+    --section-spacing: var(--space-24);      /* 96px - tablet sections */
     --section-spacing-hero: var(--space-20); /* 80px - tablet hero */
   }
 }
@@ -76,37 +73,36 @@
 /* Desktop: Maximum spacing for large screens */
 @media (min-width: 1025px) {
   :root {
-    --section-spacing: var(--space-32);    /* 128px (16x base) - desktop sections */
+    --section-spacing: var(--space-32);      /* 128px (16x base) - desktop sections */
     --section-spacing-hero: var(--space-26); /* 104px (13x base) - desktop hero */
   }
 }
 
 /* ========================================
    📏 GOLDEN RATIO TYPOGRAPHY SYSTEM
-   Mathematical scaling with SSR-safe rem units
 ======================================== */
 
 :root {
   /* Base Typography Foundation */
-  --text-base-size: 1rem;            /* 16px base - browser default */
+  --text-base-size: 1rem;              /* 16px base - browser default */
   --text-scale-factor: var(--golden-ratio); /* 1.618 scaling */
   
   /* Golden Ratio Typography Scale - SSR Safe */
-  --text-golden-xs: 0.618rem;        /* 9.88px - calc(1rem / 1.618) */
-  --text-golden-sm: 0.854rem;        /* 13.67px - Small text */
-  --text-golden-base: 1rem;          /* 16px - Base text size */
-  --text-golden-lg: 1.618rem;        /* 25.88px - Large text */
-  --text-golden-xl: 2.618rem;        /* 41.89px - Extra large */
-  --text-golden-2xl: 4.236rem;       /* 67.78px - Headings */
-  --text-golden-3xl: 6.854rem;       /* 109.66px - Big headings */
-  --text-golden-4xl: 11.09rem;       /* 177.44px - Hero headings */
-  --text-golden-5xl: 17.944rem;      /* 287.1px - Massive display */
-  --text-golden-6xl: 29.034rem;      /* 464.54px - Ultra display */
+  --text-golden-xs: 0.618rem;    /* 9.88px - calc(1rem / 1.618) */
+  --text-golden-sm: 0.854rem;    /* 13.67px - Small text */
+  --text-golden-base: 1rem;      /* 16px - Base text size */
+  --text-golden-lg: 1.618rem;    /* 25.88px - Large text */
+  --text-golden-xl: 2.618rem;    /* 41.89px - Extra large */
+  --text-golden-2xl: 4.236rem;   /* 67.78px - Headings */
+  --text-golden-3xl: 6.854rem;   /* 109.66px - Big headings */
+  --text-golden-4xl: 11.09rem;   /* 177.44px - Hero headings */
+  --text-golden-5xl: 17.944rem;  /* 287.1px - Massive display */
+  --text-golden-6xl: 29.034rem;  /* 464.54px - Ultra display */
   
   /* Typography System Ratios */
-  --line-height-tight: 1.25;         /* Tight line spacing */
-  --line-height-normal: 1.5;         /* Standard line spacing */
-  --line-height-relaxed: 1.75;       /* Relaxed line spacing */
+  --line-height-tight: 1.25;    /* Tight line spacing */
+  --line-height-normal: 1.5;    /* Standard line spacing */
+  --line-height-relaxed: 1.75;  /* Relaxed line spacing */
   
   /* Font Weight Scale */
   --font-weight-light: 300;
@@ -120,7 +116,6 @@
 
 /* ========================================
    🎨 FONT FAMILY SYSTEM
-   Cross-platform font stacks with system fallbacks
 ======================================== */
 
 :root {
@@ -164,81 +159,7 @@
 }
 
 /* ========================================
-   🧮 MATHEMATICAL UTILITY FUNCTIONS
-   CSS calc() helpers for dynamic spacing
-======================================== */
-
-:root {
-  /* Dynamic Spacing Calculations */
-  --space-auto: calc(var(--space-base) * var(--golden-ratio)); /* Auto golden spacing */
-  --space-golden: calc(var(--space-4) * var(--golden-ratio));  /* 25.888px golden spacing */
-  
-  /* Responsive Text Scaling */
-  --text-fluid-sm: calc(var(--text-golden-sm) + 0.5vw);       /* Fluid small text */
-  --text-fluid-base: calc(var(--text-golden-base) + 0.5vw);   /* Fluid base text */
-  --text-fluid-lg: calc(var(--text-golden-lg) + 1vw);         /* Fluid large text */
-  --text-fluid-xl: calc(var(--text-golden-xl) + 1.5vw);       /* Fluid XL text */
-  
-  /* Container-relative spacing */
-  --space-container-sm: min(var(--space-4), 4vw);             /* Container-aware small */
-  --space-container-md: min(var(--space-8), 6vw);             /* Container-aware medium */
-  --space-container-lg: min(var(--space-16), 8vw);            /* Container-aware large */
-}
-
-/* ========================================
-   🎯 BASELINE GRID ALIGNMENT
-   Ensures vertical rhythm consistency
-======================================== */
-
-/* Base line-height that aligns to 8px grid */
-html {
-  line-height: 1.5; /* 24px line-height on 16px base = 8px multiple */
-}
-
-/* Ensure all text elements maintain baseline grid */
-h1, h2, h3, h4, h5, h6, p, li, td, th {
-  line-height: var(--line-height-normal);
-}
-
-/* Headings with tighter line-height for better visual hierarchy */
-h1, h2, h3 {
-  line-height: var(--line-height-tight);
-}
-
-/* ========================================
-   📐 TAILWIND INTEGRATION HELPERS
-   Extends Tailwind's spacing system with our variables
-======================================== */
-
-/* These variables can be referenced in Tailwind config */
-:root {
-  /* Tailwind-compatible spacing scale */
-  --tw-space-micro: var(--space-micro);
-  --tw-space-tiny: var(--space-tiny);
-  --tw-space-small: var(--space-small);
-  --tw-space-medium: var(--space-medium);
-  --tw-space-large: var(--space-large);
-  --tw-space-huge: var(--space-huge);
-  --tw-space-section: var(--space-section);
-  --tw-space-page: var(--space-page);
-  --tw-space-massive: var(--space-massive);
-  
-  /* Tailwind-compatible font sizes */
-  --tw-text-xs: var(--text-golden-xs);
-  --tw-text-sm: var(--text-golden-sm);
-  --tw-text-base: var(--text-golden-base);
-  --tw-text-lg: var(--text-golden-lg);
-  --tw-text-xl: var(--text-golden-xl);
-  --tw-text-2xl: var(--text-golden-2xl);
-  --tw-text-3xl: var(--text-golden-3xl);
-  --tw-text-4xl: var(--text-golden-4xl);
-  --tw-text-5xl: var(--text-golden-5xl);
-  --tw-text-6xl: var(--text-golden-6xl);
-}
-
-/* ========================================
    🔧 NUXT SSR OPTIMIZATION
-   Prevents hydration mismatches and FOUC
 ======================================== */
 
 /* Prevent flash of unstyled content */
@@ -266,59 +187,19 @@ body {
   font-weight: var(--font-weight-normal);
 }
 
-/* ========================================
-   🎪 UTILITY CLASSES
-   Ready-to-use spacing classes following our system
-======================================== */
+/* Ensure all text elements maintain baseline grid */
+h1, h2, h3, h4, h5, h6, p, li, td, th {
+  line-height: var(--line-height-normal);
+}
 
-/* Spacing utilities that follow our 8-point grid */
-.space-micro { margin: var(--space-micro); }
-.space-tiny { margin: var(--space-tiny); }
-.space-small { margin: var(--space-small); }
-.space-medium { margin: var(--space-medium); }
-.space-large { margin: var(--space-large); }
-.space-huge { margin: var(--space-huge); }
-
-/* Padding utilities */
-.pad-micro { padding: var(--space-micro); }
-.pad-tiny { padding: var(--space-tiny); }
-.pad-small { padding: var(--space-small); }
-.pad-medium { padding: var(--space-medium); }
-.pad-large { padding: var(--space-large); }
-.pad-huge { padding: var(--space-huge); }
-
-/* Gap utilities for grid and flex layouts */
-.gap-micro { gap: var(--space-micro); }
-.gap-tiny { gap: var(--space-tiny); }
-.gap-small { gap: var(--space-small); }
-.gap-medium { gap: var(--space-medium); }
-.gap-large { gap: var(--space-large); }
-.gap-huge { gap: var(--space-huge); }
-
-/* Typography utilities */
-.text-golden-xs { font-size: var(--text-golden-xs); }
-.text-golden-sm { font-size: var(--text-golden-sm); }
-.text-golden-base { font-size: var(--text-golden-base); }
-.text-golden-lg { font-size: var(--text-golden-lg); }
-.text-golden-xl { font-size: var(--text-golden-xl); }
-.text-golden-2xl { font-size: var(--text-golden-2xl); }
-.text-golden-3xl { font-size: var(--text-golden-3xl); }
-.text-golden-4xl { font-size: var(--text-golden-4xl); }
-.text-golden-5xl { font-size: var(--text-golden-5xl); }
-.text-golden-6xl { font-size: var(--text-golden-6xl); }
+/* Headings with tighter line-height for better visual hierarchy */
+h1, h2, h3 {
+  line-height: var(--line-height-tight);
+}
 
 /* ========================================
    ✅ VALIDATION & DEBUG HELPERS
-   Tools for testing and validating the spacing system
 ======================================== */
-
-/* Debug grid overlay (remove in production) */
-.debug-grid {
-  background-image: 
-    linear-gradient(to bottom, rgba(255, 0, 0, 0.1) 0%, transparent 1px),
-    linear-gradient(to right, rgba(255, 0, 0, 0.1) 0%, transparent 1px);
-  background-size: var(--space-2) var(--space-2);
-}
 
 /* Test element for validating spacing in browser dev tools */
 .spacing-test {
@@ -341,7 +222,6 @@ body {
 
 /* ========================================
    📊 PERFORMANCE OPTIMIZATIONS
-   Ensures optimal rendering and CSS performance
 ======================================== */
 
 /* Reduce layout thrashing with transform/opacity animations only */
@@ -372,7 +252,6 @@ body {
  * - SSR-safe rem units for Nuxt
  * - Semantic aliases for maintainability
  * - Responsive scaling across breakpoints
- * - Tailwind CSS integration hooks
  * - Performance optimizations
  * - Debug and validation tools
  * ========================================
