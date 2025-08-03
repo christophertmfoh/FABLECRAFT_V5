@@ -2,11 +2,34 @@
 
 A modernized Nuxt 3 + Supabase foundation built to industry standards.
 
-## ⚠️ SAFETY WARNING
+## 🚨🚨🚨 CRITICAL - READ THIS FIRST 🚨🚨🚨
 
-**🚨 NEVER RUN `kill node` OR `pkill node` COMMANDS 🚨**
+### ⛔ FORBIDDEN COMMANDS - NEVER RUN THESE ⛔
 
-These commands destroy the entire development environment. Use `Ctrl+C` to stop processes safely.
+```bash
+# ❌ NEVER RUN THESE - THEY WILL DESTROY THE ENVIRONMENT ❌
+# kill node
+# pkill node
+# killall node
+# kill -9 [any node process]
+# pkill -9 node
+# systemctl stop node
+# service node stop
+```
+
+**WHY:** These commands don't just stop your dev server - they DESTROY the entire Cursor/development environment connection. The environment becomes permanently unusable.
+
+**INSTEAD:** Always use `Ctrl+C` in the terminal where the process is running to gracefully stop it.
+
+### ✅ SAFE WAYS TO STOP THE DEV SERVER
+
+```bash
+# Method 1: Press Ctrl+C in the terminal running the server
+# Method 2: Close the terminal tab/window
+# Method 3: Use pnpm db:stop for Supabase only
+```
+
+---
 
 ## Quick Start
 

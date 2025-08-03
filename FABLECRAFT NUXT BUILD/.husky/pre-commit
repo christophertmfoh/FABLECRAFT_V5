@@ -1,1 +1,16 @@
-echo "Pre-commit hook: Husky + Commitlint ready!"
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check for dangerous commands in staged files
+echo "🔍 Checking for dangerous commands..."
+if git diff --cached --name-only | xargs grep -l "kill.*node\|pkill.*node\|killall.*node" 2>/dev/null; then
+  echo "🚨 ERROR: Found dangerous kill node commands in your code!"
+  echo "❌ These commands will DESTROY the development environment"
+  echo "✅ Use Ctrl+C to stop processes safely instead"
+  echo ""
+  echo "Remove these dangerous commands before committing."
+  exit 1
+fi
+
+# Existing lint-staged command
+pnpm exec lint-staged
