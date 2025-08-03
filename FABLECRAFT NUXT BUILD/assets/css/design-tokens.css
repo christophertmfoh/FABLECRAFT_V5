@@ -39,6 +39,9 @@
   --section-gap-tablet: 48px;    /* 12x base */
   --section-gap-desktop: 64px;   /* 16x base */
   
+  /* Semantic section gap - single source of truth for responsive spacing */
+  --section-gap: var(--section-gap-mobile); /* Default to mobile */
+  
   /* Container max-widths aligned to 4px grid */
   --container-sm: 640px;   /* Tailwind sm breakpoint */
   --container-md: 768px;   /* Tailwind md breakpoint */
@@ -125,14 +128,14 @@
 /* Tablet and up: Enhanced spacing */
 @media (min-width: 768px) {
   :root {
-    --section-gap-mobile: var(--section-gap-tablet);
+    --section-gap: var(--section-gap-tablet);
   }
 }
 
 /* Desktop and up: Maximum spacing */
 @media (min-width: 1024px) {
   :root {
-    --section-gap-mobile: var(--section-gap-desktop);
+    --section-gap: var(--section-gap-desktop);
   }
 }
 
@@ -182,4 +185,15 @@ p, li, td, th {
  * ✅ Typography system with proper line-height rhythm
  * ✅ Cross-browser compatibility and accessibility
  * ✅ Research-verified optimal spacing for UI density
+ * ✅ DRY principle: Single source of truth in CSS variables
+ * ✅ Simplified responsive variables with semantic naming
+ * 
+ * USAGE EXAMPLES:
+ * CSS: var(--space-md), var(--section-gap), var(--text-lg)
+ * Tailwind: p-md, space-y-lg, text-xl, font-sans
+ * 
+ * MAINTENANCE: 
+ * - Change spacing values only in this file
+ * - Tailwind config automatically inherits changes
+ * - Use var(--section-gap) for responsive sections
  */

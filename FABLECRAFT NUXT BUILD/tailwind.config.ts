@@ -14,79 +14,50 @@ export default {
   ],
   theme: {
     extend: {
-      // Extend Tailwind's spacing with our semantic aliases
+      // DRY: Reference CSS variables for single source of truth
       spacing: {
-        'micro': '2px',    // --space-micro
-        'tiny': '4px',     // --space-tiny  
-        'xs': '8px',       // --space-xs
-        'sm': '12px',      // --space-sm
-        'md': '16px',      // --space-md
-        'lg': '20px',      // --space-lg
-        'xl': '24px',      // --space-xl
-        '2xl': '32px',     // --space-2xl
-        '3xl': '40px',     // --space-3xl
-        '4xl': '48px',     // --space-4xl
-        '5xl': '56px',     // --space-5xl
-        '6xl': '64px',     // --space-6xl
+        'micro': 'var(--space-micro)',   // References design-tokens.css
+        'tiny': 'var(--space-tiny)',     // No duplicate values
+        'xs': 'var(--space-xs)',
+        'sm': 'var(--space-sm)',
+        'md': 'var(--space-md)',
+        'lg': 'var(--space-lg)',
+        'xl': 'var(--space-xl)',
+        '2xl': 'var(--space-2xl)',
+        '3xl': 'var(--space-3xl)',
+        '4xl': 'var(--space-4xl)',
+        '5xl': 'var(--space-5xl)',
+        '6xl': 'var(--space-6xl)',
       },
       
-      // 4px-aligned typography scale
+      // 4px-aligned typography scale with CSS variable references
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1.5' }],     // 12px
-        'sm': ['0.875rem', { lineHeight: '1.5' }],    // 14px
-        'base': ['1rem', { lineHeight: '1.5' }],      // 16px
-        'lg': ['1.125rem', { lineHeight: '1.5' }],    // 18px
-        'xl': ['1.25rem', { lineHeight: '1.5' }],     // 20px
-        '2xl': ['1.5rem', { lineHeight: '1.25' }],    // 24px
-        '3xl': ['1.875rem', { lineHeight: '1.25' }],  // 30px
-        '4xl': ['2.25rem', { lineHeight: '1.25' }],   // 36px
-        '5xl': ['3rem', { lineHeight: '1' }],         // 48px
-        '6xl': ['3.75rem', { lineHeight: '1' }],      // 60px
+        'xs': ['var(--text-xs)', { lineHeight: 'var(--leading-normal)' }],
+        'sm': ['var(--text-sm)', { lineHeight: 'var(--leading-normal)' }],
+        'base': ['var(--text-base)', { lineHeight: 'var(--leading-normal)' }],
+        'lg': ['var(--text-lg)', { lineHeight: 'var(--leading-normal)' }],
+        'xl': ['var(--text-xl)', { lineHeight: 'var(--leading-normal)' }],
+        '2xl': ['var(--text-2xl)', { lineHeight: 'var(--leading-tight)' }],
+        '3xl': ['var(--text-3xl)', { lineHeight: 'var(--leading-tight)' }],
+        '4xl': ['var(--text-4xl)', { lineHeight: 'var(--leading-tight)' }],
+        '5xl': ['var(--text-5xl)', { lineHeight: 'var(--leading-none)' }],
+        '6xl': ['var(--text-6xl)', { lineHeight: 'var(--leading-none)' }],
       },
       
-      // Container max-widths aligned to Tailwind breakpoints
+      // Container max-widths with CSS variable references
       maxWidth: {
-        'container-sm': '640px',   
-        'container-md': '768px',   
-        'container-lg': '1024px',  
-        'container-xl': '1280px',  
-        'container-2xl': '1536px', 
+        'container-sm': 'var(--container-sm)',
+        'container-md': 'var(--container-md)',
+        'container-lg': 'var(--container-lg)',
+        'container-xl': 'var(--container-xl)',
+        'container-2xl': 'var(--container-2xl)',
       },
       
-      // Font families for design tokens
+      // Font families with CSS variable references
       fontFamily: {
-        'sans': [
-          'Inter', 
-          'ui-sans-serif', 
-          'system-ui', 
-          '-apple-system', 
-          'BlinkMacSystemFont', 
-          'Segoe UI', 
-          'Roboto', 
-          'Helvetica Neue', 
-          'Arial', 
-          'sans-serif'
-        ],
-        'serif': [
-          'Playfair Display', 
-          'ui-serif', 
-          'Georgia', 
-          'Cambria', 
-          'Times New Roman', 
-          'Times', 
-          'serif'
-        ],
-        'mono': [
-          'JetBrains Mono', 
-          'ui-monospace', 
-          'SFMono-Regular', 
-          'Menlo', 
-          'Monaco', 
-          'Consolas', 
-          'Liberation Mono', 
-          'Courier New', 
-          'monospace'
-        ]
+        'sans': 'var(--font-sans)',
+        'serif': 'var(--font-serif)',
+        'mono': 'var(--font-mono)',
       }
     },
   },
