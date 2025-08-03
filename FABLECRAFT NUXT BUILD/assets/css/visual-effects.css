@@ -83,9 +83,9 @@
   height: 4px;
   background: radial-gradient(
     circle,
-    var(--firefly-core) 0%,
-    var(--firefly-mid) 40%,
-    var(--firefly-outer) 70%,
+    var(--firefly-core, rgba(255, 255, 200, 0.9)) 0%,
+    var(--firefly-mid, rgba(255, 200, 150, 0.6)) 40%,
+    var(--firefly-outer, rgba(200, 150, 255, 0.3)) 70%,
     transparent 100%
   );
   border-radius: 50%;
@@ -103,11 +103,11 @@
   /* Multi-layer glow system for optimal visibility */
   box-shadow: 
     /* Inner glow */
-    0 0 var(--firefly-shadow-blur) var(--firefly-inner-glow),
+    0 0 var(--firefly-shadow-blur, 6px) var(--firefly-inner-glow, rgba(100, 200, 255, 0.6)),
     /* Outer glow */
-    0 0 calc(var(--firefly-shadow-blur) * 2) var(--firefly-outer-glow),
+    0 0 calc(var(--firefly-shadow-blur, 6px) * 2) var(--firefly-outer-glow, rgba(255, 200, 100, 0.5)),
     /* Contrast shadow for light modes */
-    0 0 calc(var(--firefly-shadow-blur) * 3) var(--firefly-shadow-spread) var(--firefly-contrast-shadow);
+    0 0 calc(var(--firefly-shadow-blur, 6px) * 3) var(--firefly-shadow-spread, 2px) var(--firefly-contrast-shadow, rgba(0, 0, 0, 0));
   
   /* Theme-aware blend mode */
   mix-blend-mode: var(--firefly-blend-mode, normal);
@@ -135,12 +135,12 @@
   left: -50%;
   background: radial-gradient(
     circle,
-    var(--firefly-inner-glow) 0%,
+    var(--firefly-inner-glow, rgba(100, 200, 255, 0.6)) 0%,
     transparent 60%
   );
   border-radius: 50%;
   opacity: var(--firefly-halo-opacity, 0.5);
-  filter: blur(var(--firefly-shadow-blur));
+  filter: blur(var(--firefly-shadow-blur, 6px));
   mix-blend-mode: var(--firefly-blend-mode, normal);
   z-index: -1;
   pointer-events: none;
