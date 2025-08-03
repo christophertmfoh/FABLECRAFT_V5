@@ -25,6 +25,30 @@ const {
 // Import theme helper functions
 import { getThemesByCategory } from '../constants/data'
 
+// Foundation test imports
+import { cn, formatCurrency } from '~/components/atoms/Utils'
+import { useComponentId } from '~/composables/useComponentId'
+import type { ComponentSize, ComponentVariant } from '~/types'
+
+// Foundation test variables
+const testClasses = cn(
+  'p-4 rounded-lg',
+  'bg-primary text-primary-foreground',
+  { 'opacity-50': false, 'shadow-lg': true },
+  ['border', 'border-primary']
+)
+
+const formattedUSD = formatCurrency(1234.56)
+const formattedEUR = formatCurrency(1234.56, { currency: 'EUR', locale: 'de-DE' })
+const formattedJPY = formatCurrency(1234, { currency: 'JPY', locale: 'ja-JP' })
+
+const id1 = useComponentId('test')
+const id2 = useComponentId('test')
+const id3 = useComponentId()
+
+const testSize: ComponentSize = 'md'
+const testVariant: ComponentVariant = 'primary'
+
 // Background orbs composable
 const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 
@@ -472,7 +496,63 @@ if (isDevelopment) {
           🔧 Foundation Systems Check
         </summary>
         
-        <div class="space-y-6">          
+        <div class="space-y-6">
+          <!-- Phase 2 Foundation Tests -->
+          <div class="border-t border-border pt-4">
+            <h3 class="text-sm font-medium text-primary mb-4">Phase 2 Foundation Tests:</h3>
+            
+            <!-- Test cn utility -->
+            <div class="mb-4">
+              <h4 class="text-xs font-semibold mb-2">Testing cn() utility:</h4>
+              <div :class="testClasses" class="text-sm">
+                This div uses cn() to merge classes
+              </div>
+              <p class="text-xs text-muted-foreground mt-1">
+                Classes: {{ testClasses }}
+              </p>
+            </div>
+
+            <!-- Test formatCurrency utility -->
+            <div class="mb-4">
+              <h4 class="text-xs font-semibold mb-2">Testing formatCurrency():</h4>
+              <div class="text-sm space-y-1">
+                <p>USD: {{ formattedUSD }}</p>
+                <p>EUR: {{ formattedEUR }}</p>
+                <p>JPY: {{ formattedJPY }}</p>
+              </div>
+            </div>
+
+            <!-- Test useComponentId -->
+            <div class="mb-4">
+              <h4 class="text-xs font-semibold mb-2">Testing useComponentId():</h4>
+              <div class="text-sm space-y-1">
+                <p>Generated ID 1: {{ id1 }}</p>
+                <p>Generated ID 2: {{ id2 }}</p>
+                <p>Generated ID 3: {{ id3 }}</p>
+              </div>
+            </div>
+
+            <!-- Test Icon from @nuxt/icon -->
+            <div class="mb-4">
+              <h4 class="text-xs font-semibold mb-2">Testing @nuxt/icon:</h4>
+              <div class="flex gap-2">
+                <Icon name="i-lucide-check" class="text-success" />
+                <Icon name="i-lucide-x" class="text-danger" />
+                <Icon name="i-lucide-info" class="text-primary" />
+                <Icon name="i-lucide-alert-triangle" class="text-warning" />
+              </div>
+            </div>
+
+            <!-- Test types -->
+            <div class="mb-4">
+              <h4 class="text-xs font-semibold mb-2">Testing Types:</h4>
+              <div class="text-sm">
+                <p>Size: {{ testSize }} (type: ComponentSize)</p>
+                <p>Variant: {{ testVariant }} (type: ComponentVariant)</p>
+              </div>
+            </div>
+          </div>
+          
           <!-- Foundation Architecture Summary -->
           <div class="border-t border-border pt-4">
             <h3 class="text-sm font-medium text-primary mb-2">Phase 1 Foundation Complete:</h3>

@@ -44,8 +44,7 @@ export default defineNuxtConfig({
         '/login', 
         '/confirm',
         '/supabase-test',
-        '/api-test',
-        '/test-foundation'
+        '/api-test'
       ], // Exclude public pages from auth redirect
     }
   },
