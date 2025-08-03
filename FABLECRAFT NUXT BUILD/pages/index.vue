@@ -130,15 +130,7 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <!-- Quick Controls -->
-      <div class="flex flex-wrap justify-center gap-4">
-        <button 
-          class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
-          @click="toggleAllEffects"
-        >
-          {{ allEffectsEnabled ? '✨ All Effects On' : '○ All Effects Off' }}
-        </button>
-      </div>
+
 
       <!-- Visual Effects Controls Dropdown -->
       <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
@@ -146,7 +138,18 @@ if (isDevelopment) {
           🎮 Visual Effects Controls
         </summary>
         
-        <!-- Performance Mode -->
+        <div class="space-y-6">
+          <!-- Quick Toggle All Effects -->
+          <div class="flex justify-center">
+            <button 
+              class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
+              @click="toggleAllEffects"
+            >
+              {{ allEffectsEnabled ? '✨ All Effects On' : '○ All Effects Off' }}
+            </button>
+          </div>
+        
+          <!-- Performance Mode -->
         <div>
           <label class="block text-sm font-medium mb-2">Performance Mode</label>
           <select 
@@ -214,6 +217,7 @@ if (isDevelopment) {
             <span class="ml-2">{{ performanceMode }}</span>
           </div>
         </div>
+        </div>
       </details>
 
       <!-- Typography Showcase Dropdown -->
@@ -247,7 +251,7 @@ if (isDevelopment) {
 
       <!-- Interactive Theme System Dropdown -->
       <details :open="showThemeSystem" class="bg-card p-8 rounded-lg border shadow-sm">
-        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary text-center">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           🎨 Interactive Theme System
         </summary>
         
