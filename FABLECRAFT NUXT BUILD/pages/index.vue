@@ -130,11 +130,12 @@ if (isDevelopment) {
 
 
 
-      <!-- Visual Effects Controls Dropdown -->
-      <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
-        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🎮 Visual Effects Controls
-        </summary>
+      <!-- Visual Effects Controls Dropdown with Glow -->
+      <UiThemeGlow size="md" position="center" :intensity="0.6" :interactive="true">
+        <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
+          <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+            🎮 Visual Effects Controls
+          </summary>
         
         <div class="space-y-6">
           <!-- Quick Toggle All Effects -->
@@ -208,6 +209,7 @@ if (isDevelopment) {
         </div>
         </div>
       </details>
+      </UiThemeGlow>
 
       <!-- Typography Showcase Dropdown -->
       <details :open="showTypography" class="bg-card p-8 rounded-lg border shadow-sm">
@@ -238,11 +240,12 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <!-- Interactive Theme System Dropdown -->
-      <details :open="showThemeSystem" class="bg-card p-8 rounded-lg border shadow-sm">
-        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🎨 Interactive Theme System
-        </summary>
+      <!-- Interactive Theme System Dropdown with Animated Glow -->
+      <UiThemeGlow size="lg" position="top-left" :intensity="0.7" :animate="true">
+        <details :open="showThemeSystem" class="bg-card p-8 rounded-lg border shadow-sm">
+          <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+            🎨 Interactive Theme System
+          </summary>
         
         <div class="space-y-4">
           <p class="text-center text-muted-foreground">
@@ -335,6 +338,7 @@ if (isDevelopment) {
         </div>
         </div>
       </details>
+      </UiThemeGlow>
 
 
 
