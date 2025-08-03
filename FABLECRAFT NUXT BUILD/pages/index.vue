@@ -89,8 +89,8 @@ if (isDevelopment) {
         :count="fireflyCount" 
         :performance-mode="performanceMode"
       />
+      <UiAtmosphericGlow :enabled="atmosphericEnabled" />
     </ClientOnly>
-    <div v-if="atmosphericEnabled" class="atmospheric-gradient" />
     
     <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
       

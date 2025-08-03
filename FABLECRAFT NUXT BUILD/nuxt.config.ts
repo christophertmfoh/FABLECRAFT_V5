@@ -28,6 +28,11 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
   },
+  
+  // Experimental optimizations for visual effects
+  experimental: {
+    payloadExtraction: false // Better for visual effects
+  },
 
   // Better error handling - explicit SSR
   ssr: true,
