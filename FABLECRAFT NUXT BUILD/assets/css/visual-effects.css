@@ -306,19 +306,25 @@
   pointer-events: none;
   z-index: 1;
   
-  /* Fixed: Use actual theme variables with proper syntax */
+  /* Fixed: Proper HSL syntax + better positioning */
   background: 
-    /* Primary glow - positioned better */
+    /* Primary glow - larger and better positioned */
     radial-gradient(
-      ellipse var(--glow-size-primary, 60%) var(--glow-size-primary, 60%) at 30% 25%, 
-      hsla(var(--glow-primary), var(--glow-opacity-primary, 0.15)) 0%,
-      transparent 70%
+      ellipse var(--glow-size-primary, 60%) var(--glow-size-primary, 60%) at 20% 30%, 
+      hsl(var(--glow-h-primary, 220), var(--glow-s-primary, 100%), var(--glow-l-primary, 50%), var(--glow-opacity-primary, 0.15)),
+      transparent 65%
     ),
-    /* Secondary glow - positioned better */
+    /* Secondary glow - larger and better positioned */
     radial-gradient(
-      ellipse var(--glow-size-secondary, 50%) var(--glow-size-secondary, 50%) at 70% 75%, 
-      hsla(var(--glow-secondary), var(--glow-opacity-secondary, 0.1)) 0%,
-      transparent 70%
+      ellipse var(--glow-size-secondary, 50%) var(--glow-size-secondary, 50%) at 80% 70%, 
+      hsl(var(--glow-h-secondary, 280), var(--glow-s-secondary, 100%), var(--glow-l-secondary, 50%), var(--glow-opacity-secondary, 0.1)),
+      transparent 65%
+    ),
+    /* Subtle overall wash for better coverage */
+    radial-gradient(
+      ellipse 120% 80% at 50% 50%, 
+      hsl(var(--glow-h-primary, 220), var(--glow-s-primary, 100%), var(--glow-l-primary, 50%), calc(var(--glow-opacity-primary, 0.15) * 0.3)),
+      transparent 80%
     );
   
   mix-blend-mode: var(--glow-blend-mode, screen);

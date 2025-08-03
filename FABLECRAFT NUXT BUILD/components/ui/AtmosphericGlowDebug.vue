@@ -1,20 +1,31 @@
 <template>
-  <div class="fixed top-4 right-4 bg-black/80 text-white p-3 rounded text-xs font-mono z-50">
+  <div class="fixed top-4 right-4 bg-black/90 text-white p-3 rounded text-xs font-mono z-50 max-w-xs">
+    <div class="font-bold mb-2">Glow Debug</div>
     <div>Theme: {{ currentTheme }}</div>
-    <div>Primary: {{ glowPrimary || 'NOT FOUND' }}</div>
-    <div>Secondary: {{ glowSecondary || 'NOT FOUND' }}</div>
-    <div>Opacity P: {{ glowOpacityPrimary || 'NOT FOUND' }}</div>
-    <div>Opacity S: {{ glowOpacitySecondary || 'NOT FOUND' }}</div>
-    <div>Blend: {{ glowBlendMode || 'NOT FOUND' }}</div>
-    <div>Size P: {{ glowSizePrimary || 'NOT FOUND' }}</div>
-    <div>Size S: {{ glowSizeSecondary || 'NOT FOUND' }}</div>
+    <hr class="my-2 opacity-30">
+    <div>H1: {{ glowHPrimary || 'MISSING' }}</div>
+    <div>S1: {{ glowSPrimary || 'MISSING' }}</div>
+    <div>L1: {{ glowLPrimary || 'MISSING' }}</div>
+    <div>H2: {{ glowHSecondary || 'MISSING' }}</div>
+    <div>S2: {{ glowSSecondary || 'MISSING' }}</div>
+    <div>L2: {{ glowLSecondary || 'MISSING' }}</div>
+    <hr class="my-2 opacity-30">
+    <div>Op1: {{ glowOpacityPrimary || 'MISSING' }}</div>
+    <div>Op2: {{ glowOpacitySecondary || 'MISSING' }}</div>
+    <div>Blend: {{ glowBlendMode || 'MISSING' }}</div>
+    <div>Size1: {{ glowSizePrimary || 'MISSING' }}</div>
+    <div>Size2: {{ glowSizeSecondary || 'MISSING' }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
 const currentTheme = ref('')
-const glowPrimary = ref('')
-const glowSecondary = ref('')
+const glowHPrimary = ref('')
+const glowSPrimary = ref('')
+const glowLPrimary = ref('')
+const glowHSecondary = ref('')
+const glowSSecondary = ref('')
+const glowLSecondary = ref('')
 const glowOpacityPrimary = ref('')
 const glowOpacitySecondary = ref('')
 const glowBlendMode = ref('')
@@ -27,8 +38,12 @@ onMounted(() => {
     const computedStyle = getComputedStyle(root)
     
     currentTheme.value = root.getAttribute('data-theme') || 'none'
-    glowPrimary.value = computedStyle.getPropertyValue('--glow-primary').trim()
-    glowSecondary.value = computedStyle.getPropertyValue('--glow-secondary').trim()
+    glowHPrimary.value = computedStyle.getPropertyValue('--glow-h-primary').trim()
+    glowSPrimary.value = computedStyle.getPropertyValue('--glow-s-primary').trim()
+    glowLPrimary.value = computedStyle.getPropertyValue('--glow-l-primary').trim()
+    glowHSecondary.value = computedStyle.getPropertyValue('--glow-h-secondary').trim()
+    glowSSecondary.value = computedStyle.getPropertyValue('--glow-s-secondary').trim()
+    glowLSecondary.value = computedStyle.getPropertyValue('--glow-l-secondary').trim()
     glowOpacityPrimary.value = computedStyle.getPropertyValue('--glow-opacity-primary').trim()
     glowOpacitySecondary.value = computedStyle.getPropertyValue('--glow-opacity-secondary').trim()
     glowBlendMode.value = computedStyle.getPropertyValue('--glow-blend-mode').trim()
@@ -38,15 +53,12 @@ onMounted(() => {
   
   updateValues()
   
-  // Watch for theme changes
   const observer = new MutationObserver(updateValues)
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['data-theme']
   })
   
-  onUnmounted(() => {
-    observer.disconnect()
-  })
+  onUnmounted(() => observer.disconnect())
 })
 </script>

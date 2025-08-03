@@ -73,12 +73,16 @@
   --atmospheric-blend: overlay;   /* Better visibility on light bg */
   --atmospheric-opacity: 0.3;     /* Stronger gradient on light bg */
   
-  /* Fixed: Use HSLA-compatible format */
-  --glow-primary: 220, 60%, 70%;        /* Note: commas for HSLA */
-  --glow-secondary: 280, 40%, 75%;
-  --glow-opacity-primary: 0.08;
-  --glow-opacity-secondary: 0.05;
-  --glow-blend-mode: multiply;
+  /* Fixed: Separate HSL components for proper CSS variable usage */
+  --glow-h-primary: 220;
+  --glow-s-primary: 60%;
+  --glow-l-primary: 70%;
+  --glow-h-secondary: 280;
+  --glow-s-secondary: 40%;
+  --glow-l-secondary: 75%;
+  --glow-opacity-primary: 0.15;     /* Increased for visibility */
+  --glow-opacity-secondary: 0.10;   /* Increased for visibility */
+  --glow-blend-mode: overlay;       /* Better for light themes */
   --glow-size-primary: 50%;
   --glow-size-secondary: 60%;
 }
@@ -144,11 +148,15 @@
   --atmospheric-blend: screen;    /* Additive for dark bg */
   --atmospheric-opacity: 0.2;     /* Subtle gradient on dark bg */
   
-  /* Fixed: Use HSLA-compatible format */
-  --glow-primary: 220, 100%, 50%;
-  --glow-secondary: 280, 100%, 50%;
-  --glow-opacity-primary: 0.15;
-  --glow-opacity-secondary: 0.1;
+  /* Fixed: Separate HSL components for proper CSS variable usage */
+  --glow-h-primary: 220;
+  --glow-s-primary: 100%;
+  --glow-l-primary: 50%;
+  --glow-h-secondary: 280;
+  --glow-s-secondary: 100%;
+  --glow-l-secondary: 50%;
+  --glow-opacity-primary: 0.2;
+  --glow-opacity-secondary: 0.15;
   --glow-blend-mode: screen;
   --glow-size-primary: 45%;
   --glow-size-secondary: 55%;
@@ -195,11 +203,15 @@
   --firefly-glow-color: hsl(210 70% 45% / 0.35); /* More prominent blue glow matching primary */
   
   /* ✅ NEW: Atmospheric Glow Variables for Arctic Focus */
-  --glow-primary: 200, 60%, 80%;      /* Cool blue */
-  --glow-secondary: 220, 40%, 85%;    /* Lighter blue */
-  --glow-opacity-primary: 0.12;          /* Increased for visibility */
-  --glow-opacity-secondary: 0.08;
-  --glow-blend-mode: multiply;
+  --glow-h-primary: 200;
+  --glow-s-primary: 60%;
+  --glow-l-primary: 60%;      /* Adjusted for better visibility */
+  --glow-h-secondary: 220;
+  --glow-s-secondary: 40%;
+  --glow-l-secondary: 65%;
+  --glow-opacity-primary: 0.18;     /* Much higher for light theme */
+  --glow-opacity-secondary: 0.12;
+  --glow-blend-mode: overlay;
   --glow-size-primary: 40%;
   --glow-size-secondary: 60%;
 }
@@ -239,11 +251,15 @@
   --firefly-glow-color: hsl(45 90% 60% / 0.3); /* A more visible golden glow */
   
   /* ✅ NEW: Atmospheric Glow Variables for Golden Hour */
-  --glow-primary: 45, 100%, 70%;      /* Warm orange */
-  --glow-secondary: 25, 80%, 75%;     /* Soft yellow */
-  --glow-opacity-primary: 0.10;          /* Increased for visibility */
-  --glow-opacity-secondary: 0.06;
-  --glow-blend-mode: multiply;
+  --glow-h-primary: 45;
+  --glow-s-primary: 100%;
+  --glow-l-primary: 65%;      /* Adjusted for better visibility */
+  --glow-h-secondary: 25;
+  --glow-s-secondary: 80%;
+  --glow-l-secondary: 70%;
+  --glow-opacity-primary: 0.18;     /* Much higher for light theme */
+  --glow-opacity-secondary: 0.12;
+  --glow-blend-mode: overlay;
   --glow-size-primary: 45%;
   --glow-size-secondary: 65%;
 }
@@ -289,10 +305,14 @@
   --firefly-glow-color: hsl(210 80% 70% / 0.5); /* Brighter blue glow matching the spark */
   
   /* ✅ NEW: Atmospheric Glow Variables for Midnight Ink */
-  --glow-primary: 220, 80%, 60%;      /* Bright blue */
-  --glow-secondary: 280, 70%, 65%;    /* Bright purple */
+  --glow-h-primary: 220;
+  --glow-s-primary: 80%;
+  --glow-l-primary: 60%;
+  --glow-h-secondary: 280;
+  --glow-s-secondary: 70%;
+  --glow-l-secondary: 65%;
   --glow-opacity-primary: 0.25;
-  --glow-opacity-secondary: 0.15;
+  --glow-opacity-secondary: 0.18;
   --glow-blend-mode: screen;
   --glow-size-primary: 35%;
   --glow-size-secondary: 55%;
@@ -427,11 +447,15 @@
   --auth-button-primary-hover: 15 75% 40%; /* Darker coral */
   
   /* ✅ NEW: Atmospheric Glow Variables for Sunset Coral */
-  --glow-primary: 15, 75%, 65%;      /* Warm coral */
-  --glow-secondary: 45, 85%, 70%;    /* Soft gold */
-  --glow-opacity-primary: 0.10;          /* Increased for visibility */
-  --glow-opacity-secondary: 0.06;
-  --glow-blend-mode: multiply;
+  --glow-h-primary: 15;
+  --glow-s-primary: 75%;
+  --glow-l-primary: 60%;      /* Adjusted for better visibility */
+  --glow-h-secondary: 45;
+  --glow-s-secondary: 85%;
+  --glow-l-secondary: 65%;
+  --glow-opacity-primary: 0.18;     /* Much higher for light theme */
+  --glow-opacity-secondary: 0.12;
+  --glow-blend-mode: overlay;
   --glow-size-primary: 40%;
   --glow-size-secondary: 60%;
 }
@@ -467,11 +491,15 @@
   --auth-button-primary-hover: 280 35% 35%; /* Darker lavender */
   
   /* ✅ NEW: Atmospheric Glow Variables for Lavender Dusk */
-  --glow-primary: 280, 40%, 75%;     /* Soft lavender */
-  --glow-secondary: 320, 35%, 80%;   /* Light pink */
-  --glow-opacity-primary: 0.10;          /* Increased for visibility */
-  --glow-opacity-secondary: 0.06;
-  --glow-blend-mode: multiply;
+  --glow-h-primary: 280;
+  --glow-s-primary: 40%;
+  --glow-l-primary: 65%;     /* Adjusted for better visibility */
+  --glow-h-secondary: 320;
+  --glow-s-secondary: 35%;
+  --glow-l-secondary: 70%;
+  --glow-opacity-primary: 0.18;     /* Much higher for light theme */
+  --glow-opacity-secondary: 0.12;
+  --glow-blend-mode: overlay;
   --glow-size-primary: 45%;
   --glow-size-secondary: 65%;
 }
@@ -508,11 +536,15 @@
   --auth-button-primary-hover: 95 60% 35%; /* Darker moonlit */
   
   /* ✅ NEW: Atmospheric Glow Variables for Moonlit Garden */
-  --glow-primary: 95, 50%, 70%;      /* Mystical teal */
-  --glow-secondary: 85, 45%, 75%;    /* Garden green */
-  --glow-opacity-primary: 0.12;          /* Increased for visibility */
-  --glow-opacity-secondary: 0.08;
-  --glow-blend-mode: multiply;
+  --glow-h-primary: 95;
+  --glow-s-primary: 50%;
+  --glow-l-primary: 60%;      /* Adjusted for better visibility */
+  --glow-h-secondary: 85;
+  --glow-s-secondary: 45%;
+  --glow-l-secondary: 65%;
+  --glow-opacity-primary: 0.18;     /* Much higher for light theme */
+  --glow-opacity-secondary: 0.12;
+  --glow-blend-mode: overlay;
   --glow-size-primary: 42%;
   --glow-size-secondary: 62%;
 }
@@ -657,10 +689,14 @@
   --firefly-glow-color: hsl(180 100% 50% / 0.4); /* Brighter contrasting cyan glow */
   
   /* ✅ NEW: Atmospheric Glow Variables for Netrunner */
-  --glow-primary: 180, 100%, 50%;        /* Cyan */
-  --glow-secondary: 300, 100%, 50%;      /* Magenta */
-  --glow-opacity-primary: 0.3;
-  --glow-opacity-secondary: 0.2;
+  --glow-h-primary: 180;
+  --glow-s-primary: 100%;
+  --glow-l-primary: 50%;
+  --glow-h-secondary: 300;
+  --glow-s-secondary: 100%;
+  --glow-l-secondary: 50%;
+  --glow-opacity-primary: 0.35;
+  --glow-opacity-secondary: 0.25;
   --glow-blend-mode: screen;
   --glow-size-primary: 30%;
   --glow-size-secondary: 45%;
