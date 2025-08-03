@@ -304,42 +304,34 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  z-index: 2;
-  will-change: opacity;
+  z-index: 1;
   
-  /* Multi-layer approach for better theme compatibility */
-  background-image: 
-    /* Primary glow - top */
+  /* FIXED: Proper gradient syntax with larger coverage */
+  background: 
+    /* Large top-left glow */
     radial-gradient(
-      ellipse var(--glow-size-primary, 35%) var(--glow-size-primary, 35%) at 20% 10%,
-      hsl(var(--glow-primary, var(--orb-primary)) / var(--glow-opacity-primary, 0.15)),
+      circle 800px at 25% 20%, 
+      rgba(var(--glow-primary-rgb, 59 130 246), var(--glow-opacity-primary, 0.15)) 0%,
       transparent 70%
     ),
-    /* Secondary glow - bottom right */
+    /* Large bottom-right glow */
     radial-gradient(
-      ellipse var(--glow-size-secondary, 50%) var(--glow-size-secondary, 50%) at 80% 90%,
-      hsl(var(--glow-secondary, var(--orb-secondary)) / var(--glow-opacity-secondary, 0.1)),
+      circle 1000px at 75% 80%, 
+      rgba(var(--glow-secondary-rgb, 147 51 234), var(--glow-opacity-secondary, 0.1)) 0%,
       transparent 70%
     ),
-    /* Subtle overall wash */
-    linear-gradient(
-      135deg,
-      hsl(var(--glow-primary, var(--orb-primary)) / calc(var(--glow-opacity-primary, 0.15) * 0.3)) 0%,
-      transparent 30%,
-      transparent 70%,
-      hsl(var(--glow-secondary, var(--orb-secondary)) / calc(var(--glow-opacity-secondary, 0.1) * 0.3)) 100%
+    /* Subtle center wash */
+    radial-gradient(
+      ellipse 1200px 600px at 50% 50%, 
+      rgba(var(--glow-primary-rgb, 59 130 246), calc(var(--glow-opacity-primary, 0.15) * 0.3)) 0%,
+      transparent 60%
     );
   
   mix-blend-mode: var(--glow-blend-mode, screen);
-  
-  /* GPU acceleration */
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  
-  /* Performance optimizations */
   contain: layout style paint;
 }
 

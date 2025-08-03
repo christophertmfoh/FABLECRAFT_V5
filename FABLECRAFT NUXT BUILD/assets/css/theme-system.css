@@ -134,6 +134,13 @@
   /* Atmospheric Effects */
   --atmospheric-blend: screen;    /* Additive for dark bg */
   --atmospheric-opacity: 0.2;     /* Subtle gradient on dark bg */
+  
+  /* Atmospheric Glow (RGB format) */
+  --glow-primary-rgb: 59, 130, 246;      /* Blue RGB */
+  --glow-secondary-rgb: 147, 51, 234;    /* Purple RGB */
+  --glow-opacity-primary: 0.25;
+  --glow-opacity-secondary: 0.15;
+  --glow-blend-mode: screen;
 }
 
 /* ========================================
