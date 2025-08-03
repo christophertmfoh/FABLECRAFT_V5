@@ -15,8 +15,18 @@ export default defineNuxtConfig({
   // Explicitly load the global stylesheet
   css: ['~/assets/css/main.css'],
 
+  // Runtime config for environment variables
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+    }
+  },
+
   // Supabase configuration for authentication redirects
   supabase: {
+    url: process.env.SUPABASE_URL,
+    key: process.env.SUPABASE_ANON_KEY,
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
