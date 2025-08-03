@@ -17,7 +17,6 @@ const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
-const atmosphericEnabled = useState('atmospheric-enabled', () => true)
 
 // Dropdown states for sections
 const showSystemStatus = ref(true) // Start expanded
@@ -27,7 +26,7 @@ const showTypography = ref(false) // Start collapsed for typography
 
 // Computed property to check if all effects are enabled
 const allEffectsEnabled = computed(() => {
-  return orbsEnabled.value && firefliesEnabled.value && atmosphericEnabled.value
+  return orbsEnabled.value && firefliesEnabled.value
 })
 
 // Toggle all effects on/off
@@ -35,7 +34,6 @@ const toggleAllEffects = () => {
   const newState = !allEffectsEnabled.value
   orbsEnabled.value = newState
   firefliesEnabled.value = newState
-  atmosphericEnabled.value = newState
 }
 
 // Device info for performance
@@ -89,9 +87,6 @@ if (isDevelopment) {
         :count="fireflyCount" 
         :performance-mode="performanceMode"
       />
-      <UiAtmosphericGlow :enabled="atmosphericEnabled" />
-      <!-- Debug component to show CSS variables -->
-      <UiAtmosphericGlowDebug />
     </ClientOnly>
     
     <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
@@ -174,15 +169,6 @@ if (isDevelopment) {
               class="rounded"
             >
             <span>Fireflies ({{ fireflyCount }} elements)</span>
-          </label>
-          
-          <label class="flex items-center gap-2">
-            <input 
-              v-model="atmosphericEnabled" 
-              type="checkbox"
-              class="rounded"
-            >
-            <span>Atmospheric Gradient</span>
           </label>
         </div>
         
