@@ -5,10 +5,11 @@
  */
 
 /* ========================================
-   PHASE 1A: MATHEMATICAL SPACING FOUNDATION
-   Must load first - all other systems depend on these variables
+   CSS IMPORTS MUST COME FIRST
+   Required by CSS specification
 ======================================== */
 @import './design-tokens.css';
+@import './theme-system.css';
 
 /* ========================================
    TAILWIND CSS LAYERS
@@ -17,9 +18,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* ========================================
-   PHASE 1B: THEME SYSTEM
-   Theme variables and utilities load after Tailwind base
-======================================== */
-@import './theme-system.css';
