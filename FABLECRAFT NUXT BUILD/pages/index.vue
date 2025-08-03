@@ -56,15 +56,28 @@ if (isDevelopment) {
         <!-- Industry-Standard Design Token Testing -->
         <div class="space-y-6 text-left mt-4">
           
+          <!-- 8-Point Grid Scale Validation -->
+          <div class="space-y-3">
+            <h3 class="text-sm font-medium text-blue-800">8-Point Grid Scale:</h3>
+            <div class="flex flex-wrap gap-2 text-xs items-end">
+              <div class="spacing-test" style="width: var(--space-1); height: var(--space-1);"><span>4px</span></div>
+              <div class="spacing-test" style="width: var(--space-2); height: var(--space-2);"><span>8px</span></div>
+              <div class="spacing-test" style="width: var(--space-4); height: var(--space-4);"><span>16px</span></div>
+              <div class="spacing-test" style="width: var(--space-6); height: var(--space-6);"><span>24px</span></div>
+              <div class="spacing-test" style="width: var(--space-8); height: var(--space-8);"><span>32px</span></div>
+              <div class="spacing-test" style="width: var(--space-12); height: var(--space-12);"><span>48px</span></div>
+            </div>
+          </div>
+          
           <!-- Semantic Token Validation -->
           <div class="space-y-3">
             <h3 class="text-sm font-medium text-blue-800">Semantic Design Tokens:</h3>
-            <div class="flex flex-wrap gap-2 text-xs">
-              <div class="spacing-test" style="width: var(--space-micro); height: var(--space-micro);">micro</div>
-              <div class="spacing-test" style="width: var(--space-tiny); height: var(--space-tiny);">tiny</div>
-              <div class="spacing-test" style="width: var(--space-small); height: var(--space-small);">small</div>
-              <div class="spacing-test" style="width: var(--space-medium); height: var(--space-medium);">medium</div>
-              <div class="spacing-test" style="width: var(--space-large); height: var(--space-large);">large</div>
+            <div class="flex flex-wrap gap-2 text-xs items-end">
+              <div class="spacing-test" style="width: var(--space-micro); height: var(--space-micro);"><span>micro</span></div>
+              <div class="spacing-test" style="width: var(--space-tiny); height: var(--space-tiny);"><span>tiny</span></div>
+              <div class="spacing-test" style="width: var(--space-small); height: var(--space-small);"><span>small</span></div>
+              <div class="spacing-test" style="width: var(--space-medium); height: var(--space-medium);"><span>medium</span></div>
+              <div class="spacing-test" style="width: var(--space-large); height: var(--space-large);"><span>large</span></div>
             </div>
           </div>
           
@@ -79,13 +92,14 @@ if (isDevelopment) {
             </div>
           </div>
           
-          <!-- Layer Architecture Validation -->
+          <!-- Foundation Architecture -->
           <div class="space-y-3">
-            <h3 class="text-sm font-medium text-blue-800">Cascade Layer Architecture:</h3>
+            <h3 class="text-sm font-medium text-blue-800">Foundation Architecture:</h3>
             <div class="text-xs font-mono bg-white p-3 rounded border">
-              <div>✓ @layer base, tokens, theme, layout, components, utilities, development</div>
-              <div>✓ Three-tier token hierarchy (Primitive → Semantic → Module)</div>
-              <div>✓ @property declarations for performance optimization</div>
+              <div>✓ Industry-standard 8-point grid system</div>
+              <div>✓ Golden Ratio typography scaling (φ = 1.618)</div>
+              <div>✓ Semantic spacing aliases for developer clarity</div>
+              <div>✓ Cross-browser compatible CSS variables</div>
             </div>
           </div>
           
