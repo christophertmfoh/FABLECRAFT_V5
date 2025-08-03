@@ -68,6 +68,18 @@
   --text-5xl: 3rem;       /* 48px */
   --text-6xl: 3.75rem;    /* 60px */
   
+  /* Golden Ratio Typography Scale (1.618) */
+  --golden-ratio: 1.618;
+  --text-golden-xs: 0.618rem;     /* 9.88px - Captions, footnotes */
+  --text-golden-sm: 0.764rem;     /* 12.23px - Small text, labels */
+  --text-golden-base: 1rem;       /* 16px - Body text (base) */
+  --text-golden-lg: 1.618rem;     /* 25.88px - H4, subheadings */
+  --text-golden-xl: 2.618rem;     /* 41.85px - H3, section titles */
+  --text-golden-2xl: 4.236rem;    /* 67.67px - H2, page headers */
+  --text-golden-3xl: 6.854rem;    /* 109.46px - H1, hero titles */
+  --text-golden-4xl: 11.089rem;   /* 177.11px - Display large */
+  --text-golden-5xl: 17.942rem;   /* 286.57px - Display massive */
+  
   /* Line heights aligned to 4px grid */
   --leading-none: 1;
   --leading-tight: 1.25;   /* 20px for 16px text */
@@ -85,6 +97,14 @@
   --font-bold: 700;
   --font-extrabold: 800;
   --font-black: 900;
+  
+  /* Letter spacing optimization for readability */
+  --letter-spacing-tighter: -0.05em;  /* For large display text */
+  --letter-spacing-tight: -0.025em;   /* For headings */
+  --letter-spacing-normal: 0;         /* For body text */
+  --letter-spacing-wide: 0.025em;     /* For small text/labels */
+  --letter-spacing-wider: 0.05em;     /* For all-caps text */
+  --letter-spacing-widest: 0.1em;     /* For micro text */
   
   /* Font families optimized for web performance */
   --font-sans: 
@@ -173,6 +193,74 @@ p, li, td, th {
   line-height: var(--leading-normal);
 }
 
+/* ========================================
+   GOLDEN RATIO TYPOGRAPHY UTILITIES
+   Apply golden ratio scale with optimized line heights
+======================================== */
+
+/* Golden ratio text utilities */
+.text-golden-xs {
+  font-size: var(--text-golden-xs);
+  line-height: 1.6;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-golden-sm {
+  font-size: var(--text-golden-sm);
+  line-height: 1.5;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.text-golden-base {
+  font-size: var(--text-golden-base);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.text-golden-lg {
+  font-size: var(--text-golden-lg);
+  line-height: 1.4;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-golden-xl {
+  font-size: var(--text-golden-xl);
+  line-height: 1.3;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.text-golden-2xl {
+  font-size: var(--text-golden-2xl);
+  line-height: 1.2;
+  letter-spacing: var(--letter-spacing-tighter);
+}
+
+.text-golden-3xl {
+  font-size: var(--text-golden-3xl);
+  line-height: 1.1;
+  letter-spacing: var(--letter-spacing-tighter);
+}
+
+.text-golden-4xl {
+  font-size: var(--text-golden-4xl);
+  line-height: 1.05;
+  letter-spacing: var(--letter-spacing-tighter);
+}
+
+.text-golden-5xl {
+  font-size: var(--text-golden-5xl);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-tighter);
+}
+
+/* Letter spacing utilities */
+.tracking-tighter { letter-spacing: var(--letter-spacing-tighter); }
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
+.tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+.tracking-widest { letter-spacing: var(--letter-spacing-widest); }
+
 /*
  * FOUNDATION COMPLETE
  * This design token system provides:
@@ -183,6 +271,8 @@ p, li, td, th {
  * ✅ Semantic spacing aliases for developer productivity  
  * ✅ Responsive scaling with 4px alignment maintained
  * ✅ Typography system with proper line-height rhythm
+ * ✅ Golden ratio typography scale (1.618)
+ * ✅ Letter spacing optimization for all text sizes
  * ✅ Cross-browser compatibility and accessibility
  * ✅ Research-verified optimal spacing for UI density
  * ✅ DRY principle: Single source of truth in CSS variables
@@ -190,10 +280,20 @@ p, li, td, th {
  * 
  * USAGE EXAMPLES:
  * CSS: var(--space-md), var(--section-gap), var(--text-lg)
+ * CSS: var(--text-golden-lg), var(--letter-spacing-tight)
+ * Classes: .text-golden-xl, .tracking-wide
  * Tailwind: p-md, space-y-lg, text-xl, font-sans
+ * 
+ * TYPOGRAPHY FEATURES:
+ * - Standard scale: --text-xs through --text-6xl
+ * - Golden ratio scale: --text-golden-xs through --text-golden-5xl
+ * - Letter spacing: --letter-spacing-tighter through --letter-spacing-widest
+ * - Font stacks: --font-sans, --font-serif, --font-mono
+ * - Font weights: --font-thin through --font-black
  * 
  * MAINTENANCE: 
  * - Change spacing values only in this file
  * - Tailwind config automatically inherits changes
  * - Use var(--section-gap) for responsive sections
+ * - Golden ratio utilities automatically apply optimal line-height & letter-spacing
  */
