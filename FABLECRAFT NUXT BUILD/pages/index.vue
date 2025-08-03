@@ -19,9 +19,11 @@ const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
 const atmosphericEnabled = useState('atmospheric-enabled', () => true)
 
-// Typography showcase
-const showTypography = ref(false)
-const showEffectsControls = ref(false)
+// Dropdown states for sections
+const showSystemStatus = ref(true) // Start expanded
+const showThemeSystem = ref(true) // Start expanded
+const showEffectsControls = ref(false) // Start collapsed
+const showTypography = ref(false) // Start collapsed for typography
 
 // Computed property to check if all effects are enabled
 const allEffectsEnabled = computed(() => {
@@ -102,31 +104,47 @@ if (isDevelopment) {
         </div>
       </div>
 
+      <!-- System Status Dropdown -->
+      <details :open="showSystemStatus" class="bg-card p-6 rounded-lg border shadow-sm max-w-md mx-auto">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          📊 System Status
+        </summary>
+        
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span>Supabase:</span>
+            <span class="text-green-600 font-medium">✓ Connected</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Authentication:</span>
+            <span class="text-blue-600 font-medium">{{ isLoggedIn ? '✓ Authenticated' : '◯ Anonymous' }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Environment:</span>
+            <span class="font-mono text-xs">{{ isDevelopment ? 'Development' : 'Production' }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Visual Effects:</span>
+            <span class="font-medium">{{ orbsEnabled ? 'Active' : 'Disabled' }}</span>
+          </div>
+        </div>
+      </details>
+
       <!-- Quick Controls -->
       <div class="flex flex-wrap justify-center gap-4">
-        <button 
-          class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          @click="showTypography = !showTypography"
-        >
-          {{ showTypography ? 'Hide' : 'Show' }} Typography
-        </button>
-        <button 
-          class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
-          @click="showEffectsControls = !showEffectsControls"
-        >
-          {{ showEffectsControls ? 'Hide' : 'Show' }} Effects Controls
-        </button>
         <button 
           class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
           @click="toggleAllEffects"
         >
-          {{ allEffectsEnabled ? '✨ Effects On' : '○ Effects Off' }}
+          {{ allEffectsEnabled ? '✨ All Effects On' : '○ All Effects Off' }}
         </button>
       </div>
 
-      <!-- Visual Effects Controls -->
-      <div v-show="showEffectsControls" class="bg-card p-6 rounded-lg border space-y-6">
-        <h2 class="text-2xl font-semibold mb-4">Visual Effects Controls</h2>
+      <!-- Visual Effects Controls Dropdown -->
+      <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🎮 Visual Effects Controls
+        </summary>
         
         <!-- Performance Mode -->
         <div>
@@ -196,11 +214,13 @@ if (isDevelopment) {
             <span class="ml-2">{{ performanceMode }}</span>
           </div>
         </div>
-      </div>
+      </details>
 
-      <!-- Typography Showcase -->
-      <div v-show="showTypography" class="bg-card p-8 rounded-lg border space-y-8">
-        <h2 class="text-2xl font-bold mb-6">Typography System</h2>
+      <!-- Typography Showcase Dropdown -->
+      <details :open="showTypography" class="bg-card p-8 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          📝 Typography System
+        </summary>
         
         <!-- Golden Ratio Scale -->
         <div class="space-y-4">
@@ -223,14 +243,18 @@ if (isDevelopment) {
           <p class="tracking-wide text-sm">tracking-wide: Small text with wide spacing</p>
           <p class="tracking-wider text-sm uppercase">tracking-wider: UPPERCASE TEXT</p>
         </div>
-      </div>
+      </details>
 
-      <!-- Theme Showcase Section -->
-      <div class="bg-card p-8 rounded-lg border shadow-sm">
-        <h2 class="text-2xl font-bold mb-6 text-center">🎨 Interactive Theme System</h2>
-        <p class="text-center text-muted-foreground mb-8">
-          Click any theme below to see our complete design system in action
-        </p>
+      <!-- Interactive Theme System Dropdown -->
+      <details :open="showThemeSystem" class="bg-card p-8 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary text-center">
+          🎨 Interactive Theme System
+        </summary>
+        
+        <div class="space-y-4">
+          <p class="text-center text-muted-foreground">
+            Click any theme below to see our complete design system in action
+          </p>
         
         <!-- Theme Categories -->
         <div class="space-y-8">
@@ -316,30 +340,10 @@ if (isDevelopment) {
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Supabase Status -->
-      <div class="bg-card p-6 rounded-lg border shadow-sm max-w-md mx-auto">
-        <h2 class="text-lg font-semibold mb-4">System Status</h2>
-        <div class="space-y-2 text-sm">
-          <div class="flex justify-between">
-            <span>Supabase:</span>
-            <span class="text-green-600 font-medium">✓ Connected</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Authentication:</span>
-            <span class="text-blue-600 font-medium">{{ isLoggedIn ? '✓ Authenticated' : '◯ Anonymous' }}</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Environment:</span>
-            <span class="font-mono text-xs">{{ isDevelopment ? 'Development' : 'Production' }}</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Visual Effects:</span>
-            <span class="font-medium">{{ orbsEnabled ? 'Active' : 'Disabled' }}</span>
-          </div>
         </div>
-      </div>
+      </details>
+
+
 
       <!-- Development-Only Validation Tests -->
       <details v-if="isDevelopment" class="bg-card p-6 rounded-lg border shadow-sm text-left">
@@ -376,6 +380,31 @@ if (isDevelopment) {
 </template>
 
 <style scoped>
+/* Dropdown smooth transitions */
+details {
+  transition: all 0.3s ease;
+}
+
+details summary {
+  list-style: none;
+  user-select: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: '▶';
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
 /* Development-only styles - excluded from production */
 .development-only {
   /* This class and its styles are only active in development */
