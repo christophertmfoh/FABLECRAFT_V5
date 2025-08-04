@@ -554,7 +554,7 @@ if (isDevelopment) {
       <!-- Buttons Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🔘 Buttons (1 component)
+          🔘 Buttons (2 components)
         </summary>
         
         <div class="space-y-8">
@@ -622,6 +622,24 @@ if (isDevelopment) {
               <Button class="rounded-full">Rounded Full</Button>
               <Button class="bg-gradient-to-r from-primary to-primary/60">Gradient</Button>
               <Button variant="outline" class="border-2 border-primary">Custom Border</Button>
+            </div>
+          </div>
+
+          <!-- GradientButton Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">GradientButton - Advanced Gradient Effects</h3>
+            <div class="flex flex-wrap gap-4">
+              <GradientButton>Default Gradient</GradientButton>
+              <GradientButton variant="secondary">Secondary Gradient</GradientButton>
+              <GradientButton variant="destructive">Destructive Gradient</GradientButton>
+              <GradientButton gradient-direction="to-br">Diagonal Gradient</GradientButton>
+              <GradientButton 
+                gradient-colors="from-purple-500/20 to-pink-500/20"
+                icon="lucide:sparkles"
+              >
+                Custom Colors
+              </GradientButton>
+              <GradientButton :show-gradient-overlay="false">No Gradient</GradientButton>
             </div>
           </div>
         </div>
@@ -797,7 +815,7 @@ if (isDevelopment) {
       <!-- Badge Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🏷️ Badges (1 component)
+          🏷️ Badges (2 components)
         </summary>
         
         <div class="space-y-8">
@@ -866,6 +884,31 @@ if (isDevelopment) {
               <Badge variant="outline" class="border-2 border-primary">Custom Border</Badge>
               <Badge class="rounded-md">Square Badge</Badge>
               <Badge class="animate-pulse">Animated</Badge>
+            </div>
+          </div>
+
+          <!-- BadgeWithDot Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">BadgeWithDot - Status Indicators</h3>
+            <div class="flex flex-wrap gap-4">
+              <BadgeWithDot>Live</BadgeWithDot>
+              <BadgeWithDot variant="secondary" dot-color="success">Online</BadgeWithDot>
+              <BadgeWithDot variant="destructive" dot-color="danger">Error</BadgeWithDot>
+              <BadgeWithDot 
+                variant="outline" 
+                dot-position="right"
+                animation-speed="slow"
+              >
+                Processing
+              </BadgeWithDot>
+              <BadgeWithDot 
+                variant="landing" 
+                size="lg"
+                dot-size="lg"
+              >
+                Featured
+              </BadgeWithDot>
+              <BadgeWithDot :animated="false">Static</BadgeWithDot>
             </div>
           </div>
         </div>
@@ -1372,61 +1415,13 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <!-- Priority 4 Components -->
+      <!-- Utility Components -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🚀 Priority 4 Components (6 new components)
+          🛠️ Utility Components (4 components)
         </summary>
         
         <div class="space-y-8">
-          <!-- GradientButton -->
-          <div class="space-y-4">
-            <h3 class="text-lg font-semibold border-b pb-2">GradientButton</h3>
-            
-            <div class="flex flex-wrap gap-4">
-              <GradientButton>Default Gradient</GradientButton>
-              <GradientButton variant="secondary">Secondary Gradient</GradientButton>
-              <GradientButton variant="destructive">Destructive Gradient</GradientButton>
-              <GradientButton gradient-direction="to-br">Diagonal Gradient</GradientButton>
-              <GradientButton 
-                gradient-colors="from-purple-500/20 to-pink-500/20"
-                icon="lucide:sparkles"
-              >
-                Custom Colors
-              </GradientButton>
-              <GradientButton 
-                :show-gradient-overlay="false"
-              >
-                No Gradient
-              </GradientButton>
-            </div>
-          </div>
-
-          <!-- BadgeWithDot -->
-          <div class="space-y-4">
-            <h3 class="text-lg font-semibold border-b pb-2">BadgeWithDot</h3>
-            
-            <div class="flex flex-wrap gap-4">
-              <BadgeWithDot>Live</BadgeWithDot>
-              <BadgeWithDot variant="secondary" dot-color="success">Online</BadgeWithDot>
-              <BadgeWithDot variant="destructive" dot-color="danger">Error</BadgeWithDot>
-              <BadgeWithDot 
-                variant="outline" 
-                dot-position="right"
-                animation-speed="slow"
-              >
-                Processing
-              </BadgeWithDot>
-              <BadgeWithDot 
-                variant="landing" 
-                size="lg"
-                dot-size="lg"
-              >
-                Featured
-              </BadgeWithDot>
-              <BadgeWithDot :animated="false">Static</BadgeWithDot>
-            </div>
-          </div>
 
           <!-- Separator -->
           <div class="space-y-4">
@@ -1553,7 +1548,7 @@ if (isDevelopment) {
                 </ScrollArea>
               </div>
               
-              <div>
+              <div class="overflow-hidden">
                 <p class="text-sm text-muted-foreground mb-2">Horizontal Scroll</p>
                 <ScrollArea 
                   orientation="horizontal" 
