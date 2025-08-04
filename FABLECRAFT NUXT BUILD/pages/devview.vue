@@ -30,6 +30,11 @@ import Section from '~/components/atoms/Section.vue'
 import Heading from '~/components/atoms/Heading.vue'
 import Text from '~/components/atoms/Text.vue'
 import Label from '~/components/atoms/Label.vue'
+import GradientButton from '~/components/atoms/GradientButton.vue'
+import BadgeWithDot from '~/components/atoms/BadgeWithDot.vue'
+import TextArea from '~/components/atoms/TextArea.vue'
+import Checkbox from '~/components/atoms/Checkbox.vue'
+import RadioGroup from '~/components/atoms/RadioGroup.vue'
 
 // Use centralized theme composable with all features
 const { 
@@ -65,6 +70,15 @@ const inputValue1 = ref('')
 const inputValue2 = ref('')
 const inputValue3 = ref('')
 const inputValue4 = ref('')
+
+// Priority 4 component values
+const textareaValue = ref('')
+const textareaValue2 = ref('This is a long text that will autoresize the height of the Textarea.')
+const checkboxValue = ref<boolean | 'indeterminate'>(false)
+const checkboxValue2 = ref<boolean | 'indeterminate'>('indeterminate')
+const checkboxValue3 = ref<boolean | 'indeterminate'>(true)
+const radioValue = ref<string | number | boolean>('vue')
+const radioValue2 = ref<string | number | boolean>()
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -1359,6 +1373,264 @@ if (isDevelopment) {
               <Label class="uppercase tracking-wider text-muted-foreground">
                 Uppercase Label
               </Label>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Forms Section -->
+      <details class="group">
+        <summary class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 font-medium hover:bg-muted/50 transition-colors">
+          <span>Forms (5 components)</span>
+          <AtomIcon 
+            name="lucide:chevron-down" 
+            class="h-4 w-4 transition-transform group-open:rotate-180" 
+          />
+        </summary>
+        <div class="mt-4 space-y-8 px-4">
+          <!-- TextArea Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">TextArea Component</h3>
+            
+            <!-- Basic TextArea -->
+            <div class="space-y-3">
+              <div>
+                <Label html-for="textarea1">Basic TextArea</Label>
+                <TextArea 
+                  id="textarea1"
+                  v-model="textareaValue" 
+                  placeholder="Type something..." 
+                  class="mt-1"
+                />
+              </div>
+              
+              <div>
+                <Label html-for="textarea2">Auto-resize TextArea</Label>
+                <TextArea 
+                  id="textarea2"
+                  v-model="textareaValue2" 
+                  autoresize 
+                  :maxrows="6"
+                  class="mt-1"
+                />
+              </div>
+              
+              <div>
+                <Label html-for="textarea3">TextArea with Icon</Label>
+                <TextArea 
+                  id="textarea3"
+                  icon="lucide:message-square" 
+                  placeholder="Write a message..." 
+                  :rows="2"
+                  class="mt-1"
+                />
+              </div>
+              
+              <div>
+                <Label html-for="textarea4">Loading TextArea</Label>
+                <TextArea 
+                  id="textarea4"
+                  loading 
+                  placeholder="Loading..." 
+                  :rows="1"
+                  class="mt-1"
+                />
+              </div>
+              
+              <div>
+                <Label html-for="textarea5" disabled>Disabled TextArea</Label>
+                <TextArea 
+                  id="textarea5"
+                  disabled 
+                  placeholder="Cannot edit..." 
+                  class="mt-1"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Checkbox Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">Checkbox Component</h3>
+            
+            <!-- Basic Checkboxes -->
+            <div class="space-y-3">
+              <Checkbox 
+                v-model="checkboxValue" 
+                label="Accept terms and conditions"
+              />
+              
+              <Checkbox 
+                v-model="checkboxValue2" 
+                label="Indeterminate state"
+                description="This checkbox is in an indeterminate state"
+              />
+              
+              <Checkbox 
+                v-model="checkboxValue3" 
+                label="Subscribe to newsletter"
+                description="Get weekly updates about new features"
+                required
+              />
+              
+              <Checkbox 
+                label="Custom icon"
+                icon="lucide:heart"
+                default-value
+              />
+              
+              <Checkbox 
+                label="Disabled checkbox"
+                disabled
+              />
+              
+              <Checkbox 
+                label="Card variant"
+                description="This checkbox uses the card variant"
+                variant="card"
+                default-value
+              />
+              
+              <Checkbox 
+                label="End indicator"
+                indicator="end"
+                default-value
+              />
+            </div>
+          </div>
+
+          <!-- RadioGroup Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">RadioGroup Component</h3>
+            
+            <!-- Basic RadioGroup -->
+            <div class="space-y-4">
+              <RadioGroup
+                v-model="radioValue"
+                legend="Select your favorite framework"
+                :options="[
+                  { value: 'vue', label: 'Vue.js', description: 'The Progressive JavaScript Framework' },
+                  { value: 'react', label: 'React', description: 'A JavaScript library for building user interfaces' },
+                  { value: 'angular', label: 'Angular', description: 'Platform for building mobile and desktop web applications' }
+                ]"
+              />
+              
+              <RadioGroup
+                v-model="radioValue2"
+                legend="Choose a plan"
+                description="Select the plan that best fits your needs"
+                :options="[
+                  { value: 'free', label: 'Free', description: '$0/month' },
+                  { value: 'pro', label: 'Pro', description: '$10/month' },
+                  { value: 'enterprise', label: 'Enterprise', description: 'Contact us', disabled: true }
+                ]"
+                required
+              />
+              
+              <RadioGroup
+                legend="Horizontal layout"
+                :options="['Small', 'Medium', 'Large']"
+                orientation="horizontal"
+                default-value="Medium"
+              />
+              
+              <RadioGroup
+                legend="Card variant"
+                :options="[
+                  { value: 'option1', label: 'Option 1' },
+                  { value: 'option2', label: 'Option 2' },
+                  { value: 'option3', label: 'Option 3' }
+                ]"
+                variant="card"
+                default-value="option1"
+              />
+            </div>
+          </div>
+
+          <!-- GradientButton Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">GradientButton Component</h3>
+            
+            <!-- Gradient Buttons -->
+            <div class="space-y-3">
+              <div class="flex flex-wrap gap-3">
+                <GradientButton>
+                  Start Your Journey
+                </GradientButton>
+                
+                <GradientButton icon="lucide:sparkles">
+                  Create Magic
+                </GradientButton>
+                
+                <GradientButton 
+                  gradient-colors="from-primary/30 to-transparent"
+                >
+                  Custom Gradient
+                </GradientButton>
+                
+                <GradientButton 
+                  :show-gradient-overlay="false"
+                >
+                  No Overlay
+                </GradientButton>
+                
+                <GradientButton 
+                  variant="outline"
+                  color="neutral"
+                >
+                  Outline Gradient
+                </GradientButton>
+                
+                <GradientButton 
+                  size="lg"
+                  trailing-icon="lucide:arrow-right"
+                >
+                  Get Started
+                </GradientButton>
+              </div>
+            </div>
+          </div>
+
+          <!-- BadgeWithDot Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">BadgeWithDot Component</h3>
+            
+            <!-- Badges with Dots -->
+            <div class="space-y-3">
+              <div class="flex flex-wrap gap-4">
+                <BadgeWithDot>
+                  Live
+                </BadgeWithDot>
+                
+                <BadgeWithDot 
+                  dot-class="bg-success"
+                  badge-class="border-success/50"
+                >
+                  Online
+                </BadgeWithDot>
+                
+                <BadgeWithDot 
+                  dot-class="bg-warning animate-pulse"
+                  badge-class="border-warning/50"
+                >
+                  In Progress
+                </BadgeWithDot>
+                
+                <BadgeWithDot 
+                  dot-class="bg-error"
+                  badge-class="border-error/50"
+                  aria-label="Status: Offline"
+                >
+                  Offline
+                </BadgeWithDot>
+                
+                <BadgeWithDot 
+                  class="scale-125"
+                  dot-class="bg-primary"
+                >
+                  Featured
+                </BadgeWithDot>
+              </div>
             </div>
           </div>
         </div>
