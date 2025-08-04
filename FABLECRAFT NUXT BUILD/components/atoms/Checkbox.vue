@@ -115,7 +115,14 @@ const checkboxVariants = cva(
 )
 
 // Component props
-interface CheckboxProps extends VariantProps<typeof checkboxVariants> {
+interface CheckboxProps {
+  // Variant props
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  variant?: 'list' | 'card'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  checked?: boolean
+  
+  // Component specific props
   id?: string
   name?: string
   value?: string | number | boolean

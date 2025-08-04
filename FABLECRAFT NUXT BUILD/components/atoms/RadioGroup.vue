@@ -151,7 +151,14 @@ interface RadioOption {
 }
 
 // Component props
-interface RadioGroupProps extends VariantProps<typeof radioVariants> {
+interface RadioGroupProps {
+  // Variant props
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  variant?: 'list' | 'card'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  checked?: boolean
+  
+  // Component specific props
   name?: string
   legend?: string
   description?: string

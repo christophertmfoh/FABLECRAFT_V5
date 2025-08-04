@@ -214,7 +214,15 @@ const textareaVariants = cva(
 )
 
 // Component props
-interface TextAreaProps extends VariantProps<typeof textareaVariants> {
+interface TextAreaProps {
+  // Variant props
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  variant?: 'outline' | 'soft' | 'subtle' | 'ghost' | 'none'
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral'
+  leading?: boolean
+  trailing?: boolean
+  
+  // Component specific props
   id?: string
   name?: string
   placeholder?: string
