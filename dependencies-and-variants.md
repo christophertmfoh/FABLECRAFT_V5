@@ -2,12 +2,62 @@
 
 ## Required Dependencies to Install
 
-### Core UI Dependencies
+### Core UI Dependencies - Nuxt/Vue Optimized
+
+#### Icons (Best Option for Nuxt)
 ```bash
-pnpm add @iconify-json/lucide  # For Lucide icons with @nuxt/icon
-pnpm add class-variance-authority  # For managing component variants
-pnpm add @vueuse/motion  # For animations (optional, can use CSS)
-pnpm add @headlessui/vue  # For accessible dropdown menus
+# RECOMMENDED: Use @nuxt/icon which is already installed
+pnpm add @iconify-json/lucide  # Lucide icons collection for @nuxt/icon
+# This gives you the same Lucide icons but optimized for Nuxt
+```
+
+**Why @nuxt/icon is better than lucide-react for Nuxt:**
+- Server-side rendering support
+- Automatic code splitting (only loads icons you use)
+- Works with 200,000+ icons from Iconify
+- Better performance with on-demand loading
+- No React dependencies
+
+#### Component Variants
+```bash
+pnpm add class-variance-authority  # Works great with Vue too!
+# CVA is framework-agnostic and works perfectly with Vue
+```
+
+#### Accessible UI Components (Choose One)
+```bash
+# Option 1: Headless UI (Tailwind's solution)
+pnpm add @headlessui/vue
+# OR
+# Option 2: Nuxt Headless UI module (better Nuxt integration)
+pnpm add nuxt-headlessui
+
+# Option 3: Radix Vue (newer, more components)
+pnpm add radix-vue
+```
+
+**Comparison of UI Libraries:**
+- **@headlessui/vue**: Official Vue port of Headless UI, fewer components but stable
+- **nuxt-headlessui**: Nuxt module with auto-imports and better SSR support
+- **radix-vue**: Community port of Radix UI, more components, newer
+
+#### Animations
+```bash
+# For complex animations
+pnpm add @vueuse/motion
+
+# For simple transitions, Vue's built-in <Transition> is often enough
+```
+
+#### Additional Recommended Dependencies
+```bash
+# Form validation (replaces react-hook-form + zod)
+pnpm add @vuelidate/core @vuelidate/validators
+# OR
+pnpm add vee-validate yup  # or zod for schema
+
+# Floating UI for tooltips/popovers (replaces Radix positioning)
+pnpm add @floating-ui/vue
 ```
 
 ### Already Installed in Nuxt Build
@@ -238,3 +288,58 @@ module.exports = {
   ]
 }
 ```
+
+## React to Vue/Nuxt Library Equivalents
+
+### Component Libraries
+- **React**: `@radix-ui/react-*` → **Vue**: `radix-vue` or `@headlessui/vue`
+- **React**: `@headlessui/react` → **Vue**: `@headlessui/vue` or `nuxt-headlessui`
+- **React**: `lucide-react` → **Vue**: `@iconify-json/lucide` with `@nuxt/icon`
+
+### Form Handling
+- **React**: `react-hook-form` → **Vue**: `vee-validate` or `@vuelidate/core`
+- **React**: `zod` → **Vue**: Works as-is (or use `yup` for better Vue integration)
+
+### State Management
+- **React**: `zustand` → **Vue**: `pinia` (already included in Nuxt)
+- **React**: `redux` → **Vue**: `pinia` or `vuex`
+
+### Routing
+- **React**: `react-router-dom` → **Vue**: `vue-router` (built into Nuxt)
+
+### Animation
+- **React**: `framer-motion` → **Vue**: `@vueuse/motion` or Vue's `<Transition>`
+- **React**: `react-spring` → **Vue**: `@vueuse/motion`
+
+### Utilities
+- **React**: `clsx` → **Vue**: Same library works!
+- **React**: `tailwind-merge` → **Vue**: Same library works!
+- **React**: `class-variance-authority` → **Vue**: Same library works!
+
+### Key Differences to Remember
+1. **Auto-imports**: Nuxt auto-imports components, composables, and utilities
+2. **SSR by default**: Nuxt is SSR-first, unlike typical React SPAs
+3. **File-based routing**: No need to configure routes manually
+4. **Built-in features**: Many features that require libraries in React are built into Nuxt/Vue
+
+## Final Dependency Recommendations
+
+For this Nuxt project, install:
+```bash
+# Essential
+pnpm add @iconify-json/lucide class-variance-authority
+
+# Choose one UI library
+pnpm add nuxt-headlessui  # Recommended for Nuxt
+# OR
+pnpm add @headlessui/vue  # If you prefer manual imports
+# OR
+pnpm add radix-vue  # If you need more components
+
+# Optional but recommended
+pnpm add @vueuse/motion  # For animations
+pnpm add vee-validate @vee-validate/zod zod  # For forms
+pnpm add @floating-ui/vue  # For tooltips/popovers
+```
+
+This will give you everything you need to build the landing page with proper Nuxt/Vue patterns!
