@@ -10,19 +10,16 @@ echo ""
 echo "Setting up bulletproof safety protections..."
 echo ""
 
-# Check if bulletproof system exists
-if [ -f "./AGENT_BULLETPROOF_SAFETY.sh" ]; then
-    # Run the bulletproof safety system
-    source ./AGENT_BULLETPROOF_SAFETY.sh
+# Use Cursor-friendly safety by default
+if [ -f "./AGENT_SAFETY_CURSOR_FRIENDLY.sh" ]; then
+    # Run the Cursor-friendly safety system
+    source ./AGENT_SAFETY_CURSOR_FRIENDLY.sh
+elif [ -f ".bashrc.safety" ]; then
+    # Fallback to basic safety
+    source .bashrc.safety
+    echo "✅ Basic command safety protection activated"
 else
-    # Fallback to basic safety if bulletproof not available
-    if [ -f ".bashrc.safety" ]; then
-        source .bashrc.safety
-        echo "✅ Basic command safety protection activated"
-        echo "⚠️  Note: Bulletproof system available for better protection!"
-    else
-        echo "⚠️  Warning: No safety systems found!"
-    fi
+    echo "⚠️  Warning: No safety systems found!"
 fi
 
 # Add Node.js safety wrapper to NODE_OPTIONS
