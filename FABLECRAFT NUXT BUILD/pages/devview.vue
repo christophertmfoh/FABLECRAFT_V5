@@ -39,6 +39,9 @@ import LoadingFallback from '~/components/atoms/LoadingFallback.vue'
 import IconContainer from '~/components/atoms/IconContainer.vue'
 import ScrollArea from '~/components/atoms/ScrollArea.vue'
 
+// Priority 5 component imports (Form components)
+import Checkbox from '~/components/atoms/Checkbox.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -73,6 +76,11 @@ const inputValue1 = ref('')
 const inputValue2 = ref('')
 const inputValue3 = ref('')
 const inputValue4 = ref('')
+
+// Form component test values
+const checkboxValue1 = ref(false)
+const checkboxValue2 = ref(true)
+const checkboxValue3 = ref(false)
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -822,6 +830,73 @@ if (isDevelopment) {
             <h3 class="text-sm font-medium text-muted-foreground mb-4">File Input</h3>
             <div class="max-w-md">
               <Input type="file" class="cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Form Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Form Components (1 component)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Checkbox Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Checkbox</h3>
+            
+            <!-- Basic Checkboxes -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Basic Usage</h4>
+              <div class="space-y-3">
+                <Checkbox v-model="checkboxValue1" label="Accept terms and conditions" />
+                <Checkbox v-model="checkboxValue2" label="Subscribe to newsletter" />
+                <Checkbox label="No v-model (uncontrolled)" />
+              </div>
+            </div>
+
+            <!-- With Description -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">With Description</h4>
+              <div class="space-y-3">
+                <Checkbox 
+                  v-model="checkboxValue3"
+                  label="Enable notifications"
+                  description="Get notified when someone mentions you"
+                />
+                <Checkbox 
+                  label="Use default settings"
+                  description="This will apply our recommended configuration for your account"
+                />
+              </div>
+            </div>
+
+            <!-- States -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">States</h4>
+              <div class="space-y-3">
+                <Checkbox label="Disabled checkbox" disabled />
+                <Checkbox v-model="checkboxValue2" label="Disabled checked" disabled />
+                <Checkbox label="Required checkbox" required />
+              </div>
+            </div>
+
+            <!-- Custom Styling -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
+              <div class="space-y-3">
+                <Checkbox class="text-primary" label="Primary colored checkbox" />
+                <Checkbox class="text-lg" label="Large checkbox" />
+              </div>
+            </div>
+
+            <!-- Current Values Display -->
+            <div class="mt-6 p-4 bg-muted/50 rounded text-sm">
+              <p class="font-medium mb-2">Current Values:</p>
+              <p>Checkbox 1: {{ checkboxValue1 }}</p>
+              <p>Checkbox 2: {{ checkboxValue2 }}</p>
+              <p>Checkbox 3: {{ checkboxValue3 }}</p>
             </div>
           </div>
         </div>
