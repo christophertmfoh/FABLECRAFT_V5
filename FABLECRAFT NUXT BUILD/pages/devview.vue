@@ -60,6 +60,18 @@ import DropdownMenuSeparator from '~/components/atoms/DropdownMenuSeparator.vue'
 import DropdownMenuCheckboxItem from '~/components/atoms/DropdownMenuCheckboxItem.vue'
 import DropdownMenuRadioItem from '~/components/atoms/DropdownMenuRadioItem.vue'
 
+// Priority 8 component imports (Special components)
+import ErrorBoundary from '~/components/atoms/ErrorBoundary.vue'
+import ThemeToggle from '~/components/atoms/ThemeToggle.vue'
+import SectionContent from '~/components/atoms/SectionContent.vue'
+import HeadingGroup from '~/components/atoms/HeadingGroup.vue'
+import NavigationItem from '~/components/atoms/NavigationItem.vue'
+import FeatureListItem from '~/components/atoms/FeatureListItem.vue'
+import SocialLink from '~/components/atoms/SocialLink.vue'
+
+// Test component for ErrorBoundary
+import ErrorThrowingComponent from '~/components/ErrorThrowingComponent.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -116,6 +128,10 @@ const dropdownCheckbox2 = ref(false)
 const dropdownCheckbox3 = ref(true)
 const dropdownRadioValue = ref('option2')
 const dropdownAlignment = ref('start')
+
+// Priority 8 test values
+const triggerError = ref(false)
+const errorComponentRef = ref(null)
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -1779,6 +1795,272 @@ if (isDevelopment) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+          </div>
+        </div>
+      </details>
+
+      <!-- Special Components (Priority 8) -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Special Components (7 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Error Boundary -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Error Boundary</h3>
+            
+            <div class="space-y-4">
+              <!-- Default Error State -->
+              <ErrorBoundary>
+                <template #error="{ error, reset }">
+                  <div class="p-4 border border-destructive rounded-md">
+                    <p class="text-destructive mb-2">Caught error: {{ error.message }}</p>
+                    <Button @click="reset" size="sm" variant="outline">Reset</Button>
+                  </div>
+                </template>
+                
+                <div class="p-4 border rounded-md">
+                  <p class="mb-2">This component will throw an error when the button is clicked.</p>
+                  <Button @click="triggerError = true" variant="destructive">Trigger Error</Button>
+                  <ErrorThrowingComponent v-if="triggerError" :should-error="true" />
+                </div>
+              </ErrorBoundary>
+
+              <!-- Custom Error Handler -->
+              <ErrorBoundary 
+                :on-error="(err, instance, info) => console.log('Custom handler:', err.message)"
+                class="block"
+              >
+                <template #error="{ error, reset, info }">
+                  <Alert variant="destructive">
+                    <Icon name="lucide:alert-triangle" class="h-4 w-4" />
+                    <AlertTitle>Application Error</AlertTitle>
+                    <AlertDescription>
+                      {{ error.message }}
+                      <Button @click="reset" size="sm" variant="outline" class="mt-2">Try Again</Button>
+                    </AlertDescription>
+                  </Alert>
+                </template>
+                
+                <Card class="p-4">
+                  <p>Safe content here</p>
+                </Card>
+              </ErrorBoundary>
+            </div>
+          </div>
+
+          <!-- Theme Toggle -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Theme Toggle</h3>
+            
+            <div class="flex items-center gap-4">
+              <ThemeToggle />
+              <ThemeToggle size="sm" />
+              <ThemeToggle size="lg" />
+              <span class="text-sm text-muted-foreground">Toggle between light and dark themes</span>
+            </div>
+            
+            <div class="mt-4 p-4 bg-muted rounded-md">
+              <p class="text-sm">The theme toggle is SSR-friendly and prevents flash of wrong theme.</p>
+            </div>
+          </div>
+
+          <!-- Section Content -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Section Content</h3>
+            
+            <div class="space-y-4">
+              <!-- Different sizes -->
+              <SectionContent size="sm" class="bg-muted/50">
+                <p class="text-center py-8">Small Container (max-w-2xl)</p>
+              </SectionContent>
+              
+              <SectionContent size="md" class="bg-muted/50">
+                <p class="text-center py-8">Medium Container (max-w-4xl)</p>
+              </SectionContent>
+              
+              <SectionContent size="lg" class="bg-muted/50">
+                <p class="text-center py-8">Large Container (max-w-6xl)</p>
+              </SectionContent>
+
+              <!-- Different padding -->
+              <SectionContent padding="sm" class="bg-muted/50">
+                <p class="py-4">Small Padding</p>
+              </SectionContent>
+              
+              <SectionContent padding="lg" class="bg-muted/50">
+                <p class="py-4">Large Padding</p>
+              </SectionContent>
+            </div>
+          </div>
+
+          <!-- Heading Group -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Heading Group</h3>
+            
+            <div class="space-y-8">
+              <!-- Basic -->
+              <HeadingGroup
+                badge="New Feature"
+                heading="Introducing Dark Mode"
+                description="Experience our application in a whole new light (or dark). Toggle between themes with ease."
+              />
+
+              <!-- Centered -->
+              <HeadingGroup
+                as="h1"
+                badge="Beta"
+                heading="Welcome to Our Platform"
+                description="Build amazing applications with our comprehensive component library."
+                align="center"
+                badgeVariant="secondary"
+              />
+
+              <!-- Using slots -->
+              <HeadingGroup as="h3" align="right">
+                <template #badge>
+                  <Icon name="lucide:zap" class="h-3 w-3 mr-1" />
+                  Performance
+                </template>
+                <template #default>Optimized for Speed</template>
+                <template #description>
+                  Our components are built with performance in mind, ensuring smooth interactions.
+                </template>
+              </HeadingGroup>
+            </div>
+          </div>
+
+          <!-- Navigation Item -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Navigation Item</h3>
+            
+            <div class="space-y-4">
+              <!-- Internal links -->
+              <nav class="flex gap-4">
+                <NavigationItem to="/devview" icon="lucide:home">Home</NavigationItem>
+                <NavigationItem to="/about" icon="lucide:info">About</NavigationItem>
+                <NavigationItem to="/contact" icon="lucide:mail">Contact</NavigationItem>
+              </nav>
+
+              <!-- Ghost variant -->
+              <nav class="flex gap-2">
+                <NavigationItem to="/devview" variant="ghost" exact>Dashboard</NavigationItem>
+                <NavigationItem to="/settings" variant="ghost">Settings</NavigationItem>
+                <NavigationItem to="/profile" variant="ghost">Profile</NavigationItem>
+              </nav>
+
+              <!-- External links -->
+              <div class="flex gap-4">
+                <NavigationItem href="https://github.com" icon="lucide:github" size="sm">
+                  GitHub
+                </NavigationItem>
+                <NavigationItem href="https://twitter.com" variant="underline">
+                  Twitter
+                </NavigationItem>
+              </div>
+
+              <!-- Different sizes -->
+              <div class="flex items-center gap-4">
+                <NavigationItem to="/" size="sm">Small</NavigationItem>
+                <NavigationItem to="/" size="md">Medium</NavigationItem>
+                <NavigationItem to="/" size="lg">Large</NavigationItem>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature List Item -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Feature List Item</h3>
+            
+            <div class="space-y-6">
+              <!-- Basic list -->
+              <ul class="space-y-2">
+                <FeatureListItem>Full TypeScript support</FeatureListItem>
+                <FeatureListItem>SSR-friendly components</FeatureListItem>
+                <FeatureListItem>Accessible by default</FeatureListItem>
+                <FeatureListItem>Tailwind CSS styling</FeatureListItem>
+              </ul>
+
+              <!-- Different icons and colors -->
+              <ul class="space-y-2">
+                <FeatureListItem icon="lucide:shield" iconColor="primary">
+                  Enterprise-grade security
+                </FeatureListItem>
+                <FeatureListItem icon="lucide:zap" iconColor="warning">
+                  Lightning fast performance
+                </FeatureListItem>
+                <FeatureListItem icon="lucide:heart" iconColor="destructive">
+                  Built with love
+                </FeatureListItem>
+              </ul>
+
+              <!-- Different sizes -->
+              <div class="space-y-4">
+                <ul class="space-y-1">
+                  <FeatureListItem size="sm">Small feature item</FeatureListItem>
+                  <FeatureListItem size="sm">Another small item</FeatureListItem>
+                </ul>
+                
+                <ul class="space-y-3">
+                  <FeatureListItem size="lg">Large feature with more text that wraps to multiple lines when necessary</FeatureListItem>
+                  <FeatureListItem size="lg">Another large feature item</FeatureListItem>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Social Links</h3>
+            
+            <div class="space-y-4">
+              <!-- Default style -->
+              <div class="flex gap-2">
+                <SocialLink platform="twitter" href="https://twitter.com" />
+                <SocialLink platform="github" href="https://github.com" />
+                <SocialLink platform="linkedin" href="https://linkedin.com" />
+                <SocialLink platform="youtube" href="https://youtube.com" />
+                <SocialLink platform="facebook" href="https://facebook.com" />
+              </div>
+
+              <!-- Brand colors on hover -->
+              <div class="flex gap-2">
+                <SocialLink platform="twitter" href="https://twitter.com" variant="brand" />
+                <SocialLink platform="github" href="https://github.com" variant="brand" />
+                <SocialLink platform="linkedin" href="https://linkedin.com" variant="brand" />
+                <SocialLink platform="instagram" href="https://instagram.com" variant="brand" />
+                <SocialLink platform="youtube" href="https://youtube.com" variant="brand" />
+              </div>
+
+              <!-- Different variants -->
+              <div class="flex items-center gap-4">
+                <div class="flex gap-2">
+                  <SocialLink platform="github" href="#" variant="default" />
+                  <SocialLink platform="github" href="#" variant="ghost" />
+                  <SocialLink platform="github" href="#" variant="outline" />
+                </div>
+                
+                <div class="flex gap-2">
+                  <SocialLink platform="twitter" href="#" size="sm" />
+                  <SocialLink platform="twitter" href="#" size="md" />
+                  <SocialLink platform="twitter" href="#" size="lg" />
+                </div>
+              </div>
+
+              <!-- Custom icons -->
+              <div class="flex gap-2">
+                <SocialLink href="https://example.com" icon="lucide:globe" label="Website" />
+                <SocialLink href="mailto:hello@example.com" icon="lucide:mail" label="Email" />
+                <SocialLink href="tel:+1234567890" icon="lucide:phone" label="Call us" />
+              </div>
+
+              <!-- Square variant -->
+              <div class="flex gap-2">
+                <SocialLink platform="discord" href="#" :rounded="false" variant="outline" />
+                <SocialLink platform="tiktok" href="#" :rounded="false" variant="outline" />
+              </div>
+            </div>
           </div>
         </div>
       </details>
