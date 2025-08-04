@@ -44,6 +44,12 @@ import Checkbox from '~/components/atoms/Checkbox.vue'
 import FormMessage from '~/components/atoms/FormMessage.vue'
 import Radio from '~/components/atoms/Radio.vue'
 
+// Priority 6 component imports (Special effect components)
+import Dot from '~/components/atoms/Dot.vue'
+import StarRating from '~/components/atoms/StarRating.vue'
+import StepNumber from '~/components/atoms/StepNumber.vue'
+import VisuallyHidden from '~/components/atoms/VisuallyHidden.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -88,6 +94,11 @@ const checkboxValue3 = ref(false)
 const radioValue1 = ref('option1')
 const radioValue2 = ref('small')
 const radioValue3 = ref('')
+
+// Priority 6 component test values
+const starRating1 = ref(0)
+const starRating2 = ref(3)
+const starRating3 = ref(5)
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -1164,6 +1175,283 @@ if (isDevelopment) {
                     class="mt-2"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Special Effect Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Special Effect Components (4 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Dot Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Dot (Pulsing Indicator)</h3>
+            
+            <!-- Different Sizes -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                  <Dot size="xs" aria-label="Extra small indicator" />
+                  <span class="text-sm">XS</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="sm" aria-label="Small indicator" />
+                  <span class="text-sm">SM</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="md" aria-label="Medium indicator" />
+                  <span class="text-sm">MD</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="lg" aria-label="Large indicator" />
+                  <span class="text-sm">LG</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="xl" aria-label="Extra large indicator" />
+                  <span class="text-sm">XL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Different Colors -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Colors</h4>
+              <div class="flex items-center gap-6">
+                <Dot color="primary" aria-label="Primary status" />
+                <Dot color="secondary" aria-label="Secondary status" />
+                <Dot color="success" aria-label="Success status" />
+                <Dot color="warning" aria-label="Warning status" />
+                <Dot color="error" aria-label="Error status" />
+                <Dot color="info" aria-label="Info status" />
+                <Dot color="neutral" aria-label="Neutral status" />
+              </div>
+            </div>
+
+            <!-- Pulse Variations -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Pulse Variations</h4>
+              <div class="space-y-3">
+                <div class="flex items-center gap-4">
+                  <Dot :pulse="false" aria-label="No pulse" />
+                  <span class="text-sm">No pulse</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Dot pulse-speed="slow" pulse-intensity="subtle" aria-label="Slow subtle pulse" />
+                  <span class="text-sm">Slow & Subtle</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Dot pulse-speed="normal" pulse-intensity="normal" aria-label="Normal pulse" />
+                  <span class="text-sm">Normal (default)</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Dot pulse-speed="fast" pulse-intensity="strong" aria-label="Fast strong pulse" />
+                  <span class="text-sm">Fast & Strong</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-world Examples -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Real-world Examples</h4>
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <Dot color="success" size="sm" aria-label="Online" />
+                  <span class="text-sm">User Online</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot color="warning" size="sm" pulse-speed="slow" aria-label="Away" />
+                  <span class="text-sm">User Away</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot color="error" size="sm" :pulse="false" aria-label="Offline" />
+                  <span class="text-sm">User Offline</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- StepNumber Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">StepNumber</h3>
+            
+            <!-- Process Steps Example -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Process Steps</h4>
+              <div class="flex items-center gap-4" role="list">
+                <StepNumber :step="1" status="completed" />
+                <div class="h-px bg-border flex-1" />
+                <StepNumber :step="2" status="active" />
+                <div class="h-px bg-border flex-1" />
+                <StepNumber :step="3" status="pending" />
+                <div class="h-px bg-border flex-1" />
+                <StepNumber :step="4" status="pending" />
+              </div>
+            </div>
+
+            <!-- Different Sizes -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
+              <div class="flex items-center gap-4">
+                <StepNumber :step="1" size="xs" status="active" />
+                <StepNumber :step="2" size="sm" status="active" />
+                <StepNumber :step="3" size="md" status="active" />
+                <StepNumber :step="4" size="lg" status="active" />
+                <StepNumber :step="5" size="xl" status="active" />
+              </div>
+            </div>
+
+            <!-- Variants -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Variants</h4>
+              <div class="space-y-3">
+                <div class="flex items-center gap-4">
+                  <StepNumber :step="1" variant="default" status="completed" />
+                  <StepNumber :step="2" variant="default" status="active" />
+                  <StepNumber :step="3" variant="default" status="pending" />
+                  <span class="text-sm">Default</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <StepNumber :step="1" variant="outline" status="completed" />
+                  <StepNumber :step="2" variant="outline" status="active" />
+                  <StepNumber :step="3" variant="outline" status="pending" />
+                  <span class="text-sm">Outline</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <StepNumber :step="1" variant="solid" status="completed" />
+                  <StepNumber :step="2" variant="solid" status="active" />
+                  <StepNumber :step="3" variant="solid" status="pending" />
+                  <span class="text-sm">Solid</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Different Colors -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Colors</h4>
+              <div class="flex items-center gap-4">
+                <StepNumber :step="1" color="primary" status="active" />
+                <StepNumber :step="2" color="secondary" status="active" />
+                <StepNumber :step="3" color="success" status="active" />
+                <StepNumber :step="4" color="neutral" status="active" />
+              </div>
+            </div>
+          </div>
+
+          <!-- StarRating Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">StarRating</h3>
+            
+            <!-- Basic Examples -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Basic Usage</h4>
+              <div class="space-y-3">
+                <StarRating 
+                  v-model="starRating1" 
+                  label="Rate this product"
+                />
+                <p class="text-sm text-muted-foreground">Current rating: {{ starRating1 }}/5</p>
+              </div>
+            </div>
+
+            <!-- Different Sizes -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
+              <div class="space-y-3">
+                <StarRating v-model="starRating2" size="xs" label="Extra small stars" />
+                <StarRating v-model="starRating2" size="sm" label="Small stars" />
+                <StarRating v-model="starRating2" size="md" label="Medium stars" />
+                <StarRating v-model="starRating2" size="lg" label="Large stars" />
+                <StarRating v-model="starRating2" size="xl" label="Extra large stars" />
+              </div>
+            </div>
+
+            <!-- Different States -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">States</h4>
+              <div class="space-y-3">
+                <StarRating 
+                  :model-value="4" 
+                  readonly 
+                  label="Read-only rating"
+                  description="This rating cannot be changed"
+                />
+                <StarRating 
+                  :model-value="3" 
+                  disabled 
+                  label="Disabled rating"
+                  description="This rating is disabled"
+                />
+                <StarRating 
+                  v-model="starRating3" 
+                  required 
+                  label="Required rating"
+                  description="Please provide a rating"
+                />
+              </div>
+            </div>
+
+            <!-- Custom Configuration -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Configuration</h4>
+              <div class="space-y-3">
+                <StarRating 
+                  v-model="starRating3" 
+                  :max-stars="10" 
+                  label="10-star rating"
+                  color="primary"
+                />
+                <StarRating 
+                  v-model="starRating3" 
+                  :allow-clear="false" 
+                  label="No clear option"
+                  color="secondary"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- VisuallyHidden Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">VisuallyHidden</h3>
+            
+            <div class="space-y-4">
+              <p class="text-sm text-muted-foreground">
+                This component hides content visually but keeps it accessible to screen readers.
+              </p>
+              
+              <!-- Basic Example -->
+              <div class="p-4 bg-muted/50 rounded">
+                <p class="text-sm">
+                  This paragraph contains 
+                  <VisuallyHidden>hidden text that screen readers can read</VisuallyHidden>
+                  visible text.
+                </p>
+              </div>
+
+              <!-- Focusable Example -->
+              <div class="p-4 bg-muted/50 rounded mt-4">
+                <p class="text-sm mb-2">Tab to reveal the skip link:</p>
+                <VisuallyHidden focusable as="a" href="#main" class="text-primary underline">
+                  Skip to main content
+                </VisuallyHidden>
+              </div>
+
+              <!-- Real-world Examples -->
+              <div class="space-y-4 mt-6">
+                <h4 class="text-xs font-medium text-muted-foreground">Real-world Uses</h4>
+                <ul class="space-y-2 text-sm">
+                  <li>• Icon-only buttons with descriptive text</li>
+                  <li>• Form field instructions for screen readers</li>
+                  <li>• Skip navigation links</li>
+                  <li>• Additional context for abbreviated content</li>
+                  <li>• Live region announcements</li>
+                </ul>
               </div>
             </div>
           </div>
