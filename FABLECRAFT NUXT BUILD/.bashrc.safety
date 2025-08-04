@@ -1,0 +1,55 @@
+#!/bin/bash
+# Bash safety configuration - Source this to add command protection
+# Usage: source .bashrc.safety
+
+echo "🛡️ Loading command safety protection..."
+
+# Create safe aliases
+alias kill='echo "⚠️  WARNING: Use npm run safe-stop instead of kill!" && echo "Type /usr/bin/kill if you really need kill for non-Node processes" && false'
+alias killall='echo "⚠️  WARNING: Use npm run safe-stop instead of killall!" && false'
+alias pkill='echo "⚠️  WARNING: Use npm run safe-stop instead of pkill!" && false'
+
+# Function to intercept kill commands
+safe_kill() {
+    if [[ "$@" == *"node"* ]] || [[ "$@" == *"-9"* ]]; then
+        echo "🚨 BLOCKED: Attempting to kill Node process!"
+        echo "✅ Use one of these instead:"
+        echo "   - npm run safe-stop"
+        echo "   - Ctrl+C in the terminal"
+        echo "   - npm run dev:alt (different port)"
+        return 1
+    else
+        /usr/bin/kill "$@"
+    fi
+}
+
+# Override kill with our safe version
+# alias kill=safe_kill
+
+# Add helpful functions
+check_ports() {
+    echo "📍 Checking ports..."
+    echo "Port 3000: $(lsof -i :3000 2>/dev/null | grep LISTEN || echo 'Free')"
+    echo "Port 3002: $(lsof -i :3002 2>/dev/null | grep LISTEN || echo 'Free')"
+    echo "Port 3003: $(lsof -i :3003 2>/dev/null | grep LISTEN || echo 'Free')"
+}
+
+safe_stop() {
+    npm run safe-stop
+}
+
+# Export functions
+export -f safe_kill
+export -f check_ports
+export -f safe_stop
+
+echo "✅ Command safety loaded! Protected commands:"
+echo "   - kill (redirected to safe version)"
+echo "   - killall (blocked)"
+echo "   - pkill (blocked)"
+echo ""
+echo "📍 New commands available:"
+echo "   - check_ports  : Check which ports are in use"
+echo "   - safe_stop    : Safely stop the dev server"
+echo ""
+echo "💡 Remember: Use Ctrl+C or npm run safe-stop!"

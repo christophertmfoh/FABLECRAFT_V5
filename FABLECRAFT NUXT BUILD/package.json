@@ -5,8 +5,9 @@
   "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "safe-stop": "./scripts/safe-stop.sh",
-    "dev": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use kill node! ⚠️' && npx nuxi dev",
-    "dev:alt": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use kill node! ⚠️' && npx nuxi dev --port 3002",
+    "list-dev": "./scripts/list-dev-servers.sh",
+    "dev": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev",
+    "dev:alt": "echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev --port 3050",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -25,16 +26,21 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@iconify-json/lucide": "1.2.60",
     "@nuxt/devtools": "1.6.0",
+    "@nuxt/icon": "1.15.0",
     "@nuxtjs/supabase": "1.6.0",
     "@pinia/nuxt": "0.11.2",
     "@tiptap/starter-kit": "3.0.9",
     "@tiptap/vue-3": "3.0.9",
     "@vueuse/core": "13.6.0",
     "@vueuse/nuxt": "13.6.0",
-          "nuxt": "3.18.0",
-      "vue": "3.5.18",
-      "vue-router": "4.5.1"
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "nuxt": "3.18.0",
+    "tailwind-merge": "3.3.1",
+    "vue": "3.5.18",
+    "vue-router": "4.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
@@ -42,10 +48,13 @@
     "@nuxt/eslint": "1.7.1",
     "@nuxt/kit": "3.18.0",
     "@nuxtjs/tailwindcss": "6.14.0",
+    "@testing-library/vue": "8.1.0",
     "@types/node": "20.14.15",
+    "@vue/test-utils": "2.4.6",
     "husky": "9.1.7",
     "supabase": "2.33.9",
     "typescript": "5.5.4",
+    "vitest": "3.2.4",
     "vue-tsc": "3.0.5"
   }
 }
