@@ -27,6 +27,9 @@ import CardDescription from '~/components/atoms/CardDescription.vue'
 import GlassCard from '~/components/atoms/GlassCard.vue'
 import Container from '~/components/atoms/Container.vue'
 import Section from '~/components/atoms/Section.vue'
+import Heading from '~/components/atoms/Heading.vue'
+import Text from '~/components/atoms/Text.vue'
+import Label from '~/components/atoms/Label.vue'
 
 // Use centralized theme composable with all features
 const { 
@@ -1103,6 +1106,260 @@ if (isDevelopment) {
                 </Card>
               </Container>
             </Section>
+          </div>
+        </div>
+      </details>
+
+      <!-- Typography Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          📝 Typography (3 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Heading Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">Heading Component</h3>
+            
+            <!-- H1 Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">H1 Variants</p>
+              <Heading as="h1" size="h1">
+                The Intuitive Web Framework
+              </Heading>
+              <Heading as="h1" size="h1-compact">
+                Compact H1 Heading
+              </Heading>
+              <Heading as="h1" size="h1" gradient>
+                Gradient H1 Heading
+              </Heading>
+            </div>
+
+            <!-- H2 Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">H2 Variants</p>
+              <Heading as="h2" size="h2">
+                Build Production-Ready Apps
+              </Heading>
+              <Heading as="h2" size="h2-compact">
+                Compact H2 Heading
+              </Heading>
+              <Heading as="h2" size="h2-display">
+                Display H2 Heading
+              </Heading>
+            </div>
+
+            <!-- H3-H6 Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">H3-H6 Variants</p>
+              <Heading as="h3" size="h3">H3: Section Title</Heading>
+              <Heading as="h3" size="h3-section">Section Label Style</Heading>
+              <Heading as="h4" size="h4">H4: Subsection Title</Heading>
+              <Heading as="h5" size="h5">H5: Minor Heading</Heading>
+              <Heading as="h6" size="h6">H6: Smallest Heading</Heading>
+            </div>
+
+            <!-- Special Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Special Variants</p>
+              <Heading size="display" align="center">
+                Display Heading
+              </Heading>
+              <Heading size="hero" align="center" gradient>
+                Hero Gradient Heading
+              </Heading>
+            </div>
+
+            <!-- Alignment -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Alignment Options</p>
+              <Heading size="h3" align="left">Left Aligned</Heading>
+              <Heading size="h3" align="center">Center Aligned</Heading>
+              <Heading size="h3" align="right">Right Aligned</Heading>
+            </div>
+          </div>
+
+          <!-- Text Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">Text Component</h3>
+            
+            <!-- Size Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Size Variants</p>
+              <Text size="xs">Extra small text (xs)</Text>
+              <Text size="sm">Small text (sm)</Text>
+              <Text size="base">Base text (base)</Text>
+              <Text size="lg">Large text (lg)</Text>
+              <Text size="xl">Extra large text (xl)</Text>
+              <Text size="2xl">2X large text (2xl)</Text>
+            </div>
+
+            <!-- Golden Ratio Sizes -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Golden Ratio Sizes</p>
+              <Text size="golden-sm">Golden small text</Text>
+              <Text size="golden-base">Golden base text</Text>
+              <Text size="golden-lg">Golden large text</Text>
+              <Text size="golden-xl">Golden XL text</Text>
+              <Text size="golden-2xl">Golden 2XL text</Text>
+            </div>
+
+            <!-- Responsive Sizes -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Responsive Body Text</p>
+              <Text size="body-compact">
+                Compact body text that scales responsively across breakpoints
+              </Text>
+              <Text size="body-default">
+                Default body text with golden ratio scaling for optimal readability
+              </Text>
+            </div>
+
+            <!-- Color Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Color Variants</p>
+              <Text variant="default">Default text color</Text>
+              <Text variant="muted">Muted text color</Text>
+              <Text variant="muted-50">50% opacity text</Text>
+              <Text variant="muted-60">60% opacity text</Text>
+              <Text variant="muted-70">70% opacity text</Text>
+              <Text variant="primary">Primary color text</Text>
+              <Text variant="secondary">Secondary color text</Text>
+              <Text variant="destructive">Destructive color text</Text>
+              <Text variant="success">Success color text</Text>
+              <Text variant="warning">Warning color text</Text>
+            </div>
+
+            <!-- Weight & Style -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Font Weights</p>
+              <Text weight="normal">Normal weight text</Text>
+              <Text weight="medium">Medium weight text</Text>
+              <Text weight="semibold">Semibold weight text</Text>
+              <Text weight="bold">Bold weight text</Text>
+              <Text weight="black">Black weight text</Text>
+            </div>
+
+            <!-- Line Height -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Line Height</p>
+              <Text leading="tight">
+                Tight line height is useful for headings where you want lines close together. Lorem ipsum dolor sit amet.
+              </Text>
+              <Text leading="normal">
+                Normal line height is the default for body text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </Text>
+              <Text leading="relaxed">
+                Relaxed line height improves readability for longer passages. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </Text>
+            </div>
+
+            <!-- Text Transform -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Text Transform</p>
+              <Text transform="uppercase">uppercase text transform</Text>
+              <Text transform="lowercase">LOWERCASE TEXT TRANSFORM</Text>
+              <Text transform="capitalize">capitalize text transform</Text>
+            </div>
+
+            <!-- Display Variants -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Display Text</p>
+              <div class="flex items-baseline gap-2">
+                <Text size="display-value" weight="bold">1,234</Text>
+                <Text size="display-label" variant="muted">active users</Text>
+              </div>
+            </div>
+
+            <!-- Semantic Elements -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Semantic Elements</p>
+              <Text as="strong" weight="bold">Strong text element</Text>
+              <Text as="em" class="italic">Emphasized text element</Text>
+              <Text as="small" size="sm">Small text element</Text>
+              <Text as="mark" class="bg-yellow-200 dark:bg-yellow-900">Marked text element</Text>
+              <Text as="del" class="line-through">Deleted text element</Text>
+              <Text as="ins" class="underline">Inserted text element</Text>
+              <div>
+                H<Text as="sub" size="sm">2</Text>O and E=mc<Text as="sup" size="sm">2</Text>
+              </div>
+            </div>
+          </div>
+
+          <!-- Label Component -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">Label Component</h3>
+            
+            <!-- Basic Labels -->
+            <div class="space-y-3">
+              <div>
+                <Label html-for="email">Email Address</Label>
+                <Input id="email" type="email" placeholder="you@example.com" class="mt-1" />
+              </div>
+              
+              <div>
+                <Label html-for="name" required>
+                  Full Name
+                </Label>
+                <Input id="name" placeholder="John Doe" class="mt-1" />
+              </div>
+              
+              <div>
+                <Label html-for="bio" required required-text=" (required)">
+                  Biography
+                </Label>
+                <textarea 
+                  id="bio" 
+                  class="mt-1 flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  placeholder="Tell us about yourself..."
+                />
+              </div>
+              
+              <div>
+                <Label html-for="disabled-input" disabled>
+                  Disabled Label
+                </Label>
+                <Input id="disabled-input" disabled placeholder="Cannot edit" class="mt-1" />
+              </div>
+              
+              <div>
+                <Label html-for="optional" :required="false">
+                  Optional Field
+                </Label>
+                <Input id="optional" placeholder="This field is optional" class="mt-1" />
+              </div>
+            </div>
+
+            <!-- Screen Reader Only Label -->
+            <div class="space-y-2">
+              <p class="text-sm text-muted-foreground">Screen Reader Only Label (invisible but accessible)</p>
+              <div class="relative">
+                <Label html-for="search" sr-only>
+                  Search
+                </Label>
+                <Input 
+                  id="search" 
+                  type="search" 
+                  placeholder="Search..." 
+                  class="pl-10"
+                />
+                <AtomIcon name="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size="sm" />
+              </div>
+            </div>
+
+            <!-- Custom Styled Labels -->
+            <div class="space-y-3">
+              <p class="text-sm text-muted-foreground">Custom Styled Labels</p>
+              <Label class="text-primary font-bold">
+                Primary Bold Label
+              </Label>
+              <Label class="text-lg">
+                Large Label
+              </Label>
+              <Label class="uppercase tracking-wider text-muted-foreground">
+                Uppercase Label
+              </Label>
+            </div>
           </div>
         </div>
       </details>
