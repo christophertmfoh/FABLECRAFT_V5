@@ -39,6 +39,27 @@ import LoadingFallback from '~/components/atoms/LoadingFallback.vue'
 import IconContainer from '~/components/atoms/IconContainer.vue'
 import ScrollArea from '~/components/atoms/ScrollArea.vue'
 
+// Priority 5 component imports (Form components)
+import Checkbox from '~/components/atoms/Checkbox.vue'
+import FormMessage from '~/components/atoms/FormMessage.vue'
+import Radio from '~/components/atoms/Radio.vue'
+
+// Priority 6 component imports (Special effect components)
+import Dot from '~/components/atoms/Dot.vue'
+import StarRating from '~/components/atoms/StarRating.vue'
+import StepNumber from '~/components/atoms/StepNumber.vue'
+import VisuallyHidden from '~/components/atoms/VisuallyHidden.vue'
+
+// Priority 7 component imports (Dropdown menu components)
+import DropdownMenu from '~/components/atoms/DropdownMenu.vue'
+import DropdownMenuTrigger from '~/components/atoms/DropdownMenuTrigger.vue'
+import DropdownMenuContent from '~/components/atoms/DropdownMenuContent.vue'
+import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
+import DropdownMenuLabel from '~/components/atoms/DropdownMenuLabel.vue'
+import DropdownMenuSeparator from '~/components/atoms/DropdownMenuSeparator.vue'
+import DropdownMenuCheckboxItem from '~/components/atoms/DropdownMenuCheckboxItem.vue'
+import DropdownMenuRadioItem from '~/components/atoms/DropdownMenuRadioItem.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -73,6 +94,28 @@ const inputValue1 = ref('')
 const inputValue2 = ref('')
 const inputValue3 = ref('')
 const inputValue4 = ref('')
+
+// Form component test values
+const checkboxValue1 = ref(false)
+const checkboxValue2 = ref(true)
+const checkboxValue3 = ref(false)
+
+// Radio button test values
+const radioValue1 = ref('option1')
+const radioValue2 = ref('small')
+const radioValue3 = ref('')
+
+// Priority 6 component test values
+const starRating1 = ref(0)
+const starRating2 = ref(3)
+const starRating3 = ref(5)
+
+// Priority 7 dropdown test values
+const dropdownCheckbox1 = ref(true)
+const dropdownCheckbox2 = ref(false)
+const dropdownCheckbox3 = ref(true)
+const dropdownRadioValue = ref('option2')
+const dropdownAlignment = ref('start')
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -823,6 +866,919 @@ if (isDevelopment) {
             <div class="max-w-md">
               <Input type="file" class="cursor-pointer" />
             </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Form Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Form Components (3 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Checkbox Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Checkbox</h3>
+            
+            <!-- Basic Checkboxes -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Basic Usage</h4>
+              <div class="space-y-3">
+                <Checkbox v-model="checkboxValue1" label="Accept terms and conditions" />
+                <Checkbox v-model="checkboxValue2" label="Subscribe to newsletter" />
+                <Checkbox label="No v-model (uncontrolled)" />
+              </div>
+            </div>
+
+            <!-- With Description -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">With Description</h4>
+              <div class="space-y-3">
+                <Checkbox 
+                  v-model="checkboxValue3"
+                  label="Enable notifications"
+                  description="Get notified when someone mentions you"
+                />
+                <Checkbox 
+                  label="Use default settings"
+                  description="This will apply our recommended configuration for your account"
+                />
+              </div>
+            </div>
+
+            <!-- States -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">States</h4>
+              <div class="space-y-3">
+                <Checkbox label="Disabled checkbox" disabled />
+                <Checkbox v-model="checkboxValue2" label="Disabled checked" disabled />
+                <Checkbox label="Required checkbox" required />
+              </div>
+            </div>
+
+            <!-- Custom Styling -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
+              <div class="space-y-3">
+                <Checkbox class="text-primary" label="Primary colored checkbox" />
+                <Checkbox class="text-lg" label="Large checkbox" />
+              </div>
+            </div>
+
+            <!-- Current Values Display -->
+            <div class="mt-6 p-4 bg-muted/50 rounded text-sm">
+              <p class="font-medium mb-2">Current Values:</p>
+              <p>Checkbox 1: {{ checkboxValue1 }}</p>
+              <p>Checkbox 2: {{ checkboxValue2 }}</p>
+              <p>Checkbox 3: {{ checkboxValue3 }}</p>
+            </div>
+          </div>
+
+          <!-- FormMessage Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">FormMessage</h3>
+            
+            <!-- Message Types -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Message Types</h4>
+              <div class="space-y-3">
+                <FormMessage message="This is a default helper message" />
+                <FormMessage type="error" message="This field is required" />
+                <FormMessage type="success" message="Email verified successfully!" />
+                <FormMessage type="warning" message="Password strength is weak" />
+                <FormMessage type="info" message="We'll never share your email" />
+              </div>
+            </div>
+
+            <!-- Without Icons -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Without Icons</h4>
+              <div class="space-y-3">
+                <FormMessage :show-icon="false" message="Plain message without icon" />
+                <FormMessage :show-icon="false" type="error" message="Error without icon" />
+                <FormMessage :show-icon="false" type="success" message="Success without icon" />
+              </div>
+            </div>
+
+            <!-- Custom Icons -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Icons</h4>
+              <div class="space-y-3">
+                <FormMessage icon="lucide:mail" message="Check your email for verification" />
+                <FormMessage type="error" icon="lucide:x-circle" message="Custom error icon" />
+                <FormMessage type="success" icon="lucide:sparkles" message="Custom success icon" />
+              </div>
+            </div>
+
+            <!-- With Form Fields -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">With Form Fields</h4>
+              <div class="space-y-4 max-w-md">
+                <div>
+                  <Label>Email</Label>
+                  <Input placeholder="Enter your email" class="mt-1" />
+                  <FormMessage type="error" message="Please enter a valid email address" />
+                </div>
+                
+                <div>
+                  <Label>Password</Label>
+                  <Input type="password" placeholder="Enter password" class="mt-1" />
+                  <FormMessage type="warning" message="Use at least 8 characters with mixed case" />
+                </div>
+                
+                <div>
+                  <Label>Username</Label>
+                  <Input placeholder="Choose a username" class="mt-1" />
+                  <FormMessage type="success" message="Username is available!" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Styling -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
+              <div class="space-y-3">
+                <FormMessage class="font-semibold" message="Bold message" />
+                <FormMessage class="text-lg" message="Large message" />
+                <FormMessage class="italic" message="Italic message" />
+              </div>
+            </div>
+
+            <!-- Using Slots -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Using Slots</h4>
+              <div class="space-y-3">
+                <FormMessage type="info">
+                  This is a message with <strong>rich content</strong> using slots
+                </FormMessage>
+                <FormMessage type="error">
+                  Multiple errors: <br>
+                  • Field is required<br>
+                  • Must be at least 8 characters
+                </FormMessage>
+              </div>
+            </div>
+          </div>
+
+          <!-- Radio Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Radio</h3>
+            
+            <!-- Basic Radio Groups -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Basic Radio Group</h4>
+              <div class="space-y-3">
+                <Radio 
+                  v-model="radioValue1" 
+                  name="basic-group" 
+                  value="option1" 
+                  label="Option 1" 
+                />
+                <Radio 
+                  v-model="radioValue1" 
+                  name="basic-group" 
+                  value="option2" 
+                  label="Option 2" 
+                />
+                <Radio 
+                  v-model="radioValue1" 
+                  name="basic-group" 
+                  value="option3" 
+                  label="Option 3" 
+                />
+              </div>
+              <p class="text-sm text-muted-foreground">Selected: {{ radioValue1 }}</p>
+            </div>
+
+            <!-- With Description -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">With Descriptions</h4>
+              <div class="space-y-3">
+                <Radio 
+                  v-model="radioValue2" 
+                  name="size-group" 
+                  value="small" 
+                  label="Small"
+                  description="Best for personal use"
+                />
+                <Radio 
+                  v-model="radioValue2" 
+                  name="size-group" 
+                  value="medium" 
+                  label="Medium"
+                  description="Recommended for most users"
+                />
+                <Radio 
+                  v-model="radioValue2" 
+                  name="size-group" 
+                  value="large" 
+                  label="Large"
+                  description="For power users and teams"
+                />
+              </div>
+              <p class="text-sm text-muted-foreground">Selected: {{ radioValue2 }}</p>
+            </div>
+
+            <!-- States -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">States</h4>
+              <div class="space-y-3">
+                <Radio 
+                  name="states-group" 
+                  value="normal" 
+                  label="Normal radio" 
+                />
+                <Radio 
+                  name="states-group" 
+                  value="disabled" 
+                  label="Disabled radio" 
+                  disabled 
+                />
+                <Radio 
+                  v-model="radioValue3" 
+                  name="states-group" 
+                  value="disabled-checked" 
+                  label="Disabled checked" 
+                  disabled 
+                />
+                <Radio 
+                  name="states-group" 
+                  value="required" 
+                  label="Required radio" 
+                  required 
+                />
+              </div>
+            </div>
+
+            <!-- Inline Radio Group -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Inline Layout</h4>
+              <div class="flex gap-6">
+                <Radio 
+                  v-model="radioValue3" 
+                  name="inline-group" 
+                  value="yes" 
+                  label="Yes" 
+                />
+                <Radio 
+                  v-model="radioValue3" 
+                  name="inline-group" 
+                  value="no" 
+                  label="No" 
+                />
+                <Radio 
+                  v-model="radioValue3" 
+                  name="inline-group" 
+                  value="maybe" 
+                  label="Maybe" 
+                />
+              </div>
+              <p class="text-sm text-muted-foreground">Selected: {{ radioValue3 || 'None' }}</p>
+            </div>
+
+            <!-- Custom Styling -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
+              <div class="space-y-3">
+                <Radio 
+                  name="custom-group" 
+                  value="primary" 
+                  label="Primary styled radio" 
+                  class="text-primary"
+                />
+                <Radio 
+                  name="custom-group" 
+                  value="large" 
+                  label="Large radio" 
+                  class="text-lg"
+                />
+              </div>
+            </div>
+
+            <!-- With Form Context -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Form Context Example</h4>
+              <div class="max-w-md space-y-4">
+                <div>
+                  <Label class="mb-3">Select your plan</Label>
+                  <div class="space-y-2">
+                    <Radio 
+                      v-model="radioValue3" 
+                      name="plan-group" 
+                      value="free" 
+                      label="Free Plan"
+                      description="$0/month - Basic features"
+                    />
+                    <Radio 
+                      v-model="radioValue3" 
+                      name="plan-group" 
+                      value="pro" 
+                      label="Pro Plan"
+                      description="$10/month - Advanced features"
+                    />
+                    <Radio 
+                      v-model="radioValue3" 
+                      name="plan-group" 
+                      value="enterprise" 
+                      label="Enterprise Plan"
+                      description="Custom pricing - All features"
+                    />
+                  </div>
+                  <FormMessage 
+                    v-if="radioValue3" 
+                    type="success" 
+                    :message="`You selected: ${radioValue3}`" 
+                    class="mt-2"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Special Effect Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Special Effect Components (4 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Dot Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Dot (Pulsing Indicator)</h3>
+            
+            <!-- Different Sizes -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                  <Dot size="xs" aria-label="Extra small indicator" />
+                  <span class="text-sm">XS</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="sm" aria-label="Small indicator" />
+                  <span class="text-sm">SM</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="md" aria-label="Medium indicator" />
+                  <span class="text-sm">MD</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="lg" aria-label="Large indicator" />
+                  <span class="text-sm">LG</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot size="xl" aria-label="Extra large indicator" />
+                  <span class="text-sm">XL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Different Colors -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Colors</h4>
+              <div class="flex items-center gap-6">
+                <Dot color="primary" aria-label="Primary status" />
+                <Dot color="secondary" aria-label="Secondary status" />
+                <Dot color="success" aria-label="Success status" />
+                <Dot color="warning" aria-label="Warning status" />
+                <Dot color="error" aria-label="Error status" />
+                <Dot color="info" aria-label="Info status" />
+                <Dot color="neutral" aria-label="Neutral status" />
+              </div>
+            </div>
+
+            <!-- Pulse Variations -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Pulse Variations</h4>
+              <div class="space-y-3">
+                <div class="flex items-center gap-4">
+                  <Dot :pulse="false" aria-label="No pulse" />
+                  <span class="text-sm">No pulse</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Dot pulse-speed="slow" pulse-intensity="subtle" aria-label="Slow subtle pulse" />
+                  <span class="text-sm">Slow & Subtle</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Dot pulse-speed="normal" pulse-intensity="normal" aria-label="Normal pulse" />
+                  <span class="text-sm">Normal (default)</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <Dot pulse-speed="fast" pulse-intensity="strong" aria-label="Fast strong pulse" />
+                  <span class="text-sm">Fast & Strong</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Real-world Examples -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Real-world Examples</h4>
+              <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                  <Dot color="success" size="sm" aria-label="Online" />
+                  <span class="text-sm">User Online</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot color="warning" size="sm" pulse-speed="slow" aria-label="Away" />
+                  <span class="text-sm">User Away</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <Dot color="error" size="sm" :pulse="false" aria-label="Offline" />
+                  <span class="text-sm">User Offline</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- StepNumber Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">StepNumber</h3>
+            
+            <!-- Process Steps Example -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Process Steps</h4>
+              <div class="flex items-center gap-4" role="list">
+                <StepNumber :step="1" status="completed" />
+                <div class="h-px bg-border flex-1" />
+                <StepNumber :step="2" status="active" />
+                <div class="h-px bg-border flex-1" />
+                <StepNumber :step="3" status="pending" />
+                <div class="h-px bg-border flex-1" />
+                <StepNumber :step="4" status="pending" />
+              </div>
+            </div>
+
+            <!-- Different Sizes -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
+              <div class="flex items-center gap-4">
+                <StepNumber :step="1" size="xs" status="active" />
+                <StepNumber :step="2" size="sm" status="active" />
+                <StepNumber :step="3" size="md" status="active" />
+                <StepNumber :step="4" size="lg" status="active" />
+                <StepNumber :step="5" size="xl" status="active" />
+              </div>
+            </div>
+
+            <!-- Variants -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Variants</h4>
+              <div class="space-y-3">
+                <div class="flex items-center gap-4">
+                  <StepNumber :step="1" variant="default" status="completed" />
+                  <StepNumber :step="2" variant="default" status="active" />
+                  <StepNumber :step="3" variant="default" status="pending" />
+                  <span class="text-sm">Default</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <StepNumber :step="1" variant="outline" status="completed" />
+                  <StepNumber :step="2" variant="outline" status="active" />
+                  <StepNumber :step="3" variant="outline" status="pending" />
+                  <span class="text-sm">Outline</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <StepNumber :step="1" variant="solid" status="completed" />
+                  <StepNumber :step="2" variant="solid" status="active" />
+                  <StepNumber :step="3" variant="solid" status="pending" />
+                  <span class="text-sm">Solid</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Different Colors -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Colors</h4>
+              <div class="flex items-center gap-4">
+                <StepNumber :step="1" color="primary" status="active" />
+                <StepNumber :step="2" color="secondary" status="active" />
+                <StepNumber :step="3" color="success" status="active" />
+                <StepNumber :step="4" color="neutral" status="active" />
+              </div>
+            </div>
+          </div>
+
+          <!-- StarRating Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">StarRating</h3>
+            
+            <!-- Basic Examples -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Basic Usage</h4>
+              <div class="space-y-3">
+                <StarRating 
+                  v-model="starRating1" 
+                  label="Rate this product"
+                />
+                <p class="text-sm text-muted-foreground">Current rating: {{ starRating1 }}/5</p>
+              </div>
+            </div>
+
+            <!-- Different Sizes -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
+              <div class="space-y-3">
+                <StarRating v-model="starRating2" size="xs" label="Extra small stars" />
+                <StarRating v-model="starRating2" size="sm" label="Small stars" />
+                <StarRating v-model="starRating2" size="md" label="Medium stars" />
+                <StarRating v-model="starRating2" size="lg" label="Large stars" />
+                <StarRating v-model="starRating2" size="xl" label="Extra large stars" />
+              </div>
+            </div>
+
+            <!-- Different States -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">States</h4>
+              <div class="space-y-3">
+                <StarRating 
+                  :model-value="4" 
+                  readonly 
+                  label="Read-only rating"
+                  description="This rating cannot be changed"
+                />
+                <StarRating 
+                  :model-value="3" 
+                  disabled 
+                  label="Disabled rating"
+                  description="This rating is disabled"
+                />
+                <StarRating 
+                  v-model="starRating3" 
+                  required 
+                  label="Required rating"
+                  description="Please provide a rating"
+                />
+              </div>
+            </div>
+
+            <!-- Custom Configuration -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Configuration</h4>
+              <div class="space-y-3">
+                <StarRating 
+                  v-model="starRating3" 
+                  :max-stars="10" 
+                  label="10-star rating"
+                  color="primary"
+                />
+                <StarRating 
+                  v-model="starRating3" 
+                  :allow-clear="false" 
+                  label="No clear option"
+                  color="secondary"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- VisuallyHidden Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">VisuallyHidden</h3>
+            
+            <div class="space-y-4">
+              <p class="text-sm text-muted-foreground">
+                This component hides content visually but keeps it accessible to screen readers.
+              </p>
+              
+              <!-- Basic Example -->
+              <div class="p-4 bg-muted/50 rounded">
+                <p class="text-sm">
+                  This paragraph contains 
+                  <VisuallyHidden>hidden text that screen readers can read</VisuallyHidden>
+                  visible text.
+                </p>
+              </div>
+
+              <!-- Focusable Example -->
+              <div class="p-4 bg-muted/50 rounded mt-4">
+                <p class="text-sm mb-2">Tab to reveal the skip link:</p>
+                <VisuallyHidden focusable as="a" href="#main" class="text-primary underline">
+                  Skip to main content
+                </VisuallyHidden>
+              </div>
+
+              <!-- Real-world Examples -->
+              <div class="space-y-4 mt-6">
+                <h4 class="text-xs font-medium text-muted-foreground">Real-world Uses</h4>
+                <ul class="space-y-2 text-sm">
+                  <li>• Icon-only buttons with descriptive text</li>
+                  <li>• Form field instructions for screen readers</li>
+                  <li>• Skip navigation links</li>
+                  <li>• Additional context for abbreviated content</li>
+                  <li>• Live region announcements</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Dropdown Menu Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Dropdown Menu Components (8 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Basic Dropdown -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Basic Dropdown</h3>
+            
+            <div class="flex gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Icon name="lucide:more-vertical" class="h-4 w-4 mr-2" />
+                  Options
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem @select="() => console.log('Edit clicked')">
+                    <Icon name="lucide:pencil" class="h-4 w-4 mr-2" />
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem @select="() => console.log('Duplicate clicked')">
+                    <Icon name="lucide:copy" class="h-4 w-4 mr-2" />
+                    Duplicate
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem @select="() => console.log('Delete clicked')" class="text-destructive">
+                    <Icon name="lucide:trash" class="h-4 w-4 mr-2" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger class="bg-primary text-primary-foreground hover:bg-primary/90">
+                  Actions
+                  <Icon name="lucide:chevron-down" class="h-4 w-4 ml-2" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>New file</DropdownMenuItem>
+                  <DropdownMenuItem>New folder</DropdownMenuItem>
+                  <DropdownMenuItem disabled>Import (coming soon)</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+
+          <!-- With Labels and Sections -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Labels & Sections</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Icon name="lucide:user" class="h-4 w-4 mr-2" />
+                Account
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icon name="lucide:user" class="h-4 w-4 mr-2" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:credit-card" class="h-4 w-4 mr-2" />
+                  Billing
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:settings" class="h-4 w-4 mr-2" />
+                  Settings
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Team</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icon name="lucide:users" class="h-4 w-4 mr-2" />
+                  Invite users
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:plus" class="h-4 w-4 mr-2" />
+                  New Team
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icon name="lucide:log-out" class="h-4 w-4 mr-2" />
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <!-- With Checkbox Items -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Checkboxes</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Icon name="lucide:sliders-horizontal" class="h-4 w-4 mr-2" />
+                View
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56">
+                <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem 
+                  v-model:checked="dropdownCheckbox1"
+                >
+                  Show status bar
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem 
+                  v-model:checked="dropdownCheckbox2"
+                >
+                  Show activity bar
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem 
+                  v-model:checked="dropdownCheckbox3"
+                >
+                  Show panel
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  Reset view
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <div class="mt-4 p-4 bg-muted/50 rounded text-sm">
+              <p class="font-medium mb-2">Current Values:</p>
+              <p>Status bar: {{ dropdownCheckbox1 ? 'Visible' : 'Hidden' }}</p>
+              <p>Activity bar: {{ dropdownCheckbox2 ? 'Visible' : 'Hidden' }}</p>
+              <p>Panel: {{ dropdownCheckbox3 ? 'Visible' : 'Hidden' }}</p>
+            </div>
+          </div>
+
+          <!-- With Radio Items -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Radio Group</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Icon name="lucide:align-left" class="h-4 w-4 mr-2" />
+                Text alignment
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56">
+                <DropdownMenuLabel>Choose alignment</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuRadioItem 
+                  value="left"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-left" class="h-4 w-4 mr-2" />
+                  Left
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem 
+                  value="center"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-center" class="h-4 w-4 mr-2" />
+                  Center
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem 
+                  value="right"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-right" class="h-4 w-4 mr-2" />
+                  Right
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem 
+                  value="justify"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-justify" class="h-4 w-4 mr-2" />
+                  Justify
+                </DropdownMenuRadioItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <p class="mt-4 text-sm text-muted-foreground">
+              Selected alignment: <span class="font-medium">{{ dropdownRadioValue }}</span>
+            </p>
+          </div>
+
+          <!-- Different Positions -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Different Positions</h3>
+            
+            <div class="grid grid-cols-3 gap-4">
+              <!-- Alignment variations -->
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Align Start
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Align Center
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Align End
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <!-- Side variations -->
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Side Top
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="top">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Side Right
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="right">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Side Left
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="left">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+
+          <!-- Complex Example -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Complex Example</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger class="bg-gradient-to-r from-primary to-secondary text-white">
+                <Icon name="lucide:sparkles" class="h-4 w-4 mr-2" />
+                Advanced Menu
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-64" align="start">
+                <div class="px-2 py-1.5">
+                  <p class="text-sm font-semibold">John Doe</p>
+                  <p class="text-xs text-muted-foreground">john@example.com</p>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Quick Actions</DropdownMenuLabel>
+                <DropdownMenuItem>
+                  <Icon name="lucide:zap" class="h-4 w-4 mr-2 text-warning" />
+                  Quick command
+                  <span class="ml-auto text-xs text-muted-foreground">⌘K</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:search" class="h-4 w-4 mr-2" />
+                  Search
+                  <span class="ml-auto text-xs text-muted-foreground">⌘/</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Preferences</DropdownMenuLabel>
+                <DropdownMenuCheckboxItem 
+                  :checked="true"
+                >
+                  <Icon name="lucide:moon" class="h-4 w-4 mr-2" />
+                  Dark mode
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem 
+                  :checked="false"
+                >
+                  <Icon name="lucide:bell" class="h-4 w-4 mr-2" />
+                  Notifications
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem class="text-destructive focus:text-destructive">
+                  <Icon name="lucide:log-out" class="h-4 w-4 mr-2" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </details>
