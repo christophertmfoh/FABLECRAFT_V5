@@ -31,6 +31,14 @@ import Heading from '~/components/atoms/Heading.vue'
 import Text from '~/components/atoms/Text.vue'
 import Label from '~/components/atoms/Label.vue'
 
+// Priority 4 component imports
+import GradientButton from '~/components/atoms/GradientButton.vue'
+import BadgeWithDot from '~/components/atoms/BadgeWithDot.vue'
+import Separator from '~/components/atoms/Separator.vue'
+import LoadingFallback from '~/components/atoms/LoadingFallback.vue'
+import IconContainer from '~/components/atoms/IconContainer.vue'
+import ScrollArea from '~/components/atoms/ScrollArea.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -1359,6 +1367,223 @@ if (isDevelopment) {
               <Label class="uppercase tracking-wider text-muted-foreground">
                 Uppercase Label
               </Label>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Priority 4 Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🚀 Priority 4 Components (6 new components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- GradientButton -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">GradientButton</h3>
+            
+            <div class="flex flex-wrap gap-4">
+              <GradientButton>Default Gradient</GradientButton>
+              <GradientButton variant="secondary">Secondary Gradient</GradientButton>
+              <GradientButton variant="destructive">Destructive Gradient</GradientButton>
+              <GradientButton gradient-direction="to-br">Diagonal Gradient</GradientButton>
+              <GradientButton 
+                gradient-colors="from-purple-500/20 to-pink-500/20"
+                icon="lucide:sparkles"
+              >
+                Custom Colors
+              </GradientButton>
+              <GradientButton 
+                :show-gradient-overlay="false"
+              >
+                No Gradient
+              </GradientButton>
+            </div>
+          </div>
+
+          <!-- BadgeWithDot -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">BadgeWithDot</h3>
+            
+            <div class="flex flex-wrap gap-4">
+              <BadgeWithDot>Live</BadgeWithDot>
+              <BadgeWithDot variant="secondary" dot-color="success">Online</BadgeWithDot>
+              <BadgeWithDot variant="destructive" dot-color="danger">Error</BadgeWithDot>
+              <BadgeWithDot 
+                variant="outline" 
+                dot-position="right"
+                animation-speed="slow"
+              >
+                Processing
+              </BadgeWithDot>
+              <BadgeWithDot 
+                variant="landing" 
+                size="lg"
+                dot-size="lg"
+              >
+                Featured
+              </BadgeWithDot>
+              <BadgeWithDot :animated="false">Static</BadgeWithDot>
+            </div>
+          </div>
+
+          <!-- Separator -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">Separator</h3>
+            
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm text-muted-foreground mb-2">Horizontal Variants</p>
+                <div class="space-y-4">
+                  <Separator />
+                  <Separator variant="dashed" />
+                  <Separator variant="dotted" />
+                </div>
+              </div>
+              
+              <div>
+                <p class="text-sm text-muted-foreground mb-2">Vertical Separator</p>
+                <div class="flex items-center gap-4 h-20">
+                  <span>Left</span>
+                  <Separator orientation="vertical" />
+                  <span>Center</span>
+                  <Separator orientation="vertical" variant="dashed" />
+                  <span>Right</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LoadingFallback -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">LoadingFallback</h3>
+            
+            <div class="grid gap-4">
+              <div class="border rounded-lg p-4 h-32">
+                <LoadingFallback 
+                  :full-height="false"
+                  size="sm"
+                  text="Loading content..."
+                />
+              </div>
+              
+              <div class="border rounded-lg p-4 h-40">
+                <LoadingFallback 
+                  :full-height="false"
+                  size="md"
+                  text="Please wait"
+                  sub-text="This might take a moment"
+                />
+              </div>
+              
+              <div class="border rounded-lg p-4 h-48">
+                <LoadingFallback 
+                  :full-height="false"
+                  size="lg"
+                  spinner-class="text-primary"
+                >
+                  <template #default>
+                    <span class="text-primary font-semibold">Loading your data...</span>
+                  </template>
+                </LoadingFallback>
+              </div>
+            </div>
+          </div>
+
+          <!-- IconContainer -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">IconContainer</h3>
+            
+            <div>
+              <p class="text-sm text-muted-foreground mb-4">Sizes & Variants</p>
+              <div class="flex flex-wrap items-center gap-4">
+                <IconContainer icon="lucide:star" size="xs" />
+                <IconContainer icon="lucide:heart" size="sm" variant="soft" />
+                <IconContainer icon="lucide:zap" size="md" variant="default" />
+                <IconContainer icon="lucide:sparkles" size="lg" variant="gradient" />
+                <IconContainer icon="lucide:rocket" size="xl" variant="subtle" />
+              </div>
+            </div>
+            
+            <div>
+              <p class="text-sm text-muted-foreground mb-4">Shapes & Interactive</p>
+              <div class="flex flex-wrap items-center gap-4">
+                <IconContainer 
+                  icon="lucide:user" 
+                  shape="circle"
+                  variant="soft"
+                  interactive
+                />
+                <IconContainer 
+                  icon="lucide:settings" 
+                  shape="square"
+                  variant="outline"
+                  interactive
+                />
+                <IconContainer 
+                  icon="lucide:bell" 
+                  shape="rounded"
+                  variant="gradient"
+                  interactive
+                />
+                <IconContainer 
+                  icon="lucide:mail" 
+                  variant="ghost"
+                  :hover="false"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- ScrollArea -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold border-b pb-2">ScrollArea</h3>
+            
+            <div class="grid gap-4">
+              <div>
+                <p class="text-sm text-muted-foreground mb-2">Vertical Scroll</p>
+                <ScrollArea max-height="200px" class="border rounded-lg p-4">
+                  <div class="space-y-4">
+                    <p v-for="i in 10" :key="i">
+                      This is paragraph {{ i }}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                      Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                  </div>
+                </ScrollArea>
+              </div>
+              
+              <div>
+                <p class="text-sm text-muted-foreground mb-2">Horizontal Scroll</p>
+                <ScrollArea 
+                  orientation="horizontal" 
+                  max-width="100%"
+                  class="border rounded-lg p-4"
+                >
+                  <div class="flex gap-4 w-max">
+                    <Card v-for="i in 10" :key="i" class="w-40 p-4 flex-shrink-0">
+                      <p class="font-semibold">Card {{ i }}</p>
+                      <p class="text-sm text-muted-foreground">Scrollable content</p>
+                    </Card>
+                  </div>
+                </ScrollArea>
+              </div>
+              
+              <div>
+                <p class="text-sm text-muted-foreground mb-2">Hover Scrollbar</p>
+                <ScrollArea 
+                  max-height="150px" 
+                  scrollbar-variant="hover"
+                  scrollbar-size="thin"
+                  class="border rounded-lg p-4"
+                >
+                  <div class="space-y-2">
+                    <p v-for="i in 8" :key="i" class="text-sm">
+                      Line {{ i }}: Hover to see the scrollbar appear
+                    </p>
+                  </div>
+                </ScrollArea>
+              </div>
             </div>
           </div>
         </div>
