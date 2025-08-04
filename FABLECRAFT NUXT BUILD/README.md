@@ -58,8 +58,8 @@ npm run dev:alt
 
 ```bash
 # Safe commands to check what's running:
-lsof -i :3000
-lsof -i :3002
+lsof -i :5050
+lsof -i :5051
 ps aux | grep node  # View only, don't pipe to kill!
 ```
 
@@ -69,12 +69,12 @@ ps aux | grep node  # View only, don't pipe to kill!
 
 ```bash
 # Start the development server (RECOMMENDED)
-npx nuxi dev --port 3002
+npx nuxi dev --port 5050
 
 # Alternative method
 pnpm dev:alt
 
-# Navigate to http://localhost:3002
+# Navigate to http://localhost:5050
 ```
 
 ## Development Scripts

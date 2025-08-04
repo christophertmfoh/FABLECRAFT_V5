@@ -29,9 +29,9 @@ safe_kill() {
 # Add helpful functions
 check_ports() {
     echo "📍 Checking ports..."
-    echo "Port 3000: $(lsof -i :3000 2>/dev/null | grep LISTEN || echo 'Free')"
-    echo "Port 3002: $(lsof -i :3002 2>/dev/null | grep LISTEN || echo 'Free')"
-    echo "Port 3003: $(lsof -i :3003 2>/dev/null | grep LISTEN || echo 'Free')"
+    echo "Port 5050: $(lsof -i :5050 2>/dev/null | grep LISTEN || echo 'Free')"
+    echo "Port 5051: $(lsof -i :5051 2>/dev/null | grep LISTEN || echo 'Free')"
+    echo "Port 5052: $(lsof -i :5052 2>/dev/null | grep LISTEN || echo 'Free')"
 }
 
 safe_stop() {

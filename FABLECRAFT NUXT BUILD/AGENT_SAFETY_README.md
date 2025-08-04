@@ -29,8 +29,8 @@ You CAN safely manage the dev server with these commands:
 npm run safe-stop                    # Recommended: Smart stop script
 kill -TERM [specific_dev_pid]        # Kill specific dev server PID
 kill -INT [specific_dev_pid]         # Interrupt specific dev server
-lsof -ti:3000 | xargs kill -TERM    # Kill only process on port 3000
-lsof -ti:3050 | xargs kill -TERM    # Kill only process on port 3050
+lsof -ti:5050 | xargs kill -TERM    # Kill only process on port 5050
+lsof -ti:5051 | xargs kill -TERM    # Kill only process on port 5051
 ```
 
 ## ✅ SAFE ALTERNATIVES
@@ -46,7 +46,7 @@ lsof -ti:3050 | xargs kill -TERM    # Kill only process on port 3050
 
 3. **Use a different port** if the current one is stuck:
    ```bash
-   npm run dev:alt  # Uses port 3050 instead of 3000
+   npm run dev:alt  # Uses port 5051 instead of 5050
    ```
 
 ### To Check What's Running:
@@ -54,8 +54,8 @@ lsof -ti:3050 | xargs kill -TERM    # Kill only process on port 3050
 ```bash
 # View only (safe):
 ps aux | grep node
-lsof -i :3000
-lsof -i :3050
+lsof -i :5050
+lsof -i :5051
 ```
 
 ### If Port is Already in Use:
@@ -78,8 +78,8 @@ npm run dev:alt
 
 ### Starting the Server:
 ```bash
-npm run dev        # Default port 3000
-npm run dev:alt    # Alternative port 3002
+npm run dev        # Default port 5050
+npm run dev:alt    # Alternative port 5051
 ```
 
 ### Stopping the Server:
@@ -96,11 +96,11 @@ npm run safe-stop
 ### If Something Goes Wrong:
 ```bash
 # Check what's using ports:
-lsof -i :3000
-lsof -i :3002
+lsof -i :5050
+lsof -i :5051
 
 # Use a different port:
-npx nuxi dev --port 3005
+npx nuxi dev --port 5052
 ```
 
 ## 🔴 CONSEQUENCES OF KILLING NODE

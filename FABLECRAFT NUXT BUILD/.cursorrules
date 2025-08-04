@@ -32,7 +32,7 @@ These commands don't just stop the server - they DESTROY the Cursor environment 
 ## DEVELOPMENT COMMANDS
 
 Safe commands to use:
-- `pnpm dev:alt` or `npx nuxi dev --port 3002` - Start development
+- `pnpm dev:alt` or `npx nuxi dev --port 5051` - Start development
 - `Ctrl+C` - Stop any running process
 - `pnpm run safe-stop` - Check processes safely
 

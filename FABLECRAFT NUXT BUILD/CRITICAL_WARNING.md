@@ -23,15 +23,15 @@
 ```bash
 # Safe commands to check what's running:
 ps aux | grep node     # Just to VIEW processes
-lsof -i :3002         # Check what's using port 3002
+lsof -i :5050         # Check what's using port 5050
 ```
 
 ### To Free Up a Port:
 ```bash
-# If port 3002 is stuck, use a different port:
-npx nuxi dev --port 3003
+# If port 5050 is stuck, use a different port:
+npx nuxi dev --port 5052
 # or
-npx nuxi dev --port 3004
+npx nuxi dev --port 5053
 ```
 
 ## 🔴 WHY THIS MATTERS:

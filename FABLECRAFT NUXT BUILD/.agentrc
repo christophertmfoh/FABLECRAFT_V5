@@ -24,8 +24,8 @@ ALLOWED_DEV_COMMANDS=(
   "npm run safe-stop"
   "kill -TERM [specific_dev_pid]"
   "kill -INT [specific_dev_pid]"
-  "lsof -ti:3000 | xargs kill -TERM"  # Only kills process on dev port
-  "lsof -ti:3050 | xargs kill -TERM"  # Only kills process on dev port
+  "lsof -ti:5050 | xargs kill -TERM"  # Only kills process on dev port
+  "lsof -ti:5051 | xargs kill -TERM"  # Only kills process on dev port
 )
 
 # DEV SERVER IDENTIFIERS - Processes with these are safe to kill
