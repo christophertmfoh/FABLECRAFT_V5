@@ -92,7 +92,7 @@ if (isDevelopment) {
 
     </ClientOnly>
     
-    <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
+    <div class="max-w-full mx-auto p-6 space-y-12 relative z-10">
       
       <!-- Header with Current Theme Display -->
       <div class="text-center space-y-4">
