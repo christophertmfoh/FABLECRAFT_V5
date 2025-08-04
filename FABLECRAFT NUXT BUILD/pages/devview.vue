@@ -42,6 +42,7 @@ import ScrollArea from '~/components/atoms/ScrollArea.vue'
 // Priority 5 component imports (Form components)
 import Checkbox from '~/components/atoms/Checkbox.vue'
 import FormMessage from '~/components/atoms/FormMessage.vue'
+import Radio from '~/components/atoms/Radio.vue'
 
 // Use centralized theme composable with all features
 const { 
@@ -82,6 +83,11 @@ const inputValue4 = ref('')
 const checkboxValue1 = ref(false)
 const checkboxValue2 = ref(true)
 const checkboxValue3 = ref(false)
+
+// Radio button test values
+const radioValue1 = ref('option1')
+const radioValue2 = ref('small')
+const radioValue3 = ref('')
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -839,7 +845,7 @@ if (isDevelopment) {
       <!-- Form Components -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          Form Components (2 components)
+          Form Components (3 components)
         </summary>
         
         <div class="space-y-8">
@@ -983,6 +989,181 @@ if (isDevelopment) {
                   • Field is required<br>
                   • Must be at least 8 characters
                 </FormMessage>
+              </div>
+            </div>
+          </div>
+
+          <!-- Radio Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Radio</h3>
+            
+            <!-- Basic Radio Groups -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Basic Radio Group</h4>
+              <div class="space-y-3">
+                <Radio 
+                  v-model="radioValue1" 
+                  name="basic-group" 
+                  value="option1" 
+                  label="Option 1" 
+                />
+                <Radio 
+                  v-model="radioValue1" 
+                  name="basic-group" 
+                  value="option2" 
+                  label="Option 2" 
+                />
+                <Radio 
+                  v-model="radioValue1" 
+                  name="basic-group" 
+                  value="option3" 
+                  label="Option 3" 
+                />
+              </div>
+              <p class="text-sm text-muted-foreground">Selected: {{ radioValue1 }}</p>
+            </div>
+
+            <!-- With Description -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">With Descriptions</h4>
+              <div class="space-y-3">
+                <Radio 
+                  v-model="radioValue2" 
+                  name="size-group" 
+                  value="small" 
+                  label="Small"
+                  description="Best for personal use"
+                />
+                <Radio 
+                  v-model="radioValue2" 
+                  name="size-group" 
+                  value="medium" 
+                  label="Medium"
+                  description="Recommended for most users"
+                />
+                <Radio 
+                  v-model="radioValue2" 
+                  name="size-group" 
+                  value="large" 
+                  label="Large"
+                  description="For power users and teams"
+                />
+              </div>
+              <p class="text-sm text-muted-foreground">Selected: {{ radioValue2 }}</p>
+            </div>
+
+            <!-- States -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">States</h4>
+              <div class="space-y-3">
+                <Radio 
+                  name="states-group" 
+                  value="normal" 
+                  label="Normal radio" 
+                />
+                <Radio 
+                  name="states-group" 
+                  value="disabled" 
+                  label="Disabled radio" 
+                  disabled 
+                />
+                <Radio 
+                  v-model="radioValue3" 
+                  name="states-group" 
+                  value="disabled-checked" 
+                  label="Disabled checked" 
+                  disabled 
+                />
+                <Radio 
+                  name="states-group" 
+                  value="required" 
+                  label="Required radio" 
+                  required 
+                />
+              </div>
+            </div>
+
+            <!-- Inline Radio Group -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Inline Layout</h4>
+              <div class="flex gap-6">
+                <Radio 
+                  v-model="radioValue3" 
+                  name="inline-group" 
+                  value="yes" 
+                  label="Yes" 
+                />
+                <Radio 
+                  v-model="radioValue3" 
+                  name="inline-group" 
+                  value="no" 
+                  label="No" 
+                />
+                <Radio 
+                  v-model="radioValue3" 
+                  name="inline-group" 
+                  value="maybe" 
+                  label="Maybe" 
+                />
+              </div>
+              <p class="text-sm text-muted-foreground">Selected: {{ radioValue3 || 'None' }}</p>
+            </div>
+
+            <!-- Custom Styling -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
+              <div class="space-y-3">
+                <Radio 
+                  name="custom-group" 
+                  value="primary" 
+                  label="Primary styled radio" 
+                  class="text-primary"
+                />
+                <Radio 
+                  name="custom-group" 
+                  value="large" 
+                  label="Large radio" 
+                  class="text-lg"
+                />
+              </div>
+            </div>
+
+            <!-- With Form Context -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Form Context Example</h4>
+              <div class="max-w-md space-y-4">
+                <div>
+                  <Label class="mb-3">Select your plan</Label>
+                  <div class="space-y-2">
+                    <Radio 
+                      v-model="radioValue3" 
+                      name="plan-group" 
+                      value="free" 
+                      label="Free Plan"
+                      description="$0/month - Basic features"
+                    />
+                    <Radio 
+                      v-model="radioValue3" 
+                      name="plan-group" 
+                      value="pro" 
+                      label="Pro Plan"
+                      description="$10/month - Advanced features"
+                    />
+                    <Radio 
+                      v-model="radioValue3" 
+                      name="plan-group" 
+                      value="enterprise" 
+                      label="Enterprise Plan"
+                      description="Custom pricing - All features"
+                    />
+                  </div>
+                  <FormMessage 
+                    v-if="radioValue3" 
+                    type="success" 
+                    :message="`You selected: ${radioValue3}`" 
+                    class="mt-2"
+                  />
+                </div>
               </div>
             </div>
           </div>
