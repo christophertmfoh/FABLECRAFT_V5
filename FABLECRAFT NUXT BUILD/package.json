@@ -35,6 +35,7 @@
     "@tiptap/vue-3": "3.0.9",
     "@vueuse/core": "13.6.0",
     "@vueuse/nuxt": "13.6.0",
+    "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "nuxt": "3.18.0",
     "tailwind-merge": "3.3.1",
