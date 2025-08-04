@@ -643,10 +643,10 @@ if (isDevelopment) {
                 Theme Aware
               </GradientButton>
               <GradientButton 
-                gradient-colors="from-muted-foreground/20 to-transparent"
+                variant="ghost"
                 gradient-direction="to-t"
               >
-                Subtle Effect
+                Ghost Variant
               </GradientButton>
               <GradientButton 
                 variant="outline"

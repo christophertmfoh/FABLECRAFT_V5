@@ -55,9 +55,9 @@ const props = withDefaults(defineProps<GradientButtonProps>(), {
   size: 'default',
   type: 'button',
   showGradientOverlay: true,
-  gradientColors: 'from-foreground/10 to-transparent',
   gradientDirection: 'to-r',
   gradientOpacity: 0,
+  adaptiveGradient: false,
 })
 
 // Emit click event
@@ -65,12 +65,27 @@ defineEmits<{
   click: [event: MouseEvent]
 }>()
 
+// Compute gradient colors based on variant
+const variantGradients = {
+  default: 'from-primary-foreground/20 to-transparent',
+  destructive: 'from-destructive-foreground/20 to-transparent', 
+  outline: 'from-primary/20 to-transparent',
+  secondary: 'from-secondary-foreground/20 to-transparent',
+  ghost: 'from-accent/20 to-transparent',
+  link: 'from-primary/20 to-transparent',
+}
+
 // Compute gradient overlay classes
 const gradientOverlayClasses = computed(() => {
   // Use adaptive gradient colors if enabled
-  const gradientColors = props.adaptiveGradient 
-    ? 'from-[hsl(var(--gradient-overlay-light)/var(--gradient-overlay-opacity))] to-transparent'
-    : props.gradientColors
+  let gradientColors = props.gradientColors
+  
+  if (props.adaptiveGradient) {
+    gradientColors = 'from-[hsl(var(--gradient-overlay-light)/var(--gradient-overlay-opacity))] to-transparent'
+  } else if (!props.gradientColors) {
+    // Use variant-specific gradient if no custom colors provided
+    gradientColors = variantGradients[props.variant] || 'from-primary/20 to-transparent'
+  }
     
   return cn(
     'absolute inset-0',
