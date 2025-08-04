@@ -28,7 +28,7 @@ interface InputProps {
   required?: boolean
   invalid?: boolean
   id?: string
-  class?: any
+  class?: string | Record<string, boolean> | string[]
   ariaDescribedby?: string
 }
 

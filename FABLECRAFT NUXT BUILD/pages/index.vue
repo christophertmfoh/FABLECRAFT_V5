@@ -8,6 +8,20 @@ const user = useSupabaseUser()
 
 const isLoggedIn = computed(() => !!user.value)
 
+// Import theme helper functions
+import { getThemesByCategory } from '../constants/data'
+
+// Foundation test imports
+import { cn, formatCurrency } from '~/components/atoms/Utils'
+import { useComponentId } from '~/composables/useComponentId'
+
+// Atom imports
+import Button from '~/components/atoms/Button.vue'
+import AtomIcon from '~/components/atoms/AtomIcon.vue'
+import Input from '~/components/atoms/Input.vue'
+import Badge from '~/components/atoms/Badge.vue'
+import Spinner from '~/components/atoms/Spinner.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -15,27 +29,9 @@ const {
   currentTheme, 
   currentThemeObject,
   isDark,
-  setTheme,
   setThemeWithTransition,
-  toggleTheme,
-  getTheme,
-  isThemeDark
+  toggleTheme
 } = useTheme()
-
-// Import theme helper functions
-import { getThemesByCategory } from '../constants/data'
-
-// Foundation test imports
-import { cn, formatCurrency } from '~/components/atoms/Utils'
-import { useComponentId } from '~/composables/useComponentId'
-import type { ComponentSize, ComponentVariant } from '~/types'
-
-// Phase 2 Atom imports
-import Button from '~/components/atoms/Button.vue'
-import AtomIcon from '~/components/atoms/AtomIcon.vue'
-import Input from '~/components/atoms/Input.vue'
-import Badge from '~/components/atoms/Badge.vue'
-import Spinner from '~/components/atoms/Spinner.vue'
 
 // Foundation test variables
 const testClasses = cn(
@@ -506,9 +502,9 @@ if (isDevelopment) {
         </summary>
         
         <div class="space-y-6">
-          <!-- Phase 2 Foundation Tests -->
+          <!-- Foundation Tests -->
           <div class="border-t border-border pt-4">
-            <h3 class="text-sm font-medium text-primary mb-4">Phase 2 Foundation Tests:</h3>
+            <h3 class="text-sm font-medium text-primary mb-4">Foundation Tests:</h3>
             
             <!-- Test cn utility -->
             <div class="mb-4">
@@ -538,7 +534,7 @@ if (isDevelopment) {
         </div>
       </details>
 
-      <!-- Phase 2: Atoms Components -->
+      <!-- Buttons Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           🔘 Buttons (1 component)

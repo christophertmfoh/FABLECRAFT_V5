@@ -23,7 +23,7 @@ const sizeClasses = {
 interface IconProps {
   name: string
   size?: keyof typeof sizeClasses
-  class?: any
+  class?: string | Record<string, boolean> | string[]
   color?: string
 }
 

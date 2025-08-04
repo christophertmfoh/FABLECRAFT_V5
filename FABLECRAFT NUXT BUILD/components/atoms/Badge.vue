@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { cn } from './Utils'
 
 // Badge variants using CVA
@@ -38,7 +38,7 @@ const badgeVariants = cva(
 interface BadgeProps {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline' | 'landing'
   size?: 'default' | 'sm' | 'lg'
-  class?: any
+  class?: string | Record<string, boolean> | string[]
 }
 
 // Define props with defaults

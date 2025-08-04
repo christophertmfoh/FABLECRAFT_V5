@@ -22,7 +22,7 @@ const sizeClasses = {
 interface SpinnerProps {
   size?: keyof typeof sizeClasses
   icon?: string
-  class?: any
+  class?: string | Record<string, boolean> | string[]
   color?: string
 }
 

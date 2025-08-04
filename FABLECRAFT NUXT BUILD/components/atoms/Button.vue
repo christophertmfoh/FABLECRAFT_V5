@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { cn } from './Utils'
 import type { RouteLocationRaw } from 'vue-router'
 
@@ -86,7 +86,7 @@ interface ButtonProps {
   href?: string
   target?: '_blank' | '_self' | '_parent' | '_top'
   type?: 'button' | 'submit' | 'reset'
-  class?: any
+  class?: string | Record<string, boolean> | string[]
   iconOnly?: boolean
   // CVA variant props
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
