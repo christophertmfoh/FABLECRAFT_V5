@@ -2,6 +2,17 @@
 
 A modernized Nuxt 3 + Supabase foundation built to industry standards.
 
+## 🚀 AGENTS: Initialize First!
+
+```bash
+# Run this IMMEDIATELY when starting work:
+./AGENT_INIT.sh
+# or
+npm run init
+```
+
+This activates safety protections that prevent accidental disconnection.
+
 ## 🚨🚨🚨 CRITICAL - READ THIS FIRST 🚨🚨🚨
 
 ### ⛔ FORBIDDEN COMMANDS - NEVER RUN THESE ⛔
