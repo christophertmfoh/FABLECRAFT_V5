@@ -72,6 +72,16 @@ import SocialLink from '~/components/atoms/SocialLink.vue'
 // Test component for ErrorBoundary
 import ErrorThrowingComponent from '~/components/ErrorThrowingComponent.vue'
 
+// Priority 9 component imports (Additional atoms)
+import Avatar from '~/components/atoms/Avatar.vue'
+import StepConnector from '~/components/atoms/StepConnector.vue'
+import GradientOverlay from '~/components/atoms/GradientOverlay.vue'
+import NavigationLogo from '~/components/atoms/NavigationLogo.vue'
+import CopyrightText from '~/components/atoms/CopyrightText.vue'
+import AnimatedOrb from '~/components/atoms/AnimatedOrb.vue'
+import TrustIndicatorCard from '~/components/atoms/TrustIndicatorCard.vue'
+import PriceDisplay from '~/components/atoms/PriceDisplay.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -2060,6 +2070,441 @@ if (isDevelopment) {
                 <SocialLink platform="discord" href="#" :rounded="false" variant="outline" />
                 <SocialLink platform="tiktok" href="#" :rounded="false" variant="outline" />
               </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Additional Atoms (Priority 9) -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm" open>
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Additional Atoms (8 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Avatar -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Avatar</h3>
+            
+            <div class="space-y-4">
+              <!-- Sizes -->
+              <div class="flex items-center gap-4">
+                <Avatar size="xs" name="John Doe" />
+                <Avatar size="sm" name="Jane Smith" />
+                <Avatar size="md" name="Bob Johnson" />
+                <Avatar size="lg" name="Alice Williams" />
+                <Avatar size="xl" name="Charlie Brown" />
+              </div>
+
+              <!-- With Images -->
+              <div class="flex items-center gap-4">
+                <Avatar src="https://github.com/shadcn.png" alt="User Avatar" size="sm" />
+                <Avatar src="https://github.com/shadcn.png" alt="User Avatar" />
+                <Avatar src="https://github.com/shadcn.png" alt="User Avatar" size="lg" />
+              </div>
+
+              <!-- With Status -->
+              <div class="flex items-center gap-4">
+                <Avatar name="Online User" status="online" />
+                <Avatar name="Away User" status="away" />
+                <Avatar name="Busy User" status="busy" />
+                <Avatar name="Offline User" status="offline" />
+              </div>
+
+              <!-- Square Shape -->
+              <div class="flex items-center gap-4">
+                <Avatar name="Square Avatar" shape="square" />
+                <Avatar src="https://github.com/shadcn.png" shape="square" />
+                <Avatar name="SA" shape="square" status="online" />
+              </div>
+
+              <!-- Fallback Examples -->
+              <div class="flex items-center gap-4">
+                <Avatar src="invalid-url.jpg" name="Fallback User" />
+                <Avatar name="Single Name" />
+                <Avatar name="Three Word Name" />
+                <Avatar alt="Just Alt Text" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Logo -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Navigation Logo</h3>
+            
+            <div class="space-y-4">
+              <!-- Icon Logos -->
+              <div class="flex items-center gap-4">
+                <NavigationLogo icon="lucide:package" text="FABLECRAFT" size="sm" />
+                <NavigationLogo icon="lucide:package" text="FABLECRAFT" />
+                <NavigationLogo icon="lucide:package" text="FABLECRAFT" size="lg" />
+              </div>
+
+              <!-- Image Logos -->
+              <div class="flex items-center gap-4">
+                <NavigationLogo src="/logo.png" alt="Company Logo" />
+                <NavigationLogo src="/logo.png" alt="Company Logo" text="Company" />
+              </div>
+
+              <!-- Variants -->
+              <div class="flex items-center gap-4">
+                <NavigationLogo icon="lucide:zap" text="Default" variant="default" />
+                <NavigationLogo icon="lucide:zap" text="Ghost" variant="ghost" />
+                <NavigationLogo icon="lucide:zap" text="Minimal" variant="minimal" />
+              </div>
+
+              <!-- As Links -->
+              <div class="flex items-center gap-4">
+                <NavigationLogo icon="lucide:home" text="Home" to="/" />
+                <NavigationLogo icon="lucide:globe" text="External" href="https://example.com" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Step Connector -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Step Connector</h3>
+            
+            <div class="space-y-6">
+              <!-- Horizontal Connectors -->
+              <div class="flex items-center gap-2 w-full">
+                <StepNumber :step="1" status="completed" />
+                <StepConnector completed />
+                <StepNumber :step="2" status="active" />
+                <StepConnector active />
+                <StepNumber :step="3" />
+                <StepConnector />
+                <StepNumber :step="4" />
+              </div>
+
+              <!-- Variants -->
+              <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-primary" />
+                  <StepConnector variant="solid" completed class="w-32" />
+                  <div class="w-8 h-8 rounded-full bg-muted" />
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-primary" />
+                  <StepConnector variant="dashed" completed class="w-32" />
+                  <div class="w-8 h-8 rounded-full bg-muted" />
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-primary" />
+                  <StepConnector variant="dotted" completed class="w-32" />
+                  <div class="w-8 h-8 rounded-full bg-muted" />
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-full bg-primary" />
+                  <StepConnector variant="gradient" completed class="w-32" />
+                  <div class="w-8 h-8 rounded-full bg-muted" />
+                </div>
+              </div>
+
+              <!-- Animated -->
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-primary" />
+                <StepConnector variant="gradient" active animated class="w-32" />
+                <div class="w-8 h-8 rounded-full bg-muted" />
+              </div>
+
+              <!-- Vertical -->
+              <div class="flex gap-8">
+                <div class="flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-primary" />
+                  <StepConnector orientation="vertical" completed class="h-16" />
+                  <div class="w-8 h-8 rounded-full bg-primary" />
+                  <StepConnector orientation="vertical" active class="h-16" />
+                  <div class="w-8 h-8 rounded-full bg-muted" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gradient Overlay -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Gradient Overlay</h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <!-- Radial Gradient -->
+              <div class="relative h-32 bg-card rounded-lg overflow-hidden">
+                <p class="absolute inset-0 flex items-center justify-center text-sm font-medium z-10">
+                  Radial Gradient
+                </p>
+                <GradientOverlay variant="radial" />
+              </div>
+
+              <!-- Linear Gradient -->
+              <div class="relative h-32 bg-card rounded-lg overflow-hidden">
+                <p class="absolute inset-0 flex items-center justify-center text-sm font-medium z-10">
+                  Linear Gradient
+                </p>
+                <GradientOverlay variant="linear" />
+              </div>
+
+              <!-- Conic Gradient -->
+              <div class="relative h-32 bg-card rounded-lg overflow-hidden">
+                <p class="absolute inset-0 flex items-center justify-center text-sm font-medium z-10">
+                  Conic Gradient
+                </p>
+                <GradientOverlay variant="conic" />
+              </div>
+
+              <!-- Mesh Gradient -->
+              <div class="relative h-32 bg-card rounded-lg overflow-hidden">
+                <p class="absolute inset-0 flex items-center justify-center text-sm font-medium z-10">
+                  Mesh Gradient
+                </p>
+                <GradientOverlay variant="mesh" />
+              </div>
+
+              <!-- Animated -->
+              <div class="relative h-32 bg-card rounded-lg overflow-hidden">
+                <p class="absolute inset-0 flex items-center justify-center text-sm font-medium z-10">
+                  Animated
+                </p>
+                <GradientOverlay animate :animationDuration="5" />
+              </div>
+
+              <!-- Blend Modes -->
+              <div class="relative h-32 bg-card rounded-lg overflow-hidden">
+                <p class="absolute inset-0 flex items-center justify-center text-sm font-medium z-10">
+                  Blend Mode
+                </p>
+                <GradientOverlay blendMode="overlay" :opacity="0.5" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Animated Orb -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Animated Orb</h3>
+            
+            <div class="space-y-6">
+              <!-- Sizes -->
+              <div class="flex items-center gap-8">
+                <AnimatedOrb size="sm" />
+                <AnimatedOrb size="md" />
+                <AnimatedOrb size="lg" />
+                <AnimatedOrb size="xl" />
+              </div>
+
+              <!-- Variants -->
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                  <AnimatedOrb variant="default" size="md" />
+                  <p class="text-xs text-muted-foreground mt-2">Default</p>
+                </div>
+                <div class="text-center">
+                  <AnimatedOrb variant="aurora" size="md" />
+                  <p class="text-xs text-muted-foreground mt-2">Aurora</p>
+                </div>
+                <div class="text-center">
+                  <AnimatedOrb variant="plasma" size="md" />
+                  <p class="text-xs text-muted-foreground mt-2">Plasma</p>
+                </div>
+                <div class="text-center">
+                  <AnimatedOrb variant="sunset" size="md" />
+                  <p class="text-xs text-muted-foreground mt-2">Sunset</p>
+                </div>
+              </div>
+
+              <!-- Pulse Speeds -->
+              <div class="flex items-center gap-8">
+                <AnimatedOrb pulseSpeed="slow" />
+                <AnimatedOrb pulseSpeed="normal" />
+                <AnimatedOrb pulseSpeed="fast" />
+              </div>
+
+              <!-- Custom Colors -->
+              <div class="flex items-center gap-8">
+                <AnimatedOrb :colors="['#ff6b6b', '#4ecdc4', '#45b7d1']" />
+                <AnimatedOrb :colors="['#f093fb', '#f5576c']" />
+                <AnimatedOrb :colors="['#fa709a', '#fee140']" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Trust Indicator Card -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Trust Indicator Card</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Default Cards -->
+              <TrustIndicatorCard
+                icon="lucide:users"
+                :number="50000"
+                label="Happy Customers"
+              />
+              <TrustIndicatorCard
+                icon="lucide:star"
+                :number="4.9"
+                label="Average Rating"
+                :formatNumber="false"
+              />
+              <TrustIndicatorCard
+                icon="lucide:shield-check"
+                :number="99.9"
+                label="Uptime"
+                suffix="%"
+                :formatNumber="false"
+              />
+
+              <!-- Bordered Variant -->
+              <TrustIndicatorCard
+                icon="lucide:package"
+                :number="1234567"
+                label="Products Sold"
+                variant="bordered"
+              />
+              <TrustIndicatorCard
+                icon="lucide:globe"
+                :number="150"
+                label="Countries"
+                variant="bordered"
+              />
+              <TrustIndicatorCard
+                icon="lucide:award"
+                :number="25"
+                label="Awards Won"
+                variant="bordered"
+              />
+
+              <!-- Different Sizes -->
+              <TrustIndicatorCard
+                icon="lucide:download"
+                :number="2500000"
+                label="Downloads"
+                size="sm"
+              />
+              <TrustIndicatorCard
+                icon="lucide:heart"
+                :number="98"
+                label="Satisfaction"
+                suffix="%"
+                size="lg"
+                :formatNumber="false"
+              />
+              <TrustIndicatorCard
+                icon="lucide:clock"
+                :number="24"
+                label="Support"
+                suffix="/7"
+                variant="ghost"
+                :formatNumber="false"
+              />
+
+              <!-- Animated Numbers -->
+              <TrustIndicatorCard
+                icon="lucide:trending-up"
+                :number="15000"
+                label="Active Users"
+                :animateNumber="true"
+                :animationDuration="3000"
+              />
+              <TrustIndicatorCard
+                icon="lucide:zap"
+                :number="500"
+                label="API Requests/sec"
+                :animateNumber="true"
+                :animationDuration="2000"
+              />
+              <TrustIndicatorCard
+                icon="lucide:database"
+                :number="10"
+                label="Data Centers"
+                :animateNumber="true"
+                :animationDuration="1500"
+                :formatNumber="false"
+              />
+            </div>
+          </div>
+
+          <!-- Price Display -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Price Display</h3>
+            
+            <div class="space-y-6">
+              <!-- Sizes -->
+              <div class="flex items-end gap-8">
+                <PriceDisplay :price="29.99" size="sm" />
+                <PriceDisplay :price="29.99" size="md" />
+                <PriceDisplay :price="29.99" size="lg" />
+                <PriceDisplay :price="29.99" size="xl" />
+              </div>
+
+              <!-- With Period -->
+              <div class="flex items-end gap-8">
+                <PriceDisplay :price="9.99" period="month" />
+                <PriceDisplay :price="99" period="year" />
+                <PriceDisplay :price="24.99" period="week" />
+                <PriceDisplay :price="299" period="once" />
+              </div>
+
+              <!-- With Discount -->
+              <div class="flex items-end gap-8">
+                <PriceDisplay :price="19.99" :originalPrice="29.99" period="month" />
+                <PriceDisplay :price="79" :originalPrice="99" period="year" size="lg" />
+                <PriceDisplay :price="149" :originalPrice="299" size="xl" />
+              </div>
+
+              <!-- Different Currencies -->
+              <div class="flex items-end gap-8">
+                <PriceDisplay :price="29.99" currency="USD" />
+                <PriceDisplay :price="27.99" currency="EUR" locale="de-DE" />
+                <PriceDisplay :price="24.99" currency="GBP" locale="en-GB" />
+                <PriceDisplay :price="3999" currency="JPY" locale="ja-JP" :showCents="false" />
+              </div>
+
+              <!-- Currency Position -->
+              <div class="flex items-end gap-8">
+                <PriceDisplay :price="29.99" currency="USD" currencyPosition="before" />
+                <PriceDisplay :price="29.99" currency="USD" currencyPosition="after" />
+              </div>
+
+              <!-- Without Cents -->
+              <div class="flex items-end gap-8">
+                <PriceDisplay :price="29" :showCents="false" />
+                <PriceDisplay :price="199" :showCents="false" size="lg" />
+                <PriceDisplay :price="999" :showCents="false" size="xl" period="year" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Copyright Text -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Copyright Text</h3>
+            
+            <div class="space-y-4">
+              <!-- Basic -->
+              <CopyrightText company="FABLECRAFT" />
+              
+              <!-- With Start Year -->
+              <CopyrightText company="FABLECRAFT" :startYear="2020" />
+              
+              <!-- Different Formats -->
+              <CopyrightText company="FABLECRAFT" format="short" />
+              <CopyrightText company="FABLECRAFT" format="long" />
+              
+              <!-- Custom Format -->
+              <CopyrightText 
+                company="FABLECRAFT" 
+                format="custom"
+                customFormat="Copyright {year} {company} - Made with ❤️"
+              />
+              
+              <!-- Without Symbol -->
+              <CopyrightText company="FABLECRAFT" :showSymbol="false" />
+              
+              <!-- Custom Styling -->
+              <CopyrightText 
+                company="FABLECRAFT" 
+                class="text-primary font-medium"
+                format="long"
+              />
             </div>
           </div>
         </div>
