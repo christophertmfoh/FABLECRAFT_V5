@@ -13,7 +13,12 @@ This is the prioritized, deduplicated list of actual Vue components needed to bu
 ### 2. Icon Component  
 - **File**: `components/atoms/Icon.vue`
 - **Library**: @nuxt/icon with Lucide icons
-- **Required Icons**: Zap, Sparkles, Feather, Mail, Phone, MapPin, CheckCircle, ArrowRight, Star, Heart, Film, Share2, Globe, Palette, Lightbulb, PenTool, Camera, Music, ChevronDown, User, LogOut, UserCircle, Loader2, Check, Circle, AlertTriangle, RefreshCw, Home, BookOpen, Users, ChevronRight, Download, X
+- **Required Icons** (30 total):
+  - **Navigation**: ChevronDown, ChevronRight, User, LogOut, UserCircle, Users, BookOpen
+  - **Actions**: ArrowRight, Download, X, RefreshCw, Home, Check, Circle
+  - **Features**: Zap, Sparkles, Film, Share2, Globe, Palette, Lightbulb, PenTool, Camera, Music
+  - **Communication**: Mail, Phone, MapPin, Feather
+  - **Status**: CheckCircle, Star, Heart, AlertTriangle, Loader2
 
 ### 3. Input Component
 - **File**: `components/atoms/Input.vue`
@@ -132,6 +137,78 @@ This is the prioritized, deduplicated list of actual Vue components needed to bu
 ### 25. VisuallyHidden Component
 - **File**: `components/atoms/VisuallyHidden.vue`
 - **Features**: Screen reader only content
+
+## Priority 7: Dropdown Menu Components
+
+### 26. DropdownMenu Component
+- **File**: `components/atoms/DropdownMenu.vue`
+- **Features**: Root container for dropdown
+
+### 27. DropdownMenuTrigger Component
+- **File**: `components/atoms/DropdownMenuTrigger.vue`
+- **Features**: Button that opens dropdown
+
+### 28. DropdownMenuContent Component
+- **File**: `components/atoms/DropdownMenuContent.vue`
+- **Features**: Dropdown panel with animations
+
+### 29. DropdownMenuItem Component
+- **File**: `components/atoms/DropdownMenuItem.vue`
+- **Features**: Individual menu item
+
+### 30. DropdownMenuLabel Component
+- **File**: `components/atoms/DropdownMenuLabel.vue`
+- **Features**: Section label in dropdown
+
+### 31. DropdownMenuSeparator Component
+- **File**: `components/atoms/DropdownMenuSeparator.vue`
+- **Features**: Divider between sections
+
+### 32. DropdownMenuCheckboxItem Component
+- **File**: `components/atoms/DropdownMenuCheckboxItem.vue`
+- **Features**: Checkbox menu item
+
+### 33. DropdownMenuRadioItem Component
+- **File**: `components/atoms/DropdownMenuRadioItem.vue`
+- **Features**: Radio menu item
+
+## Priority 8: Additional Special Components
+
+### 34. HeadingGroup Component
+- **File**: `components/atoms/HeadingGroup.vue`
+- **Features**: Badge + Heading + Description composition
+
+### 35. SectionContent Component
+- **File**: `components/atoms/SectionContent.vue`
+- **Features**: Inner content wrapper for sections
+
+### 36. ErrorBoundary Component
+- **File**: `components/atoms/ErrorBoundary.vue`
+- **Features**: Error fallback UI
+
+### 37. ThemeToggle Component
+- **File**: `components/atoms/ThemeToggle.vue`
+- **Features**: Theme switcher button with dropdown
+
+### 38. NavigationItem Component
+- **File**: `components/atoms/NavigationItem.vue`
+- **Features**: Nav link with active states
+
+### 39. SocialLink Component
+- **File**: `components/atoms/SocialLink.vue`
+- **Features**: Social media icon button
+
+### 40. FeatureListItem Component
+- **File**: `components/atoms/FeatureListItem.vue`
+- **Features**: CheckCircle + text for feature lists
+
+## Updated Component Count
+
+Total essential atoms needed: **40 components** (not 25)
+- 30 unique icons within the Icon component
+- Plus 40 distinct component types
+
+This is more realistic for building all the molecules and organisms needed for the landing page.
 
 ## Components NOT Needed (Use Tailwind/CSS)
 
