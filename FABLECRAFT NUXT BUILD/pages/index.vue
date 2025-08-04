@@ -30,6 +30,9 @@ import { cn, formatCurrency } from '~/components/atoms/Utils'
 import { useComponentId } from '~/composables/useComponentId'
 import type { ComponentSize, ComponentVariant } from '~/types'
 
+// Phase 2 Atom imports
+import Button from '~/components/atoms/Button.vue'
+
 // Foundation test variables
 const testClasses = cn(
   'p-4 rounded-md',
@@ -520,6 +523,82 @@ if (isDevelopment) {
             <div class="mb-4">
               <h4 class="text-xs font-semibold mb-2">Testing useComponentId():</h4>
               <p class="text-sm">Component ID: {{ componentId }}</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Phase 2: Atoms Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🔘 Buttons (1 component)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Button Variants -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Variants</h3>
+            <div class="flex flex-wrap gap-4">
+              <Button>Default</Button>
+              <Button variant="destructive">Destructive</Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="link">Link</Button>
+            </div>
+          </div>
+
+          <!-- Button Sizes -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Sizes</h3>
+            <div class="flex flex-wrap items-center gap-4">
+              <Button size="sm">Small</Button>
+              <Button size="default">Default</Button>
+              <Button size="lg">Large</Button>
+              <Button size="icon" icon="lucide:settings" />
+            </div>
+          </div>
+
+          <!-- Button with Icons -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Icons</h3>
+            <div class="flex flex-wrap gap-4">
+              <Button icon="lucide:mail">Email</Button>
+              <Button icon="lucide:arrow-right" trailing>Continue</Button>
+              <Button variant="outline" icon="lucide:github">GitHub</Button>
+              <Button variant="ghost" size="icon" icon="lucide:menu" />
+            </div>
+          </div>
+
+          <!-- Button States -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">States</h3>
+            <div class="flex flex-wrap gap-4">
+              <Button loading>Loading</Button>
+              <Button loading trailing>Loading</Button>
+              <Button disabled>Disabled</Button>
+              <Button variant="outline" disabled>Disabled</Button>
+            </div>
+          </div>
+
+          <!-- Button as Link -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">As Link</h3>
+            <div class="flex flex-wrap gap-4">
+              <Button to="/" icon="lucide:home">Home</Button>
+              <Button href="https://github.com" target="_blank" variant="outline" icon="lucide:external-link">
+                External Link
+              </Button>
+            </div>
+          </div>
+
+          <!-- Custom Styling -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Custom Styling</h3>
+            <div class="flex flex-wrap gap-4">
+              <Button class="rounded-full">Rounded Full</Button>
+              <Button class="bg-gradient-to-r from-primary to-primary/60">Gradient</Button>
+              <Button variant="outline" class="border-2 border-primary">Custom Border</Button>
             </div>
           </div>
         </div>
