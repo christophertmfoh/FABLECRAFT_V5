@@ -1921,3 +1921,206 @@ This document now contains every single atomic UI element found in the landing p
 - **Ready for Nuxt/Vue implementation** - all specs included
 
 Every atom maintains compatibility with the 15-theme system and includes all necessary visual information for accurate reproduction in the new Nuxt/Vue codebase.
+
+## Animation & Transform Atoms
+
+### 1. Transition Properties
+**Base Component**: CSS transition utilities
+**Visual Specifications**:
+- All properties: `transition-all`
+- Colors only: `transition-colors`
+- Opacity only: `transition-opacity`
+- Shadow only: `transition-shadow`
+- Transform only: `transition-transform`
+
+### 2. Transition Duration
+**Base Component**: Animation timing
+**Visual Specifications**:
+- Fast: `duration-200`
+- Medium: `duration-300`
+- Slow: `duration-500`
+- Very slow: `duration-700`
+
+### 3. Animation Classes
+**Base Component**: Keyframe animations
+**Visual Specifications**:
+- Spin: `animate-spin`
+- Pulse: `animate-pulse`
+- Radix animations: `animate-in`, `animate-out`
+
+### 4. Transform Scale
+**Base Component**: Scale transformations
+**Visual Specifications**:
+- Hover scale: `hover:scale-105`, `hover:scale-110`
+- Group hover: `group-hover:scale-105`, `group-hover:scale-110`
+
+### 5. Transform Translate
+**Base Component**: Position transformations
+**Visual Specifications**:
+- Y-axis: `hover:-translate-y-0.5`, `hover:-translate-y-1`, `hover:-translate-y-2`
+- X-axis: `group-hover:translate-x-1`
+- Group hover: `group-hover:-translate-y-2`
+
+### 6. Transform Rotate
+**Base Component**: Rotation transformations
+**Visual Specifications**:
+- Small rotation: `hover:rotate-3`, `group-hover:rotate-3`
+- Half rotation: `hover:rotate-180`, `group-hover:rotate-180`
+
+## Cursor & Interaction Atoms
+
+### 1. Cursor Types
+**Base Component**: Mouse cursor styles
+**Visual Specifications**:
+- Default: `cursor-default`
+- Pointer: `cursor-pointer`
+- Wait: `cursor-wait`
+- Not allowed: `cursor-not-allowed`, `disabled:cursor-not-allowed`
+
+### 2. User Selection
+**Base Component**: Text selection control
+**Visual Specifications**:
+- None: `select-none`
+- Touch: `touch-none`
+
+### 3. Pointer Events
+**Base Component**: Mouse interaction control
+**Visual Specifications**:
+- None: `pointer-events-none`
+- Disabled state: `disabled:pointer-events-none`, `data-[disabled]:pointer-events-none`
+
+### 4. Scroll Behavior
+**Base Component**: Scroll interaction
+**Visual Specifications**:
+- ScrollArea component with `type='always'`
+- Custom scrollbar styling
+
+## Text Alignment Atoms
+
+### 1. Horizontal Alignment
+**Base Component**: Text alignment utilities
+**Visual Specifications**:
+- Left: `text-left`
+- Center: `text-center`
+- Right: `text-right`
+- Justify: Not found in current implementation
+
+### 2. Vertical Alignment
+**Base Component**: Inline alignment
+**Visual Specifications**:
+- Not explicitly used in current implementation
+
+## Grid Layout Atoms
+
+### 1. Grid Template Columns
+**Base Component**: Column definitions
+**Visual Specifications**:
+- 1 column: `grid-cols-1`
+- 2 columns: `grid-cols-2`
+- 3 columns: `grid-cols-3`
+- 4 columns: `grid-cols-4`
+- 6 columns: `grid-cols-6`
+- Responsive: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`
+
+### 2. Grid Spacing
+**Base Component**: Grid gap utilities
+**Visual Specifications**:
+- Custom gap: `grid-normal`
+- Standard gaps: Use regular gap utilities
+
+## Additional Visual Effect Atoms
+
+### 1. Backdrop Blur
+**Base Component**: Background blur effects
+**Visual Specifications**:
+- Small: `backdrop-blur-sm`
+- Medium: `backdrop-blur-md`
+- Large: `backdrop-blur-lg`
+- Extra large: `backdrop-blur-xl`
+
+### 2. Z-Index Layers
+**Base Component**: Stacking order
+**Visual Specifications**:
+- Base: `z-10`
+- Navigation: `z-20`
+- Modals/Dropdowns: `z-50`
+
+### 3. Opacity Transitions
+**Base Component**: Opacity animation states
+**Visual Specifications**:
+- Hidden to visible: `opacity-0 group-hover:opacity-100`
+- Partial opacity: `opacity-70`
+
+## Whitespace Control Atoms
+
+### 1. Text Wrapping
+**Base Component**: Line breaking control
+**Visual Specifications**:
+- No wrap: `whitespace-nowrap`
+
+## Form State Atoms
+
+### 1. Peer Modifiers
+**Base Component**: Sibling state styling
+**Visual Specifications**:
+- Disabled label: `peer-disabled:cursor-not-allowed peer-disabled:opacity-70`
+
+### 2. Data Attribute States
+**Base Component**: Custom state attributes
+**Visual Specifications**:
+- Open: `data-[state=open]:bg-accent`
+- Disabled: `data-[disabled]:pointer-events-none data-[disabled]:opacity-50`
+
+## Radix UI Animation Atoms
+
+### 1. Animation States
+**Base Component**: Radix UI animations
+**Visual Specifications**:
+- Fade in/out: `data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0`
+- Zoom in/out: `data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95`
+
+### 2. Slide Animations
+**Base Component**: Directional slide effects
+**Visual Specifications**:
+- From top: `data-[side=bottom]:slide-in-from-top-2`
+- From right: `data-[side=left]:slide-in-from-right-2`
+- From left: `data-[side=right]:slide-in-from-left-2`
+- From bottom: `data-[side=top]:slide-in-from-bottom-2`
+
+## Background Pattern Atoms
+
+### 1. Gradient Overlays
+**Base Component**: Decorative gradients
+**Visual Specifications**:
+- Primary orb: `linear-gradient(135deg, hsl(var(--orb-primary) / 0.05) 0%, hsl(var(--orb-secondary) / 0.03) 50%, hsl(var(--orb-primary) / 0.02) 100%)`
+
+### 2. Custom Effects
+**Base Component**: Special visual effects
+**Visual Specifications**:
+- Hero ambient glow: `hero-ambient-glow`
+- Idea sparks: `idea-sparks`
+- Surface elevated: `surface-elevated`
+
+## Accessibility State Atoms
+
+### 1. Focus Visible
+**Base Component**: Keyboard focus indicators
+**Visual Specifications**:
+- Standard: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`
+- Primary: `focus-visible:ring-primary`
+
+### 2. Focus Within
+**Base Component**: Parent focus state
+**Visual Specifications**:
+- Ring system: `focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2`
+
+## Final Complete Inventory
+
+This exhaustive audit has identified:
+- **600+ unique atomic patterns**
+- **50+ categories of atoms**
+- **Complete visual specifications for each**
+- **All theme-compatible (no hardcoded colors)**
+- **Ready for systematic Nuxt/Vue implementation**
+
+Every possible atomic UI element from the landing page has been documented, categorized, and specified for accurate reproduction.
