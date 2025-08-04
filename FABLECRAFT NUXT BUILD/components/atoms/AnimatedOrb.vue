@@ -23,7 +23,7 @@ interface AnimatedOrbProps {
 // Define props with defaults
 const props = withDefaults(defineProps<AnimatedOrbProps>(), {
   size: 'md',
-  colors: () => ['#ff006e', '#8338ec', '#3a86ff'],
+  colors: () => [],
   pulseSpeed: 'normal',
   glowIntensity: 'medium',
   variant: 'default',
@@ -57,10 +57,22 @@ const glowIntensity = {
 
 // Variant gradient configurations
 const variantGradients = {
-  default: (colors: string[]) => `radial-gradient(circle at 30% 30%, ${colors[0]}, ${colors[1]}, ${colors[2]})`,
-  aurora: (colors: string[]) => `conic-gradient(from 180deg, ${colors.join(', ')}, ${colors[0]})`,
-  plasma: (colors: string[]) => `radial-gradient(ellipse at center, ${colors[0]} 0%, ${colors[1]} 25%, ${colors[2]} 50%, transparent 70%)`,
-  sunset: (colors: string[]) => `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 50%, ${colors[2]} 100%)`
+  default: (colors: string[]) => {
+    const c = colors.length ? colors : ['hsl(var(--primary))', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.6)']
+    return `radial-gradient(circle at 30% 30%, ${c[0]}, ${c[1]}, ${c[2]})`
+  },
+  aurora: (colors: string[]) => {
+    const c = colors.length ? colors : ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))']
+    return `conic-gradient(from 180deg, ${c.join(', ')}, ${c[0]})`
+  },
+  plasma: (colors: string[]) => {
+    const c = colors.length ? colors : ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))']
+    return `radial-gradient(ellipse at center, ${c[0]} 0%, ${c[1]} 25%, ${c[2]} 50%, transparent 70%)`
+  },
+  sunset: (colors: string[]) => {
+    const c = colors.length ? colors : ['hsl(var(--destructive))', 'hsl(var(--primary))', 'hsl(var(--secondary))']
+    return `linear-gradient(135deg, ${c[0]} 0%, ${c[1]} 50%, ${c[2]} 100%)`
+  }
 }
 
 // Computed gradient
@@ -91,9 +103,12 @@ const orbClasses = computed(() => {
 
 // Computed styles
 const orbStyles = computed(() => {
+  // Use primary color for glow if no colors provided
+  const glowColor = props.colors.length ? props.colors[0] : 'hsl(var(--primary))'
+  
   return {
     background: gradientBackground.value,
-    boxShadow: `0 0 ${glowIntensity[props.glowIntensity]} ${props.colors[0]}40`,
+    boxShadow: `0 0 ${glowIntensity[props.glowIntensity]} ${glowColor}40`,
     filter: 'blur(0.5px)',
   }
 })

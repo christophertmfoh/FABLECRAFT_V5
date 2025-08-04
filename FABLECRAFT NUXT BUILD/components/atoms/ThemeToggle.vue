@@ -108,9 +108,13 @@ const toggleTheme = () => {
 if (import.meta.client) {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
   mediaQuery.addEventListener('change', (e) => {
-    if (!localStorage.getItem(props.storageKey)) {
-      currentTheme.value = e.matches ? 'dark' : 'light'
-      applyTheme(currentTheme.value)
+    try {
+      if (!localStorage.getItem(props.storageKey)) {
+        currentTheme.value = e.matches ? 'dark' : 'light'
+        applyTheme(currentTheme.value)
+      }
+    } catch (err) {
+      console.warn('Failed to check theme preference:', err)
     }
   })
 }
@@ -152,11 +156,15 @@ if (import.meta.server) {
       {
         innerHTML: `
           (function() {
-            const theme = localStorage.getItem('${props.storageKey}') || 
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            if (theme === 'dark') {
-              document.documentElement.setAttribute('data-theme', 'dark');
-              document.documentElement.classList.add('dark');
+            try {
+              const theme = localStorage.getItem('${props.storageKey}') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+              if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.documentElement.classList.add('dark');
+              }
+            } catch (e) {
+              // Fallback to light theme if localStorage fails
             }
           })();
         `.trim(),

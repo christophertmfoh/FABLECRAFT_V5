@@ -139,12 +139,12 @@ defineExpose({
 }
 
 .scrollbar-thumb-muted-foreground\/20::-webkit-scrollbar-thumb {
-  background-color: rgba(128, 128, 128, 0.2);
+  background-color: hsl(var(--muted-foreground) / 0.2);
   border-radius: 9999px;
 }
 
 .scrollbar-thumb-muted-foreground\/30:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(128, 128, 128, 0.3);
+  background-color: hsl(var(--muted-foreground) / 0.3);
 }
 
 .scrollbar-corner-transparent::-webkit-scrollbar-corner {
@@ -185,10 +185,10 @@ defineExpose({
 
 /* Firefox color support */
 * {
-  scrollbar-color: rgba(128, 128, 128, 0.2) transparent;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.2) transparent;
 }
 
 *:hover {
-  scrollbar-color: rgba(128, 128, 128, 0.3) transparent;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
 }
 </style>

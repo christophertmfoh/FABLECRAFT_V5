@@ -25,7 +25,7 @@ interface GradientOverlayProps {
 const props = withDefaults(defineProps<GradientOverlayProps>(), {
   variant: 'radial',
   position: 'center',
-  colors: () => ['rgb(59, 130, 246)', 'rgb(147, 51, 234)', 'rgb(236, 72, 153)'],
+  colors: () => [],
   opacity: 0.3,
   blur: 0,
   animate: false,
@@ -48,7 +48,9 @@ const positionClasses = {
 
 // Computed gradient style
 const gradientStyle = computed(() => {
-  const colors = props.colors.join(', ')
+  // Use theme colors as fallback
+  const defaultColors = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))']
+  const colors = (props.colors.length ? props.colors : defaultColors).join(', ')
   
   switch (props.variant) {
     case 'linear':
@@ -57,7 +59,8 @@ const gradientStyle = computed(() => {
       return `conic-gradient(from 0deg, ${colors})`
     case 'mesh':
       // Create mesh gradient with multiple radial gradients
-      const meshColors = props.colors.map((color, i) => {
+      const colorsArray = props.colors.length ? props.colors : defaultColors
+      const meshColors = colorsArray.map((color, i) => {
         const positions = ['25% 25%', '75% 25%', '25% 75%', '75% 75%']
         const pos = positions[i % positions.length]
         return `radial-gradient(circle at ${pos}, ${color}, transparent 50%)`

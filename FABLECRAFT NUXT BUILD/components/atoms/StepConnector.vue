@@ -29,9 +29,9 @@ const props = withDefaults(defineProps<StepConnectorProps>(), {
   completed: false,
   variant: 'solid',
   thickness: 'normal',
-  color: 'rgb(229, 231, 235)', // gray-200
-  gradientFrom: 'rgb(59, 130, 246)', // blue-500
-  gradientTo: 'rgb(147, 51, 234)', // purple-600
+  color: '', // Will use CSS variable fallback
+  gradientFrom: '', // Will use CSS variable fallback
+  gradientTo: '', // Will use CSS variable fallback
   animated: false
 })
 
@@ -93,26 +93,35 @@ const lineClasses = computed(() => {
 const lineStyles = computed(() => {
   const baseStyles: any = {}
   
+  // Use theme variables as fallbacks
+  const defaultColor = 'hsl(var(--muted))'
+  const activeColor = 'hsl(var(--primary))'
+  const completedColor = 'hsl(var(--primary))'
+  
+  const color = props.color || defaultColor
+  const gradientFrom = props.gradientFrom || activeColor
+  const gradientTo = props.gradientTo || 'hsl(var(--primary) / 0.7)'
+  
   // Set color based on state
   if (props.completed) {
     if (props.variant === 'gradient') {
-      baseStyles.background = `linear-gradient(${props.orientation === 'horizontal' ? 'to right' : 'to bottom'}, ${props.gradientFrom}, ${props.gradientTo})`
+      baseStyles.background = `linear-gradient(${props.orientation === 'horizontal' ? 'to right' : 'to bottom'}, ${gradientFrom}, ${gradientTo})`
     } else {
-      baseStyles.backgroundColor = props.gradientFrom
-      baseStyles.color = props.gradientFrom
+      baseStyles.backgroundColor = completedColor
+      baseStyles.color = completedColor
     }
   } else if (props.active) {
     if (props.variant === 'gradient') {
       // Partial gradient for active state
       const gradientDirection = props.orientation === 'horizontal' ? 'to right' : 'to bottom'
-      baseStyles.background = `linear-gradient(${gradientDirection}, ${props.gradientFrom} 0%, ${props.gradientFrom} 50%, ${props.color} 50%)`
+      baseStyles.background = `linear-gradient(${gradientDirection}, ${gradientFrom} 0%, ${gradientFrom} 50%, ${color} 50%)`
     } else {
-      baseStyles.backgroundColor = props.gradientFrom
-      baseStyles.color = props.gradientFrom
+      baseStyles.backgroundColor = activeColor
+      baseStyles.color = activeColor
     }
   } else {
-    baseStyles.backgroundColor = props.color
-    baseStyles.color = props.color
+    baseStyles.backgroundColor = color
+    baseStyles.color = color
   }
   
   // Apply variant-specific styles

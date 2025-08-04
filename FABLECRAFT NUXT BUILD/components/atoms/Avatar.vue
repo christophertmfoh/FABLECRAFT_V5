@@ -109,10 +109,20 @@ const gradientBackground = computed(() => {
     return char.charCodeAt(0) + ((acc << 5) - acc)
   }, 0)
   
-  const hue1 = Math.abs(hash) % 360
-  const hue2 = (hue1 + 60) % 360
+  // Use theme-aware approach with CSS custom properties
+  const colorIndex = Math.abs(hash) % 5
+  const themeColors = [
+    'hsl(var(--primary))',
+    'hsl(var(--secondary))',
+    'hsl(var(--accent))',
+    'hsl(var(--muted-foreground))',
+    'hsl(var(--foreground))'
+  ]
   
-  return `linear-gradient(135deg, hsl(${hue1}, 70%, 60%), hsl(${hue2}, 70%, 50%))`
+  const color1 = themeColors[colorIndex]
+  const color2 = themeColors[(colorIndex + 1) % themeColors.length]
+  
+  return `linear-gradient(135deg, ${color1}, ${color2})`
 })
 
 // Computed classes

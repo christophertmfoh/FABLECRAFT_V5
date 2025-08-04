@@ -64,6 +64,8 @@ const platformLabels = {
 }
 
 // Platform brand colors
+// NOTE: These are intentionally hardcoded as they represent official brand colors
+// If theme-aware social colors are needed, use variant="ghost" or "outline" instead
 const brandColors = {
   twitter: 'hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]',
   facebook: 'hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2]',
