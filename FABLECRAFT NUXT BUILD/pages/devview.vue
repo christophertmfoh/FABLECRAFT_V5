@@ -1800,7 +1800,7 @@ if (isDevelopment) {
       </details>
 
       <!-- Special Components (Priority 8) -->
-      <details class="bg-card p-6 rounded-lg border shadow-sm">
+      <details class="bg-card p-6 rounded-lg border shadow-sm" open>
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Special Components (7 components)
         </summary>
