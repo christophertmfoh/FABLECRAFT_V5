@@ -13,14 +13,13 @@
     <Icon
       v-if="loading && !trailing"
       :name="loadingIcon"
-      class="animate-spin"
-      :class="iconSizeClasses[size]"
+      class="animate-spin h-4 w-4"
     />
     <slot v-else-if="$slots.leading" name="leading" />
     <Icon
       v-else-if="icon && !trailing"
       :name="icon"
-      :class="iconSizeClasses[size]"
+      class="h-4 w-4"
     />
 
     <!-- Label/Content -->
@@ -32,14 +31,13 @@
     <Icon
       v-if="loading && trailing"
       :name="loadingIcon"
-      class="animate-spin"
-      :class="iconSizeClasses[size]"
+      class="animate-spin h-4 w-4"
     />
     <slot v-else-if="$slots.trailing" name="trailing" />
     <Icon
       v-else-if="icon && trailing"
       :name="icon"
-      :class="iconSizeClasses[size]"
+      class="h-4 w-4"
     />
   </component>
 </template>
@@ -76,19 +74,8 @@ const buttonVariants = cva(
   }
 )
 
-// Icon size mapping
-const iconSizeClasses = {
-  default: 'h-4 w-4',
-  sm: 'h-4 w-4',
-  lg: 'h-5 w-5',
-  icon: 'h-5 w-5',
-} as const
-
-// Extract variant props type
-type ButtonVariantProps = VariantProps<typeof buttonVariants>
-
 // Component props interface
-interface ButtonProps extends ButtonVariantProps {
+interface ButtonProps {
   label?: string
   icon?: string
   loadingIcon?: string
@@ -101,6 +88,9 @@ interface ButtonProps extends ButtonVariantProps {
   type?: 'button' | 'submit' | 'reset'
   class?: any
   iconOnly?: boolean
+  // CVA variant props
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+  size?: 'default' | 'sm' | 'lg' | 'icon'
 }
 
 // Define props with defaults

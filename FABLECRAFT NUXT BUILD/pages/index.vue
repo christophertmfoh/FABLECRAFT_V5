@@ -32,6 +32,10 @@ import type { ComponentSize, ComponentVariant } from '~/types'
 
 // Phase 2 Atom imports
 import Button from '~/components/atoms/Button.vue'
+import AtomIcon from '~/components/atoms/AtomIcon.vue'
+import Input from '~/components/atoms/Input.vue'
+import Badge from '~/components/atoms/Badge.vue'
+import Spinner from '~/components/atoms/Spinner.vue'
 
 // Foundation test variables
 const testClasses = cn(
@@ -50,6 +54,12 @@ const componentId = useComponentId('test')
 
 // Background orbs composable
 const { orbsEnabled, performanceMode, setPerformanceMode } = useBackgroundOrbs()
+
+// Input test values
+const inputValue1 = ref('')
+const inputValue2 = ref('')
+const inputValue3 = ref('')
+const inputValue4 = ref('')
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -599,6 +609,327 @@ if (isDevelopment) {
               <Button class="rounded-full">Rounded Full</Button>
               <Button class="bg-gradient-to-r from-primary to-primary/60">Gradient</Button>
               <Button variant="outline" class="border-2 border-primary">Custom Border</Button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Icons Component -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🎨 Icons (30 types)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Icon Sizes -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Sizes</h3>
+            <div class="flex flex-wrap items-center gap-4">
+              <AtomIcon name="lucide:sparkles" size="xs" />
+              <AtomIcon name="lucide:sparkles" size="sm" />
+              <AtomIcon name="lucide:sparkles" size="md" />
+              <AtomIcon name="lucide:sparkles" size="lg" />
+              <AtomIcon name="lucide:sparkles" size="xl" />
+              <AtomIcon name="lucide:sparkles" size="2xl" />
+            </div>
+          </div>
+
+          <!-- Common Icons -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Common Icons (Theme Reactive)</h3>
+            <div class="grid grid-cols-10 gap-4">
+              <AtomIcon name="lucide:sparkles" class="text-primary" />
+              <AtomIcon name="lucide:zap" class="text-primary" />
+              <AtomIcon name="lucide:check-circle" class="text-success" />
+              <AtomIcon name="lucide:mail" class="text-muted-foreground" />
+              <AtomIcon name="lucide:github" />
+              <AtomIcon name="lucide:menu" />
+              <AtomIcon name="lucide:x" />
+              <AtomIcon name="lucide:arrow-right" />
+              <AtomIcon name="lucide:loader-circle" class="animate-spin" />
+              <AtomIcon name="lucide:settings" />
+            </div>
+          </div>
+
+          <!-- All 30 Landing Page Icons -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">All Landing Page Icons</h3>
+            <div class="grid grid-cols-10 gap-4">
+              <!-- Navigation & UI -->
+              <AtomIcon name="lucide:feather" />
+              <AtomIcon name="lucide:book-open" />
+              <AtomIcon name="lucide:users" />
+              <AtomIcon name="lucide:chevron-down" />
+              <AtomIcon name="lucide:user" />
+              <AtomIcon name="lucide:log-out" />
+              <AtomIcon name="lucide:user-circle" />
+              
+              <!-- Hero & Features -->
+              <AtomIcon name="lucide:sparkles" />
+              <AtomIcon name="lucide:zap" />
+              <AtomIcon name="lucide:check-circle" />
+              <AtomIcon name="lucide:film" />
+              <AtomIcon name="lucide:share-2" />
+              <AtomIcon name="lucide:globe" />
+              <AtomIcon name="lucide:palette" />
+              
+              <!-- Process Steps -->
+              <AtomIcon name="lucide:lightbulb" />
+              <AtomIcon name="lucide:pen-tool" />
+              <AtomIcon name="lucide:camera" />
+              <AtomIcon name="lucide:music" />
+              
+              <!-- Testimonials & Misc -->
+              <AtomIcon name="lucide:star" />
+              <AtomIcon name="lucide:arrow-right" />
+              
+              <!-- Footer & Social -->
+              <AtomIcon name="lucide:mail" />
+              <AtomIcon name="lucide:map-pin" />
+              <AtomIcon name="lucide:phone" />
+              <AtomIcon name="lucide:twitter" />
+              <AtomIcon name="lucide:facebook" />
+              <AtomIcon name="lucide:instagram" />
+              <AtomIcon name="lucide:linkedin" />
+              <AtomIcon name="lucide:github" />
+              <AtomIcon name="lucide:external-link" />
+              <AtomIcon name="lucide:loader-circle" />
+            </div>
+          </div>
+
+          <!-- Custom Styling -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Custom Styling</h3>
+            <div class="flex flex-wrap gap-4">
+              <AtomIcon name="lucide:heart" class="text-red-500" />
+              <AtomIcon name="lucide:star" class="text-yellow-500" />
+              <AtomIcon name="lucide:check-circle" class="text-green-500" />
+              <AtomIcon name="lucide:info" class="text-blue-500" />
+              <AtomIcon name="lucide:alert-triangle" class="text-orange-500" />
+              <AtomIcon name="lucide:sparkles" class="text-primary animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Input Component -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          📝 Inputs (1 component)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Basic Inputs -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Basic Inputs</h3>
+            <div class="space-y-4 max-w-md">
+              <Input v-model="inputValue1" placeholder="Enter text..." />
+              <Input v-model="inputValue2" type="email" placeholder="Email address" />
+              <Input v-model="inputValue3" type="password" placeholder="Password" />
+              <Input v-model="inputValue4" type="number" placeholder="Enter number" />
+            </div>
+          </div>
+
+          <!-- Input States -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">States</h3>
+            <div class="space-y-4 max-w-md">
+              <Input placeholder="Disabled input" disabled />
+              <Input value="Read-only input" readonly />
+              <Input placeholder="Required field" required />
+              <Input placeholder="Invalid input" invalid />
+            </div>
+          </div>
+
+          <!-- With Icons (using slots) -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Icons</h3>
+            <div class="space-y-4 max-w-md">
+              <div class="relative">
+                <Icon name="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input class="pl-10" placeholder="Search..." />
+              </div>
+              <div class="relative">
+                <Icon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input class="pl-10" type="email" placeholder="Email with icon" />
+              </div>
+              <div class="relative">
+                <Input class="pr-10" placeholder="With trailing icon" />
+                <Icon name="lucide:check" class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-green-500" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Styling -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Custom Styling</h3>
+            <div class="space-y-4 max-w-md">
+              <Input class="h-12 text-lg" placeholder="Large input" />
+              <Input class="h-8 text-xs" placeholder="Small input" />
+              <Input class="rounded-full" placeholder="Rounded input" />
+              <Input class="border-2 border-primary" placeholder="Custom border" />
+            </div>
+          </div>
+
+          <!-- File Input -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">File Input</h3>
+            <div class="max-w-md">
+              <Input type="file" class="cursor-pointer" />
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Badge Component -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🏷️ Badges (1 component)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Badge Variants -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Variants</h3>
+            <div class="flex flex-wrap gap-4">
+              <Badge>Default</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="destructive">Destructive</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="landing">Landing Style</Badge>
+            </div>
+          </div>
+
+          <!-- Badge Sizes -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Sizes</h3>
+            <div class="flex flex-wrap items-center gap-4">
+              <Badge size="sm">Small</Badge>
+              <Badge size="default">Default</Badge>
+              <Badge size="lg">Large</Badge>
+            </div>
+          </div>
+
+          <!-- With Icons -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Icons</h3>
+            <div class="flex flex-wrap gap-4">
+              <Badge>
+                <Icon name="lucide:star" class="mr-1 h-3 w-3" />
+                Featured
+              </Badge>
+              <Badge variant="secondary">
+                <Icon name="lucide:trending-up" class="mr-1 h-3 w-3" />
+                Trending
+              </Badge>
+              <Badge variant="destructive">
+                <Icon name="lucide:alert-circle" class="mr-1 h-3 w-3" />
+                Critical
+              </Badge>
+            </div>
+          </div>
+
+          <!-- Landing Page Style -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Landing Page Style</h3>
+            <div class="flex flex-wrap gap-4">
+              <Badge variant="landing" size="lg" class="font-bold">
+                ✨ LIMITED TIME OFFER
+              </Badge>
+              <Badge variant="landing" size="lg">
+                🎯 TESTIMONIALS
+              </Badge>
+              <Badge variant="landing" size="lg">
+                💎 PRICING PLANS
+              </Badge>
+            </div>
+          </div>
+
+          <!-- Custom Styling -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Custom Styling</h3>
+            <div class="flex flex-wrap gap-4">
+              <Badge class="bg-gradient-to-r from-primary to-primary/60">Gradient</Badge>
+              <Badge variant="outline" class="border-2 border-primary">Custom Border</Badge>
+              <Badge class="rounded-md">Square Badge</Badge>
+              <Badge class="animate-pulse">Animated</Badge>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Spinner Component -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          ⏳ Spinners (1 component)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Spinner Sizes -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Sizes</h3>
+            <div class="flex flex-wrap items-center gap-6">
+              <Spinner size="xs" />
+              <Spinner size="sm" />
+              <Spinner size="md" />
+              <Spinner size="lg" />
+              <Spinner size="xl" />
+            </div>
+          </div>
+
+          <!-- Different Icons -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Different Icons</h3>
+            <div class="flex flex-wrap items-center gap-6">
+              <Spinner icon="lucide:loader-circle" />
+              <Spinner icon="lucide:loader" />
+              <Spinner icon="lucide:refresh-cw" />
+              <Spinner icon="lucide:circle-dashed" />
+            </div>
+          </div>
+
+          <!-- Colors -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Colors (Theme Reactive)</h3>
+            <div class="flex flex-wrap items-center gap-6">
+              <Spinner class="text-primary" />
+              <Spinner class="text-secondary" />
+              <Spinner class="text-muted-foreground" />
+              <Spinner class="text-success" />
+              <Spinner class="text-destructive" />
+            </div>
+          </div>
+
+          <!-- Loading States -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Loading States</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <Spinner size="sm" />
+                <span class="text-sm text-muted-foreground">Loading content...</span>
+              </div>
+              
+              <div class="inline-flex items-center gap-2 px-4 py-2 bg-card border rounded-md">
+                <Spinner size="sm" class="text-primary" />
+                <span>Processing</span>
+              </div>
+
+              <div class="flex justify-center items-center h-32 bg-card/50 border border-dashed rounded-lg">
+                <div class="text-center">
+                  <Spinner size="lg" class="mx-auto mb-2" />
+                  <p class="text-sm text-muted-foreground">Loading data...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Styling -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Custom Styling</h3>
+            <div class="flex flex-wrap items-center gap-6">
+              <Spinner class="text-gradient-to-r from-primary to-secondary" />
+              <Spinner size="lg" class="animate-pulse" />
+              <Spinner class="opacity-50" />
             </div>
           </div>
         </div>
