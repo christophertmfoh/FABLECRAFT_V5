@@ -1,9 +1,0 @@
-# Agent Initialization Required
-# This file indicates that agents should run initialization before work
-
-INIT_REQUIRED=true
-INIT_SCRIPT="./AGENT_INIT.sh"
-SAFETY_DOC="AGENT_SAFETY_README.md"
-
-# Quick check command for agents:
-# if [ -f .agentinit ]; then source .agentinit && $INIT_SCRIPT; fi
