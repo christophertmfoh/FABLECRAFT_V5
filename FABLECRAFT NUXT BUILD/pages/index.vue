@@ -10,23 +10,23 @@
     <!-- Background Effects Layer -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <!-- Paper Texture -->
-      <PaperTexture v-if="paperTextureEnabled" />
+      <EffectsPaperTexture v-if="paperTextureEnabled" />
       
       <!-- Background Orbs -->
-      <BackgroundOrbs v-if="orbsEnabled" />
+      <EffectsBackgroundOrbs v-if="orbsEnabled" />
       
       <!-- Firefly Effect -->
-      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" />
+      <EffectsFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" />
     </div>
 
     <!-- Main Content Layer -->
     <div class="relative z-10">
       <!-- Skip to Content Link (Accessibility) -->
-      <VisuallyHidden>
+      <AtomsVisuallyHidden>
         <a href="#main-content" class="skip-link">
           Skip to main content
         </a>
-      </VisuallyHidden>
+      </AtomsVisuallyHidden>
 
       <!-- Header Section -->
       <header 
@@ -34,12 +34,12 @@
         class="relative z-50"
         :class="headerClasses"
       >
-        <Container size="xl" class="py-4 md:py-6">
+        <AtomsContainer size="xl" class="py-4 md:py-6">
           <!-- Header Component Placeholder -->
           <div class="min-h-[64px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
             <span class="text-muted-foreground">Header Component</span>
           </div>
-        </Container>
+        </AtomsContainer>
       </header>
 
       <!-- Main Content -->
@@ -48,88 +48,88 @@
         class="relative z-20"
       >
         <!-- Hero Section -->
-        <Section 
+        <AtomsSection 
           id="hero"
           spacing="xl"
           class="hero-section"
         >
-          <Container size="xl">
+          <AtomsContainer size="xl">
             <!-- Hero Component Placeholder -->
             <div class="min-h-[600px] md:min-h-[700px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Hero Section</span>
             </div>
-          </Container>
-        </Section>
+          </AtomsContainer>
+        </AtomsSection>
 
         <!-- Features Section -->
-        <Section 
+        <AtomsSection 
           id="features"
           spacing="lg"
           class="features-section"
         >
-          <Container size="xl">
+          <AtomsContainer size="xl">
             <!-- Features Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Features Section</span>
             </div>
-          </Container>
-        </Section>
+          </AtomsContainer>
+        </AtomsSection>
 
         <!-- Process Section -->
-        <Section 
+        <AtomsSection 
           id="process"
           spacing="lg"
           class="process-section bg-muted/30"
         >
-          <Container size="xl">
+          <AtomsContainer size="xl">
             <!-- Process Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Process Section</span>
             </div>
-          </Container>
-        </Section>
+          </AtomsContainer>
+        </AtomsSection>
 
         <!-- Testimonials Section -->
-        <Section 
+        <AtomsSection 
           id="testimonials"
           spacing="lg"
           class="testimonials-section"
         >
-          <Container size="lg">
+          <AtomsContainer size="lg">
             <!-- Testimonials Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Testimonials Section</span>
             </div>
-          </Container>
-        </Section>
+          </AtomsContainer>
+        </AtomsSection>
 
         <!-- Pricing Section -->
-        <Section 
+        <AtomsSection 
           id="pricing"
           spacing="lg"
           class="pricing-section bg-muted/20"
         >
-          <Container size="xl">
+          <AtomsContainer size="xl">
             <!-- Pricing Component Placeholder -->
             <div class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Pricing Section</span>
             </div>
-          </Container>
-        </Section>
+          </AtomsContainer>
+        </AtomsSection>
 
         <!-- CTA Section -->
-        <Section 
+        <AtomsSection 
           id="cta"
           spacing="lg"
           class="cta-section"
         >
-          <Container size="md">
+          <AtomsContainer size="md">
             <!-- CTA Component Placeholder -->
             <div class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">CTA Section</span>
             </div>
-          </Container>
-        </Section>
+          </AtomsContainer>
+        </AtomsSection>
       </main>
 
       <!-- Footer Section -->
@@ -137,12 +137,12 @@
         id="footer"
         class="relative z-30 bg-card border-t"
       >
-        <Container size="xl" class="py-8 md:py-12">
+        <AtomsContainer size="xl" class="py-8 md:py-12">
           <!-- Footer Component Placeholder -->
           <div class="min-h-[200px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
             <span class="text-muted-foreground">Footer Component</span>
           </div>
-        </Container>
+        </AtomsContainer>
       </footer>
     </div>
 
