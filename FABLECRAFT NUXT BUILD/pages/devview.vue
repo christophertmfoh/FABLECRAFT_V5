@@ -727,12 +727,12 @@ if (isDevelopment) {
           <!-- Basic Inputs -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Basic Inputs</h3>
-            <div class="space-y-4 max-w-md">
+            <form @submit.prevent class="space-y-4 max-w-md">
               <Input v-model="inputValue1" placeholder="Enter text..." />
               <Input v-model="inputValue2" type="email" placeholder="Email address" />
               <Input v-model="inputValue3" type="password" placeholder="Password" />
               <Input v-model="inputValue4" type="number" placeholder="Enter number" />
-            </div>
+            </form>
           </div>
 
           <!-- Input States -->
