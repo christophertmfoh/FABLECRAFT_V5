@@ -21,6 +21,12 @@ import AtomIcon from '~/components/atoms/AtomIcon.vue'
 import Input from '~/components/atoms/Input.vue'
 import Badge from '~/components/atoms/Badge.vue'
 import Spinner from '~/components/atoms/Spinner.vue'
+import Card from '~/components/atoms/Card.vue'
+import CardTitle from '~/components/atoms/CardTitle.vue'
+import CardDescription from '~/components/atoms/CardDescription.vue'
+import GlassCard from '~/components/atoms/GlassCard.vue'
+import Container from '~/components/atoms/Container.vue'
+import Section from '~/components/atoms/Section.vue'
 
 // Use centralized theme composable with all features
 const { 
@@ -927,6 +933,176 @@ if (isDevelopment) {
               <Spinner size="lg" class="animate-pulse" />
               <Spinner class="opacity-50" />
             </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Cards Component -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          🃏 Cards (2 components)
+        </summary>
+        
+        <div class="space-y-6">
+          <!-- Basic Card -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Basic Card</h3>
+            <Card>
+              <template #header>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>This is a card description that provides context.</CardDescription>
+              </template>
+              
+              <p>This is the main content area of the card. It can contain any content you need.</p>
+              
+              <template #footer>
+                <Button size="sm">Action</Button>
+                <Button size="sm" variant="ghost">Cancel</Button>
+              </template>
+            </Card>
+          </div>
+
+          <!-- Card without header/footer -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Content Only Card</h3>
+            <Card>
+              <p class="text-lg font-semibold mb-2">Simple Card</p>
+              <p>Cards can be used with just the default slot for simpler layouts.</p>
+            </Card>
+          </div>
+
+          <!-- Glass Cards -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Glass Card Variants</h3>
+            <div class="grid gap-4">
+              <GlassCard variant="light">
+                <p class="font-semibold">Light Glass Card</p>
+                <p class="text-sm text-muted-foreground">Subtle glass effect with 95% opacity</p>
+              </GlassCard>
+              
+              <GlassCard variant="heavy">
+                <p class="font-semibold">Heavy Glass Card</p>
+                <p class="text-sm text-muted-foreground">Strong glass effect with 90% opacity</p>
+              </GlassCard>
+              
+              <GlassCard variant="elevated" hover>
+                <p class="font-semibold">Elevated Glass Card</p>
+                <p class="text-sm text-muted-foreground">Premium feel with hover effect</p>
+              </GlassCard>
+            </div>
+          </div>
+
+          <!-- Custom styled cards -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Custom Styled Cards</h3>
+            <Card class="border-primary">
+              <p>Card with primary border</p>
+            </Card>
+            <GlassCard class="p-8 text-center" variant="elevated">
+              <AtomIcon name="lucide:sparkles" size="xl" class="mx-auto mb-4 text-primary" />
+              <p class="text-lg font-semibold">Icon Card</p>
+              <p class="text-sm text-muted-foreground">Combining glass card with icons</p>
+            </GlassCard>
+          </div>
+        </div>
+      </details>
+
+      <!-- Layout Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          📐 Layout (2 components)
+        </summary>
+        
+        <div class="space-y-6">
+          <!-- Container Sizes -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Container Sizes</h3>
+            <div class="space-y-4">
+              <Container size="sm" class="bg-muted/50 py-4">
+                <p class="text-center">Small Container (max-w-3xl)</p>
+              </Container>
+              
+              <Container size="md" class="bg-muted/50 py-4">
+                <p class="text-center">Medium Container (max-w-5xl)</p>
+              </Container>
+              
+              <Container size="lg" class="bg-muted/50 py-4">
+                <p class="text-center">Large Container (max-w-7xl) - Default</p>
+              </Container>
+              
+              <Container size="xl" class="bg-muted/50 py-4">
+                <p class="text-center">XL Container (max-w-screen-xl)</p>
+              </Container>
+            </div>
+          </div>
+
+          <!-- Container Padding -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Container Padding Variants</h3>
+            <Container padding="none" class="bg-muted/50 py-4">
+              <p>No padding container</p>
+            </Container>
+            
+            <Container padding="sm" class="bg-muted/50 py-4">
+              <p>Small padding container</p>
+            </Container>
+            
+            <Container padding="lg" class="bg-muted/50 py-4">
+              <p>Large padding container</p>
+            </Container>
+          </div>
+
+          <!-- Section Spacing -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Section Spacing</h3>
+            <div class="space-y-0 -mx-6">
+              <Section spacing="sm" background="muted">
+                <Container>
+                  <p>Small section spacing (py-8 sm:py-12)</p>
+                </Container>
+              </Section>
+              
+              <Section spacing="md" background="card">
+                <Container>
+                  <p>Medium section spacing (py-16 sm:py-20) - Default</p>
+                </Container>
+              </Section>
+              
+              <Section spacing="lg" background="accent">
+                <Container>
+                  <p>Large section spacing (py-24 sm:py-32)</p>
+                </Container>
+              </Section>
+            </div>
+          </div>
+
+          <!-- Polymorphic Components -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Polymorphic Support</h3>
+            <Container as="article" class="bg-muted/50 py-4">
+              <p>Container rendered as &lt;article&gt;</p>
+            </Container>
+            
+            <Section as="header" spacing="sm" class="bg-primary/10">
+              <Container>
+                <p>Section rendered as &lt;header&gt;</p>
+              </Container>
+            </Section>
+          </div>
+
+          <!-- Nested Layout Example -->
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium">Nested Layout Example</h3>
+            <Section background="muted" spacing="md">
+              <Container size="lg">
+                <Card>
+                  <template #header>
+                    <CardTitle>Nested Components</CardTitle>
+                  </template>
+                  <p>Section → Container → Card composition</p>
+                </Card>
+              </Container>
+            </Section>
           </div>
         </div>
       </details>
