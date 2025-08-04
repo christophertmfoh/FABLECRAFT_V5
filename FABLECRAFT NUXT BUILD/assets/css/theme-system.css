@@ -79,6 +79,10 @@
   --glow-opacity-primary: 0.25;        /* Higher for light themes */
   --glow-opacity-secondary: 0.15;      /* Higher for light themes */
   --glow-blend-mode: overlay;          /* Overlay for light themes */
+  
+  /* Gradient overlay variables for buttons */
+  --gradient-overlay-light: 0 0% 0%;   /* Black for light themes */
+  --gradient-overlay-opacity: 0.08;     /* Lower opacity for light themes */
 }
 
 /* ========================================
@@ -148,6 +152,10 @@
   --glow-opacity-primary: 0.2;
   --glow-opacity-secondary: 0.15;
   --glow-blend-mode: screen;             /* Screen for dark themes */
+  
+  /* Gradient overlay variables for buttons */
+  --gradient-overlay-light: 0 0% 100%;  /* White for dark themes */
+  --gradient-overlay-opacity: 0.15;      /* Higher opacity for dark themes */
 }
 
 /* ========================================
@@ -196,6 +204,10 @@
   --glow-opacity-primary: 0.25;        /* Higher for light themes */
   --glow-opacity-secondary: 0.15;      /* Higher for light themes */
   --glow-blend-mode: overlay;          /* Overlay for light themes */
+  
+  /* Gradient overlay variables for buttons */
+  --gradient-overlay-light: 0 0% 0%;   /* Black for light themes */
+  --gradient-overlay-opacity: 0.08;     /* Lower opacity for light themes */
 }
 
 /* Golden Hour - Warm yellows optimized for inspiration */
@@ -286,6 +298,10 @@
   --glow-opacity-primary: 0.25;
   --glow-opacity-secondary: 0.18;
   --glow-blend-mode: screen;            /* Screen for dark themes */
+  
+  /* Gradient overlay variables for buttons */
+  --gradient-overlay-light: 0 0% 100%;  /* White for dark themes */
+  --gradient-overlay-opacity: 0.15;      /* Higher opacity for dark themes */
 }
 
 /* Forest Manuscript - Deep greens for nature-inspired writing */

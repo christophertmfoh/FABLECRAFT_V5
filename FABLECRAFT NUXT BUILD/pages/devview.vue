@@ -633,11 +633,26 @@ if (isDevelopment) {
               <GradientButton variant="secondary">Secondary Gradient</GradientButton>
               <GradientButton variant="destructive">Destructive Gradient</GradientButton>
               <GradientButton gradient-direction="to-br">Diagonal Gradient</GradientButton>
+              <GradientButton :adaptive-gradient="true" icon="lucide:sun-moon">
+                Adaptive Gradient
+              </GradientButton>
               <GradientButton 
-                gradient-colors="from-purple-500/20 to-pink-500/20"
+                gradient-colors="from-primary/20 to-secondary/20"
                 icon="lucide:sparkles"
               >
-                Custom Colors
+                Theme Aware
+              </GradientButton>
+              <GradientButton 
+                gradient-colors="from-muted-foreground/20 to-transparent"
+                gradient-direction="to-t"
+              >
+                Subtle Effect
+              </GradientButton>
+              <GradientButton 
+                variant="outline"
+                gradient-colors="from-accent/30 to-transparent"
+              >
+                Accent Overlay
               </GradientButton>
               <GradientButton :show-gradient-overlay="false">No Gradient</GradientButton>
             </div>

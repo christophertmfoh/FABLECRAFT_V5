@@ -46,6 +46,7 @@ interface GradientButtonProps {
   gradientColors?: string
   gradientDirection?: 'to-r' | 'to-l' | 'to-t' | 'to-b' | 'to-tr' | 'to-tl' | 'to-br' | 'to-bl'
   gradientOpacity?: number
+  adaptiveGradient?: boolean
 }
 
 // Define props with defaults
@@ -54,7 +55,7 @@ const props = withDefaults(defineProps<GradientButtonProps>(), {
   size: 'default',
   type: 'button',
   showGradientOverlay: true,
-  gradientColors: 'from-white/20 to-transparent',
+  gradientColors: 'from-foreground/10 to-transparent',
   gradientDirection: 'to-r',
   gradientOpacity: 0,
 })
@@ -66,10 +67,15 @@ defineEmits<{
 
 // Compute gradient overlay classes
 const gradientOverlayClasses = computed(() => {
+  // Use adaptive gradient colors if enabled
+  const gradientColors = props.adaptiveGradient 
+    ? 'from-[hsl(var(--gradient-overlay-light)/var(--gradient-overlay-opacity))] to-transparent'
+    : props.gradientColors
+    
   return cn(
     'absolute inset-0',
     'bg-gradient-' + props.gradientDirection,
-    props.gradientColors,
+    gradientColors,
     'transition-opacity duration-300',
     props.gradientOpacity === 0 ? 'opacity-0 group-hover:opacity-100' : `opacity-${props.gradientOpacity * 100}`,
     'pointer-events-none',
