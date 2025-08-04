@@ -1,0 +1,39 @@
+# CRITICAL SAFETY RULES FOR AI AGENTS
+
+## 🚨 FORBIDDEN COMMANDS - NEVER RUN THESE 🚨
+
+The following commands are STRICTLY FORBIDDEN and will PERMANENTLY DESTROY the development environment:
+
+- ❌ kill node
+- ❌ pkill node  
+- ❌ killall node
+- ❌ kill -9 [any node process]
+- ❌ pkill -9 node
+- ❌ systemctl stop node
+- ❌ service node stop
+- ❌ Any forceful termination of node processes
+
+## ✅ SAFE ALTERNATIVES
+
+### To stop the development server:
+1. Use Ctrl+C in the terminal where it's running
+2. Close the terminal tab
+3. Run on a different port if needed: `npx nuxi dev --port 3003`
+
+### To check processes:
+- `ps aux | grep node` (VIEW ONLY, don't kill)
+- `lsof -i :3002` (check port usage)
+- `pnpm run safe-stop` (use the safe helper script)
+
+## WHY THIS MATTERS
+
+These commands don't just stop the server - they DESTROY the Cursor environment connection permanently. The environment becomes unusable and all work is lost.
+
+## DEVELOPMENT COMMANDS
+
+Safe commands to use:
+- `pnpm dev:alt` or `npx nuxi dev --port 3002` - Start development
+- `Ctrl+C` - Stop any running process
+- `pnpm run safe-stop` - Check processes safely
+
+Remember: When something seems stuck, use a different port instead of trying to kill processes.

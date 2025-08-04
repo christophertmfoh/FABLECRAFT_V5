@@ -1,0 +1,245 @@
+/*
+ * PAPER TEXTURE SYSTEM - FABLECRAFT NUXT PROJECT
+ * 5-layer CSS-only texture with theme reactivity and GPU optimization
+ * Phase 1 Step 5: Paper Texture Foundation
+ */
+
+/* ========================================
+   CSS VARIABLES FOR PAPER TEXTURE
+   Theme-reactive and performance-optimized
+======================================== */
+
+:root {
+  /* Paper texture base colors */
+  --texture-grain: 0 0% 45% / 0.03;
+  --texture-fiber: 0 0% 40% / 0.015;
+  
+  /* Texture visibility controls */
+  --texture-opacity: 0.6;
+  --texture-blend-mode: multiply;
+  
+  /* GPU optimization hints */
+  --texture-z-index: -1;
+  --texture-pointer-events: none;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] {
+  --texture-grain: 0 0% 55% / 0.02;
+  --texture-fiber: 0 0% 60% / 0.01;
+  --texture-opacity: 0.4;
+  --texture-blend-mode: screen;
+}
+
+/* ========================================
+   THEME-SPECIFIC TEXTURE VARIATIONS
+   Optimized for each theme's color palette
+======================================== */
+
+/* Classic Light Themes */
+[data-theme="arctic-focus"] {
+  --texture-grain: 200 10% 50% / 0.025;
+  --texture-fiber: 200 5% 45% / 0.012;
+  --texture-opacity: 0.5;
+}
+
+[data-theme="golden-hour"] {
+  --texture-grain: 45 15% 48% / 0.03;
+  --texture-fiber: 45 10% 43% / 0.015;
+  --texture-opacity: 0.55;
+}
+
+/* Classic Dark Themes */
+[data-theme="midnight-ink"] {
+  --texture-grain: 220 8% 58% / 0.018;
+  --texture-fiber: 220 5% 63% / 0.008;
+  --texture-opacity: 0.35;
+}
+
+[data-theme="forest-manuscript"] {
+  --texture-grain: 140 5% 56% / 0.02;
+  --texture-fiber: 140 3% 61% / 0.01;
+  --texture-opacity: 0.38;
+}
+
+[data-theme="starlit-prose"] {
+  --texture-grain: 270 5% 57% / 0.019;
+  --texture-fiber: 270 3% 62% / 0.009;
+  --texture-opacity: 0.36;
+}
+
+[data-theme="coffee-house"] {
+  --texture-grain: 25 10% 54% / 0.022;
+  --texture-fiber: 25 5% 59% / 0.011;
+  --texture-opacity: 0.4;
+}
+
+/* Modern Light Themes */
+[data-theme="sunset-coral"] {
+  --texture-grain: 15 12% 49% / 0.028;
+  --texture-fiber: 15 8% 44% / 0.014;
+  --texture-opacity: 0.52;
+}
+
+[data-theme="lavender-dusk"] {
+  --texture-grain: 280 8% 51% / 0.026;
+  --texture-fiber: 280 5% 46% / 0.013;
+  --texture-opacity: 0.5;
+}
+
+[data-theme="moonlit-garden"] {
+  --texture-grain: 95 10% 50% / 0.027;
+  --texture-fiber: 95 6% 45% / 0.014;
+  --texture-opacity: 0.53;
+}
+
+/* Modern Dark Themes */
+[data-theme="cherry-lacquer"] {
+  --texture-grain: 350 10% 55% / 0.021;
+  --texture-fiber: 350 6% 60% / 0.01;
+  --texture-opacity: 0.37;
+}
+
+[data-theme="dragons-hoard"] {
+  --texture-grain: 50 12% 53% / 0.023;
+  --texture-fiber: 50 8% 58% / 0.012;
+  --texture-opacity: 0.39;
+}
+
+/* Specialty Themes */
+[data-theme="halloween"] {
+  --texture-grain: 30 15% 52% / 0.025;
+  --texture-fiber: 30 10% 57% / 0.013;
+  --texture-opacity: 0.42;
+  --texture-blend-mode: overlay;
+}
+
+[data-theme="netrunner"] {
+  --texture-grain: 180 5% 60% / 0.015;
+  --texture-fiber: 180 3% 65% / 0.007;
+  --texture-opacity: 0.3;
+  --texture-blend-mode: screen;
+}
+
+/* ========================================
+   PAPER TEXTURE IMPLEMENTATION
+   5-layer system with GPU optimization
+======================================== */
+
+.paper-texture {
+  /* Create new stacking context */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* GPU optimization */
+  z-index: var(--texture-z-index);
+  pointer-events: var(--texture-pointer-events);
+  will-change: opacity;
+  
+  /* Performance containment */
+  contain: strict;
+  
+  /* Texture visibility */
+  opacity: var(--texture-opacity);
+  mix-blend-mode: var(--texture-blend-mode);
+  
+  /* Accessibility: decorative only */
+  user-select: none;
+  -webkit-user-select: none;
+  
+  /* Animation for theme transitions */
+  transition: opacity 0.3s ease-out;
+}
+
+/* 5-layer texture system using pseudo-element */
+.paper-texture::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Multi-layer paper texture composite */
+  background-image: 
+    /* Layer 1: Fine paper grain */
+    radial-gradient(circle at 1px 1px, hsl(var(--texture-grain)) 0.8px, transparent 0),
+    /* Layer 2: Medium grain pattern */
+    radial-gradient(circle at 3px 2px, hsl(var(--texture-grain)) 0.5px, transparent 0),
+    /* Layer 3: Paper fibers - vertical */
+    linear-gradient(90deg, transparent 49%, hsl(var(--texture-fiber)) 50%, transparent 51%),
+    /* Layer 4: Paper fibers - horizontal */
+    linear-gradient(0deg, transparent 49%, hsl(var(--texture-fiber)) 50%, transparent 51%),
+    /* Layer 5: Diagonal texture */
+    linear-gradient(45deg, transparent 48%, hsl(var(--texture-fiber)) 49%, hsl(var(--texture-fiber)) 51%, transparent 52%);
+  
+  /* Size configuration for each layer */
+  background-size: 
+    3px 3px,      /* Fine grain */
+    6px 6px,      /* Medium grain */
+    8px 8px,      /* Vertical fibers */
+    8px 8px,      /* Horizontal fibers */
+    12px 12px;    /* Diagonal texture */
+  
+  /* Position offsets for natural variation */
+  background-position: 
+    0 0,          /* Fine grain */
+    1px 1px,      /* Medium grain offset */
+    0 0,          /* Vertical fibers */
+    4px 4px,      /* Horizontal fibers offset */
+    6px 6px;      /* Diagonal texture offset */
+}
+
+/* ========================================
+   PERFORMANCE STATES
+   Reduced motion and low-performance modes
+======================================== */
+
+/* Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .paper-texture {
+    transition: none;
+  }
+}
+
+/* Simplified texture for low-end devices */
+@media (max-width: 768px) {
+  .paper-texture::before {
+    /* Reduce to 3 layers on mobile for better performance */
+    background-image: 
+      radial-gradient(circle at 2px 2px, hsl(var(--texture-grain)) 0.6px, transparent 0),
+      linear-gradient(90deg, transparent 48%, hsl(var(--texture-fiber)) 50%, transparent 52%),
+      linear-gradient(45deg, transparent 47%, hsl(var(--texture-fiber)) 49%, hsl(var(--texture-fiber)) 51%, transparent 53%);
+    
+    background-size: 
+      4px 4px,
+      10px 10px,
+      15px 15px;
+  }
+}
+
+/* Disable texture on print */
+@media print {
+  .paper-texture {
+    display: none;
+  }
+}
+
+/* ========================================
+   TEXTURE TOGGLE STATES
+   For user preference control
+======================================== */
+
+/* When texture is disabled via user preference */
+[data-texture-disabled="true"] .paper-texture {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Smooth transition when toggling texture */
+.paper-texture-transitioning {
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}

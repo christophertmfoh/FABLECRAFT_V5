@@ -1,0 +1,40 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Check for dangerous kill commands
+echo "🔍 Checking for dangerous kill commands..."
+
+# Search for forbidden patterns in all files
+FORBIDDEN_PATTERNS=(
+    "kill.*node"
+    "killall.*node"
+    "pkill.*node"
+    "kill.*-9"
+    "kill.*pgrep"
+)
+
+FOUND_ISSUES=0
+
+for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
+    # Check in staged files
+    if git diff --cached --name-only | xargs grep -l "$pattern" 2>/dev/null; then
+        echo "❌ Found dangerous pattern: $pattern"
+        FOUND_ISSUES=1
+    fi
+done
+
+if [ $FOUND_ISSUES -eq 1 ]; then
+    echo ""
+    echo "🚨 COMMIT BLOCKED: Dangerous kill commands detected!"
+    echo ""
+    echo "Please remove any commands that kill Node processes."
+    echo "Use 'npm run safe-stop' instead."
+    echo ""
+    exit 1
+fi
+
+echo "✅ No dangerous kill commands found"
+
+# Run existing checks
+npm run lint
+npm run typecheck
