@@ -41,6 +41,7 @@ import ScrollArea from '~/components/atoms/ScrollArea.vue'
 
 // Priority 5 component imports (Form components)
 import Checkbox from '~/components/atoms/Checkbox.vue'
+import FormMessage from '~/components/atoms/FormMessage.vue'
 
 // Use centralized theme composable with all features
 const { 
@@ -838,7 +839,7 @@ if (isDevelopment) {
       <!-- Form Components -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          Form Components (1 component)
+          Form Components (2 components)
         </summary>
         
         <div class="space-y-8">
@@ -897,6 +898,92 @@ if (isDevelopment) {
               <p>Checkbox 1: {{ checkboxValue1 }}</p>
               <p>Checkbox 2: {{ checkboxValue2 }}</p>
               <p>Checkbox 3: {{ checkboxValue3 }}</p>
+            </div>
+          </div>
+
+          <!-- FormMessage Component -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">FormMessage</h3>
+            
+            <!-- Message Types -->
+            <div class="space-y-4">
+              <h4 class="text-xs font-medium text-muted-foreground">Message Types</h4>
+              <div class="space-y-3">
+                <FormMessage message="This is a default helper message" />
+                <FormMessage type="error" message="This field is required" />
+                <FormMessage type="success" message="Email verified successfully!" />
+                <FormMessage type="warning" message="Password strength is weak" />
+                <FormMessage type="info" message="We'll never share your email" />
+              </div>
+            </div>
+
+            <!-- Without Icons -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Without Icons</h4>
+              <div class="space-y-3">
+                <FormMessage :show-icon="false" message="Plain message without icon" />
+                <FormMessage :show-icon="false" type="error" message="Error without icon" />
+                <FormMessage :show-icon="false" type="success" message="Success without icon" />
+              </div>
+            </div>
+
+            <!-- Custom Icons -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Icons</h4>
+              <div class="space-y-3">
+                <FormMessage icon="lucide:mail" message="Check your email for verification" />
+                <FormMessage type="error" icon="lucide:x-circle" message="Custom error icon" />
+                <FormMessage type="success" icon="lucide:sparkles" message="Custom success icon" />
+              </div>
+            </div>
+
+            <!-- With Form Fields -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">With Form Fields</h4>
+              <div class="space-y-4 max-w-md">
+                <div>
+                  <Label>Email</Label>
+                  <Input placeholder="Enter your email" class="mt-1" />
+                  <FormMessage type="error" message="Please enter a valid email address" />
+                </div>
+                
+                <div>
+                  <Label>Password</Label>
+                  <Input type="password" placeholder="Enter password" class="mt-1" />
+                  <FormMessage type="warning" message="Use at least 8 characters with mixed case" />
+                </div>
+                
+                <div>
+                  <Label>Username</Label>
+                  <Input placeholder="Choose a username" class="mt-1" />
+                  <FormMessage type="success" message="Username is available!" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Styling -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
+              <div class="space-y-3">
+                <FormMessage class="font-semibold" message="Bold message" />
+                <FormMessage class="text-lg" message="Large message" />
+                <FormMessage class="italic" message="Italic message" />
+              </div>
+            </div>
+
+            <!-- Using Slots -->
+            <div class="space-y-4 mt-6">
+              <h4 class="text-xs font-medium text-muted-foreground">Using Slots</h4>
+              <div class="space-y-3">
+                <FormMessage type="info">
+                  This is a message with <strong>rich content</strong> using slots
+                </FormMessage>
+                <FormMessage type="error">
+                  Multiple errors: <br>
+                  • Field is required<br>
+                  • Must be at least 8 characters
+                </FormMessage>
+              </div>
             </div>
           </div>
         </div>
