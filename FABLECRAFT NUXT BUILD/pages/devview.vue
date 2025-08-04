@@ -124,15 +124,15 @@ onMounted(() => {
 
 // Development-only debugging (excluded from production)
 if (isDevelopment) {
-  console.log('🔧 Development Mode: Mathematical spacing system loaded')
-  console.log('🎯 Design tokens available:', {
+      console.log('Development Mode: Mathematical spacing system loaded')
+    console.log('Design tokens available:', {
     primitive: 'var(--space-1) through var(--space-32)',
     semantic: 'var(--space-micro) through var(--space-massive)',
     typography: 'var(--text-xs) through var(--text-6xl)',
     golden: 'var(--text-golden-xs) through var(--text-golden-5xl)'
   })
-  console.log('🎨 Theme system loaded with', themes.length, 'themes')
-  console.log('✨ Visual effects system initialized')
+  console.log('Theme system loaded with', themes.length, 'themes')
+  console.log('Visual effects system initialized')
 }
 </script>
 
@@ -169,7 +169,7 @@ if (isDevelopment) {
       <!-- System Status Dropdown -->
       <details :open="showSystemStatus" class="bg-card p-6 rounded-lg border shadow-sm max-w-md mx-auto">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          📊 System Status
+          System Status
         </summary>
         
         <div class="space-y-2 text-sm">
@@ -197,7 +197,7 @@ if (isDevelopment) {
       <!-- Visual Effects Controls Dropdown -->
       <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🎮 Visual Effects Controls
+          Visual Effects Controls
         </summary>
         
         <div class="space-y-6">
@@ -207,7 +207,7 @@ if (isDevelopment) {
               class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
               @click="toggleAllEffects"
             >
-              {{ allEffectsEnabled ? '✨ All Effects On' : '○ All Effects Off' }}
+              {{ allEffectsEnabled ? 'All Effects On' : 'All Effects Off' }}
             </button>
           </div>
         
@@ -285,7 +285,7 @@ if (isDevelopment) {
       <!-- Typography Showcase Dropdown -->
       <details :open="showTypography" class="bg-card p-8 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          📝 Typography System
+          Typography System
         </summary>
         
         <!-- Golden Ratio Scale -->
@@ -314,7 +314,7 @@ if (isDevelopment) {
       <!-- Interactive Theme System & Persistence Test -->
       <details :open="showThemeSystem" class="bg-card p-8 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🎨 Interactive Theme System & Persistence Test
+          Interactive Theme System & Persistence Test
         </summary>
         
         <div class="space-y-6">
@@ -515,7 +515,7 @@ if (isDevelopment) {
       <!-- Development-Only Validation Tests -->
       <details v-if="isDevelopment" class="bg-card p-6 rounded-lg border shadow-sm text-left">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🔧 Foundation Systems Check
+          Foundation Systems Check
         </summary>
         
         <div class="space-y-6">
@@ -554,7 +554,7 @@ if (isDevelopment) {
       <!-- Buttons Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🔘 Buttons (2 components)
+          Buttons (2 components)
         </summary>
         
         <div class="space-y-8">
@@ -648,7 +648,7 @@ if (isDevelopment) {
       <!-- Icons Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🎨 Icons (30 types)
+          Icons (30 types)
         </summary>
         
         <div class="space-y-8">
@@ -746,7 +746,7 @@ if (isDevelopment) {
       <!-- Input Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          📝 Inputs (1 component)
+          Inputs (1 component)
         </summary>
         
         <div class="space-y-8">
@@ -815,7 +815,7 @@ if (isDevelopment) {
       <!-- Badge Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🏷️ Badges (2 components)
+          Badges (2 components)
         </summary>
         
         <div class="space-y-8">
@@ -865,13 +865,13 @@ if (isDevelopment) {
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Landing Page Style</h3>
             <div class="flex flex-wrap gap-4">
               <Badge variant="landing" size="lg" class="font-bold">
-                ✨ LIMITED TIME OFFER
+                LIMITED TIME OFFER
               </Badge>
               <Badge variant="landing" size="lg">
-                🎯 TESTIMONIALS
+                TESTIMONIALS
               </Badge>
               <Badge variant="landing" size="lg">
-                💎 PRICING PLANS
+                PRICING PLANS
               </Badge>
             </div>
           </div>
@@ -917,7 +917,7 @@ if (isDevelopment) {
       <!-- Spinner Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          ⏳ Spinners (1 component)
+          Spinners (1 component)
         </summary>
         
         <div class="space-y-8">
@@ -994,7 +994,7 @@ if (isDevelopment) {
       <!-- Cards Component -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🃏 Cards (2 components)
+          Cards (2 components)
         </summary>
         
         <div class="space-y-6">
@@ -1164,7 +1164,7 @@ if (isDevelopment) {
       <!-- Typography Components -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          📝 Typography (3 components)
+          Typography (3 components)
         </summary>
         
         <div class="space-y-8">
@@ -1418,7 +1418,7 @@ if (isDevelopment) {
       <!-- Utility Components -->
       <details class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
-          🛠️ Utility Components (4 components)
+          Utility Components (4 components)
         </summary>
         
         <div class="space-y-8">
