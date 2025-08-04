@@ -8,6 +8,8 @@
 </template>
 
 <script setup lang="ts">
-// Redirect to devview page
-await navigateTo('/devview')
+// Redirect to devview page after component is mounted
+onMounted(() => {
+  navigateTo('/devview')
+})
 </script>
