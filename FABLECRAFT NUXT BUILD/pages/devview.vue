@@ -50,6 +50,16 @@ import StarRating from '~/components/atoms/StarRating.vue'
 import StepNumber from '~/components/atoms/StepNumber.vue'
 import VisuallyHidden from '~/components/atoms/VisuallyHidden.vue'
 
+// Priority 7 component imports (Dropdown menu components)
+import DropdownMenu from '~/components/atoms/DropdownMenu.vue'
+import DropdownMenuTrigger from '~/components/atoms/DropdownMenuTrigger.vue'
+import DropdownMenuContent from '~/components/atoms/DropdownMenuContent.vue'
+import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
+import DropdownMenuLabel from '~/components/atoms/DropdownMenuLabel.vue'
+import DropdownMenuSeparator from '~/components/atoms/DropdownMenuSeparator.vue'
+import DropdownMenuCheckboxItem from '~/components/atoms/DropdownMenuCheckboxItem.vue'
+import DropdownMenuRadioItem from '~/components/atoms/DropdownMenuRadioItem.vue'
+
 // Use centralized theme composable with all features
 const { 
   themes, 
@@ -99,6 +109,13 @@ const radioValue3 = ref('')
 const starRating1 = ref(0)
 const starRating2 = ref(3)
 const starRating3 = ref(5)
+
+// Priority 7 dropdown test values
+const dropdownCheckbox1 = ref(true)
+const dropdownCheckbox2 = ref(false)
+const dropdownCheckbox3 = ref(true)
+const dropdownRadioValue = ref('option2')
+const dropdownAlignment = ref('start')
 
 // Visual effects controls using useState for SSR-safe state
 const firefliesEnabled = useState('fireflies-enabled', () => true)
@@ -1454,6 +1471,314 @@ if (isDevelopment) {
                 </ul>
               </div>
             </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- Dropdown Menu Components -->
+      <details class="bg-card p-6 rounded-lg border shadow-sm">
+        <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
+          Dropdown Menu Components (8 components)
+        </summary>
+        
+        <div class="space-y-8">
+          <!-- Basic Dropdown -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Basic Dropdown</h3>
+            
+            <div class="flex gap-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Icon name="lucide:more-vertical" class="h-4 w-4 mr-2" />
+                  Options
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem @select="() => console.log('Edit clicked')">
+                    <Icon name="lucide:pencil" class="h-4 w-4 mr-2" />
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem @select="() => console.log('Duplicate clicked')">
+                    <Icon name="lucide:copy" class="h-4 w-4 mr-2" />
+                    Duplicate
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem @select="() => console.log('Delete clicked')" class="text-destructive">
+                    <Icon name="lucide:trash" class="h-4 w-4 mr-2" />
+                    Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger class="bg-primary text-primary-foreground hover:bg-primary/90">
+                  Actions
+                  <Icon name="lucide:chevron-down" class="h-4 w-4 ml-2" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>New file</DropdownMenuItem>
+                  <DropdownMenuItem>New folder</DropdownMenuItem>
+                  <DropdownMenuItem disabled>Import (coming soon)</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+
+          <!-- With Labels and Sections -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Labels & Sections</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Icon name="lucide:user" class="h-4 w-4 mr-2" />
+                Account
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icon name="lucide:user" class="h-4 w-4 mr-2" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:credit-card" class="h-4 w-4 mr-2" />
+                  Billing
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:settings" class="h-4 w-4 mr-2" />
+                  Settings
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Team</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icon name="lucide:users" class="h-4 w-4 mr-2" />
+                  Invite users
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:plus" class="h-4 w-4 mr-2" />
+                  New Team
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icon name="lucide:log-out" class="h-4 w-4 mr-2" />
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
+          <!-- With Checkbox Items -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Checkboxes</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Icon name="lucide:sliders-horizontal" class="h-4 w-4 mr-2" />
+                View
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56">
+                <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem 
+                  v-model:checked="dropdownCheckbox1"
+                >
+                  Show status bar
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem 
+                  v-model:checked="dropdownCheckbox2"
+                >
+                  Show activity bar
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem 
+                  v-model:checked="dropdownCheckbox3"
+                >
+                  Show panel
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  Reset view
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <div class="mt-4 p-4 bg-muted/50 rounded text-sm">
+              <p class="font-medium mb-2">Current Values:</p>
+              <p>Status bar: {{ dropdownCheckbox1 ? 'Visible' : 'Hidden' }}</p>
+              <p>Activity bar: {{ dropdownCheckbox2 ? 'Visible' : 'Hidden' }}</p>
+              <p>Panel: {{ dropdownCheckbox3 ? 'Visible' : 'Hidden' }}</p>
+            </div>
+          </div>
+
+          <!-- With Radio Items -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">With Radio Group</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Icon name="lucide:align-left" class="h-4 w-4 mr-2" />
+                Text alignment
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-56">
+                <DropdownMenuLabel>Choose alignment</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuRadioItem 
+                  value="left"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-left" class="h-4 w-4 mr-2" />
+                  Left
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem 
+                  value="center"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-center" class="h-4 w-4 mr-2" />
+                  Center
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem 
+                  value="right"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-right" class="h-4 w-4 mr-2" />
+                  Right
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem 
+                  value="justify"
+                  v-model="dropdownRadioValue"
+                >
+                  <Icon name="lucide:align-justify" class="h-4 w-4 mr-2" />
+                  Justify
+                </DropdownMenuRadioItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <p class="mt-4 text-sm text-muted-foreground">
+              Selected alignment: <span class="font-medium">{{ dropdownRadioValue }}</span>
+            </p>
+          </div>
+
+          <!-- Different Positions -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Different Positions</h3>
+            
+            <div class="grid grid-cols-3 gap-4">
+              <!-- Alignment variations -->
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Align Start
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Align Center
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Align End
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <!-- Side variations -->
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Side Top
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="top">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Side Right
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="right">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  Side Left
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="left">
+                  <DropdownMenuItem>Item 1</DropdownMenuItem>
+                  <DropdownMenuItem>Item 2</DropdownMenuItem>
+                  <DropdownMenuItem>Item 3</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          </div>
+
+          <!-- Complex Example -->
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">Complex Example</h3>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger class="bg-gradient-to-r from-primary to-secondary text-white">
+                <Icon name="lucide:sparkles" class="h-4 w-4 mr-2" />
+                Advanced Menu
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="w-64" align="start">
+                <div class="px-2 py-1.5">
+                  <p class="text-sm font-semibold">John Doe</p>
+                  <p class="text-xs text-muted-foreground">john@example.com</p>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Quick Actions</DropdownMenuLabel>
+                <DropdownMenuItem>
+                  <Icon name="lucide:zap" class="h-4 w-4 mr-2 text-warning" />
+                  Quick command
+                  <span class="ml-auto text-xs text-muted-foreground">⌘K</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Icon name="lucide:search" class="h-4 w-4 mr-2" />
+                  Search
+                  <span class="ml-auto text-xs text-muted-foreground">⌘/</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Preferences</DropdownMenuLabel>
+                <DropdownMenuCheckboxItem 
+                  :checked="true"
+                >
+                  <Icon name="lucide:moon" class="h-4 w-4 mr-2" />
+                  Dark mode
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem 
+                  :checked="false"
+                >
+                  <Icon name="lucide:bell" class="h-4 w-4 mr-2" />
+                  Notifications
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem class="text-destructive focus:text-destructive">
+                  <Icon name="lucide:log-out" class="h-4 w-4 mr-2" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </details>
