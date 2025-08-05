@@ -7,18 +7,60 @@ export const useTheme = () => {
     httpOnly: false,
     sameSite: 'lax',
     secure: false, // Set to true in production
-    maxAge: 60 * 60 * 24 * 365 // 1 year
+    maxAge: 60 * 60 * 24 * 365, // 1 year
+    default: () => 'system' // Default to system theme
   })
   
   // Current theme state
   const currentTheme = useState<string>('currentTheme', () => {
-    // SSR: Use cookie value if available
-    if (themeCookie.value) {
-      return themeCookie.value
-    }
-    // Default to light theme
-    return 'light'
+    // SSR: Use cookie value if available, otherwise default to system
+    return themeCookie.value || 'system'
   })
+  
+  // System theme detection
+  const systemTheme = ref<'light' | 'dark'>('light')
+  
+  // Initialize system theme detection on client
+  if (import.meta.client) {
+    // Set initial system theme
+    systemTheme.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      systemTheme.value = e.matches ? 'dark' : 'light'
+      // If current theme is system, update DOM
+      if (currentTheme.value === 'system') {
+        updateDOMTheme()
+      }
+    }
+    
+    mediaQuery.addEventListener('change', handleSystemThemeChange)
+    
+    // Cleanup listener on unmount
+    onUnmounted(() => {
+      mediaQuery.removeEventListener('change', handleSystemThemeChange)
+    })
+  }
+  
+  // Resolved theme (what actually gets applied to DOM)
+  const resolvedTheme = computed(() => {
+    if (currentTheme.value === 'system') {
+      return systemTheme.value
+    }
+    return currentTheme.value
+  })
+  
+  // Update DOM with current theme
+  const updateDOMTheme = () => {
+    if (!import.meta.client) return
+    
+    const resolved = resolvedTheme.value
+    document.documentElement.setAttribute('data-theme', resolved)
+    
+    // Also update localStorage for redundancy
+    localStorage.setItem('theme', currentTheme.value)
+  }
   
   // Set theme function
   const setTheme = (themeName: string) => {
@@ -29,27 +71,29 @@ export const useTheme = () => {
     themeCookie.value = themeName
     
     // Update DOM if on client
-    if (import.meta.client) {
-      document.documentElement.setAttribute('data-theme', themeName)
-      // Also update localStorage for redundancy
-      localStorage.setItem('theme', themeName)
-    }
+    updateDOMTheme()
   }
   
   // Initialize theme on client
   const initializeTheme = () => {
     if (!import.meta.client) return
     
-    const savedTheme = themeCookie.value || localStorage.getItem('theme')
+    let themeToSet = currentTheme.value
     
-    if (savedTheme && savedTheme !== 'system') {
-      setTheme(savedTheme)
-    } else {
-      // Handle system theme
-      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches
-      const systemTheme = prefersLight ? 'light' : 'dark'
-      setTheme(systemTheme)
+    // Check localStorage as fallback
+    const localStorageTheme = localStorage.getItem('theme')
+    if (!themeCookie.value && localStorageTheme) {
+      themeToSet = localStorageTheme
     }
+    
+    // If still no theme or invalid theme, default to system
+    const validThemes = themes.map(t => t.name).concat(['system'])
+    if (!themeToSet || !validThemes.includes(themeToSet)) {
+      themeToSet = 'system'
+    }
+    
+    // Set the theme (this will update DOM and cookie)
+    setTheme(themeToSet)
   }
   
   // Add theme transition class
@@ -75,7 +119,7 @@ export const useTheme = () => {
   
   // Check if current theme is dark
   const isDark = computed(() => {
-    return isThemeDark(currentTheme.value)
+    return isThemeDark(resolvedTheme.value)
   })
   
   // Toggle between light and dark
@@ -84,10 +128,20 @@ export const useTheme = () => {
     setThemeWithTransition(newTheme)
   }
   
+  // Auto-initialize theme on client
+  if (import.meta.client) {
+    // Use nextTick to ensure DOM is ready
+    nextTick(() => {
+      initializeTheme()
+    })
+  }
+  
   return {
     themes: readonly(themes),
     themeCategories: readonly(themeCategories),
     currentTheme: readonly(currentTheme),
+    resolvedTheme: readonly(resolvedTheme),
+    systemTheme: readonly(systemTheme),
     currentThemeObject: readonly(currentThemeObject),
     isDark: readonly(isDark),
     setTheme,
