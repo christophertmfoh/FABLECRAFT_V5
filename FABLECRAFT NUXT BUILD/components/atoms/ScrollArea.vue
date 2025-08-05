@@ -1,9 +1,5 @@
 <template>
-  <div
-    ref="viewportRef"
-    :class="viewportClasses"
-    :style="viewportStyles"
-  >
+  <div ref="viewportRef" :class="viewportClasses" :style="viewportStyles">
     <div :class="contentClasses">
       <slot />
     </div>
@@ -51,15 +47,15 @@ const overflowClasses = {
 // Compute viewport styles
 const viewportStyles = computed(() => {
   const styles: Record<string, string> = {}
-  
+
   if (props.maxHeight) {
     styles.maxHeight = props.maxHeight
   }
-  
+
   if (props.maxWidth) {
     styles.maxWidth = props.maxWidth
   }
-  
+
   return styles
 })
 
@@ -68,21 +64,21 @@ const viewportClasses = computed(() => {
   return cn(
     // Base classes
     'relative',
-    
+
     // Overflow classes
     overflowClasses[props.orientation],
-    
+
     // Scrollbar styling - using custom CSS classes
     scrollbarSizeClasses[props.scrollbarSize],
     'scrollbar-track-transparent',
     'scrollbar-thumb-muted-foreground/20',
     'hover:scrollbar-thumb-muted-foreground/30',
     'scrollbar-corner-transparent',
-    
+
     // Scrollbar visibility
     props.scrollbarVariant === 'hover' && 'scrollbar-hover',
     props.scrollbarVariant === 'always' && 'scrollbar-always',
-    
+
     // Custom classes
     props.class
   )
@@ -90,9 +86,7 @@ const viewportClasses = computed(() => {
 
 // Compute content classes
 const contentClasses = computed(() => {
-  return cn(
-    props.contentClass
-  )
+  return cn(props.contentClass)
 })
 
 // Expose scroll methods

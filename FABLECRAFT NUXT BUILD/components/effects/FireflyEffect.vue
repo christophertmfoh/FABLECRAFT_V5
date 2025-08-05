@@ -37,7 +37,7 @@ interface Firefly {
 const props = withDefaults(defineProps<FireflyProps>(), {
   enabled: true,
   count: 12,
-  performanceMode: 'medium'
+  performanceMode: 'medium',
 })
 
 const containerRef = ref<HTMLElement>()
@@ -74,29 +74,29 @@ const fireflyPositions = [
   // Additional positions for 13-15 fireflies
   { x: 10, variant: 'bright', delay: 28.1 },
   { x: 42, variant: 'normal', delay: 29.7 },
-  { x: 95, variant: 'small', delay: 31.2 }
+  { x: 95, variant: 'small', delay: 31.2 },
 ]
 
 // Create fireflies based on count - computed so it's reactive
 const fireflies = computed<Firefly[]>(() => {
   if (!props.enabled) return []
-  
+
   const actualCount = Math.min(props.count, 15) // Max 15 (sweet spot)
   const limits = {
     low: 5,
     medium: 10,
-    high: 15
+    high: 15,
   }
   const limit = limits[props.performanceMode] || 8
   const finalCount = Math.min(limit, actualCount)
-  
+
   return fireflyPositions.slice(0, finalCount).map((pos, index) => {
     const durations = {
       small: 18,
       normal: 14,
-      bright: 10
+      bright: 10,
     }
-    
+
     return {
       id: index,
       x: pos.x,
@@ -106,8 +106,8 @@ const fireflies = computed<Firefly[]>(() => {
       style: {
         '--firefly-x': `${pos.x}%`,
         '--firefly-delay': `${pos.delay}s`,
-        '--firefly-duration': `${durations[pos.variant]}s`
-      }
+        '--firefly-duration': `${durations[pos.variant]}s`,
+      },
     }
   })
 })
@@ -119,18 +119,21 @@ onMounted(() => {
   if (import.meta.client && containerRef.value) {
     // Start visible for immediate effect
     isVisible.value = true
-    
+
     // Create intersection observer for performance optimization
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        isVisible.value = entry.isIntersecting
-      })
-    }, {
-      threshold: 0.1
-    })
-    
+    observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          isVisible.value = entry.isIntersecting
+        })
+      },
+      {
+        threshold: 0.1,
+      }
+    )
+
     observer.observe(containerRef.value)
-    
+
     // Initialize animations
     setTimeout(() => {
       isInitialized.value = true

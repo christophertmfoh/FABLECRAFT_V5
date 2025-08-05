@@ -2,10 +2,11 @@
 
 ## Description
 
-**Component Purpose:** 
+**Component Purpose:**
 A sticky navigation header that provides primary site navigation, authentication controls, and theme switching. The component adapts its display based on user authentication status and provides contextual navigation options.
 
 **Behavior:**
+
 - Sticky positioning with backdrop blur effect
 - Responsive design with mobile-first approach
 - Conditional rendering based on authentication state
@@ -17,18 +18,19 @@ A sticky navigation header that provides primary site navigation, authentication
 
 ### Nuxt/Vue Approach vs React Patterns
 
-| React Pattern | Vue/Nuxt Equivalent | Rationale |
-|---------------|-------------------|-----------|
-| `useState()` | `ref()` / `reactive()` | Vue's reactivity system |
-| `useCallback()` | `computed()` | Cached computed values |
-| `onClick` handlers | `@click` event handlers | Vue event syntax |
-| Conditional `&&` rendering | `v-if` / `v-show` | Vue's template directives |
-| Props destructuring | `defineProps<T>()` | Vue 3 Composition API |
-| `React.lazy()` | Dynamic imports with `<Suspense>` | Nuxt auto-imports |
-| Error boundaries | `onErrorCaptured()` | Vue's error handling |
-| `className` prop | `:class` binding | Vue class binding |
+| React Pattern              | Vue/Nuxt Equivalent               | Rationale                 |
+| -------------------------- | --------------------------------- | ------------------------- |
+| `useState()`               | `ref()` / `reactive()`            | Vue's reactivity system   |
+| `useCallback()`            | `computed()`                      | Cached computed values    |
+| `onClick` handlers         | `@click` event handlers           | Vue event syntax          |
+| Conditional `&&` rendering | `v-if` / `v-show`                 | Vue's template directives |
+| Props destructuring        | `defineProps<T>()`                | Vue 3 Composition API     |
+| `React.lazy()`             | Dynamic imports with `<Suspense>` | Nuxt auto-imports         |
+| Error boundaries           | `onErrorCaptured()`               | Vue's error handling      |
+| `className` prop           | `:class` binding                  | Vue class binding         |
 
 ### Key Differences
+
 1. **Auto-imports**: No manual component imports in Nuxt
 2. **Composables**: Use `useSupabaseUser()` instead of React context
 3. **Routing**: Use `navigateTo()` instead of React Router
@@ -38,6 +40,7 @@ A sticky navigation header that provides primary site navigation, authentication
 ## Atoms Required
 
 ### ✅ Existing Atoms
+
 - **AtomsButton** (Button.vue) - Primary action buttons
 - **AtomsAtomIcon** (AtomIcon.vue) - Lucide icons (Feather, UserCircle, etc.)
 - **AtomsDropdownMenu** (DropdownMenu.vue) - Dropdown container
@@ -47,14 +50,13 @@ A sticky navigation header that provides primary site navigation, authentication
 - **AtomsContainer** (Container.vue) - Layout container
 
 ### ❌ Missing Atoms (Need Creation)
+
 1. **ANavigationLogo** - Brand logo with icon and text
    - Props: `onClick?: () => void`
    - Features: Hover animations, accessibility
-   
 2. **ANavigationItem** - Individual navigation link
    - Props: `label: string, href?: string, active?: boolean, onClick?: () => void`
    - Features: Active states, hover effects
-   
 3. **AThemeToggle** - Theme switching component
    - Props: None (uses useTheme composable)
    - Features: Dropdown with theme options
@@ -62,14 +64,13 @@ A sticky navigation header that provides primary site navigation, authentication
 ## Molecules Required
 
 ### ❌ Missing Molecules (Need Creation)
+
 1. **MNavigationMenu** - Main navigation links group
    - Composition: 5x ANavigationItem
    - Props: `items: NavigationItem[], onNavigate?: (view: string) => void`
-   
 2. **MUserDropdown** - Authenticated user menu
    - Composition: AtomsDropdownMenu + AtomsDropdownMenuItem + AtomsAtomIcon
    - Props: `user: User, onLogout: () => Promise<void>, onNavigate: (view: string) => void`
-   
 3. **MAuthButton** - Sign in/up button
    - Composition: AtomsButton + AtomsAtomIcon
    - Props: `text?: string, onClick: () => void`
@@ -88,6 +89,7 @@ ONavigationHeader
 ```
 
 ### Responsive Behavior
+
 - **Desktop**: Full navigation menu visible
 - **Mobile**: Navigation menu hidden (future: hamburger menu)
 - **Sticky**: backdrop-blur, shadow on scroll
@@ -95,13 +97,14 @@ ONavigationHeader
 ## Props & Events
 
 ### NavigationHeader Props Interface
+
 ```typescript
 interface NavigationHeaderProps {
   // Configuration
   showAuthButton?: boolean
   authButtonText?: string
   showNavItems?: boolean
-  
+
   // User state
   isAuthenticated?: boolean
   user?: {
@@ -109,43 +112,48 @@ interface NavigationHeaderProps {
     email?: string
     id?: string
   } | null
-  
+
   // Event handlers
   onAuthClick?: () => void
   onLogout?: () => Promise<void>
   onNavigate?: (view: string) => void
-  
+
   // Styling
   className?: string
 }
 ```
 
 ### Emitted Events
+
 ```typescript
 const emit = defineEmits<{
   'auth:click': []
   'auth:logout': []
-  'navigate': [view: string]
+  navigate: [view: string]
 }>()
 ```
 
 ## State Management
 
 ### Local State (ref/reactive)
+
 - Navigation menu visibility (mobile)
 - Loading states for logout
 - Dropdown open/closed states
 
 ### Composables
+
 - `useSupabaseUser()` - User authentication state
 - `useTheme()` - Theme management
 - `useRouter()` / `navigateTo()` - Navigation
 
 ### Pinia (if needed)
+
 - Authentication store for complex auth flows
 - Navigation state for multi-step processes
 
 ### SSR Considerations
+
 - Use `useState()` for SSR-safe state
 - Authentication state from Supabase module
 - Theme state from existing useTheme composable
@@ -155,12 +163,10 @@ const emit = defineEmits<{
 1. **Semantic HTML**
    - `<nav>` element with `role="navigation"`
    - `aria-label="Main navigation"`
-   
 2. **Keyboard Navigation**
    - Tab order: Logo → Nav items → Auth → Theme
    - Enter/Space for activation
    - Escape to close dropdowns
-   
 3. **Screen Readers**
    - `aria-label` for icon buttons
    - `aria-expanded` for dropdown states
@@ -176,10 +182,8 @@ const emit = defineEmits<{
 1. **Lazy Loading**
    - Theme toggle dropdown content
    - User dropdown menu items
-   
 2. **Event Delegation**
    - Single event handler for navigation items
-   
 3. **Computed Properties**
    - Cached class computations
    - Memoized navigation items
@@ -187,7 +191,7 @@ const emit = defineEmits<{
 ## Migration Priority
 
 1. **Phase 1**: Create missing atoms (ANavigationLogo, ANavigationItem, AThemeToggle)
-2. **Phase 2**: Build molecules (MNavigationMenu, MUserDropdown, MAuthButton) 
+2. **Phase 2**: Build molecules (MNavigationMenu, MUserDropdown, MAuthButton)
 3. **Phase 3**: Assemble organism (ONavigationHeader)
 4. **Phase 4**: Integration in pages/index.vue
 5. **Phase 5**: Testing and refinement

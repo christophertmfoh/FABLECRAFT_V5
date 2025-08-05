@@ -17,21 +17,21 @@ const headingVariants = cva(
         // H1 sizes
         h1: 'text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl leading-[1.1]',
         'h1-compact': 'text-3xl sm:text-4xl lg:text-5xl leading-[1.1]',
-        
+
         // H2 sizes
         h2: 'text-golden-3xl sm:text-golden-4xl lg:text-golden-5xl xl:text-6xl leading-[1.2]',
         'h2-compact': 'text-2xl sm:text-3xl lg:text-4xl leading-[1.2]',
         'h2-display': 'text-4xl md:text-5xl leading-[1.2]',
-        
+
         // H3 sizes
         h3: 'text-2xl font-bold',
         'h3-section': 'text-sm font-semibold uppercase tracking-wider',
-        
+
         // H4-H6 sizes
         h4: 'text-golden-lg font-bold',
         h5: 'text-base font-bold',
         h6: 'text-sm font-bold',
-        
+
         // Custom sizes
         display: 'text-golden-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05]',
         hero: 'text-golden-4xl sm:text-golden-5xl lg:text-golden-6xl leading-[1.1]',
@@ -57,12 +57,19 @@ const headingVariants = cva(
 // Component props
 interface HeadingProps {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'span'
-  size?: 
-    | 'h1' | 'h1-compact' 
-    | 'h2' | 'h2-compact' | 'h2-display'
-    | 'h3' | 'h3-section'
-    | 'h4' | 'h5' | 'h6'
-    | 'display' | 'hero'
+  size?:
+    | 'h1'
+    | 'h1-compact'
+    | 'h2'
+    | 'h2-compact'
+    | 'h2-display'
+    | 'h3'
+    | 'h3-section'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'display'
+    | 'hero'
   gradient?: boolean
   align?: 'left' | 'center' | 'right'
   class?: string | Record<string, boolean> | string[]

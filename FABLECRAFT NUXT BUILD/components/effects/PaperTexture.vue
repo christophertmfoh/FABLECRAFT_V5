@@ -1,6 +1,6 @@
 <template>
-  <div 
-    v-if="enabled" 
+  <div
+    v-if="enabled"
     class="paper-texture"
     :class="{ 'paper-texture-transitioning': isTransitioning }"
     aria-hidden="true"
@@ -13,19 +13,22 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  enabled: true
+  enabled: true,
 })
 
 // Track transition state for smooth toggling
 const isTransitioning = ref(false)
 
 // Watch for enabled state changes to trigger transition
-watch(() => props.enabled, () => {
-  isTransitioning.value = true
-  setTimeout(() => {
-    isTransitioning.value = false
-  }, 600) // Match CSS transition duration
-})
+watch(
+  () => props.enabled,
+  () => {
+    isTransitioning.value = true
+    setTimeout(() => {
+      isTransitioning.value = false
+    }, 600) // Match CSS transition duration
+  }
+)
 
 // SSR-safe initialization
 onMounted(() => {

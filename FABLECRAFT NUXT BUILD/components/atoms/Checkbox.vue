@@ -15,7 +15,7 @@
       :aria-describedby="description ? `${componentId}-description` : undefined"
       class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       v-bind="$attrs"
-    >
+    />
     <div v-if="label || description || $slots.default" class="ml-3">
       <label
         v-if="label || $slots.default"
@@ -57,13 +57,13 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   modelValue: false,
   value: true,
   disabled: false,
-  required: false
+  required: false,
 })
 
 // Define emits
 const emit = defineEmits<{
   'update:modelValue': [value: boolean | string | number]
-  'change': [event: Event]
+  change: [event: Event]
 }>()
 
 // Generate unique ID for accessibility
@@ -79,7 +79,7 @@ const internalValue = computed({
   },
   set(newValue) {
     emit('update:modelValue', newValue)
-  }
+  },
 })
 
 // Watch for changes to emit change event
@@ -92,6 +92,6 @@ watch(internalValue, () => {
 
 // Expose checkbox element
 defineExpose({
-  checkboxRef
+  checkboxRef,
 })
 </script>

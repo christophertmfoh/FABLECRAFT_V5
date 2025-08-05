@@ -19,7 +19,7 @@ interface DropdownMenuProps {
 // Define props with defaults
 const props = withDefaults(defineProps<DropdownMenuProps>(), {
   defaultOpen: false,
-  modal: true
+  modal: true,
 })
 
 // Provide dropdown context to children
@@ -32,9 +32,6 @@ if (props.defaultOpen) {
 
 // Computed classes
 const dropdownClasses = computed(() => {
-  return cn(
-    'relative inline-block text-left',
-    props.class
-  )
+  return cn('relative inline-block text-left', props.class)
 })
 </script>

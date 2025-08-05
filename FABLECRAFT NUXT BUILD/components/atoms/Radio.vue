@@ -17,7 +17,7 @@
       class="h-4 w-4 border-gray-300 text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       v-bind="$attrs"
       @change="handleChange"
-    >
+    />
     <div v-if="label || description || $slots.default" class="ml-3">
       <label
         v-if="label || $slots.default"
@@ -61,7 +61,7 @@ const props = defineProps<RadioProps>()
 // Define emits
 const emit = defineEmits<{
   'update:modelValue': [value: string | number | boolean]
-  'change': [event: Event]
+  change: [event: Event]
 }>()
 
 // Generate unique ID for accessibility
@@ -83,7 +83,7 @@ const internalValue = computed({
   set() {
     // For radio buttons, we emit the value when selected
     emit('update:modelValue', props.value)
-  }
+  },
 })
 
 // Handle change event
@@ -96,6 +96,6 @@ const handleChange = (event: Event) => {
 
 // Expose radio element
 defineExpose({
-  radioRef
+  radioRef,
 })
 </script>

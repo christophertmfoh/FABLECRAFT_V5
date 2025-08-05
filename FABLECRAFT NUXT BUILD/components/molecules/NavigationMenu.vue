@@ -1,5 +1,5 @@
 <template>
-  <nav 
+  <nav
     class="navigation-menu"
     :class="navigationMenuClasses"
     role="navigation"
@@ -66,32 +66,32 @@ const defaultNavigationItems: NavigationItem[] = [
     id: 'community',
     label: 'COMMUNITY',
     href: '/community',
-    ariaLabel: 'Navigate to Community page'
+    ariaLabel: 'Navigate to Community page',
   },
   {
     id: 'gallery',
-    label: 'GALLERY', 
+    label: 'GALLERY',
     href: '/gallery',
-    ariaLabel: 'Navigate to Gallery page'
+    ariaLabel: 'Navigate to Gallery page',
   },
   {
     id: 'library',
     label: 'LIBRARY',
-    href: '/library', 
-    ariaLabel: 'Navigate to Library page'
+    href: '/library',
+    ariaLabel: 'Navigate to Library page',
   },
   {
     id: 'about',
     label: 'ABOUT',
     href: '/about',
-    ariaLabel: 'Navigate to About page'
+    ariaLabel: 'Navigate to About page',
   },
   {
     id: 'contact',
     label: 'CONTACT',
     href: '/contact',
-    ariaLabel: 'Navigate to Contact page'
-  }
+    ariaLabel: 'Navigate to Contact page',
+  },
 ]
 
 // Use provided items or defaults
@@ -102,17 +102,13 @@ const navigationItems = computed(() => {
 // Handle navigation click
 const handleNavigate = (item: NavigationItem, href?: string) => {
   if (item.disabled) return
-  
+
   emit('navigate', item, href)
 }
 
 // Compute navigation menu classes
 const navigationMenuClasses = computed(() => {
-  return cn(
-    'flex items-center',
-    props.showItems ? 'block' : 'hidden',
-    props.class
-  )
+  return cn('flex items-center', props.showItems ? 'block' : 'hidden', props.class)
 })
 </script>
 

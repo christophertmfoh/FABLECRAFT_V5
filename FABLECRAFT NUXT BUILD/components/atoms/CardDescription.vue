@@ -14,9 +14,6 @@ interface CardDescriptionProps {
 const props = defineProps<CardDescriptionProps>()
 
 const descriptionClasses = computed(() => {
-  return cn(
-    'text-sm text-muted-foreground',
-    props.class
-  )
+  return cn('text-sm text-muted-foreground', props.class)
 })
 </script>

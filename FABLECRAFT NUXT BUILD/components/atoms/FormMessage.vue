@@ -6,11 +6,7 @@
     role="alert"
     :aria-live="type === 'error' ? 'assertive' : 'polite'"
   >
-    <Icon
-      v-if="showIcon && iconName"
-      :name="iconName"
-      :class="iconClasses"
-    />
+    <Icon v-if="showIcon && iconName" :name="iconName" :class="iconClasses" />
     <span>
       <slot>{{ message }}</slot>
     </span>
@@ -34,7 +30,7 @@ interface FormMessageProps {
 // Define props with defaults
 const props = withDefaults(defineProps<FormMessageProps>(), {
   type: 'default',
-  showIcon: true
+  showIcon: true,
 })
 
 // Icon mapping for different types
@@ -43,7 +39,7 @@ const iconMap = {
   success: 'lucide:check-circle',
   warning: 'lucide:alert-triangle',
   info: 'lucide:info',
-  default: ''
+  default: '',
 }
 
 // Computed icon name
@@ -60,23 +56,16 @@ const typeClasses = {
   success: 'text-success',
   warning: 'text-warning',
   info: 'text-info',
-  default: 'text-muted-foreground'
+  default: 'text-muted-foreground',
 }
 
 // Computed message classes
 const messageClasses = computed(() => {
-  return cn(
-    baseClasses,
-    typeClasses[props.type],
-    props.class
-  )
+  return cn(baseClasses, typeClasses[props.type], props.class)
 })
 
 // Icon classes
 const iconClasses = computed(() => {
-  return cn(
-    'h-3.5 w-3.5 flex-shrink-0',
-    props.type === 'default' && 'opacity-70'
-  )
+  return cn('h-3.5 w-3.5 flex-shrink-0', props.type === 'default' && 'opacity-70')
 })
 </script>

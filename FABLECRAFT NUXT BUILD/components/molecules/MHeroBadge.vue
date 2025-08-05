@@ -1,21 +1,8 @@
 <template>
-  <div 
-    :class="badgeContainerClasses"
-    role="banner"
-    aria-label="Product announcement badge"
-  >
-    <APulsingDot 
-      :size="dotSize"
-      :color="dotColor"
-      :speed="dotSpeed"
-      :intensity="dotIntensity"
-    />
-    
-    <Badge
-      :class="badgeClasses"
-      v-bind="$attrs"
-      @click="handleBadgeClick"
-    >
+  <div :class="badgeContainerClasses" role="banner" aria-label="Product announcement badge">
+    <APulsingDot :size="dotSize" :color="dotColor" :speed="dotSpeed" :intensity="dotIntensity" />
+
+    <Badge :class="badgeClasses" v-bind="$attrs" @click="handleBadgeClick">
       <slot>{{ text }}</slot>
     </Badge>
   </div>
@@ -48,10 +35,10 @@ const props = withDefaults(defineProps<HeroBadgeProps>(), {
   variant: 'default',
   size: 'base',
   dotColor: 'primary',
-  dotSpeed: 'normal', 
+  dotSpeed: 'normal',
   dotIntensity: 'normal',
   clickable: false,
-  className: ''
+  className: '',
 })
 
 const emit = defineEmits<HeroBadgeEmits>()
@@ -59,10 +46,10 @@ const emit = defineEmits<HeroBadgeEmits>()
 // Computed properties
 const badgeContainerClasses = computed(() => {
   const sizeClasses = {
-    sm: 'gap-1.5',        // 6px - small gap
-    base: 'gap-2.5',      // 10px - perfect gap for base size
-    md: 'gap-3',          // 12px - increased from gap-2
-    lg: 'gap-4'           // 16px - increased from gap-3
+    sm: 'gap-1.5', // 6px - small gap
+    base: 'gap-2.5', // 10px - perfect gap for base size
+    md: 'gap-3', // 12px - increased from gap-2
+    lg: 'gap-4', // 16px - increased from gap-3
   }
 
   return cn(
@@ -76,17 +63,19 @@ const badgeContainerClasses = computed(() => {
 
 const badgeClasses = computed(() => {
   const variantClasses = {
-    default: 'bg-card/95 text-foreground border-border backdrop-blur-md font-semibold shadow-md hover:shadow-lg transition-shadow duration-300',
+    default:
+      'bg-card/95 text-foreground border-border backdrop-blur-md font-semibold shadow-md hover:shadow-lg transition-shadow duration-300',
     accent: 'bg-accent/95 text-accent-foreground border-accent backdrop-blur-md',
-    secondary: 'bg-secondary/95 text-secondary-foreground border-secondary backdrop-blur-md', 
-    outline: 'bg-transparent text-foreground border-border hover:bg-accent hover:text-accent-foreground'
+    secondary: 'bg-secondary/95 text-secondary-foreground border-secondary backdrop-blur-md',
+    outline:
+      'bg-transparent text-foreground border-border hover:bg-accent hover:text-accent-foreground',
   }
 
   const sizeClasses = {
     sm: 'text-xs px-2 py-1',
-    base: 'text-sm px-3 py-1.5',  // New size between sm and md - perfect middle ground
-    md: 'text-base px-4 py-2',  // Matches React original text-base px-4 py-2
-    lg: 'text-lg px-5 py-2.5'
+    base: 'text-sm px-3 py-1.5', // New size between sm and md - perfect middle ground
+    md: 'text-base px-4 py-2', // Matches React original text-base px-4 py-2
+    lg: 'text-lg px-5 py-2.5',
   }
 
   return cn(
@@ -102,11 +91,11 @@ const badgeClasses = computed(() => {
 const dotSize = computed(() => {
   const dotSizes = {
     sm: 'sm',
-    base: 'sm',  // Use small dot for base badge size
+    base: 'sm', // Use small dot for base badge size
     md: 'md',
-    lg: 'lg'
+    lg: 'lg',
   } as const
-  
+
   return dotSizes[props.size]
 })
 
@@ -127,7 +116,7 @@ const handleBadgeClick = (event: MouseEvent) => {
 /* Improved focus handling */
 .badge:focus-visible {
   outline: none;
-  box-shadow: 
+  box-shadow:
     0 0 0 2px hsl(var(--background)),
     0 0 0 4px hsl(var(--primary));
 }

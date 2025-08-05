@@ -1,7 +1,7 @@
 <template>
   <button
-    ref="triggerEl"
     :id="context.triggerId"
+    ref="triggerEl"
     :aria-expanded="context.open.value"
     :aria-controls="context.contentId"
     :aria-haspopup="true"
@@ -27,7 +27,7 @@ interface DropdownMenuTriggerProps {
 
 // Define props with defaults
 const props = withDefaults(defineProps<DropdownMenuTriggerProps>(), {
-  disabled: false
+  disabled: false,
 })
 
 // Get dropdown context

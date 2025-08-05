@@ -1,23 +1,11 @@
 <template>
-  <div 
-    :class="headingContainerClasses"
-    role="heading"
-    :aria-level="headingLevel"
-  >
-    <component
-      :is="headingTag"
-      :id="headingId"
-      :class="headingClasses"
-      v-bind="$attrs"
-    >
+  <div :class="headingContainerClasses" role="heading" :aria-level="headingLevel">
+    <component :is="headingTag" :id="headingId" :class="headingClasses" v-bind="$attrs">
       <!-- Regular text part -->
-      <span 
-        v-if="title"
-        class="text-foreground"
-      >
+      <span v-if="title" class="text-foreground">
         {{ title }}
       </span>
-      
+
       <!-- Highlighted gradient text part -->
       <AGradientText
         v-if="highlightText"
@@ -30,17 +18,13 @@
       >
         {{ highlightText }}
       </AGradientText>
-      
+
       <!-- Slot for custom content -->
       <slot />
     </component>
-    
+
     <!-- Optional subheading -->
-    <p 
-      v-if="subheading"
-      :class="subheadingClasses"
-      :aria-describedby="headingId"
-    >
+    <p v-if="subheading" :class="subheadingClasses" :aria-describedby="headingId">
       {{ subheading }}
     </p>
   </div>
@@ -85,7 +69,7 @@ const props = withDefaults(defineProps<HeroHeadingProps>(), {
   gradientIntensity: 'normal',
   gradientAnimation: 'none',
   spacing: 'normal',
-  className: ''
+  className: '',
 })
 
 // Computed properties
@@ -93,17 +77,17 @@ const headingContainerClasses = computed(() => {
   const alignmentClasses = {
     left: 'text-left',
     center: 'text-center',
-    right: 'text-right'
+    right: 'text-right',
   }
-  
+
   const spacingClasses = {
-    tight: 'space-y-1',        // 4px - minimal spacing
-    normal: 'space-y-2',       // 8px - standard spacing  
-    relaxed: 'space-y-3'       // 12px - modest spacing (reduced from space-y-8)
+    tight: 'space-y-1', // 4px - minimal spacing
+    normal: 'space-y-2', // 8px - standard spacing
+    relaxed: 'space-y-3', // 12px - modest spacing (reduced from space-y-8)
   }
 
   return cn(
-    'heading-group flex flex-col pb-2',  // Reduced from pb-6 to pb-2 since webkit clipping is fixed
+    'heading-group flex flex-col pb-2', // Reduced from pb-6 to pb-2 since webkit clipping is fixed
     alignmentClasses[props.alignment],
     spacingClasses[props.spacing],
     props.className
@@ -112,50 +96,43 @@ const headingContainerClasses = computed(() => {
 
 const headingClasses = computed(() => {
   const variantClasses = {
-    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm',  // Removed mb-4 since webkit fix handles clipping
-    compact: 'font-bold leading-tight tracking-normal', 
-    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg'  // Removed mb-6 since webkit fix handles clipping
+    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm', // Removed mb-4 since webkit fix handles clipping
+    compact: 'font-bold leading-tight tracking-normal',
+    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg', // Removed mb-6 since webkit fix handles clipping
   }
-  
+
   const sizeClasses = {
     sm: 'text-2xl sm:text-3xl lg:text-4xl',
     md: 'text-3xl sm:text-4xl lg:text-5xl',
     lg: 'text-4xl sm:text-5xl lg:text-6xl',
     xl: 'text-5xl sm:text-6xl lg:text-7xl xl:text-8xl',
-    '2xl': 'text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl'  // Matches React original exactly
+    '2xl': 'text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl', // Matches React original exactly
   }
 
-  return cn(
-    'transition-all duration-300',
-    variantClasses[props.variant],
-    sizeClasses[props.size]
-  )
+  return cn('transition-all duration-300', variantClasses[props.variant], sizeClasses[props.size])
 })
 
 const highlightClasses = computed(() => {
-  return cn(
-    'inline-block',
-    'transition-all duration-300'
-  )
+  return cn('inline-block', 'transition-all duration-300')
 })
 
 const subheadingClasses = computed(() => {
   const alignmentClasses = {
     left: 'text-left',
     center: 'text-center max-w-4xl mx-auto',
-    right: 'text-right'
+    right: 'text-right',
   }
 
   const sizeClasses = {
     sm: 'text-sm sm:text-base',
-    md: 'text-base sm:text-lg', 
+    md: 'text-base sm:text-lg',
     lg: 'text-lg sm:text-xl',
     xl: 'text-xl sm:text-2xl lg:text-3xl',
-    '2xl': 'text-2xl sm:text-3xl lg:text-4xl'
+    '2xl': 'text-2xl sm:text-3xl lg:text-4xl',
   }
 
   return cn(
-    'text-muted-foreground leading-normal font-medium',  // Changed from leading-relaxed to leading-normal
+    'text-muted-foreground leading-normal font-medium', // Changed from leading-relaxed to leading-normal
     'transition-all duration-300',
     alignmentClasses[props.alignment],
     sizeClasses[props.size]
@@ -183,7 +160,8 @@ const subheadingClasses = computed(() => {
 }
 
 /* Improved text rendering */
-.font-black, .font-bold {
+.font-black,
+.font-bold {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -193,7 +171,7 @@ const subheadingClasses = computed(() => {
 @media (min-width: 1280px) {
   .text-9xl {
     font-size: 8rem;
-    line-height: 1.1;  /* Increased from 1 to prevent clipping of descenders */
+    line-height: 1.1; /* Increased from 1 to prevent clipping of descenders */
   }
 }
 
@@ -202,7 +180,7 @@ const subheadingClasses = computed(() => {
   .transition-all {
     transition: none;
   }
-  
+
   .drop-shadow-sm,
   .drop-shadow-lg {
     filter: none;
@@ -215,7 +193,7 @@ const subheadingClasses = computed(() => {
   .drop-shadow-lg {
     filter: none;
   }
-  
+
   .text-muted-foreground {
     color: hsl(var(--foreground));
     opacity: 0.8;
@@ -228,7 +206,7 @@ const subheadingClasses = computed(() => {
   .drop-shadow-lg {
     filter: none;
   }
-  
+
   .text-muted-foreground {
     color: #666;
   }

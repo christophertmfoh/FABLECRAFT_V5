@@ -12,11 +12,7 @@
     @mouseleave="handleMouseLeave"
   >
     <span :class="indicatorClasses">
-      <Icon
-        v-if="checked"
-        name="lucide:check"
-        :class="iconClasses"
-      />
+      <Icon v-if="checked" name="lucide:check" :class="iconClasses" />
     </span>
     <span class="flex-1">
       <slot />
@@ -40,7 +36,7 @@ interface DropdownMenuCheckboxItemProps {
 // Define props with defaults
 const props = withDefaults(defineProps<DropdownMenuCheckboxItemProps>(), {
   checked: false,
-  disabled: false
+  disabled: false,
 })
 
 // Define emits
@@ -109,14 +105,10 @@ const itemClasses = computed(() => {
 })
 
 const indicatorClasses = computed(() => {
-  return cn(
-    'absolute left-2 flex h-3.5 w-3.5 items-center justify-center'
-  )
+  return cn('absolute left-2 flex h-3.5 w-3.5 items-center justify-center')
 })
 
 const iconClasses = computed(() => {
-  return cn(
-    'h-4 w-4'
-  )
+  return cn('h-4 w-4')
 })
 </script>

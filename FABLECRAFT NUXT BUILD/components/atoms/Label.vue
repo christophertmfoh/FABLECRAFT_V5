@@ -42,11 +42,8 @@ const labelClasses = computed(() => {
 
 // Compute required indicator classes
 const requiredClasses = computed(() => {
-  return cn(
-    'text-destructive ml-1',
-    {
-      'text-destructive/50': props.disabled,
-    }
-  )
+  return cn('text-destructive ml-1', {
+    'text-destructive/50': props.disabled,
+  })
 })
 </script>

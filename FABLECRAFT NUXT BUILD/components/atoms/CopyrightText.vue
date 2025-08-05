@@ -11,7 +11,7 @@ import { cn } from '~/components/atoms/Utils'
 // Props interface
 interface CopyrightTextProps {
   company: string
-  startYear?: number    // Optional start year for range (e.g., 2020-2024)
+  startYear?: number // Optional start year for range (e.g., 2020-2024)
   size?: 'sm' | 'md' | 'lg'
   variant?: 'default' | 'subtle'
   class?: string
@@ -21,7 +21,7 @@ interface CopyrightTextProps {
 const props = withDefaults(defineProps<CopyrightTextProps>(), {
   size: 'md',
   variant: 'default',
-  class: ''
+  class: '',
 })
 
 // Get current year
@@ -30,12 +30,12 @@ const getCurrentYear = () => new Date().getFullYear()
 // Computed properties
 const copyrightText = computed(() => {
   const currentYear = getCurrentYear()
-  
+
   // If startYear is provided and different from current year, show range
   if (props.startYear && props.startYear < currentYear) {
     return `© ${props.startYear}-${currentYear} ${props.company}. All rights reserved.`
   }
-  
+
   // Otherwise, just show current year
   return `© ${currentYear} ${props.company}. All rights reserved.`
 })
@@ -44,12 +44,12 @@ const copyrightClasses = computed(() => {
   const sizeClasses = {
     sm: 'text-xs',
     md: 'text-sm',
-    lg: 'text-base'
+    lg: 'text-base',
   }
 
   const variantClasses = {
     default: 'text-foreground/50',
-    subtle: 'text-muted-foreground'
+    subtle: 'text-muted-foreground',
   }
 
   return cn(

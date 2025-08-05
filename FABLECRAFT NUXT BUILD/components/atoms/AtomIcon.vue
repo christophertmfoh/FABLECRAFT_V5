@@ -1,9 +1,5 @@
 <template>
-  <Icon
-    :name="name"
-    :class="iconClasses"
-    :style="customStyle"
-  />
+  <Icon :name="name" :class="iconClasses" :style="customStyle" />
 </template>
 
 <script setup lang="ts">
@@ -34,10 +30,7 @@ const props = withDefaults(defineProps<IconProps>(), {
 
 // Compute icon classes
 const iconClasses = computed(() => {
-  return cn(
-    sizeClasses[props.size],
-    props.class
-  )
+  return cn(sizeClasses[props.size], props.class)
 })
 
 // Compute custom style for color

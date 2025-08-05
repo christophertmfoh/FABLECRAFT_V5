@@ -2,24 +2,15 @@
   <div :class="containerClasses">
     <div :class="contentClasses">
       <!-- Loading spinner -->
-      <Spinner
-        :size="spinnerSize"
-        :class="spinnerClass"
-      />
-      
+      <Spinner :size="spinnerSize" :class="spinnerClass" />
+
       <!-- Loading text -->
-      <p
-        v-if="text || $slots.default"
-        :class="textClasses"
-      >
+      <p v-if="text || $slots.default" :class="textClasses">
         <slot>{{ text }}</slot>
       </p>
-      
+
       <!-- Sub text -->
-      <p
-        v-if="subText"
-        :class="subTextClasses"
-      >
+      <p v-if="subText" :class="subTextClasses">
         {{ subText }}
       </p>
     </div>

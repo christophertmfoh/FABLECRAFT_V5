@@ -6,11 +6,8 @@
         <slot name="copyright">
           <!-- Default copyright content if no slot provided -->
           <div class="flex flex-col sm:flex-row items-center gap-4 text-sm text-foreground/50">
-            <CopyrightText 
-              :company="defaultCompany"
-              :start-year="startYear"
-            />
-            <LegalLinks 
+            <CopyrightText :company="defaultCompany" :start-year="startYear" />
+            <LegalLinks
               v-if="legalLinks.length > 0"
               :links="legalLinks"
               layout="horizontal"
@@ -77,7 +74,7 @@ const props = withDefaults(defineProps<FooterBottomProps>(), {
   followText: 'Follow us',
   layout: 'split',
   variant: 'default',
-  class: ''
+  class: '',
 })
 
 const emit = defineEmits<FooterBottomEmits>()
@@ -87,55 +84,40 @@ const footerBottomClasses = computed(() => {
   const variantClasses = {
     default: 'pt-8 border-t border-border/20',
     minimal: 'pt-6 border-t border-border/10',
-    detailed: 'pt-10 border-t border-border/30'
+    detailed: 'pt-10 border-t border-border/30',
   }
 
-  return cn(
-    'footer-bottom',
-    'w-full',
-    variantClasses[props.variant],
-    props.class
-  )
+  return cn('footer-bottom', 'w-full', variantClasses[props.variant], props.class)
 })
 
 const contentContainerClasses = computed(() => {
   const layoutClasses = {
     stacked: 'flex flex-col items-center gap-6',
     split: 'flex flex-col md:flex-row items-center justify-between gap-6',
-    centered: 'flex flex-col items-center text-center gap-4'
+    centered: 'flex flex-col items-center text-center gap-4',
   }
 
-  return cn(
-    'footer-bottom-content',
-    'w-full',
-    layoutClasses[props.layout]
-  )
+  return cn('footer-bottom-content', 'w-full', layoutClasses[props.layout])
 })
 
 const copyrightSectionClasses = computed(() => {
   const layoutClasses = {
     stacked: 'order-1 w-full text-center',
     split: 'order-1 md:order-1 flex-1 text-left',
-    centered: 'order-1 w-full text-center'
+    centered: 'order-1 w-full text-center',
   }
 
-  return cn(
-    'copyright-section',
-    layoutClasses[props.layout]
-  )
+  return cn('copyright-section', layoutClasses[props.layout])
 })
 
 const socialSectionClasses = computed(() => {
   const layoutClasses = {
     stacked: 'order-2 w-full text-center',
     split: 'order-2 md:order-2 flex-shrink-0 text-right',
-    centered: 'order-2 w-full text-center'
+    centered: 'order-2 w-full text-center',
   }
 
-  return cn(
-    'social-section',
-    layoutClasses[props.layout]
-  )
+  return cn('social-section', layoutClasses[props.layout])
 })
 
 // Event handlers
@@ -179,11 +161,11 @@ const handleSocialClick = (payload: { platform: string; href?: string }) => {
   .footer-bottom-content.md\:flex-row {
     @apply flex-col items-center text-center gap-4;
   }
-  
+
   .copyright-section {
     @apply text-center w-full;
   }
-  
+
   .social-section {
     @apply text-center w-full;
   }

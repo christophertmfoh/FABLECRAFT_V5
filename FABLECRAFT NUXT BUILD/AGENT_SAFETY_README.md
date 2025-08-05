@@ -11,7 +11,7 @@ The following commands are **STRICTLY FORBIDDEN** as they kill ALL Node processe
 ```bash
 # NEVER USE THESE - They kill Cursor's Node:
 killall node          # Kills ALL Node processes
-pkill node            # Kills ALL Node processes  
+pkill node            # Kills ALL Node processes
 kill -9 node          # Force kills ALL Node
 killall -9 node       # Force kills ALL Node
 pkill -9 node         # Force kills ALL Node
@@ -38,6 +38,7 @@ lsof -ti:3050 | xargs kill -TERM    # Kill only process on port 3050
 ### To Stop the Development Server:
 
 1. **Use the safe-stop script**:
+
    ```bash
    npm run safe-stop
    ```
@@ -77,12 +78,14 @@ npm run dev:alt
 ## 📋 DEVELOPMENT WORKFLOW
 
 ### Starting the Server:
+
 ```bash
 npm run dev        # Default port 3000
 npm run dev:alt    # Alternative port 3002
 ```
 
 ### Stopping the Server:
+
 ```bash
 # Option 1: In the terminal running the server
 Ctrl+C
@@ -94,6 +97,7 @@ npm run safe-stop
 ```
 
 ### If Something Goes Wrong:
+
 ```bash
 # Check what's using ports:
 lsof -i :3000
@@ -106,6 +110,7 @@ npx nuxi dev --port 3005
 ## 🔴 CONSEQUENCES OF KILLING NODE
 
 If you kill Node processes:
+
 - ❌ You'll lose connection to the server
 - ❌ Development will stop
 - ❌ You may corrupt the environment

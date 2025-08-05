@@ -1,9 +1,5 @@
 <template>
-  <nav
-    :class="headerClasses"
-    role="navigation"
-    aria-label="Main navigation"
-  >
+  <nav :class="headerClasses" role="navigation" aria-label="Main navigation">
     <Container size="xl" class="py-4">
       <div class="flex items-center justify-between">
         <!-- Brand Logo Section - Using NavigationLogo atom -->
@@ -41,10 +37,10 @@
                   </template>
                   Welcome {{ displayName }}
                   <template #trailing>
-                    <AtomIcon 
-                      name="lucide:chevron-down" 
-                      class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300" 
-                      aria-hidden="true" 
+                    <AtomIcon
+                      name="lucide:chevron-down"
+                      class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300"
+                      aria-hidden="true"
                     />
                   </template>
                 </GradientButton>
@@ -56,7 +52,9 @@
               >
                 <!-- Workspace Section -->
                 <div class="p-2 border-b border-border/20">
-                  <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                  <div
+                    class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
+                  >
                     Workspace
                   </div>
                   <DropdownMenuItem
@@ -64,7 +62,11 @@
                     @select="() => handleNavigate('projects')"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon name="lucide:book-open" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <AtomIcon
+                        name="lucide:book-open"
+                        class="h-4 w-4 text-primary"
+                        aria-hidden="true"
+                      />
                       <div>
                         <div class="font-medium">Creative Workspace</div>
                         <div class="text-xs text-muted-foreground">
@@ -77,7 +79,9 @@
 
                 <!-- Account Section -->
                 <div class="p-2 border-b border-border/20">
-                  <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                  <div
+                    class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
+                  >
                     Account
                   </div>
                   <DropdownMenuItem
@@ -85,12 +89,14 @@
                     @select="() => handleNavigate('profile')"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon name="lucide:user" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <AtomIcon
+                        name="lucide:user"
+                        class="h-4 w-4 text-primary"
+                        aria-hidden="true"
+                      />
                       <div>
                         <div class="font-medium">Profile & Settings</div>
-                        <div class="text-xs text-muted-foreground">
-                          Manage your account
-                        </div>
+                        <div class="text-xs text-muted-foreground">Manage your account</div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -98,7 +104,9 @@
 
                 <!-- Community Section -->
                 <div class="p-2 border-b border-border/20">
-                  <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                  <div
+                    class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
+                  >
                     Community
                   </div>
                   <DropdownMenuItem
@@ -106,12 +114,14 @@
                     @select="() => handleNavigate('community')"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon name="lucide:users" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <AtomIcon
+                        name="lucide:users"
+                        class="h-4 w-4 text-primary"
+                        aria-hidden="true"
+                      />
                       <div>
                         <div class="font-medium">Writer Community</div>
-                        <div class="text-xs text-muted-foreground">
-                          Connect with other writers
-                        </div>
+                        <div class="text-xs text-muted-foreground">Connect with other writers</div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -124,16 +134,18 @@
                     @select="handleLogout"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon name="lucide:log-out" class="h-4 w-4 text-destructive" aria-hidden="true" />
-                      <span class="font-medium text-destructive">
-                        Sign Out
-                      </span>
+                      <AtomIcon
+                        name="lucide:log-out"
+                        class="h-4 w-4 text-destructive"
+                        aria-hidden="true"
+                      />
+                      <span class="font-medium text-destructive"> Sign Out </span>
                     </div>
                   </DropdownMenuItem>
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
-            
+
             <!-- Unauthenticated User Sign In Button -->
             <GradientButton
               v-else
@@ -163,6 +175,7 @@
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
+import { logger } from '~/utils/logger'
 
 // User interface for authentication
 interface User {
@@ -183,11 +196,11 @@ interface NavigationHeaderProps {
   showAuthButton?: boolean
   authButtonText?: string
   showNavItems?: boolean
-  
+
   // User state
   isAuthenticated?: boolean
   user?: User | null
-  
+
   // Styling
   className?: string
 }
@@ -206,22 +219,22 @@ const props = withDefaults(defineProps<NavigationHeaderProps>(), {
 const emit = defineEmits<{
   'auth:click': []
   'auth:logout': []
-  'navigate': [view: string]
+  navigate: [view: string]
   'logo:click': []
 }>()
 
 // Authentication composable
-const user = useSupabaseUser()
+const supabaseUser = useSupabaseUser()
 const supabase = useSupabaseClient()
 
 // Compute authentication state
 const isAuthenticated = computed(() => {
-  return props.isAuthenticated || !!user.value
+  return props.isAuthenticated || !!supabaseUser.value
 })
 
 // Compute display name
 const displayName = computed(() => {
-  return user.value?.user_metadata?.username || user.value?.email?.split('@')[0] || 'User'
+  return supabaseUser.value?.user_metadata?.username || supabaseUser.value?.email?.split('@')[0] || 'User'
 })
 
 // Handle logo click
@@ -242,7 +255,7 @@ const handleLogout = async () => {
     await supabase.auth.signOut()
     emit('auth:logout')
   } catch (error) {
-    console.error('Error during logout:', error)
+    logger.error('Error during logout:', error)
   }
 }
 
@@ -251,7 +264,7 @@ const handleNavigate = (item: any, href?: string) => {
   // If it's a navigation item object, use the id
   const view = typeof item === 'string' ? item : item.id
   emit('navigate', view)
-  
+
   // Navigate to the appropriate route
   if (href) {
     navigateTo(href)
@@ -303,7 +316,7 @@ const headerClasses = computed(() => {
   .transition-all {
     @apply transition-none;
   }
-  
+
   .backdrop-blur-xl {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -326,7 +339,7 @@ const headerClasses = computed(() => {
   .sticky {
     @apply static;
   }
-  
+
   .backdrop-blur-xl {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;

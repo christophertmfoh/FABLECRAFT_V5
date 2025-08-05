@@ -2,17 +2,9 @@
   <DropdownMenu>
     <!-- User Menu Trigger -->
     <DropdownMenuTrigger as-child>
-      <Button
-        :class="triggerClasses"
-        :aria-label="triggerAriaLabel"
-      >
+      <Button :class="triggerClasses" :aria-label="triggerAriaLabel">
         <span class="user-info">
-          <AtomIcon 
-            name="lucide:user-circle"
-            size="sm"
-            class="mr-2"
-            aria-hidden="true"
-          />
+          <AtomIcon name="lucide:user-circle" size="sm" class="mr-2" aria-hidden="true" />
           Welcome {{ displayName }}
           <AtomIcon
             name="lucide:chevron-down"
@@ -25,20 +17,12 @@
     </DropdownMenuTrigger>
 
     <!-- User Menu Content -->
-    <DropdownMenuContent 
-      align="end"
-      :class="contentClasses"
-    >
+    <DropdownMenuContent align="end" :class="contentClasses">
       <!-- Workspace Section -->
       <div class="menu-section">
-        <DropdownMenuLabel>
-          Workspace
-        </DropdownMenuLabel>
-        
-        <DropdownMenuItem
-          :class="menuItemClasses"
-          @click="() => handleNavigate('projects')"
-        >
+        <DropdownMenuLabel> Workspace </DropdownMenuLabel>
+
+        <DropdownMenuItem :class="menuItemClasses" @click="() => handleNavigate('projects')">
           <AtomIcon
             name="lucide:book-open"
             size="sm"
@@ -47,9 +31,7 @@
           />
           <div class="menu-item-content">
             <div class="menu-item-title">Creative Workspace</div>
-            <div class="menu-item-description">
-              Projects, characters & world bible
-            </div>
+            <div class="menu-item-description">Projects, characters & world bible</div>
           </div>
         </DropdownMenuItem>
       </div>
@@ -58,14 +40,9 @@
 
       <!-- Account Section -->
       <div class="menu-section">
-        <DropdownMenuLabel>
-          Account
-        </DropdownMenuLabel>
-        
-        <DropdownMenuItem
-          :class="menuItemClasses"
-          @click="() => handleNavigate('profile')"
-        >
+        <DropdownMenuLabel> Account </DropdownMenuLabel>
+
+        <DropdownMenuItem :class="menuItemClasses" @click="() => handleNavigate('profile')">
           <!-- <AtomIcon
             name="lucide:user"
             size="sm"
@@ -74,9 +51,7 @@
           /> -->
           <div class="menu-item-content">
             <div class="menu-item-title">Profile & Settings</div>
-            <div class="menu-item-description">
-              Manage your account
-            </div>
+            <div class="menu-item-description">Manage your account</div>
           </div>
         </DropdownMenuItem>
       </div>
@@ -85,14 +60,9 @@
 
       <!-- Community Section -->
       <div class="menu-section">
-        <DropdownMenuLabel>
-          Community
-        </DropdownMenuLabel>
-        
-        <DropdownMenuItem
-          :class="menuItemClasses"
-          @click="() => handleNavigate('community')"
-        >
+        <DropdownMenuLabel> Community </DropdownMenuLabel>
+
+        <DropdownMenuItem :class="menuItemClasses" @click="() => handleNavigate('community')">
           <!-- <AtomIcon
             name="lucide:users"
             size="sm"
@@ -101,9 +71,7 @@
           /> -->
           <div class="menu-item-content">
             <div class="menu-item-title">Writer Community</div>
-            <div class="menu-item-description">
-              Connect with other writers
-            </div>
+            <div class="menu-item-description">Connect with other writers</div>
           </div>
         </DropdownMenuItem>
       </div>
@@ -112,19 +80,14 @@
 
       <!-- Sign Out Section -->
       <div class="menu-section">
-        <DropdownMenuItem
-          :class="signOutClasses"
-          @click="handleLogout"
-        >
+        <DropdownMenuItem :class="signOutClasses" @click="handleLogout">
           <!-- <AtomIcon
             name="lucide:log-out"
             size="sm"
             class="text-destructive mr-3"
             aria-hidden="true"
           /> -->
-          <span class="font-medium text-destructive">
-            Sign Out
-          </span>
+          <span class="font-medium text-destructive"> Sign Out </span>
         </DropdownMenuItem>
       </div>
     </DropdownMenuContent>
@@ -196,9 +159,7 @@ const triggerClasses = computed(() => {
 
 // Compute content classes
 const contentClasses = computed(() => {
-  return cn(
-    'w-64 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2'
-  )
+  return cn('w-64 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2')
 })
 
 // Compute menu item classes
@@ -255,11 +216,11 @@ const signOutClasses = computed(() => {
   .transition-transform {
     @apply transition-none;
   }
-  
+
   .group-hover\:rotate-180 {
     @apply rotate-0;
   }
-  
+
   .hover\:scale-105 {
     @apply scale-100;
   }

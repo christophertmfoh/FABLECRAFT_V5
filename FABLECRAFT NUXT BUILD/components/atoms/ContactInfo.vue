@@ -1,10 +1,6 @@
 <template>
   <div :class="contactInfoClasses">
-    <AtomIcon 
-      :name="icon"
-      :class="iconClasses"
-      aria-hidden="true"
-    />
+    <AtomIcon :name="icon" :class="iconClasses" aria-hidden="true" />
     <span :class="textClasses">
       {{ text }}
     </span>
@@ -17,8 +13,8 @@ import { cn } from '~/components/atoms/Utils'
 
 // Props interface
 interface ContactInfoProps {
-  icon: string          // Icon name (e.g., 'lucide:mail')
-  text: string          // Contact text (email, phone, address)
+  icon: string // Icon name (e.g., 'lucide:mail')
+  text: string // Contact text (email, phone, address)
   type?: 'email' | 'phone' | 'address' | 'generic'
   size?: 'sm' | 'md' | 'lg'
   class?: string
@@ -28,7 +24,7 @@ interface ContactInfoProps {
 const props = withDefaults(defineProps<ContactInfoProps>(), {
   type: 'generic',
   size: 'md',
-  class: ''
+  class: '',
 })
 
 // Computed properties
@@ -36,7 +32,7 @@ const contactInfoClasses = computed(() => {
   const sizeClasses = {
     sm: 'gap-2 text-xs',
     md: 'gap-3 text-sm',
-    lg: 'gap-4 text-base'
+    lg: 'gap-4 text-base',
   }
 
   return cn(
@@ -53,14 +49,10 @@ const iconClasses = computed(() => {
   const iconSizeClasses = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4',
-    lg: 'w-5 h-5'
+    lg: 'w-5 h-5',
   }
 
-  return cn(
-    'flex-shrink-0',
-    'text-current',
-    iconSizeClasses[props.size]
-  )
+  return cn('flex-shrink-0', 'text-current', iconSizeClasses[props.size])
 })
 
 const textClasses = computed(() => {
@@ -86,8 +78,8 @@ const textClasses = computed(() => {
 }
 
 /* Special handling for email and phone links if needed in future */
-.contact-info[data-type="email"]:hover,
-.contact-info[data-type="phone"]:hover {
+.contact-info[data-type='email']:hover,
+.contact-info[data-type='phone']:hover {
   cursor: pointer;
 }
 </style>

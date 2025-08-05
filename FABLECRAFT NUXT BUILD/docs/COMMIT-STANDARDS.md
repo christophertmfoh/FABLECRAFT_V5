@@ -12,18 +12,18 @@
 
 ## 🎯 Commit Types
 
-| Type | Purpose | Example |
-|------|---------|---------|
-| `feat` | New feature | `feat: add user authentication` |
-| `fix` | Bug fix | `fix: resolve Tailwind CSS import error` |
-| `docs` | Documentation | `docs: update README with setup guide` |
-| `chore` | Maintenance | `chore: update dependencies` |
+| Type       | Purpose          | Example                                    |
+| ---------- | ---------------- | ------------------------------------------ |
+| `feat`     | New feature      | `feat: add user authentication`            |
+| `fix`      | Bug fix          | `fix: resolve Tailwind CSS import error`   |
+| `docs`     | Documentation    | `docs: update README with setup guide`     |
+| `chore`    | Maintenance      | `chore: update dependencies`               |
 | `refactor` | Code improvement | `refactor: simplify user validation logic` |
-| `test` | Adding tests | `test: add unit tests for auth service` |
-| `style` | Formatting | `style: fix ESLint formatting issues` |
-| `perf` | Performance | `perf: optimize database queries` |
-| `ci` | CI/CD changes | `ci: add automated testing workflow` |
-| `build` | Build system | `build: update Nuxt configuration` |
+| `test`     | Adding tests     | `test: add unit tests for auth service`    |
+| `style`    | Formatting       | `style: fix ESLint formatting issues`      |
+| `perf`     | Performance      | `perf: optimize database queries`          |
+| `ci`       | CI/CD changes    | `ci: add automated testing workflow`       |
+| `build`    | Build system     | `build: update Nuxt configuration`         |
 
 ## ✅ Good Examples
 

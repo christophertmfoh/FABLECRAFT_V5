@@ -4,18 +4,11 @@
     <h3 :class="headerClasses">
       {{ title }}
     </h3>
-    
+
     <!-- Navigation Links -->
-    <nav 
-      role="navigation" 
-      :aria-label="`${title} navigation`"
-    >
+    <nav role="navigation" :aria-label="`${title} navigation`">
       <ul :class="listClasses" role="list">
-        <li 
-          v-for="link in links" 
-          :key="getKey(link)"
-          class="nav-item"
-        >
+        <li v-for="link in links" :key="getKey(link)" class="nav-item">
           <FooterLink
             :text="getLinkText(link)"
             :href="getLinkHref(link)"
@@ -52,7 +45,7 @@ interface NavigationColumnEmits {
 const props = withDefaults(defineProps<NavigationColumnProps>(), {
   variant: 'default',
   headerLevel: 'h3',
-  class: ''
+  class: '',
 })
 
 const emit = defineEmits<NavigationColumnEmits>()
@@ -75,34 +68,24 @@ const columnClasses = computed(() => {
   const variantClasses = {
     default: 'space-y-6',
     compact: 'space-y-4',
-    spaced: 'space-y-8'
+    spaced: 'space-y-8',
   }
 
-  return cn(
-    'navigation-column',
-    variantClasses[props.variant],
-    props.class
-  )
+  return cn('navigation-column', variantClasses[props.variant], props.class)
 })
 
 const headerClasses = computed(() => {
-  return cn(
-    'text-sm font-semibold text-foreground uppercase tracking-wider',
-    'mb-4'
-  )
+  return cn('text-sm font-semibold text-foreground uppercase tracking-wider', 'mb-4')
 })
 
 const listClasses = computed(() => {
   const variantClasses = {
     default: 'space-y-3',
     compact: 'space-y-2',
-    spaced: 'space-y-4'
+    spaced: 'space-y-4',
   }
 
-  return cn(
-    'list-none',
-    variantClasses[props.variant]
-  )
+  return cn('list-none', variantClasses[props.variant])
 })
 
 // Event handlers
@@ -110,7 +93,7 @@ const handleLinkClick = (payload: { text: string; href?: string }) => {
   emit('link-click', {
     text: payload.text,
     href: payload.href,
-    category: props.title
+    category: props.title,
   })
 }
 </script>
@@ -136,7 +119,7 @@ h3 {
   .navigation-column {
     @apply space-y-4;
   }
-  
+
   h3 {
     @apply text-xs;
   }

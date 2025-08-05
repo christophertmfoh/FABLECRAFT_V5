@@ -9,14 +9,13 @@ export interface NewsletterState {
 }
 
 export interface NewsletterEmit {
-  (e: 'subscribe', email: string): void
-  (e: 'success', email: string): void
+  (e: 'subscribe' | 'success', email: string): void
   (e: 'error', error: string): void
 }
 
 /**
  * Newsletter Subscription Composable
- * 
+ *
  * Handles newsletter subscription state, validation, and form submission.
  * Provides reactive state management for newsletter signup components.
  */
@@ -26,7 +25,7 @@ export const useNewsletter = () => {
     email: '',
     isLoading: false,
     isSuccess: false,
-    error: null
+    error: null,
   })
 
   // Email validation regex
@@ -44,19 +43,19 @@ export const useNewsletter = () => {
   // Validation helpers
   const validateEmail = (email: string): string | null => {
     const trimmedEmail = email.trim()
-    
+
     if (!trimmedEmail) {
       return 'Email is required'
     }
-    
+
     if (!emailRegex.test(trimmedEmail)) {
       return 'Please enter a valid email address'
     }
-    
+
     if (trimmedEmail.length > 254) {
       return 'Email address is too long'
     }
-    
+
     return null
   }
 
@@ -84,7 +83,7 @@ export const useNewsletter = () => {
   // Main subscription function
   const subscribe = async (email?: string): Promise<{ success: boolean; error?: string }> => {
     const emailToSubmit = email || state.email
-    
+
     // Validate email
     const validationError = validateEmail(emailToSubmit)
     if (validationError) {
@@ -99,31 +98,29 @@ export const useNewsletter = () => {
     try {
       // Simulate API call (replace with actual newsletter service)
       await new Promise(resolve => setTimeout(resolve, 1500))
-      
+
       // For demo purposes, randomly simulate success/failure
       const shouldSucceed = Math.random() > 0.2 // 80% success rate
-      
+
       if (shouldSucceed) {
         state.isSuccess = true
         state.email = emailToSubmit.trim()
-        
+
         // Auto-clear success message after 5 seconds
         setTimeout(() => {
           if (state.isSuccess) {
             clearForm()
           }
         }, 5000)
-        
+
         return { success: true }
       } else {
         throw new Error('Newsletter service temporarily unavailable. Please try again later.')
       }
-      
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred'
       state.error = errorMessage
       return { success: false, error: errorMessage }
-      
     } finally {
       state.isLoading = false
     }
@@ -134,7 +131,7 @@ export const useNewsletter = () => {
     if (event) {
       event.preventDefault()
     }
-    
+
     await subscribe()
   }
 
@@ -142,23 +139,23 @@ export const useNewsletter = () => {
   return {
     // State
     state: readonly(state),
-    
+
     // Computed
     isValidEmail,
     canSubmit,
-    
-    // Actions  
+
+    // Actions
     setEmail,
     clearForm,
     resetState,
     subscribe,
     handleSubmit,
     validateEmail,
-    
+
     // Convenience getters
     email: computed(() => state.email),
     isLoading: computed(() => state.isLoading),
     isSuccess: computed(() => state.isSuccess),
-    error: computed(() => state.error)
+    error: computed(() => state.error),
   }
 }

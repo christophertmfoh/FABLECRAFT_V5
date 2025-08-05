@@ -4,25 +4,18 @@
     <h3 class="newsletter-title">
       {{ content.title }}
     </h3>
-    
+
     <!-- Newsletter Description -->
     <p class="newsletter-description">
       {{ content.description }}
     </p>
 
     <!-- Newsletter Form -->
-    <form 
-      @submit="handleSubmit"
-      class="newsletter-form"
-      novalidate
-    >
+    <form class="newsletter-form" novalidate @submit="handleSubmit">
       <!-- Email Input and Button Row -->
       <div class="input-group">
         <div class="input-container">
-          <Label 
-            for="newsletter-email" 
-            class="sr-only"
-          >
+          <Label for="newsletter-email" class="sr-only">
             {{ content.placeholder }}
           </Label>
           <Input
@@ -39,54 +32,36 @@
             @input="handleInput"
           />
         </div>
-        
-        <Button 
+
+        <Button
           type="submit"
-          size="sm" 
+          size="sm"
           :class="buttonClasses"
           :disabled="!canSubmit"
           :aria-label="`${content.buttonText} to newsletter`"
         >
-          <Spinner 
-            v-if="isLoading" 
-            class="w-4 h-4 mr-2" 
-            aria-hidden="true"
-          />
+          <Spinner v-if="isLoading" class="w-4 h-4 mr-2" aria-hidden="true" />
           {{ isLoading ? 'Subscribing...' : content.buttonText }}
         </Button>
       </div>
 
       <!-- Error Message -->
-      <div 
-        v-if="error" 
-        id="newsletter-error"
-        class="error-message"
-        role="alert"
-        aria-live="polite"
-      >
+      <div v-if="error" id="newsletter-error" class="error-message" role="alert" aria-live="polite">
         {{ error }}
       </div>
 
       <!-- Success Message -->
-      <div 
-        v-if="isSuccess" 
-        class="success-message"
-        role="alert"
-        aria-live="polite"
-      >
-        <AtomIcon 
-          name="lucide:check-circle" 
-          class="w-4 h-4 mr-2 text-green-600" 
+      <div v-if="isSuccess" class="success-message" role="alert" aria-live="polite">
+        <AtomIcon
+          name="lucide:check-circle"
+          class="w-4 h-4 mr-2 text-green-600"
           aria-hidden="true"
         />
         Thanks for subscribing! Check your email to confirm.
       </div>
 
       <!-- Disclaimer -->
-      <p 
-        id="newsletter-disclaimer"
-        class="disclaimer"
-      >
+      <p id="newsletter-disclaimer" class="disclaimer">
         {{ content.disclaimer }}
       </p>
     </form>
@@ -108,15 +83,14 @@ interface NewsletterSignupProps {
 
 // Events interface
 interface NewsletterSignupEmits {
-  (e: 'subscribe', email: string): void
-  (e: 'success', email: string): void
+  (e: 'subscribe' | 'success', email: string): void
   (e: 'error', error: string): void
 }
 
 // Component setup
 const props = withDefaults(defineProps<NewsletterSignupProps>(), {
   variant: 'default',
-  class: ''
+  class: '',
 })
 
 const emit = defineEmits<NewsletterSignupEmits>()
@@ -129,7 +103,7 @@ const {
   error,
   canSubmit,
   setEmail,
-  handleSubmit: submitNewsletter
+  handleSubmit: submitNewsletter,
 } = useNewsletter()
 
 // Refs
@@ -140,24 +114,17 @@ const signupClasses = computed(() => {
   const variantClasses = {
     default: 'space-y-3',
     compact: 'space-y-2',
-    inline: 'space-y-2'
+    inline: 'space-y-2',
   }
 
-  return cn(
-    'newsletter-signup',
-    variantClasses[props.variant],
-    props.class
-  )
+  return cn('newsletter-signup', variantClasses[props.variant], props.class)
 })
 
 const inputClasses = computed(() => {
-  return cn(
-    'text-sm flex-1',
-    {
-      'border-red-300 focus:border-red-500 focus:ring-red-500': !!error.value,
-      'border-green-300 focus:border-green-500 focus:ring-green-500': isSuccess.value
-    }
-  )
+  return cn('text-sm flex-1', {
+    'border-red-300 focus:border-red-500 focus:ring-red-500': !!error.value,
+    'border-green-300 focus:border-green-500 focus:ring-green-500': isSuccess.value,
+  })
 })
 
 const buttonClasses = computed(() => {
@@ -165,7 +132,7 @@ const buttonClasses = computed(() => {
     'px-4 whitespace-nowrap',
     'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     {
-      'opacity-50 cursor-not-allowed': !canSubmit.value
+      'opacity-50 cursor-not-allowed': !canSubmit.value,
     }
   )
 })
@@ -178,13 +145,13 @@ const handleInput = (event: Event) => {
 
 const handleSubmit = async (event: Event) => {
   event.preventDefault()
-  
+
   const result = await submitNewsletter()
-  
+
   if (result.success) {
     emit('subscribe', email.value)
     emit('success', email.value)
-    
+
     // Focus back to input for next use
     await nextTick()
     emailInput.value?.focus()
@@ -246,11 +213,11 @@ const handleSubmit = async (event: Event) => {
   .input-group {
     @apply flex-col gap-2;
   }
-  
+
   .newsletter-title {
     @apply text-xs;
   }
-  
+
   .newsletter-description {
     @apply text-xs;
   }

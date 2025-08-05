@@ -29,10 +29,91 @@
 .theme-transition *,
 .theme-transition *::before,
 .theme-transition *::after {
-  transition: 
+  transition:
     background-color 300ms ease-in-out,
     border-color 300ms ease-in-out,
     color 300ms ease-in-out,
     fill 300ms ease-in-out,
     stroke 300ms ease-in-out !important;
+}
+
+/* ========================================
+   SPACING FRIENDSHIP LEVELS
+   Migrated from old build for visual parity
+======================================== */
+.mt-best-friends {
+  margin-top: var(--space-tiny); /* 4px - using existing token */
+}
+
+.mt-friends {
+  margin-top: var(--space-sm); /* 12px - using existing token */
+}
+
+.mt-acquaintances {
+  margin-top: var(--space-lg); /* 20px - using existing token */
+}
+
+.p-comfortable {
+  padding: var(--space-xl); /* 24px - using existing token */
+}
+
+/* ========================================
+   GRID UTILITIES
+   Consistent spacing for layout grids
+======================================== */
+.grid-normal {
+  gap: var(--space-lg); /* 20px - using existing token */
+}
+
+/* ========================================
+   SECTION SPACING
+   Professional page layout spacing
+======================================== */
+.section-spacing-compact {
+  padding-top: var(--space-6xl); /* 64px */
+  padding-bottom: var(--space-6xl); /* 64px */
+}
+
+@media (max-width: 768px) {
+  .section-spacing-compact {
+    padding-top: var(--space-4xl); /* 48px on mobile */
+    padding-bottom: var(--space-4xl); /* 48px on mobile */
+  }
+}
+
+/* ========================================
+   VISUAL EFFECTS
+   Card depth and hover effects from old build
+======================================== */
+.natural-depth {
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(1px);
+  transform: translateZ(0);
+}
+
+.natural-depth::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card) / 0.1) 0%,
+    transparent 50%,
+    hsl(var(--muted) / 0.05) 100%
+  );
+  border-radius: inherit;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.gentle-hover {
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gentle-hover:hover {
+  transform: translateY(-1px) translateZ(0);
+  filter: drop-shadow(0 4px 12px hsl(var(--foreground) / 0.08));
 }

@@ -26,18 +26,18 @@ export const useBackgroundOrbs = () => {
   const orbCount = useState('orbs-count', () => ({
     primary: 1,
     secondary: 1,
-    tertiary: 1
+    tertiary: 1,
   }))
 
   // Auto-detect performance mode
   const detectPerformance = () => {
     if (!import.meta.client) return 'medium'
-    
+
     // Check for reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return 'low'
     }
-    
+
     // Check device memory (if available)
     const nav = navigator as NavigatorWithMemory
     const memory = nav.deviceMemory
@@ -45,14 +45,14 @@ export const useBackgroundOrbs = () => {
       if (memory < 4) return 'low'
       if (memory >= 8) return 'high'
     }
-    
+
     // Check CPU cores (if available)
     const cores = navigator.hardwareConcurrency
     if (cores) {
       if (cores < 4) return 'low'
       if (cores >= 8) return 'high'
     }
-    
+
     return 'medium'
   }
 
@@ -71,7 +71,7 @@ export const useBackgroundOrbs = () => {
   // Set performance mode
   const setPerformanceMode = (mode: 'low' | 'medium' | 'high') => {
     performanceMode.value = mode
-    
+
     // Adjust orb count based on performance mode
     switch (mode) {
       case 'low':
@@ -103,7 +103,7 @@ export const useBackgroundOrbs = () => {
   const getConfig = () => ({
     enabled: orbsEnabled.value,
     performanceMode: performanceMode.value,
-    orbCount: orbCount.value
+    orbCount: orbCount.value,
   })
 
   // Initialize performance mode on client
@@ -118,13 +118,13 @@ export const useBackgroundOrbs = () => {
     orbsEnabled,
     performanceMode,
     orbCount,
-    
+
     // Methods
     initializePerformance,
     toggleOrbs,
     setPerformanceMode,
     updateOrbConfig,
     getConfig,
-    detectPerformance
+    detectPerformance,
   }
 }
