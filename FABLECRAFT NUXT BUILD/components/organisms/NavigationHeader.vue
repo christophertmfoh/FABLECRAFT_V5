@@ -61,13 +61,15 @@
                   </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="() => handleNavigate('projects')"
+                    @select="() => handleNavigate('projects')"
                   >
-                    <AtomIcon name="lucide:book-open" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
-                    <div>
-                      <div class="font-medium">Creative Workspace</div>
-                      <div class="text-xs text-muted-foreground">
-                        Projects, characters & world bible
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:book-open" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <div>
+                        <div class="font-medium">Creative Workspace</div>
+                        <div class="text-xs text-muted-foreground">
+                          Projects, characters & world bible
+                        </div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -80,13 +82,15 @@
                   </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="() => handleNavigate('profile')"
+                    @select="() => handleNavigate('profile')"
                   >
-                    <AtomIcon name="lucide:user" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
-                    <div>
-                      <div class="font-medium">Profile & Settings</div>
-                      <div class="text-xs text-muted-foreground">
-                        Manage your account
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:user" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <div>
+                        <div class="font-medium">Profile & Settings</div>
+                        <div class="text-xs text-muted-foreground">
+                          Manage your account
+                        </div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -99,13 +103,15 @@
                   </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="() => handleNavigate('community')"
+                    @select="() => handleNavigate('community')"
                   >
-                    <AtomIcon name="lucide:users" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
-                    <div>
-                      <div class="font-medium">Writer Community</div>
-                      <div class="text-xs text-muted-foreground">
-                        Connect with other writers
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:users" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <div>
+                        <div class="font-medium">Writer Community</div>
+                        <div class="text-xs text-muted-foreground">
+                          Connect with other writers
+                        </div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -115,12 +121,14 @@
                 <div class="p-2">
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-destructive/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="handleLogout"
+                    @select="handleLogout"
                   >
-                    <AtomIcon name="lucide:log-out" class="mr-3 h-4 w-4 text-destructive" aria-hidden="true" />
-                    <span class="font-medium text-destructive">
-                      Sign Out
-                    </span>
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:log-out" class="h-4 w-4 text-destructive" aria-hidden="true" />
+                      <span class="font-medium text-destructive">
+                        Sign Out
+                      </span>
+                    </div>
                   </DropdownMenuItem>
                 </div>
               </DropdownMenuContent>
@@ -154,6 +162,7 @@
 
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
+import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
 
 // User interface for authentication
 interface User {
