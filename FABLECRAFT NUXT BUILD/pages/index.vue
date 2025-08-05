@@ -28,19 +28,15 @@
         </a>
       </AtomsVisuallyHidden>
 
-      <!-- Header Section -->
-      <header 
-        id="header"
-        class="relative z-50"
-        :class="headerClasses"
-      >
-        <AtomsContainer size="xl" class="py-4 md:py-6">
-          <!-- Header Component Placeholder -->
-          <div class="min-h-[64px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-            <span class="text-muted-foreground">Header Component</span>
-          </div>
-        </AtomsContainer>
-      </header>
+      <!-- Navigation Header -->
+      <OrganismsONavigationHeader
+        :is-authenticated="isAuthenticated"
+        :user="user"
+        @auth:click="handleAuth"
+        @auth:logout="handleLogout"
+        @navigate="handleNavigate"
+        @logo:click="handleHome"
+      />
 
       <!-- Main Content -->
       <main 
@@ -164,6 +160,13 @@
 const route = useRoute()
 const router = useRouter()
 
+// Authentication
+const user = useSupabaseUser()
+const supabase = useSupabaseClient()
+
+// Compute authentication state
+const isAuthenticated = computed(() => !!user.value)
+
 // Theme system
 const { 
   currentTheme, 
@@ -182,14 +185,38 @@ const paperTextureEnabled = useState('paper-texture-enabled', () => true)
 const showScrollProgress = ref(false)
 const scrollProgress = ref(0)
 
-// Header classes for sticky behavior
-const headerClasses = computed(() => ({
-  'sticky top-0 bg-background/95 backdrop-blur-md border-b': true,
-  'shadow-sm': scrollProgress.value > 5
-}))
+// Header classes removed - now handled by ONavigationHeader component
 
 // Analytics composable (ready for implementation)
 // const { trackPageView, trackEvent } = useAnalytics()
+
+// Navigation handlers
+const handleAuth = () => {
+  // Navigate to auth page or trigger auth modal
+  navigateTo('/auth')
+}
+
+const handleLogout = async () => {
+  try {
+    await supabase.auth.signOut()
+    // Optionally show success message
+    console.log('Logged out successfully')
+  } catch (error) {
+    console.error('Error during logout:', error)
+  }
+}
+
+const handleNavigate = (view: string) => {
+  if (view === 'home') {
+    navigateTo('/')
+  } else {
+    navigateTo(`/${view}`)
+  }
+}
+
+const handleHome = () => {
+  navigateTo('/')
+}
 
 // Scroll handling
 const handleScroll = () => {
@@ -288,8 +315,7 @@ definePageMeta({
 
 // Expose utilities for child components
 provide('landingPage', {
-  scrollProgress: readonly(scrollProgress),
-  headerClasses: readonly(headerClasses)
+  scrollProgress: readonly(scrollProgress)
 })
 </script>
 
