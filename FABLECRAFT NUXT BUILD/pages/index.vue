@@ -1,7 +1,7 @@
 <template>
   <div 
     id="app-root"
-    class="min-h-screen transition-colors duration-300"
+    class="min-h-screen bg-background transition-colors duration-300"
     :class="[
       currentTheme,
       { 'theme-transition': isThemeTransitioning }
