@@ -6,34 +6,20 @@
   >
     <Container size="xl" class="py-4">
       <div class="flex items-center justify-between">
-        <!-- Brand Logo Section - Match exact React design -->
-        <div
-          class="flex items-center space-x-3 group cursor-pointer"
+        <!-- Brand Logo Section - Using NavigationLogo atom -->
+        <NavigationLogo
+          :brand-text="brandText"
+          :show-text="showBrandText"
           @click="handleLogoClick"
-        >
-          <div class="w-14 h-14 bg-primary/10 hover:bg-primary/20 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
-            <AtomIcon 
-              name="lucide:feather" 
-              class="w-7 h-7 text-primary" 
-              aria-hidden="true" 
-            />
-          </div>
-          <span class="text-3xl font-black text-foreground tracking-wide">
-            Fablecraft
-          </span>
-        </div>
+        />
 
-        <!-- Professional Navigation Menu -->
-        <div v-if="showNavItems" class="flex items-center space-x-8">
-          <button
-            v-for="item in navigationItems"
-            :key="item.id"
-            class="text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 tracking-wide cursor-pointer uppercase"
-            @click="() => handleNavigate(item.id)"
-          >
-            {{ item.label }}
-          </button>
-        </div>
+        <!-- Professional Navigation Menu - Using NavigationMenu molecule -->
+        <NavigationMenu
+          v-if="showNavItems"
+          :show-items="showNavItems"
+          class="hidden md:flex"
+          @navigate="handleNavigate"
+        />
 
         <!-- Navigation Actions -->
         <div class="flex items-center space-x-4">
@@ -159,26 +145,22 @@
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
 
-console.log('🔥 Full NavigationHeader component loaded!')
-
-// User interface
+// User interface for authentication
 interface User {
-  username?: string
-  email?: string
-  id?: string
-}
-
-// Navigation item interface
-interface NavigationItem {
   id: string
-  label: string
-  href?: string
-  active?: boolean
+  email?: string
+  username?: string
+  user_metadata?: {
+    username?: string
+    email?: string
+  }
 }
 
 // Component props interface
 interface NavigationHeaderProps {
-  // Configuration
+  // Content and visibility
+  brandText?: string
+  showBrandText?: boolean
   showAuthButton?: boolean
   authButtonText?: string
   showNavItems?: boolean
@@ -194,6 +176,8 @@ interface NavigationHeaderProps {
 
 // Define props with defaults
 const props = withDefaults(defineProps<NavigationHeaderProps>(), {
+  brandText: 'Fablecraft',
+  showBrandText: true,
   showAuthButton: true,
   authButtonText: 'Sign Up / Sign In',
   showNavItems: true,
@@ -208,15 +192,6 @@ const emit = defineEmits<{
   'navigate': [view: string]
   'logo:click': []
 }>()
-
-// Default navigation items (matches React version)
-const navigationItems: NavigationItem[] = [
-  { id: 'community', label: 'COMMUNITY', href: '/community' },
-  { id: 'gallery', label: 'GALLERY', href: '/gallery' },
-  { id: 'library', label: 'LIBRARY', href: '/library' },
-  { id: 'about', label: 'ABOUT', href: '/about' },
-  { id: 'contact', label: 'CONTACT', href: '/contact' }
-]
 
 // Authentication composable
 const user = useSupabaseUser()
@@ -254,10 +229,16 @@ const handleLogout = async () => {
   }
 }
 
-// Handle navigation
-const handleNavigate = (view: string) => {
+// Handle navigation (updated to work with NavigationMenu molecule)
+const handleNavigate = (item: any, href?: string) => {
+  // If it's a navigation item object, use the id
+  const view = typeof item === 'string' ? item : item.id
   emit('navigate', view)
-  if (view === 'home') {
+  
+  // Navigate to the appropriate route
+  if (href) {
+    navigateTo(href)
+  } else if (view === 'home') {
     navigateTo('/')
   } else {
     navigateTo(`/${view}`)

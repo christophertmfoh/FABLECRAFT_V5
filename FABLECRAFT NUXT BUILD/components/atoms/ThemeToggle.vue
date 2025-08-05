@@ -1,67 +1,186 @@
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <Button
-        :class="triggerClasses"
-        :aria-label="ariaLabel"
-        variant="ghost"
-        size="icon"
-      >
-        <!-- Dynamic icon based on current theme -->
+      <Button variant="ghost" size="icon" class="relative">
         <AtomIcon 
           :name="currentThemeIcon" 
-          class="h-4 w-4 transition-transform duration-300" 
+          class="h-5 w-5 transition-all" 
           aria-hidden="true"
         />
+        <span class="sr-only">Toggle theme</span>
       </Button>
     </DropdownMenuTrigger>
+    
+    <DropdownMenuContent align="end" class="w-64">
+      <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
+      <DropdownMenuSeparator />
 
-    <DropdownMenuContent 
-      align="end" 
-      class="w-80 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2 max-h-96 overflow-y-auto"
-    >
-      <!-- Theme Header -->
-      <div class="theme-header">
-        <div class="text-sm font-semibold text-foreground">
-          Choose Theme
-        </div>
-        <div class="text-xs text-muted-foreground mt-1">
-          Current: {{ currentThemeObject.label }}
-        </div>
-      </div>
-
-      <!-- Theme Categories -->
-      <div v-for="category in themeCategories" :key="category" class="p-2 border-b border-border/20 last:border-b-0">
-        <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-          {{ category }}
-        </div>
-        
-        <template v-for="theme in getThemesByCategory(category)" :key="theme.name">
-          <DropdownMenuItem
-            class="cursor-pointer hover:bg-accent/10 p-3 rounded-lg transition-colors theme-item"
-            @click="() => handleThemeChange(theme.name)"
-          >
-            <!-- Theme Preview Circle -->
+      <!-- Scrollable content area with responsive max height -->
+      <div class="max-h-96 overflow-y-auto">
+        <!-- System preference -->
+        <DropdownMenuItem
+          @click="() => handleThemeChange('system')"
+          class="cursor-pointer"
+        >
+          <div class="flex items-center gap-3 w-full">
+            <AtomIcon name="lucide:monitor" class="h-4 w-4" />
+            <div class="flex-1">
+              <div class="font-medium">System</div>
+              <div class="text-xs text-muted-foreground">Follow system preference</div>
+            </div>
             <div 
-              class="theme-preview"
-              :style="{ backgroundColor: theme.preview?.primary || 'currentColor' }"
+              v-if="currentTheme === 'system'" 
+              class="ml-auto h-2 w-2 rounded-full bg-primary"
             />
-            
-            <!-- Theme Info -->
-            <div class="theme-info">
-              <div class="theme-label">
-                {{ theme.label }}
-                <!-- Current theme indicator -->
-                <AtomIcon 
-                  v-if="currentTheme === theme.name"
-                  name="lucide:check"
-                  class="h-4 w-4 text-primary"
-                  aria-hidden="true"
-                />
+          </div>
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel class="text-xs text-muted-foreground">
+          Core Themes
+        </DropdownMenuLabel>
+
+        <!-- Core themes -->
+        <template v-for="theme in coreThemes" :key="theme">
+          <DropdownMenuItem
+            @click="() => handleThemeChange(theme)"
+            class="cursor-pointer"
+          >
+            <div class="flex items-center gap-3 w-full">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
+              <div class="flex-1">
+                <div class="font-medium">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
               </div>
-              <div v-if="theme.description" class="theme-description">
-                {{ theme.description }}
+              <div 
+                v-if="currentTheme === theme" 
+                class="ml-auto h-2 w-2 rounded-full bg-primary"
+              />
+            </div>
+          </DropdownMenuItem>
+        </template>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel class="text-xs text-muted-foreground">
+          Classic Light Themes
+        </DropdownMenuLabel>
+
+        <!-- Classic light themes -->
+        <template v-for="theme in classicLightThemes" :key="theme">
+          <DropdownMenuItem
+            @click="() => handleThemeChange(theme)"
+            class="cursor-pointer"
+          >
+            <div class="flex items-center gap-3 w-full">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
+              <div class="flex-1">
+                <div class="font-medium">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
               </div>
+              <div 
+                v-if="currentTheme === theme" 
+                class="ml-auto h-2 w-2 rounded-full bg-primary"
+              />
+            </div>
+          </DropdownMenuItem>
+        </template>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel class="text-xs text-muted-foreground">
+          Classic Dark Themes
+        </DropdownMenuLabel>
+
+        <!-- Classic dark themes -->
+        <template v-for="theme in classicDarkThemes" :key="theme">
+          <DropdownMenuItem
+            @click="() => handleThemeChange(theme)"
+            class="cursor-pointer"
+          >
+            <div class="flex items-center gap-3 w-full">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
+              <div class="flex-1">
+                <div class="font-medium">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+              </div>
+              <div 
+                v-if="currentTheme === theme" 
+                class="ml-auto h-2 w-2 rounded-full bg-primary"
+              />
+            </div>
+          </DropdownMenuItem>
+        </template>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel class="text-xs text-muted-foreground">
+          Modern Light Themes
+        </DropdownMenuLabel>
+
+        <!-- Modern light themes -->
+        <template v-for="theme in modernLightThemes" :key="theme">
+          <DropdownMenuItem
+            @click="() => handleThemeChange(theme)"
+            class="cursor-pointer"
+          >
+            <div class="flex items-center gap-3 w-full">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
+              <div class="flex-1">
+                <div class="font-medium">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+              </div>
+              <div 
+                v-if="currentTheme === theme" 
+                class="ml-auto h-2 w-2 rounded-full bg-primary"
+              />
+            </div>
+          </DropdownMenuItem>
+        </template>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel class="text-xs text-muted-foreground">
+          Modern Dark Themes
+        </DropdownMenuLabel>
+
+        <!-- Modern dark themes -->
+        <template v-for="theme in modernDarkThemes" :key="theme">
+          <DropdownMenuItem
+            @click="() => handleThemeChange(theme)"
+            class="cursor-pointer"
+          >
+            <div class="flex items-center gap-3 w-full">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
+              <div class="flex-1">
+                <div class="font-medium">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+              </div>
+              <div 
+                v-if="currentTheme === theme" 
+                class="ml-auto h-2 w-2 rounded-full bg-primary"
+              />
+            </div>
+          </DropdownMenuItem>
+        </template>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel class="text-xs text-muted-foreground">
+          Specialty Themes
+        </DropdownMenuLabel>
+
+        <!-- Specialty themes -->
+        <template v-for="theme in specialtyThemes" :key="theme">
+          <DropdownMenuItem
+            @click="() => handleThemeChange(theme)"
+            class="cursor-pointer"
+          >
+            <div class="flex items-center gap-3 w-full">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
+              <div class="flex-1">
+                <div class="font-medium">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+              </div>
+              <div 
+                v-if="currentTheme === theme" 
+                class="ml-auto h-2 w-2 rounded-full bg-primary"
+              />
             </div>
           </DropdownMenuItem>
         </template>
@@ -71,118 +190,45 @@
 </template>
 
 <script setup lang="ts">
-import { cn } from '~/components/atoms/Utils'
+// Use theme composable 
+const { currentTheme, setTheme } = useTheme()
 
-// Component props interface
-interface ThemeToggleProps {
-  /** Custom aria-label for accessibility */
-  ariaLabel?: string
-  /** Additional CSS classes */
-  class?: string | Record<string, boolean> | string[]
-}
+// Theme configuration matching React version exactly
+const themeConfig = {
+  system: { icon: 'lucide:monitor', label: 'System', description: 'Follow system preference' },
+  light: { icon: 'lucide:sun', label: 'Light', description: 'Default light theme' },
+  dark: { icon: 'lucide:moon', label: 'Dark', description: 'Default dark theme' },
+  'arctic-focus': { icon: 'lucide:sun', label: 'Arctic Focus', description: 'Cool blues and whites' },
+  'golden-hour': { icon: 'lucide:sun', label: 'Golden Hour', description: 'Warm yellows' },
+  'midnight-ink': { icon: 'lucide:moon', label: 'Midnight Ink', description: 'Deep blue-black' },
+  'forest-manuscript': { icon: 'lucide:moon', label: 'Forest Manuscript', description: 'Green and brown' },
+  'starlit-prose': { icon: 'lucide:moon', label: 'Starlit Prose', description: 'Purple cosmic' },
+  'coffee-house': { icon: 'lucide:moon', label: 'Coffee House', description: 'Warm browns' },
+  'sunset-coral': { icon: 'lucide:sun', label: 'Sunset Coral', description: 'Warm coral and gold' },
+  'lavender-dusk': { icon: 'lucide:sun', label: 'Lavender Dusk', description: 'Soft lavender and grey' },
+  'moonlit-garden': { icon: 'lucide:sun', label: 'Moonlit Garden', description: 'Mystical moonlit blues' },
+  halloween: { icon: 'lucide:zap', label: 'Halloween', description: 'Spooky orange and black' },
+  'cherry-lacquer': { icon: 'lucide:moon', label: 'Cherry Lacquer', description: 'Luxury deep red' },
+  netrunner: { icon: 'lucide:zap', label: 'Netrunner', description: 'Electric yellow and cyan' },
+  'dragons-hoard': { icon: 'lucide:moon', label: "Dragon's Hoard", description: 'Fantasy gold treasures' },
+} as const
 
-// Define props with defaults
-const props = withDefaults(defineProps<ThemeToggleProps>(), {
-  ariaLabel: 'Change theme',
-})
+// Theme arrays organized by category (matching React version exactly)
+const coreThemes = ['light', 'dark'] as const
+const classicLightThemes = ['arctic-focus', 'golden-hour'] as const
+const classicDarkThemes = ['midnight-ink', 'forest-manuscript', 'starlit-prose', 'coffee-house'] as const
+const modernLightThemes = ['sunset-coral', 'lavender-dusk', 'moonlit-garden'] as const
+const modernDarkThemes = ['cherry-lacquer', 'dragons-hoard'] as const
+const specialtyThemes = ['halloween', 'netrunner'] as const
 
-// Use theme system with all features
-const { 
-  themes, 
-  themeCategories, 
-  currentTheme, 
-  currentThemeObject,
-  isDark,
-  setThemeWithTransition,
-} = useTheme()
-
-// Get themes by category
-const getThemesByCategory = (category: string) => {
-  return themes.filter(theme => theme.category === category)
-}
-
-// Get current theme icon
+// Get current theme icon with proper fallback
 const currentThemeIcon = computed(() => {
-  const theme = currentThemeObject.value
-  if (!theme) return 'lucide:sun'
-  
-  // Icon based on color scheme
-  switch (theme.colorScheme) {
-    case 'dark':
-      return 'lucide:moon'
-    case 'auto':
-      return 'lucide:monitor'
-    default:
-      return 'lucide:sun'
-  }
+  const config = themeConfig[currentTheme.value as keyof typeof themeConfig]
+  return config?.icon ?? themeConfig.light.icon
 })
 
 // Handle theme change
-const handleThemeChange = (themeName: string) => {
-  setThemeWithTransition(themeName)
+const handleThemeChange = (theme: string) => {
+  setTheme(theme)
 }
-
-// Compute trigger classes
-const triggerClasses = computed(() => {
-  return cn(
-    'relative transition-all duration-300 hover:bg-accent hover:text-accent-foreground',
-    'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-    props.class
-  )
-})
 </script>
-
-<style scoped>
-.theme-header {
-  @apply p-4 pb-2 border-b border-border/20;
-}
-
-.theme-item {
-  @apply flex items-center space-x-3;
-}
-
-.theme-preview {
-  @apply w-4 h-4 rounded-full border border-border/30 shadow-sm flex-shrink-0;
-}
-
-.theme-info {
-  @apply flex-1 min-w-0;
-}
-
-.theme-label {
-  @apply font-medium text-foreground flex items-center justify-between;
-}
-
-.theme-description {
-  @apply text-xs text-muted-foreground mt-1 line-clamp-2;
-}
-
-/* Scroll styling for theme list */
-:deep(.overflow-y-auto) {
-  scrollbar-width: thin;
-  scrollbar-color: hsl(var(--muted)) transparent;
-}
-
-:deep(.overflow-y-auto::-webkit-scrollbar) {
-  @apply w-2;
-}
-
-:deep(.overflow-y-auto::-webkit-scrollbar-track) {
-  @apply bg-transparent;
-}
-
-:deep(.overflow-y-auto::-webkit-scrollbar-thumb) {
-  @apply bg-muted rounded-full border-2 border-transparent bg-clip-content;
-}
-
-:deep(.overflow-y-auto::-webkit-scrollbar-thumb:hover) {
-  @apply bg-muted-foreground/50;
-}
-
-/* Animation for theme transitions */
-@media (prefers-reduced-motion: reduce) {
-  .transition-all {
-    @apply transition-none;
-  }
-}
-</style>
