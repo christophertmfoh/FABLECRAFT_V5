@@ -30,8 +30,7 @@ interface NavigationLogoProps {
   brandText?: string
   /** Whether to show brand text */
   showText?: boolean
-  /** Icon size variant */
-  iconSize?: 'sm' | 'md' | 'lg' | 'xl'
+  /** Icon size variant (currently unused - removed for simplicity) */
   /** Custom aria-label for accessibility */
   ariaLabel?: string
   /** Additional CSS classes */
@@ -42,7 +41,6 @@ interface NavigationLogoProps {
 const props = withDefaults(defineProps<NavigationLogoProps>(), {
   brandText: 'Fablecraft',
   showText: true,
-  iconSize: 'lg',
   ariaLabel: 'Navigate to homepage',
 })
 

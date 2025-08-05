@@ -190,7 +190,6 @@ interface NavigationHeaderProps {
   
   // Styling
   className?: string
-  variant?: 'default' | 'transparent' | 'solid'
 }
 
 // Define props with defaults
@@ -201,7 +200,6 @@ const props = withDefaults(defineProps<NavigationHeaderProps>(), {
   authButtonText: 'Sign Up / Sign In',
   showNavItems: true,
   isAuthenticated: false,
-  variant: 'default',
 })
 
 // Define emits
@@ -264,14 +262,11 @@ const handleNavigate = (item: any, href?: string) => {
   }
 }
 
-// Compute header classes (matches React version exactly)
+// Compute header classes (simplified - only using default behavior)
 const headerClasses = computed(() => {
   return cn(
     'sticky top-0 z-50 backdrop-blur-xl border-b border-border/20 shadow-sm',
-    {
-      'bg-transparent': props.variant === 'transparent',
-      'bg-background/20 border-b border-border shadow-sm': props.variant === 'solid',
-    },
+    'bg-transparent', // Always transparent to allow visual effects through
     props.className
   )
 })

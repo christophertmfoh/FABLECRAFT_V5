@@ -5,6 +5,7 @@
         variant="ghost" 
         size="icon" 
         class="relative group overflow-hidden border border-border/50 hover:border-border hover:bg-accent/20 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:outline-none transition-all duration-300"
+        aria-label="Open theme selection menu"
       >
         <!-- Gradient overlay effect (like old GradientButton) -->
         <div 

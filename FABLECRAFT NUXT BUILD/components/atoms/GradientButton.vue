@@ -65,15 +65,15 @@ defineEmits<{
   click: [event: MouseEvent]
 }>()
 
-// Compute gradient colors based on variant
+// Compute gradient colors based on variant (theme-reactive)
 const variantGradients = {
-  default: 'from-primary-foreground/20 to-transparent',
-  destructive: 'from-destructive-foreground/20 to-transparent', 
-  outline: 'from-primary/20 to-transparent',
-  secondary: 'from-secondary-foreground/20 to-transparent',
-  ghost: 'from-accent/20 to-transparent',
-  link: 'from-primary/20 to-transparent',
-}
+  default: 'from-primary-foreground/25 to-transparent',
+  destructive: 'from-destructive-foreground/25 to-transparent', 
+  outline: 'from-primary/25 to-transparent',
+  secondary: 'from-secondary-foreground/25 to-transparent',
+  ghost: 'from-accent/25 to-transparent',
+  link: 'from-primary/25 to-transparent',
+} as const
 
 // Compute gradient overlay classes
 const gradientOverlayClasses = computed(() => {
