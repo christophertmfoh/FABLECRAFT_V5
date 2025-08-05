@@ -1,6 +1,6 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger ref="triggerRef" as-child>
+    <DropdownMenuTrigger as-child>
       <Button 
         variant="ghost" 
         size="icon" 
@@ -35,7 +35,7 @@
       <div class="max-h-96 overflow-y-auto overflow-x-hidden">
         <!-- System preference -->
         <DropdownMenuItem
-          @click="() => handleThemeChange('system')"
+          @click="(event) => handleThemeChange('system', event)"
           class="cursor-pointer"
         >
           <div class="flex items-center gap-3 w-full min-w-0">
@@ -59,7 +59,7 @@
         <!-- Core themes -->
         <template v-for="theme in coreThemes" :key="theme">
           <DropdownMenuItem
-            @click="() => handleThemeChange(theme)"
+            @click="(event) => handleThemeChange(theme, event)"
             class="cursor-pointer"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
@@ -84,7 +84,7 @@
         <!-- Classic light themes -->
         <template v-for="theme in classicLightThemes" :key="theme">
           <DropdownMenuItem
-            @click="() => handleThemeChange(theme)"
+            @click="(event) => handleThemeChange(theme, event)"
             class="cursor-pointer"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
@@ -109,7 +109,7 @@
         <!-- Classic dark themes -->
         <template v-for="theme in classicDarkThemes" :key="theme">
           <DropdownMenuItem
-            @click="() => handleThemeChange(theme)"
+            @click="(event) => handleThemeChange(theme, event)"
             class="cursor-pointer"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
@@ -134,7 +134,7 @@
         <!-- Modern light themes -->
         <template v-for="theme in modernLightThemes" :key="theme">
           <DropdownMenuItem
-            @click="() => handleThemeChange(theme)"
+            @click="(event) => handleThemeChange(theme, event)"
             class="cursor-pointer"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
@@ -159,7 +159,7 @@
         <!-- Modern dark themes -->
         <template v-for="theme in modernDarkThemes" :key="theme">
           <DropdownMenuItem
-            @click="() => handleThemeChange(theme)"
+            @click="(event) => handleThemeChange(theme, event)"
             class="cursor-pointer"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
@@ -184,7 +184,7 @@
         <!-- Specialty themes -->
         <template v-for="theme in specialtyThemes" :key="theme">
           <DropdownMenuItem
-            @click="() => handleThemeChange(theme)"
+            @click="(event) => handleThemeChange(theme, event)"
             class="cursor-pointer"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
@@ -206,11 +206,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-// Template ref for the trigger button
-const triggerRef = ref<HTMLElement>()
-
 // Use theme composable 
 const { currentTheme, setTheme } = useTheme()
 
@@ -248,23 +243,14 @@ const currentThemeIcon = computed(() => {
   return config?.icon ?? themeConfig.light.icon
 })
 
-// Handle theme change with proper focus management
-const handleThemeChange = (theme: string) => {
+// Handle theme change with proper focus management (Claude's approach)
+const handleThemeChange = (theme: string, event?: Event) => {
   setTheme(theme)
   
-  // Delay the blur to allow dropdown to close naturally
-  setTimeout(() => {
-    // Use the template ref to blur the trigger button
-    if (triggerRef.value) {
-      const buttonElement = triggerRef.value.querySelector('button') as HTMLElement
-      if (buttonElement) {
-        buttonElement.blur()
-        // Force remove any remaining focus states
-        buttonElement.style.outline = 'none'
-        buttonElement.style.boxShadow = 'none'
-      }
-    }
-  }, 100)
+  // Claude's recommended approach: Remove focus after selection
+  if (event?.target) {
+    (event.target as HTMLElement).blur()
+  }
 }
 </script>
 
@@ -300,10 +286,9 @@ const handleThemeChange = (theme: string) => {
   outline-offset: 2px;
 }
 
-/* Improved focus management */
+/* Improved focus management - Claude's approach handles this better */
 .group:focus:not(:focus-visible) {
   outline: none;
-  box-shadow: none;
 }
 
 /* Enhanced gradient effect */
@@ -317,7 +302,6 @@ const handleThemeChange = (theme: string) => {
 
 /* Theme-reactive border enhancement */
 .group:hover {
-  border-color: hsl(var(--border));
   background-color: hsl(var(--accent) / 0.2);
 }
 
