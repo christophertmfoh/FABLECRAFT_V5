@@ -29,7 +29,9 @@
       </AtomsVisuallyHidden>
 
       <!-- Navigation Header -->
-      <OrganismsONavigationHeader
+      <TestComponent />
+      <!-- 
+      <OrganismsNavigationHeader
         :is-authenticated="isAuthenticated"
         :user="user"
         @auth:click="handleAuth"
@@ -37,6 +39,7 @@
         @navigate="handleNavigate"
         @logo:click="handleHome"
       />
+      -->
 
       <!-- Main Content -->
       <main 
