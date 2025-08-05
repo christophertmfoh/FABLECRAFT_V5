@@ -13,10 +13,10 @@
       <PaperTexture v-if="paperTextureEnabled" />
       
       <!-- Background Orbs -->
-      <BackgroundOrbs v-if="orbsEnabled" />
+      <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
       
       <!-- Firefly Effect -->
-      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" />
+      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
     </div>
 
     <!-- Main Content Layer -->
@@ -178,7 +178,7 @@ const {
 // Visual effects state (using useState for SSR compatibility)
 const orbsEnabled = useState('orbs-enabled', () => true)
 const firefliesEnabled = useState('fireflies-enabled', () => true)
-const fireflyCount = useState('firefly-count', () => 12)
+const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
 
 // Scroll progress
