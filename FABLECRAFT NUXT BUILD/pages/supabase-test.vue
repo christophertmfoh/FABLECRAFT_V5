@@ -11,15 +11,15 @@
             <p><strong>Supabase URL:</strong> {{ supabaseUrl }}</p>
             <p>
               <strong>Status:</strong>
-              <span v-if="connectionStatus === 'connected'" class="text-green-500"
+              <span v-if="connectionStatus === 'connected'" class="text-success"
                 >✅ Connected</span
               >
               <span v-else-if="connectionStatus === 'checking'" class="text-yellow-500"
                 >⏳ Checking...</span
               >
-              <span v-else class="text-red-500">❌ Not Connected</span>
+              <span v-else class="text-destructive">❌ Not Connected</span>
             </p>
-            <p v-if="error" class="text-red-500"><strong>Error:</strong> {{ error }}</p>
+            <p v-if="error" class="text-destructive"><strong>Error:</strong> {{ error }}</p>
           </div>
         </div>
 
@@ -77,7 +77,7 @@ onMounted(async () => {
     }
 
     connectionStatus.value = 'connected'
-  } catch (err: any) {
+  } catch (err: Error) {
     connectionStatus.value = 'error'
     error.value = err.message || 'Failed to connect to Supabase'
   }
@@ -118,7 +118,7 @@ const testDatabaseConnection = async () => {
         count,
       }
     }
-  } catch (err: any) {
+  } catch (err: Error) {
     queryResult.value = {
       status: 'error',
       message: err.message || 'Query failed',

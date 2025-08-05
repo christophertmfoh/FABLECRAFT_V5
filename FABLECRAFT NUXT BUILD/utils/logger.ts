@@ -12,7 +12,7 @@ export const logger = {
   debug: console.debug.bind(console, '[FABLECRAFT DEBUG]'),
   time: (label: string) => console.time(`[FABLECRAFT PERF] ${label}`),
   timeEnd: (label: string) => console.timeEnd(`[FABLECRAFT PERF] ${label}`),
-  table: (data: any) => {
+  table: (data: Record<string, unknown>) => {
     console.log('[FABLECRAFT TABLE]')
     console.table(data)
   },

@@ -54,7 +54,7 @@
       <div v-if="isSuccess" class="success-message" role="alert" aria-live="polite">
         <AtomIcon
           name="lucide:check-circle"
-          class="w-4 h-4 mr-2 text-green-600"
+          class="w-4 h-4 mr-2 text-success"
           aria-hidden="true"
         />
         Thanks for subscribing! Check your email to confirm.

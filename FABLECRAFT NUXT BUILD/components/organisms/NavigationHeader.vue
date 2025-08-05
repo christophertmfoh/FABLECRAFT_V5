@@ -260,7 +260,7 @@ const handleLogout = async () => {
 }
 
 // Handle navigation (updated to work with NavigationMenu molecule)
-const handleNavigate = (item: any, href?: string) => {
+const handleNavigate = (item: string | { id: string }, href?: string) => {
   // If it's a navigation item object, use the id
   const view = typeof item === 'string' ? item : item.id
   emit('navigate', view)
