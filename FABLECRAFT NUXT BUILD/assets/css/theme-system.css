@@ -34,6 +34,8 @@
   --accent-foreground: 15 25% 15%; /* Dark text */
   --destructive: 0 65% 50%;      /* Error red */
   --destructive-foreground: 0 0% 98%; /* White */
+  --success: 140 50% 45%;        /* Success green */
+  --success-foreground: 0 0% 98%; /* White text */
 
   /* Form Elements */
   --border: 35 20% 85%;          /* Border color */
@@ -108,6 +110,8 @@
   --accent-foreground: 220 15% 13%; /* Dark text */
   --destructive: 0 70% 60%;      /* Bright red */
   --destructive-foreground: 0 0% 98%; /* White */
+  --success: 140 60% 55%;        /* Success green (brighter for dark) */
+  --success-foreground: 220 15% 13%; /* Dark text */
   --border: 220 15% 25%;         /* Border */
   --input: 220 15% 25%;          /* Input */
   --ring: 35 75% 55%;            /* Focus ring */
