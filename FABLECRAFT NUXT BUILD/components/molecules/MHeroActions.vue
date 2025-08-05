@@ -118,7 +118,7 @@ const actionsContainerClasses = computed(() => {
   }
 
   return cn(
-    'action-group w-full max-w-md mx-auto sm:max-w-none sm:ml-8',  // Adjusted: smaller max-width and left margin on larger screens
+    'action-group w-full max-w-md mx-auto sm:max-w-none',  // Removed sm:ml-8 for perfect alignment
     'transition-all duration-300',
     layoutClasses[props.layout],
     alignmentClasses[props.alignment],
@@ -129,7 +129,7 @@ const actionsContainerClasses = computed(() => {
 
 const primaryButtonClasses = computed(() => {
   return cn(
-    'group relative w-full sm:w-auto',
+    'group relative w-full sm:w-auto sm:min-w-[200px]',  // Added min-width for consistent button sizing
     'font-semibold shadow-lg hover:shadow-xl',
     'rounded-xl transition-all duration-300',
     'hover:scale-[1.01]',  // Reduced from 1.02 to prevent buttons from appearing too close on hover
@@ -140,7 +140,7 @@ const primaryButtonClasses = computed(() => {
 
 const secondaryButtonClasses = computed(() => {
   return cn(
-    'group relative w-full sm:w-auto',
+    'group relative w-full sm:w-auto sm:min-w-[200px]',  // Added min-width for consistent button sizing
     'font-semibold shadow-md hover:shadow-lg',
     'rounded-xl transition-all duration-300',
     'hover:scale-[1.01]',  // Reduced from 1.02 to prevent buttons from appearing too close on hover

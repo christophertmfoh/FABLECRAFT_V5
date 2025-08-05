@@ -112,9 +112,9 @@ const headingContainerClasses = computed(() => {
 
 const headingClasses = computed(() => {
   const variantClasses = {
-    default: 'font-black leading-[1.1] tracking-tight drop-shadow-sm',
+    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm',  // Increased from 1.1 to prevent clipping
     compact: 'font-bold leading-tight tracking-normal', 
-    dramatic: 'font-black leading-[0.9] tracking-tighter drop-shadow-lg'
+    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg'  // Keep dramatic tight
   }
   
   const sizeClasses = {
@@ -155,7 +155,7 @@ const subheadingClasses = computed(() => {
   }
 
   return cn(
-    'text-muted-foreground leading-relaxed font-medium',
+    'text-muted-foreground leading-normal font-medium',  // Changed from leading-relaxed to leading-normal
     'transition-all duration-300',
     alignmentClasses[props.alignment],
     sizeClasses[props.size]

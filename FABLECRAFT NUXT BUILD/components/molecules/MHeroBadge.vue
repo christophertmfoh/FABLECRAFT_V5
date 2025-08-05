@@ -59,9 +59,10 @@ const emit = defineEmits<HeroBadgeEmits>()
 // Computed properties
 const badgeContainerClasses = computed(() => {
   const sizeClasses = {
-    sm: 'gap-1.5',
-    md: 'gap-2', 
-    lg: 'gap-3'
+    sm: 'gap-1.5',        // 6px - small gap
+    base: 'gap-2.5',      // 10px - perfect gap for base size
+    md: 'gap-3',          // 12px - increased from gap-2
+    lg: 'gap-4'           // 16px - increased from gap-3
   }
 
   return cn(

@@ -69,7 +69,7 @@ defineEmits<{
 const variantGradients = {
   default: 'from-primary-foreground/25 to-transparent',
   destructive: 'from-destructive-foreground/25 to-transparent', 
-  outline: 'from-primary/25 to-transparent',
+  outline: 'from-accent/30 to-transparent',  // Changed to accent for better visibility on hover
   secondary: 'from-secondary-foreground/25 to-transparent',
   ghost: 'from-accent/25 to-transparent',
   link: 'from-primary/25 to-transparent',
