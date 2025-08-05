@@ -15,6 +15,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "fix-console": "node scripts/fix-console-logs.cjs",
     "typecheck": "nuxt typecheck",
     "clean": "rm -rf .nuxt .output dist",
     "db:start": "supabase start",
