@@ -79,7 +79,7 @@ const fireflyPositions = [
 
 // Create fireflies based on count - computed so it's reactive
 const fireflies = computed<Firefly[]>(() => {
-  if (!props.enabled || !isVisible.value) return []
+  if (!props.enabled) return []
   
   const actualCount = Math.min(props.count, 15) // Max 15 (sweet spot)
   const limits = {

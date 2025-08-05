@@ -10,13 +10,13 @@
     <!-- Background Effects Layer -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <!-- Paper Texture -->
-      <EffectsPaperTexture v-if="paperTextureEnabled" />
+      <PaperTexture v-if="paperTextureEnabled" />
       
       <!-- Background Orbs -->
-      <EffectsBackgroundOrbs v-if="orbsEnabled" />
+      <BackgroundOrbs v-if="orbsEnabled" />
       
       <!-- Firefly Effect -->
-      <EffectsFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" />
+      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" />
     </div>
 
     <!-- Main Content Layer -->
