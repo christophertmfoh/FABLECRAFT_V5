@@ -1,48 +1,55 @@
 <template>
   <Card
-    :class="[
-      'group bg-card hover:bg-accent/50 border-border transition-all duration-500',
-      'natural-depth gentle-hover',
-      'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
-    ]"
+    :class="cardClasses"
     role="article"
     :aria-label="`${number} ${label}`"
   >
     <div class="p-6 text-center space-y-4">
       <!-- Icon Container -->
-      <div
-        :class="[
-          'w-12 h-12 bg-primary/10 hover:bg-primary/20 rounded-xl',
-          'flex items-center justify-center mx-auto transition-all duration-300',
-          'group-hover:scale-110 group-hover:rotate-3'
-        ]"
-      >
-        <Icon
-          :name="icon"
-          class="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300"
-          aria-hidden="true"
-        />
-      </div>
+      <IconContainer
+        :icon="icon"
+        :size="'md'"
+        :variant="'primary'"
+        :shape="'rounded'"
+        class="mx-auto group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
+      />
 
       <!-- Content -->
-      <div class="mt-best-friends space-y-1">
+      <div class="space-y-1">
         <!-- Number -->
-        <div class="text-2xl sm:text-3xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+        <Text
+          :as="'div'"
+          :size="'display-value'"
+          :weight="'bold'"
+          :align="'center'"
+          class="text-foreground group-hover:text-primary transition-colors duration-300"
+        >
           {{ number }}
-        </div>
+        </Text>
         
         <!-- Label -->
-        <div class="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+        <Text
+          :as="'div'"
+          :size="'sm'"
+          :variant="'muted'"
+          :weight="'medium'"
+          :align="'center'"
+          class="group-hover:text-foreground transition-colors duration-300"
+        >
           {{ label }}
-        </div>
+        </Text>
         
         <!-- Optional Description -->
-        <p 
+        <Text
           v-if="showDescription && description"
-          class="text-xs text-muted-foreground mt-2"
+          :as="'p'"
+          :size="'xs'"
+          :variant="'muted'"
+          :align="'center'"
+          class="mt-2"
         >
           {{ description }}
-        </p>
+        </Text>
       </div>
     </div>
   </Card>
@@ -60,4 +67,14 @@ interface MTrustIndicatorCardProps {
 const props = withDefaults(defineProps<MTrustIndicatorCardProps>(), {
   showDescription: false
 })
+
+// Consolidated card classes
+const cardClasses = [
+  'group',
+  'bg-card hover:bg-accent/50',
+  'border-border',
+  'transition-all duration-500',
+  'natural-depth gentle-hover',
+  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
+]
 </script>

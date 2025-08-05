@@ -1,55 +1,55 @@
 <template>
   <div
-    :class="[
-      'group bg-card hover:bg-accent/30 rounded-2xl p-comfortable space-y-6',
-      'border border-border hover:border-primary/50 transition-all duration-500',
-      'natural-depth gentle-hover focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
-    ]"
+    :class="cardClasses"
     role="article"
     tabindex="0"
     :aria-labelledby="`benefit-title-${id}`"
     :aria-describedby="`benefit-description-${id}`"
   >
     <!-- Icon -->
-    <div
-      :class="[
-        'w-16 h-16 bg-primary/10 hover:bg-primary/20 rounded-2xl',
-        'flex items-center justify-center mx-auto transition-all duration-500',
-        'group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg'
-      ]"
-    >
-      <Icon
-        :name="icon"
-        class="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300"
-        aria-hidden="true"
-      />
-    </div>
+    <IconContainer
+      :icon="icon"
+      :size="'lg'"
+      :variant="'primary'"
+      :shape="'rounded'"
+      class="mx-auto group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg transition-all duration-500"
+    />
 
     <!-- Content -->
-    <div class="mt-best-friends space-y-4 text-center">
+    <div class="space-y-4 text-center">
       <!-- Title -->
-      <h4
+      <Heading
+        :as="'h4'"
+        :size="'h4'"
+        :align="'center'"
         :id="`benefit-title-${id}`"
-        class="text-golden-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300"
+        class="text-foreground group-hover:text-primary transition-colors duration-300"
       >
         {{ title }}
-      </h4>
+      </Heading>
 
       <!-- Category Badge (optional) -->
       <Badge 
         v-if="showCategory && category"
         variant="secondary"
+        size="sm"
+        class="mx-auto"
       >
         {{ category }}
       </Badge>
 
       <!-- Description -->
-      <p
+      <Text
+        :as="'p'"
+        :size="'base'"
+        :variant="'muted'"
+        :leading="'relaxed'"
+        :align="'center'"
         :id="`benefit-description-${id}`"
-        class="text-muted-foreground group-hover:text-foreground transition-colors duration-300 leading-relaxed"
+        class="group-hover:text-foreground transition-colors duration-300"
       >
         {{ description }}
-      </p>
+      </Text>
     </div>
   </div>
 </template>
@@ -71,4 +71,15 @@ const props = withDefaults(defineProps<MBenefitCardProps>(), {
 
 // Generate unique ID for accessibility
 const id = useComponentId()
+
+// Consolidated card classes
+const cardClasses = [
+  'group',
+  'bg-card hover:bg-accent/30',
+  'rounded-2xl p-comfortable space-y-6',
+  'border border-border hover:border-primary/50',
+  'transition-all duration-500',
+  'natural-depth gentle-hover',
+  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
+]
 </script>

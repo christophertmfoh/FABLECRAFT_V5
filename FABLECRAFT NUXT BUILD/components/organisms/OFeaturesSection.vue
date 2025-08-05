@@ -1,17 +1,16 @@
 <template>
   <section
-    :class="[
-      'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
-      isCompact ? 'py-12' : 'section-spacing-compact',
-      props.class
-    ]"
-    aria-labelledby="features-heading"
+    :class="sectionClasses"
+    aria-label="Features Section"
   >
     <!-- Feature Header -->
     <MFeatureHeader
       badge-text="Revolutionary Creative Technology"
       title="The Creative Industry's First Complete Multimedia Suite"
       :subtitle="headerSubtitle"
+      :badge-size="isCompact ? 'sm' : 'base'"
+      :heading-size="isCompact ? 'h2-compact' : 'h2'"
+      :subtitle-size="isCompact ? 'body-compact' : 'body-default'"
       :compact="isCompact"
     />
 
@@ -20,12 +19,8 @@
       v-if="showTrustIndicators"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-normal mt-acquaintances"
       role="region"
-      aria-labelledby="trust-indicators-heading"
+      aria-label="Platform Statistics and Trust Indicators"
     >
-      <h3 id="trust-indicators-heading" class="sr-only">
-        Platform Statistics and Trust Indicators
-      </h3>
-
       <MTrustIndicatorCard
         v-for="(indicator, index) in trustIndicators"
         :key="`trust-${index}`"
@@ -42,12 +37,8 @@
       v-if="showKeyBenefits"
       class="grid grid-cols-1 md:grid-cols-3 grid-normal mt-acquaintances"
       role="region"
-      aria-labelledby="key-benefits-heading"
+      aria-label="Key Platform Benefits and Features"
     >
-      <h3 id="key-benefits-heading" class="sr-only">
-        Key Platform Benefits and Features
-      </h3>
-
       <MBenefitCard
         v-for="(benefit, index) in keyBenefits"
         :key="`benefit-${index}`"
@@ -94,6 +85,13 @@ const props = withDefaults(defineProps<OFeaturesSectionProps>(), {
 // Variant checks
 const isCompact = computed(() => props.variant === 'compact')
 const isDetailed = computed(() => props.variant === 'detailed')
+
+// Section classes
+const sectionClasses = computed(() => [
+  'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
+  isCompact.value ? 'py-12' : 'section-spacing-compact',
+  props.class
+])
 
 // Header subtitle
 const headerSubtitle = 'Break free from scattered tools. Fablecraft replaces 50+ applications with one intelligent platform that understands your entire creative process from world-building to video production, audio scoring, and community publishing.'

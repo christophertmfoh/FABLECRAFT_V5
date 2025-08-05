@@ -1,33 +1,32 @@
 <template>
-  <div class="text-center">
-    <!-- Badge Container -->
-    <div class="flex items-center justify-center gap-2">
-      <APulsingDot 
-        :color="pulsingDotColor"
-        aria-hidden="true"
-      />
-      <Badge 
-        :variant="badgeVariant"
-        :class="badgeClass"
-      >
-        {{ badgeText }}
-      </Badge>
-    </div>
+  <div class="text-center heading-group space-y-3">
+    <!-- Use the existing MHeroBadge component -->
+    <MHeroBadge
+      :text="badgeText"
+      :variant="badgeVariant"
+      :size="badgeSize"
+      :clickable="false"
+    />
 
-    <!-- Main Heading -->
+    <!-- Main Heading with proper centering -->
     <Heading
-      :level="2"
+      :as="headingTag"
       :size="headingSize"
+      :align="'center'"
       :class="headingClass"
     >
       {{ title }}
     </Heading>
 
-    <!-- Description Text -->
+    <!-- Description Text with proper centering and styling -->
     <Text
       v-if="subtitle"
+      :as="'p'"
       :size="subtitleSize"
-      :variant="muted"
+      :variant="'muted'"
+      :weight="'medium'"
+      :leading="'relaxed'"
+      :align="'center'"
       :class="subtitleClass"
     >
       {{ subtitle }}
@@ -36,49 +35,36 @@
 </template>
 
 <script setup lang="ts">
-import type { ComponentSize } from '~/types'
-
 interface MFeatureHeaderProps {
   badgeText: string
   title: string
   subtitle?: string
-  badgeVariant?: 'default' | 'secondary' | 'accent'
-  pulsingDotColor?: string
-  headingSize?: ComponentSize
-  subtitleSize?: ComponentSize
+  badgeVariant?: 'default' | 'accent' | 'secondary' | 'outline'
+  badgeSize?: 'sm' | 'base' | 'md' | 'lg'
+  headingTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  headingSize?: 'h2' | 'h2-compact' | 'h2-display'
+  subtitleSize?: 'body-compact' | 'body-default'
   compact?: boolean
   class?: string
 }
 
 const props = withDefaults(defineProps<MFeatureHeaderProps>(), {
   badgeVariant: 'default',
-  pulsingDotColor: 'primary',
-  headingSize: 'xl',
-  subtitleSize: 'lg',
+  badgeSize: 'base',
+  headingTag: 'h2',
+  headingSize: 'h2',
+  subtitleSize: 'body-default',
   compact: false
 })
 
-// Compute responsive classes based on variant
-const badgeClass = computed(() => [
-  'bg-card/95 text-foreground border-border font-semibold',
-  'backdrop-blur-md shadow-md hover:shadow-lg',
-  'transition-shadow duration-300',
-  'text-base px-4 py-2'
-])
-
+// Additional spacing and size adjustments based on compact mode
 const headingClass = computed(() => [
-  'font-black text-foreground leading-[1.2] tracking-tight drop-shadow-sm',
-  'mt-best-friends',
-  props.compact
-    ? 'text-2xl sm:text-3xl lg:text-4xl'
-    : 'text-golden-3xl sm:text-golden-4xl lg:text-golden-5xl xl:text-6xl'
+  'mt-best-friends', // Consistent spacing after badge
+  props.compact && 'sm:text-3xl lg:text-4xl' // Override sizes if compact
 ])
 
 const subtitleClass = computed(() => [
-  'text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium',
-  'mt-friends',
-  props.compact
-    ? 'text-base sm:text-lg'
-    : 'text-golden-lg sm:text-golden-xl lg:text-golden-2xl'
+  'max-w-4xl mx-auto', // Center and constrain width
+  'mt-friends' // Consistent spacing after heading
 ])
 </script>
