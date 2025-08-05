@@ -2,13 +2,13 @@
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
       <Button 
-        variant="ghost" 
+        variant="outline" 
         size="icon" 
-        class="relative focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none"
+        class="relative border-border/30 hover:border-border/60 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         <AtomIcon 
           :name="currentThemeIcon" 
-          class="h-5 w-5 transition-all" 
+          class="h-5 w-5 text-foreground transition-all" 
           aria-hidden="true"
         />
         <span class="sr-only">Toggle theme</span>
@@ -18,7 +18,6 @@
     <DropdownMenuContent 
       align="end" 
       class="w-64 focus:outline-none"
-      @close-auto-focus="(e) => e.preventDefault()"
     >
       <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
       <DropdownMenuSeparator />
@@ -198,6 +197,8 @@
 </template>
 
 <script setup lang="ts">
+import { nextTick } from 'vue'
+
 // Use theme composable 
 const { currentTheme, setTheme } = useTheme()
 
@@ -235,8 +236,17 @@ const currentThemeIcon = computed(() => {
   return config?.icon ?? themeConfig.light.icon
 })
 
-// Handle theme change
+// Handle theme change with proper focus management
 const handleThemeChange = (theme: string) => {
   setTheme(theme)
+  
+  // Allow menu to close naturally, then blur the trigger button
+  nextTick(() => {
+    // Find the trigger button and blur it after theme change
+    const triggerButton = document.querySelector('[role="button"][aria-haspopup="menu"]') as HTMLElement
+    if (triggerButton) {
+      triggerButton.blur()
+    }
+  })
 }
 </script>
