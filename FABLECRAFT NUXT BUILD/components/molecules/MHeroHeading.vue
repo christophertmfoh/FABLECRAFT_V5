@@ -103,7 +103,7 @@ const headingContainerClasses = computed(() => {
   }
 
   return cn(
-    'heading-group flex flex-col',
+    'heading-group flex flex-col pb-2',  // Added pb-2 to ensure descenders have space
     alignmentClasses[props.alignment],
     spacingClasses[props.spacing],
     props.className
@@ -193,7 +193,7 @@ const subheadingClasses = computed(() => {
 @media (min-width: 1280px) {
   .text-9xl {
     font-size: 8rem;
-    line-height: 1;
+    line-height: 1.1;  /* Increased from 1 to prevent clipping of descenders */
   }
 }
 

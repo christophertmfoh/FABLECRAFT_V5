@@ -35,17 +35,6 @@
           :spacing="headingSpacing"
         />
 
-        <!-- Hero Description (if separate from heading) -->
-        <Text
-          v-if="separateDescription && description"
-          :class="descriptionClasses"
-          :variant="descriptionVariant"
-          :size="descriptionSize"
-          :alignment="alignment"
-        >
-          {{ description }}
-        </Text>
-
         <!-- Hero Actions -->
         <MHeroActions
           :primary-text="primaryButtonText"
@@ -109,11 +98,6 @@ interface HeroSectionProps {
   gradientIntensity?: 'subtle' | 'normal' | 'vibrant'
   gradientAnimation?: 'none' | 'shimmer' | 'pulse' | 'flow'
   
-  // Description props
-  separateDescription?: boolean
-  descriptionVariant?: 'default' | 'muted' | 'accent'
-  descriptionSize?: 'sm' | 'md' | 'lg' | 'xl'
-  
   // Button props  
   primaryButtonIcon?: string
   secondaryButtonIcon?: string
@@ -145,7 +129,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   badgeText: 'End-to-End Creative Production Suite',
   title: 'Where Creative Visions ',
   highlightText: 'Become Reality',
-  description: `The world's first complete multimedia creative suite. Transform ideas into novels, screenplays, graphic novels, and D&D campaigns. Generate storyboards, create videos, compose scores, and build communities. From concept to publication, from script to screen, all powered by AI that understands your creative universe.`,
+  description: `The world's first complete multimedia creative suite. Transform ideas into novels, screenplays, graphic novels, and D&D campaigns. From concept to publication, from script to screen, all powered by AI that understands your creative universe.`,
   primaryButtonText: 'Start Creating Free',
   secondaryButtonText: 'Explore Examples',
   
@@ -173,11 +157,6 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   gradientDirection: 'to-r',
   gradientIntensity: 'normal',
   gradientAnimation: 'none',
-  
-  // Default description settings
-  separateDescription: true,  // Changed to true for better control over description bulk
-  descriptionVariant: 'muted',
-  descriptionSize: 'sm',  // Further reduced from 'md' to make description text even smaller
   
   // Default button settings
   primaryButtonIcon: 'lucide:zap',
@@ -219,27 +198,6 @@ const heroSectionClasses = computed(() => {
     variantClasses[props.variant],
     backgroundClasses[props.background],
     props.className
-  )
-})
-
-const descriptionClasses = computed(() => {
-  const variantClasses = {
-    default: 'text-foreground',
-    muted: 'text-muted-foreground',
-    accent: 'text-accent-foreground'
-  }
-  
-  const alignmentClasses = {
-    left: 'text-left',
-    center: 'text-center max-w-3xl mx-auto',  // Reduced from max-w-4xl to max-w-3xl
-    right: 'text-right'
-  }
-
-  return cn(
-    'leading-normal font-normal',  // Changed from leading-relaxed font-medium to reduce bulk
-    'transition-all duration-300',
-    variantClasses[props.descriptionVariant],
-    alignmentClasses[props.alignment]
   )
 })
 
@@ -290,14 +248,9 @@ const handleBadgeClick = (event: MouseEvent) => {
   margin-top: var(--space-md); /* 16px - badge to heading */
 }
 
-/* Medium spacing between heading and description */
-.hero-content > :nth-child(3) {
-  margin-top: var(--space-lg); /* 20px - heading to description */
-}
-
 /* Larger spacing before action buttons (separate action area) */
-.hero-content > :nth-child(4) {
-  margin-top: var(--space-3xl); /* 40px - description to buttons for clear separation */
+.hero-content > :nth-child(3) {
+  margin-top: var(--space-3xl); /* 40px - heading to buttons for clear separation */
 }
 
 /* Enhanced hero ambient glow effect - optimized */
@@ -331,10 +284,6 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
   
   .hero-content > :nth-child(3) {
-    margin-top: var(--space-md); /* Heading to description on mobile */
-  }
-  
-  .hero-content > :nth-child(4) {
     margin-top: var(--space-xl); /* Reduced button spacing on mobile */
   }
 }
@@ -345,10 +294,6 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
   
   .hero-content > :nth-child(3) {
-    margin-top: var(--space-lg); /* Heading to description on tablet */
-  }
-  
-  .hero-content > :nth-child(4) {
     margin-top: var(--space-2xl); /* Good button separation on tablet */
   }
 }
@@ -359,10 +304,6 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
   
   .hero-content > :nth-child(3) {
-    margin-top: var(--space-xl); /* Heading to description on desktop */
-  }
-  
-  .hero-content > :nth-child(4) {
     margin-top: var(--space-4xl); /* Maximum button separation on desktop */
   }
 }
