@@ -28,20 +28,26 @@
             <!-- Authenticated User Dropdown -->
             <DropdownMenu v-if="isAuthenticated && user">
               <DropdownMenuTrigger as-child>
-                <Button
-                  class="group bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                <GradientButton
+                  variant="default"
+                  size="default"
+                  :show-gradient-overlay="true"
+                  gradient-colors="from-primary-foreground/25 to-transparent"
+                  class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
                   :aria-label="`User menu for ${displayName}`"
                 >
-                  <span class="flex items-center">
-                    <AtomIcon name="lucide:user-circle" class="mr-2 h-4 w-4" aria-hidden="true" />
-                    Welcome {{ displayName }}
+                  <template #leading>
+                    <AtomIcon name="lucide:user-circle" class="h-4 w-4" aria-hidden="true" />
+                  </template>
+                  Welcome {{ displayName }}
+                  <template #trailing>
                     <AtomIcon 
                       name="lucide:chevron-down" 
-                      class="ml-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-300" 
+                      class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300" 
                       aria-hidden="true" 
                     />
-                  </span>
-                </Button>
+                  </template>
+                </GradientButton>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
@@ -55,13 +61,15 @@
                   </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="() => handleNavigate('projects')"
+                    @select="() => handleNavigate('projects')"
                   >
-                    <AtomIcon name="lucide:book-open" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
-                    <div>
-                      <div class="font-medium">Creative Workspace</div>
-                      <div class="text-xs text-muted-foreground">
-                        Projects, characters & world bible
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:book-open" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <div>
+                        <div class="font-medium">Creative Workspace</div>
+                        <div class="text-xs text-muted-foreground">
+                          Projects, characters & world bible
+                        </div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -74,13 +82,15 @@
                   </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="() => handleNavigate('profile')"
+                    @select="() => handleNavigate('profile')"
                   >
-                    <AtomIcon name="lucide:user" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
-                    <div>
-                      <div class="font-medium">Profile & Settings</div>
-                      <div class="text-xs text-muted-foreground">
-                        Manage your account
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:user" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <div>
+                        <div class="font-medium">Profile & Settings</div>
+                        <div class="text-xs text-muted-foreground">
+                          Manage your account
+                        </div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -93,13 +103,15 @@
                   </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="() => handleNavigate('community')"
+                    @select="() => handleNavigate('community')"
                   >
-                    <AtomIcon name="lucide:users" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
-                    <div>
-                      <div class="font-medium">Writer Community</div>
-                      <div class="text-xs text-muted-foreground">
-                        Connect with other writers
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:users" class="h-4 w-4 text-primary" aria-hidden="true" />
+                      <div>
+                        <div class="font-medium">Writer Community</div>
+                        <div class="text-xs text-muted-foreground">
+                          Connect with other writers
+                        </div>
                       </div>
                     </div>
                   </DropdownMenuItem>
@@ -109,29 +121,35 @@
                 <div class="p-2">
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-destructive/10 py-3 px-4 rounded-lg transition-colors"
-                    @click="handleLogout"
+                    @select="handleLogout"
                   >
-                    <AtomIcon name="lucide:log-out" class="mr-3 h-4 w-4 text-destructive" aria-hidden="true" />
-                    <span class="font-medium text-destructive">
-                      Sign Out
-                    </span>
+                    <div class="flex items-center gap-3">
+                      <AtomIcon name="lucide:log-out" class="h-4 w-4 text-destructive" aria-hidden="true" />
+                      <span class="font-medium text-destructive">
+                        Sign Out
+                      </span>
+                    </div>
                   </DropdownMenuItem>
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
             
             <!-- Unauthenticated User Sign In Button -->
-            <Button
+            <GradientButton
               v-else
-              class="group bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+              variant="default"
+              size="default"
+              :show-gradient-overlay="true"
+              gradient-colors="from-primary-foreground/25 to-transparent"
+              class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
               :aria-label="authButtonText"
               @click="handleAuthClick"
             >
-              <span class="flex items-center">
-                <AtomIcon name="lucide:users" class="mr-2 h-4 w-4" aria-hidden="true" />
-                {{ authButtonText }}
-              </span>
-            </Button>
+              <template #leading>
+                <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
+              </template>
+              {{ authButtonText }}
+            </GradientButton>
           </template>
 
           <!-- Advanced Theme Toggle -->
@@ -144,6 +162,7 @@
 
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
+import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
 
 // User interface for authentication
 interface User {
@@ -171,7 +190,6 @@ interface NavigationHeaderProps {
   
   // Styling
   className?: string
-  variant?: 'default' | 'transparent' | 'solid'
 }
 
 // Define props with defaults
@@ -182,7 +200,6 @@ const props = withDefaults(defineProps<NavigationHeaderProps>(), {
   authButtonText: 'Sign Up / Sign In',
   showNavItems: true,
   isAuthenticated: false,
-  variant: 'default',
 })
 
 // Define emits
@@ -245,14 +262,11 @@ const handleNavigate = (item: any, href?: string) => {
   }
 }
 
-// Compute header classes (matches React version exactly)
+// Compute header classes (simplified - only using default behavior)
 const headerClasses = computed(() => {
   return cn(
-    'sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-sm',
-    {
-      'bg-transparent': props.variant === 'transparent',
-      'bg-background border-b border-border shadow-sm': props.variant === 'solid',
-    },
+    'sticky top-0 z-50 backdrop-blur-xl border-b border-border/20 shadow-sm',
+    'bg-transparent', // Always transparent to allow visual effects through
     props.className
   )
 })
