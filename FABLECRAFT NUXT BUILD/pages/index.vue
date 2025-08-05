@@ -176,7 +176,7 @@ const {
 } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
-const orbsEnabled = useState('orbs-enabled', () => true)
+const orbsEnabled = useState('orbs-enabled', () => false)
 const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
