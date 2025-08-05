@@ -99,8 +99,8 @@ const gradientStyles = computed(() => {
   return {
     backgroundImage: gradient,
     // Ensure proper text rendering across all themes
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
+    '-webkit-background-clip': 'text',
+    '-webkit-text-fill-color': 'transparent',
     // Fallback for theme compatibility
     backgroundClip: 'text'
   }
