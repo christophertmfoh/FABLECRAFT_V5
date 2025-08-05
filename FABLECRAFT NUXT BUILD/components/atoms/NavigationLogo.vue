@@ -75,9 +75,9 @@ const logoClasses = computed(() => {
   @apply group-hover:shadow-lg group-hover:scale-105 transition-all duration-300;
 }
 
-/* Brand text (exact match to React version) */
+/* Brand text (slightly smaller for better proportions) */
 .brand-text {
-  @apply text-3xl font-black text-foreground tracking-wide;
+  @apply text-2xl font-black text-foreground tracking-wide;
 }
 
 /* Accessibility improvements */

@@ -6,11 +6,11 @@
     :aria-label="ariaLabel"
   >
     <div class="nav-items">
-      <!-- Simplified: Just text links for now -->
+      <!-- Navigation buttons with theme-responsive colors -->
       <button
         v-for="item in navigationItems"
         :key="item.id"
-        class="text-sm font-semibold tracking-wide cursor-pointer uppercase px-3 py-2 hover:text-primary transition-colors"
+        class="text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 tracking-wide cursor-pointer uppercase"
         @click="() => handleNavigate(item, item.href)"
       >
         {{ item.label }}

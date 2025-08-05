@@ -1,7 +1,11 @@
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
-      <Button variant="ghost" size="icon" class="relative">
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        class="relative focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none"
+      >
         <AtomIcon 
           :name="currentThemeIcon" 
           class="h-5 w-5 transition-all" 
@@ -11,7 +15,7 @@
       </Button>
     </DropdownMenuTrigger>
     
-    <DropdownMenuContent align="end" class="w-64">
+    <DropdownMenuContent align="end" class="w-64 focus:outline-none">
       <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
