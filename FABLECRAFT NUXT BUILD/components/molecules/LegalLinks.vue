@@ -1,5 +1,5 @@
 <template>
-  <div :class="legalLinksClasses">
+  <div :class="legalLinksClasses" :data-layout="layout">
     <nav 
       role="navigation" 
       aria-label="Legal information"
@@ -159,46 +159,54 @@ ul {
 
 /* Separator styling */
 .separator {
-  @apply text-foreground/30 mx-2 select-none;
+  color: hsl(var(--foreground) / 0.3);
+  margin: 0 0.5rem;
+  user-select: none;
   font-size: 0.875rem;
 }
 
 /* Item styling */
 li {
-  @apply flex items-center;
+  display: flex;
+  align-items: center;
 }
 
 /* Horizontal layout specific */
-.legal-links .flex-row li:not(:last-child) .separator {
-  @apply inline;
+.legal-links[data-layout="horizontal"] li:not(:last-child) .separator {
+  display: inline;
 }
 
 /* Vertical layout - hide separators */
-.legal-links .flex-col .separator {
-  @apply hidden;
+.legal-links[data-layout="vertical"] .separator,
+.legal-links[data-layout="stacked"] .separator {
+  display: none;
 }
 
 /* Responsive behavior */
 @media (max-width: 640px) {
   /* Stack horizontally laid out links vertically on small screens */
-  .legal-links .flex-row {
-    @apply flex-col items-start space-y-1;
+  .legal-links[data-layout="horizontal"] ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
   }
   
   /* Hide separators on mobile for horizontal layout */
-  .legal-links .flex-row .separator {
-    @apply hidden;
+  .legal-links[data-layout="horizontal"] .separator {
+    display: none;
   }
   
   /* Adjust alignment on mobile */
-  .legal-links.justify-center .flex-col {
-    @apply items-center;
+  .legal-links.justify-center[data-layout="vertical"] ul,
+  .legal-links.justify-center[data-layout="stacked"] ul {
+    align-items: center;
   }
 }
 
 /* Focus management */
 .legal-links:focus-within {
-  @apply outline-none;
+  outline: none;
 }
 
 /* Ensure proper spacing for stacked layout */
@@ -208,7 +216,7 @@ li {
 
 /* Accessibility improvements */
 nav[aria-label="Legal information"] {
-  @apply outline-none;
+  outline: none;
 }
 
 /* Color consistency */
