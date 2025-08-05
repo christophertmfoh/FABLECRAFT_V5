@@ -10,37 +10,33 @@
     <!-- Background Effects Layer -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <!-- Paper Texture -->
-      <EffectsPaperTexture v-if="paperTextureEnabled" />
+      <PaperTexture v-if="paperTextureEnabled" />
       
       <!-- Background Orbs -->
-      <EffectsBackgroundOrbs v-if="orbsEnabled" />
+      <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
       
       <!-- Firefly Effect -->
-      <EffectsFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" />
+      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
     </div>
 
     <!-- Main Content Layer -->
     <div class="relative z-10">
       <!-- Skip to Content Link (Accessibility) -->
-      <AtomsVisuallyHidden>
+      <VisuallyHidden>
         <a href="#main-content" class="skip-link">
           Skip to main content
         </a>
-      </AtomsVisuallyHidden>
+      </VisuallyHidden>
 
-      <!-- Header Section -->
-      <header 
-        id="header"
-        class="relative z-50"
-        :class="headerClasses"
-      >
-        <AtomsContainer size="xl" class="py-4 md:py-6">
-          <!-- Header Component Placeholder -->
-          <div class="min-h-[64px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-            <span class="text-muted-foreground">Header Component</span>
-          </div>
-        </AtomsContainer>
-      </header>
+      <!-- Navigation Header -->
+      <NavigationHeader
+        :is-authenticated="isAuthenticated"
+        :user="user"
+        @auth:click="handleAuth"
+        @auth:logout="handleLogout"
+        @navigate="handleNavigate"
+        @logo:click="handleHome"
+      />
 
       <!-- Main Content -->
       <main 
@@ -48,102 +44,103 @@
         class="relative z-20"
       >
         <!-- Hero Section -->
-        <AtomsSection 
+        <Section 
           id="hero"
           spacing="xl"
           class="hero-section"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Hero Component Placeholder -->
             <div class="min-h-[600px] md:min-h-[700px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Hero Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Features Section -->
-        <AtomsSection 
+        <Section 
           id="features"
           spacing="lg"
           class="features-section"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Features Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Features Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Process Section -->
-        <AtomsSection 
+        <Section 
           id="process"
           spacing="lg"
           class="process-section bg-muted/30"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Process Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Process Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Testimonials Section -->
-        <AtomsSection 
+        <Section 
           id="testimonials"
           spacing="lg"
           class="testimonials-section"
         >
-          <AtomsContainer size="lg">
+          <Container size="lg">
             <!-- Testimonials Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Testimonials Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Pricing Section -->
-        <AtomsSection 
+        <Section 
           id="pricing"
           spacing="lg"
           class="pricing-section bg-muted/20"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Pricing Component Placeholder -->
             <div class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Pricing Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- CTA Section -->
-        <AtomsSection 
+        <Section 
           id="cta"
           spacing="lg"
           class="cta-section"
         >
-          <AtomsContainer size="md">
+          <Container size="md">
             <!-- CTA Component Placeholder -->
             <div class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">CTA Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
       </main>
 
       <!-- Footer Section -->
-      <footer 
+      <Footer
         id="footer"
-        class="relative z-30 bg-card border-t"
-      >
-        <AtomsContainer size="xl" class="py-8 md:py-12">
-          <!-- Footer Component Placeholder -->
-          <div class="min-h-[200px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-            <span class="text-muted-foreground">Footer Component</span>
-          </div>
-        </AtomsContainer>
-      </footer>
+        class="relative z-30"
+        :show-branding="true"
+        variant="default"
+        @navigate="handleFooterNavigation"
+        @newsletter:subscribe="handleNewsletterSubscribe"
+        @newsletter:success="handleNewsletterSuccess"
+        @newsletter:error="handleNewsletterError"
+        @social:click="handleSocialClick"
+        @legal:click="handleLegalClick"
+      />
     </div>
 
     <!-- Scroll Progress Indicator (optional) -->
@@ -164,6 +161,13 @@
 const route = useRoute()
 const router = useRouter()
 
+// Authentication
+const user = useSupabaseUser()
+const supabase = useSupabaseClient()
+
+// Compute authentication state
+const isAuthenticated = computed(() => !!user.value)
+
 // Theme system
 const { 
   currentTheme, 
@@ -173,29 +177,84 @@ const {
 } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
-const orbsEnabled = useState('orbs-enabled', () => true)
+const orbsEnabled = useState('orbs-enabled', () => false)
 const firefliesEnabled = useState('fireflies-enabled', () => true)
-const fireflyCount = useState('firefly-count', () => 12)
+const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
 
 // Scroll progress
 const showScrollProgress = ref(false)
 const scrollProgress = ref(0)
 
-// Header classes for sticky behavior
-const headerClasses = computed(() => ({
-  'sticky top-0 bg-background/95 backdrop-blur-md border-b': true,
-  'shadow-sm': scrollProgress.value > 5
-}))
+// Header classes removed - now handled by ONavigationHeader component
 
 // Analytics composable (ready for implementation)
 // const { trackPageView, trackEvent } = useAnalytics()
+
+// Navigation handlers
+const handleAuth = () => {
+  // Navigate to auth page or trigger auth modal
+  navigateTo('/auth')
+}
+
+const handleLogout = async () => {
+  try {
+    await supabase.auth.signOut()
+    // Optionally show success message
+    console.log('Logged out successfully')
+  } catch (error) {
+    console.error('Error during logout:', error)
+  }
+}
+
+const handleNavigate = (view: string) => {
+  if (view === 'home') {
+    navigateTo('/')
+  } else {
+    navigateTo(`/${view}`)
+  }
+}
+
+const handleHome = () => {
+  navigateTo('/')
+}
 
 // Scroll handling
 const handleScroll = () => {
   const winScroll = document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
   scrollProgress.value = (winScroll / height) * 100
+}
+
+// Footer event handlers
+const handleFooterNavigation = (payload: { type: string; item: string; category: string }) => {
+  console.log('Footer navigation:', payload)
+  // Future: Handle footer navigation routing
+}
+
+const handleNewsletterSubscribe = (email: string) => {
+  console.log('Newsletter subscription:', email)
+  // Future: Handle newsletter subscription API call
+}
+
+const handleNewsletterSuccess = (email: string) => {
+  console.log('Newsletter subscription successful:', email)
+  // Future: Show success notification
+}
+
+const handleNewsletterError = (error: string) => {
+  console.log('Newsletter subscription error:', error)
+  // Future: Show error notification
+}
+
+const handleSocialClick = (platform: string) => {
+  console.log('Social media click:', platform)
+  // Future: Handle social media analytics
+}
+
+const handleLegalClick = (payload: { text: string; href?: string }) => {
+  console.log('Legal link click:', payload)
+  // Future: Handle legal page navigation
 }
 
 // Component mount lifecycle
@@ -288,8 +347,7 @@ definePageMeta({
 
 // Expose utilities for child components
 provide('landingPage', {
-  scrollProgress: readonly(scrollProgress),
-  headerClasses: readonly(headerClasses)
+  scrollProgress: readonly(scrollProgress)
 })
 </script>
 
