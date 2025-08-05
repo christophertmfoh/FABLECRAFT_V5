@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@pinia/nuxt',
     '@vueuse/nuxt',
-    '@nuxt/eslint'
+    '@nuxt/eslint',
+    '@nuxt/devtools'  // Fix: DevTools wasn't working due to missing module registration
   ],
 
   // Icon module configuration
