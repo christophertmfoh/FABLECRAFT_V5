@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { cn } from '../atoms/Utils'
+import { cn } from '~/components/atoms/Utils'
 
 // Component props interface
 interface AuthButtonProps {

@@ -92,8 +92,8 @@
 </template>
 
 <script setup lang="ts">
-import { cn } from './Utils'
-import type { Theme } from '../constants/data'
+import { cn } from '~/components/atoms/Utils'
+import type { Theme } from '~/constants/data'
 
 // Component props interface
 interface ThemeToggleProps {

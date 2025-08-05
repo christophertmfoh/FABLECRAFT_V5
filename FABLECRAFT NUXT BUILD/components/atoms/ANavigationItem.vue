@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { cn } from './Utils'
+import { cn } from '~/components/atoms/Utils'
 
 // Component props interface
 interface NavigationItemProps {
