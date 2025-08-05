@@ -57,8 +57,8 @@ const gradientStyles = computed(() => {
   const gradientConfigs = {
     primary: {
       subtle: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.7))',
-      normal: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8))',
-      vibrant: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)))'
+      normal: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))',
+      vibrant: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))'
     },
     secondary: {
       subtle: 'linear-gradient({direction}, hsl(var(--secondary)), hsl(var(--secondary) / 0.7))',

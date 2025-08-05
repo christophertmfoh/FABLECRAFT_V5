@@ -75,7 +75,7 @@ const badgeContainerClasses = computed(() => {
 
 const badgeClasses = computed(() => {
   const variantClasses = {
-    default: 'bg-card/95 text-foreground border-border backdrop-blur-md',
+    default: 'bg-card/95 text-foreground border-border backdrop-blur-md font-semibold shadow-md hover:shadow-lg transition-shadow duration-300',
     accent: 'bg-accent/95 text-accent-foreground border-accent backdrop-blur-md',
     secondary: 'bg-secondary/95 text-secondary-foreground border-secondary backdrop-blur-md', 
     outline: 'bg-transparent text-foreground border-border hover:bg-accent hover:text-accent-foreground'
@@ -83,17 +83,16 @@ const badgeClasses = computed(() => {
 
   const sizeClasses = {
     sm: 'text-xs px-2 py-1',
-    md: 'text-sm px-3 py-1.5',
-    lg: 'text-base px-4 py-2'
+    md: 'text-base px-4 py-2',  // Matches React original text-base px-4 py-2
+    lg: 'text-lg px-5 py-2.5'
   }
 
   return cn(
-    'font-semibold shadow-md hover:shadow-lg',
-    'transition-all duration-300',
+    'font-semibold transition-all duration-300',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     variantClasses[props.variant],
     sizeClasses[props.size],
-    props.clickable && 'hover:scale-102'
+    props.clickable && 'hover:scale-102 cursor-pointer'
   )
 })
 

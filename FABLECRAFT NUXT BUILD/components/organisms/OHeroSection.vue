@@ -165,7 +165,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   headingTag: 'h1',
   headingId: 'hero-heading',
   headingVariant: 'default',
-  headingSize: 'xl',
+  headingSize: '2xl',  // Updated to match React original's golden ratio typography
   headingSpacing: 'normal',
   
   // Default gradient settings

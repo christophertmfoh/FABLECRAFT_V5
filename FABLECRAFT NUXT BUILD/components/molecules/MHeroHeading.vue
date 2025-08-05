@@ -122,7 +122,7 @@ const headingClasses = computed(() => {
     md: 'text-3xl sm:text-4xl lg:text-5xl',
     lg: 'text-4xl sm:text-5xl lg:text-6xl',
     xl: 'text-5xl sm:text-6xl lg:text-7xl xl:text-8xl',
-    '2xl': 'text-6xl sm:text-7xl lg:text-8xl xl:text-9xl'
+    '2xl': 'text-golden-4xl sm:text-golden-5xl lg:text-6xl xl:text-7xl'  // Matches React original exactly
   }
 
   return cn(

@@ -128,8 +128,8 @@ const actionsContainerClasses = computed(() => {
   
   const spacingClasses = {
     tight: 'gap-2',
-    normal: 'gap-4',
-    relaxed: 'gap-6'
+    normal: 'gap-6',   // Increased from gap-4 to match React original visual spacing
+    relaxed: 'gap-8'   // Increased from gap-6 for consistency
   }
 
   return cn(
@@ -148,7 +148,8 @@ const primaryButtonClasses = computed(() => {
     'font-semibold shadow-lg hover:shadow-xl',
     'rounded-xl transition-all duration-300',
     'hover:scale-[1.02]',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+    'text-xl px-8 py-4'  // Enhanced sizing to match React original
   )
 })
 
@@ -158,7 +159,8 @@ const secondaryButtonClasses = computed(() => {
     'font-semibold shadow-md hover:shadow-lg',
     'rounded-xl transition-all duration-300',
     'hover:scale-[1.02]',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+    'text-xl px-8 py-4'  // Enhanced sizing to match React original
   )
 })
 
@@ -202,20 +204,20 @@ const handleSecondaryClick = (event: MouseEvent) => {
 <style scoped>
 /* Enhanced button animations and effects */
 .action-group {
-  /* Mathematical spacing using design system */
-  gap: var(--space-2);
+  /* Mathematical spacing using design system - increased to match React original */
+  gap: var(--space-6);
 }
 
 /* Responsive gap adjustments */
 @media (min-width: 640px) {
   .action-group {
-    gap: var(--space-3);
+    gap: var(--space-6); /* Consistent spacing across breakpoints */
   }
 }
 
-/* Enhanced hover effects */
+/* Enhanced hover effects - removed conflicting transform */
 .group:hover {
-  transform: translateY(-2px) scale(1.05);
+  /* Transform handled by hover:scale-[1.02] class */
 }
 
 /* Improved focus management */
