@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+import { logger } from '~/utils/logger'
+
 import { computed } from 'vue'
 import { cn } from '~/components/atoms/Utils'
 
@@ -85,7 +87,7 @@ const handleClick = () => {
   // Future: Handle navigation when href is provided
   if (props.href) {
     // For now, just emit - parent can handle navigation
-    console.log(`Navigate to: ${props.href}`)
+    logger.log(`Navigate to: ${props.href}`)
   }
 }
 </script>

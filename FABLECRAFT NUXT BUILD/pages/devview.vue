@@ -1,5 +1,7 @@
 <!-- file: pages/index.vue -->
 <script setup lang="ts">
+import { logger } from '~/utils/logger'
+
 // Industry-standard development environment detection
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -167,15 +169,15 @@ onMounted(() => {
 
 // Development-only debugging (excluded from production)
 if (isDevelopment) {
-      console.log('Development Mode: Mathematical spacing system loaded')
-    console.log('Design tokens available:', {
+      logger.log('Development Mode: Mathematical spacing system loaded')
+    logger.log('Design tokens available:', {
     primitive: 'var(--space-1) through var(--space-32)',
     semantic: 'var(--space-micro) through var(--space-massive)',
     typography: 'var(--text-xs) through var(--text-6xl)',
     golden: 'var(--text-golden-xs) through var(--text-golden-5xl)'
   })
-  console.log('Theme system loaded with', themes.length, 'themes')
-  console.log('Visual effects system initialized')
+  logger.log('Theme system loaded with', themes.length, 'themes')
+  logger.log('Visual effects system initialized')
 }
 </script>
 
@@ -1493,16 +1495,16 @@ if (isDevelopment) {
                   Options
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem @select="() => console.log('Edit clicked')">
+                  <DropdownMenuItem @select="() => logger.log('Edit clicked')">
                     <Icon name="lucide:pencil" class="h-4 w-4 mr-2" />
                     Edit
                   </DropdownMenuItem>
-                  <DropdownMenuItem @select="() => console.log('Duplicate clicked')">
+                  <DropdownMenuItem @select="() => logger.log('Duplicate clicked')">
                     <Icon name="lucide:copy" class="h-4 w-4 mr-2" />
                     Duplicate
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem @select="() => console.log('Delete clicked')" class="text-destructive">
+                  <DropdownMenuItem @select="() => logger.log('Delete clicked')" class="text-destructive">
                     <Icon name="lucide:trash" class="h-4 w-4 mr-2" />
                     Delete
                   </DropdownMenuItem>

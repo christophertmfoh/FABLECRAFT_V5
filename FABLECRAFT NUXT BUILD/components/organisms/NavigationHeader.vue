@@ -161,6 +161,8 @@
 </template>
 
 <script setup lang="ts">
+import { logger } from '~/utils/logger'
+
 import { cn } from '~/components/atoms/Utils'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
 
@@ -242,7 +244,7 @@ const handleLogout = async () => {
     await supabase.auth.signOut()
     emit('auth:logout')
   } catch (error) {
-    console.error('Error during logout:', error)
+    logger.error('Error during logout:', error)
   }
 }
 

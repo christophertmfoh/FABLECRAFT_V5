@@ -147,6 +147,8 @@
 </template>
 
 <script setup lang="ts">
+import { logger } from '~/utils/logger'
+
 // Core Nuxt 3 composables
 const route = useRoute()
 const router = useRouter()
@@ -191,9 +193,9 @@ const handleLogout = async () => {
   try {
     await supabase.auth.signOut()
     // Optionally show success message
-    console.log('Logged out successfully')
+    logger.log('Logged out successfully')
   } catch (error) {
-    console.error('Error during logout:', error)
+    logger.error('Error during logout:', error)
   }
 }
 
@@ -234,32 +236,32 @@ const handleScroll = () => {
 
 // Footer event handlers
 const handleFooterNavigation = (payload: { type: string; item: string; category: string }) => {
-  console.log('Footer navigation:', payload)
+  logger.log('Footer navigation:', payload)
   // Future: Handle footer navigation routing
 }
 
 const handleNewsletterSubscribe = (email: string) => {
-  console.log('Newsletter subscription:', email)
+  logger.log('Newsletter subscription:', email)
   // Future: Handle newsletter subscription API call
 }
 
 const handleNewsletterSuccess = (email: string) => {
-  console.log('Newsletter subscription successful:', email)
+  logger.log('Newsletter subscription successful:', email)
   // Future: Show success notification
 }
 
 const handleNewsletterError = (error: string) => {
-  console.log('Newsletter subscription error:', error)
+  logger.log('Newsletter subscription error:', error)
   // Future: Show error notification
 }
 
 const handleSocialClick = (platform: string) => {
-  console.log('Social media click:', platform)
+  logger.log('Social media click:', platform)
   // Future: Handle social media analytics
 }
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {
-  console.log('Legal link click:', payload)
+  logger.log('Legal link click:', payload)
   // Future: Handle legal page navigation
 }
 
