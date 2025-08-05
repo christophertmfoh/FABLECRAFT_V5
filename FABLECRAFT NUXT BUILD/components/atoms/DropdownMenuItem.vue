@@ -28,7 +28,7 @@ interface DropdownMenuItemProps {
 
 // Define props with defaults
 const props = withDefaults(defineProps<DropdownMenuItemProps>(), {
-  disabled: false
+  disabled: false,
 })
 
 // Define emits

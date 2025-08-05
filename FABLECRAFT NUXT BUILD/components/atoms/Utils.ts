@@ -26,20 +26,20 @@ export function formatCurrency(
     currency = 'USD',
     locale = 'en-US',
     minimumFractionDigits = 0,
-    maximumFractionDigits = 2
+    maximumFractionDigits = 2,
   } = options
-  
+
   const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount
-  
+
   if (isNaN(numAmount)) {
     return ''
   }
-  
+
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
     minimumFractionDigits,
-    maximumFractionDigits
+    maximumFractionDigits,
   }).format(numAmount)
 }
 
@@ -51,7 +51,7 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null
-  
+
   return (...args: Parameters<T>) => {
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(() => func(...args), wait)

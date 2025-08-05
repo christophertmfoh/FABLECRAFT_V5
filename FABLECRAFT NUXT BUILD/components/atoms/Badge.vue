@@ -15,11 +15,14 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default: 'border-transparent bg-primary text-primary-foreground hover:bg-primary/80',
-        secondary: 'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        destructive: 'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
+        secondary:
+          'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        destructive:
+          'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
         outline: 'text-foreground',
         // Special landing page variant
-        landing: 'bg-card/95 text-foreground border-border backdrop-blur-md shadow-md hover:shadow-lg transition-shadow duration-300',
+        landing:
+          'bg-card/95 text-foreground border-border backdrop-blur-md shadow-md hover:shadow-lg transition-shadow duration-300',
       },
       size: {
         default: 'px-2.5 py-0.5 text-xs',

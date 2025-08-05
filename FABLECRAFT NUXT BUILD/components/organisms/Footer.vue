@@ -33,7 +33,7 @@
             @success="handleNewsletterSuccess"
             @error="handleNewsletterError"
           />
-          
+
           <NavigationColumn
             title="Support"
             :links="footerLinks.support"
@@ -44,7 +44,7 @@
       </div>
 
       <!-- Footer Bottom -->
-      <FooterBottom 
+      <FooterBottom
         class="pt-8"
         :default-company="companyInfo.name"
         :legal-links="footerLinks.legal"
@@ -58,12 +58,12 @@
       <!-- Made with Love -->
       <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground mt-8 pt-6">
         <span>{{ footerBranding.madeWithText }}</span>
-        <AnimatedOrb 
-          size="md" 
+        <AnimatedOrb
+          size="md"
           animation="pulse"
           :colors="{
             primary: 'hsl(var(--orb-primary))',
-            secondary: 'hsl(var(--orb-secondary))'
+            secondary: 'hsl(var(--orb-secondary))',
           }"
         />
         <span>{{ footerBranding.madeForText }}</span>
@@ -99,19 +99,14 @@ interface FooterEmits {
 const props = withDefaults(defineProps<FooterProps>(), {
   className: '',
   showBranding: true,
-  variant: 'default'
+  variant: 'default',
 })
 
 const emit = defineEmits<FooterEmits>()
 
 // Footer content composable
-const {
-  companyInfo,
-  footerLinks,
-  newsletterContent,
-  socialLinks,
-  footerBranding
-} = useFooterContent()
+const { companyInfo, footerLinks, newsletterContent, socialLinks, footerBranding } =
+  useFooterContent()
 
 // Computed properties
 const tagline = computed(() => {
@@ -120,19 +115,14 @@ const tagline = computed(() => {
 
 const footerClasses = computed(() => {
   const baseClasses = 'relative z-10'
-  
+
   const variantClasses = {
-    default: '',  // Removed border-t - no weird line at top
-    minimal: 'bg-transparent',  // Removed border-t
-    dark: ''  // Removed border-t
+    default: '', // Removed border-t - no weird line at top
+    minimal: 'bg-transparent', // Removed border-t
+    dark: '', // Removed border-t
   }
 
-  return cn(
-    'footer-organism',
-    baseClasses,
-    variantClasses[props.variant],
-    props.className
-  )
+  return cn('footer-organism', baseClasses, variantClasses[props.variant], props.className)
 })
 
 // Event handlers
@@ -140,14 +130,14 @@ const handleNavigate = (payload: { text: string; href?: string; category: string
   emit('navigate', {
     type: 'footer-navigation',
     item: payload.text,
-    category: payload.category
+    category: payload.category,
   })
-  
+
   // Track navigation event
   trackEvent('footer_navigation', {
-    'link_text': payload.text,
-    'link_category': payload.category,
-    'link_url': payload.href
+    link_text: payload.text,
+    link_category: payload.category,
+    link_url: payload.href,
   })
 }
 
@@ -157,10 +147,10 @@ const handleNewsletter = (email: string) => {
 
 const handleNewsletterSuccess = (email: string) => {
   emit('newsletter:success', email)
-  
+
   // Track newsletter signup
   trackEvent('newsletter_signup', {
-    'method': 'footer_form'
+    method: 'footer_form',
   })
 }
 
@@ -170,21 +160,21 @@ const handleNewsletterError = (error: string) => {
 
 const handleSocialClick = (platform: string) => {
   emit('social:click', platform)
-  
+
   // Track social click
   trackEvent('social_click', {
-    'platform': platform,
-    'location': 'footer'
+    platform: platform,
+    location: 'footer',
   })
 }
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {
   emit('legal:click', payload)
-  
+
   // Track legal link click
   trackEvent('legal_click', {
-    'link_text': payload.text,
-    'link_url': payload.href
+    link_text: payload.text,
+    link_url: payload.href,
   })
 }
 
@@ -200,7 +190,9 @@ const trackEvent = (eventName: string, parameters: Record<string, any>) => {
 /* Footer organism styling - following header pattern */
 .footer-organism {
   @apply w-full;
-  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+  transition:
+    background-color 300ms ease-in-out,
+    border-color 300ms ease-in-out;
 }
 
 /* Grid responsive behavior */
@@ -260,7 +252,7 @@ footer:focus-within {
   .footer-organism {
     @apply bg-white text-black border-black;
   }
-  
+
   .made-with-love {
     @apply text-black border-black/20;
   }

@@ -13,13 +13,10 @@ interface CardTitleProps {
 }
 
 const props = withDefaults(defineProps<CardTitleProps>(), {
-  as: 'h3'
+  as: 'h3',
 })
 
 const titleClasses = computed(() => {
-  return cn(
-    'text-2xl font-semibold leading-none tracking-tight',
-    props.class
-  )
+  return cn('text-2xl font-semibold leading-none tracking-tight', props.class)
 })
 </script>

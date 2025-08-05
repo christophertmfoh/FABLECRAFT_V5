@@ -1,15 +1,8 @@
 <template>
   <div :class="legalLinksClasses" :data-layout="layout">
-    <nav 
-      role="navigation" 
-      aria-label="Legal information"
-    >
+    <nav role="navigation" aria-label="Legal information">
       <ul :class="listClasses" role="list">
-        <li 
-          v-for="(link, index) in links" 
-          :key="getKey(link)"
-          :class="itemClasses"
-        >
+        <li v-for="(link, index) in links" :key="getKey(link)" :class="itemClasses">
           <FooterLink
             :text="getLinkText(link)"
             :href="getLinkHref(link)"
@@ -17,9 +10,9 @@
             :size="linkSize"
             @click="handleLinkClick"
           />
-          
+
           <!-- Separator between links -->
-          <span 
+          <span
             v-if="showSeparators && index < links.length - 1"
             class="separator"
             aria-hidden="true"
@@ -62,7 +55,7 @@ const props = withDefaults(defineProps<LegalLinksProps>(), {
   showSeparators: true,
   linkSize: 'sm',
   alignment: 'left',
-  class: ''
+  class: '',
 })
 
 const emit = defineEmits<LegalLinksEmits>()
@@ -85,28 +78,23 @@ const legalLinksClasses = computed(() => {
   const alignmentClasses = {
     left: 'justify-start text-left',
     center: 'justify-center text-center',
-    right: 'justify-end text-right'
+    right: 'justify-end text-right',
   }
 
-  return cn(
-    'legal-links',
-    'w-full',
-    alignmentClasses[props.alignment],
-    props.class
-  )
+  return cn('legal-links', 'w-full', alignmentClasses[props.alignment], props.class)
 })
 
 const listClasses = computed(() => {
   const layoutClasses = {
     horizontal: 'flex flex-row flex-wrap items-center',
     vertical: 'flex flex-col',
-    stacked: 'flex flex-col space-y-2'
+    stacked: 'flex flex-col space-y-2',
   }
 
   const alignmentClasses = {
     left: 'justify-start',
     center: 'justify-center',
-    right: 'justify-end'
+    right: 'justify-end',
   }
 
   return cn(
@@ -131,14 +119,14 @@ const handleLinkClick = (payload: { text: string; href?: string }) => {
   emit('link-click', {
     text: payload.text,
     href: payload.href,
-    type: 'legal'
+    type: 'legal',
   })
-  
+
   // Track legal link clicks for compliance
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'legal_link_click', {
-      'link_text': payload.text,
-      'link_url': payload.href
+      link_text: payload.text,
+      link_url: payload.href,
     })
   }
 }
@@ -172,34 +160,34 @@ li {
 }
 
 /* Horizontal layout specific */
-.legal-links[data-layout="horizontal"] li:not(:last-child) .separator {
+.legal-links[data-layout='horizontal'] li:not(:last-child) .separator {
   display: inline;
 }
 
 /* Vertical layout - hide separators */
-.legal-links[data-layout="vertical"] .separator,
-.legal-links[data-layout="stacked"] .separator {
+.legal-links[data-layout='vertical'] .separator,
+.legal-links[data-layout='stacked'] .separator {
   display: none;
 }
 
 /* Responsive behavior */
 @media (max-width: 640px) {
   /* Stack horizontally laid out links vertically on small screens */
-  .legal-links[data-layout="horizontal"] ul {
+  .legal-links[data-layout='horizontal'] ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
   }
-  
+
   /* Hide separators on mobile for horizontal layout */
-  .legal-links[data-layout="horizontal"] .separator {
+  .legal-links[data-layout='horizontal'] .separator {
     display: none;
   }
-  
+
   /* Adjust alignment on mobile */
-  .legal-links.justify-center[data-layout="vertical"] ul,
-  .legal-links.justify-center[data-layout="stacked"] ul {
+  .legal-links.justify-center[data-layout='vertical'] ul,
+  .legal-links.justify-center[data-layout='stacked'] ul {
     align-items: center;
   }
 }
@@ -215,7 +203,7 @@ li {
 }
 
 /* Accessibility improvements */
-nav[aria-label="Legal information"] {
+nav[aria-label='Legal information'] {
   outline: none;
 }
 

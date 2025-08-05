@@ -1,14 +1,11 @@
 <template>
-  <fieldset
-    :class="fieldsetClasses"
-    :disabled="disabled"
-  >
+  <fieldset :class="fieldsetClasses" :disabled="disabled">
     <legend v-if="label" :class="legendClasses">
       {{ label }}
       <span v-if="required" class="text-destructive ml-1">*</span>
     </legend>
-    
-    <div 
+
+    <div
       :class="containerClasses"
       role="radiogroup"
       :aria-label="label || 'Rating'"
@@ -16,11 +13,7 @@
       @mouseleave="hoveredValue = 0"
     >
       <!-- Zero/Clear rating option -->
-      <label
-        v-if="allowClear"
-        :for="`${componentId}-0`"
-        class="sr-only"
-      >
+      <label v-if="allowClear" :for="`${componentId}-0`" class="sr-only">
         <input
           :id="`${componentId}-0`"
           v-model="internalValue"
@@ -30,7 +23,7 @@
           class="sr-only"
           @focus="focusedValue = 0"
           @blur="focusedValue = -1"
-        >
+        />
         <span>No rating</span>
       </label>
 
@@ -53,33 +46,20 @@
           class="sr-only peer"
           @focus="focusedValue = star"
           @blur="focusedValue = -1"
-        >
-        
-        <Icon
-          :name="getStarIcon(star)"
-          :class="getStarClasses(star)"
-          aria-hidden="true"
         />
-        
+
+        <Icon :name="getStarIcon(star)" :class="getStarClasses(star)" aria-hidden="true" />
+
         <VisuallyHidden>{{ star }} {{ star === 1 ? 'star' : 'stars' }}</VisuallyHidden>
       </label>
     </div>
 
-    <p
-      v-if="description"
-      :id="`${componentId}-description`"
-      :class="descriptionClasses"
-    >
+    <p v-if="description" :id="`${componentId}-description`" :class="descriptionClasses">
       {{ description }}
     </p>
 
     <!-- Display current value for screen readers -->
-    <div
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-      class="sr-only"
-    >
+    <div role="status" aria-live="polite" aria-atomic="true" class="sr-only">
       Current rating: {{ internalValue || 0 }} out of {{ maxStars }} stars
     </div>
   </fieldset>
@@ -120,13 +100,13 @@ const props = withDefaults(defineProps<StarRatingProps>(), {
   readonly: false,
   allowClear: true,
   filledIcon: 'lucide:star',
-  emptyIcon: 'lucide:star'
+  emptyIcon: 'lucide:star',
 })
 
 // Define emits
 const emit = defineEmits<{
   'update:modelValue': [value: number]
-  'change': [value: number]
+  change: [value: number]
 }>()
 
 // Generate unique ID
@@ -142,7 +122,7 @@ const internalValue = computed({
   set: (value: number) => {
     emit('update:modelValue', value)
     emit('change', value)
-  }
+  },
 })
 
 // Size classes
@@ -151,7 +131,7 @@ const sizeClasses = {
   sm: 'h-4 w-4',
   md: 'h-5 w-5',
   lg: 'h-6 w-6',
-  xl: 'h-8 w-8'
+  xl: 'h-8 w-8',
 }
 
 // Color classes
@@ -159,48 +139,38 @@ const colorClasses = {
   primary: {
     filled: 'text-primary',
     empty: 'text-muted',
-    hover: 'hover:text-primary/80'
+    hover: 'hover:text-primary/80',
   },
   secondary: {
     filled: 'text-secondary',
     empty: 'text-muted',
-    hover: 'hover:text-secondary/80'
+    hover: 'hover:text-secondary/80',
   },
   warning: {
     filled: 'text-warning',
     empty: 'text-muted',
-    hover: 'hover:text-warning/80'
+    hover: 'hover:text-warning/80',
   },
   neutral: {
     filled: 'text-foreground',
     empty: 'text-muted',
-    hover: 'hover:text-foreground/80'
-  }
+    hover: 'hover:text-foreground/80',
+  },
 }
 
 // Fieldset classes
 const fieldsetClasses = computed(() => {
-  return cn(
-    'border-0 p-0 m-0',
-    props.disabled && 'opacity-50 cursor-not-allowed',
-    props.class
-  )
+  return cn('border-0 p-0 m-0', props.disabled && 'opacity-50 cursor-not-allowed', props.class)
 })
 
 // Legend classes
 const legendClasses = computed(() => {
-  return cn(
-    'text-sm font-medium mb-1',
-    props.disabled && 'text-muted-foreground'
-  )
+  return cn('text-sm font-medium mb-1', props.disabled && 'text-muted-foreground')
 })
 
 // Container classes
 const containerClasses = computed(() => {
-  return cn(
-    'inline-flex items-center',
-    props.readonly ? 'pointer-events-none' : 'cursor-pointer'
-  )
+  return cn('inline-flex items-center', props.readonly ? 'pointer-events-none' : 'cursor-pointer')
 })
 
 // Star label classes
@@ -214,10 +184,7 @@ const starLabelClasses = computed(() => {
 
 // Description classes
 const descriptionClasses = computed(() => {
-  return cn(
-    'text-sm text-muted-foreground mt-1',
-    props.disabled && 'opacity-75'
-  )
+  return cn('text-sm text-muted-foreground mt-1', props.disabled && 'opacity-75')
 })
 
 // Get star icon based on state

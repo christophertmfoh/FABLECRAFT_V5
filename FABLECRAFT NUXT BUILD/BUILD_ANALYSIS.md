@@ -5,6 +5,7 @@
 The Nuxt 3 build process generates a `.output` directory with the following structure:
 
 ### 1. Main Build Directory: `.output/`
+
 ```
 .output/
 ├── nitro.json          # Build configuration metadata
@@ -13,6 +14,7 @@ The Nuxt 3 build process generates a `.output` directory with the following stru
 ```
 
 ### 2. Public Directory (Client-Side)
+
 ```
 .output/public/
 ├── _nuxt/              # Client bundles and assets
@@ -25,12 +27,14 @@ The Nuxt 3 build process generates a `.output` directory with the following stru
 ```
 
 **Key Client Bundles:**
+
 - `CwL54M5C.js` (324KB) - Main application bundle
 - `DPAv5Ms0.js` (159KB) - Vendor/framework code
 - `BudAUlF8.js` (7.5KB) - App-specific code
 - `devview.KOpPpXDQ.css` - DevTools styles
 
 ### 3. Server Directory (Node.js Server)
+
 ```
 .output/server/
 ├── index.mjs           # Entry point for Node.js server
@@ -45,7 +49,9 @@ The Nuxt 3 build process generates a `.output` directory with the following stru
 ```
 
 ### 4. Build Configuration
+
 **nitro.json:**
+
 - Preset: `node-server` (standard Node.js deployment)
 - Framework: Nuxt 3.18.0
 - Server: Nitro 2.12.4
@@ -54,6 +60,7 @@ The Nuxt 3 build process generates a `.output` directory with the following stru
 ## AGENT_SAFETY_CURSOR_FRIENDLY.sh Script Analysis
 
 ### Purpose
+
 This script implements a safety system specifically designed for Cursor IDE to prevent accidental termination of Node.js/Nuxt development processes.
 
 ### Key Features
@@ -69,6 +76,7 @@ This script implements a safety system specifically designed for Cursor IDE to p
    - Contains executable wrapper scripts
 
 3. **Kill Command Protection**
+
    ```bash
    # Blocks commands like:
    kill node
@@ -89,6 +97,7 @@ This script implements a safety system specifically designed for Cursor IDE to p
 ### Why Cursor-Friendly?
 
 The script is specifically designed to work with Cursor IDE by:
+
 1. **No Terminal Interference** - Avoids DEBUG traps that log every command
 2. **Simple Aliases** - Won't break Cursor's terminal integration
 3. **Minimal Monitoring** - Reduces overhead and complexity
@@ -97,11 +106,13 @@ The script is specifically designed to work with Cursor IDE by:
 ### Integration with Build Process
 
 The safety system protects the development environment during:
+
 - `npm run dev` - Development server
 - `npm run build` - Build process
 - `npm run preview` - Production preview
 
 ### Usage
+
 ```bash
 # Activate safety
 ./AGENT_SAFETY_CURSOR_FRIENDLY.sh

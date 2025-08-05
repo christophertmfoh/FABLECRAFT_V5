@@ -1,9 +1,5 @@
 <template>
-  <div 
-    :class="dotClasses"
-    :style="dotStyles"
-    aria-hidden="true"
-  />
+  <div :class="dotClasses" :style="dotStyles" aria-hidden="true" />
 </template>
 
 <script setup lang="ts">
@@ -25,7 +21,7 @@ const props = withDefaults(defineProps<PulsingDotProps>(), {
   color: 'primary',
   intensity: 'normal',
   speed: 'normal',
-  className: ''
+  className: '',
 })
 
 // Computed classes
@@ -33,22 +29,22 @@ const dotClasses = computed(() => {
   const sizeClasses = {
     sm: 'w-2 h-2',
     md: 'w-4 h-4',
-    lg: 'w-6 h-6'
+    lg: 'w-6 h-6',
   }
-  
+
   const colorClasses = {
     primary: 'bg-primary',
     secondary: 'bg-secondary',
     accent: 'bg-accent',
     success: 'bg-success',
     warning: 'bg-warning',
-    destructive: 'bg-destructive'
+    destructive: 'bg-destructive',
   }
-  
+
   const speedClasses = {
     slow: 'animate-pulse-slow',
     normal: 'animate-pulse',
-    fast: 'animate-pulse-fast'
+    fast: 'animate-pulse-fast',
   }
 
   return cn(
@@ -65,12 +61,12 @@ const dotClasses = computed(() => {
 const dotStyles = computed(() => {
   const intensityValues = {
     subtle: '0.6',
-    normal: '0.8', 
-    strong: '1.0'
+    normal: '0.8',
+    strong: '1.0',
   }
-  
+
   return {
-    opacity: intensityValues[props.intensity]
+    opacity: intensityValues[props.intensity],
   }
 })
 </script>
@@ -78,7 +74,8 @@ const dotStyles = computed(() => {
 <style scoped>
 /* Custom pulse animation variants */
 @keyframes pulse-slow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -87,7 +84,8 @@ const dotStyles = computed(() => {
 }
 
 @keyframes pulse-fast {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {

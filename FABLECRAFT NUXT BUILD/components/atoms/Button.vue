@@ -10,17 +10,9 @@
     v-bind="$attrs"
   >
     <!-- Leading content (icon/avatar) -->
-    <Icon
-      v-if="loading && !trailing"
-      :name="loadingIcon"
-      class="animate-spin h-4 w-4"
-    />
+    <Icon v-if="loading && !trailing" :name="loadingIcon" class="animate-spin h-4 w-4" />
     <slot v-else-if="$slots.leading" name="leading" />
-    <Icon
-      v-else-if="icon && !trailing"
-      :name="icon"
-      class="h-4 w-4"
-    />
+    <Icon v-else-if="icon && !trailing" :name="icon" class="h-4 w-4" />
 
     <!-- Label/Content -->
     <span v-if="label || $slots.default" :class="{ 'sr-only': iconOnly }">
@@ -28,17 +20,9 @@
     </span>
 
     <!-- Trailing content (icon) -->
-    <Icon
-      v-if="loading && trailing"
-      :name="loadingIcon"
-      class="animate-spin h-4 w-4"
-    />
+    <Icon v-if="loading && trailing" :name="loadingIcon" class="animate-spin h-4 w-4" />
     <slot v-else-if="$slots.trailing" name="trailing" />
-    <Icon
-      v-else-if="icon && trailing"
-      :name="icon"
-      class="h-4 w-4"
-    />
+    <Icon v-else-if="icon && trailing" :name="icon" class="h-4 w-4" />
   </component>
 </template>
 
@@ -55,7 +39,8 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-        outline: 'border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground',
+        outline:
+          'border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',

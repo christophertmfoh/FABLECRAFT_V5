@@ -1,11 +1,6 @@
 <template>
   <div :class="containerClasses">
-    <AtomIcon
-      v-if="icon"
-      :name="icon"
-      :size="iconSize"
-      :class="iconClass"
-    />
+    <AtomIcon v-if="icon" :name="icon" :size="iconSize" :class="iconClass" />
     <slot v-else />
   </div>
 </template>
@@ -99,24 +94,24 @@ const iconSize = computed(() => {
 // Compute container classes
 const containerClasses = computed(() => {
   const config = sizeConfigs[props.size]
-  
+
   return cn(
     // Base classes
     'inline-flex items-center justify-center',
     'transition-all duration-200',
-    
+
     // Size classes
     config.container,
-    
+
     // Shape classes
     shapeClasses[props.shape],
-    
+
     // Variant classes
     variantClasses[props.variant],
-    
+
     // Hover classes
     props.hover && hoverClasses[props.variant],
-    
+
     // Interactive classes
     props.interactive && [
       'cursor-pointer',
@@ -125,7 +120,7 @@ const containerClasses = computed(() => {
       'focus-visible:ring-ring',
       'focus-visible:ring-offset-2',
     ],
-    
+
     // Custom classes
     props.class
   )

@@ -1,8 +1,5 @@
 <template>
-  <section
-    :class="sectionClasses"
-    aria-label="Features Section"
-  >
+  <section :class="sectionClasses" aria-label="Features Section">
     <!-- Feature Header -->
     <MFeatureHeader
       :badge-text="headerBadgeText"
@@ -16,7 +13,7 @@
     />
 
     <!-- Trust Indicators Section -->
-    <div 
+    <div
       v-if="showTrustIndicators"
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-normal mt-acquaintances"
       role="region"
@@ -89,8 +86,9 @@ const props = withDefaults(defineProps<OFeaturesSectionProps>(), {
   headerBadgeText: 'Revolutionary Creative Technology',
   headerTitle: "The Creative Industry's First Complete",
   headerHighlightText: 'Multimedia Suite',
-  headerSubtitle: 'Break free from scattered tools. Fablecraft replaces 50+ applications with one intelligent platform that understands your entire creative process from world-building to video production, audio scoring, and community publishing.',
-  gradientVariant: 'primary'
+  headerSubtitle:
+    'Break free from scattered tools. Fablecraft replaces 50+ applications with one intelligent platform that understands your entire creative process from world-building to video production, audio scoring, and community publishing.',
+  gradientVariant: 'primary',
 })
 
 // Variant checks
@@ -101,7 +99,7 @@ const isDetailed = computed(() => props.variant === 'detailed')
 const sectionClasses = computed(() => [
   'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
   isCompact.value ? 'py-12' : 'section-spacing-compact',
-  props.class
+  props.class,
 ])
 
 // Default trust indicators data
@@ -137,19 +135,22 @@ const defaultKeyBenefits: KeyBenefit[] = [
   {
     icon: 'lucide:globe',
     title: 'Intelligent World Building',
-    description: 'Create interconnected characters, locations, cultures, and factions with AI that understands your entire creative universe across all media formats.',
+    description:
+      'Create interconnected characters, locations, cultures, and factions with AI that understands your entire creative universe across all media formats.',
     category: 'World Building',
   },
   {
     icon: 'lucide:film',
     title: 'Complete Production Pipeline',
-    description: 'Transform your written content into storyboards, videos, and audio productions with AI-powered generation trained on your creative style.',
+    description:
+      'Transform your written content into storyboards, videos, and audio productions with AI-powered generation trained on your creative style.',
     category: 'Visual & Audio Production',
   },
   {
     icon: 'lucide:share-2',
     title: 'Community & Publishing',
-    description: 'Share your creations, collaborate in real-time, and publish across multiple formats. Build your audience and connect with fellow creators.',
+    description:
+      'Share your creations, collaborate in real-time, and publish across multiple formats. Build your audience and connect with fellow creators.',
     category: 'Community',
   },
 ]

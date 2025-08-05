@@ -1,9 +1,5 @@
 <template>
-  <Icon
-    :name="icon"
-    :class="spinnerClasses"
-    :style="customStyle"
-  />
+  <Icon :name="icon" :class="spinnerClasses" :style="customStyle" />
 </template>
 
 <script setup lang="ts">
@@ -34,11 +30,7 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
 
 // Compute spinner classes
 const spinnerClasses = computed(() => {
-  return cn(
-    'animate-spin',
-    sizeClasses[props.size],
-    props.class
-  )
+  return cn('animate-spin', sizeClasses[props.size], props.class)
 })
 
 // Compute custom style for color

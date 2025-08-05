@@ -1,20 +1,17 @@
 <template>
-  <div 
+  <div
     id="app-root"
     class="min-h-screen bg-background transition-colors duration-300"
-    :class="[
-      currentTheme,
-      { 'theme-transition': isThemeTransitioning }
-    ]"
+    :class="[currentTheme, { 'theme-transition': isThemeTransitioning }]"
   >
     <!-- Background Effects Layer -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <!-- Paper Texture -->
       <PaperTexture v-if="paperTextureEnabled" />
-      
+
       <!-- Background Orbs -->
       <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
-      
+
       <!-- Firefly Effect -->
       <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
     </div>
@@ -23,9 +20,7 @@
     <div class="relative z-10">
       <!-- Skip to Content Link (Accessibility) -->
       <VisuallyHidden>
-        <a href="#main-content" class="skip-link">
-          Skip to main content
-        </a>
+        <a href="#main-content" class="skip-link"> Skip to main content </a>
       </VisuallyHidden>
 
       <!-- Navigation Header -->
@@ -39,10 +34,7 @@
       />
 
       <!-- Main Content -->
-      <main 
-        id="main-content"
-        class="relative z-20"
-      >
+      <main id="main-content" class="relative z-20">
         <!-- Hero Section -->
         <OHeroSection
           id="hero"
@@ -62,56 +54,48 @@
         />
 
         <!-- Process Section -->
-        <Section 
-          id="process"
-          spacing="lg"
-          class="process-section bg-muted/30"
-        >
+        <Section id="process" spacing="lg" class="process-section bg-muted/30">
           <Container size="xl">
             <!-- Process Component Placeholder -->
-            <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
+            <div
+              class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
+            >
               <span class="text-muted-foreground">Process Section</span>
             </div>
           </Container>
         </Section>
 
         <!-- Testimonials Section -->
-        <Section 
-          id="testimonials"
-          spacing="lg"
-          class="testimonials-section"
-        >
+        <Section id="testimonials" spacing="lg" class="testimonials-section">
           <Container size="lg">
             <!-- Testimonials Component Placeholder -->
-            <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
+            <div
+              class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
+            >
               <span class="text-muted-foreground">Testimonials Section</span>
             </div>
           </Container>
         </Section>
 
         <!-- Pricing Section -->
-        <Section 
-          id="pricing"
-          spacing="lg"
-          class="pricing-section bg-muted/20"
-        >
+        <Section id="pricing" spacing="lg" class="pricing-section bg-muted/20">
           <Container size="xl">
             <!-- Pricing Component Placeholder -->
-            <div class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
+            <div
+              class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
+            >
               <span class="text-muted-foreground">Pricing Section</span>
             </div>
           </Container>
         </Section>
 
         <!-- CTA Section -->
-        <Section 
-          id="cta"
-          spacing="lg"
-          class="cta-section"
-        >
+        <Section id="cta" spacing="lg" class="cta-section">
           <Container size="md">
             <!-- CTA Component Placeholder -->
-            <div class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
+            <div
+              class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
+            >
               <span class="text-muted-foreground">CTA Section</span>
             </div>
           </Container>
@@ -134,11 +118,8 @@
     </div>
 
     <!-- Scroll Progress Indicator (optional) -->
-    <div 
-      v-if="showScrollProgress"
-      class="fixed top-0 left-0 w-full h-1 bg-primary/20 z-[100]"
-    >
-      <div 
+    <div v-if="showScrollProgress" class="fixed top-0 left-0 w-full h-1 bg-primary/20 z-[100]">
+      <div
         class="h-full bg-primary transition-all duration-100"
         :style="{ width: `${scrollProgress}%` }"
       />
@@ -161,12 +142,7 @@ const user = useSupabaseUser()
 const isAuthenticated = computed(() => !!user.value)
 
 // Theme system
-const { 
-  currentTheme, 
-  isDark,
-  isThemeTransitioning,
-  setThemeWithTransition 
-} = useTheme()
+const { currentTheme, isDark, isThemeTransitioning, setThemeWithTransition } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
 const orbsEnabled = useState('orbs-enabled', () => false)
@@ -271,10 +247,10 @@ onMounted(() => {
   if (showScrollProgress.value) {
     window.addEventListener('scroll', handleScroll, { passive: true })
   }
-  
+
   // Track page view
   // trackPageView({ page: 'landing' })
-  
+
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {
@@ -294,43 +270,45 @@ onUnmounted(() => {
 useHead({
   title: 'Fablecraft - Modern Web Development Foundation',
   meta: [
-    { 
-      name: 'description', 
-      content: 'A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript.' 
+    {
+      name: 'description',
+      content:
+        'A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript.',
     },
-    { 
-      name: 'viewport', 
-      content: 'width=device-width, initial-scale=1' 
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1',
     },
     // Open Graph
-    { 
-      property: 'og:title', 
-      content: 'Fablecraft - Modern Web Development Foundation' 
+    {
+      property: 'og:title',
+      content: 'Fablecraft - Modern Web Development Foundation',
     },
-    { 
-      property: 'og:description', 
-      content: 'A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript.' 
+    {
+      property: 'og:description',
+      content:
+        'A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript.',
     },
-    { 
-      property: 'og:type', 
-      content: 'website' 
+    {
+      property: 'og:type',
+      content: 'website',
     },
     // Twitter Card
-    { 
-      name: 'twitter:card', 
-      content: 'summary_large_image' 
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
     },
-    { 
-      name: 'twitter:title', 
-      content: 'Fablecraft' 
+    {
+      name: 'twitter:title',
+      content: 'Fablecraft',
     },
-    { 
-      name: 'twitter:description', 
-      content: 'Modern web development foundation' 
+    {
+      name: 'twitter:description',
+      content: 'Modern web development foundation',
     },
   ],
   bodyAttrs: {
-    class: computed(() => `${currentTheme.value} ${isDark.value ? 'dark' : 'light'}`)
+    class: computed(() => `${currentTheme.value} ${isDark.value ? 'dark' : 'light'}`),
   },
   // Structured data for SEO
   script: [
@@ -341,21 +319,21 @@ useHead({
         '@type': 'WebSite',
         name: 'Fablecraft',
         description: 'Modern web development foundation',
-        url: 'https://fablecraft.dev'
-      })
-    }
-  ]
+        url: 'https://fablecraft.dev',
+      }),
+    },
+  ],
 })
 
 // Route meta for analytics
 definePageMeta({
   name: 'landing',
-  layout: false // We're not using a layout wrapper for now
+  layout: false, // We're not using a layout wrapper for now
 })
 
 // Expose utilities for child components
 provide('landingPage', {
-  scrollProgress: readonly(scrollProgress)
+  scrollProgress: readonly(scrollProgress),
 })
 </script>
 

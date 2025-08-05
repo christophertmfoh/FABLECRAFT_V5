@@ -46,20 +46,20 @@ const isActive = computed(() => {
   if (props.active !== undefined) {
     return props.active
   }
-  
+
   // Auto-detect active state based on route
   if (props.href) {
     // Handle exact match for home page
     if (props.href === '/' && route.path === '/') {
       return true
     }
-    
+
     // Handle other routes (startsWith for nested routes)
     if (props.href !== '/' && route.path.startsWith(props.href)) {
       return true
     }
   }
-  
+
   return false
 })
 
@@ -76,12 +76,12 @@ const navigationItemClasses = computed(() => {
     'transition-colors duration-200 ease-in-out',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     'rounded-md px-3 py-2',
-    
+
     // State-dependent styles
     isActive.value
       ? 'text-foreground font-bold border-b-2 border-primary' // Active state
       : 'text-foreground/80 hover:text-foreground', // Inactive state
-    
+
     // Custom classes
     props.class
   )

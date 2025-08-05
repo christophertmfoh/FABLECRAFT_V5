@@ -69,35 +69,33 @@ const authButtonClasses = computed(() => {
   return cn(
     'group transition-all duration-300 hover:scale-105 rounded-xl',
     'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-    
+
     // Variant-specific styles
     props.variant === 'primary' && [
       'bg-primary hover:bg-primary/90 text-primary-foreground',
-      'shadow-md hover:shadow-lg'
+      'shadow-md hover:shadow-lg',
     ],
-    
+
     props.variant === 'secondary' && [
       'bg-secondary hover:bg-secondary/80 text-secondary-foreground',
-      'shadow-md hover:shadow-lg'
+      'shadow-md hover:shadow-lg',
     ],
-    
+
     props.variant === 'outline' && [
       'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-      'shadow-sm hover:shadow-md'
+      'shadow-sm hover:shadow-md',
     ],
-    
-    props.variant === 'ghost' && [
-      'hover:bg-accent hover:text-accent-foreground'
-    ],
-    
+
+    props.variant === 'ghost' && ['hover:bg-accent hover:text-accent-foreground'],
+
     // Size-specific styles
     props.size === 'lg' && 'px-8 py-3 text-base font-semibold',
     props.size === 'default' && 'px-4 py-2 font-semibold',
     props.size === 'sm' && 'px-3 py-1.5 text-sm font-medium',
-    
+
     // Loading state
     props.loading && 'opacity-80 cursor-not-allowed',
-    
+
     // Custom classes
     props.class
   )
@@ -133,15 +131,15 @@ const authButtonClasses = computed(() => {
   .transition-all {
     @apply transition-none;
   }
-  
+
   .hover\:scale-105 {
     @apply scale-100;
   }
-  
+
   .animate-spin {
     @apply animate-none;
   }
-  
+
   .group:hover {
     @apply scale-100;
   }

@@ -37,22 +37,24 @@ const props = withDefaults(defineProps<SeparatorProps>(), {
 // Compute separator classes based on orientation and variant
 const separatorClasses = computed(() => {
   const baseClasses = 'shrink-0 bg-border'
-  
+
   const orientationClasses = {
     horizontal: 'h-[1px] w-full',
     vertical: 'h-full w-[1px]',
   }
-  
+
   const variantClasses = {
     solid: '',
-    dashed: props.orientation === 'horizontal' 
-      ? 'bg-transparent border-t border-dashed' 
-      : 'bg-transparent border-l border-dashed',
-    dotted: props.orientation === 'horizontal'
-      ? 'bg-transparent border-t border-dotted'
-      : 'bg-transparent border-l border-dotted',
+    dashed:
+      props.orientation === 'horizontal'
+        ? 'bg-transparent border-t border-dashed'
+        : 'bg-transparent border-l border-dashed',
+    dotted:
+      props.orientation === 'horizontal'
+        ? 'bg-transparent border-t border-dotted'
+        : 'bg-transparent border-l border-dotted',
   }
-  
+
   return cn(
     baseClasses,
     orientationClasses[props.orientation],

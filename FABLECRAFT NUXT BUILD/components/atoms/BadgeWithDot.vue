@@ -1,27 +1,17 @@
 <template>
   <div class="inline-flex items-center gap-2">
     <!-- Pulsing dot -->
-    <span
-      :class="dotClasses"
-      :aria-hidden="true"
-    >
-      <span 
+    <span :class="dotClasses" :aria-hidden="true">
+      <span
         v-if="animated"
         class="absolute inset-0 rounded-full animate-ping"
         :class="dotPingClasses"
       />
-      <span 
-        class="relative block w-full h-full rounded-full"
-        :class="dotCoreClasses"
-      />
+      <span class="relative block w-full h-full rounded-full" :class="dotCoreClasses" />
     </span>
-    
+
     <!-- Badge content -->
-    <Badge
-      :variant="variant"
-      :size="size"
-      :class="badgeClass"
-    >
+    <Badge :variant="variant" :size="size" :class="badgeClass">
       <slot />
     </Badge>
   </div>
@@ -36,7 +26,7 @@ interface BadgeWithDotProps {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline' | 'landing'
   size?: 'default' | 'sm' | 'lg'
   badgeClass?: string | Record<string, boolean> | string[]
-  
+
   // Dot specific props
   dotPosition?: 'left' | 'right'
   dotSize?: 'sm' | 'md' | 'lg'
@@ -100,8 +90,6 @@ const dotPingClasses = computed(() => {
 
 // Compute dot core classes
 const dotCoreClasses = computed(() => {
-  return cn(
-    dotColorClasses[props.dotColor]
-  )
+  return cn(dotColorClasses[props.dotColor])
 })
 </script>

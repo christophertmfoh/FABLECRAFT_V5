@@ -51,37 +51,38 @@ The Fablecraft theme system has been audited against Nuxt 3 best practices. Over
 ### 🚀 **Recommendations for Future Improvements**
 
 1. **Add Theme Transition Plugin**
+
    ```ts
    // plugins/theme-transition.client.ts
    export default defineNuxtPlugin(() => {
      useHead({
-       style: [{
-         children: `
+       style: [
+         {
+           children: `
            * {
              transition: background-color 0.3s ease, color 0.3s ease;
            }
-         `
-       }]
+         `,
+         },
+       ],
      })
    })
    ```
 
 2. **Implement Theme Preview on Hover**
+
    ```vue
-   <button 
+   <button
      @mouseenter="previewTheme(theme.name)"
      @mouseleave="revertTheme()"
      @click="setTheme(theme.name)"
-   >
+   ></button>
    ```
 
 3. **Add Theme-Aware Image Component**
    ```vue
    <template>
-     <img 
-       :src="currentTheme === 'dark' ? darkSrc : lightSrc"
-       :alt="alt"
-     />
+     <img :src="currentTheme === 'dark' ? darkSrc : lightSrc" :alt="alt" />
    </template>
    ```
 

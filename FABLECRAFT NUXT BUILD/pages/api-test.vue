@@ -7,19 +7,16 @@
         <p>URL: {{ config.public.supabaseUrl || 'Not set' }}</p>
         <p>Key: {{ config.public.supabaseAnonKey ? 'Set (hidden)' : 'Not set' }}</p>
       </div>
-      
+
       <div>
         <p><strong>Client Status:</strong></p>
         <p>Supabase client exists: {{ supabaseExists ? '✅' : '❌' }}</p>
       </div>
-      
-      <button 
-        @click="testConnection" 
-        class="px-4 py-2 bg-blue-500 text-white rounded"
-      >
+
+      <button class="px-4 py-2 bg-blue-500 text-white rounded" @click="testConnection">
         Test Connection
       </button>
-      
+
       <div v-if="result" class="p-4 bg-gray-100 rounded">
         <pre>{{ JSON.stringify(result, null, 2) }}</pre>
       </div>
@@ -36,21 +33,21 @@ const supabaseExists = computed(() => !!supabase)
 
 const testConnection = async () => {
   result.value = { testing: true }
-  
+
   try {
     // Simple test - just try to use the client
     const { data, error } = await supabase.from('test').select('*').limit(1)
-    
+
     result.value = {
       success: !error || error.message.includes('does not exist'),
       message: error ? error.message : 'Query successful',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
   } catch (err) {
     result.value = {
       success: false,
       error: err.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     }
   }
 }

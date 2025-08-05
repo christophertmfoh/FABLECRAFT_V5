@@ -25,9 +25,9 @@ const props = withDefaults(defineProps<AnimatedOrbProps>(), {
   animation: 'pulse',
   colors: () => ({
     primary: 'hsl(var(--orb-primary))',
-    secondary: 'hsl(var(--orb-secondary))'
+    secondary: 'hsl(var(--orb-secondary))',
   }),
-  class: ''
+  class: '',
 })
 
 // Computed properties
@@ -35,14 +35,14 @@ const orbClasses = computed(() => {
   const sizeClasses = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4',
-    lg: 'w-5 h-5'
+    lg: 'w-5 h-5',
   }
 
   const animationClasses = {
     pulse: 'animate-pulse',
     spin: 'animate-spin',
     bounce: 'animate-bounce',
-    glow: 'animate-pulse animate-bounce'
+    glow: 'animate-pulse animate-bounce',
   }
 
   return cn(
@@ -58,11 +58,11 @@ const orbClasses = computed(() => {
 const orbStyles = computed(() => {
   const primary = props.colors?.primary || 'hsl(var(--orb-primary))'
   const secondary = props.colors?.secondary || 'hsl(var(--orb-secondary))'
-  
+
   return {
     background: `linear-gradient(45deg, ${primary}, ${secondary})`,
     backgroundSize: '200% 200%',
-    animation: `gradient-shift 3s ease infinite, ${props.animation === 'pulse' ? 'pulse' : props.animation} 2s ease-in-out infinite`
+    animation: `gradient-shift 3s ease infinite, ${props.animation === 'pulse' ? 'pulse' : props.animation} 2s ease-in-out infinite`,
   }
 })
 </script>
@@ -96,7 +96,7 @@ const orbStyles = computed(() => {
   .animate-bounce {
     animation: none;
   }
-  
+
   div {
     animation: none !important;
   }
@@ -104,8 +104,9 @@ const orbStyles = computed(() => {
 
 /* Custom animation variants */
 .animate-glow {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite,
-             bounce 2s ease-in-out infinite;
+  animation:
+    pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite,
+    bounce 2s ease-in-out infinite;
 }
 
 /* Hover enhancement */

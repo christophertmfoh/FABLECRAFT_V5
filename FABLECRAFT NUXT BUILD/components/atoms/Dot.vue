@@ -5,15 +5,12 @@
     :aria-label="ariaLabel"
     :role="ariaLabel ? 'status' : undefined"
   >
-    <span 
+    <span
       v-if="pulse && !reducedMotion"
       class="absolute inset-0 rounded-full animate-ping"
       :class="pulseClasses"
     />
-    <span 
-      class="relative block w-full h-full rounded-full"
-      :class="coreClasses"
-    />
+    <span class="relative block w-full h-full rounded-full" :class="coreClasses" />
   </span>
 </template>
 
@@ -39,7 +36,7 @@ const props = withDefaults(defineProps<DotProps>(), {
   color: 'primary',
   pulse: true,
   pulseSpeed: 'normal',
-  pulseIntensity: 'normal'
+  pulseIntensity: 'normal',
 })
 
 // Check for reduced motion preference
@@ -51,7 +48,7 @@ const sizeClasses = {
   sm: 'w-2 h-2',
   md: 'w-2.5 h-2.5',
   lg: 'w-3 h-3',
-  xl: 'w-4 h-4'
+  xl: 'w-4 h-4',
 }
 
 // Color classes for the core dot
@@ -63,30 +60,26 @@ const colorClasses = {
   error: 'bg-destructive',
   info: 'bg-info',
   neutral: 'bg-muted-foreground',
-  current: 'bg-current'
+  current: 'bg-current',
 }
 
 // Pulse animation speed
 const pulseSpeedClasses = {
   slow: 'duration-2000',
   normal: 'duration-1000',
-  fast: 'duration-700'
+  fast: 'duration-700',
 }
 
 // Pulse intensity (opacity)
 const pulseIntensityClasses = {
   subtle: 'opacity-50',
   normal: 'opacity-75',
-  strong: 'opacity-100'
+  strong: 'opacity-100',
 }
 
 // Computed container classes
 const dotClasses = computed(() => {
-  return cn(
-    'relative inline-flex',
-    sizeClasses[props.size],
-    props.class
-  )
+  return cn('relative inline-flex', sizeClasses[props.size], props.class)
 })
 
 // Computed pulse animation classes

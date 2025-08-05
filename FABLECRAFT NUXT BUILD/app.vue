@@ -5,7 +5,7 @@ const { resolvedTheme, initializeTheme } = useTheme()
 // Apply theme from cookie on SSR - use resolved theme for actual CSS variables
 useHead({
   htmlAttrs: {
-    'data-theme': () => resolvedTheme.value
+    'data-theme': () => resolvedTheme.value,
   },
   script: [
     {
@@ -28,9 +28,9 @@ useHead({
       type: 'text/javascript',
       // This script should run immediately, blocking other scripts
       async: false,
-      defer: false
-    }
-  ]
+      defer: false,
+    },
+  ],
 })
 
 // Initialize theme on client mount to ensure proper hydration

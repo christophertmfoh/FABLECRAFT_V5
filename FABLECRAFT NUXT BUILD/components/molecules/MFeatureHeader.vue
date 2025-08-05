@@ -34,7 +34,7 @@ interface MFeatureHeaderProps {
   badgeSize?: 'sm' | 'base' | 'md' | 'lg'
   badgeDotColor?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive'
   badgeClickable?: boolean
-  
+
   // Heading props
   title: string
   highlightText?: string
@@ -43,7 +43,7 @@ interface MFeatureHeaderProps {
   headingSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   headingVariant?: 'default' | 'compact' | 'dramatic'
   headingSpacing?: 'tight' | 'normal' | 'relaxed'
-  
+
   // Gradient props
   gradientVariant?: 'primary' | 'secondary' | 'accent' | 'rainbow' | 'custom'
   gradientDirection?: 'to-r' | 'to-l' | 'to-t' | 'to-b' | 'to-br' | 'to-bl' | 'to-tr' | 'to-tl'
@@ -61,7 +61,7 @@ const props = withDefaults(defineProps<MFeatureHeaderProps>(), {
   headingSpacing: 'normal',
   gradientVariant: 'primary',
   gradientDirection: 'to-r',
-  gradientIntensity: 'normal'
+  gradientIntensity: 'normal',
 })
 
 // Emit events

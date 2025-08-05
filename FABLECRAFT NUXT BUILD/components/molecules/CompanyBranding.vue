@@ -4,9 +4,9 @@
     <div v-if="showBranding" class="company-header">
       <div class="flex items-center gap-3 group cursor-pointer">
         <div class="logo-container">
-          <AtomIcon 
-            name="lucide:feather" 
-            class="w-6 h-6 text-primary-foreground" 
+          <AtomIcon
+            name="lucide:feather"
+            class="w-6 h-6 text-primary-foreground"
             aria-hidden="true"
           />
         </div>
@@ -17,30 +17,16 @@
     </div>
 
     <!-- Company Tagline and Description -->
-    <p class="company-description">
-      {{ displayTagline }}. {{ company.description }}
-    </p>
+    <p class="company-description">{{ displayTagline }}. {{ company.description }}</p>
 
     <!-- Contact Information Slot -->
     <div class="contact-section">
       <slot name="contact">
         <!-- Default contact info if no slot provided -->
         <div class="space-y-3">
-          <ContactInfo 
-            icon="lucide:mail"
-            :text="company.contact.email"
-            type="email"
-          />
-          <ContactInfo 
-            icon="lucide:phone"
-            :text="company.contact.phone"
-            type="phone"
-          />
-          <ContactInfo 
-            icon="lucide:map-pin"
-            :text="company.contact.location"
-            type="address"
-          />
+          <ContactInfo icon="lucide:mail" :text="company.contact.email" type="email" />
+          <ContactInfo icon="lucide:phone" :text="company.contact.phone" type="phone" />
+          <ContactInfo icon="lucide:map-pin" :text="company.contact.location" type="address" />
         </div>
       </slot>
     </div>
@@ -65,7 +51,7 @@ interface CompanyBrandingProps {
 const props = withDefaults(defineProps<CompanyBrandingProps>(), {
   showBranding: true,
   variant: 'default',
-  class: ''
+  class: '',
 })
 
 // Computed properties
@@ -77,14 +63,10 @@ const brandingClasses = computed(() => {
   const variantClasses = {
     default: 'space-y-6',
     compact: 'space-y-4',
-    detailed: 'space-y-8'
+    detailed: 'space-y-8',
   }
 
-  return cn(
-    'company-branding',
-    variantClasses[props.variant],
-    props.class
-  )
+  return cn('company-branding', variantClasses[props.variant], props.class)
 })
 </script>
 
@@ -156,11 +138,11 @@ const brandingClasses = computed(() => {
   .company-name {
     @apply text-xl;
   }
-  
+
   .logo-container {
     @apply w-10 h-10;
   }
-  
+
   .company-description {
     @apply text-xs;
   }
@@ -175,7 +157,7 @@ const brandingClasses = computed(() => {
     background-clip: unset;
     @apply text-primary;
   }
-  
+
   .company-description {
     @apply text-foreground/90;
   }
@@ -188,7 +170,7 @@ const brandingClasses = computed(() => {
   .company-description {
     transition: none !important;
   }
-  
+
   .group:hover .logo-container {
     @apply scale-100;
   }
@@ -199,7 +181,7 @@ const brandingClasses = computed(() => {
   .logo-container {
     @apply shadow-none bg-gray-200;
   }
-  
+
   .company-name {
     background: none;
     -webkit-background-clip: unset;
@@ -207,7 +189,7 @@ const brandingClasses = computed(() => {
     background-clip: unset;
     @apply text-black;
   }
-  
+
   .company-description {
     @apply text-gray-700;
   }

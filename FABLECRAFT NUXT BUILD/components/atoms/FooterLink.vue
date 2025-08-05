@@ -1,9 +1,5 @@
 <template>
-  <button
-    type="button"
-    :class="footerLinkClasses"
-    @click="handleClick"
-  >
+  <button type="button" :class="footerLinkClasses" @click="handleClick">
     {{ text }}
   </button>
 </template>
@@ -15,8 +11,8 @@ import { logger } from '~/utils/logger'
 
 // Props interface
 interface FooterLinkProps {
-  text: string          // Link text
-  href?: string         // Link URL (optional for now)
+  text: string // Link text
+  href?: string // Link URL (optional for now)
   variant?: 'default' | 'subtle' | 'legal'
   size?: 'sm' | 'md' | 'lg'
   class?: string
@@ -31,7 +27,7 @@ interface FooterLinkEmits {
 const props = withDefaults(defineProps<FooterLinkProps>(), {
   variant: 'default',
   size: 'md',
-  class: ''
+  class: '',
 })
 
 const emit = defineEmits<FooterLinkEmits>()
@@ -41,13 +37,13 @@ const footerLinkClasses = computed(() => {
   const sizeClasses = {
     sm: 'text-xs',
     md: 'text-sm',
-    lg: 'text-base'
+    lg: 'text-base',
   }
 
   const variantClasses = {
     default: 'text-foreground/60 hover:text-foreground',
     subtle: 'text-foreground/50 hover:text-foreground/70',
-    legal: 'text-foreground/50 hover:text-foreground'
+    legal: 'text-foreground/50 hover:text-foreground',
   }
 
   return cn(
@@ -57,20 +53,20 @@ const footerLinkClasses = computed(() => {
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     'cursor-pointer',
     'tracking-normal',
-    
+
     // Remove button styling
     'border-none bg-transparent p-0',
     'font-inherit',
-    
+
     // Size classes
     sizeClasses[props.size],
-    
+
     // Variant classes
     variantClasses[props.variant],
-    
+
     // Hover effects
     'hover:underline hover:underline-offset-4',
-    
+
     // Custom classes
     props.class
   )
@@ -80,9 +76,9 @@ const footerLinkClasses = computed(() => {
 const handleClick = () => {
   emit('click', {
     text: props.text,
-    href: props.href
+    href: props.href,
   })
-  
+
   // Future: Handle navigation when href is provided
   if (props.href) {
     // For now, just emit - parent can handle navigation

@@ -22,17 +22,17 @@
     <div class="space-y-4 text-center">
       <!-- Title -->
       <Heading
+        :id="`benefit-title-${id}`"
         :as="'h4'"
         :size="'h4'"
         :align="'center'"
-        :id="`benefit-title-${id}`"
         class="text-foreground group-hover:text-primary transition-colors duration-300"
       >
         {{ title }}
       </Heading>
 
       <!-- Category Badge (optional) -->
-      <Badge 
+      <Badge
         v-if="showCategory && category"
         :variant="categoryBadgeVariant"
         :size="categoryBadgeSize"
@@ -43,12 +43,12 @@
 
       <!-- Description -->
       <Text
+        :id="`benefit-description-${id}`"
         :as="'p'"
         :size="descriptionSize"
         :variant="'muted'"
         :leading="'relaxed'"
         :align="'center'"
-        :id="`benefit-description-${id}`"
         class="group-hover:text-foreground transition-colors duration-300"
       >
         {{ description }}
@@ -84,7 +84,7 @@ const props = withDefaults(defineProps<MBenefitCardProps>(), {
   iconShape: 'rounded',
   categoryBadgeVariant: 'secondary',
   categoryBadgeSize: 'sm',
-  descriptionSize: 'base'
+  descriptionSize: 'base',
 })
 
 // Generate unique ID for accessibility
@@ -98,6 +98,6 @@ const cardClasses = [
   'border border-border hover:border-primary/50',
   'transition-all duration-500',
   'natural-depth gentle-hover',
-  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
+  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
 ]
 </script>

@@ -7,7 +7,7 @@ export const useComponentId = (prefix: string = 'fc'): string => {
   if (typeof useId === 'function') {
     return useId()
   }
-  
+
   // Fallback for older Nuxt versions
   if (import.meta.server) {
     // Use a counter in SSR for deterministic IDs
@@ -15,7 +15,7 @@ export const useComponentId = (prefix: string = 'fc'): string => {
     counter.value++
     return `${prefix}-ssr-${counter.value}`
   }
-  
+
   // Client-side random ID
   return `${prefix}-${Math.random().toString(36).substring(2, 9)}`
 }

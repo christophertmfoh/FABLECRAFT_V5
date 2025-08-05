@@ -1,10 +1,5 @@
 <template>
-  <component 
-    :is="tag"
-    :class="textClasses"
-    :style="gradientStyles"
-    v-bind="$attrs"
-  >
+  <component :is="tag" :class="textClasses" :style="gradientStyles" v-bind="$attrs">
     <slot>{{ text }}</slot>
   </component>
 </template>
@@ -32,7 +27,7 @@ const props = withDefaults(defineProps<GradientTextProps>(), {
   direction: 'to-r',
   intensity: 'normal',
   animation: 'none',
-  className: ''
+  className: '',
 })
 
 // Computed classes
@@ -41,7 +36,7 @@ const textClasses = computed(() => {
     none: '',
     shimmer: 'animate-shimmer',
     pulse: 'animate-pulse',
-    flow: 'animate-flow'
+    flow: 'animate-flow',
   }
 
   return cn(
@@ -57,44 +52,51 @@ const gradientStyles = computed(() => {
   const gradientConfigs = {
     primary: {
       subtle: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.7))',
-      normal: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))',
-      vibrant: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))'
+      normal:
+        'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))',
+      vibrant:
+        'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--primary) / 0.8), hsl(var(--primary) / 0.6))',
     },
     secondary: {
       subtle: 'linear-gradient({direction}, hsl(var(--secondary)), hsl(var(--secondary) / 0.7))',
       normal: 'linear-gradient({direction}, hsl(var(--secondary)), hsl(var(--secondary) / 0.8))',
-      vibrant: 'linear-gradient({direction}, hsl(var(--secondary)), hsl(var(--primary)))'
+      vibrant: 'linear-gradient({direction}, hsl(var(--secondary)), hsl(var(--primary)))',
     },
     accent: {
       subtle: 'linear-gradient({direction}, hsl(var(--accent)), hsl(var(--accent) / 0.7))',
       normal: 'linear-gradient({direction}, hsl(var(--accent)), hsl(var(--accent) / 0.8))',
-      vibrant: 'linear-gradient({direction}, hsl(var(--accent)), hsl(var(--primary)))'
+      vibrant: 'linear-gradient({direction}, hsl(var(--accent)), hsl(var(--primary)))',
     },
     rainbow: {
-      subtle: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)))',
-      normal: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary) / 0.8))',
-      vibrant: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--accent)))'
+      subtle:
+        'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)))',
+      normal:
+        'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary) / 0.8))',
+      vibrant:
+        'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--accent)))',
     },
     custom: {
       subtle: 'linear-gradient({direction}, currentColor, transparent)',
       normal: 'linear-gradient({direction}, currentColor, hsl(var(--muted-foreground)))',
-      vibrant: 'linear-gradient({direction}, currentColor, hsl(var(--primary)))'
-    }
+      vibrant: 'linear-gradient({direction}, currentColor, hsl(var(--primary)))',
+    },
   }
 
   const directionMap = {
     'to-r': 'to right',
-    'to-l': 'to left', 
+    'to-l': 'to left',
     'to-t': 'to top',
     'to-b': 'to bottom',
     'to-br': 'to bottom right',
     'to-bl': 'to bottom left',
     'to-tr': 'to top right',
-    'to-tl': 'to top left'
+    'to-tl': 'to top left',
   }
 
-  const gradient = gradientConfigs[props.variant][props.intensity]
-    .replace('{direction}', directionMap[props.direction])
+  const gradient = gradientConfigs[props.variant][props.intensity].replace(
+    '{direction}',
+    directionMap[props.direction]
+  )
 
   return {
     backgroundImage: gradient,
@@ -102,7 +104,7 @@ const gradientStyles = computed(() => {
     '-webkit-background-clip': 'text',
     '-webkit-text-fill-color': 'transparent',
     // Fallback for theme compatibility
-    backgroundClip: 'text'
+    backgroundClip: 'text',
   }
 })
 </script>
@@ -119,7 +121,8 @@ const gradientStyles = computed(() => {
 }
 
 @keyframes flow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {

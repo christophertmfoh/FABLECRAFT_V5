@@ -29,7 +29,7 @@
 .theme-transition *,
 .theme-transition *::before,
 .theme-transition *::after {
-  transition: 
+  transition:
     background-color 300ms ease-in-out,
     border-color 300ms ease-in-out,
     color 300ms ease-in-out,
@@ -93,7 +93,7 @@
 }
 
 .natural-depth::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -2px;
   background: linear-gradient(

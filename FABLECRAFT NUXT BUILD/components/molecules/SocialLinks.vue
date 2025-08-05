@@ -1,16 +1,12 @@
 <template>
   <div :class="socialLinksClasses">
     <!-- Follow Text Label -->
-    <span 
-      v-if="followText" 
-      :class="labelClasses"
-      :id="labelId"
-    >
+    <span v-if="followText" :id="labelId" :class="labelClasses">
       {{ followText }}
     </span>
 
     <!-- Social Icons Group -->
-    <div 
+    <div
       :class="iconsContainerClasses"
       role="group"
       :aria-labelledby="followText ? labelId : undefined"
@@ -59,7 +55,7 @@ const props = withDefaults(defineProps<SocialLinksProps>(), {
   iconVariant: 'default',
   spacing: 'normal',
   alignment: 'left',
-  class: ''
+  class: '',
 })
 
 const emit = defineEmits<SocialLinksEmits>()
@@ -72,13 +68,13 @@ const socialLinksClasses = computed(() => {
   const alignmentClasses = {
     left: 'justify-start text-left',
     center: 'justify-center text-center',
-    right: 'justify-end text-right'
+    right: 'justify-end text-right',
   }
 
   const layoutClasses = {
     horizontal: 'flex flex-col',
     vertical: 'flex flex-col',
-    grid: 'grid'
+    grid: 'grid',
   }
 
   return cn(
@@ -102,19 +98,19 @@ const iconsContainerClasses = computed(() => {
   const layoutClasses = {
     horizontal: 'flex flex-row',
     vertical: 'flex flex-col',
-    grid: 'grid grid-cols-3'
+    grid: 'grid grid-cols-3',
   }
 
   const spacingClasses = {
     tight: 'gap-2',
     normal: 'gap-4',
-    loose: 'gap-6'
+    loose: 'gap-6',
   }
 
   const alignmentClasses = {
     left: 'justify-start',
     center: 'justify-center',
-    right: 'justify-end'
+    right: 'justify-end',
   }
 
   return cn(
@@ -129,12 +125,12 @@ const iconsContainerClasses = computed(() => {
 // Event handlers
 const handleSocialClick = (payload: { platform: string; href?: string }) => {
   emit('social-click', payload)
-  
+
   // Track social media clicks for analytics
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'social_click', {
-      'social_platform': payload.platform.toLowerCase(),
-      'link_url': payload.href
+      social_platform: payload.platform.toLowerCase(),
+      link_url: payload.href,
     })
   }
 }
@@ -167,7 +163,7 @@ const handleSocialClick = (payload: { platform: string; href?: string }) => {
   .social-icons-container {
     @apply gap-3;
   }
-  
+
   /* Stack horizontally on small screens for vertical layout */
   .social-links.vertical .social-icons-container {
     @apply flex-row flex-wrap justify-center;
@@ -190,11 +186,21 @@ const handleSocialClick = (payload: { platform: string; href?: string }) => {
   animation-fill-mode: both;
 }
 
-.social-icons-container > *:nth-child(1) { animation-delay: 0.1s; }
-.social-icons-container > *:nth-child(2) { animation-delay: 0.2s; }
-.social-icons-container > *:nth-child(3) { animation-delay: 0.3s; }
-.social-icons-container > *:nth-child(4) { animation-delay: 0.4s; }
-.social-icons-container > *:nth-child(5) { animation-delay: 0.5s; }
+.social-icons-container > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.social-icons-container > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.social-icons-container > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.social-icons-container > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.social-icons-container > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
 
 @keyframes fadeInUp {
   from {

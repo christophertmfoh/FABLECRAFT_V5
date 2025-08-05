@@ -16,16 +16,16 @@
   --effect-duration-slow: 2s;
   --effect-duration-firefly: 15s;
   --effect-duration-orb: 25s;
-  
+
   /* Easing Functions */
   --effect-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --effect-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
+
   /* Effect Intensities */
   --effect-opacity-subtle: 0.3;
   --effect-opacity-normal: 0.6;
   --effect-opacity-strong: 0.9;
-  
+
   /* Performance Hints */
   --effect-blur-amount: 80px;
   --effect-glow-spread: 20px;
@@ -39,14 +39,14 @@
 .effects-container {
   /* CSS Containment for performance isolation */
   contain: layout style paint;
-  
+
   /* Prevent interaction with effects */
   pointer-events: none;
-  
+
   /* Create stacking context */
   position: relative;
   z-index: 0;
-  
+
   /* Force GPU layer */
   will-change: transform;
   transform: translateZ(0);
@@ -84,28 +84,28 @@
   height: 4px;
   border-radius: 50%;
   will-change: transform, opacity;
-  
+
   /* ✅ UPDATED: Use the new theme-aware variables */
   background: var(--firefly-color);
   /* ✅ UPDATED: Increased glow size and intensity */
   box-shadow: 0 0 8px 2px var(--firefly-glow-color);
-  
+
   /* Custom properties for dynamic positioning */
   left: var(--firefly-x);
   bottom: -10px;
-  
+
   /* GPU-accelerated animations */
-  animation: 
+  animation:
     firefly-drift var(--effect-duration-firefly) var(--firefly-delay) linear infinite,
     firefly-glow 4s var(--firefly-delay) ease-in-out infinite;
-  
+
   /* Force GPU acceleration */
   transform: translateZ(0);
   z-index: 5;
-  
+
   /* Containment for performance */
   contain: paint style;
-  
+
   /* Start invisible for animation */
   opacity: 0;
 }
@@ -186,7 +186,8 @@
 
 /* Subtle firefly glow - breathing effect */
 @keyframes firefly-glow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.4;
     transform: scale(1);
   }
@@ -210,11 +211,11 @@
   border-radius: 50%;
   filter: blur(var(--effect-blur-amount));
   opacity: var(--effect-opacity-subtle);
-  
+
   /* Force GPU acceleration */
   transform: translateZ(0);
   will-change: transform;
-  
+
   /* Prevent layout thrashing */
   contain: layout style paint;
 }
@@ -223,11 +224,7 @@
 .orb--primary {
   width: 320px;
   height: 320px;
-  background: radial-gradient(
-    circle at center,
-    hsl(var(--orb-primary) / 0.3) 0%,
-    transparent 100%
-  );
+  background: radial-gradient(circle at center, hsl(var(--orb-primary) / 0.3) 0%, transparent 100%);
   animation: orb-float-primary var(--effect-duration-orb) ease-in-out infinite;
 }
 
@@ -257,7 +254,8 @@
 
 /* GPU-accelerated orb animations */
 @keyframes orb-float-primary {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) translateX(0px) scale(1);
   }
   25% {
@@ -272,7 +270,8 @@
 }
 
 @keyframes orb-float-secondary {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
   }
   50% {
@@ -281,7 +280,8 @@
 }
 
 @keyframes orb-float-tertiary {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate3d(0, 0, 0);
   }
   25% {
@@ -305,30 +305,30 @@
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  
+
   /* CRITICAL: Use fixed pixel sizes, NOT percentages with variables */
   background: 
     /* Primary glow - MUST use fixed pixel sizes */
     radial-gradient(
-      ellipse 800px 600px at 25% 30%, 
+      ellipse 800px 600px at 25% 30%,
       hsl(var(--glow-primary) / var(--glow-opacity-primary, 0.15)),
       transparent 70%
     ),
     /* Secondary glow - MUST use fixed pixel sizes */
-    radial-gradient(
-      ellipse 600px 500px at 75% 70%, 
-      hsl(var(--glow-secondary) / var(--glow-opacity-secondary, 0.1)),
-      transparent 70%
-    ),
+      radial-gradient(
+        ellipse 600px 500px at 75% 70%,
+        hsl(var(--glow-secondary) / var(--glow-opacity-secondary, 0.1)),
+        transparent 70%
+      ),
     /* Overall wash - percentages work here because they're literal, not variables */
-    radial-gradient(
-      ellipse 120% 80% at 50% 50%, 
-      hsl(var(--glow-primary) / calc(var(--glow-opacity-primary, 0.15) * 0.3)),
-      transparent 90%
-    );
-  
+      radial-gradient(
+        ellipse 120% 80% at 50% 50%,
+        hsl(var(--glow-primary) / calc(var(--glow-opacity-primary, 0.15) * 0.3)),
+        transparent 90%
+      );
+
   mix-blend-mode: var(--glow-blend-mode, screen);
-  
+
   /* Keep these optimizations */
   will-change: opacity;
   transform: translateZ(0);
@@ -345,7 +345,9 @@
 /* Mobile optimization */
 @media (max-width: 768px) {
   .atmospheric-gradient {
-    background-size: 120% 120%, 100% 100%;
+    background-size:
+      120% 120%,
+      100% 100%;
   }
 }
 
@@ -382,21 +384,21 @@
 ======================================== */
 
 /* Low performance mode */
-.effects-container[data-performance="low"] .firefly,
-.effects-container[data-performance="low"] .orb {
+.effects-container[data-performance='low'] .firefly,
+.effects-container[data-performance='low'] .orb {
   animation-duration: calc(var(--effect-duration-firefly) * 2);
   opacity: var(--effect-opacity-subtle);
 }
 
 /* Disable complex effects on low-end devices */
-.effects-container[data-performance="low"] .atmospheric-gradient,
-.effects-container[data-performance="low"] .atmospheric-glow {
+.effects-container[data-performance='low'] .atmospheric-gradient,
+.effects-container[data-performance='low'] .atmospheric-glow {
   display: none;
 }
 
 /* High performance mode */
-.effects-container[data-performance="high"] .firefly {
-  box-shadow: 
+.effects-container[data-performance='high'] .firefly {
+  box-shadow:
     0 0 6px hsl(var(--orb-primary) / 0.8),
     0 0 12px hsl(var(--orb-primary) / 0.4);
 }

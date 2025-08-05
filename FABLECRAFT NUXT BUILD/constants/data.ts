@@ -4,7 +4,14 @@
 export interface Theme {
   name: string
   label: string
-  category: 'Core' | 'Classic Light' | 'Classic Dark' | 'Modern Light' | 'Modern Dark' | 'Specialty' | 'Auto'
+  category:
+    | 'Core'
+    | 'Classic Light'
+    | 'Classic Dark'
+    | 'Modern Light'
+    | 'Modern Dark'
+    | 'Specialty'
+    | 'Auto'
   description?: string
   colorScheme: 'light' | 'dark' | 'auto'
   preview?: {
@@ -25,8 +32,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(350, 70%, 40%)',
       secondary: 'hsl(35, 40%, 85%)',
-      background: 'hsl(45, 25%, 96%)'
-    }
+      background: 'hsl(45, 25%, 96%)',
+    },
   },
   {
     name: 'dark',
@@ -37,10 +44,10 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(35, 75%, 55%)',
       secondary: 'hsl(220, 20%, 25%)',
-      background: 'hsl(220, 15%, 13%)'
-    }
+      background: 'hsl(220, 15%, 13%)',
+    },
   },
-  
+
   // Classic Light Themes
   {
     name: 'arctic-focus',
@@ -51,8 +58,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(200, 70%, 45%)',
       secondary: 'hsl(210, 20%, 90%)',
-      background: 'hsl(210, 25%, 98%)'
-    }
+      background: 'hsl(210, 25%, 98%)',
+    },
   },
   {
     name: 'golden-hour',
@@ -63,10 +70,10 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(45, 80%, 50%)',
       secondary: 'hsl(40, 30%, 85%)',
-      background: 'hsl(50, 30%, 97%)'
-    }
+      background: 'hsl(50, 30%, 97%)',
+    },
   },
-  
+
   // Classic Dark Themes
   {
     name: 'midnight-ink',
@@ -77,8 +84,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(210, 70%, 65%)',
       secondary: 'hsl(220, 30%, 30%)',
-      background: 'hsl(220, 25%, 10%)'
-    }
+      background: 'hsl(220, 25%, 10%)',
+    },
   },
   {
     name: 'forest-manuscript',
@@ -89,8 +96,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(120, 40%, 55%)',
       secondary: 'hsl(30, 30%, 35%)',
-      background: 'hsl(120, 15%, 12%)'
-    }
+      background: 'hsl(120, 15%, 12%)',
+    },
   },
   {
     name: 'starlit-prose',
@@ -101,8 +108,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(270, 60%, 65%)',
       secondary: 'hsl(250, 30%, 35%)',
-      background: 'hsl(250, 20%, 11%)'
-    }
+      background: 'hsl(250, 20%, 11%)',
+    },
   },
   {
     name: 'coffee-house',
@@ -113,10 +120,10 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(25, 65%, 60%)',
       secondary: 'hsl(20, 30%, 35%)',
-      background: 'hsl(20, 15%, 13%)'
-    }
+      background: 'hsl(20, 15%, 13%)',
+    },
   },
-  
+
   // Modern Light Themes
   {
     name: 'sunset-coral',
@@ -127,8 +134,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(15, 75%, 55%)',
       secondary: 'hsl(35, 40%, 85%)',
-      background: 'hsl(25, 25%, 96%)'
-    }
+      background: 'hsl(25, 25%, 96%)',
+    },
   },
   {
     name: 'lavender-dusk',
@@ -139,8 +146,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(270, 50%, 60%)',
       secondary: 'hsl(260, 20%, 85%)',
-      background: 'hsl(260, 20%, 96%)'
-    }
+      background: 'hsl(260, 20%, 96%)',
+    },
   },
   {
     name: 'moonlit-garden',
@@ -151,10 +158,10 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(220, 60%, 50%)',
       secondary: 'hsl(210, 30%, 85%)',
-      background: 'hsl(210, 25%, 96%)'
-    }
+      background: 'hsl(210, 25%, 96%)',
+    },
   },
-  
+
   // Modern Dark Themes
   {
     name: 'cherry-lacquer',
@@ -165,8 +172,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(350, 70%, 55%)',
       secondary: 'hsl(340, 30%, 30%)',
-      background: 'hsl(340, 20%, 10%)'
-    }
+      background: 'hsl(340, 20%, 10%)',
+    },
   },
   {
     name: 'dragons-hoard',
@@ -177,10 +184,10 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(45, 85%, 60%)',
       secondary: 'hsl(40, 40%, 35%)',
-      background: 'hsl(40, 25%, 12%)'
-    }
+      background: 'hsl(40, 25%, 12%)',
+    },
   },
-  
+
   // Specialty Themes
   {
     name: 'halloween',
@@ -191,8 +198,8 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(25, 90%, 55%)',
       secondary: 'hsl(0, 0%, 20%)',
-      background: 'hsl(0, 0%, 8%)'
-    }
+      background: 'hsl(0, 0%, 8%)',
+    },
   },
   {
     name: 'netrunner',
@@ -203,18 +210,18 @@ export const themes: Theme[] = [
     preview: {
       primary: 'hsl(55, 100%, 60%)',
       secondary: 'hsl(180, 80%, 50%)',
-      background: 'hsl(220, 30%, 10%)'
-    }
+      background: 'hsl(220, 30%, 10%)',
+    },
   },
-  
+
   // System Adaptation
   {
     name: 'system',
     label: 'System',
     category: 'Auto',
     description: 'Follow system color preference',
-    colorScheme: 'auto'
-  }
+    colorScheme: 'auto',
+  },
 ]
 
 // Theme categories for grouping
@@ -225,7 +232,7 @@ export const themeCategories = [
   'Modern Light',
   'Modern Dark',
   'Specialty',
-  'Auto'
+  'Auto',
 ] as const
 
 // Get themes by category
@@ -242,7 +249,7 @@ export const getTheme = (name: string): Theme | undefined => {
 export const isThemeDark = (themeName: string): boolean => {
   const theme = getTheme(themeName)
   if (!theme) return false
-  
+
   if (theme.colorScheme === 'auto') {
     // For system theme, check current preference
     if (typeof window !== 'undefined') {
@@ -250,7 +257,7 @@ export const isThemeDark = (themeName: string): boolean => {
     }
     return false
   }
-  
+
   return theme.colorScheme === 'dark'
 }
 
@@ -261,13 +268,13 @@ export const defaultDarkTheme = 'dark'
 // Theme transition settings
 export const themeTransition = {
   duration: 300, // milliseconds
-  class: 'theme-transition'
+  class: 'theme-transition',
 }
 
 // Visual effects configuration per theme
 export const themeEffectsConfig: Record<string, { fireflies?: number; orbs?: number }> = {
-  'light': { fireflies: 12, orbs: 3 },
-  'dark': { fireflies: 8, orbs: 2 },
+  light: { fireflies: 12, orbs: 3 },
+  dark: { fireflies: 8, orbs: 2 },
   'arctic-focus': { fireflies: 6, orbs: 2 },
   'golden-hour': { fireflies: 15, orbs: 4 },
   'midnight-ink': { fireflies: 10, orbs: 3 },
@@ -279,10 +286,10 @@ export const themeEffectsConfig: Record<string, { fireflies?: number; orbs?: num
   'moonlit-garden': { fireflies: 12, orbs: 4 },
   'cherry-lacquer': { fireflies: 8, orbs: 2 },
   'dragons-hoard': { fireflies: 15, orbs: 5 },
-  'halloween': { fireflies: 20, orbs: 3 },
-  'netrunner': { fireflies: 25, orbs: 6 }
+  halloween: { fireflies: 20, orbs: 3 },
+  netrunner: { fireflies: 25, orbs: 6 },
 }
 
 // Export type for use in components
-export type ThemeName = typeof themes[number]['name']
-export type ThemeCategory = typeof themeCategories[number]
+export type ThemeName = (typeof themes)[number]['name']
+export type ThemeCategory = (typeof themeCategories)[number]

@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="labelClasses"
-    v-bind="$attrs"
-  >
+  <div :class="labelClasses" v-bind="$attrs">
     <slot />
   </div>
 </template>
@@ -19,15 +16,11 @@ interface DropdownMenuLabelProps {
 
 // Define props with defaults
 const props = withDefaults(defineProps<DropdownMenuLabelProps>(), {
-  inset: false
+  inset: false,
 })
 
 // Computed classes
 const labelClasses = computed(() => {
-  return cn(
-    'px-2 py-1.5 text-sm font-semibold',
-    props.inset && 'pl-8',
-    props.class
-  )
+  return cn('px-2 py-1.5 text-sm font-semibold', props.inset && 'pl-8', props.class)
 })
 </script>

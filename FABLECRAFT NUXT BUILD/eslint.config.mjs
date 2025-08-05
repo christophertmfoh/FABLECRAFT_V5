@@ -11,18 +11,18 @@ export default withNuxt(
       // Console warnings
       'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       'no-debugger': 'error',
-      
+
       // Vue rules
       'vue/multi-word-component-names': 'off',
       'vue/no-v-html': 'warn',
-      
+
       // TypeScript rules
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      
+
       // Import rules
       'import/no-unresolved': 'off',
-      
+
       // General rules
       'no-unused-vars': 'off',
       'prefer-const': 'warn',
@@ -34,5 +34,5 @@ export default withNuxt(
     rules: {
       'no-console': 'off', // Logger is meant to use console
     },
-  },
+  }
 )

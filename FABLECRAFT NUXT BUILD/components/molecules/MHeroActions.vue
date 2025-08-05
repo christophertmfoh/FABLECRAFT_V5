@@ -1,9 +1,5 @@
 <template>
-  <div 
-    :class="actionsContainerClasses"
-    role="group"
-    :aria-label="groupLabel"
-  >
+  <div :class="actionsContainerClasses" role="group" :aria-label="groupLabel">
     <!-- Primary Action Button -->
     <GradientButton
       :size="buttonSize"
@@ -16,12 +12,7 @@
       @click="handlePrimaryClick"
     >
       <template #leading>
-        <AtomIcon 
-          v-if="primaryIcon"
-          :name="primaryIcon"
-          :class="iconClasses"
-          aria-hidden="true"
-        />
+        <AtomIcon v-if="primaryIcon" :name="primaryIcon" :class="iconClasses" aria-hidden="true" />
       </template>
       {{ primaryText }}
     </GradientButton>
@@ -37,7 +28,7 @@
       @click="handleSecondaryClick"
     >
       <template #leading>
-        <AtomIcon 
+        <AtomIcon
           v-if="secondaryIcon"
           :name="secondaryIcon"
           :class="iconClasses"
@@ -92,7 +83,7 @@ const props = withDefaults(defineProps<HeroActionsProps>(), {
   primaryDisabled: false,
   secondaryDisabled: false,
   groupLabel: 'Hero action buttons',
-  className: ''
+  className: '',
 })
 
 const emit = defineEmits<HeroActionsEmits>()
@@ -102,23 +93,23 @@ const actionsContainerClasses = computed(() => {
   const layoutClasses = {
     stacked: 'flex flex-col items-center',
     inline: 'flex flex-row items-center',
-    responsive: 'flex flex-col sm:flex-row items-center'
+    responsive: 'flex flex-col sm:flex-row items-center',
   }
-  
+
   const alignmentClasses = {
     left: 'justify-start',
     center: 'justify-center',
-    right: 'justify-end'
+    right: 'justify-end',
   }
-  
+
   const spacingClasses = {
     tight: 'gap-2',
-    normal: 'gap-10',  // Increased from gap-8 to ensure adequate spacing even on hover
-    relaxed: 'gap-12'  // Increased from gap-10 for maximum spacing
+    normal: 'gap-10', // Increased from gap-8 to ensure adequate spacing even on hover
+    relaxed: 'gap-12', // Increased from gap-10 for maximum spacing
   }
 
   return cn(
-    'action-group w-full max-w-md mx-auto sm:max-w-none',  // Removed sm:ml-8 for perfect alignment
+    'action-group w-full max-w-md mx-auto sm:max-w-none', // Removed sm:ml-8 for perfect alignment
     'transition-all duration-300',
     layoutClasses[props.layout],
     alignmentClasses[props.alignment],
@@ -129,23 +120,23 @@ const actionsContainerClasses = computed(() => {
 
 const primaryButtonClasses = computed(() => {
   return cn(
-    'group relative w-full sm:w-auto sm:min-w-[200px]',  // Added min-width for consistent button sizing
+    'group relative w-full sm:w-auto sm:min-w-[200px]', // Added min-width for consistent button sizing
     'font-semibold shadow-lg hover:shadow-xl',
     'rounded-xl transition-all duration-300',
-    'hover:scale-[1.01]',  // Reduced from 1.02 to prevent buttons from appearing too close on hover
+    'hover:scale-[1.01]', // Reduced from 1.02 to prevent buttons from appearing too close on hover
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-    'text-xl px-8 py-4'  // Enhanced sizing to match React original
+    'text-xl px-8 py-4' // Enhanced sizing to match React original
   )
 })
 
 const secondaryButtonClasses = computed(() => {
   return cn(
-    'group relative w-full sm:w-auto sm:min-w-[200px]',  // Added min-width for consistent button sizing
+    'group relative w-full sm:w-auto sm:min-w-[200px]', // Added min-width for consistent button sizing
     'font-semibold shadow-md hover:shadow-lg',
     'rounded-xl transition-all duration-300',
-    'hover:scale-[1.01]',  // Reduced from 1.02 to prevent buttons from appearing too close on hover
+    'hover:scale-[1.01]', // Reduced from 1.02 to prevent buttons from appearing too close on hover
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-    'text-xl px-8 py-4'  // Enhanced sizing to match React original
+    'text-xl px-8 py-4' // Enhanced sizing to match React original
   )
 })
 
@@ -154,9 +145,9 @@ const iconClasses = computed(() => {
     sm: 'w-4 h-4',
     default: 'w-4 h-4',
     lg: 'w-5 h-5',
-    icon: 'w-4 h-4'
+    icon: 'w-4 h-4',
   }
-  
+
   return cn(
     'group-hover:scale-110 transition-transform duration-300 flex-shrink-0',
     sizeClasses[props.buttonSize]
@@ -208,7 +199,7 @@ const handleSecondaryClick = (event: MouseEvent) => {
 /* Improved focus management */
 .focus-visible\:ring-2:focus-visible {
   outline: none;
-  box-shadow: 
+  box-shadow:
     0 0 0 2px hsl(var(--background)),
     0 0 0 4px hsl(var(--primary)),
     0 10px 25px -5px rgba(0, 0, 0, 0.1),
@@ -226,14 +217,14 @@ const handleSecondaryClick = (event: MouseEvent) => {
 
 /* Enhanced shadow effects */
 .shadow-lg {
-  box-shadow: 
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .hover\:shadow-xl:hover {
-  box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
@@ -253,7 +244,7 @@ const handleSecondaryClick = (event: MouseEvent) => {
 @media (prefers-contrast: high) {
   .shadow-lg,
   .hover\:shadow-xl:hover {
-    box-shadow: 
+    box-shadow:
       0 0 0 2px hsl(var(--foreground)),
       0 4px 6px -1px rgba(0, 0, 0, 0.3);
   }
@@ -265,7 +256,7 @@ const handleSecondaryClick = (event: MouseEvent) => {
     flex-direction: column;
     gap: 1rem;
   }
-  
+
   .shadow-lg,
   .hover\:shadow-xl:hover {
     box-shadow: none;
@@ -278,7 +269,7 @@ const handleSecondaryClick = (event: MouseEvent) => {
   .group:hover {
     transform: none;
   }
-  
+
   .hover\:scale-105:hover,
   .hover\:-translate-y-0\.5:hover {
     transform: none;

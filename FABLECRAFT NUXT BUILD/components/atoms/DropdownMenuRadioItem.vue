@@ -12,11 +12,7 @@
     @mouseleave="handleMouseLeave"
   >
     <span :class="indicatorClasses">
-      <Icon
-        v-if="isChecked"
-        name="lucide:circle"
-        :class="iconClasses"
-      />
+      <Icon v-if="isChecked" name="lucide:circle" :class="iconClasses" />
     </span>
     <span class="flex-1">
       <slot />
@@ -40,7 +36,7 @@ interface DropdownMenuRadioItemProps {
 
 // Define props with defaults
 const props = withDefaults(defineProps<DropdownMenuRadioItemProps>(), {
-  disabled: false
+  disabled: false,
 })
 
 // Define emits
@@ -113,14 +109,10 @@ const itemClasses = computed(() => {
 })
 
 const indicatorClasses = computed(() => {
-  return cn(
-    'absolute left-2 flex h-3.5 w-3.5 items-center justify-center'
-  )
+  return cn('absolute left-2 flex h-3.5 w-3.5 items-center justify-center')
 })
 
 const iconClasses = computed(() => {
-  return cn(
-    'h-2 w-2 fill-current'
-  )
+  return cn('h-2 w-2 fill-current')
 })
 </script>

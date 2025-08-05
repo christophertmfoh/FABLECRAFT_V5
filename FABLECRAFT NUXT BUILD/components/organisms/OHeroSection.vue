@@ -1,9 +1,5 @@
 <template>
-  <section
-    :class="heroSectionClasses"
-    :aria-labelledby="headingId"
-    role="banner"
-  >
+  <section :class="heroSectionClasses" :aria-labelledby="headingId" role="banner">
     <Container size="xl">
       <!-- Hero Content -->
       <div class="hero-content">
@@ -72,33 +68,33 @@ interface HeroSectionProps {
   description?: string
   primaryButtonText?: string
   secondaryButtonText?: string
-  
+
   // Visual props
   variant?: 'default' | 'compact' | 'dramatic'
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   alignment?: 'left' | 'center' | 'right'
-  
+
   // Badge props
   badgeVariant?: 'default' | 'accent' | 'secondary' | 'outline'
   badgeSize?: 'sm' | 'base' | 'md' | 'lg'
   badgeDotColor?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive'
   badgeDotSpeed?: 'slow' | 'normal' | 'fast'
   badgeClickable?: boolean
-  
+
   // Heading props
   headingTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   headingId?: string
   headingVariant?: 'default' | 'compact' | 'dramatic'
   headingSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   headingSpacing?: 'tight' | 'normal' | 'relaxed'
-  
+
   // Gradient props
   gradientVariant?: 'primary' | 'secondary' | 'accent' | 'rainbow' | 'custom'
   gradientDirection?: 'to-r' | 'to-l' | 'to-t' | 'to-b' | 'to-br' | 'to-bl' | 'to-tr' | 'to-tl'
   gradientIntensity?: 'subtle' | 'normal' | 'vibrant'
   gradientAnimation?: 'none' | 'shimmer' | 'pulse' | 'flow'
-  
-  // Button props  
+
+  // Button props
   primaryButtonIcon?: string
   secondaryButtonIcon?: string
   primaryButtonVariant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
@@ -109,7 +105,7 @@ interface HeroSectionProps {
   buttonGroupLabel?: string
   primaryDisabled?: boolean
   secondaryDisabled?: boolean
-  
+
   // Layout props
   spacing?: 'tight' | 'normal' | 'relaxed' | 'spacious'
   background?: 'default' | 'gradient' | 'transparent'
@@ -119,7 +115,7 @@ interface HeroSectionProps {
 // Events interface
 interface HeroSectionEmits {
   (e: 'primary:click', event: MouseEvent): void
-  (e: 'secondary:click', event: MouseEvent): void  
+  (e: 'secondary:click', event: MouseEvent): void
   (e: 'badge:click', event: MouseEvent): void
 }
 
@@ -132,32 +128,32 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   description: `The world's first complete multimedia creative suite. Transform ideas into novels, screenplays, graphic novels, and D&D campaigns. From concept to publication, from script to screen, all powered by AI that understands your creative universe.`,
   primaryButtonText: 'Start Creating Free',
   secondaryButtonText: 'Explore Examples',
-  
+
   // Default styling
   variant: 'default',
   size: 'xl',
-  alignment: 'center',  // Keep center alignment for hero section
-  
+  alignment: 'center', // Keep center alignment for hero section
+
   // Default badge settings
   badgeVariant: 'default',
-  badgeSize: 'base',  // Perfect middle ground between sm and md
+  badgeSize: 'base', // Perfect middle ground between sm and md
   badgeDotColor: 'primary',
   badgeDotSpeed: 'normal',
   badgeClickable: false,
-  
+
   // Default heading settings
   headingTag: 'h1',
   headingId: 'hero-heading',
   headingVariant: 'default',
-  headingSize: '2xl',  // Updated to match React original's golden ratio typography
-  headingSpacing: 'relaxed',  // Increased from 'normal' to prevent text clipping
-  
+  headingSize: '2xl', // Updated to match React original's golden ratio typography
+  headingSpacing: 'relaxed', // Increased from 'normal' to prevent text clipping
+
   // Default gradient settings
   gradientVariant: 'primary',
   gradientDirection: 'to-r',
   gradientIntensity: 'normal',
   gradientAnimation: 'none',
-  
+
   // Default button settings
   primaryButtonIcon: 'lucide:zap',
   secondaryButtonIcon: 'lucide:sparkles',
@@ -169,11 +165,11 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   buttonGroupLabel: 'Hero action buttons',
   primaryDisabled: false,
   secondaryDisabled: false,
-  
+
   // Default layout settings
   spacing: 'normal',
   background: 'default',
-  className: ''
+  className: '',
 })
 
 const emit = defineEmits<HeroSectionEmits>()
@@ -183,13 +179,13 @@ const heroSectionClasses = computed(() => {
   const variantClasses = {
     default: 'hero-ambient-glow py-16 sm:py-20 lg:py-24',
     compact: 'py-8 sm:py-12 lg:py-16',
-    dramatic: 'hero-ambient-glow py-20 sm:py-24 lg:py-32'
+    dramatic: 'hero-ambient-glow py-20 sm:py-24 lg:py-32',
   }
-  
+
   const backgroundClasses = {
     default: 'relative z-10',
     gradient: 'relative z-10 bg-gradient-to-b from-background/50 to-background',
-    transparent: 'relative z-10 bg-transparent'
+    transparent: 'relative z-10 bg-transparent',
   }
 
   return cn(
@@ -206,13 +202,10 @@ const actionsClasses = computed(() => {
     tight: 'mt-6',
     normal: 'mt-8',
     relaxed: 'mt-12',
-    spacious: 'mt-16'
+    spacious: 'mt-16',
   }
 
-  return cn(
-    'transition-all duration-300',
-    spacingClasses[props.spacing]
-  )
+  return cn('transition-all duration-300', spacingClasses[props.spacing])
 })
 
 // Event handlers
@@ -261,11 +254,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   left: 50%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at center,
-    hsl(var(--primary) / 0.15) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center, hsl(var(--primary) / 0.15) 0%, transparent 70%);
   transform: translateX(-50%);
   filter: blur(60px);
   z-index: -1;
@@ -278,11 +267,11 @@ const handleBadgeClick = (event: MouseEvent) => {
   .hero-content > *:not(:first-child) {
     margin-top: var(--space-md); /* Reduced spacing on mobile */
   }
-  
+
   .hero-content > :nth-child(2) {
     margin-top: var(--space-sm); /* Tighter badge to heading on mobile */
   }
-  
+
   .hero-content > :nth-child(3) {
     margin-top: var(--space-lg); /* Reduced from xl to lg on mobile */
   }
@@ -292,7 +281,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   .hero-content > *:not(:first-child) {
     margin-top: var(--space-lg); /* Standard spacing on tablet */
   }
-  
+
   .hero-content > :nth-child(3) {
     margin-top: var(--space-xl); /* Reduced from 2xl to xl on tablet */
   }
@@ -302,7 +291,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   .hero-content > *:not(:first-child) {
     margin-top: var(--space-xl); /* Larger spacing on desktop */
   }
-  
+
   .hero-content > :nth-child(3) {
     margin-top: var(--space-2xl); /* Reduced from 4xl to 2xl on desktop for better cohesion */
   }
@@ -318,7 +307,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   .transition-all {
     transition: none;
   }
-  
+
   .hero-ambient-glow::before {
     animation: none;
     filter: none;
@@ -338,7 +327,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   .hero-ambient-glow::before {
     display: none;
   }
-  
+
   .hero-content {
     gap: 1.5rem;
   }

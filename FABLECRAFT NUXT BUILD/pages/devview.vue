@@ -2,14 +2,6 @@
 <script setup lang="ts">
 import { logger } from '~/utils/logger'
 
-// Industry-standard development environment detection
-const isDevelopment = process.env.NODE_ENV === 'development'
-
-// Supabase connection validation 
-const user = useSupabaseUser()
-
-const isLoggedIn = computed(() => !!user.value)
-
 // Import theme helper functions
 import { getThemesByCategory } from '../constants/data'
 
@@ -26,6 +18,14 @@ import Spinner from '~/components/atoms/Spinner.vue'
 import Card from '~/components/atoms/Card.vue'
 import CardTitle from '~/components/atoms/CardTitle.vue'
 import CardDescription from '~/components/atoms/CardDescription.vue'
+
+// Industry-standard development environment detection
+const isDevelopment = process.env.NODE_ENV === 'development'
+
+// Supabase connection validation
+const user = useSupabaseUser()
+
+const isLoggedIn = computed(() => !!user.value)
 import GlassCard from '~/components/atoms/GlassCard.vue'
 import Container from '~/components/atoms/Container.vue'
 import Section from '~/components/atoms/Section.vue'
@@ -63,14 +63,14 @@ import DropdownMenuCheckboxItem from '~/components/atoms/DropdownMenuCheckboxIte
 import DropdownMenuRadioItem from '~/components/atoms/DropdownMenuRadioItem.vue'
 
 // Use centralized theme composable with all features
-const { 
-  themes, 
-  themeCategories, 
-  currentTheme, 
+const {
+  themes,
+  themeCategories,
+  currentTheme,
   currentThemeObject,
   isDark,
   setThemeWithTransition,
-  toggleTheme
+  toggleTheme,
 } = useTheme()
 
 // Foundation test variables
@@ -147,7 +147,7 @@ const toggleAllEffects = () => {
 const deviceInfo = ref({
   memory: null as number | null,
   cores: null as number | null,
-  reducedMotion: false
+  reducedMotion: false,
 })
 
 // Extended Navigator interface for deviceMemory
@@ -162,19 +162,19 @@ onMounted(() => {
     deviceInfo.value = {
       memory: nav.deviceMemory || null,
       cores: navigator.hardwareConcurrency || null,
-      reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     }
   }
 })
 
 // Development-only debugging (excluded from production)
 if (isDevelopment) {
-      logger.log('Development Mode: Mathematical spacing system loaded')
-    logger.log('Design tokens available:', {
+  logger.log('Development Mode: Mathematical spacing system loaded')
+  logger.log('Design tokens available:', {
     primitive: 'var(--space-1) through var(--space-32)',
     semantic: 'var(--space-micro) through var(--space-massive)',
     typography: 'var(--text-xs) through var(--text-6xl)',
-    golden: 'var(--text-golden-xs) through var(--text-golden-5xl)'
+    golden: 'var(--text-golden-xs) through var(--text-golden-5xl)',
   })
   logger.log('Theme system loaded with', themes.length, 'themes')
   logger.log('Visual effects system initialized')
@@ -185,26 +185,22 @@ if (isDevelopment) {
   <div class="min-h-screen bg-background text-foreground transition-colors duration-300">
     <!-- Background Visual Effects -->
     <ClientOnly>
-      <EffectsBackgroundOrbs 
-        :enabled="orbsEnabled"
-        :performance-mode="performanceMode"
-      />
-      <EffectsFireflyEffect 
+      <EffectsBackgroundOrbs :enabled="orbsEnabled" :performance-mode="performanceMode" />
+      <EffectsFireflyEffect
         :enabled="firefliesEnabled"
-        :count="fireflyCount" 
+        :count="fireflyCount"
         :performance-mode="performanceMode"
       />
-      <EffectsPaperTexture 
-        :enabled="paperTextureEnabled"
-      />
+      <EffectsPaperTexture :enabled="paperTextureEnabled" />
     </ClientOnly>
-    
+
     <div class="max-w-7xl mx-auto p-6 space-y-12 relative z-10">
-      
       <!-- Header with Current Theme Display -->
       <div class="text-center space-y-4">
         <h1 class="text-4xl font-bold">Fablecraft Foundation</h1>
-        <p class="text-xl text-muted-foreground">Modernized build environment with 15 production themes</p>
+        <p class="text-xl text-muted-foreground">
+          Modernized build environment with 15 production themes
+        </p>
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-card rounded-lg border">
           <div class="w-3 h-3 rounded-full bg-primary" />
           <span class="text-sm font-medium">Current Theme: {{ currentTheme }}</span>
@@ -212,11 +208,14 @@ if (isDevelopment) {
       </div>
 
       <!-- System Status Dropdown -->
-      <details :open="showSystemStatus" class="bg-card p-6 rounded-lg border shadow-sm max-w-md mx-auto">
+      <details
+        :open="showSystemStatus"
+        class="bg-card p-6 rounded-lg border shadow-sm max-w-md mx-auto"
+      >
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           System Status
         </summary>
-        
+
         <div class="space-y-2 text-sm">
           <div class="flex justify-between">
             <span>Supabase:</span>
@@ -224,11 +223,15 @@ if (isDevelopment) {
           </div>
           <div class="flex justify-between">
             <span>Authentication:</span>
-            <span class="text-blue-600 font-medium">{{ isLoggedIn ? '✓ Authenticated' : '◯ Anonymous' }}</span>
+            <span class="text-blue-600 font-medium">{{
+              isLoggedIn ? '✓ Authenticated' : '◯ Anonymous'
+            }}</span>
           </div>
           <div class="flex justify-between">
             <span>Environment:</span>
-            <span class="font-mono text-xs">{{ isDevelopment ? 'Development' : 'Production' }}</span>
+            <span class="font-mono text-xs">{{
+              isDevelopment ? 'Development' : 'Production'
+            }}</span>
           </div>
           <div class="flex justify-between">
             <span>Visual Effects:</span>
@@ -237,93 +240,77 @@ if (isDevelopment) {
         </div>
       </details>
 
-
-
       <!-- Visual Effects Controls Dropdown -->
       <details :open="showEffectsControls" class="bg-card p-6 rounded-lg border shadow-sm">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Visual Effects Controls
         </summary>
-        
+
         <div class="space-y-6">
           <!-- Quick Toggle All Effects -->
           <div class="flex justify-center">
-            <button 
+            <button
               class="px-4 py-2 bg-muted text-foreground rounded-lg border hover:bg-accent transition-colors"
               @click="toggleAllEffects"
             >
               {{ allEffectsEnabled ? 'All Effects On' : 'All Effects Off' }}
             </button>
           </div>
-        
-          <!-- Performance Mode -->
-        <div>
-          <label class="block text-sm font-medium mb-2">Performance Mode</label>
-          <select 
-            :value="performanceMode" 
-            class="w-full px-3 py-2 bg-background border rounded"
-            @change="setPerformanceMode($event.target.value as 'low' | 'medium' | 'high')"
-          >
-            <option value="low">Low (Mobile)</option>
-            <option value="medium">Medium (Default)</option>
-            <option value="high">High (Desktop)</option>
-          </select>
-        </div>
-        
-        <!-- Effect Toggles -->
-        <div class="space-y-2">
-          <label class="flex items-center gap-2">
-            <input 
-              v-model="firefliesEnabled" 
-              type="checkbox"
-              class="rounded"
-            >
-            <span>Fireflies ({{ fireflyCount }} elements)</span>
-          </label>
-          
-          <label class="flex items-center gap-2">
-            <input 
-              v-model="paperTextureEnabled" 
-              type="checkbox"
-              class="rounded"
-            >
-            <span>Paper Texture</span>
-          </label>
-        </div>
-        
-        <!-- Firefly Count -->
-        <div v-if="firefliesEnabled">
-          <label class="block text-sm font-medium mb-2">
-            Firefly Count: {{ fireflyCount }}
-          </label>
-          <input 
-            v-model.number="fireflyCount"
-            type="range" 
-            min="1"
-            max="12"
-            class="w-full"
-          >
-        </div>
 
-        <!-- Device Info -->
-        <div class="grid grid-cols-2 gap-4 text-sm">
+          <!-- Performance Mode -->
           <div>
-            <span class="font-medium">Device Memory:</span>
-            <span class="ml-2">{{ deviceInfo.memory || 'Unknown' }} GB</span>
+            <label class="block text-sm font-medium mb-2">Performance Mode</label>
+            <select
+              :value="performanceMode"
+              class="w-full px-3 py-2 bg-background border rounded"
+              @change="setPerformanceMode($event.target.value as 'low' | 'medium' | 'high')"
+            >
+              <option value="low">Low (Mobile)</option>
+              <option value="medium">Medium (Default)</option>
+              <option value="high">High (Desktop)</option>
+            </select>
           </div>
-          <div>
-            <span class="font-medium">CPU Cores:</span>
-            <span class="ml-2">{{ deviceInfo.cores || 'Unknown' }}</span>
+
+          <!-- Effect Toggles -->
+          <div class="space-y-2">
+            <label class="flex items-center gap-2">
+              <input v-model="firefliesEnabled" type="checkbox" class="rounded" />
+              <span>Fireflies ({{ fireflyCount }} elements)</span>
+            </label>
+
+            <label class="flex items-center gap-2">
+              <input v-model="paperTextureEnabled" type="checkbox" class="rounded" />
+              <span>Paper Texture</span>
+            </label>
           </div>
-          <div>
-            <span class="font-medium">Reduced Motion:</span>
-            <span class="ml-2">{{ deviceInfo.reducedMotion ? 'Yes' : 'No' }}</span>
+
+          <!-- Firefly Count -->
+          <div v-if="firefliesEnabled">
+            <label class="block text-sm font-medium mb-2">
+              Firefly Count: {{ fireflyCount }}
+            </label>
+            <input v-model.number="fireflyCount" type="range" min="1" max="12" class="w-full" />
           </div>
-          <div>
-            <span class="font-medium">Performance:</span>
-            <span class="ml-2">{{ performanceMode }}</span>
+
+          <!-- Device Info -->
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="font-medium">Device Memory:</span>
+              <span class="ml-2">{{ deviceInfo.memory || 'Unknown' }} GB</span>
+            </div>
+            <div>
+              <span class="font-medium">CPU Cores:</span>
+              <span class="ml-2">{{ deviceInfo.cores || 'Unknown' }}</span>
+            </div>
+            <div>
+              <span class="font-medium">Reduced Motion:</span>
+              <span class="ml-2">{{ deviceInfo.reducedMotion ? 'Yes' : 'No' }}</span>
+            </div>
+            <div>
+              <span class="font-medium">Performance:</span>
+              <span class="ml-2">{{ performanceMode }}</span>
+            </div>
           </div>
-        </div>
         </div>
       </details>
 
@@ -332,15 +319,25 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Typography System
         </summary>
-        
+
         <!-- Golden Ratio Scale -->
         <div class="space-y-4">
           <h3 class="text-xl font-semibold mb-4">Golden Ratio Typography Scale (1.618)</h3>
-          <p class="text-golden-xs">text-golden-xs: The quick brown fox jumps over the lazy dog (9.88px)</p>
-          <p class="text-golden-sm">text-golden-sm: The quick brown fox jumps over the lazy dog (12.23px)</p>
-          <p class="text-golden-base">text-golden-base: The quick brown fox jumps over the lazy dog (16px)</p>
-          <p class="text-golden-lg">text-golden-lg: The quick brown fox jumps over the lazy dog (25.88px)</p>
-          <p class="text-golden-xl">text-golden-xl: The quick brown fox jumps over the lazy dog (41.85px)</p>
+          <p class="text-golden-xs">
+            text-golden-xs: The quick brown fox jumps over the lazy dog (9.88px)
+          </p>
+          <p class="text-golden-sm">
+            text-golden-sm: The quick brown fox jumps over the lazy dog (12.23px)
+          </p>
+          <p class="text-golden-base">
+            text-golden-base: The quick brown fox jumps over the lazy dog (16px)
+          </p>
+          <p class="text-golden-lg">
+            text-golden-lg: The quick brown fox jumps over the lazy dog (25.88px)
+          </p>
+          <p class="text-golden-xl">
+            text-golden-xl: The quick brown fox jumps over the lazy dog (41.85px)
+          </p>
           <p class="text-golden-2xl">text-golden-2xl: The quick brown fox (67.67px)</p>
           <p class="text-golden-3xl">text-golden-3xl: The quick brown (109.46px)</p>
         </div>
@@ -361,7 +358,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Interactive Theme System & Persistence Test
         </summary>
-        
+
         <div class="space-y-6">
           <!-- Current Theme Information -->
           <div class="bg-muted/30 rounded-lg p-4 border">
@@ -384,22 +381,22 @@ if (isDevelopment) {
                 <span class="ml-2 font-medium">{{ isDark ? 'Yes' : 'No' }}</span>
               </div>
             </div>
-            
+
             <!-- Theme Preview Colors -->
             <div v-if="currentThemeObject.preview" class="mt-3 flex items-center gap-2">
               <span class="text-sm text-muted-foreground">Preview:</span>
-              <div 
-                class="w-6 h-6 rounded shadow-sm" 
+              <div
+                class="w-6 h-6 rounded shadow-sm"
                 :style="{ backgroundColor: currentThemeObject.preview.primary }"
                 title="Primary"
               ></div>
-              <div 
-                class="w-6 h-6 rounded shadow-sm" 
+              <div
+                class="w-6 h-6 rounded shadow-sm"
                 :style="{ backgroundColor: currentThemeObject.preview.secondary }"
                 title="Secondary"
               ></div>
-              <div 
-                class="w-6 h-6 rounded shadow-sm border" 
+              <div
+                class="w-6 h-6 rounded shadow-sm border"
                 :style="{ backgroundColor: currentThemeObject.preview.background }"
                 title="Background"
               ></div>
@@ -411,47 +408,49 @@ if (isDevelopment) {
             <h3 class="font-semibold text-sm mb-3">Quick Actions & Persistence Test</h3>
             <div class="flex flex-wrap gap-3">
               <button
-                @click="toggleTheme"
                 class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+                @click="toggleTheme"
               >
                 Toggle Light/Dark
               </button>
               <button
-                @click="setThemeWithTransition('light')"
                 class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+                @click="setThemeWithTransition('light')"
               >
                 Set Light
               </button>
               <button
-                @click="setThemeWithTransition('dark')"
                 class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+                @click="setThemeWithTransition('dark')"
               >
                 Set Dark
               </button>
               <button
-                @click="() => window.location.reload()"
                 class="px-4 py-2 bg-accent text-accent-foreground rounded-lg text-sm hover:opacity-90 transition-all"
+                @click="() => window.location.reload()"
               >
                 🔄 Refresh Page
               </button>
             </div>
-            
+
             <div class="mt-3 p-3 bg-background/50 rounded text-xs text-muted-foreground">
-              <strong>Persistence Test:</strong> Select a theme, then click "Refresh Page" or press F5. The theme should persist across page refreshes and navigation.
+              <strong>Persistence Test:</strong> Select a theme, then click "Refresh Page" or press
+              F5. The theme should persist across page refreshes and navigation.
             </div>
           </div>
-        
+
           <!-- Theme Selection Grid -->
           <div class="space-y-6">
             <p class="text-center text-muted-foreground text-sm">
-              Click any theme below to instantly switch. Themes persist using cookies (SSR) + localStorage.
+              Click any theme below to instantly switch. Themes persist using cookies (SSR) +
+              localStorage.
             </p>
-            
+
             <div v-for="category in themeCategories" :key="category" class="space-y-3">
               <h3 class="text-base font-semibold text-foreground border-b border-border pb-2">
                 {{ category }} ({{ getThemesByCategory(category).length }})
               </h3>
-              
+
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 <button
                   v-for="theme in getThemesByCategory(category)"
@@ -459,9 +458,9 @@ if (isDevelopment) {
                   :class="[
                     'p-3 rounded-lg border-2 transition-all duration-200 text-left relative overflow-hidden',
                     'hover:scale-105 hover:shadow-md',
-                    currentTheme === theme.name 
-                      ? 'border-primary bg-primary/10 shadow-lg ring-2 ring-primary/20' 
-                      : 'border-border bg-muted/50 hover:border-primary/50'
+                    currentTheme === theme.name
+                      ? 'border-primary bg-primary/10 shadow-lg ring-2 ring-primary/20'
+                      : 'border-border bg-muted/50 hover:border-primary/50',
                   ]"
                   @click="setThemeWithTransition(theme.name)"
                 >
@@ -469,24 +468,27 @@ if (isDevelopment) {
                   <div v-if="currentTheme === theme.name" class="absolute top-1 right-1">
                     <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                   </div>
-                  
+
                   <div class="font-medium text-sm">{{ theme.label }}</div>
-                  <div v-if="theme.description" class="text-xs text-muted-foreground mt-1 line-clamp-2">
+                  <div
+                    v-if="theme.description"
+                    class="text-xs text-muted-foreground mt-1 line-clamp-2"
+                  >
                     {{ theme.description }}
                   </div>
-                  
+
                   <!-- Theme preview colors -->
                   <div v-if="theme.preview" class="flex gap-1 mt-2">
-                    <div 
-                      class="w-4 h-4 rounded-full shadow-sm" 
+                    <div
+                      class="w-4 h-4 rounded-full shadow-sm"
                       :style="{ backgroundColor: theme.preview.primary }"
                     ></div>
-                    <div 
-                      class="w-4 h-4 rounded-full shadow-sm" 
+                    <div
+                      class="w-4 h-4 rounded-full shadow-sm"
                       :style="{ backgroundColor: theme.preview.secondary }"
                     ></div>
-                    <div 
-                      class="w-4 h-4 rounded-full shadow-sm border" 
+                    <div
+                      class="w-4 h-4 rounded-full shadow-sm border"
                       :style="{ backgroundColor: theme.preview.background }"
                     ></div>
                   </div>
@@ -495,88 +497,88 @@ if (isDevelopment) {
             </div>
           </div>
 
-        <!-- Theme Demo Content -->
-        <div class="mt-12 space-y-6">
-          <div class="text-center">
-            <h3 class="text-xl font-bold mb-4">Live Theme Preview</h3>
-            <p class="text-muted-foreground">All colors and components update automatically</p>
-          </div>
-          
-          <!-- Color Palette Display -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="space-y-2">
-              <div class="h-12 bg-primary rounded border flex items-center justify-center">
-                <span class="text-primary-foreground text-xs font-medium">Primary</span>
-              </div>
-              <div class="text-xs text-center text-muted-foreground">Primary</div>
+          <!-- Theme Demo Content -->
+          <div class="mt-12 space-y-6">
+            <div class="text-center">
+              <h3 class="text-xl font-bold mb-4">Live Theme Preview</h3>
+              <p class="text-muted-foreground">All colors and components update automatically</p>
             </div>
-            <div class="space-y-2">
-              <div class="h-12 bg-secondary rounded border flex items-center justify-center">
-                <span class="text-secondary-foreground text-xs font-medium">Secondary</span>
-              </div>
-              <div class="text-xs text-center text-muted-foreground">Secondary</div>
-            </div>
-            <div class="space-y-2">
-              <div class="h-12 bg-accent rounded border flex items-center justify-center">
-                <span class="text-accent-foreground text-xs font-medium">Accent</span>
-              </div>
-              <div class="text-xs text-center text-muted-foreground">Accent</div>
-            </div>
-            <div class="space-y-2">
-              <div class="h-12 bg-muted rounded border flex items-center justify-center">
-                <span class="text-muted-foreground text-xs font-medium">Muted</span>
-              </div>
-              <div class="text-xs text-center text-muted-foreground">Muted</div>
-            </div>
-          </div>
 
-          <!-- Interactive Components -->
-          <div class="flex flex-wrap gap-4 justify-center">
-            <button class="auth-button px-6 py-2 rounded-lg font-medium transition-colors">
-              Auth Button
-            </button>
-            <button class="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">
-              Primary Button
-            </button>
-            <button class="bg-secondary text-secondary-foreground px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">
-              Secondary Button
-            </button>
-          </div>
+            <!-- Color Palette Display -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="space-y-2">
+                <div class="h-12 bg-primary rounded border flex items-center justify-center">
+                  <span class="text-primary-foreground text-xs font-medium">Primary</span>
+                </div>
+                <div class="text-xs text-center text-muted-foreground">Primary</div>
+              </div>
+              <div class="space-y-2">
+                <div class="h-12 bg-secondary rounded border flex items-center justify-center">
+                  <span class="text-secondary-foreground text-xs font-medium">Secondary</span>
+                </div>
+                <div class="text-xs text-center text-muted-foreground">Secondary</div>
+              </div>
+              <div class="space-y-2">
+                <div class="h-12 bg-accent rounded border flex items-center justify-center">
+                  <span class="text-accent-foreground text-xs font-medium">Accent</span>
+                </div>
+                <div class="text-xs text-center text-muted-foreground">Accent</div>
+              </div>
+              <div class="space-y-2">
+                <div class="h-12 bg-muted rounded border flex items-center justify-center">
+                  <span class="text-muted-foreground text-xs font-medium">Muted</span>
+                </div>
+                <div class="text-xs text-center text-muted-foreground">Muted</div>
+              </div>
+            </div>
 
-          <!-- Floating Orbs -->
-          <div class="relative h-32 bg-muted/30 rounded-lg overflow-hidden">
-            <div class="floating-orb--primary absolute top-4 left-8 w-16 h-16 rounded-full" />
-            <div class="floating-orb--secondary absolute bottom-4 right-8 w-12 h-12 rounded-full" />
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-sm text-muted-foreground">Theme-reactive floating orbs</span>
+            <!-- Interactive Components -->
+            <div class="flex flex-wrap gap-4 justify-center">
+              <button class="auth-button px-6 py-2 rounded-lg font-medium transition-colors">
+                Auth Button
+              </button>
+              <button
+                class="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                Primary Button
+              </button>
+              <button
+                class="bg-secondary text-secondary-foreground px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
+              >
+                Secondary Button
+              </button>
+            </div>
+
+            <!-- Floating Orbs -->
+            <div class="relative h-32 bg-muted/30 rounded-lg overflow-hidden">
+              <div class="floating-orb--primary absolute top-4 left-8 w-16 h-16 rounded-full" />
+              <div
+                class="floating-orb--secondary absolute bottom-4 right-8 w-12 h-12 rounded-full"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-sm text-muted-foreground">Theme-reactive floating orbs</span>
+              </div>
             </div>
           </div>
-        </div>
         </div>
       </details>
-
-
 
       <!-- Development-Only Validation Tests -->
       <details v-if="isDevelopment" class="bg-card p-6 rounded-lg border shadow-sm text-left">
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Foundation Systems Check
         </summary>
-        
+
         <div class="space-y-6">
           <!-- Foundation Tests -->
           <div class="border-t border-border pt-4">
             <h3 class="text-sm font-medium text-primary mb-4">Foundation Tests:</h3>
-            
+
             <!-- Test cn utility -->
             <div class="mb-4">
               <h4 class="text-xs font-semibold mb-2">Testing cn() utility:</h4>
-              <div :class="testClasses" class="text-sm">
-                This div uses cn() to merge classes
-              </div>
-              <p class="text-sm text-muted-foreground mt-2">
-                Classes: {{ testClasses }}
-              </p>
+              <div :class="testClasses" class="text-sm">This div uses cn() to merge classes</div>
+              <p class="text-sm text-muted-foreground mt-2">Classes: {{ testClasses }}</p>
             </div>
 
             <!-- Test formatCurrency utility -->
@@ -601,7 +603,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Buttons (2 components)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Button Variants -->
           <div>
@@ -654,7 +656,12 @@ if (isDevelopment) {
             <h3 class="text-sm font-medium text-muted-foreground mb-4">As Link</h3>
             <div class="flex flex-wrap gap-4">
               <Button to="/" icon="lucide:home">Home</Button>
-              <Button href="https://github.com" target="_blank" variant="outline" icon="lucide:external-link">
+              <Button
+                href="https://github.com"
+                target="_blank"
+                variant="outline"
+                icon="lucide:external-link"
+              >
                 External Link
               </Button>
             </div>
@@ -672,7 +679,9 @@ if (isDevelopment) {
 
           <!-- GradientButton Component -->
           <div>
-            <h3 class="text-sm font-medium text-muted-foreground mb-4">GradientButton - Advanced Gradient Effects</h3>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">
+              GradientButton - Advanced Gradient Effects
+            </h3>
             <div class="flex flex-wrap gap-4">
               <GradientButton>Default Gradient</GradientButton>
               <GradientButton variant="secondary">Secondary Gradient</GradientButton>
@@ -681,22 +690,16 @@ if (isDevelopment) {
               <GradientButton :adaptive-gradient="true" icon="lucide:sun-moon">
                 Adaptive Gradient
               </GradientButton>
-              <GradientButton 
+              <GradientButton
                 gradient-colors="from-primary/20 to-secondary/20"
                 icon="lucide:sparkles"
               >
                 Theme Aware
               </GradientButton>
-              <GradientButton 
-                variant="ghost"
-                gradient-direction="to-t"
-              >
+              <GradientButton variant="ghost" gradient-direction="to-t">
                 Ghost Variant
               </GradientButton>
-              <GradientButton 
-                variant="outline"
-                gradient-colors="from-accent/30 to-transparent"
-              >
+              <GradientButton variant="outline" gradient-colors="from-accent/30 to-transparent">
                 Accent Overlay
               </GradientButton>
               <GradientButton :show-gradient-overlay="false">No Gradient</GradientButton>
@@ -710,7 +713,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Icons (30 types)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Icon Sizes -->
           <div>
@@ -727,7 +730,9 @@ if (isDevelopment) {
 
           <!-- Common Icons -->
           <div>
-            <h3 class="text-sm font-medium text-muted-foreground mb-4">Common Icons (Theme Reactive)</h3>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">
+              Common Icons (Theme Reactive)
+            </h3>
             <div class="grid grid-cols-10 gap-4">
               <AtomIcon name="lucide:sparkles" class="text-primary" />
               <AtomIcon name="lucide:zap" class="text-primary" />
@@ -754,7 +759,7 @@ if (isDevelopment) {
               <AtomIcon name="lucide:user" />
               <AtomIcon name="lucide:log-out" />
               <AtomIcon name="lucide:user-circle" />
-              
+
               <!-- Hero & Features -->
               <AtomIcon name="lucide:sparkles" />
               <AtomIcon name="lucide:zap" />
@@ -763,17 +768,17 @@ if (isDevelopment) {
               <AtomIcon name="lucide:share-2" />
               <AtomIcon name="lucide:globe" />
               <AtomIcon name="lucide:palette" />
-              
+
               <!-- Process Steps -->
               <AtomIcon name="lucide:lightbulb" />
               <AtomIcon name="lucide:pen-tool" />
               <AtomIcon name="lucide:camera" />
               <AtomIcon name="lucide:music" />
-              
+
               <!-- Testimonials & Misc -->
               <AtomIcon name="lucide:star" />
               <AtomIcon name="lucide:arrow-right" />
-              
+
               <!-- Footer & Social -->
               <AtomIcon name="lucide:mail" />
               <AtomIcon name="lucide:map-pin" />
@@ -808,12 +813,12 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Inputs (1 component)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Basic Inputs -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Basic Inputs</h3>
-            <form @submit.prevent class="space-y-4 max-w-md">
+            <form class="space-y-4 max-w-md" @submit.prevent>
               <Input v-model="inputValue1" placeholder="Enter text..." />
               <Input v-model="inputValue2" type="email" placeholder="Email address" />
               <Input v-model="inputValue3" type="password" placeholder="Password" />
@@ -837,16 +842,25 @@ if (isDevelopment) {
             <h3 class="text-sm font-medium text-muted-foreground mb-4">With Icons</h3>
             <div class="space-y-4 max-w-md">
               <div class="relative">
-                <Icon name="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Icon
+                  name="lucide:search"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+                />
                 <Input class="pl-10" placeholder="Search..." />
               </div>
               <div class="relative">
-                <Icon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Icon
+                  name="lucide:mail"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+                />
                 <Input class="pl-10" type="email" placeholder="Email with icon" />
               </div>
               <div class="relative">
                 <Input class="pr-10" placeholder="With trailing icon" />
-                <Icon name="lucide:check" class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-green-500" />
+                <Icon
+                  name="lucide:check"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-green-500"
+                />
               </div>
             </div>
           </div>
@@ -877,12 +891,12 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Form Components (3 components)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Checkbox Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Checkbox</h3>
-            
+
             <!-- Basic Checkboxes -->
             <div class="space-y-4">
               <h4 class="text-xs font-medium text-muted-foreground">Basic Usage</h4>
@@ -897,12 +911,12 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">With Description</h4>
               <div class="space-y-3">
-                <Checkbox 
+                <Checkbox
                   v-model="checkboxValue3"
                   label="Enable notifications"
                   description="Get notified when someone mentions you"
                 />
-                <Checkbox 
+                <Checkbox
                   label="Use default settings"
                   description="This will apply our recommended configuration for your account"
                 />
@@ -940,7 +954,7 @@ if (isDevelopment) {
           <!-- FormMessage Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">FormMessage</h3>
-            
+
             <!-- Message Types -->
             <div class="space-y-4">
               <h4 class="text-xs font-medium text-muted-foreground">Message Types</h4>
@@ -982,13 +996,13 @@ if (isDevelopment) {
                   <Input placeholder="Enter your email" class="mt-1" />
                   <FormMessage type="error" message="Please enter a valid email address" />
                 </div>
-                
+
                 <div>
                   <Label>Password</Label>
                   <Input type="password" placeholder="Enter password" class="mt-1" />
                   <FormMessage type="warning" message="Use at least 8 characters with mixed case" />
                 </div>
-                
+
                 <div>
                   <Label>Username</Label>
                   <Input placeholder="Choose a username" class="mt-1" />
@@ -1015,8 +1029,8 @@ if (isDevelopment) {
                   This is a message with <strong>rich content</strong> using slots
                 </FormMessage>
                 <FormMessage type="error">
-                  Multiple errors: <br>
-                  • Field is required<br>
+                  Multiple errors: <br />
+                  • Field is required<br />
                   • Must be at least 8 characters
                 </FormMessage>
               </div>
@@ -1026,29 +1040,14 @@ if (isDevelopment) {
           <!-- Radio Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Radio</h3>
-            
+
             <!-- Basic Radio Groups -->
             <div class="space-y-4">
               <h4 class="text-xs font-medium text-muted-foreground">Basic Radio Group</h4>
               <div class="space-y-3">
-                <Radio 
-                  v-model="radioValue1" 
-                  name="basic-group" 
-                  value="option1" 
-                  label="Option 1" 
-                />
-                <Radio 
-                  v-model="radioValue1" 
-                  name="basic-group" 
-                  value="option2" 
-                  label="Option 2" 
-                />
-                <Radio 
-                  v-model="radioValue1" 
-                  name="basic-group" 
-                  value="option3" 
-                  label="Option 3" 
-                />
+                <Radio v-model="radioValue1" name="basic-group" value="option1" label="Option 1" />
+                <Radio v-model="radioValue1" name="basic-group" value="option2" label="Option 2" />
+                <Radio v-model="radioValue1" name="basic-group" value="option3" label="Option 3" />
               </div>
               <p class="text-sm text-muted-foreground">Selected: {{ radioValue1 }}</p>
             </div>
@@ -1057,24 +1056,24 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">With Descriptions</h4>
               <div class="space-y-3">
-                <Radio 
-                  v-model="radioValue2" 
-                  name="size-group" 
-                  value="small" 
+                <Radio
+                  v-model="radioValue2"
+                  name="size-group"
+                  value="small"
                   label="Small"
                   description="Best for personal use"
                 />
-                <Radio 
-                  v-model="radioValue2" 
-                  name="size-group" 
-                  value="medium" 
+                <Radio
+                  v-model="radioValue2"
+                  name="size-group"
+                  value="medium"
                   label="Medium"
                   description="Recommended for most users"
                 />
-                <Radio 
-                  v-model="radioValue2" 
-                  name="size-group" 
-                  value="large" 
+                <Radio
+                  v-model="radioValue2"
+                  name="size-group"
+                  value="large"
                   label="Large"
                   description="For power users and teams"
                 />
@@ -1086,30 +1085,16 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">States</h4>
               <div class="space-y-3">
-                <Radio 
-                  name="states-group" 
-                  value="normal" 
-                  label="Normal radio" 
+                <Radio name="states-group" value="normal" label="Normal radio" />
+                <Radio name="states-group" value="disabled" label="Disabled radio" disabled />
+                <Radio
+                  v-model="radioValue3"
+                  name="states-group"
+                  value="disabled-checked"
+                  label="Disabled checked"
+                  disabled
                 />
-                <Radio 
-                  name="states-group" 
-                  value="disabled" 
-                  label="Disabled radio" 
-                  disabled 
-                />
-                <Radio 
-                  v-model="radioValue3" 
-                  name="states-group" 
-                  value="disabled-checked" 
-                  label="Disabled checked" 
-                  disabled 
-                />
-                <Radio 
-                  name="states-group" 
-                  value="required" 
-                  label="Required radio" 
-                  required 
-                />
+                <Radio name="states-group" value="required" label="Required radio" required />
               </div>
             </div>
 
@@ -1117,24 +1102,9 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">Inline Layout</h4>
               <div class="flex gap-6">
-                <Radio 
-                  v-model="radioValue3" 
-                  name="inline-group" 
-                  value="yes" 
-                  label="Yes" 
-                />
-                <Radio 
-                  v-model="radioValue3" 
-                  name="inline-group" 
-                  value="no" 
-                  label="No" 
-                />
-                <Radio 
-                  v-model="radioValue3" 
-                  name="inline-group" 
-                  value="maybe" 
-                  label="Maybe" 
-                />
+                <Radio v-model="radioValue3" name="inline-group" value="yes" label="Yes" />
+                <Radio v-model="radioValue3" name="inline-group" value="no" label="No" />
+                <Radio v-model="radioValue3" name="inline-group" value="maybe" label="Maybe" />
               </div>
               <p class="text-sm text-muted-foreground">Selected: {{ radioValue3 || 'None' }}</p>
             </div>
@@ -1143,18 +1113,13 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">Custom Styling</h4>
               <div class="space-y-3">
-                <Radio 
-                  name="custom-group" 
-                  value="primary" 
-                  label="Primary styled radio" 
+                <Radio
+                  name="custom-group"
+                  value="primary"
+                  label="Primary styled radio"
                   class="text-primary"
                 />
-                <Radio 
-                  name="custom-group" 
-                  value="large" 
-                  label="Large radio" 
-                  class="text-lg"
-                />
+                <Radio name="custom-group" value="large" label="Large radio" class="text-lg" />
               </div>
             </div>
 
@@ -1165,32 +1130,32 @@ if (isDevelopment) {
                 <div>
                   <Label class="mb-3">Select your plan</Label>
                   <div class="space-y-2">
-                    <Radio 
-                      v-model="radioValue3" 
-                      name="plan-group" 
-                      value="free" 
+                    <Radio
+                      v-model="radioValue3"
+                      name="plan-group"
+                      value="free"
                       label="Free Plan"
                       description="$0/month - Basic features"
                     />
-                    <Radio 
-                      v-model="radioValue3" 
-                      name="plan-group" 
-                      value="pro" 
+                    <Radio
+                      v-model="radioValue3"
+                      name="plan-group"
+                      value="pro"
                       label="Pro Plan"
                       description="$10/month - Advanced features"
                     />
-                    <Radio 
-                      v-model="radioValue3" 
-                      name="plan-group" 
-                      value="enterprise" 
+                    <Radio
+                      v-model="radioValue3"
+                      name="plan-group"
+                      value="enterprise"
                       label="Enterprise Plan"
                       description="Custom pricing - All features"
                     />
                   </div>
-                  <FormMessage 
-                    v-if="radioValue3" 
-                    type="success" 
-                    :message="`You selected: ${radioValue3}`" 
+                  <FormMessage
+                    v-if="radioValue3"
+                    type="success"
+                    :message="`You selected: ${radioValue3}`"
                     class="mt-2"
                   />
                 </div>
@@ -1205,12 +1170,12 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Special Effect Components (4 components)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Dot Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Dot (Pulsing Indicator)</h3>
-            
+
             <!-- Different Sizes -->
             <div class="space-y-4">
               <h4 class="text-xs font-medium text-muted-foreground">Sizes</h4>
@@ -1298,7 +1263,7 @@ if (isDevelopment) {
           <!-- StepNumber Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">StepNumber</h3>
-            
+
             <!-- Process Steps Example -->
             <div class="space-y-4">
               <h4 class="text-xs font-medium text-muted-foreground">Process Steps</h4>
@@ -1365,15 +1330,12 @@ if (isDevelopment) {
           <!-- StarRating Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">StarRating</h3>
-            
+
             <!-- Basic Examples -->
             <div class="space-y-4">
               <h4 class="text-xs font-medium text-muted-foreground">Basic Usage</h4>
               <div class="space-y-3">
-                <StarRating 
-                  v-model="starRating1" 
-                  label="Rate this product"
-                />
+                <StarRating v-model="starRating1" label="Rate this product" />
                 <p class="text-sm text-muted-foreground">Current rating: {{ starRating1 }}/5</p>
               </div>
             </div>
@@ -1394,21 +1356,21 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">States</h4>
               <div class="space-y-3">
-                <StarRating 
-                  :model-value="4" 
-                  readonly 
+                <StarRating
+                  :model-value="4"
+                  readonly
                   label="Read-only rating"
                   description="This rating cannot be changed"
                 />
-                <StarRating 
-                  :model-value="3" 
-                  disabled 
+                <StarRating
+                  :model-value="3"
+                  disabled
                   label="Disabled rating"
                   description="This rating is disabled"
                 />
-                <StarRating 
-                  v-model="starRating3" 
-                  required 
+                <StarRating
+                  v-model="starRating3"
+                  required
                   label="Required rating"
                   description="Please provide a rating"
                 />
@@ -1419,15 +1381,15 @@ if (isDevelopment) {
             <div class="space-y-4 mt-6">
               <h4 class="text-xs font-medium text-muted-foreground">Custom Configuration</h4>
               <div class="space-y-3">
-                <StarRating 
-                  v-model="starRating3" 
-                  :max-stars="10" 
+                <StarRating
+                  v-model="starRating3"
+                  :max-stars="10"
                   label="10-star rating"
                   color="primary"
                 />
-                <StarRating 
-                  v-model="starRating3" 
-                  :allow-clear="false" 
+                <StarRating
+                  v-model="starRating3"
+                  :allow-clear="false"
                   label="No clear option"
                   color="secondary"
                 />
@@ -1438,16 +1400,16 @@ if (isDevelopment) {
           <!-- VisuallyHidden Component -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">VisuallyHidden</h3>
-            
+
             <div class="space-y-4">
               <p class="text-sm text-muted-foreground">
                 This component hides content visually but keeps it accessible to screen readers.
               </p>
-              
+
               <!-- Basic Example -->
               <div class="p-4 bg-muted/50 rounded">
                 <p class="text-sm">
-                  This paragraph contains 
+                  This paragraph contains
                   <VisuallyHidden>hidden text that screen readers can read</VisuallyHidden>
                   visible text.
                 </p>
@@ -1482,12 +1444,12 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Dropdown Menu Components (8 components)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Basic Dropdown -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Basic Dropdown</h3>
-            
+
             <div class="flex gap-4">
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -1504,7 +1466,10 @@ if (isDevelopment) {
                     Duplicate
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem @select="() => logger.log('Delete clicked')" class="text-destructive">
+                  <DropdownMenuItem
+                    class="text-destructive"
+                    @select="() => logger.log('Delete clicked')"
+                  >
                     <Icon name="lucide:trash" class="h-4 w-4 mr-2" />
                     Delete
                   </DropdownMenuItem>
@@ -1528,7 +1493,7 @@ if (isDevelopment) {
           <!-- With Labels and Sections -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">With Labels & Sections</h3>
-            
+
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Icon name="lucide:user" class="h-4 w-4 mr-2" />
@@ -1572,7 +1537,7 @@ if (isDevelopment) {
           <!-- With Checkbox Items -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">With Checkboxes</h3>
-            
+
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Icon name="lucide:sliders-horizontal" class="h-4 w-4 mr-2" />
@@ -1581,28 +1546,20 @@ if (isDevelopment) {
               <DropdownMenuContent class="w-56">
                 <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem 
-                  v-model:checked="dropdownCheckbox1"
-                >
+                <DropdownMenuCheckboxItem v-model:checked="dropdownCheckbox1">
                   Show status bar
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem 
-                  v-model:checked="dropdownCheckbox2"
-                >
+                <DropdownMenuCheckboxItem v-model:checked="dropdownCheckbox2">
                   Show activity bar
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem 
-                  v-model:checked="dropdownCheckbox3"
-                >
+                <DropdownMenuCheckboxItem v-model:checked="dropdownCheckbox3">
                   Show panel
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  Reset view
-                </DropdownMenuItem>
+                <DropdownMenuItem> Reset view </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            
+
             <div class="mt-4 p-4 bg-muted/50 rounded text-sm">
               <p class="font-medium mb-2">Current Values:</p>
               <p>Status bar: {{ dropdownCheckbox1 ? 'Visible' : 'Hidden' }}</p>
@@ -1614,7 +1571,7 @@ if (isDevelopment) {
           <!-- With Radio Items -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">With Radio Group</h3>
-            
+
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Icon name="lucide:align-left" class="h-4 w-4 mr-2" />
@@ -1623,37 +1580,25 @@ if (isDevelopment) {
               <DropdownMenuContent class="w-56">
                 <DropdownMenuLabel>Choose alignment</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuRadioItem 
-                  value="left"
-                  v-model="dropdownRadioValue"
-                >
+                <DropdownMenuRadioItem v-model="dropdownRadioValue" value="left">
                   <Icon name="lucide:align-left" class="h-4 w-4 mr-2" />
                   Left
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem 
-                  value="center"
-                  v-model="dropdownRadioValue"
-                >
+                <DropdownMenuRadioItem v-model="dropdownRadioValue" value="center">
                   <Icon name="lucide:align-center" class="h-4 w-4 mr-2" />
                   Center
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem 
-                  value="right"
-                  v-model="dropdownRadioValue"
-                >
+                <DropdownMenuRadioItem v-model="dropdownRadioValue" value="right">
                   <Icon name="lucide:align-right" class="h-4 w-4 mr-2" />
                   Right
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem 
-                  value="justify"
-                  v-model="dropdownRadioValue"
-                >
+                <DropdownMenuRadioItem v-model="dropdownRadioValue" value="justify">
                   <Icon name="lucide:align-justify" class="h-4 w-4 mr-2" />
                   Justify
                 </DropdownMenuRadioItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            
+
             <p class="mt-4 text-sm text-muted-foreground">
               Selected alignment: <span class="font-medium">{{ dropdownRadioValue }}</span>
             </p>
@@ -1662,13 +1607,11 @@ if (isDevelopment) {
           <!-- Different Positions -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Different Positions</h3>
-            
+
             <div class="grid grid-cols-3 gap-4">
               <!-- Alignment variations -->
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  Align Start
-                </DropdownMenuTrigger>
+                <DropdownMenuTrigger> Align Start </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
                   <DropdownMenuItem>Item 1</DropdownMenuItem>
                   <DropdownMenuItem>Item 2</DropdownMenuItem>
@@ -1677,9 +1620,7 @@ if (isDevelopment) {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  Align Center
-                </DropdownMenuTrigger>
+                <DropdownMenuTrigger> Align Center </DropdownMenuTrigger>
                 <DropdownMenuContent align="center">
                   <DropdownMenuItem>Item 1</DropdownMenuItem>
                   <DropdownMenuItem>Item 2</DropdownMenuItem>
@@ -1688,9 +1629,7 @@ if (isDevelopment) {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  Align End
-                </DropdownMenuTrigger>
+                <DropdownMenuTrigger> Align End </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>Item 1</DropdownMenuItem>
                   <DropdownMenuItem>Item 2</DropdownMenuItem>
@@ -1700,9 +1639,7 @@ if (isDevelopment) {
 
               <!-- Side variations -->
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  Side Top
-                </DropdownMenuTrigger>
+                <DropdownMenuTrigger> Side Top </DropdownMenuTrigger>
                 <DropdownMenuContent side="top">
                   <DropdownMenuItem>Item 1</DropdownMenuItem>
                   <DropdownMenuItem>Item 2</DropdownMenuItem>
@@ -1711,9 +1648,7 @@ if (isDevelopment) {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  Side Right
-                </DropdownMenuTrigger>
+                <DropdownMenuTrigger> Side Right </DropdownMenuTrigger>
                 <DropdownMenuContent side="right">
                   <DropdownMenuItem>Item 1</DropdownMenuItem>
                   <DropdownMenuItem>Item 2</DropdownMenuItem>
@@ -1722,9 +1657,7 @@ if (isDevelopment) {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  Side Left
-                </DropdownMenuTrigger>
+                <DropdownMenuTrigger> Side Left </DropdownMenuTrigger>
                 <DropdownMenuContent side="left">
                   <DropdownMenuItem>Item 1</DropdownMenuItem>
                   <DropdownMenuItem>Item 2</DropdownMenuItem>
@@ -1737,7 +1670,7 @@ if (isDevelopment) {
           <!-- Complex Example -->
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Complex Example</h3>
-            
+
             <DropdownMenu>
               <DropdownMenuTrigger class="bg-gradient-to-r from-primary to-secondary text-white">
                 <Icon name="lucide:sparkles" class="h-4 w-4 mr-2" />
@@ -1762,15 +1695,11 @@ if (isDevelopment) {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel>Preferences</DropdownMenuLabel>
-                <DropdownMenuCheckboxItem 
-                  :checked="true"
-                >
+                <DropdownMenuCheckboxItem :checked="true">
                   <Icon name="lucide:moon" class="h-4 w-4 mr-2" />
                   Dark mode
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem 
-                  :checked="false"
-                >
+                <DropdownMenuCheckboxItem :checked="false">
                   <Icon name="lucide:bell" class="h-4 w-4 mr-2" />
                   Notifications
                 </DropdownMenuCheckboxItem>
@@ -1790,7 +1719,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Badges (2 components)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Badge Variants -->
           <div>
@@ -1837,15 +1766,9 @@ if (isDevelopment) {
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Landing Page Style</h3>
             <div class="flex flex-wrap gap-4">
-              <Badge variant="landing" size="lg" class="font-bold">
-                LIMITED TIME OFFER
-              </Badge>
-              <Badge variant="landing" size="lg">
-                TESTIMONIALS
-              </Badge>
-              <Badge variant="landing" size="lg">
-                PRICING PLANS
-              </Badge>
+              <Badge variant="landing" size="lg" class="font-bold"> LIMITED TIME OFFER </Badge>
+              <Badge variant="landing" size="lg"> TESTIMONIALS </Badge>
+              <Badge variant="landing" size="lg"> PRICING PLANS </Badge>
             </div>
           </div>
 
@@ -1862,25 +1785,17 @@ if (isDevelopment) {
 
           <!-- BadgeWithDot Component -->
           <div>
-            <h3 class="text-sm font-medium text-muted-foreground mb-4">BadgeWithDot - Status Indicators</h3>
+            <h3 class="text-sm font-medium text-muted-foreground mb-4">
+              BadgeWithDot - Status Indicators
+            </h3>
             <div class="flex flex-wrap gap-4">
               <BadgeWithDot>Live</BadgeWithDot>
               <BadgeWithDot variant="secondary" dot-color="success">Online</BadgeWithDot>
               <BadgeWithDot variant="destructive" dot-color="danger">Error</BadgeWithDot>
-              <BadgeWithDot 
-                variant="outline" 
-                dot-position="right"
-                animation-speed="slow"
-              >
+              <BadgeWithDot variant="outline" dot-position="right" animation-speed="slow">
                 Processing
               </BadgeWithDot>
-              <BadgeWithDot 
-                variant="landing" 
-                size="lg"
-                dot-size="lg"
-              >
-                Featured
-              </BadgeWithDot>
+              <BadgeWithDot variant="landing" size="lg" dot-size="lg"> Featured </BadgeWithDot>
               <BadgeWithDot :animated="false">Static</BadgeWithDot>
             </div>
           </div>
@@ -1892,7 +1807,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Spinners (1 component)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Spinner Sizes -->
           <div>
@@ -1937,13 +1852,15 @@ if (isDevelopment) {
                 <Spinner size="sm" />
                 <span class="text-sm text-muted-foreground">Loading content...</span>
               </div>
-              
+
               <div class="inline-flex items-center gap-2 px-4 py-2 bg-card border rounded-md">
                 <Spinner size="sm" class="text-primary" />
                 <span>Processing</span>
               </div>
 
-              <div class="flex justify-center items-center h-32 bg-card/50 border border-dashed rounded-lg">
+              <div
+                class="flex justify-center items-center h-32 bg-card/50 border border-dashed rounded-lg"
+              >
                 <div class="text-center">
                   <Spinner size="lg" class="mx-auto mb-2" />
                   <p class="text-sm text-muted-foreground">Loading data...</p>
@@ -1969,7 +1886,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Cards (2 components)
         </summary>
-        
+
         <div class="space-y-6">
           <!-- Basic Card -->
           <div class="space-y-2">
@@ -1979,9 +1896,9 @@ if (isDevelopment) {
                 <CardTitle>Card Title</CardTitle>
                 <CardDescription>This is a card description that provides context.</CardDescription>
               </template>
-              
+
               <p>This is the main content area of the card. It can contain any content you need.</p>
-              
+
               <template #footer>
                 <Button size="sm">Action</Button>
                 <Button size="sm" variant="ghost">Cancel</Button>
@@ -2006,12 +1923,12 @@ if (isDevelopment) {
                 <p class="font-semibold">Light Glass Card</p>
                 <p class="text-sm text-muted-foreground">Subtle glass effect with 95% opacity</p>
               </GlassCard>
-              
+
               <GlassCard variant="heavy">
                 <p class="font-semibold">Heavy Glass Card</p>
                 <p class="text-sm text-muted-foreground">Strong glass effect with 90% opacity</p>
               </GlassCard>
-              
+
               <GlassCard variant="elevated" hover>
                 <p class="font-semibold">Elevated Glass Card</p>
                 <p class="text-sm text-muted-foreground">Premium feel with hover effect</p>
@@ -2039,7 +1956,7 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           📐 Layout (2 components)
         </summary>
-        
+
         <div class="space-y-6">
           <!-- Container Sizes -->
           <div class="space-y-2">
@@ -2048,15 +1965,15 @@ if (isDevelopment) {
               <Container size="sm" class="bg-muted/50 py-4">
                 <p class="text-center">Small Container (max-w-3xl)</p>
               </Container>
-              
+
               <Container size="md" class="bg-muted/50 py-4">
                 <p class="text-center">Medium Container (max-w-5xl)</p>
               </Container>
-              
+
               <Container size="lg" class="bg-muted/50 py-4">
                 <p class="text-center">Large Container (max-w-7xl) - Default</p>
               </Container>
-              
+
               <Container size="xl" class="bg-muted/50 py-4">
                 <p class="text-center">XL Container (max-w-screen-xl)</p>
               </Container>
@@ -2069,11 +1986,11 @@ if (isDevelopment) {
             <Container padding="none" class="bg-muted/50 py-4">
               <p>No padding container</p>
             </Container>
-            
+
             <Container padding="sm" class="bg-muted/50 py-4">
               <p>Small padding container</p>
             </Container>
-            
+
             <Container padding="lg" class="bg-muted/50 py-4">
               <p>Large padding container</p>
             </Container>
@@ -2088,13 +2005,13 @@ if (isDevelopment) {
                   <p>Small section spacing (py-8 sm:py-12)</p>
                 </Container>
               </Section>
-              
+
               <Section spacing="md" background="card">
                 <Container>
                   <p>Medium section spacing (py-16 sm:py-20) - Default</p>
                 </Container>
               </Section>
-              
+
               <Section spacing="lg" background="accent">
                 <Container>
                   <p>Large section spacing (py-24 sm:py-32)</p>
@@ -2109,7 +2026,7 @@ if (isDevelopment) {
             <Container as="article" class="bg-muted/50 py-4">
               <p>Container rendered as &lt;article&gt;</p>
             </Container>
-            
+
             <Section as="header" spacing="sm" class="bg-primary/10">
               <Container>
                 <p>Section rendered as &lt;header&gt;</p>
@@ -2139,38 +2056,26 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Typography (3 components)
         </summary>
-        
+
         <div class="space-y-8">
           <!-- Heading Component -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">Heading Component</h3>
-            
+
             <!-- H1 Variants -->
             <div class="space-y-2">
               <p class="text-sm text-muted-foreground">H1 Variants</p>
-              <Heading as="h1" size="h1">
-                The Intuitive Web Framework
-              </Heading>
-              <Heading as="h1" size="h1-compact">
-                Compact H1 Heading
-              </Heading>
-              <Heading as="h1" size="h1" gradient>
-                Gradient H1 Heading
-              </Heading>
+              <Heading as="h1" size="h1"> The Intuitive Web Framework </Heading>
+              <Heading as="h1" size="h1-compact"> Compact H1 Heading </Heading>
+              <Heading as="h1" size="h1" gradient> Gradient H1 Heading </Heading>
             </div>
 
             <!-- H2 Variants -->
             <div class="space-y-2">
               <p class="text-sm text-muted-foreground">H2 Variants</p>
-              <Heading as="h2" size="h2">
-                Build Production-Ready Apps
-              </Heading>
-              <Heading as="h2" size="h2-compact">
-                Compact H2 Heading
-              </Heading>
-              <Heading as="h2" size="h2-display">
-                Display H2 Heading
-              </Heading>
+              <Heading as="h2" size="h2"> Build Production-Ready Apps </Heading>
+              <Heading as="h2" size="h2-compact"> Compact H2 Heading </Heading>
+              <Heading as="h2" size="h2-display"> Display H2 Heading </Heading>
             </div>
 
             <!-- H3-H6 Variants -->
@@ -2186,12 +2091,8 @@ if (isDevelopment) {
             <!-- Special Variants -->
             <div class="space-y-2">
               <p class="text-sm text-muted-foreground">Special Variants</p>
-              <Heading size="display" align="center">
-                Display Heading
-              </Heading>
-              <Heading size="hero" align="center" gradient>
-                Hero Gradient Heading
-              </Heading>
+              <Heading size="display" align="center"> Display Heading </Heading>
+              <Heading size="hero" align="center" gradient> Hero Gradient Heading </Heading>
             </div>
 
             <!-- Alignment -->
@@ -2206,7 +2107,7 @@ if (isDevelopment) {
           <!-- Text Component -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">Text Component</h3>
-            
+
             <!-- Size Variants -->
             <div class="space-y-2">
               <p class="text-sm text-muted-foreground">Size Variants</p>
@@ -2268,13 +2169,16 @@ if (isDevelopment) {
             <div class="space-y-2">
               <p class="text-sm text-muted-foreground">Line Height</p>
               <Text leading="tight">
-                Tight line height is useful for headings where you want lines close together. Lorem ipsum dolor sit amet.
+                Tight line height is useful for headings where you want lines close together. Lorem
+                ipsum dolor sit amet.
               </Text>
               <Text leading="normal">
-                Normal line height is the default for body text. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Normal line height is the default for body text. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit.
               </Text>
               <Text leading="relaxed">
-                Relaxed line height improves readability for longer passages. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Relaxed line height improves readability for longer passages. Lorem ipsum dolor sit
+                amet, consectetur adipiscing elit.
               </Text>
             </div>
 
@@ -2313,73 +2217,60 @@ if (isDevelopment) {
           <!-- Label Component -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">Label Component</h3>
-            
+
             <!-- Basic Labels -->
             <div class="space-y-3">
               <div>
                 <Label html-for="email">Email Address</Label>
                 <Input id="email" type="email" placeholder="you@example.com" class="mt-1" />
               </div>
-              
+
               <div>
-                <Label html-for="name" required>
-                  Full Name
-                </Label>
+                <Label html-for="name" required> Full Name </Label>
                 <Input id="name" placeholder="John Doe" class="mt-1" />
               </div>
-              
+
               <div>
-                <Label html-for="bio" required required-text=" (required)">
-                  Biography
-                </Label>
-                <textarea 
-                  id="bio" 
+                <Label html-for="bio" required required-text=" (required)"> Biography </Label>
+                <textarea
+                  id="bio"
                   class="mt-1 flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   placeholder="Tell us about yourself..."
                 />
               </div>
-              
+
               <div>
-                <Label html-for="disabled-input" disabled>
-                  Disabled Label
-                </Label>
+                <Label html-for="disabled-input" disabled> Disabled Label </Label>
                 <Input id="disabled-input" disabled placeholder="Cannot edit" class="mt-1" />
               </div>
-              
+
               <div>
-                <Label html-for="optional" :required="false">
-                  Optional Field
-                </Label>
+                <Label html-for="optional" :required="false"> Optional Field </Label>
                 <Input id="optional" placeholder="This field is optional" class="mt-1" />
               </div>
             </div>
 
             <!-- Screen Reader Only Label -->
             <div class="space-y-2">
-              <p class="text-sm text-muted-foreground">Screen Reader Only Label (invisible but accessible)</p>
+              <p class="text-sm text-muted-foreground">
+                Screen Reader Only Label (invisible but accessible)
+              </p>
               <div class="relative">
-                <Label html-for="search" sr-only>
-                  Search
-                </Label>
-                <Input 
-                  id="search" 
-                  type="search" 
-                  placeholder="Search..." 
-                  class="pl-10"
+                <Label html-for="search" sr-only> Search </Label>
+                <Input id="search" type="search" placeholder="Search..." class="pl-10" />
+                <AtomIcon
+                  name="lucide:search"
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                  size="sm"
                 />
-                <AtomIcon name="lucide:search" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size="sm" />
               </div>
             </div>
 
             <!-- Custom Styled Labels -->
             <div class="space-y-3">
               <p class="text-sm text-muted-foreground">Custom Styled Labels</p>
-              <Label class="text-primary font-bold">
-                Primary Bold Label
-              </Label>
-              <Label class="text-lg">
-                Large Label
-              </Label>
+              <Label class="text-primary font-bold"> Primary Bold Label </Label>
+              <Label class="text-lg"> Large Label </Label>
               <Label class="uppercase tracking-wider text-muted-foreground">
                 Uppercase Label
               </Label>
@@ -2393,13 +2284,12 @@ if (isDevelopment) {
         <summary class="cursor-pointer font-semibold text-lg mb-4 hover:text-primary">
           Utility Components (4 components)
         </summary>
-        
-        <div class="space-y-8">
 
+        <div class="space-y-8">
           <!-- Separator -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">Separator</h3>
-            
+
             <div class="space-y-4">
               <div>
                 <p class="text-sm text-muted-foreground mb-2">Horizontal Variants</p>
@@ -2409,7 +2299,7 @@ if (isDevelopment) {
                   <Separator variant="dotted" />
                 </div>
               </div>
-              
+
               <div>
                 <p class="text-sm text-muted-foreground mb-2">Vertical Separator</p>
                 <div class="flex items-center gap-4 h-20">
@@ -2426,31 +2316,23 @@ if (isDevelopment) {
           <!-- LoadingFallback -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">LoadingFallback</h3>
-            
+
             <div class="grid gap-4">
               <div class="border rounded-lg p-4 h-32">
-                <LoadingFallback 
-                  :full-height="false"
-                  size="sm"
-                  text="Loading content..."
-                />
+                <LoadingFallback :full-height="false" size="sm" text="Loading content..." />
               </div>
-              
+
               <div class="border rounded-lg p-4 h-40">
-                <LoadingFallback 
+                <LoadingFallback
                   :full-height="false"
                   size="md"
                   text="Please wait"
                   sub-text="This might take a moment"
                 />
               </div>
-              
+
               <div class="border rounded-lg p-4 h-48">
-                <LoadingFallback 
-                  :full-height="false"
-                  size="lg"
-                  spinner-class="text-primary"
-                >
+                <LoadingFallback :full-height="false" size="lg" spinner-class="text-primary">
                   <template #default>
                     <span class="text-primary font-semibold">Loading your data...</span>
                   </template>
@@ -2462,7 +2344,7 @@ if (isDevelopment) {
           <!-- IconContainer -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">IconContainer</h3>
-            
+
             <div>
               <p class="text-sm text-muted-foreground mb-4">Sizes & Variants</p>
               <div class="flex flex-wrap items-center gap-4">
@@ -2473,33 +2355,19 @@ if (isDevelopment) {
                 <IconContainer icon="lucide:rocket" size="xl" variant="subtle" />
               </div>
             </div>
-            
+
             <div>
               <p class="text-sm text-muted-foreground mb-4">Shapes & Interactive</p>
               <div class="flex flex-wrap items-center gap-4">
-                <IconContainer 
-                  icon="lucide:user" 
-                  shape="circle"
-                  variant="soft"
-                  interactive
-                />
-                <IconContainer 
-                  icon="lucide:settings" 
+                <IconContainer icon="lucide:user" shape="circle" variant="soft" interactive />
+                <IconContainer
+                  icon="lucide:settings"
                   shape="square"
                   variant="outline"
                   interactive
                 />
-                <IconContainer 
-                  icon="lucide:bell" 
-                  shape="rounded"
-                  variant="gradient"
-                  interactive
-                />
-                <IconContainer 
-                  icon="lucide:mail" 
-                  variant="ghost"
-                  :hover="false"
-                />
+                <IconContainer icon="lucide:bell" shape="rounded" variant="gradient" interactive />
+                <IconContainer icon="lucide:mail" variant="ghost" :hover="false" />
               </div>
             </div>
           </div>
@@ -2507,27 +2375,23 @@ if (isDevelopment) {
           <!-- ScrollArea -->
           <div class="space-y-4">
             <h3 class="text-lg font-semibold border-b pb-2">ScrollArea</h3>
-            
+
             <div class="grid gap-4">
               <div>
                 <p class="text-sm text-muted-foreground mb-2">Vertical Scroll</p>
                 <ScrollArea max-height="200px" class="border rounded-lg p-4">
                   <div class="space-y-4">
                     <p v-for="i in 10" :key="i">
-                      This is paragraph {{ i }}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                      Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      This is paragraph {{ i }}. Lorem ipsum dolor sit amet, consectetur adipiscing
+                      elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </p>
                   </div>
                 </ScrollArea>
               </div>
-              
+
               <div class="overflow-hidden">
                 <p class="text-sm text-muted-foreground mb-2">Horizontal Scroll</p>
-                <ScrollArea 
-                  orientation="horizontal" 
-                  max-width="100%"
-                  class="border rounded-lg p-4"
-                >
+                <ScrollArea orientation="horizontal" max-width="100%" class="border rounded-lg p-4">
                   <div class="flex gap-4 w-max">
                     <Card v-for="i in 10" :key="i" class="w-40 p-4 flex-shrink-0">
                       <p class="font-semibold">Card {{ i }}</p>
@@ -2536,11 +2400,11 @@ if (isDevelopment) {
                   </div>
                 </ScrollArea>
               </div>
-              
+
               <div>
                 <p class="text-sm text-muted-foreground mb-2">Hover Scrollbar</p>
-                <ScrollArea 
-                  max-height="150px" 
+                <ScrollArea
+                  max-height="150px"
                   scrollbar-variant="hover"
                   scrollbar-size="thin"
                   class="border rounded-lg p-4"

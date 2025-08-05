@@ -1,19 +1,10 @@
 <template>
-  <button
-    type="button"
-    :class="logoClasses"
-    :aria-label="ariaLabel"
-    @click="handleClick"
-  >
+  <button type="button" :class="logoClasses" :aria-label="ariaLabel" @click="handleClick">
     <!-- Feather Icon Container (matching React original) -->
     <div class="icon-container">
-      <AtomIcon 
-        name="lucide:feather" 
-        class="w-7 h-7 text-primary-foreground" 
-        aria-hidden="true" 
-      />
+      <AtomIcon name="lucide:feather" class="w-7 h-7 text-primary-foreground" aria-hidden="true" />
     </div>
-    
+
     <!-- Brand Text (matching React original) -->
     <span v-if="showText" class="brand-text">
       {{ brandText }}
@@ -89,7 +80,7 @@ const logoClasses = computed(() => {
   .brand-text {
     @apply transition-none;
   }
-  
+
   .icon-container:hover {
     @apply scale-100;
   }

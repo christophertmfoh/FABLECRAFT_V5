@@ -10,8 +10,8 @@
     >
       <div
         v-if="context.open.value"
-        ref="contentEl"
         :id="context.contentId"
+        ref="contentEl"
         role="menu"
         :aria-labelledby="context.triggerId"
         :class="contentClasses"
@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<DropdownMenuContentProps>(), {
   align: 'start',
   side: 'bottom',
   sideOffset: 4,
-  alignOffset: 0
+  alignOffset: 0,
 })
 
 // Get dropdown context
@@ -63,13 +63,13 @@ const floatingStyles = computed(() => {
   const offset = props.sideOffset
   const styles: Record<string, string> = {
     position: 'fixed',
-    zIndex: '50'
+    zIndex: '50',
   }
 
   // Position based on trigger
   if (context.triggerRef.value) {
     const rect = context.triggerRef.value.getBoundingClientRect()
-    
+
     switch (props.side) {
       case 'bottom':
         styles.top = `${rect.bottom + offset}px`
@@ -131,10 +131,7 @@ const collectMenuItems = () => {
 }
 
 // Focus management
-const { focusFirst, focusLast, focusNext, focusPrevious } = useDropdownFocus(
-  menuItems,
-  context
-)
+const { focusFirst, focusLast, focusNext, focusPrevious } = useDropdownFocus(menuItems, context)
 
 // Handle keyboard navigation
 const handleKeyDown = (event: KeyboardEvent) => {
@@ -177,7 +174,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
 }
 
 // Click outside handler
-onClickOutside(contentEl, (event) => {
+onClickOutside(contentEl, event => {
   // Don't close if clicking the trigger
   if (context.triggerRef.value?.contains(event.target as Node)) {
     return
@@ -186,14 +183,17 @@ onClickOutside(contentEl, (event) => {
 })
 
 // Watch for open state changes
-watch(() => context.open.value, async (isOpen) => {
-  if (isOpen) {
-    await nextTick()
-    collectMenuItems()
-    // Focus the content element first
-    contentEl.value?.focus()
+watch(
+  () => context.open.value,
+  async isOpen => {
+    if (isOpen) {
+      await nextTick()
+      collectMenuItems()
+      // Focus the content element first
+      contentEl.value?.focus()
+    }
   }
-})
+)
 
 // Computed classes
 const contentClasses = computed(() => {

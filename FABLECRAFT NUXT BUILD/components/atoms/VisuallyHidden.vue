@@ -1,9 +1,5 @@
 <template>
-  <component
-    :is="as"
-    :class="visuallyHiddenClasses"
-    v-bind="$attrs"
-  >
+  <component :is="as" :class="visuallyHiddenClasses" v-bind="$attrs">
     <slot />
   </component>
 </template>
@@ -22,7 +18,7 @@ interface VisuallyHiddenProps {
 // Define props with defaults
 const props = withDefaults(defineProps<VisuallyHiddenProps>(), {
   as: 'span',
-  focusable: false
+  focusable: false,
 })
 
 // Standard visually hidden styles that work across all screen readers
@@ -60,11 +56,6 @@ const focusableClasses = `
 
 // Computed classes
 const visuallyHiddenClasses = computed(() => {
-  return cn(
-    baseClasses,
-    clipClasses,
-    props.focusable && focusableClasses,
-    props.class
-  )
+  return cn(baseClasses, clipClasses, props.focusable && focusableClasses, props.class)
 })
 </script>

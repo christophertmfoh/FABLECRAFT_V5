@@ -28,7 +28,7 @@
         >
           {{ number }}
         </Text>
-        
+
         <!-- Label -->
         <Text
           :as="'div'"
@@ -40,7 +40,7 @@
         >
           {{ label }}
         </Text>
-        
+
         <!-- Optional Description -->
         <Text
           v-if="showDescription && description"
@@ -90,7 +90,7 @@ const props = withDefaults(defineProps<MTrustIndicatorCardProps>(), {
   numberWeight: 'bold',
   labelSize: 'sm',
   labelWeight: 'medium',
-  descriptionSize: 'xs'
+  descriptionSize: 'xs',
 })
 
 // Consolidated card classes
@@ -100,7 +100,7 @@ const cardClasses = [
   'border-border',
   'transition-all duration-500',
   'natural-depth gentle-hover',
-  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
+  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
 ]
 
 // Content padding classes
@@ -108,7 +108,7 @@ const contentClasses = computed(() => {
   const paddingMap = {
     sm: 'p-4 space-y-3',
     md: 'p-6 space-y-4',
-    lg: 'p-8 space-y-5'
+    lg: 'p-8 space-y-5',
   }
   return ['text-center', paddingMap[props.contentPadding]]
 })

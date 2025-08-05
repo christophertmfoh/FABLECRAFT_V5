@@ -5,10 +5,7 @@
     :aria-current="status === 'active' ? 'step' : undefined"
     role="listitem"
   >
-    <span
-      :class="numberClasses"
-      :aria-hidden="!!ariaLabel"
-    >
+    <span :class="numberClasses" :aria-hidden="!!ariaLabel">
       {{ step }}
     </span>
     <VisuallyHidden v-if="status !== 'pending' && includeStatusText">
@@ -40,7 +37,7 @@ const props = withDefaults(defineProps<StepNumberProps>(), {
   size: 'md',
   variant: 'default',
   color: 'primary',
-  includeStatusText: true
+  includeStatusText: true,
 })
 
 // Size classes
@@ -49,7 +46,7 @@ const sizeClasses = {
   sm: 'w-8 h-8 text-sm',
   md: 'w-10 h-10 text-base',
   lg: 'w-12 h-12 text-lg',
-  xl: 'w-14 h-14 text-xl'
+  xl: 'w-14 h-14 text-xl',
 }
 
 // Base container classes
@@ -66,70 +63,70 @@ const getVariantClasses = (variant: string, status: string, color: string) => {
       pending: {
         default: 'border-2 border-muted text-muted-foreground',
         outline: 'border-2 border-muted text-muted-foreground',
-        solid: 'bg-muted text-muted-foreground'
+        solid: 'bg-muted text-muted-foreground',
       },
       active: {
         default: 'border-2 border-primary text-primary',
         outline: 'border-2 border-primary text-primary',
-        solid: 'bg-primary text-primary-foreground'
+        solid: 'bg-primary text-primary-foreground',
       },
       completed: {
         default: 'border-2 border-primary bg-primary text-primary-foreground',
         outline: 'border-2 border-primary bg-primary text-primary-foreground',
-        solid: 'bg-primary text-primary-foreground'
-      }
+        solid: 'bg-primary text-primary-foreground',
+      },
     },
     secondary: {
       pending: {
         default: 'border-2 border-muted text-muted-foreground',
         outline: 'border-2 border-muted text-muted-foreground',
-        solid: 'bg-muted text-muted-foreground'
+        solid: 'bg-muted text-muted-foreground',
       },
       active: {
         default: 'border-2 border-secondary text-secondary',
         outline: 'border-2 border-secondary text-secondary',
-        solid: 'bg-secondary text-secondary-foreground'
+        solid: 'bg-secondary text-secondary-foreground',
       },
       completed: {
         default: 'border-2 border-secondary bg-secondary text-secondary-foreground',
         outline: 'border-2 border-secondary bg-secondary text-secondary-foreground',
-        solid: 'bg-secondary text-secondary-foreground'
-      }
+        solid: 'bg-secondary text-secondary-foreground',
+      },
     },
     success: {
       pending: {
         default: 'border-2 border-muted text-muted-foreground',
         outline: 'border-2 border-muted text-muted-foreground',
-        solid: 'bg-muted text-muted-foreground'
+        solid: 'bg-muted text-muted-foreground',
       },
       active: {
         default: 'border-2 border-success text-success',
         outline: 'border-2 border-success text-success',
-        solid: 'bg-success text-success-foreground'
+        solid: 'bg-success text-success-foreground',
       },
       completed: {
         default: 'border-2 border-success bg-success text-success-foreground',
         outline: 'border-2 border-success bg-success text-success-foreground',
-        solid: 'bg-success text-success-foreground'
-      }
+        solid: 'bg-success text-success-foreground',
+      },
     },
     neutral: {
       pending: {
         default: 'border-2 border-muted text-muted-foreground',
         outline: 'border-2 border-muted text-muted-foreground',
-        solid: 'bg-muted text-muted-foreground'
+        solid: 'bg-muted text-muted-foreground',
       },
       active: {
         default: 'border-2 border-foreground text-foreground',
         outline: 'border-2 border-foreground text-foreground',
-        solid: 'bg-foreground text-background'
+        solid: 'bg-foreground text-background',
       },
       completed: {
         default: 'border-2 border-foreground bg-foreground text-background',
         outline: 'border-2 border-foreground bg-foreground text-background',
-        solid: 'bg-foreground text-background'
-      }
-    }
+        solid: 'bg-foreground text-background',
+      },
+    },
   }
 
   return colorMap[color]?.[status]?.[variant] || colorMap.primary[status][variant]

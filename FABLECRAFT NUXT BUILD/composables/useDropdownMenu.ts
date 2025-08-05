@@ -49,7 +49,7 @@ export function useDropdownMenuProvider() {
     contentId,
     triggerRef,
     focusedIndex,
-    onItemSelect
+    onItemSelect,
   }
 
   provide(DROPDOWN_MENU_INJECTION_KEY, context)
@@ -59,27 +59,24 @@ export function useDropdownMenuProvider() {
 
 export function useDropdownMenuContext() {
   const context = inject(DROPDOWN_MENU_INJECTION_KEY)
-  
+
   if (!context) {
     throw new Error('useDropdownMenuContext must be used within a DropdownMenu component')
   }
-  
+
   return context
 }
 
 // Utility for managing focus within dropdown
-export function useDropdownFocus(
-  itemsRef: Ref<HTMLElement[]>,
-  context: DropdownMenuContext
-) {
+export function useDropdownFocus(itemsRef: Ref<HTMLElement[]>, context: DropdownMenuContext) {
   const focusItem = (index: number) => {
     const items = itemsRef.value
     if (items.length === 0) return
-    
+
     // Wrap around
     if (index < 0) index = items.length - 1
     if (index >= items.length) index = 0
-    
+
     context.focusedIndex.value = index
     items[index]?.focus()
   }
@@ -94,6 +91,6 @@ export function useDropdownFocus(
     focusFirst,
     focusLast,
     focusNext,
-    focusPrevious
+    focusPrevious,
   }
 }
