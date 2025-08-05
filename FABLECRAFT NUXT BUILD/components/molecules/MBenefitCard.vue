@@ -13,6 +13,7 @@
         :size="iconSize"
         :variant="iconVariant"
         :shape="iconShape"
+        :hover="false"
         class="group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg transition-all duration-500"
       />
     </div>

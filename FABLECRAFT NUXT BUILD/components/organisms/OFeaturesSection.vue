@@ -10,7 +10,7 @@
       :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
       :badge-size="isCompact ? 'sm' : 'base'"
-      :heading-size="isCompact ? 'md' : 'xl'"
+      :heading-size="isCompact ? 'sm' : 'lg'"
       :heading-variant="isCompact ? 'compact' : 'default'"
       :gradient-variant="gradientVariant"
     />

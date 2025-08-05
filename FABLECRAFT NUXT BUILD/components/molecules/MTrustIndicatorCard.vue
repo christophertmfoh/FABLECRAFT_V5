@@ -12,6 +12,7 @@
         :size="iconSize"
         :variant="iconVariant"
         :shape="iconShape"
+        :hover="false"
         class="mx-auto group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
       />
 
