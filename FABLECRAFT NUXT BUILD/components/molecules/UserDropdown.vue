@@ -1,8 +1,8 @@
 <template>
-  <AtomsDropdownMenu>
+  <DropdownMenu>
     <!-- User Menu Trigger -->
-    <AtomsDropdownMenuTrigger as-child>
-      <AtomsButton
+    <DropdownMenuTrigger as-child>
+      <Button
         :class="triggerClasses"
         :aria-label="triggerAriaLabel"
       >
@@ -21,21 +21,21 @@
             aria-hidden="true"
           />
         </span>
-      </AtomsButton>
-    </AtomsDropdownMenuTrigger>
+      </Button>
+    </DropdownMenuTrigger>
 
     <!-- User Menu Content -->
-    <AtomsDropdownMenuContent 
+    <DropdownMenuContent 
       align="end"
       :class="contentClasses"
     >
       <!-- Workspace Section -->
       <div class="menu-section">
-        <AtomsDropdownMenuLabel>
+        <DropdownMenuLabel>
           Workspace
-        </AtomsDropdownMenuLabel>
+        </DropdownMenuLabel>
         
-        <AtomsDropdownMenuItem
+        <DropdownMenuItem
           :class="menuItemClasses"
           @click="() => handleNavigate('projects')"
         >
@@ -51,84 +51,84 @@
               Projects, characters & world bible
             </div>
           </div>
-        </AtomsDropdownMenuItem>
+        </DropdownMenuItem>
       </div>
 
-      <AtomsDropdownMenuSeparator />
+      <DropdownMenuSeparator />
 
       <!-- Account Section -->
       <div class="menu-section">
-        <AtomsDropdownMenuLabel>
+        <DropdownMenuLabel>
           Account
-        </AtomsDropdownMenuLabel>
+        </DropdownMenuLabel>
         
-        <AtomsDropdownMenuItem
+        <DropdownMenuItem
           :class="menuItemClasses"
           @click="() => handleNavigate('profile')"
         >
-          <AtomIcon
+          <!-- <AtomIcon
             name="lucide:user"
             size="sm"
             class="text-primary mr-3"
             aria-hidden="true"
-          />
+          /> -->
           <div class="menu-item-content">
             <div class="menu-item-title">Profile & Settings</div>
             <div class="menu-item-description">
               Manage your account
             </div>
           </div>
-        </AtomsDropdownMenuItem>
+        </DropdownMenuItem>
       </div>
 
-      <AtomsDropdownMenuSeparator />
+      <DropdownMenuSeparator />
 
       <!-- Community Section -->
       <div class="menu-section">
-        <AtomsDropdownMenuLabel>
+        <DropdownMenuLabel>
           Community
-        </AtomsDropdownMenuLabel>
+        </DropdownMenuLabel>
         
-        <AtomsDropdownMenuItem
+        <DropdownMenuItem
           :class="menuItemClasses"
           @click="() => handleNavigate('community')"
         >
-          <AtomIcon
+          <!-- <AtomIcon
             name="lucide:users"
             size="sm"
             class="text-primary mr-3"
             aria-hidden="true"
-          />
+          /> -->
           <div class="menu-item-content">
             <div class="menu-item-title">Writer Community</div>
             <div class="menu-item-description">
               Connect with other writers
             </div>
           </div>
-        </AtomsDropdownMenuItem>
+        </DropdownMenuItem>
       </div>
 
-      <AtomsDropdownMenuSeparator />
+      <DropdownMenuSeparator />
 
       <!-- Sign Out Section -->
       <div class="menu-section">
-        <AtomsDropdownMenuItem
+        <DropdownMenuItem
           :class="signOutClasses"
           @click="handleLogout"
         >
-          <AtomIcon
+          <!-- <AtomIcon
             name="lucide:log-out"
             size="sm"
             class="text-destructive mr-3"
             aria-hidden="true"
-          />
+          /> -->
           <span class="font-medium text-destructive">
             Sign Out
           </span>
-        </AtomsDropdownMenuItem>
+        </DropdownMenuItem>
       </div>
-    </AtomsDropdownMenuContent>
-  </AtomsDropdownMenu>
+    </DropdownMenuContent>
+  </DropdownMenu>
 </template>
 
 <script setup lang="ts">

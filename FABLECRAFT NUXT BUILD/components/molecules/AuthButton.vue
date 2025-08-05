@@ -1,5 +1,5 @@
 <template>
-  <AtomsButton
+  <Button
     :class="authButtonClasses"
     :aria-label="ariaLabel"
     :disabled="loading"
@@ -7,7 +7,7 @@
   >
     <!-- Simplified: Just text for now -->
     {{ buttonText }}
-  </AtomsButton>
+  </Button>
 </template>
 
 <script setup lang="ts">

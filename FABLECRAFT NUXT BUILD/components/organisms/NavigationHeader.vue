@@ -4,56 +4,85 @@
     role="navigation"
     aria-label="Main navigation"
   >
-    <AtomsContainer size="xl" class="py-4">
+    <div class="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4">
       <div class="flex items-center justify-between">
         <!-- Brand Logo Section -->
-        <NavigationLogo
-          :brand-text="brandText"
-          :show-text="showBrandText"
+        <button
+          class="group flex items-center space-x-3 cursor-pointer transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg p-2 -m-2"
+          aria-label="Navigate to homepage"
           @click="handleLogoClick"
-        />
+        >
+          <span class="text-2xl font-bold text-primary">🪶 {{ brandText }}</span>
+        </button>
 
         <!-- Main Navigation Menu (Desktop) -->
-        <NavigationMenu
-          v-if="showNavItems"
-          :items="navigationItems"
-          :show-items="showNavItems"
-          class="hidden md:flex"
-          @navigate="handleNavigate"
-        />
+        <nav class="hidden md:flex items-center space-x-8" aria-label="Main navigation">
+          <button
+            v-for="item in navigationItems"
+            :key="item.id"
+            class="text-sm font-semibold tracking-wide cursor-pointer uppercase px-3 py-2 hover:text-primary transition-colors rounded-md"
+            :class="{ 'text-primary font-bold border-b-2 border-primary': item.active }"
+            @click="() => handleNavigate(item.id)"
+          >
+            {{ item.label }}
+          </button>
+        </nav>
 
         <!-- Actions Section -->
         <div class="flex items-center space-x-4">
           <!-- Authentication Section -->
           <template v-if="showAuthButton">
-            <!-- Authenticated User -->
-            <UserDropdown
-              v-if="isAuthenticated && user"
-              :user="user"
-              :loading="logoutLoading"
-              @navigate="handleNavigate"
-              @logout="handleLogout"
-            />
-            
             <!-- Unauthenticated User -->
-            <AuthButton
-              v-else
-              :text="authButtonText"
-              :loading="authLoading"
+            <Button
+              v-if="!isAuthenticated"
+              :class="authButtonClasses"
               @click="handleAuthClick"
-            />
+            >
+              {{ authButtonText }}
+            </Button>
+            
+            <!-- Authenticated User Dropdown -->
+            <DropdownMenu v-else>
+              <DropdownMenuTrigger as-child>
+                <Button class="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl">
+                  Welcome {{ displayName }}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" class="w-64 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2">
+                <DropdownMenuItem @click="() => handleNavigate('projects')">
+                  Creative Workspace
+                </DropdownMenuItem>
+                <DropdownMenuItem @click="() => handleNavigate('profile')">
+                  Profile & Settings
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem @click="handleLogout" class="text-destructive">
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </template>
 
           <!-- Theme Toggle -->
-          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            class="relative transition-all duration-300 hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            aria-label="Toggle theme"
+            @click="handleThemeToggle"
+          >
+            {{ isDark ? '🌙' : '☀️' }}
+          </Button>
         </div>
       </div>
-    </AtomsContainer>
+    </div>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
+
+console.log('🔥 NavigationHeader component loaded!')
 
 // User interface
 interface User {
@@ -68,8 +97,6 @@ interface NavigationItem {
   label: string
   href?: string
   active?: boolean
-  ariaLabel?: string
-  disabled?: boolean
 }
 
 // Component props interface
@@ -78,19 +105,11 @@ interface NavigationHeaderProps {
   showAuthButton?: boolean
   authButtonText?: string
   showNavItems?: boolean
-  showBrandText?: boolean
   brandText?: string
   
   // User state
   isAuthenticated?: boolean
   user?: User | null
-  
-  // Loading states
-  authLoading?: boolean
-  logoutLoading?: boolean
-  
-  // Navigation items
-  navigationItems?: NavigationItem[]
   
   // Styling
   className?: string
@@ -102,12 +121,8 @@ const props = withDefaults(defineProps<NavigationHeaderProps>(), {
   showAuthButton: true,
   authButtonText: 'Sign Up / Sign In',
   showNavItems: true,
-  showBrandText: true,
   brandText: 'Fablecraft',
   isAuthenticated: false,
-  authLoading: false,
-  logoutLoading: false,
-  navigationItems: () => [],
   variant: 'default',
 })
 
@@ -119,36 +134,57 @@ const emit = defineEmits<{
   'logo:click': []
 }>()
 
-// Authentication composable (check if user is logged in)
+// Default navigation items
+const navigationItems: NavigationItem[] = [
+  { id: 'community', label: 'COMMUNITY', href: '/community' },
+  { id: 'gallery', label: 'GALLERY', href: '/gallery' },
+  { id: 'library', label: 'LIBRARY', href: '/library' },
+  { id: 'about', label: 'ABOUT', href: '/about' },
+  { id: 'contact', label: 'CONTACT', href: '/contact' }
+]
+
+// Authentication composable
 const user = useSupabaseUser()
+const supabase = useSupabaseClient()
 
 // Compute authentication state
 const isAuthenticated = computed(() => {
   return props.isAuthenticated || !!user.value
 })
 
+// Compute display name
+const displayName = computed(() => {
+  return user.value?.user_metadata?.username || user.value?.email?.split('@')[0] || 'User'
+})
+
+// Theme system
+const { isDark, toggleTheme } = useTheme()
+
 // Handle logo click
 const handleLogoClick = () => {
   emit('logo:click')
-  // Default behavior: navigate to home
-  handleNavigate('home')
+  navigateTo('/')
 }
 
 // Handle authentication click
 const handleAuthClick = () => {
   emit('auth:click')
+  navigateTo('/auth')
 }
 
 // Handle logout
 const handleLogout = async () => {
-  emit('auth:logout')
+  try {
+    await supabase.auth.signOut()
+    emit('auth:logout')
+  } catch (error) {
+    console.error('Error during logout:', error)
+  }
 }
 
 // Handle navigation
 const handleNavigate = (view: string) => {
   emit('navigate', view)
-  
-  // Default navigation behavior using Nuxt router
   if (view === 'home') {
     navigateTo('/')
   } else {
@@ -156,13 +192,25 @@ const handleNavigate = (view: string) => {
   }
 }
 
+// Handle theme toggle
+const handleThemeToggle = () => {
+  toggleTheme()
+}
+
+// Compute auth button classes
+const authButtonClasses = computed(() => {
+  return cn(
+    'bg-primary hover:bg-primary/90 text-primary-foreground',
+    'px-4 py-2 font-semibold shadow-md hover:shadow-lg',
+    'transition-all duration-300 hover:scale-105 rounded-xl',
+    'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+  )
+})
+
 // Compute header classes
 const headerClasses = computed(() => {
   return cn(
-    // Base styles
     'relative z-50 transition-all duration-300',
-    
-    // Variant styles
     {
       'sticky top-0 bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-sm': 
         props.variant === 'default',
@@ -171,8 +219,6 @@ const headerClasses = computed(() => {
       'bg-background border-b border-border shadow-sm': 
         props.variant === 'solid',
     },
-    
-    // Custom classes
     props.className
   )
 })
