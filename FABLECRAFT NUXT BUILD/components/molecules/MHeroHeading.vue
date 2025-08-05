@@ -97,13 +97,13 @@ const headingContainerClasses = computed(() => {
   }
   
   const spacingClasses = {
-    tight: 'space-y-2',        // 8px - minimal spacing
-    normal: 'space-y-4',       // 16px - standard spacing  
-    relaxed: 'space-y-8'       // 32px - generous spacing to prevent clipping
+    tight: 'space-y-1',        // 4px - minimal spacing
+    normal: 'space-y-2',       // 8px - standard spacing  
+    relaxed: 'space-y-3'       // 12px - modest spacing (reduced from space-y-8)
   }
 
   return cn(
-    'heading-group flex flex-col pb-6',  // Increased from pb-2 to pb-6 for extra descender space
+    'heading-group flex flex-col pb-2',  // Reduced from pb-6 to pb-2 since webkit clipping is fixed
     alignmentClasses[props.alignment],
     spacingClasses[props.spacing],
     props.className
@@ -112,9 +112,9 @@ const headingContainerClasses = computed(() => {
 
 const headingClasses = computed(() => {
   const variantClasses = {
-    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm mb-4',  // Added mb-4 for extra descender space
-    compact: 'font-bold leading-tight tracking-normal mb-2', 
-    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg mb-6'  // Added mb-6 for dramatic variant
+    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm',  // Removed mb-4 since webkit fix handles clipping
+    compact: 'font-bold leading-tight tracking-normal', 
+    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg'  // Removed mb-6 since webkit fix handles clipping
   }
   
   const sizeClasses = {
@@ -195,12 +195,6 @@ const subheadingClasses = computed(() => {
     font-size: 8rem;
     line-height: 1.1;  /* Increased from 1 to prevent clipping of descenders */
   }
-}
-
-/* Extra spacing for large text sizes to prevent descender clipping */
-.text-6xl, .text-7xl, .text-8xl, .text-9xl {
-  margin-bottom: 0.5rem; /* Additional bottom margin for largest text sizes */
-  padding-bottom: 0.25rem; /* Extra padding for descenders */
 }
 
 /* Accessibility improvements */

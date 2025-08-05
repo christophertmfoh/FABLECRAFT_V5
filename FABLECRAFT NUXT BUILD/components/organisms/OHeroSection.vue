@@ -248,9 +248,9 @@ const handleBadgeClick = (event: MouseEvent) => {
   margin-top: var(--space-md); /* 16px - badge to heading */
 }
 
-/* Larger spacing before action buttons (separate action area) */
+/* Moderate spacing before action buttons (reduced from 3xl to xl) */
 .hero-content > :nth-child(3) {
-  margin-top: var(--space-3xl); /* 40px - heading to buttons for clear separation */
+  margin-top: var(--space-xl); /* 24px - heading to buttons for better cohesion */
 }
 
 /* Enhanced hero ambient glow effect - optimized */
@@ -284,7 +284,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
   
   .hero-content > :nth-child(3) {
-    margin-top: var(--space-xl); /* Reduced button spacing on mobile */
+    margin-top: var(--space-lg); /* Reduced from xl to lg on mobile */
   }
 }
 
@@ -294,7 +294,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
   
   .hero-content > :nth-child(3) {
-    margin-top: var(--space-2xl); /* Good button separation on tablet */
+    margin-top: var(--space-xl); /* Reduced from 2xl to xl on tablet */
   }
 }
 
@@ -304,7 +304,7 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
   
   .hero-content > :nth-child(3) {
-    margin-top: var(--space-4xl); /* Maximum button separation on desktop */
+    margin-top: var(--space-2xl); /* Reduced from 4xl to 2xl on desktop for better cohesion */
   }
 }
 

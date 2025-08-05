@@ -146,6 +146,16 @@ const gradientStyles = computed(() => {
   }
 }
 
+/* Fix webkit gradient text descender clipping */
+.bg-clip-text {
+  /* Ensure descenders aren't clipped in webkit gradient text */
+  line-height: 1.2 !important;
+  padding-bottom: 0.1em; /* Minimal padding for descenders */
+  /* Webkit-specific fix for descender clipping */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 /* High contrast mode fallback */
 @media (prefers-contrast: high) {
   .bg-clip-text {
