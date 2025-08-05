@@ -1,14 +1,14 @@
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-child>
+    <DropdownMenuTrigger ref="triggerRef" as-child>
       <Button 
         variant="outline" 
         size="icon" 
-        class="relative border-border/30 hover:border-border/60 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none"
+        class="relative border-border hover:border-foreground/50 hover:bg-accent/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none transition-all duration-300"
       >
         <AtomIcon 
           :name="currentThemeIcon" 
-          class="h-5 w-5 text-foreground transition-all" 
+          class="h-5 w-5 text-foreground/80 hover:text-foreground transition-all duration-300" 
           aria-hidden="true"
         />
         <span class="sr-only">Toggle theme</span>
@@ -17,23 +17,23 @@
     
     <DropdownMenuContent 
       align="end" 
-      class="w-64 focus:outline-none"
+      class="w-72 min-w-0 border-border bg-background/95 backdrop-blur-sm shadow-lg focus:outline-none"
     >
       <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
       <!-- Scrollable content area with responsive max height -->
-      <div class="max-h-96 overflow-y-auto">
+      <div class="max-h-96 overflow-y-auto overflow-x-hidden">
         <!-- System preference -->
         <DropdownMenuItem
           @click="() => handleThemeChange('system')"
           class="cursor-pointer"
         >
-          <div class="flex items-center gap-3 w-full">
-            <AtomIcon name="lucide:monitor" class="h-4 w-4" />
-            <div class="flex-1">
-              <div class="font-medium">System</div>
-              <div class="text-xs text-muted-foreground">Follow system preference</div>
+          <div class="flex items-center gap-3 w-full min-w-0">
+            <AtomIcon name="lucide:monitor" class="h-4 w-4 flex-shrink-0" />
+            <div class="flex-1 min-w-0">
+              <div class="font-medium truncate">System</div>
+              <div class="text-xs text-muted-foreground truncate">Follow system preference</div>
             </div>
             <div 
               v-if="currentTheme === 'system'" 
@@ -53,11 +53,11 @@
             @click="() => handleThemeChange(theme)"
             class="cursor-pointer"
           >
-            <div class="flex items-center gap-3 w-full">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
-              <div class="flex-1">
-                <div class="font-medium">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground truncate">{{ themeConfig[theme].description }}</div>
               </div>
               <div 
                 v-if="currentTheme === theme" 
@@ -78,11 +78,11 @@
             @click="() => handleThemeChange(theme)"
             class="cursor-pointer"
           >
-            <div class="flex items-center gap-3 w-full">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
-              <div class="flex-1">
-                <div class="font-medium">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground truncate">{{ themeConfig[theme].description }}</div>
               </div>
               <div 
                 v-if="currentTheme === theme" 
@@ -103,11 +103,11 @@
             @click="() => handleThemeChange(theme)"
             class="cursor-pointer"
           >
-            <div class="flex items-center gap-3 w-full">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
-              <div class="flex-1">
-                <div class="font-medium">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground truncate">{{ themeConfig[theme].description }}</div>
               </div>
               <div 
                 v-if="currentTheme === theme" 
@@ -128,11 +128,11 @@
             @click="() => handleThemeChange(theme)"
             class="cursor-pointer"
           >
-            <div class="flex items-center gap-3 w-full">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
-              <div class="flex-1">
-                <div class="font-medium">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground truncate">{{ themeConfig[theme].description }}</div>
               </div>
               <div 
                 v-if="currentTheme === theme" 
@@ -153,11 +153,11 @@
             @click="() => handleThemeChange(theme)"
             class="cursor-pointer"
           >
-            <div class="flex items-center gap-3 w-full">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
-              <div class="flex-1">
-                <div class="font-medium">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground truncate">{{ themeConfig[theme].description }}</div>
               </div>
               <div 
                 v-if="currentTheme === theme" 
@@ -178,11 +178,11 @@
             @click="() => handleThemeChange(theme)"
             class="cursor-pointer"
           >
-            <div class="flex items-center gap-3 w-full">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4" />
-              <div class="flex-1">
-                <div class="font-medium">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground">{{ themeConfig[theme].description }}</div>
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                <div class="text-xs text-muted-foreground truncate">{{ themeConfig[theme].description }}</div>
               </div>
               <div 
                 v-if="currentTheme === theme" 
@@ -197,7 +197,10 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick } from 'vue'
+import { nextTick, ref } from 'vue'
+
+// Template ref for the trigger button
+const triggerRef = ref<HTMLElement>()
 
 // Use theme composable 
 const { currentTheme, setTheme } = useTheme()
@@ -242,10 +245,12 @@ const handleThemeChange = (theme: string) => {
   
   // Allow menu to close naturally, then blur the trigger button
   nextTick(() => {
-    // Find the trigger button and blur it after theme change
-    const triggerButton = document.querySelector('[role="button"][aria-haspopup="menu"]') as HTMLElement
-    if (triggerButton) {
-      triggerButton.blur()
+    // Use the template ref to blur the trigger button
+    if (triggerRef.value) {
+      const buttonElement = triggerRef.value.querySelector('button') as HTMLElement
+      if (buttonElement) {
+        buttonElement.blur()
+      }
     }
   })
 }
