@@ -29,7 +29,7 @@ import { cn } from '~/components/atoms/Utils'
 interface HeroBadgeProps {
   text?: string
   variant?: 'default' | 'accent' | 'secondary' | 'outline'
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'base' | 'md' | 'lg'
   dotColor?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive'
   dotSpeed?: 'slow' | 'normal' | 'fast'
   dotIntensity?: 'subtle' | 'normal' | 'strong'
@@ -46,7 +46,7 @@ interface HeroBadgeEmits {
 const props = withDefaults(defineProps<HeroBadgeProps>(), {
   text: '',
   variant: 'default',
-  size: 'md',
+  size: 'base',
   dotColor: 'primary',
   dotSpeed: 'normal', 
   dotIntensity: 'normal',
@@ -83,6 +83,7 @@ const badgeClasses = computed(() => {
 
   const sizeClasses = {
     sm: 'text-xs px-2 py-1',
+    base: 'text-sm px-3 py-1.5',  // New size between sm and md - perfect middle ground
     md: 'text-base px-4 py-2',  // Matches React original text-base px-4 py-2
     lg: 'text-lg px-5 py-2.5'
   }
@@ -100,6 +101,7 @@ const badgeClasses = computed(() => {
 const dotSize = computed(() => {
   const dotSizes = {
     sm: 'sm',
+    base: 'sm',  // Use small dot for base badge size
     md: 'md',
     lg: 'lg'
   } as const

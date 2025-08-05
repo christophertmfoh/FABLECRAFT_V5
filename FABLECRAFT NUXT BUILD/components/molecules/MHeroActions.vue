@@ -113,8 +113,8 @@ const actionsContainerClasses = computed(() => {
   
   const spacingClasses = {
     tight: 'gap-2',
-    normal: 'gap-6',   // Increased from gap-4 to match React original visual spacing
-    relaxed: 'gap-8'   // Increased from gap-6 for consistency
+    normal: 'gap-10',  // Increased from gap-8 to ensure adequate spacing even on hover
+    relaxed: 'gap-12'  // Increased from gap-10 for maximum spacing
   }
 
   return cn(
@@ -132,7 +132,7 @@ const primaryButtonClasses = computed(() => {
     'group relative w-full sm:w-auto',
     'font-semibold shadow-lg hover:shadow-xl',
     'rounded-xl transition-all duration-300',
-    'hover:scale-[1.02]',
+    'hover:scale-[1.01]',  // Reduced from 1.02 to prevent buttons from appearing too close on hover
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     'text-xl px-8 py-4'  // Enhanced sizing to match React original
   )
@@ -143,7 +143,7 @@ const secondaryButtonClasses = computed(() => {
     'group relative w-full sm:w-auto',
     'font-semibold shadow-md hover:shadow-lg',
     'rounded-xl transition-all duration-300',
-    'hover:scale-[1.02]',
+    'hover:scale-[1.01]',  // Reduced from 1.02 to prevent buttons from appearing too close on hover
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     'text-xl px-8 py-4'  // Enhanced sizing to match React original
   )
@@ -189,14 +189,14 @@ const handleSecondaryClick = (event: MouseEvent) => {
 <style scoped>
 /* Enhanced button animations and effects */
 .action-group {
-  /* Mathematical spacing using design system - increased to match React original */
-  gap: var(--space-6);
+  /* Mathematical spacing using design system - increased for better button separation even on hover */
+  gap: 2.5rem; /* 40px - matches gap-10 */
 }
 
 /* Responsive gap adjustments */
 @media (min-width: 640px) {
   .action-group {
-    gap: var(--space-6); /* Consistent spacing across breakpoints */
+    gap: 2.5rem; /* Consistent larger spacing across breakpoints */
   }
 }
 

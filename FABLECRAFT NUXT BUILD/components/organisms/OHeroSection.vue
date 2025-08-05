@@ -91,7 +91,7 @@ interface HeroSectionProps {
   
   // Badge props
   badgeVariant?: 'default' | 'accent' | 'secondary' | 'outline'
-  badgeSize?: 'sm' | 'md' | 'lg'
+  badgeSize?: 'sm' | 'base' | 'md' | 'lg'
   badgeDotColor?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive'
   badgeDotSpeed?: 'slow' | 'normal' | 'fast'
   badgeClickable?: boolean
@@ -145,7 +145,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   badgeText: 'End-to-End Creative Production Suite',
   title: 'Where Creative Visions ',
   highlightText: 'Become Reality',
-  description: `The world's first complete multimedia creative suite. Transform ideas into novels, screenplays, graphic novels, and D&D campaigns. Generate storyboards, create videos, compose scores, and build communities. From concept to publication, from script to screen — all powered by AI that understands your creative universe.`,
+  description: `The world's first complete multimedia creative suite. Transform ideas into novels, screenplays, graphic novels, and D&D campaigns. Generate storyboards, create videos, compose scores, and build communities. From concept to publication, from script to screen, all powered by AI that understands your creative universe.`,
   primaryButtonText: 'Start Creating Free',
   secondaryButtonText: 'Explore Examples',
   
@@ -156,7 +156,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   
   // Default badge settings
   badgeVariant: 'default',
-  badgeSize: 'sm',  // Reduced from 'md' to make badge smaller relative to large heading
+  badgeSize: 'base',  // Perfect middle ground between sm and md
   badgeDotColor: 'primary',
   badgeDotSpeed: 'normal',
   badgeClickable: false,
@@ -177,7 +177,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   // Default description settings
   separateDescription: false,
   descriptionVariant: 'muted',
-  descriptionSize: 'md',  // Reduced from 'lg' to make description text smaller
+  descriptionSize: 'sm',  // Further reduced from 'md' to make description text even smaller
   
   // Default button settings
   primaryButtonIcon: 'lucide:zap',
@@ -277,7 +277,22 @@ const handleBadgeClick = (event: MouseEvent) => {
   @apply text-center max-w-5xl mx-auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  /* Removed uniform gap - using individual spacing for better hierarchy */
+}
+
+/* Individual element spacing for optimal visual hierarchy */
+.hero-content > *:not(:first-child) {
+  margin-top: var(--space-lg); /* Default 20px spacing */
+}
+
+/* Tighter spacing between badge and heading (closely related) */
+.hero-content > :nth-child(2) {
+  margin-top: var(--space-md); /* 16px - badge to heading */
+}
+
+/* Larger spacing before action buttons (separate action area) */
+.hero-content > :last-child {
+  margin-top: var(--space-2xl); /* 32px - description to buttons */
 }
 
 /* Enhanced hero ambient glow effect - optimized */
@@ -302,20 +317,36 @@ const handleBadgeClick = (event: MouseEvent) => {
 
 /* Responsive spacing optimizations */
 @media (max-width: 640px) {
-  .hero-content {
-    gap: var(--space-4);
+  .hero-content > *:not(:first-child) {
+    margin-top: var(--space-md); /* Reduced spacing on mobile */
+  }
+  
+  .hero-content > :nth-child(2) {
+    margin-top: var(--space-sm); /* Tighter badge to heading on mobile */
+  }
+  
+  .hero-content > :last-child {
+    margin-top: var(--space-xl); /* Reduced button spacing on mobile */
   }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
-  .hero-content {
-    gap: var(--space-5);
+  .hero-content > *:not(:first-child) {
+    margin-top: var(--space-lg); /* Standard spacing on tablet */
+  }
+  
+  .hero-content > :last-child {
+    margin-top: var(--space-2xl); /* Good button separation on tablet */
   }
 }
 
 @media (min-width: 1025px) {
-  .hero-content {
-    gap: var(--space-8);
+  .hero-content > *:not(:first-child) {
+    margin-top: var(--space-xl); /* Larger spacing on desktop */
+  }
+  
+  .hero-content > :last-child {
+    margin-top: var(--space-3xl); /* Maximum button separation on desktop */
   }
 }
 
