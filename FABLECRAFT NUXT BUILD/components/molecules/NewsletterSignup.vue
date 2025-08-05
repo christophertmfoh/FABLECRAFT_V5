@@ -83,8 +83,7 @@ interface NewsletterSignupProps {
 
 // Events interface
 interface NewsletterSignupEmits {
-  (e: 'subscribe', email: string): void
-  (e: 'success', email: string): void
+  (e: 'subscribe' | 'success', email: string): void
   (e: 'error', error: string): void
 }
 

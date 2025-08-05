@@ -18,14 +18,6 @@ import Spinner from '~/components/atoms/Spinner.vue'
 import Card from '~/components/atoms/Card.vue'
 import CardTitle from '~/components/atoms/CardTitle.vue'
 import CardDescription from '~/components/atoms/CardDescription.vue'
-
-// Industry-standard development environment detection
-const isDevelopment = process.env.NODE_ENV === 'development'
-
-// Supabase connection validation
-const user = useSupabaseUser()
-
-const isLoggedIn = computed(() => !!user.value)
 import GlassCard from '~/components/atoms/GlassCard.vue'
 import Container from '~/components/atoms/Container.vue'
 import Section from '~/components/atoms/Section.vue'
@@ -61,6 +53,14 @@ import DropdownMenuLabel from '~/components/atoms/DropdownMenuLabel.vue'
 import DropdownMenuSeparator from '~/components/atoms/DropdownMenuSeparator.vue'
 import DropdownMenuCheckboxItem from '~/components/atoms/DropdownMenuCheckboxItem.vue'
 import DropdownMenuRadioItem from '~/components/atoms/DropdownMenuRadioItem.vue'
+
+// Industry-standard development environment detection
+const isDevelopment = process.env.NODE_ENV === 'development'
+
+// Supabase connection validation
+const user = useSupabaseUser()
+
+const isLoggedIn = computed(() => !!user.value)
 
 // Use centralized theme composable with all features
 const {

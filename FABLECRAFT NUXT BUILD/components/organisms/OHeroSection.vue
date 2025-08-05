@@ -114,9 +114,7 @@ interface HeroSectionProps {
 
 // Events interface
 interface HeroSectionEmits {
-  (e: 'primary:click', event: MouseEvent): void
-  (e: 'secondary:click', event: MouseEvent): void
-  (e: 'badge:click', event: MouseEvent): void
+  (e: 'primary:click' | 'secondary:click' | 'badge:click', event: MouseEvent): void
 }
 
 // Component setup

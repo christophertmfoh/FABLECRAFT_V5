@@ -9,8 +9,7 @@ export interface NewsletterState {
 }
 
 export interface NewsletterEmit {
-  (e: 'subscribe', email: string): void
-  (e: 'success', email: string): void
+  (e: 'subscribe' | 'success', email: string): void
   (e: 'error', error: string): void
 }
 

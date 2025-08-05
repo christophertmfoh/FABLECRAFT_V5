@@ -64,8 +64,7 @@ interface HeroActionsProps {
 
 // Events interface
 interface HeroActionsEmits {
-  (e: 'primary:click', event: MouseEvent): void
-  (e: 'secondary:click', event: MouseEvent): void
+  (e: 'primary:click' | 'secondary:click', event: MouseEvent): void
 }
 
 // Component setup

@@ -88,8 +88,7 @@ interface FooterProps {
 // Events interface
 interface FooterEmits {
   (e: 'navigate', payload: { type: string; item: string; category: string }): void
-  (e: 'newsletter:subscribe', email: string): void
-  (e: 'newsletter:success', email: string): void
+  (e: 'newsletter:subscribe' | 'newsletter:success', email: string): void
   (e: 'newsletter:error', error: string): void
   (e: 'social:click', platform: string): void
   (e: 'legal:click', payload: { text: string; href?: string }): void

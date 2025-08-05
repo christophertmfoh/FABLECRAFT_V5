@@ -224,17 +224,17 @@ const emit = defineEmits<{
 }>()
 
 // Authentication composable
-const user = useSupabaseUser()
+const supabaseUser = useSupabaseUser()
 const supabase = useSupabaseClient()
 
 // Compute authentication state
 const isAuthenticated = computed(() => {
-  return props.isAuthenticated || !!user.value
+  return props.isAuthenticated || !!supabaseUser.value
 })
 
 // Compute display name
 const displayName = computed(() => {
-  return user.value?.user_metadata?.username || user.value?.email?.split('@')[0] || 'User'
+  return supabaseUser.value?.user_metadata?.username || supabaseUser.value?.email?.split('@')[0] || 'User'
 })
 
 // Handle logo click
