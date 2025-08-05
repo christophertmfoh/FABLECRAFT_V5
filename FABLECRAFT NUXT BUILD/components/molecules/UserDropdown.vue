@@ -7,14 +7,14 @@
         :aria-label="triggerAriaLabel"
       >
         <span class="user-info">
-          <AtomsAtomIcon 
+          <AtomIcon 
             name="lucide:user-circle"
             size="sm"
             class="mr-2"
             aria-hidden="true"
           />
           Welcome {{ displayName }}
-          <AtomsAtomIcon
+          <AtomIcon
             name="lucide:chevron-down"
             size="sm"
             class="ml-2 group-hover:rotate-180 transition-transform duration-300"
@@ -39,7 +39,7 @@
           :class="menuItemClasses"
           @click="() => handleNavigate('projects')"
         >
-          <AtomsAtomIcon
+          <AtomIcon
             name="lucide:book-open"
             size="sm"
             class="text-primary mr-3"
@@ -66,7 +66,7 @@
           :class="menuItemClasses"
           @click="() => handleNavigate('profile')"
         >
-          <AtomsAtomIcon
+          <AtomIcon
             name="lucide:user"
             size="sm"
             class="text-primary mr-3"
@@ -93,7 +93,7 @@
           :class="menuItemClasses"
           @click="() => handleNavigate('community')"
         >
-          <AtomsAtomIcon
+          <AtomIcon
             name="lucide:users"
             size="sm"
             class="text-primary mr-3"
@@ -116,7 +116,7 @@
           :class="signOutClasses"
           @click="handleLogout"
         >
-          <AtomsAtomIcon
+          <AtomIcon
             name="lucide:log-out"
             size="sm"
             class="text-destructive mr-3"

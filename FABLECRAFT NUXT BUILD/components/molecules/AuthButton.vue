@@ -5,28 +5,8 @@
     :disabled="loading"
     @click="handleClick"
   >
-    <span class="auth-button-content">
-      <!-- Loading state icon -->
-      <AtomsAtomIcon
-        v-if="loading"
-        name="lucide:loader-2"
-        size="sm"
-        class="mr-2 animate-spin"
-        aria-hidden="true"
-      />
-      
-      <!-- Auth icon (when not loading) -->
-      <AtomsAtomIcon
-        v-else
-        :name="iconName"
-        size="sm"
-        class="mr-2"
-        aria-hidden="true"
-      />
-      
-      <!-- Button text -->
-      {{ buttonText }}
-    </span>
+    <!-- Simplified: Just text for now -->
+    {{ buttonText }}
   </AtomsButton>
 </template>
 
@@ -73,11 +53,6 @@ const buttonText = computed(() => {
   return props.text
 })
 
-// Computed icon name
-const iconName = computed(() => {
-  return props.icon
-})
-
 // Computed aria label
 const ariaLabel = computed(() => {
   return props.ariaLabel || props.text
@@ -92,7 +67,6 @@ const handleClick = () => {
 // Compute auth button classes
 const authButtonClasses = computed(() => {
   return cn(
-    // Base button styling handled by AtomsButton
     'group transition-all duration-300 hover:scale-105 rounded-xl',
     'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
     

@@ -7,14 +7,14 @@
     <AtomsContainer size="xl" class="py-4">
       <div class="flex items-center justify-between">
         <!-- Brand Logo Section -->
-        <ANavigationLogo
+        <NavigationLogo
           :brand-text="brandText"
           :show-text="showBrandText"
           @click="handleLogoClick"
         />
 
         <!-- Main Navigation Menu (Desktop) -->
-        <MNavigationMenu
+        <NavigationMenu
           v-if="showNavItems"
           :items="navigationItems"
           :show-items="showNavItems"
@@ -27,7 +27,7 @@
           <!-- Authentication Section -->
           <template v-if="showAuthButton">
             <!-- Authenticated User -->
-            <MUserDropdown
+            <UserDropdown
               v-if="isAuthenticated && user"
               :user="user"
               :loading="logoutLoading"
@@ -36,7 +36,7 @@
             />
             
             <!-- Unauthenticated User -->
-            <MAuthButton
+            <AuthButton
               v-else
               :text="authButtonText"
               :loading="authLoading"
@@ -45,7 +45,7 @@
           </template>
 
           <!-- Theme Toggle -->
-          <AThemeToggle />
+          <ThemeToggle />
         </div>
       </div>
     </AtomsContainer>

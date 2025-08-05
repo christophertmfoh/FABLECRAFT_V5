@@ -6,15 +6,15 @@
     :aria-label="ariaLabel"
   >
     <div class="nav-items">
-      <ANavigationItem
+      <!-- Simplified: Just text links for now -->
+      <button
         v-for="item in navigationItems"
         :key="item.id"
-        :label="item.label"
-        :href="item.href"
-        :active="item.active"
-        :aria-label="item.ariaLabel"
-        @click="(href) => handleNavigate(item, href)"
-      />
+        class="text-sm font-semibold tracking-wide cursor-pointer uppercase px-3 py-2 hover:text-primary transition-colors"
+        @click="() => handleNavigate(item, item.href)"
+      >
+        {{ item.label }}
+      </button>
     </div>
   </nav>
 </template>
@@ -105,23 +105,14 @@ const handleNavigate = (item: NavigationItem, href?: string) => {
 // Compute navigation menu classes
 const navigationMenuClasses = computed(() => {
   return cn(
-    // Base classes
     'flex items-center',
-    
-    // Responsive visibility
     props.showItems ? 'block' : 'hidden',
-    
-    // Custom classes
     props.class
   )
 })
 </script>
 
 <style scoped>
-.navigation-menu {
-  /* Container styles handled by utility classes */
-}
-
 .nav-items {
   @apply flex items-center space-x-8;
 }
@@ -129,21 +120,7 @@ const navigationMenuClasses = computed(() => {
 /* Responsive behavior */
 @media (max-width: 768px) {
   .navigation-menu {
-    @apply hidden; /* Hide on mobile - can be shown with showItems prop */
-  }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .nav-items {
-    @apply space-x-6; /* Slightly less spacing for high contrast */
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .nav-items * {
-    @apply transition-none;
+    @apply hidden;
   }
 }
 </style>

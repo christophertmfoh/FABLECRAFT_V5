@@ -5,22 +5,9 @@
     :aria-label="ariaLabel"
     @click="handleClick"
   >
-    <!-- Icon Container -->
-    <div class="icon-container">
-      <AtomsAtomIcon 
-        name="lucide:feather"
-        :size="iconSize"
-        class="text-primary"
-        aria-hidden="true"
-      />
-    </div>
-    
-    <!-- Brand Text -->
-    <span 
-      v-if="showText"
-      class="brand-text"
-    >
-      {{ brandText }}
+    <!-- Simplified: Just text for now -->
+    <span class="text-2xl font-bold text-primary">
+      🪶 {{ brandText }}
     </span>
   </button>
 </template>
@@ -63,16 +50,11 @@ const handleClick = () => {
 // Compute logo classes
 const logoClasses = computed(() => {
   return cn(
-    // Base styles
     'group flex items-center space-x-3 cursor-pointer',
     'transition-all duration-300 ease-in-out',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-    'rounded-lg p-2 -m-2', // Invisible padding for better click area
-    
-    // Hover effects
+    'rounded-lg p-2 -m-2',
     'hover:scale-105',
-    
-    // Custom classes
     props.class
   )
 })
