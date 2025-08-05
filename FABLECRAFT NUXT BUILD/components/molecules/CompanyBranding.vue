@@ -3,10 +3,7 @@
     <!-- Company Logo and Name -->
     <div v-if="showBranding" class="company-header">
       <div class="flex items-center gap-3 group cursor-pointer">
-        <div 
-          class="logo-container"
-          :style="{ background: logoGradient }"
-        >
+        <div class="logo-container">
           <AtomIcon 
             name="lucide:feather" 
             class="w-6 h-6 text-primary-foreground" 
@@ -71,9 +68,6 @@ const props = withDefaults(defineProps<CompanyBrandingProps>(), {
   class: ''
 })
 
-// Theme integration
-const { isDark, resolvedTheme } = useTheme()
-
 // Computed properties
 const displayTagline = computed(() => {
   return props.tagline || props.company.tagline
@@ -92,14 +86,6 @@ const brandingClasses = computed(() => {
     props.class
   )
 })
-
-// Theme-reactive gradient for logo
-const logoGradient = computed(() => {
-  if (isDark.value) {
-    return 'linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--primary) / 0.7))'
-  }
-  return 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8))'
-})
 </script>
 
 <style scoped>
@@ -111,7 +97,7 @@ const logoGradient = computed(() => {
 /* Theme-reactive logo container */
 .logo-container {
   @apply w-12 h-12 rounded-xl flex items-center justify-center shadow-lg;
-  /* Background set via JavaScript for theme reactivity */
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
   transition: all 0.3s ease;
 }
 

@@ -104,9 +104,6 @@ const props = withDefaults(defineProps<FooterProps>(), {
 
 const emit = defineEmits<FooterEmits>()
 
-// Theme integration
-const { currentTheme, resolvedTheme, isDark } = useTheme()
-
 // Footer content composable
 const {
   companyInfo,
@@ -125,9 +122,9 @@ const footerClasses = computed(() => {
   const baseClasses = 'relative z-10'
   
   const variantClasses = {
-    default: `bg-gradient-to-t from-muted/30 to-transparent border-t border-border ${isDark.value ? 'from-muted/20' : 'from-muted/30'}`,
-    minimal: `bg-transparent border-t ${isDark.value ? 'border-border/30' : 'border-border/50'}`,
-    dark: `bg-background border-t border-border ${isDark.value ? 'bg-card/50' : 'bg-background'}`
+    default: 'bg-gradient-to-t from-muted/30 to-transparent border-t border-border',
+    minimal: 'bg-transparent border-t border-border/50',
+    dark: 'bg-background border-t border-border'
   }
 
   return cn(
@@ -204,7 +201,7 @@ const handleLegalClick = (payload: { text: string; href?: string; type: 'legal' 
 </script>
 
 <style scoped>
-/* Footer organism styling with enhanced theme integration */
+/* Footer organism styling - following header pattern */
 .footer-organism {
   @apply w-full;
   transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
@@ -228,44 +225,11 @@ const handleLegalClick = (payload: { text: string; href?: string; type: 'legal' 
   }
 }
 
-/* Made with love section styling - theme reactive */
+/* Made with love section styling */
 .made-with-love {
   @apply flex items-center justify-center gap-2 text-sm text-muted-foreground;
   @apply mt-8 pt-6 border-t border-border/10;
   transition: color 300ms ease-in-out, border-color 300ms ease-in-out;
-}
-
-/* Enhanced background gradients with theme variables */
-.footer-organism.bg-gradient-to-t {
-  background: linear-gradient(to top, hsl(var(--muted) / 0.3), transparent);
-}
-
-/* Theme-reactive background for dark mode */
-[data-theme*="dark"] .footer-organism.bg-gradient-to-t,
-[data-theme="system"] .footer-organism.bg-gradient-to-t {
-  background: linear-gradient(to top, hsl(var(--muted) / 0.2), transparent);
-}
-
-/* Border styling with smooth transitions */
-.border-border {
-  border-color: hsl(var(--border));
-  transition: border-color 300ms ease-in-out;
-}
-
-.border-border\/20 {
-  border-color: hsl(var(--border) / 0.2);
-  transition: border-color 300ms ease-in-out;
-}
-
-.border-border\/10 {
-  border-color: hsl(var(--border) / 0.1);
-  transition: border-color 300ms ease-in-out;
-}
-
-/* Enhanced muted foreground with transitions */
-.text-muted-foreground {
-  color: hsl(var(--muted-foreground));
-  transition: color 300ms ease-in-out;
 }
 
 /* Focus management for accessibility */
@@ -278,31 +242,18 @@ footer:focus-within {
   @apply w-full;
 }
 
-/* Enhanced high contrast mode support */
+/* High contrast mode support */
 @media (prefers-contrast: high) {
   .footer-organism {
     @apply border-foreground/50;
   }
-  
-  .border-border\/20,
-  .border-border\/10 {
-    @apply border-foreground/30;
-  }
-  
-  .text-muted-foreground {
-    @apply text-foreground/80;
-  }
 }
 
-/* Reduced motion support with enhanced accessibility */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .footer-organism,
   .footer-organism *,
-  .made-with-love,
-  .border-border,
-  .border-border\/20,
-  .border-border\/10,
-  .text-muted-foreground {
+  .made-with-love {
     animation: none !important;
     transition: none !important;
   }
