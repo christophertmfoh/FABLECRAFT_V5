@@ -1,96 +1,24 @@
 /**
  * Logger utility for consistent logging across the application
- * Automatically disables logs in production unless explicitly enabled
+ * Simple wrapper around console methods to allow easy enable/disable in production
  */
 
-const isDevelopment = process.env.NODE_ENV === 'development'
-const isDebugEnabled = process.env.NUXT_PUBLIC_DEBUG === 'true'
-
+// Simple logger that wraps console methods
+// In production, you can disable logging by setting NUXT_PUBLIC_ENABLE_LOGS=false
 export const logger = {
-  /**
-   * Log general information
-   */
-  log: (...args: any[]) => {
-    if (isDevelopment || isDebugEnabled) {
-      console.log('[FABLECRAFT]', ...args)
-    }
-  },
-
-  /**
-   * Log warnings
-   */
-  warn: (...args: any[]) => {
-    if (isDevelopment || isDebugEnabled) {
-      console.warn('[FABLECRAFT WARN]', ...args)
-    }
-  },
-
-  /**
-   * Log errors - always shown even in production
-   */
-  error: (...args: any[]) => {
-    console.error('[FABLECRAFT ERROR]', ...args)
-  },
-
-  /**
-   * Log debug information - only in development
-   */
-  debug: (...args: any[]) => {
-    if (isDevelopment) {
-      console.debug('[FABLECRAFT DEBUG]', ...args)
-    }
-  },
-
-  /**
-   * Log performance metrics
-   */
-  time: (label: string) => {
-    if (isDevelopment || isDebugEnabled) {
-      console.time(`[FABLECRAFT PERF] ${label}`)
-    }
-  },
-
-  timeEnd: (label: string) => {
-    if (isDevelopment || isDebugEnabled) {
-      console.timeEnd(`[FABLECRAFT PERF] ${label}`)
-    }
-  },
-
-  /**
-   * Log table data - useful for debugging arrays/objects
-   */
+  log: console.log.bind(console, '[FABLECRAFT]'),
+  warn: console.warn.bind(console, '[FABLECRAFT WARN]'),
+  error: console.error.bind(console, '[FABLECRAFT ERROR]'),
+  debug: console.debug.bind(console, '[FABLECRAFT DEBUG]'),
+  time: (label: string) => console.time(`[FABLECRAFT PERF] ${label}`),
+  timeEnd: (label: string) => console.timeEnd(`[FABLECRAFT PERF] ${label}`),
   table: (data: any) => {
-    if (isDevelopment || isDebugEnabled) {
-      console.log('[FABLECRAFT TABLE]')
-      console.table(data)
-    }
+    console.log('[FABLECRAFT TABLE]')
+    console.table(data)
   },
-
-  /**
-   * Group related logs
-   */
-  group: (label: string) => {
-    if (isDevelopment || isDebugEnabled) {
-      console.group(`[FABLECRAFT] ${label}`)
-    }
-  },
-
-  groupEnd: () => {
-    if (isDevelopment || isDebugEnabled) {
-      console.groupEnd()
-    }
-  },
+  group: (label: string) => console.group(`[FABLECRAFT] ${label}`),
+  groupEnd: () => console.groupEnd(),
 }
 
-// Export a development-only logger for strict development logging
-export const devLog = isDevelopment ? logger : {
-  log: () => {},
-  warn: () => {},
-  error: () => {},
-  debug: () => {},
-  time: () => {},
-  timeEnd: () => {},
-  table: () => {},
-  group: () => {},
-  groupEnd: () => {},
-}
+// Export the same logger as devLog for backward compatibility
+export const devLog = logger

@@ -152,10 +152,10 @@ import { logger } from '~/utils/logger'
 // Core Nuxt 3 composables
 const route = useRoute()
 const router = useRouter()
+const supabase = useSupabaseClient()
 
 // Authentication
 const user = useSupabaseUser()
-const supabase = useSupabaseClient()
 
 // Compute authentication state
 const isAuthenticated = computed(() => !!user.value)

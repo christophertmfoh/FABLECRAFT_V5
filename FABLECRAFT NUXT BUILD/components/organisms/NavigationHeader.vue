@@ -161,10 +161,9 @@
 </template>
 
 <script setup lang="ts">
-import { logger } from '~/utils/logger'
-
 import { cn } from '~/components/atoms/Utils'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
+import { logger } from '~/utils/logger'
 
 // User interface for authentication
 interface User {
