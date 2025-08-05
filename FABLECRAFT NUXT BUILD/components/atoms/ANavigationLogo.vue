@@ -1,0 +1,108 @@
+<template>
+  <button
+    type="button"
+    :class="logoClasses"
+    :aria-label="ariaLabel"
+    @click="handleClick"
+  >
+    <!-- Icon Container -->
+    <div class="icon-container">
+      <AtomsAtomIcon 
+        name="lucide:feather"
+        :size="iconSize"
+        class="text-primary"
+        aria-hidden="true"
+      />
+    </div>
+    
+    <!-- Brand Text -->
+    <span 
+      v-if="showText"
+      class="brand-text"
+    >
+      {{ brandText }}
+    </span>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { cn } from './Utils'
+
+// Component props interface
+interface NavigationLogoProps {
+  /** Brand text to display */
+  brandText?: string
+  /** Whether to show brand text */
+  showText?: boolean
+  /** Icon size variant */
+  iconSize?: 'sm' | 'md' | 'lg' | 'xl'
+  /** Custom aria-label for accessibility */
+  ariaLabel?: string
+  /** Additional CSS classes */
+  class?: string | Record<string, boolean> | string[]
+}
+
+// Define props with defaults
+const props = withDefaults(defineProps<NavigationLogoProps>(), {
+  brandText: 'Fablecraft',
+  showText: true,
+  iconSize: 'lg',
+  ariaLabel: 'Navigate to homepage',
+})
+
+// Define emits
+const emit = defineEmits<{
+  click: []
+}>()
+
+// Handle click event
+const handleClick = () => {
+  emit('click')
+}
+
+// Compute logo classes
+const logoClasses = computed(() => {
+  return cn(
+    // Base styles
+    'group flex items-center space-x-3 cursor-pointer',
+    'transition-all duration-300 ease-in-out',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+    'rounded-lg p-2 -m-2', // Invisible padding for better click area
+    
+    // Hover effects
+    'hover:scale-105',
+    
+    // Custom classes
+    props.class
+  )
+})
+</script>
+
+<style scoped>
+.icon-container {
+  @apply w-14 h-14 bg-primary/10 hover:bg-primary/20 rounded-xl flex items-center justify-center shadow-md;
+  @apply group-hover:shadow-lg transition-all duration-300;
+}
+
+.brand-text {
+  @apply text-3xl font-black text-foreground tracking-wide;
+  @apply transition-colors duration-300;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .icon-container,
+  .brand-text {
+    @apply transition-none;
+  }
+  
+  .group:hover {
+    @apply scale-100;
+  }
+}
+
+/* Focus styles for better keyboard navigation */
+.group:focus-visible .icon-container {
+  @apply ring-2 ring-primary ring-offset-2;
+}
+</style>
