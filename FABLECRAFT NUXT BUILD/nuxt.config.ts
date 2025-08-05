@@ -24,6 +24,14 @@ export default defineNuxtConfig({
   // Explicitly load the global stylesheet
   css: ['~/assets/css/main.css'],
 
+  // Component auto-import configuration (disable path prefixing for atomic design)
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false, // Disable auto-prefixing for atomic design structure
+    },
+  ],
+
   // Runtime config for environment variables
   runtimeConfig: {
     public: {
