@@ -97,13 +97,13 @@ const headingContainerClasses = computed(() => {
   }
   
   const spacingClasses = {
-    tight: 'space-y-1',
-    normal: 'space-y-2',
-    relaxed: 'space-y-4'
+    tight: 'space-y-2',        // 8px - minimal spacing
+    normal: 'space-y-4',       // 16px - standard spacing  
+    relaxed: 'space-y-8'       // 32px - generous spacing to prevent clipping
   }
 
   return cn(
-    'heading-group flex flex-col pb-2',  // Added pb-2 to ensure descenders have space
+    'heading-group flex flex-col pb-6',  // Increased from pb-2 to pb-6 for extra descender space
     alignmentClasses[props.alignment],
     spacingClasses[props.spacing],
     props.className
@@ -112,9 +112,9 @@ const headingContainerClasses = computed(() => {
 
 const headingClasses = computed(() => {
   const variantClasses = {
-    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm',  // Increased from 1.1 to prevent clipping
-    compact: 'font-bold leading-tight tracking-normal', 
-    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg'  // Keep dramatic tight
+    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm mb-4',  // Added mb-4 for extra descender space
+    compact: 'font-bold leading-tight tracking-normal mb-2', 
+    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg mb-6'  // Added mb-6 for dramatic variant
   }
   
   const sizeClasses = {
@@ -195,6 +195,12 @@ const subheadingClasses = computed(() => {
     font-size: 8rem;
     line-height: 1.1;  /* Increased from 1 to prevent clipping of descenders */
   }
+}
+
+/* Extra spacing for large text sizes to prevent descender clipping */
+.text-6xl, .text-7xl, .text-8xl, .text-9xl {
+  margin-bottom: 0.5rem; /* Additional bottom margin for largest text sizes */
+  padding-bottom: 0.25rem; /* Extra padding for descenders */
 }
 
 /* Accessibility improvements */
