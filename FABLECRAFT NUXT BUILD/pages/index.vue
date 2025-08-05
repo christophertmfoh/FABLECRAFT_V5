@@ -54,9 +54,56 @@
           class="hero-section"
         >
           <AtomsContainer size="xl">
-            <!-- Hero Component Placeholder -->
-            <div class="min-h-[600px] md:min-h-[700px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-              <span class="text-muted-foreground">Hero Section</span>
+            <!-- Hero Content -->
+            <div class="text-center space-y-8 py-16 md:py-24">
+              <!-- Badge -->
+              <AtomsBadgeWithDot class="mx-auto">
+                🚀 Building Something Amazing
+              </AtomsBadgeWithDot>
+              
+              <!-- Hero Heading -->
+              <AtomsHeading level="h1" class="text-4xl md:text-6xl lg:text-7xl font-bold max-w-4xl mx-auto">
+                Welcome to 
+                <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Fablecraft
+                </span>
+              </AtomsHeading>
+              
+              <!-- Hero Description -->
+              <AtomsText size="lg" class="text-muted-foreground max-w-2xl mx-auto">
+                A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript. Your design system is ready to go.
+              </AtomsText>
+              
+              <!-- Hero Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <AtomsGradientButton size="lg" class="min-w-[160px]">
+                  <AtomsAtomIcon name="lucide:zap" size="sm" class="mr-2" />
+                  Get Started
+                </AtomsGradientButton>
+                
+                <AtomsButton variant="outline" size="lg" class="min-w-[160px]">
+                  <AtomsAtomIcon name="lucide:book-open" size="sm" class="mr-2" />
+                  Documentation
+                </AtomsButton>
+              </div>
+              
+              <!-- Status Cards -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto pt-8">
+                <AtomsGlassCard class="p-6 text-center">
+                  <div class="text-2xl font-bold text-primary">35+</div>
+                  <div class="text-sm text-muted-foreground">Atom Components</div>
+                </AtomsGlassCard>
+                
+                <AtomsGlassCard class="p-6 text-center">
+                  <div class="text-2xl font-bold text-primary">15</div>
+                  <div class="text-sm text-muted-foreground">Color Themes</div>
+                </AtomsGlassCard>
+                
+                <AtomsGlassCard class="p-6 text-center">
+                  <div class="text-2xl font-bold text-primary">100%</div>
+                  <div class="text-sm text-muted-foreground">TypeScript</div>
+                </AtomsGlassCard>
+              </div>
             </div>
           </AtomsContainer>
         </AtomsSection>
