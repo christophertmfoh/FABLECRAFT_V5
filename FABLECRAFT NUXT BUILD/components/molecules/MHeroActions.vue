@@ -5,62 +5,47 @@
     :aria-label="groupLabel"
   >
     <!-- Primary Action Button -->
-    <Button
+    <GradientButton
       :size="buttonSize"
       :variant="primaryVariant"
       :class="primaryButtonClasses"
       :disabled="primaryDisabled"
       :aria-label="primaryAriaLabel"
+      :show-gradient-overlay="true"
+      gradient-colors="from-primary-foreground/25 to-transparent"
       @click="handlePrimaryClick"
     >
-      <!-- Hover overlay effect (behind content) -->
-      <div 
-        class="absolute inset-0 bg-gradient-to-r from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10"
-        aria-hidden="true"
-      />
-      
-      <!-- Button Content -->
-      <div class="relative flex items-center justify-center gap-3">
+      <template #leading>
         <AtomIcon 
           v-if="primaryIcon"
           :name="primaryIcon"
           :class="iconClasses"
           aria-hidden="true"
         />
-        <span class="font-semibold">
-          {{ primaryText }}
-        </span>
-      </div>
-    </Button>
+      </template>
+      {{ primaryText }}
+    </GradientButton>
 
     <!-- Secondary Action Button -->
-    <Button
+    <GradientButton
       :size="buttonSize"
       :variant="secondaryVariant"
       :class="secondaryButtonClasses"
       :disabled="secondaryDisabled"
       :aria-label="secondaryAriaLabel"
+      :show-gradient-overlay="true"
       @click="handleSecondaryClick"
     >
-      <!-- Hover overlay effect (behind content) -->
-      <div 
-        class="absolute inset-0 bg-gradient-to-r from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10"
-        aria-hidden="true"
-      />
-      
-      <!-- Button Content -->
-      <div class="relative flex items-center justify-center gap-3">
+      <template #leading>
         <AtomIcon 
           v-if="secondaryIcon"
           :name="secondaryIcon"
           :class="iconClasses"
           aria-hidden="true"
         />
-        <span class="font-semibold">
-          {{ secondaryText }}
-        </span>
-      </div>
-    </Button>
+      </template>
+      {{ secondaryText }}
+    </GradientButton>
   </div>
 </template>
 
@@ -133,7 +118,7 @@ const actionsContainerClasses = computed(() => {
   }
 
   return cn(
-    'action-group w-full max-w-lg mx-auto sm:max-w-none',
+    'action-group w-full max-w-md mx-auto sm:max-w-none sm:ml-8',  // Adjusted: smaller max-width and left margin on larger screens
     'transition-all duration-300',
     layoutClasses[props.layout],
     alignmentClasses[props.alignment],

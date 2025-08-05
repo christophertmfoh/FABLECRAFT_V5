@@ -152,11 +152,11 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   // Default styling
   variant: 'default',
   size: 'xl',
-  alignment: 'center',
+  alignment: 'center',  // Keep center alignment for hero section
   
   // Default badge settings
   badgeVariant: 'default',
-  badgeSize: 'md',
+  badgeSize: 'sm',  // Reduced from 'md' to make badge smaller relative to large heading
   badgeDotColor: 'primary',
   badgeDotSpeed: 'normal',
   badgeClickable: false,
@@ -166,7 +166,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   headingId: 'hero-heading',
   headingVariant: 'default',
   headingSize: '2xl',  // Updated to match React original's golden ratio typography
-  headingSpacing: 'normal',
+  headingSpacing: 'relaxed',  // Increased from 'normal' to prevent text clipping
   
   // Default gradient settings
   gradientVariant: 'primary',
@@ -177,7 +177,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   // Default description settings
   separateDescription: false,
   descriptionVariant: 'muted',
-  descriptionSize: 'lg',
+  descriptionSize: 'md',  // Reduced from 'lg' to make description text smaller
   
   // Default button settings
   primaryButtonIcon: 'lucide:zap',
