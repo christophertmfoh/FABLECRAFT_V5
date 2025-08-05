@@ -44,18 +44,14 @@
         class="relative z-20"
       >
         <!-- Hero Section -->
-        <Section 
+        <OHeroSection
           id="hero"
-          spacing="xl"
+          variant="default"
           class="hero-section"
-        >
-          <Container size="xl">
-            <!-- Hero Component Placeholder -->
-            <div class="min-h-[600px] md:min-h-[700px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-              <span class="text-muted-foreground">Hero Section</span>
-            </div>
-          </Container>
-        </Section>
+          @primary:click="handleNewProject"
+          @secondary:click="handleExploreExamples"
+          @badge:click="handleBadgeClick"
+        />
 
         <!-- Features Section -->
         <Section 
@@ -217,6 +213,22 @@ const handleNavigate = (view: string) => {
 
 const handleHome = () => {
   navigateTo('/')
+}
+
+// Hero section event handlers
+const handleNewProject = () => {
+  // Navigate to project creation or open project modal
+  navigateTo('/projects/new')
+}
+
+const handleExploreExamples = () => {
+  // Navigate to examples/templates page
+  navigateTo('/examples')
+}
+
+const handleBadgeClick = () => {
+  // Optional: Navigate to product announcement or features
+  navigateTo('/features')
 }
 
 // Scroll handling
