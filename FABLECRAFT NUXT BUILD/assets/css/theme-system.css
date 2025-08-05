@@ -56,23 +56,6 @@
     var(--primary) / 0.3
   ); /* A more visible glow using the theme's primary color */
 
-  /* DEPRECATED: Old firefly variables - will be removed in future */
-  --firefly-core: rgba(40, 30, 60, 0.9);
-  --firefly-mid: rgba(80, 60, 120, 0.6);
-  --firefly-outer: rgba(120, 100, 160, 0.3);
-  --firefly-inner-glow: rgba(120, 80, 200, 0.8);
-  --firefly-outer-glow: rgba(200, 150, 100, 0.4);
-  --firefly-contrast-shadow: rgba(0, 0, 0, 0.2);
-  --firefly-brightness: 0.7;
-  --firefly-glow-intensity: 1.2;
-  --firefly-contrast: 2;
-  --firefly-opacity-boost: 1.8;
-  --firefly-blend-mode: multiply;
-  --firefly-shadow-opacity: 0.5;
-  --firefly-shadow-blur: 6px;
-  --firefly-shadow-spread: 2px;
-  --firefly-halo-opacity: 0.6;
-
   /* Atmospheric Effects */
   --atmospheric-blend: overlay; /* Better visibility on light bg */
   --atmospheric-opacity: 0.3; /* Stronger gradient on light bg */

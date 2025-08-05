@@ -219,7 +219,7 @@ if (isDevelopment) {
         <div class="space-y-2 text-sm">
           <div class="flex justify-between">
             <span>Supabase:</span>
-            <span class="text-green-600 font-medium">✓ Connected</span>
+            <span class="text-success font-medium">✓ Connected</span>
           </div>
           <div class="flex justify-between">
             <span>Authentication:</span>
@@ -797,9 +797,9 @@ if (isDevelopment) {
           <div>
             <h3 class="text-sm font-medium text-muted-foreground mb-4">Custom Styling</h3>
             <div class="flex flex-wrap gap-4">
-              <AtomIcon name="lucide:heart" class="text-red-500" />
+              <AtomIcon name="lucide:heart" class="text-destructive" />
               <AtomIcon name="lucide:star" class="text-yellow-500" />
-              <AtomIcon name="lucide:check-circle" class="text-green-500" />
+              <AtomIcon name="lucide:check-circle" class="text-success" />
               <AtomIcon name="lucide:info" class="text-blue-500" />
               <AtomIcon name="lucide:alert-triangle" class="text-orange-500" />
               <AtomIcon name="lucide:sparkles" class="text-primary animate-pulse" />
@@ -859,7 +859,7 @@ if (isDevelopment) {
                 <Input class="pr-10" placeholder="With trailing icon" />
                 <Icon
                   name="lucide:check"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-green-500"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-success"
                 />
               </div>
             </div>

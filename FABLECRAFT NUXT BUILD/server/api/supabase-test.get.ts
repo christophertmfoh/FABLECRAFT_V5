@@ -26,7 +26,7 @@ export default defineEventHandler(async event => {
       hasDatabase: !dbError || dbError.message.includes('does not exist'),
       databaseMessage: dbError ? dbError.message : 'Database accessible',
     }
-  } catch (err: any) {
+  } catch (err: Error) {
     return {
       status: 'error',
       message: 'Connection test failed',
