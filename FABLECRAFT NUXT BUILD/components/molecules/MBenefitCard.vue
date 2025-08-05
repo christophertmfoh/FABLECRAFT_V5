@@ -6,14 +6,16 @@
     :aria-labelledby="`benefit-title-${id}`"
     :aria-describedby="`benefit-description-${id}`"
   >
-    <!-- Icon -->
-    <IconContainer
-      :icon="icon"
-      :size="'lg'"
-      :variant="'primary'"
-      :shape="'rounded'"
-      class="mx-auto group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg transition-all duration-500"
-    />
+    <!-- Icon centered at the top -->
+    <div class="flex justify-center">
+      <IconContainer
+        :icon="icon"
+        :size="iconSize"
+        :variant="iconVariant"
+        :shape="iconShape"
+        class="group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg transition-all duration-500"
+      />
+    </div>
 
     <!-- Content -->
     <div class="space-y-4 text-center">
@@ -31,8 +33,8 @@
       <!-- Category Badge (optional) -->
       <Badge 
         v-if="showCategory && category"
-        variant="secondary"
-        size="sm"
+        :variant="categoryBadgeVariant"
+        :size="categoryBadgeSize"
         class="mx-auto"
       >
         {{ category }}
@@ -41,7 +43,7 @@
       <!-- Description -->
       <Text
         :as="'p'"
-        :size="'base'"
+        :size="descriptionSize"
         :variant="'muted'"
         :leading="'relaxed'"
         :align="'center'"
@@ -63,10 +65,25 @@ interface MBenefitCardProps {
   description: string
   category?: string
   showCategory?: boolean
+  // Icon customization
+  iconSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  iconVariant?: 'default' | 'ghost' | 'soft' | 'subtle' | 'outline' | 'gradient'
+  iconShape?: 'circle' | 'square' | 'rounded'
+  // Badge customization
+  categoryBadgeVariant?: 'default' | 'secondary' | 'accent' | 'outline'
+  categoryBadgeSize?: 'sm' | 'base' | 'md' | 'lg'
+  // Text customization
+  descriptionSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
 }
 
 const props = withDefaults(defineProps<MBenefitCardProps>(), {
-  showCategory: false
+  showCategory: false,
+  iconSize: 'lg',
+  iconVariant: 'gradient',
+  iconShape: 'rounded',
+  categoryBadgeVariant: 'secondary',
+  categoryBadgeSize: 'sm',
+  descriptionSize: 'base'
 })
 
 // Generate unique ID for accessibility

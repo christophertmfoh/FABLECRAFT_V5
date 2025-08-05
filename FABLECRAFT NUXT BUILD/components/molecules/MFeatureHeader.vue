@@ -5,66 +5,67 @@
       :text="badgeText"
       :variant="badgeVariant"
       :size="badgeSize"
-      :clickable="false"
+      :dot-color="badgeDotColor"
+      :clickable="badgeClickable"
+      @click="$emit('badge-click', $event)"
     />
 
-    <!-- Main Heading with proper centering -->
-    <Heading
-      :as="headingTag"
+    <!-- Use MHeroHeading for consistent gradient text support -->
+    <MHeroHeading
+      :heading-tag="headingTag"
+      :title="title"
+      :highlight-text="highlightText"
+      :subheading="subtitle"
       :size="headingSize"
-      :align="'center'"
-      :class="headingClass"
-    >
-      {{ title }}
-    </Heading>
-
-    <!-- Description Text with proper centering and styling -->
-    <Text
-      v-if="subtitle"
-      :as="'p'"
-      :size="subtitleSize"
-      :variant="'muted'"
-      :weight="'medium'"
-      :leading="'relaxed'"
-      :align="'center'"
-      :class="subtitleClass"
-    >
-      {{ subtitle }}
-    </Text>
+      :variant="headingVariant"
+      :gradient-variant="gradientVariant"
+      :gradient-direction="gradientDirection"
+      :gradient-intensity="gradientIntensity"
+      :spacing="headingSpacing"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 interface MFeatureHeaderProps {
+  // Badge props
   badgeText: string
-  title: string
-  subtitle?: string
   badgeVariant?: 'default' | 'accent' | 'secondary' | 'outline'
   badgeSize?: 'sm' | 'base' | 'md' | 'lg'
+  badgeDotColor?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive'
+  badgeClickable?: boolean
+  
+  // Heading props
+  title: string
+  highlightText?: string
+  subtitle?: string
   headingTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  headingSize?: 'h2' | 'h2-compact' | 'h2-display'
-  subtitleSize?: 'body-compact' | 'body-default'
-  compact?: boolean
-  class?: string
+  headingSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  headingVariant?: 'default' | 'compact' | 'dramatic'
+  headingSpacing?: 'tight' | 'normal' | 'relaxed'
+  
+  // Gradient props
+  gradientVariant?: 'primary' | 'secondary' | 'accent' | 'rainbow' | 'custom'
+  gradientDirection?: 'to-r' | 'to-l' | 'to-t' | 'to-b' | 'to-br' | 'to-bl' | 'to-tr' | 'to-tl'
+  gradientIntensity?: 'subtle' | 'normal' | 'vibrant'
 }
 
 const props = withDefaults(defineProps<MFeatureHeaderProps>(), {
   badgeVariant: 'default',
   badgeSize: 'base',
+  badgeDotColor: 'primary',
+  badgeClickable: false,
   headingTag: 'h2',
-  headingSize: 'h2',
-  subtitleSize: 'body-default',
-  compact: false
+  headingSize: 'xl',
+  headingVariant: 'default',
+  headingSpacing: 'normal',
+  gradientVariant: 'primary',
+  gradientDirection: 'to-r',
+  gradientIntensity: 'normal'
 })
 
-// Additional spacing and size adjustments based on compact mode
-const headingClass = computed(() => [
-  'mt-best-friends', // Consistent spacing after badge
-  props.compact && 'sm:text-3xl lg:text-4xl' // Override sizes if compact
-])
-
-const subtitleClass = computed(() => [
-  'max-w-4xl mx-auto', // Center and constrain width
-  'mt-friends' // Consistent spacing after heading
-])
+// Emit events
+defineEmits<{
+  'badge-click': [event: MouseEvent]
+}>()
 </script>

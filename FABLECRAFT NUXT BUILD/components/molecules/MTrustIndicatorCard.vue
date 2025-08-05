@@ -1,16 +1,17 @@
 <template>
   <Card
     :class="cardClasses"
+    :variant="cardVariant"
     role="article"
     :aria-label="`${number} ${label}`"
   >
-    <div class="p-6 text-center space-y-4">
+    <div :class="contentClasses">
       <!-- Icon Container -->
       <IconContainer
         :icon="icon"
-        :size="'md'"
-        :variant="'primary'"
-        :shape="'rounded'"
+        :size="iconSize"
+        :variant="iconVariant"
+        :shape="iconShape"
         class="mx-auto group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
       />
 
@@ -19,8 +20,8 @@
         <!-- Number -->
         <Text
           :as="'div'"
-          :size="'display-value'"
-          :weight="'bold'"
+          :size="numberSize"
+          :weight="numberWeight"
           :align="'center'"
           class="text-foreground group-hover:text-primary transition-colors duration-300"
         >
@@ -30,9 +31,9 @@
         <!-- Label -->
         <Text
           :as="'div'"
-          :size="'sm'"
+          :size="labelSize"
           :variant="'muted'"
-          :weight="'medium'"
+          :weight="labelWeight"
           :align="'center'"
           class="group-hover:text-foreground transition-colors duration-300"
         >
@@ -43,7 +44,7 @@
         <Text
           v-if="showDescription && description"
           :as="'p'"
-          :size="'xs'"
+          :size="descriptionSize"
           :variant="'muted'"
           :align="'center'"
           class="mt-2"
@@ -62,10 +63,33 @@ interface MTrustIndicatorCardProps {
   icon: string
   description?: string
   showDescription?: boolean
+  // Card customization
+  cardVariant?: 'default' | 'ghost' | 'outline'
+  contentPadding?: 'sm' | 'md' | 'lg'
+  // Icon customization
+  iconSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+  iconVariant?: 'default' | 'ghost' | 'soft' | 'subtle' | 'outline' | 'gradient'
+  iconShape?: 'circle' | 'square' | 'rounded'
+  // Text customization
+  numberSize?: 'display-value' | 'xl' | '2xl' | '3xl'
+  numberWeight?: 'normal' | 'medium' | 'semibold' | 'bold' | 'black'
+  labelSize?: 'xs' | 'sm' | 'base' | 'lg'
+  labelWeight?: 'normal' | 'medium' | 'semibold' | 'bold'
+  descriptionSize?: 'xs' | 'sm' | 'base'
 }
 
 const props = withDefaults(defineProps<MTrustIndicatorCardProps>(), {
-  showDescription: false
+  showDescription: false,
+  cardVariant: 'default',
+  contentPadding: 'md',
+  iconSize: 'md',
+  iconVariant: 'gradient',
+  iconShape: 'rounded',
+  numberSize: 'display-value',
+  numberWeight: 'bold',
+  labelSize: 'sm',
+  labelWeight: 'medium',
+  descriptionSize: 'xs'
 })
 
 // Consolidated card classes
@@ -77,4 +101,14 @@ const cardClasses = [
   'natural-depth gentle-hover',
   'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2'
 ]
+
+// Content padding classes
+const contentClasses = computed(() => {
+  const paddingMap = {
+    sm: 'p-4 space-y-3',
+    md: 'p-6 space-y-4',
+    lg: 'p-8 space-y-5'
+  }
+  return ['text-center', paddingMap[props.contentPadding]]
+})
 </script>

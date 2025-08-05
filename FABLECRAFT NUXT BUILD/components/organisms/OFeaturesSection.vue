@@ -5,13 +5,14 @@
   >
     <!-- Feature Header -->
     <MFeatureHeader
-      badge-text="Revolutionary Creative Technology"
-      title="The Creative Industry's First Complete Multimedia Suite"
+      :badge-text="headerBadgeText"
+      :title="headerTitle"
+      :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
       :badge-size="isCompact ? 'sm' : 'base'"
-      :heading-size="isCompact ? 'h2-compact' : 'h2'"
-      :subtitle-size="isCompact ? 'body-compact' : 'body-default'"
-      :compact="isCompact"
+      :heading-size="isCompact ? 'md' : 'xl'"
+      :heading-variant="isCompact ? 'compact' : 'default'"
+      :gradient-variant="gradientVariant"
     />
 
     <!-- Trust Indicators Section -->
@@ -73,13 +74,23 @@ interface OFeaturesSectionProps {
   showKeyBenefits?: boolean
   customTrustIndicators?: TrustIndicator[]
   customKeyBenefits?: KeyBenefit[]
+  headerBadgeText?: string
+  headerTitle?: string
+  headerHighlightText?: string
+  headerSubtitle?: string
+  gradientVariant?: 'primary' | 'secondary' | 'accent' | 'rainbow' | 'custom'
   class?: string
 }
 
 const props = withDefaults(defineProps<OFeaturesSectionProps>(), {
   variant: 'default',
   showTrustIndicators: true,
-  showKeyBenefits: true
+  showKeyBenefits: true,
+  headerBadgeText: 'Revolutionary Creative Technology',
+  headerTitle: "The Creative Industry's First Complete",
+  headerHighlightText: 'Multimedia Suite',
+  headerSubtitle: 'Break free from scattered tools. Fablecraft replaces 50+ applications with one intelligent platform that understands your entire creative process from world-building to video production, audio scoring, and community publishing.',
+  gradientVariant: 'primary'
 })
 
 // Variant checks
@@ -92,9 +103,6 @@ const sectionClasses = computed(() => [
   isCompact.value ? 'py-12' : 'section-spacing-compact',
   props.class
 ])
-
-// Header subtitle
-const headerSubtitle = 'Break free from scattered tools. Fablecraft replaces 50+ applications with one intelligent platform that understands your entire creative process from world-building to video production, audio scoring, and community publishing.'
 
 // Default trust indicators data
 const defaultTrustIndicators: TrustIndicator[] = [
