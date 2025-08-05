@@ -54,18 +54,12 @@
         />
 
         <!-- Features Section -->
-        <Section 
+        <OFeaturesSection
           id="features"
-          spacing="lg"
-          class="features-section"
-        >
-          <Container size="xl">
-            <!-- Features Component Placeholder -->
-            <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-              <span class="text-muted-foreground">Features Section</span>
-            </div>
-          </Container>
-        </Section>
+          variant="default"
+          :show-trust-indicators="true"
+          :show-key-benefits="true"
+        />
 
         <!-- Process Section -->
         <Section 
