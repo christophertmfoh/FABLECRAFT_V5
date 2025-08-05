@@ -28,20 +28,26 @@
             <!-- Authenticated User Dropdown -->
             <DropdownMenu v-if="isAuthenticated && user">
               <DropdownMenuTrigger as-child>
-                <Button
-                  class="group bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                <GradientButton
+                  variant="default"
+                  size="default"
+                  :show-gradient-overlay="true"
+                  gradient-colors="from-primary-foreground/25 to-transparent"
+                  class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
                   :aria-label="`User menu for ${displayName}`"
                 >
-                  <span class="flex items-center">
-                    <AtomIcon name="lucide:user-circle" class="mr-2 h-4 w-4" aria-hidden="true" />
-                    Welcome {{ displayName }}
+                  <template #leading>
+                    <AtomIcon name="lucide:user-circle" class="h-4 w-4" aria-hidden="true" />
+                  </template>
+                  Welcome {{ displayName }}
+                  <template #trailing>
                     <AtomIcon 
                       name="lucide:chevron-down" 
-                      class="ml-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-300" 
+                      class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300" 
                       aria-hidden="true" 
                     />
-                  </span>
-                </Button>
+                  </template>
+                </GradientButton>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
@@ -121,17 +127,21 @@
             </DropdownMenu>
             
             <!-- Unauthenticated User Sign In Button -->
-            <Button
+            <GradientButton
               v-else
-              class="group bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+              variant="default"
+              size="default"
+              :show-gradient-overlay="true"
+              gradient-colors="from-primary-foreground/25 to-transparent"
+              class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
               :aria-label="authButtonText"
               @click="handleAuthClick"
             >
-              <span class="flex items-center">
-                <AtomIcon name="lucide:users" class="mr-2 h-4 w-4" aria-hidden="true" />
-                {{ authButtonText }}
-              </span>
-            </Button>
+              <template #leading>
+                <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
+              </template>
+              {{ authButtonText }}
+            </GradientButton>
           </template>
 
           <!-- Advanced Theme Toggle -->
