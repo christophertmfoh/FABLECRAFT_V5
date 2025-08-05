@@ -29,10 +29,14 @@
       </AtomsVisuallyHidden>
 
       <!-- Navigation Header -->
-      <div class="bg-red-500 text-white p-4 text-center font-bold">
-        🔥 HEADER TEST - IF YOU SEE THIS RED BAR, RENDERING WORKS! 🔥
-      </div>
-      <SimpleHeader />
+      <OrganismsNavigationHeader
+        :is-authenticated="isAuthenticated"
+        :user="user"
+        @auth:click="handleAuth"
+        @auth:logout="handleLogout"
+        @navigate="handleNavigate"
+        @logo:click="handleHome"
+      />
 
       <!-- Main Content -->
       <main 
