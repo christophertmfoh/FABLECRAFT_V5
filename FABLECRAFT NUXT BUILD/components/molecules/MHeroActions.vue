@@ -13,15 +13,17 @@
       :aria-label="primaryAriaLabel"
       @click="handlePrimaryClick"
     >
-      <AtomIcon 
-        v-if="primaryIcon"
-        :name="primaryIcon"
-        :class="iconClasses"
-        aria-hidden="true"
-      />
-      <span class="relative z-10">
-        {{ primaryText }}
-      </span>
+      <div class="flex items-center justify-center gap-3">
+        <AtomIcon 
+          v-if="primaryIcon"
+          :name="primaryIcon"
+          :class="iconClasses"
+          aria-hidden="true"
+        />
+        <span class="font-semibold">
+          {{ primaryText }}
+        </span>
+      </div>
       
       <!-- Hover overlay effect -->
       <div 
@@ -39,15 +41,17 @@
       :aria-label="secondaryAriaLabel"
       @click="handleSecondaryClick"
     >
-      <AtomIcon 
-        v-if="secondaryIcon"
-        :name="secondaryIcon"
-        :class="iconClasses"
-        aria-hidden="true"
-      />
-      <span class="relative z-10">
-        {{ secondaryText }}
-      </span>
+      <div class="flex items-center justify-center gap-3">
+        <AtomIcon 
+          v-if="secondaryIcon"
+          :name="secondaryIcon"
+          :class="iconClasses"
+          aria-hidden="true"
+        />
+        <span class="font-semibold">
+          {{ secondaryText }}
+        </span>
+      </div>
     </Button>
   </div>
 </template>
@@ -152,14 +156,14 @@ const secondaryButtonClasses = computed(() => {
 
 const iconClasses = computed(() => {
   const sizeClasses = {
-    sm: 'w-4 h-4 mr-2',
-    default: 'w-4 h-4 mr-2',
-    lg: 'w-5 h-5 mr-3',
+    sm: 'w-4 h-4',
+    default: 'w-4 h-4',
+    lg: 'w-5 h-5',
     icon: 'w-4 h-4'
   }
   
   return cn(
-    'group-hover:scale-110 transition-transform duration-300',
+    'group-hover:scale-110 transition-transform duration-300 flex-shrink-0',
     sizeClasses[props.buttonSize]
   )
 })

@@ -71,9 +71,9 @@ const gradientStyles = computed(() => {
       vibrant: 'linear-gradient({direction}, hsl(var(--accent)), hsl(var(--primary)))'
     },
     rainbow: {
-      subtle: 'linear-gradient({direction}, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7)',
-      normal: 'linear-gradient({direction}, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd)',
-      vibrant: 'linear-gradient({direction}, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)'
+      subtle: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)))',
+      normal: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary) / 0.8))',
+      vibrant: 'linear-gradient({direction}, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary)), hsl(var(--accent)))'
     },
     custom: {
       subtle: 'linear-gradient({direction}, currentColor, transparent)',
@@ -98,9 +98,11 @@ const gradientStyles = computed(() => {
 
   return {
     backgroundImage: gradient,
-    // Ensure proper text rendering
+    // Ensure proper text rendering across all themes
     WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent'
+    WebkitTextFillColor: 'transparent',
+    // Fallback for theme compatibility
+    backgroundClip: 'text'
   }
 })
 </script>

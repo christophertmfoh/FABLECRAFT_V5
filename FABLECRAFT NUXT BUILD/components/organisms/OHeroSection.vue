@@ -212,13 +212,6 @@ const heroSectionClasses = computed(() => {
     gradient: 'relative z-10 bg-gradient-to-b from-background/50 to-background',
     transparent: 'relative z-10 bg-transparent'
   }
-  
-  const spacingClasses = {
-    tight: 'space-y-6',
-    normal: 'space-y-8',
-    relaxed: 'space-y-12',
-    spacious: 'space-y-16'
-  }
 
   return cn(
     'w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
@@ -279,15 +272,15 @@ const handleBadgeClick = (event: MouseEvent) => {
 </script>
 
 <style scoped>
-/* Hero section styling with theme integration */
+/* Hero section styling with optimized theme integration */
 .hero-content {
   @apply text-center max-w-5xl mx-auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-6);
 }
 
-/* Enhanced hero ambient glow effect */
+/* Enhanced hero ambient glow effect - optimized */
 .hero-ambient-glow::before {
   content: '';
   position: absolute;
@@ -297,36 +290,36 @@ const handleBadgeClick = (event: MouseEvent) => {
   height: 100%;
   background: radial-gradient(
     ellipse at center,
-    hsl(var(--primary) / 0.12) 0%,
-    transparent 80%
+    hsl(var(--primary) / 0.15) 0%,
+    transparent 70%
   );
   transform: translateX(-50%);
-  filter: blur(80px);
+  filter: blur(60px);
   z-index: -1;
   pointer-events: none;
   opacity: 1;
 }
 
-/* Responsive spacing adjustments */
-@media (max-width: 768px) {
-  .hero-content {
-    gap: var(--space-2);
-  }
-}
-
-@media (min-width: 769px) {
+/* Responsive spacing optimizations */
+@media (max-width: 640px) {
   .hero-content {
     gap: var(--space-4);
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   .hero-content {
-    gap: var(--space-6);
+    gap: var(--space-5);
   }
 }
 
-/* Enhanced focus management for the entire section */
+@media (min-width: 1025px) {
+  .hero-content {
+    gap: var(--space-8);
+  }
+}
+
+/* Enhanced focus management */
 .hero-section:focus-within {
   outline: none;
 }
@@ -362,10 +355,10 @@ const handleBadgeClick = (event: MouseEvent) => {
   }
 }
 
-/* Dark mode enhancements */
+/* Theme-reactive dark mode enhancements */
 @media (prefers-color-scheme: dark) {
   .hero-ambient-glow::before {
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }
 </style>
