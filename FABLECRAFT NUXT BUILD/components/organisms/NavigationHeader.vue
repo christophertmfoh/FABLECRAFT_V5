@@ -248,10 +248,10 @@ const handleNavigate = (item: any, href?: string) => {
 // Compute header classes (matches React version exactly)
 const headerClasses = computed(() => {
   return cn(
-    'sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-sm',
+    'sticky top-0 z-50 backdrop-blur-xl border-b border-border/20 shadow-sm',
     {
       'bg-transparent': props.variant === 'transparent',
-      'bg-background border-b border-border shadow-sm': props.variant === 'solid',
+      'bg-background/20 border-b border-border shadow-sm': props.variant === 'solid',
     },
     props.className
   )

@@ -122,9 +122,9 @@ const footerClasses = computed(() => {
   const baseClasses = 'relative z-10'
   
   const variantClasses = {
-    default: 'bg-background/90 border-t border-border',
+    default: 'border-t border-border/30',
     minimal: 'bg-transparent border-t border-border/50',
-    dark: 'bg-background border-t border-border'
+    dark: 'border-t border-border'
   }
 
   return cn(

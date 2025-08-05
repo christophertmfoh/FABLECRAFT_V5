@@ -13,7 +13,14 @@
       :aria-label="primaryAriaLabel"
       @click="handlePrimaryClick"
     >
-      <div class="flex items-center justify-center gap-3">
+      <!-- Hover overlay effect (behind content) -->
+      <div 
+        class="absolute inset-0 bg-gradient-to-r from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10"
+        aria-hidden="true"
+      />
+      
+      <!-- Button Content -->
+      <div class="relative flex items-center justify-center gap-3">
         <AtomIcon 
           v-if="primaryIcon"
           :name="primaryIcon"
@@ -24,12 +31,6 @@
           {{ primaryText }}
         </span>
       </div>
-      
-      <!-- Hover overlay effect -->
-      <div 
-        class="absolute inset-0 bg-gradient-to-r from-foreground/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
-        aria-hidden="true"
-      />
     </Button>
 
     <!-- Secondary Action Button -->
@@ -41,7 +42,14 @@
       :aria-label="secondaryAriaLabel"
       @click="handleSecondaryClick"
     >
-      <div class="flex items-center justify-center gap-3">
+      <!-- Hover overlay effect (behind content) -->
+      <div 
+        class="absolute inset-0 bg-gradient-to-r from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10"
+        aria-hidden="true"
+      />
+      
+      <!-- Button Content -->
+      <div class="relative flex items-center justify-center gap-3">
         <AtomIcon 
           v-if="secondaryIcon"
           :name="secondaryIcon"
@@ -139,7 +147,7 @@ const primaryButtonClasses = computed(() => {
     'group relative w-full sm:w-auto',
     'font-semibold shadow-lg hover:shadow-xl',
     'rounded-xl transition-all duration-300',
-    'hover:scale-105 hover:-translate-y-0.5',
+    'hover:scale-[1.02]',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
   )
 })
@@ -149,7 +157,7 @@ const secondaryButtonClasses = computed(() => {
     'group relative w-full sm:w-auto',
     'font-semibold shadow-md hover:shadow-lg',
     'rounded-xl transition-all duration-300',
-    'hover:scale-105 hover:-translate-y-0.5',
+    'hover:scale-[1.02]',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
   )
 })
