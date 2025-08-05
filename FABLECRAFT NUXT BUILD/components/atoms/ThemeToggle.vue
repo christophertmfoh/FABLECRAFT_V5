@@ -15,7 +15,11 @@
       </Button>
     </DropdownMenuTrigger>
     
-    <DropdownMenuContent align="end" class="w-64 focus:outline-none">
+    <DropdownMenuContent 
+      align="end" 
+      class="w-64 focus:outline-none"
+      @close-auto-focus="(e) => e.preventDefault()"
+    >
       <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
       <DropdownMenuSeparator />
 
