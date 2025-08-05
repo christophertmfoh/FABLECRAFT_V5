@@ -129,17 +129,18 @@
       </main>
 
       <!-- Footer Section -->
-      <footer 
+      <Footer
         id="footer"
-        class="relative z-30 bg-card border-t"
-      >
-        <Container size="xl" class="py-8 md:py-12">
-          <!-- Footer Component Placeholder -->
-          <div class="min-h-[200px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
-            <span class="text-muted-foreground">Footer Component</span>
-          </div>
-        </Container>
-      </footer>
+        class="relative z-30"
+        :show-branding="true"
+        variant="default"
+        @navigate="handleFooterNavigation"
+        @newsletter:subscribe="handleNewsletterSubscribe"
+        @newsletter:success="handleNewsletterSuccess"
+        @newsletter:error="handleNewsletterError"
+        @social:click="handleSocialClick"
+        @legal:click="handleLegalClick"
+      />
     </div>
 
     <!-- Scroll Progress Indicator (optional) -->
@@ -223,6 +224,37 @@ const handleScroll = () => {
   const winScroll = document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
   scrollProgress.value = (winScroll / height) * 100
+}
+
+// Footer event handlers
+const handleFooterNavigation = (payload: { type: string; item: string; category: string }) => {
+  console.log('Footer navigation:', payload)
+  // Future: Handle footer navigation routing
+}
+
+const handleNewsletterSubscribe = (email: string) => {
+  console.log('Newsletter subscription:', email)
+  // Future: Handle newsletter subscription API call
+}
+
+const handleNewsletterSuccess = (email: string) => {
+  console.log('Newsletter subscription successful:', email)
+  // Future: Show success notification
+}
+
+const handleNewsletterError = (error: string) => {
+  console.log('Newsletter subscription error:', error)
+  // Future: Show error notification
+}
+
+const handleSocialClick = (platform: string) => {
+  console.log('Social media click:', platform)
+  // Future: Handle social media analytics
+}
+
+const handleLegalClick = (payload: { text: string; href?: string }) => {
+  console.log('Legal link click:', payload)
+  // Future: Handle legal page navigation
 }
 
 // Component mount lifecycle
