@@ -208,7 +208,7 @@ const heroSectionClasses = computed(() => {
   }
   
   const backgroundClasses = {
-    default: 'relative z-10',
+    default: 'relative z-10 bg-background',
     gradient: 'relative z-10 bg-gradient-to-b from-background/50 to-background',
     transparent: 'relative z-10 bg-transparent'
   }

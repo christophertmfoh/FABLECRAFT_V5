@@ -27,7 +27,7 @@
       
       <!-- Hover overlay effect -->
       <div 
-        class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+        class="absolute inset-0 bg-gradient-to-r from-foreground/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
         aria-hidden="true"
       />
     </Button>
