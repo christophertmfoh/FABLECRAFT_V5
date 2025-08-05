@@ -214,7 +214,7 @@ const themeConfig = {
   'coffee-house': { icon: 'lucide:moon', label: 'Coffee House', description: 'Warm browns' },
   'sunset-coral': { icon: 'lucide:sun', label: 'Sunset Coral', description: 'Warm coral and gold' },
   'lavender-dusk': { icon: 'lucide:sun', label: 'Lavender Dusk', description: 'Soft lavender and grey' },
-  'moonlit-garden': { icon: 'lucide:sun', label: 'Moonlit Garden', description: 'Mystical moonlit blues' },
+  'moonlit-garden': { icon: 'lucide:sun', label: 'Moonlit Garden', description: 'Mystical garden greens' },
   halloween: { icon: 'lucide:zap', label: 'Halloween', description: 'Spooky orange and black' },
   'cherry-lacquer': { icon: 'lucide:moon', label: 'Cherry Lacquer', description: 'Luxury deep red' },
   netrunner: { icon: 'lucide:zap', label: 'Netrunner', description: 'Electric yellow and cyan' },
