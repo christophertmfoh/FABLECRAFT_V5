@@ -22,14 +22,14 @@
     <!-- Main Content Layer -->
     <div class="relative z-10">
       <!-- Skip to Content Link (Accessibility) -->
-      <AtomsVisuallyHidden>
+      <VisuallyHidden>
         <a href="#main-content" class="skip-link">
           Skip to main content
         </a>
-      </AtomsVisuallyHidden>
+      </VisuallyHidden>
 
       <!-- Navigation Header -->
-      <OrganismsNavigationHeader
+      <NavigationHeader
         :is-authenticated="isAuthenticated"
         :user="user"
         @auth:click="handleAuth"
@@ -44,88 +44,88 @@
         class="relative z-20"
       >
         <!-- Hero Section -->
-        <AtomsSection 
+        <Section 
           id="hero"
           spacing="xl"
           class="hero-section"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Hero Component Placeholder -->
             <div class="min-h-[600px] md:min-h-[700px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Hero Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Features Section -->
-        <AtomsSection 
+        <Section 
           id="features"
           spacing="lg"
           class="features-section"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Features Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Features Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Process Section -->
-        <AtomsSection 
+        <Section 
           id="process"
           spacing="lg"
           class="process-section bg-muted/30"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Process Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Process Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Testimonials Section -->
-        <AtomsSection 
+        <Section 
           id="testimonials"
           spacing="lg"
           class="testimonials-section"
         >
-          <AtomsContainer size="lg">
+          <Container size="lg">
             <!-- Testimonials Component Placeholder -->
             <div class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Testimonials Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- Pricing Section -->
-        <AtomsSection 
+        <Section 
           id="pricing"
           spacing="lg"
           class="pricing-section bg-muted/20"
         >
-          <AtomsContainer size="xl">
+          <Container size="xl">
             <!-- Pricing Component Placeholder -->
             <div class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">Pricing Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
 
         <!-- CTA Section -->
-        <AtomsSection 
+        <Section 
           id="cta"
           spacing="lg"
           class="cta-section"
         >
-          <AtomsContainer size="md">
+          <Container size="md">
             <!-- CTA Component Placeholder -->
             <div class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
               <span class="text-muted-foreground">CTA Section</span>
             </div>
-          </AtomsContainer>
-        </AtomsSection>
+          </Container>
+        </Section>
       </main>
 
       <!-- Footer Section -->
@@ -133,12 +133,12 @@
         id="footer"
         class="relative z-30 bg-card border-t"
       >
-        <AtomsContainer size="xl" class="py-8 md:py-12">
+        <Container size="xl" class="py-8 md:py-12">
           <!-- Footer Component Placeholder -->
           <div class="min-h-[200px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
             <span class="text-muted-foreground">Footer Component</span>
           </div>
-        </AtomsContainer>
+        </Container>
       </footer>
     </div>
 

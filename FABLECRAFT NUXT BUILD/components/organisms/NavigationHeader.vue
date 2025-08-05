@@ -4,85 +4,162 @@
     role="navigation"
     aria-label="Main navigation"
   >
-    <div class="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 py-4">
+    <Container size="xl" class="py-4">
       <div class="flex items-center justify-between">
-        <!-- Brand Logo Section -->
-        <button
-          class="group flex items-center space-x-3 cursor-pointer transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg p-2 -m-2"
-          aria-label="Navigate to homepage"
+        <!-- Brand Logo Section - Match exact React design -->
+        <div
+          class="flex items-center space-x-3 group cursor-pointer"
           @click="handleLogoClick"
         >
-          <span class="text-2xl font-bold text-primary">🪶 {{ brandText }}</span>
-        </button>
+          <div class="w-14 h-14 bg-primary/10 hover:bg-primary/20 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
+            <AtomIcon 
+              name="lucide:feather" 
+              class="w-7 h-7 text-primary" 
+              aria-hidden="true" 
+            />
+          </div>
+          <span class="text-3xl font-black text-foreground tracking-wide">
+            Fablecraft
+          </span>
+        </div>
 
-        <!-- Main Navigation Menu (Desktop) -->
-        <nav class="hidden md:flex items-center space-x-8" aria-label="Main navigation">
+        <!-- Professional Navigation Menu -->
+        <div v-if="showNavItems" class="flex items-center space-x-8">
           <button
             v-for="item in navigationItems"
             :key="item.id"
-            class="text-sm font-semibold tracking-wide cursor-pointer uppercase px-3 py-2 hover:text-primary transition-colors rounded-md"
-            :class="{ 'text-primary font-bold border-b-2 border-primary': item.active }"
+            class="text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 tracking-wide cursor-pointer uppercase"
             @click="() => handleNavigate(item.id)"
           >
             {{ item.label }}
           </button>
-        </nav>
+        </div>
 
-        <!-- Actions Section -->
+        <!-- Navigation Actions -->
         <div class="flex items-center space-x-4">
           <!-- Authentication Section -->
           <template v-if="showAuthButton">
-            <!-- Unauthenticated User -->
-            <Button
-              v-if="!isAuthenticated"
-              :class="authButtonClasses"
-              @click="handleAuthClick"
-            >
-              {{ authButtonText }}
-            </Button>
-            
             <!-- Authenticated User Dropdown -->
-            <DropdownMenu v-else>
+            <DropdownMenu v-if="isAuthenticated && user">
               <DropdownMenuTrigger as-child>
-                <Button class="bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl">
-                  Welcome {{ displayName }}
+                <Button
+                  class="group bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                  :aria-label="`User menu for ${displayName}`"
+                >
+                  <span class="flex items-center">
+                    <AtomIcon name="lucide:user-circle" class="mr-2 h-4 w-4" aria-hidden="true" />
+                    Welcome {{ displayName }}
+                    <AtomIcon 
+                      name="lucide:chevron-down" 
+                      class="ml-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-300" 
+                      aria-hidden="true" 
+                    />
+                  </span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" class="w-64 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2">
-                <DropdownMenuItem @click="() => handleNavigate('projects')">
-                  Creative Workspace
-                </DropdownMenuItem>
-                <DropdownMenuItem @click="() => handleNavigate('profile')">
-                  Profile & Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem @click="handleLogout" class="text-destructive">
-                  Sign Out
-                </DropdownMenuItem>
+
+              <DropdownMenuContent
+                align="end"
+                class="w-64 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2"
+              >
+                <!-- Workspace Section -->
+                <div class="p-2 border-b border-border/20">
+                  <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                    Workspace
+                  </div>
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @click="() => handleNavigate('projects')"
+                  >
+                    <AtomIcon name="lucide:book-open" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
+                    <div>
+                      <div class="font-medium">Creative Workspace</div>
+                      <div class="text-xs text-muted-foreground">
+                        Projects, characters & world bible
+                      </div>
+                    </div>
+                  </DropdownMenuItem>
+                </div>
+
+                <!-- Account Section -->
+                <div class="p-2 border-b border-border/20">
+                  <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                    Account
+                  </div>
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @click="() => handleNavigate('profile')"
+                  >
+                    <AtomIcon name="lucide:user" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
+                    <div>
+                      <div class="font-medium">Profile & Settings</div>
+                      <div class="text-xs text-muted-foreground">
+                        Manage your account
+                      </div>
+                    </div>
+                  </DropdownMenuItem>
+                </div>
+
+                <!-- Community Section -->
+                <div class="p-2 border-b border-border/20">
+                  <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+                    Community
+                  </div>
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @click="() => handleNavigate('community')"
+                  >
+                    <AtomIcon name="lucide:users" class="mr-3 h-4 w-4 text-primary" aria-hidden="true" />
+                    <div>
+                      <div class="font-medium">Writer Community</div>
+                      <div class="text-xs text-muted-foreground">
+                        Connect with other writers
+                      </div>
+                    </div>
+                  </DropdownMenuItem>
+                </div>
+
+                <!-- Sign Out -->
+                <div class="p-2">
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-destructive/10 py-3 px-4 rounded-lg transition-colors"
+                    @click="handleLogout"
+                  >
+                    <AtomIcon name="lucide:log-out" class="mr-3 h-4 w-4 text-destructive" aria-hidden="true" />
+                    <span class="font-medium text-destructive">
+                      Sign Out
+                    </span>
+                  </DropdownMenuItem>
+                </div>
               </DropdownMenuContent>
             </DropdownMenu>
+            
+            <!-- Unauthenticated User Sign In Button -->
+            <Button
+              v-else
+              class="group bg-primary hover:bg-primary/90 text-primary-foreground px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+              :aria-label="authButtonText"
+              @click="handleAuthClick"
+            >
+              <span class="flex items-center">
+                <AtomIcon name="lucide:users" class="mr-2 h-4 w-4" aria-hidden="true" />
+                {{ authButtonText }}
+              </span>
+            </Button>
           </template>
 
-          <!-- Theme Toggle -->
-          <Button
-            variant="ghost"
-            size="icon"
-            class="relative transition-all duration-300 hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-            aria-label="Toggle theme"
-            @click="handleThemeToggle"
-          >
-            {{ isDark ? '🌙' : '☀️' }}
-          </Button>
+          <!-- Advanced Theme Toggle -->
+          <ThemeToggle />
         </div>
       </div>
-    </div>
+    </Container>
   </nav>
 </template>
 
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
 
-console.log('🔥 NavigationHeader component loaded!')
+console.log('🔥 Full NavigationHeader component loaded!')
 
 // User interface
 interface User {
@@ -105,7 +182,6 @@ interface NavigationHeaderProps {
   showAuthButton?: boolean
   authButtonText?: string
   showNavItems?: boolean
-  brandText?: string
   
   // User state
   isAuthenticated?: boolean
@@ -121,7 +197,6 @@ const props = withDefaults(defineProps<NavigationHeaderProps>(), {
   showAuthButton: true,
   authButtonText: 'Sign Up / Sign In',
   showNavItems: true,
-  brandText: 'Fablecraft',
   isAuthenticated: false,
   variant: 'default',
 })
@@ -134,7 +209,7 @@ const emit = defineEmits<{
   'logo:click': []
 }>()
 
-// Default navigation items
+// Default navigation items (matches React version)
 const navigationItems: NavigationItem[] = [
   { id: 'community', label: 'COMMUNITY', href: '/community' },
   { id: 'gallery', label: 'GALLERY', href: '/gallery' },
@@ -156,9 +231,6 @@ const isAuthenticated = computed(() => {
 const displayName = computed(() => {
   return user.value?.user_metadata?.username || user.value?.email?.split('@')[0] || 'User'
 })
-
-// Theme system
-const { isDark, toggleTheme } = useTheme()
 
 // Handle logo click
 const handleLogoClick = () => {
@@ -192,32 +264,13 @@ const handleNavigate = (view: string) => {
   }
 }
 
-// Handle theme toggle
-const handleThemeToggle = () => {
-  toggleTheme()
-}
-
-// Compute auth button classes
-const authButtonClasses = computed(() => {
-  return cn(
-    'bg-primary hover:bg-primary/90 text-primary-foreground',
-    'px-4 py-2 font-semibold shadow-md hover:shadow-lg',
-    'transition-all duration-300 hover:scale-105 rounded-xl',
-    'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
-  )
-})
-
-// Compute header classes
+// Compute header classes (matches React version exactly)
 const headerClasses = computed(() => {
   return cn(
-    'relative z-50 transition-all duration-300',
+    'sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-sm',
     {
-      'sticky top-0 bg-background/80 backdrop-blur-xl border-b border-border/20 shadow-sm': 
-        props.variant === 'default',
-      'bg-transparent': 
-        props.variant === 'transparent',
-      'bg-background border-b border-border shadow-sm': 
-        props.variant === 'solid',
+      'bg-transparent': props.variant === 'transparent',
+      'bg-background border-b border-border shadow-sm': props.variant === 'solid',
     },
     props.className
   )

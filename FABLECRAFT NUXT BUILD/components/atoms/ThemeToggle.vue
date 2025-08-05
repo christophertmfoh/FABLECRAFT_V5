@@ -1,12 +1,73 @@
 <template>
-  <button
-    :class="triggerClasses"
-    :aria-label="ariaLabel"
-    @click="handleToggle"
-  >
-    <!-- Simplified: Just text for now -->
-    {{ isDark ? '🌙' : '☀️' }} Theme
-  </button>
+  <DropdownMenu>
+    <DropdownMenuTrigger as-child>
+      <Button
+        :class="triggerClasses"
+        :aria-label="ariaLabel"
+        variant="ghost"
+        size="icon"
+      >
+        <!-- Dynamic icon based on current theme -->
+        <AtomIcon 
+          :name="currentThemeIcon" 
+          class="h-4 w-4 transition-transform duration-300" 
+          aria-hidden="true"
+        />
+      </Button>
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent 
+      align="end" 
+      class="w-80 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2 max-h-96 overflow-y-auto"
+    >
+      <!-- Theme Header -->
+      <div class="theme-header">
+        <div class="text-sm font-semibold text-foreground">
+          Choose Theme
+        </div>
+        <div class="text-xs text-muted-foreground mt-1">
+          Current: {{ currentThemeObject.label }}
+        </div>
+      </div>
+
+      <!-- Theme Categories -->
+      <div v-for="category in themeCategories" :key="category" class="p-2 border-b border-border/20 last:border-b-0">
+        <div class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+          {{ category }}
+        </div>
+        
+        <template v-for="theme in getThemesByCategory(category)" :key="theme.name">
+          <DropdownMenuItem
+            class="cursor-pointer hover:bg-accent/10 p-3 rounded-lg transition-colors theme-item"
+            @click="() => handleThemeChange(theme.name)"
+          >
+            <!-- Theme Preview Circle -->
+            <div 
+              class="theme-preview"
+              :style="{ backgroundColor: theme.preview?.primary || 'currentColor' }"
+            />
+            
+            <!-- Theme Info -->
+            <div class="theme-info">
+              <div class="theme-label">
+                {{ theme.label }}
+                <!-- Current theme indicator -->
+                <AtomIcon 
+                  v-if="currentTheme === theme.name"
+                  name="lucide:check"
+                  class="h-4 w-4 text-primary"
+                  aria-hidden="true"
+                />
+              </div>
+              <div v-if="theme.description" class="theme-description">
+                {{ theme.description }}
+              </div>
+            </div>
+          </DropdownMenuItem>
+        </template>
+      </div>
+    </DropdownMenuContent>
+  </DropdownMenu>
 </template>
 
 <script setup lang="ts">
@@ -22,27 +83,50 @@ interface ThemeToggleProps {
 
 // Define props with defaults
 const props = withDefaults(defineProps<ThemeToggleProps>(), {
-  ariaLabel: 'Toggle theme',
+  ariaLabel: 'Change theme',
 })
 
-// Use theme system
+// Use theme system with all features
 const { 
+  themes, 
+  themeCategories, 
+  currentTheme, 
+  currentThemeObject,
   isDark,
-  toggleTheme
+  setThemeWithTransition,
 } = useTheme()
 
-// Handle theme toggle
-const handleToggle = () => {
-  toggleTheme()
+// Get themes by category
+const getThemesByCategory = (category: string) => {
+  return themes.filter(theme => theme.category === category)
+}
+
+// Get current theme icon
+const currentThemeIcon = computed(() => {
+  const theme = currentThemeObject.value
+  if (!theme) return 'lucide:sun'
+  
+  // Icon based on color scheme
+  switch (theme.colorScheme) {
+    case 'dark':
+      return 'lucide:moon'
+    case 'auto':
+      return 'lucide:monitor'
+    default:
+      return 'lucide:sun'
+  }
+})
+
+// Handle theme change
+const handleThemeChange = (themeName: string) => {
+  setThemeWithTransition(themeName)
 }
 
 // Compute trigger classes
 const triggerClasses = computed(() => {
   return cn(
-    'relative transition-all duration-300 px-3 py-2 rounded-md',
-    'hover:bg-accent hover:text-accent-foreground',
+    'relative transition-all duration-300 hover:bg-accent hover:text-accent-foreground',
     'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-    'text-sm font-medium cursor-pointer',
     props.class
   )
 })
