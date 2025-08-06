@@ -23,14 +23,10 @@
         <a href="#main-content" class="skip-link"> Skip to main content </a>
       </VisuallyHidden>
 
-      <!-- Navigation Header Organism -->
+      <!-- Navigation Header -->
       <NavigationHeader
         :is-authenticated="isAuthenticated"
         :user="user"
-        :show-auth-button="true"
-        :show-brand-text="true"
-        :show-nav-items="true"
-        brand-text="FABLECRAFT"
         @auth:click="handleAuth"
         @auth:logout="handleLogout"
         @navigate="handleNavigate"
@@ -57,7 +53,7 @@
         </Section>
       </main>
 
-      <!-- Footer Organism -->
+      <!-- Footer Section -->
       <Footer
         id="footer"
         class="relative z-30"
