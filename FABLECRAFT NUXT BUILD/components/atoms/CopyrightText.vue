@@ -24,20 +24,19 @@ const props = withDefaults(defineProps<CopyrightTextProps>(), {
   class: '',
 })
 
-// Get current year
-const getCurrentYear = () => new Date().getFullYear()
+// Get current year - SSR-safe with consistent date
+const currentYear = useState('copyright-year', () => new Date().getFullYear())
 
 // Computed properties
 const copyrightText = computed(() => {
-  const currentYear = getCurrentYear()
 
   // If startYear is provided and different from current year, show range
-  if (props.startYear && props.startYear < currentYear) {
-    return `© ${props.startYear}-${currentYear} ${props.company}. All rights reserved.`
+  if (props.startYear && props.startYear < currentYear.value) {
+    return `© ${props.startYear}-${currentYear.value} ${props.company}. All rights reserved.`
   }
 
   // Otherwise, just show current year
-  return `© ${currentYear} ${props.company}. All rights reserved.`
+  return `© ${currentYear.value} ${props.company}. All rights reserved.`
 })
 
 const copyrightClasses = computed(() => {
