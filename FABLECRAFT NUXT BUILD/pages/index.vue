@@ -77,15 +77,13 @@
         </Section>
 
         <!-- Pricing Section -->
-        <Section spacing="xl" class="pricing-section bg-muted/20">
-          <Container size="xl">
-            <!-- Pricing Component Placeholder -->
-            <div
-              class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Pricing Section</span>
-            </div>
-          </Container>
+        <Section spacing="xl" class="pricing-section">
+          <OPricingSection
+            id="pricing"
+            variant="default"
+            @plan-click="handlePlanClick"
+            @cta-click="handlePricingCtaClick"
+          />
         </Section>
 
         <!-- CTA Section -->
@@ -250,6 +248,29 @@ const handleProcessStepClick = (stepNumber: number, stepData: { title: string; d
 const handleTestimonialClick = (testimonial: { id: string; name: string; role: string; content: string; rating: number }) => {
   logger.log('Testimonial click:', testimonial)
   // Future: Handle testimonial interactions - could show full testimonial, navigate to case study, etc.
+}
+
+// Pricing section event handlers
+const handlePlanClick = (plan: { id: string; name: string; price: string | number; description: string }) => {
+  logger.log('Pricing plan click:', plan)
+  // Future: Handle plan interactions - could show detailed comparison, features breakdown, etc.
+}
+
+const handlePricingCtaClick = (plan: { id: string; name: string; price: string | number; ctaText?: string }) => {
+  logger.log('Pricing CTA click:', plan)
+  // Future: Handle pricing CTA - could navigate to signup, payment flow, contact sales, etc.
+  
+  // Example routing based on plan type
+  if (plan.id === 'enterprise') {
+    // Could navigate to contact sales page
+    logger.log('Navigating to contact sales for enterprise plan')
+  } else if (plan.id === 'free') {
+    // Could navigate directly to signup
+    logger.log('Navigating to free signup')
+  } else {
+    // Could navigate to payment flow
+    logger.log('Navigating to payment flow for paid plan')
+  }
 }
 
 // Component mount lifecycle
