@@ -60,7 +60,7 @@
         <span>{{ footerBranding.madeWithText }}</span>
         <APulsingHeart
           size="md"
-          color="red"
+          color="theme-adaptive"
           intensity="normal"
           speed="normal"
         />
