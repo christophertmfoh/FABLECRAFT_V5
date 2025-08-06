@@ -20,8 +20,29 @@
     />
 
     <!-- Main CTA Card -->
-    <Card :class="ctaCardClasses" variant="default">
-              <div class="relative z-10 p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto">
+    <div :class="ctaCardClasses">
+      <!-- Advanced Background Effects -->
+      <div class="absolute inset-0 rounded-3xl overflow-hidden">
+        <!-- Primary Gradient Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/15 to-pink-500/20"></div>
+        
+        <!-- Secondary Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-background/95"></div>
+        
+        <!-- Animated Glow Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 animate-pulse"></div>
+        
+        <!-- Glassmorphism Backdrop -->
+        <div class="absolute inset-0 backdrop-blur-xl bg-white/5 dark:bg-white/5"></div>
+        
+        <!-- Border Glow -->
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 p-[1px]">
+          <div class="w-full h-full rounded-3xl bg-background/50"></div>
+        </div>
+      </div>
+
+      <!-- Content Container -->
+      <div class="relative z-10 p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto">
         <!-- Icon Container (optional) -->
         <div
           v-if="showIcon && !isCompact"
@@ -76,7 +97,7 @@
           :alignment="'center'"
           :spacing="ctaSpacing"
           :group-label="'Call to action buttons'"
-          class="mt-acquaintances mb-8"
+          class="mt-8 mb-8"
           @primary:click="handlePrimaryCtaClick"
           @secondary:click="handleSecondaryCtaClick"
         />
@@ -86,12 +107,12 @@
           v-if="trustSignal"
           tag="p"
           size="sm"
-          class="text-muted-foreground text-center mt-6"
+          class="text-muted-foreground/80 text-center mt-6 font-medium"
         >
           {{ trustSignal }}
         </Text>
       </div>
-    </Card>
+    </div>
   </section>
 </template>
 
@@ -198,44 +219,67 @@ const sectionClasses = computed(() => [
 
 const ctaCardClasses = computed(() => {
   const baseClasses = [
-    'relative overflow-hidden',
-    'bg-gradient-to-br from-card via-background to-card/50',
-    'border border-border/50 backdrop-blur-sm',
-    'shadow-2xl hover:shadow-3xl',
+    // Container & Layout
+    'relative overflow-hidden mt-16',
+    'rounded-3xl',
+    
+    // Modern Shadows & Elevation
+    'shadow-[0_32px_64px_-12px_rgba(0,0,0,0.25)]',
+    'dark:shadow-[0_32px_64px_-12px_rgba(0,0,0,0.4)]',
+    
+    // Premium Interactions
     'transition-all duration-700 ease-out',
-    'hover:scale-[1.02] hover:-translate-y-2',
-    'mt-acquaintances',
-    'rounded-2xl',
-    // Premium glow effect
-    'before:absolute before:inset-0 before:rounded-2xl',
-    'before:bg-gradient-to-r before:from-primary/5 before:via-transparent before:to-accent/5',
-    'before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-700',
+    'hover:shadow-[0_40px_80px_-12px_rgba(0,0,0,0.35)]',
+    'dark:hover:shadow-[0_40px_80px_-12px_rgba(0,0,0,0.5)]',
+    'hover:scale-[1.01] hover:-translate-y-1',
+    'group cursor-default',
+    
+    // Performance
+    'transform-gpu will-change-transform',
   ]
-  
-  if (props.theme === 'gradient') {
-    baseClasses.push('bg-gradient-to-br from-primary/5 via-card/95 to-accent/10')
-  }
   
   return baseClasses
 })
 
 const iconContainerClasses = computed(() => [
-  'w-20 h-20 bg-primary/10 hover:bg-primary/20 rounded-2xl',
-  'flex items-center justify-center mx-auto mb-6',
-  'transition-all duration-500',
-  'hover:scale-110 hover:rotate-3 hover:shadow-lg',
+  // Layout & Size
+  'w-24 h-24 mx-auto mb-8',
+  'flex items-center justify-center',
+  
+  // Modern Glass Effect
+  'bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10',
+  'backdrop-blur-sm border border-primary/20',
+  'rounded-2xl',
+  
+  // Advanced Shadows
+  'shadow-[0_8px_32px_-4px_rgba(0,0,0,0.1)]',
+  'dark:shadow-[0_8px_32px_-4px_rgba(0,0,0,0.3)]',
+  
+  // Premium Interactions
+  'transition-all duration-500 ease-out',
+  'hover:bg-gradient-to-br hover:from-primary/20 hover:via-primary/10 hover:to-accent/20',
+  'hover:shadow-[0_12px_40px_-4px_rgba(0,0,0,0.15)]',
+  'dark:hover:shadow-[0_12px_40px_-4px_rgba(0,0,0,0.4)]',
+  'hover:scale-110 hover:rotate-2',
+  'group-hover:scale-105',
+  
+  // Performance
+  'transform-gpu will-change-transform',
 ])
 
 const iconClasses = computed(() => [
-  'text-primary hover:scale-110 transition-transform duration-300',
+  'text-primary transition-all duration-300 ease-out',
+  'group-hover:scale-110 group-hover:text-primary/90',
 ])
 
 const mainHeadingClasses = computed(() => [
-  'font-black leading-[1.1] tracking-tight mb-6',
+  'font-black leading-[1.1] tracking-tight mb-8',
+  'text-balance', // Better text wrapping
 ])
 
 const supportingCopyClasses = computed(() => [
-  'text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium mb-6',
+  'text-muted-foreground/90 max-w-2xl mx-auto leading-relaxed font-medium mb-8',
+  'text-balance', // Better text wrapping
 ])
 
 // Event handlers
