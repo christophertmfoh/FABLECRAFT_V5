@@ -58,11 +58,10 @@
       <!-- Made with Love -->
       <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground mt-8 pt-6">
         <span>{{ footerBranding.madeWithText }}</span>
-        <APulsingHeart
-          size="md"
-          color="primary"
-          intensity="strong"
-          speed="normal"
+        <AtomIcon
+          name="lucide:heart"
+          class="w-4 h-4 text-primary animate-pulse"
+          fill="currentColor"
         />
         <span>{{ footerBranding.madeForText }}</span>
       </div>
