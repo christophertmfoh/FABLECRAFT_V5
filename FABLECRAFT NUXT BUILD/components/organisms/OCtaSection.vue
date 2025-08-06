@@ -184,15 +184,7 @@ const sectionClasses = computed(() => [
   props.class,
 ])
 
-const headingClasses = computed(() => [
-  'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl',
-  'font-black leading-[1.1] tracking-tight',
-  'text-center',
-])
 
-const subtitleClasses = computed(() => [
-  'text-muted-foreground max-w-3xl mx-auto leading-relaxed text-center',
-])
 
 const ctaCardClasses = computed(() => {
   const baseClasses = [
