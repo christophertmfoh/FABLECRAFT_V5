@@ -78,16 +78,15 @@
         </Section>
 
         <!-- Pricing Section -->
-        <Section id="pricing" spacing="lg" class="pricing-section bg-muted/20">
-          <Container size="xl">
-            <!-- Pricing Component Placeholder -->
-            <div
-              class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Pricing Section</span>
-            </div>
-          </Container>
-        </Section>
+        <PricingSection
+          :is-authenticated="isAuthenticated"
+          @plan-select="handlePlanSelect"
+          @auth-required="handleAuthRequired"  
+          @navigate="handleNavigate"
+          @feature-click="handleFeatureClick"
+          @feature-expand="handleFeatureExpand"
+          @section-view="handlePricingSectionView"
+        />
 
         <!-- CTA Section -->
         <Section id="cta" spacing="lg" class="cta-section">
@@ -201,6 +200,40 @@ const handleExploreExamples = () => {
 const handleBadgeClick = () => {
   // Optional: Navigate to product announcement or features
   navigateTo('/features')
+}
+
+// Pricing section event handlers
+const handlePlanSelect = (event: any) => {
+  logger.log('Plan selected:', event)
+  // Handle plan selection - redirect to checkout or dashboard
+  if (event.planDetails.id === 'enterprise') {
+    navigateTo('/contact')
+  } else if (isAuthenticated.value) {
+    navigateTo('/dashboard')
+  } else {
+    navigateTo('/auth')
+  }
+}
+
+const handleAuthRequired = (planId: string) => {
+  logger.log('Authentication required for plan:', planId)
+  // Store selected plan and redirect to auth
+  navigateTo(`/auth?plan=${planId}`)
+}
+
+const handleFeatureClick = (feature: any, tierId: string) => {
+  logger.log('Feature clicked:', { feature: feature.text, tier: tierId })
+  // Optional: Track feature interest for analytics
+}
+
+const handleFeatureExpand = (featureId: string, expanded: boolean, tierId: string) => {
+  logger.log('Feature expanded:', { featureId, expanded, tier: tierId })
+  // Optional: Track feature detail engagement
+}
+
+const handlePricingSectionView = () => {
+  logger.log('Pricing section viewed')
+  // Optional: Track pricing section visibility for analytics
 }
 
 // Scroll handling
