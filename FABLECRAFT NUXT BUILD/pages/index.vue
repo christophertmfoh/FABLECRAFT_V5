@@ -88,14 +88,12 @@
 
         <!-- CTA Section -->
         <Section spacing="xl" class="cta-section">
-          <Container size="md">
-            <!-- CTA Component Placeholder -->
-            <div
-              class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">CTA Section</span>
-            </div>
-          </Container>
+          <OCtaSection
+            id="cta"
+            variant="default"
+            @primary-cta-click="handlePrimaryCtaClick"
+            @secondary-cta-click="handleSecondaryCtaClick"
+          />
         </Section>
       </main>
 
@@ -271,6 +269,31 @@ const handlePricingCtaClick = (plan: { id: string; name: string; price: string |
     // Could navigate to payment flow
     logger.log('Navigating to payment flow for paid plan')
   }
+}
+
+// CTA section event handlers
+const handlePrimaryCtaClick = () => {
+  logger.log('Primary CTA click: Start Creating Free')
+  // Future: Navigate to signup flow or dashboard
+  // For now, could navigate to sign up page
+  // navigateTo('/signup')
+  
+  // Or if user is already authenticated, go to dashboard
+  if (isAuthenticated.value) {
+    logger.log('User authenticated, navigating to dashboard')
+    // navigateTo('/dashboard')
+  } else {
+    logger.log('User not authenticated, navigating to signup')
+    // navigateTo('/signup?plan=free')
+  }
+}
+
+const handleSecondaryCtaClick = () => {
+  logger.log('Secondary CTA click: Watch Demo')
+  // Future: Open demo video, navigate to demo page, or trigger demo modal
+  // Could be a video modal, YouTube embed, or dedicated demo page
+  // Example: openDemoModal() or navigateTo('/demo')
+  logger.log('Opening demo experience')
 }
 
 // Component mount lifecycle
