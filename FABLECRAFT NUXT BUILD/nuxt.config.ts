@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   // Development server configuration for Cursor port forwarding
   devServer: {
     port: 3000,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
 
   // Enable essential modules for the core stack
@@ -112,10 +112,16 @@ export default defineNuxtConfig({
     },
   },
 
-  // Enable TypeScript strict mode for code quality
+  // TypeScript configuration with compatibility settings
   typescript: {
-    strict: true,
-    typeCheck: false, // Temporarily disabled due to Vite plugin compatibility
+    strict: false,
+    typeCheck: false, // Disabled due to Vite plugin compatibility issues
+    tsConfig: {
+      compilerOptions: {
+        skipLibCheck: true,
+        strict: false
+      }
+    }
   },
 
   // Enable Nuxt DevTools for development

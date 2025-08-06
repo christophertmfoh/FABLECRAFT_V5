@@ -1,7 +1,7 @@
 <template>
-  <div 
-    class="flex items-center gap-1" 
-    role="img" 
+  <div
+    class="flex items-center gap-1"
+    role="img"
     :aria-label="`${rating} out of ${maxRating} stars`"
   >
     <span
@@ -10,11 +10,7 @@
       :class="starClasses(star)"
       aria-hidden="true"
     >
-      <AtomIcon
-        name="lucide:star"
-        :size="size"
-        :class="star <= rating ? 'fill-current' : ''"
-      />
+      <AtomIcon name="lucide:star" :size="size" :class="star <= rating ? 'fill-current' : ''" />
     </span>
   </div>
 </template>
@@ -41,21 +37,17 @@ const props = withDefaults(defineProps<StarRatingProps>(), {
 // Computed classes for individual stars
 const starClasses = computed(() => (starNumber: number) => {
   const isActive = starNumber <= props.rating
-  
+
   const baseClasses = 'transition-colors duration-200'
-  
+
   const colorClasses = {
     primary: isActive ? 'text-primary' : 'text-muted-foreground/30',
-    secondary: isActive ? 'text-secondary' : 'text-muted-foreground/30', 
+    secondary: isActive ? 'text-secondary' : 'text-muted-foreground/30',
     warning: isActive ? 'text-primary' : 'text-muted-foreground/30',
     success: isActive ? 'text-green-500' : 'text-muted-foreground/30',
   }
-  
-  return [
-    baseClasses,
-    colorClasses[props.color],
-    props.class,
-  ]
+
+  return [baseClasses, colorClasses[props.color], props.class]
 })
 
 // Pass size directly to AtomIcon

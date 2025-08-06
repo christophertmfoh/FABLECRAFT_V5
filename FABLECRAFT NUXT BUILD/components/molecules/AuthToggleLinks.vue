@@ -6,21 +6,12 @@
     </Text>
 
     <!-- Action link -->
-    <Button
-      variant="link"
-      :size="linkSize"
-      :class="linkClasses"
-      @click="handleToggle"
-    >
+    <Button variant="link" :size="linkSize" :class="linkClasses" @click="handleToggle">
       {{ linkText }}
-      
+
       <!-- Optional trailing icon -->
       <template v-if="showIcon" #trailing>
-        <AtomIcon
-          :name="iconName"
-          :class="iconClasses"
-          aria-hidden="true"
-        />
+        <AtomIcon :name="iconName" :class="iconClasses" aria-hidden="true" />
       </template>
     </Button>
   </div>
@@ -138,12 +129,9 @@ const containerClasses = computed(() => {
 })
 
 const textClasses = computed(() => {
-  return cn(
-    'text-muted-foreground transition-colors duration-200',
-    {
-      'mb-1': props.layout === 'vertical',
-    }
-  )
+  return cn('text-muted-foreground transition-colors duration-200', {
+    'mb-1': props.layout === 'vertical',
+  })
 })
 
 const linkClasses = computed(() => {
@@ -166,7 +154,7 @@ const iconClasses = computed(() => {
     default: 'h-3.5 w-3.5',
     lg: 'h-4 w-4',
   }
-  
+
   return cn(
     'transition-transform duration-200 group-hover:translate-x-0.5',
     sizeClasses[props.linkSize]
@@ -181,12 +169,12 @@ const handleToggle = () => {
 
 <style scoped>
 /* Enhanced link hover effects */
-button[variant="link"] {
+button[variant='link'] {
   position: relative;
 }
 
 /* Smooth underline animation */
-button[variant="link"]:hover {
+button[variant='link']:hover {
   text-decoration-color: hsl(var(--primary));
 }
 
@@ -201,7 +189,8 @@ button:focus-visible {
 }
 
 @keyframes focusPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

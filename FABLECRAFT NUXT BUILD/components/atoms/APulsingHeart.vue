@@ -1,16 +1,6 @@
 <template>
-  <div
-    :class="heartClasses"
-    :style="heartStyles"
-    aria-hidden="true"
-    role="img"
-    aria-label="heart"
-  >
-    <AtomIcon
-      name="lucide:heart"
-      :class="iconClasses"
-      fill="currentColor"
-    />
+  <div :class="heartClasses" :style="heartStyles" aria-hidden="true" role="img" aria-label="heart">
+    <AtomIcon name="lucide:heart" :class="iconClasses" fill="currentColor" />
   </div>
 </template>
 
@@ -58,7 +48,7 @@ const heartClasses = computed(() => {
     'duration-300',
     'cursor-pointer',
     'hover:scale-110', // Interactive hover scale
-    'active:scale-95',  // Press effect
+    'active:scale-95', // Press effect
     sizeClasses[props.size],
     speedClasses[props.speed],
     props.className
@@ -114,7 +104,8 @@ const heartStyles = computed(() => {
 <style scoped>
 /* Enhanced pulsing animation for the heart */
 @keyframes pulse-heart {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.8;
     filter: brightness(1);

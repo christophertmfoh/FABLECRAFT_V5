@@ -52,11 +52,7 @@
 
       <!-- Success Message -->
       <div v-if="isSuccess" class="success-message" role="alert" aria-live="polite">
-        <AtomIcon
-          name="lucide:check-circle"
-          class="w-4 h-4 mr-2 text-success"
-          aria-hidden="true"
-        />
+        <AtomIcon name="lucide:check-circle" class="w-4 h-4 mr-2 text-success" aria-hidden="true" />
         Thanks for subscribing! Check your email to confirm.
       </div>
 
@@ -83,8 +79,7 @@ interface NewsletterSignupProps {
 
 // Events interface
 interface NewsletterSignupEmits {
-  (e: 'subscribe' | 'success', email: string): void
-  (e: 'error', error: string): void
+  (e: 'subscribe' | 'success' | 'error', data: string): void
 }
 
 // Component setup

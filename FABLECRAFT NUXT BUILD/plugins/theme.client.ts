@@ -4,6 +4,6 @@ export default defineNuxtPlugin(() => {
 
   // Initialize theme on client
   initializeTheme()
-  
+
   // Note: System theme watching is handled in the useTheme composable
 })

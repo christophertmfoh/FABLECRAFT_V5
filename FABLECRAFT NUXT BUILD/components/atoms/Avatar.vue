@@ -9,7 +9,7 @@
       @error="handleImageError"
       @load="handleImageLoad"
     />
-    
+
     <!-- Initials Avatar -->
     <span
       v-else-if="initials || name"
@@ -18,14 +18,9 @@
     >
       {{ displayInitials }}
     </span>
-    
+
     <!-- Fallback Icon -->
-    <AtomIcon
-      v-else
-      :name="fallbackIcon"
-      :class="iconClasses"
-      aria-hidden="true"
-    />
+    <AtomIcon v-else :name="fallbackIcon" :class="iconClasses" aria-hidden="true" />
   </div>
 </template>
 
@@ -65,7 +60,7 @@ const imageLoaded = ref(false)
 // Computed properties
 const displayInitials = computed(() => {
   if (props.initials) return props.initials.toUpperCase()
-  
+
   if (props.name) {
     return props.name
       .split(' ')
@@ -74,7 +69,7 @@ const displayInitials = computed(() => {
       .join('')
       .toUpperCase()
   }
-  
+
   return ''
 })
 
@@ -111,42 +106,34 @@ const avatarClasses = computed(() => {
 // Avatar styles for gradient
 const avatarStyles = computed(() => {
   if (props.src || !props.gradient) return {}
-  
+
   return {
-    background: `linear-gradient(to bottom right, ${props.gradientFrom}, ${props.gradientTo})`
+    background: `linear-gradient(to bottom right, ${props.gradientFrom}, ${props.gradientTo})`,
   }
 })
 
 // Image classes
 const imageClasses = computed(() => {
-  return cn(
-    'w-full h-full object-cover',
-    variantClasses[props.variant]
-  )
+  return cn('w-full h-full object-cover', variantClasses[props.variant])
 })
 
 // Initials classes
 const initialsClasses = computed(() => {
-  return cn(
-    'select-none font-bold leading-none'
-  )
+  return cn('select-none font-bold leading-none')
 })
 
 // Icon classes
 const iconClasses = computed(() => {
   const iconSizes = {
     xs: 'w-3 h-3',
-    sm: 'w-4 h-4', 
+    sm: 'w-4 h-4',
     base: 'w-5 h-5',
     lg: 'w-6 h-6',
     xl: 'w-8 h-8',
     '2xl': 'w-10 h-10',
   }
-  
-  return cn(
-    iconSizes[props.size],
-    'text-current'
-  )
+
+  return cn(iconSizes[props.size], 'text-current')
 })
 
 // Event handlers

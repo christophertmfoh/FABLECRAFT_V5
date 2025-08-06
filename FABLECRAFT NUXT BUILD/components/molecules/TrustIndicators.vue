@@ -8,11 +8,7 @@
         :class="badgeClasses"
         :title="badge.description"
       >
-        <AtomIcon
-          :name="badge.icon"
-          :class="badgeIconClasses"
-          aria-hidden="true"
-        />
+        <AtomIcon :name="badge.icon" :class="badgeIconClasses" aria-hidden="true" />
         <Text :size="badgeTextSize" :class="badgeTextClasses">
           {{ badge.label }}
         </Text>
@@ -203,9 +199,7 @@ const badgesContainerVariants = cva('flex', {
 
 // Computed properties
 const visibleBadges = computed(() => {
-  return props.badges
-    .map(key => availableBadges[key])
-    .filter(badge => badge && badge.enabled)
+  return props.badges.map(key => availableBadges[key]).filter(badge => badge && badge.enabled)
 })
 
 const containerClasses = computed(() => {
@@ -242,11 +236,8 @@ const badgeIconClasses = computed(() => {
     md: 'h-3.5 w-3.5',
     lg: 'h-4 w-4',
   }
-  
-  return cn(
-    'text-success flex-shrink-0',
-    sizeClasses[props.size]
-  )
+
+  return cn('text-success flex-shrink-0', sizeClasses[props.size])
 })
 
 const badgeTextClasses = computed(() => {
@@ -263,11 +254,8 @@ const messageIconClasses = computed(() => {
     md: 'h-4 w-4',
     lg: 'h-4.5 w-4.5',
   }
-  
-  return cn(
-    'text-primary flex-shrink-0',
-    sizeClasses[props.size]
-  )
+
+  return cn('text-primary flex-shrink-0', sizeClasses[props.size])
 })
 
 const messageTextClasses = computed(() => {
@@ -321,11 +309,21 @@ const handleBadgeClick = (badge: string) => {
   animation-fill-mode: both;
 }
 
-.flex-wrap > *:nth-child(1) { animation-delay: 0.1s; }
-.flex-wrap > *:nth-child(2) { animation-delay: 0.2s; }
-.flex-wrap > *:nth-child(3) { animation-delay: 0.3s; }
-.flex-wrap > *:nth-child(4) { animation-delay: 0.4s; }
-.flex-wrap > *:nth-child(5) { animation-delay: 0.5s; }
+.flex-wrap > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.flex-wrap > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.flex-wrap > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.flex-wrap > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.flex-wrap > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
 
 @keyframes fadeInScale {
   from {
@@ -344,7 +342,11 @@ const handleBadgeClick = (badge: string) => {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>

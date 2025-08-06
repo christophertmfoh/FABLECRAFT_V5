@@ -29,7 +29,6 @@ const currentYear = useState('copyright-year', () => new Date().getFullYear())
 
 // Computed properties
 const copyrightText = computed(() => {
-
   // If startYear is provided and different from current year, show range
   if (props.startYear && props.startYear < currentYear.value) {
     return `© ${props.startYear}-${currentYear.value} ${props.company}. All rights reserved.`

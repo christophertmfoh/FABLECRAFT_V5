@@ -236,7 +236,11 @@ const isAuthenticated = computed(() => {
 
 // Compute display name
 const displayName = computed(() => {
-  return supabaseUser.value?.user_metadata?.username || supabaseUser.value?.email?.split('@')[0] || 'User'
+  return (
+    supabaseUser.value?.user_metadata?.username ||
+    supabaseUser.value?.email?.split('@')[0] ||
+    'User'
+  )
 })
 
 // Handle logo click

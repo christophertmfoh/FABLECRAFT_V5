@@ -12,7 +12,11 @@
       />
 
       <!-- Custom heading with forced line break -->
-      <div class="heading-group flex flex-col pb-2 text-center space-y-2" role="heading" aria-level="2">
+      <div
+        class="heading-group flex flex-col pb-2 text-center space-y-2"
+        role="heading"
+        aria-level="2"
+      >
         <h2 :class="headingClasses">
           <!-- First line -->
           <div class="text-foreground">
@@ -127,13 +131,14 @@ const props = withDefaults(defineProps<PricingProps>(), {
   headerBadgeText: 'Simple, Transparent Pricing',
   headerTitle: 'Start Free.',
   headerHighlightText: 'Scale With Your Stories',
-  headerSubtitle: 'Choose the perfect plan for your creative journey. Start with our free tier and upgrade as your projects grow.',
+  headerSubtitle:
+    'Choose the perfect plan for your creative journey. Start with our free tier and upgrade as your projects grow.',
   gradientVariant: 'primary',
   annualLabel: 'Yearly',
   monthlyLabel: 'Monthly',
   showDiscount: true,
   discountText: '-20%',
-  class: ''
+  class: '',
 })
 
 // Define emits
@@ -159,8 +164,8 @@ const defaultPricingPlans: PricingPlan[] = [
       { text: '3 Projects', included: true },
       { text: 'Basic AI Features', included: true },
       { text: 'Community Access', included: true },
-      { text: 'Standard Export', included: true }
-    ]
+      { text: 'Standard Export', included: true },
+    ],
   },
   {
     id: 'starter',
@@ -174,8 +179,8 @@ const defaultPricingPlans: PricingPlan[] = [
       { text: 'Unlimited Projects', included: true },
       { text: 'Standard AI Credits', included: true },
       { text: 'Advanced Features', included: true },
-      { text: 'Enhanced Export', included: true }
-    ]
+      { text: 'Enhanced Export', included: true },
+    ],
   },
   {
     id: 'professional',
@@ -191,8 +196,8 @@ const defaultPricingPlans: PricingPlan[] = [
       { text: 'Everything in Starter', included: true },
       { text: 'Premium AI Credits', included: true },
       { text: 'Media Production', included: true },
-      { text: 'Priority Support', included: true }
-    ]
+      { text: 'Priority Support', included: true },
+    ],
   },
   {
     id: 'enterprise',
@@ -207,9 +212,9 @@ const defaultPricingPlans: PricingPlan[] = [
       { text: 'Everything in Studio', included: true },
       { text: 'Unlimited AI Credits', included: true },
       { text: 'Custom Integrations', included: true },
-      { text: 'Dedicated Support', included: true }
-    ]
-  }
+      { text: 'Dedicated Support', included: true },
+    ],
+  },
 ]
 
 // Computed properties
@@ -218,43 +223,44 @@ const isCompact = computed(() => props.variant === 'compact')
 // Add validation for custom pricing plans
 const pricingPlans = computed(() => {
   const plans = props.customPricingPlans || defaultPricingPlans
-  
+
   // Validate that plans array is not empty and has valid structure
   if (!Array.isArray(plans) || plans.length === 0) {
     console.warn('OPricingSection: Invalid pricing plans data, falling back to defaults')
     return defaultPricingPlans
   }
-  
+
   // Validate each plan has required properties
-  const validPlans = plans.filter(plan => 
-    plan && 
-    typeof plan === 'object' && 
-    plan.id && 
-    plan.name && 
-    plan.description && 
-    Array.isArray(plan.features)
+  const validPlans = plans.filter(
+    plan =>
+      plan &&
+      typeof plan === 'object' &&
+      plan.id &&
+      plan.name &&
+      plan.description &&
+      Array.isArray(plan.features)
   )
-  
+
   if (validPlans.length !== plans.length) {
     console.warn('OPricingSection: Some pricing plans have invalid structure')
   }
-  
+
   return validPlans.length > 0 ? validPlans : defaultPricingPlans
 })
 
 const sectionClasses = computed(() => [
   'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
-  props.class
+  props.class,
 ])
 
 const headingClasses = computed(() => [
   'transition-all duration-300 font-black tracking-tight drop-shadow-sm text-foreground',
-  isCompact.value ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-4xl sm:text-5xl lg:text-6xl'
+  isCompact.value ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-4xl sm:text-5xl lg:text-6xl',
 ])
 
 const subtitleClasses = computed(() => [
   'text-muted-foreground font-medium transition-all duration-300 text-center max-w-4xl mx-auto',
-  isCompact.value ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'
+  isCompact.value ? 'text-base sm:text-lg' : 'text-lg sm:text-xl',
 ])
 
 // Helper methods
@@ -266,9 +272,11 @@ const getCurrentPeriod = (plan: PricingPlan) => {
   if (typeof plan.monthlyPrice === 'string' && plan.monthlyPrice.toLowerCase().includes('free')) {
     return ''
   }
-  if (typeof plan.monthlyPrice === 'string' && 
-      (plan.monthlyPrice.toLowerCase().includes('contact') || 
-       plan.monthlyPrice.toLowerCase().includes('custom'))) {
+  if (
+    typeof plan.monthlyPrice === 'string' &&
+    (plan.monthlyPrice.toLowerCase().includes('contact') ||
+      plan.monthlyPrice.toLowerCase().includes('custom'))
+  ) {
     return ''
   }
   return isAnnual.value ? '/year' : '/month'

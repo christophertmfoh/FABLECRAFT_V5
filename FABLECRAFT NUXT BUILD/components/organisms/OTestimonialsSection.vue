@@ -12,7 +12,11 @@
       />
 
       <!-- Custom heading with forced line break -->
-      <div class="heading-group flex flex-col pb-2 text-center space-y-2" role="heading" aria-level="1">
+      <div
+        class="heading-group flex flex-col pb-2 text-center space-y-2"
+        role="heading"
+        aria-level="1"
+      >
         <h2 id="testimonials-heading" :class="headingClasses">
           <!-- First line -->
           <div class="text-foreground">
@@ -29,7 +33,7 @@
             {{ headerHighlightText }}
           </AGradientText>
         </h2>
-        
+
         <!-- Subtitle -->
         <p :class="subtitleClasses" aria-describedby="testimonials-heading">
           {{ headerSubtitle }}
@@ -91,7 +95,8 @@ const props = withDefaults(defineProps<TestimonialsSectionProps>(), {
   headerBadgeText: 'Trusted by Creators',
   headerTitle: 'What Our Users',
   headerHighlightText: 'Are Saying',
-  headerSubtitle: 'Join thousands of creators who have transformed their storytelling with Fablecraft\'s comprehensive creative suite.',
+  headerSubtitle:
+    "Join thousands of creators who have transformed their storytelling with Fablecraft's comprehensive creative suite.",
   gradientVariant: 'primary',
 })
 
@@ -108,7 +113,8 @@ const defaultTestimonials: Testimonial[] = [
     role: 'Multimedia Creator',
     initials: 'SC',
     rating: 5,
-    content: 'Fablecraft replaced my entire creative workflow. From writing my novel to generating storyboards and creating promotional videos, everything is connected. The AI understands my world so well, it feels like having a creative partner who never forgets anything.',
+    content:
+      'Fablecraft replaced my entire creative workflow. From writing my novel to generating storyboards and creating promotional videos, everything is connected. The AI understands my world so well, it feels like having a creative partner who never forgets anything.',
   },
   {
     id: 'testimonial-2',
@@ -116,7 +122,8 @@ const defaultTestimonials: Testimonial[] = [
     role: 'Screenwriter',
     initials: 'MR',
     rating: 5,
-    content: 'Finally, a platform that gets the creative process. The world bible feature keeps all my storylines consistent, and the collaboration tools let my writing partner contribute seamlessly.',
+    content:
+      'Finally, a platform that gets the creative process. The world bible feature keeps all my storylines consistent, and the collaboration tools let my writing partner contribute seamlessly.',
   },
   {
     id: 'testimonial-3',
@@ -124,7 +131,8 @@ const defaultTestimonials: Testimonial[] = [
     role: 'Graphic Novelist',
     initials: 'AT',
     rating: 5,
-    content: 'The visual storytelling features are incredible. I can generate consistent character art and storyboards that perfectly match my written descriptions. It\'s like having a whole creative team.',
+    content:
+      "The visual storytelling features are incredible. I can generate consistent character art and storyboards that perfectly match my written descriptions. It's like having a whole creative team.",
   },
 ]
 
@@ -133,13 +141,13 @@ const isCompact = computed(() => props.variant === 'compact')
 
 const testimonials = computed(() => {
   const data = props.customTestimonials || defaultTestimonials
-  
+
   // Validate testimonials data
   if (!Array.isArray(data) || data.length === 0) {
     console.warn('OTestimonialsSection: Invalid or empty testimonials data provided')
     return defaultTestimonials
   }
-  
+
   return data
 })
 
@@ -152,21 +160,21 @@ const sectionClasses = computed(() => [
 // Heading classes
 const headingClasses = computed(() => [
   'transition-all duration-300 font-black tracking-tight drop-shadow-sm',
-  isCompact.value ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-4xl sm:text-5xl lg:text-6xl'
+  isCompact.value ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-4xl sm:text-5xl lg:text-6xl',
 ])
 
-// Subtitle classes  
+// Subtitle classes
 const subtitleClasses = computed(() => [
   'text-muted-foreground font-medium transition-all duration-300 text-center max-w-4xl mx-auto',
-  isCompact.value ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'
+  isCompact.value ? 'text-base sm:text-lg' : 'text-lg sm:text-xl',
 ])
 
-// Event handlers  
+// Event handlers
 const handleTestimonialClick = (testimonial: Testimonial) => {
-  const testimonialData = testimonials.value.find(t => 
-    t.name === testimonial.name && t.role === testimonial.role
+  const testimonialData = testimonials.value.find(
+    t => t.name === testimonial.name && t.role === testimonial.role
   )
-  
+
   if (testimonialData) {
     emit('testimonialClick', testimonialData)
   }

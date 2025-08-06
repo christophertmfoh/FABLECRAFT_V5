@@ -20,23 +20,11 @@
     />
 
     <!-- Main CTA Card -->
-    <GlassCard 
-      variant="heavy" 
-      :hover="true"
-      :class="ctaCardClasses"
-    >
+    <GlassCard variant="heavy" :hover="true" :class="ctaCardClasses">
       <div class="relative p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto">
         <!-- Icon Container (optional) -->
-        <div
-          v-if="showIcon && !isCompact"
-          :class="iconContainerClasses"
-          aria-hidden="true"
-        >
-          <AtomIcon
-            :name="ctaIcon"
-            :size="iconSize"
-            :class="iconClasses"
-          />
+        <div v-if="showIcon && !isCompact" :class="iconContainerClasses" aria-hidden="true">
+          <AtomIcon :name="ctaIcon" :size="iconSize" :class="iconClasses" />
         </div>
 
         <!-- Main Headline -->
@@ -84,14 +72,9 @@
           @primary:click="handlePrimaryCtaClick"
           @secondary:click="handleSecondaryCtaClick"
         />
-        
+
         <!-- Trust Signal -->
-        <Text
-          v-if="trustSignal"
-          tag="p"
-          size="sm"
-          class="text-muted-foreground text-center mt-6"
-        >
+        <Text v-if="trustSignal" tag="p" size="sm" class="text-muted-foreground text-center mt-6">
           {{ trustSignal }}
         </Text>
       </div>
@@ -105,23 +88,23 @@ import { computed } from 'vue'
 // Component props
 interface CtaSectionProps {
   variant?: 'default' | 'compact' | 'minimal'
-  
+
   // Header content
   headerBadgeText?: string
   headerTitle?: string
   headerHighlightText?: string
   headerSubtitle?: string
   gradientVariant?: 'primary' | 'secondary' | 'accent'
-  
+
   // Main content
   mainHeadline?: string
   supportingCopy?: string
   mainGradientVariant?: 'primary' | 'secondary' | 'accent'
-  
+
   // Icon
   showIcon?: boolean
   ctaIcon?: string
-  
+
   // CTA buttons
   primaryCtaText?: string
   primaryCtaVariant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
@@ -132,10 +115,10 @@ interface CtaSectionProps {
   ctaButtonSize?: 'sm' | 'base' | 'lg' | 'xl'
   ctaLayout?: 'horizontal' | 'vertical' | 'responsive'
   ctaSpacing?: 'tight' | 'normal' | 'loose'
-  
+
   // Trust signal
   trustSignal?: string
-  
+
   // Styling
   theme?: 'gradient' | 'solid' | 'outline'
   class?: string | Record<string, boolean> | string[]
@@ -147,10 +130,12 @@ const props = withDefaults(defineProps<CtaSectionProps>(), {
   headerBadgeText: 'Ready to Begin?',
   headerTitle: 'Ready to Revolutionize',
   headerHighlightText: 'Creative Production?',
-  headerSubtitle: 'Join thousands of creators who\'ve replaced entire workflows with one intelligent platform. From concept to publication, from script to screen—all in one revolutionary suite.',
+  headerSubtitle:
+    "Join thousands of creators who've replaced entire workflows with one intelligent platform. From concept to publication, from script to screen—all in one revolutionary suite.",
   gradientVariant: 'primary',
   mainHeadline: 'Start Creating Today',
-  supportingCopy: 'Transform your creative process with AI-powered tools that adapt to your unique storytelling style.',
+  supportingCopy:
+    'Transform your creative process with AI-powered tools that adapt to your unique storytelling style.',
   mainGradientVariant: 'primary',
   showIcon: true,
   ctaIcon: 'lucide:zap',
@@ -178,7 +163,7 @@ const isCompact = computed(() => props.variant === 'compact')
 const isMinimal = computed(() => props.variant === 'minimal')
 
 // Dynamic sizing based on variant
-const headingTag = computed(() => isCompact.value ? 'h3' : 'h2')
+const headingTag = computed(() => (isCompact.value ? 'h3' : 'h2'))
 const mainHeadingSize = computed(() => {
   if (isCompact.value) return '2xl'
   return '4xl'
@@ -198,12 +183,10 @@ const sectionClasses = computed(() => [
   props.class,
 ])
 
-
-
 const ctaCardClasses = computed(() => [
   // Container spacing
   'mt-16',
-  
+
   // Enhanced styling that works with GlassCard
   'rounded-2xl',
   'overflow-hidden',
@@ -213,21 +196,19 @@ const iconContainerClasses = computed(() => [
   // Layout & Size - centered
   'w-20 h-20 mx-auto mb-8',
   'flex items-center justify-center',
-  
+
   // Design system styling
   'bg-primary/10 hover:bg-primary/20',
   'border border-primary/20',
   'rounded-2xl',
-  
+
   // Smooth interactions
   'transition-all duration-500 ease-out',
   'hover:scale-110 hover:rotate-2',
   'shadow-sm hover:shadow-md',
 ])
 
-const iconClasses = computed(() => [
-  'text-primary transition-all duration-300 ease-out',
-])
+const iconClasses = computed(() => ['text-primary transition-all duration-300 ease-out'])
 
 const mainHeadingClasses = computed(() => [
   'font-black leading-[1.1] tracking-tight mb-8',

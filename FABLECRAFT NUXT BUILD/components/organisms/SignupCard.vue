@@ -220,7 +220,7 @@ const cardClasses = computed(() => {
     md: 'p-8',
     lg: 'p-10',
   }
-  
+
   return cn(
     'w-full max-w-md mx-auto',
     spacingClasses[props.spacing],
@@ -236,7 +236,7 @@ const headerClasses = computed(() => {
     md: 'mb-8',
     lg: 'mb-10',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -246,7 +246,7 @@ const socialSectionClasses = computed(() => {
     md: 'mb-6',
     lg: 'mb-8',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -256,7 +256,7 @@ const formSectionClasses = computed(() => {
     md: 'mb-6',
     lg: 'mb-8',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -266,7 +266,7 @@ const toggleSectionClasses = computed(() => {
     md: 'mb-6',
     lg: 'mb-8',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -330,7 +330,9 @@ const handlePasswordStrengthChange = (strength: string, score: number) => {
 }
 
 /* Section transition effects */
-.mb-6, .mb-8, .mb-10 {
+.mb-6,
+.mb-8,
+.mb-10 {
   transition: all 0.3s ease-in-out;
 }
 
@@ -356,12 +358,24 @@ const handlePasswordStrengthChange = (strength: string, score: number) => {
   animation-fill-mode: both;
 }
 
-.mb-6 > form > *:nth-child(1) { animation-delay: 0.1s; }
-.mb-6 > form > *:nth-child(2) { animation-delay: 0.2s; }
-.mb-6 > form > *:nth-child(3) { animation-delay: 0.3s; }
-.mb-6 > form > *:nth-child(4) { animation-delay: 0.4s; }
-.mb-6 > form > *:nth-child(5) { animation-delay: 0.5s; }
-.mb-6 > form > *:nth-child(6) { animation-delay: 0.6s; }
+.mb-6 > form > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.mb-6 > form > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.mb-6 > form > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.mb-6 > form > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.mb-6 > form > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.mb-6 > form > *:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 @keyframes slideInLeft {
   from {
@@ -390,15 +404,19 @@ const handlePasswordStrengthChange = (strength: string, score: number) => {
   .max-w-md {
     max-width: calc(100vw - 2rem);
   }
-  
+
   /* Reduce animation complexity on mobile for performance */
   .mb-6 > form > * {
     animation: fadeIn 0.3s ease-out;
   }
-  
+
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
 </style>

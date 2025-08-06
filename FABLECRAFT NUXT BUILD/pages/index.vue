@@ -249,27 +249,46 @@ const handleLegalClick = (payload: { text: string; href?: string }) => {
 }
 
 // Process section event handlers
-const handleProcessStepClick = (stepNumber: number, stepData: { title: string; description: string; detail?: string; category?: string }) => {
+const handleProcessStepClick = (
+  stepNumber: number,
+  stepData: { title: string; description: string; detail?: string; category?: string }
+) => {
   logger.log('Process step click:', { stepNumber, stepData })
   // Future: Handle process step interactions - could show detailed view, navigate to specific feature, etc.
 }
 
 // Testimonials section event handlers
-const handleTestimonialClick = (testimonial: { id: string; name: string; role: string; content: string; rating: number }) => {
+const handleTestimonialClick = (testimonial: {
+  id: string
+  name: string
+  role: string
+  content: string
+  rating: number
+}) => {
   logger.log('Testimonial click:', testimonial)
   // Future: Handle testimonial interactions - could show full testimonial, navigate to case study, etc.
 }
 
 // Pricing section event handlers
-const handlePlanClick = (plan: { id: string; name: string; price: string | number; description: string }) => {
+const handlePlanClick = (plan: {
+  id: string
+  name: string
+  price: string | number
+  description: string
+}) => {
   logger.log('Pricing plan click:', plan)
   // Future: Handle plan interactions - could show detailed comparison, features breakdown, etc.
 }
 
-const handlePricingCtaClick = (plan: { id: string; name: string; price: string | number; ctaText?: string }) => {
+const handlePricingCtaClick = (plan: {
+  id: string
+  name: string
+  price: string | number
+  ctaText?: string
+}) => {
   logger.log('Pricing CTA click:', plan)
   // Future: Handle pricing CTA - could navigate to signup, payment flow, contact sales, etc.
-  
+
   // Example routing based on plan type
   if (plan.id === 'enterprise') {
     // Could navigate to contact sales page
@@ -289,7 +308,7 @@ const handlePrimaryCtaClick = () => {
   // Future: Navigate to signup flow or dashboard
   // For now, could navigate to sign up page
   // navigateTo('/signup')
-  
+
   // Or if user is already authenticated, go to dashboard
   if (isAuthenticated.value) {
     logger.log('User authenticated, navigating to dashboard')
