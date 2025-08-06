@@ -250,7 +250,8 @@ watch(
     if (!newLoading) {
       // Clear form errors when loading stops (successful submission)
       Object.keys(errors).forEach(key => {
-        delete errors[key as keyof LoginFormErrors]
+        const errorKey = key as keyof LoginFormErrors
+        errors[errorKey] = undefined
       })
     }
   }

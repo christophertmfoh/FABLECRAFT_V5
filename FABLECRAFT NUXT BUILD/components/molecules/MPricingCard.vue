@@ -128,7 +128,6 @@ interface PricingCardProps {
   variant?: 'default' | 'highlighted' | 'enterprise'
   featuresTitle?: string
   featureSize?: 'xs' | 'sm' | 'base' | 'lg'
-  planId?: string
   class?: string | Record<string, boolean> | string[]
 }
 

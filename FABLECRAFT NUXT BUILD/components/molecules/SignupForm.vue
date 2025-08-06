@@ -383,7 +383,8 @@ watch(
   newLoading => {
     if (!newLoading) {
       Object.keys(errors).forEach(key => {
-        delete errors[key as keyof SignupFormErrors]
+        const errorKey = key as keyof SignupFormErrors
+        errors[errorKey] = undefined
       })
     }
   }
