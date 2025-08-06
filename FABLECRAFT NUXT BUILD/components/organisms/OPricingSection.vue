@@ -13,20 +13,22 @@
 
       <!-- Custom heading with forced line break -->
       <div class="heading-group flex flex-col pb-2 text-center space-y-2" role="heading" aria-level="2">
-        <!-- First line -->
-        <div :class="headingClasses">
-          {{ headerTitle }}
-        </div>
-        <!-- Second line with gradient -->
-        <AGradientText
-          tag="div"
-          :variant="gradientVariant"
-          direction="to-r"
-          intensity="normal"
-          class="inline-block transition-all duration-300"
-        >
-          {{ headerHighlightText }}
-        </AGradientText>
+        <h2 :class="headingClasses">
+          <!-- First line -->
+          <div class="text-foreground">
+            {{ headerTitle }}
+          </div>
+          <!-- Second line with gradient -->
+          <AGradientText
+            tag="div"
+            :variant="gradientVariant"
+            direction="to-r"
+            intensity="normal"
+            class="inline-block transition-all duration-300"
+          >
+            {{ headerHighlightText }}
+          </AGradientText>
+        </h2>
       </div>
 
       <!-- Subtitle -->
