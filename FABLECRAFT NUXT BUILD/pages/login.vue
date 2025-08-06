@@ -320,3 +320,4 @@ const handlePasswordStrengthChange = (strength: string, score: number) => {
   logger.log('Password strength:', { strength, score })
 }
 </script>
+
