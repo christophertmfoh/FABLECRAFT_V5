@@ -215,7 +215,32 @@ const defaultPricingPlans: PricingPlan[] = [
 // Computed properties
 const isCompact = computed(() => props.variant === 'compact')
 
-const pricingPlans = computed(() => props.customPricingPlans || defaultPricingPlans)
+// Add validation for custom pricing plans
+const pricingPlans = computed(() => {
+  const plans = props.customPricingPlans || defaultPricingPlans
+  
+  // Validate that plans array is not empty and has valid structure
+  if (!Array.isArray(plans) || plans.length === 0) {
+    console.warn('OPricingSection: Invalid pricing plans data, falling back to defaults')
+    return defaultPricingPlans
+  }
+  
+  // Validate each plan has required properties
+  const validPlans = plans.filter(plan => 
+    plan && 
+    typeof plan === 'object' && 
+    plan.id && 
+    plan.name && 
+    plan.description && 
+    Array.isArray(plan.features)
+  )
+  
+  if (validPlans.length !== plans.length) {
+    console.warn('OPricingSection: Some pricing plans have invalid structure')
+  }
+  
+  return validPlans.length > 0 ? validPlans : defaultPricingPlans
+})
 
 const sectionClasses = computed(() => [
   'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
@@ -251,10 +276,20 @@ const getCurrentPeriod = (plan: PricingPlan) => {
 
 // Event handlers
 const handlePlanClick = (plan: PricingPlan) => {
+  // Validate plan data before emitting
+  if (!plan || !plan.id) {
+    console.warn('OPricingSection: Invalid plan data in click handler')
+    return
+  }
   emit('planClick', plan)
 }
 
 const handleCtaClick = (plan: PricingPlan) => {
+  // Validate plan data before emitting
+  if (!plan || !plan.id) {
+    console.warn('OPricingSection: Invalid plan data in CTA click handler')
+    return
+  }
   emit('ctaClick', plan)
 }
 </script>

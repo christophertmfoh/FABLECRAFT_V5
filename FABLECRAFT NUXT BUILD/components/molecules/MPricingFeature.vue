@@ -46,12 +46,36 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+// Size configurations (moved outside to avoid recreation)
+const FEATURE_SIZE_CONFIG = {
+  xs: {
+    icon: 'xs' as const,
+    text: 'xs' as const,
+    spacing: 'gap-2'
+  },
+  sm: {
+    icon: 'sm' as const,
+    text: 'sm' as const,
+    spacing: 'gap-2.5'
+  },
+  base: {
+    icon: 'base' as const,
+    text: 'base' as const,
+    spacing: 'gap-3'
+  },
+  lg: {
+    icon: 'lg' as const,
+    text: 'lg' as const,
+    spacing: 'gap-3'
+  }
+} as const
+
 // Component props
 interface PricingFeatureProps {
   text: string
   included?: boolean
   tooltip?: string
-  size?: 'xs' | 'sm' | 'base' | 'lg'
+  size?: keyof typeof FEATURE_SIZE_CONFIG
   variant?: 'default' | 'compact'
   class?: string | Record<string, boolean> | string[]
 }
@@ -64,44 +88,16 @@ const props = withDefaults(defineProps<PricingFeatureProps>(), {
   class: ''
 })
 
-// Size configurations
-const sizeConfig = {
-  xs: {
-    icon: 'xs',
-    text: 'xs',
-    spacing: 'gap-2'
-  },
-  sm: {
-    icon: 'sm',
-    text: 'sm',
-    spacing: 'gap-2.5'
-  },
-  base: {
-    icon: 'base',
-    text: 'base',
-    spacing: 'gap-3'
-  },
-  lg: {
-    icon: 'lg',
-    text: 'lg',
-    spacing: 'gap-3'
-  }
-}
-
 // Computed properties
 const iconVariant = computed(() => props.included ? 'check' : 'x')
-
 const iconColor = computed(() => props.included ? 'success' : 'muted')
-
-const iconSize = computed(() => sizeConfig[props.size].icon)
-
+const iconSize = computed(() => FEATURE_SIZE_CONFIG[props.size].icon)
 const textTag = computed(() => 'span')
-
-const textSize = computed(() => sizeConfig[props.size].text)
+const textSize = computed(() => FEATURE_SIZE_CONFIG[props.size].text)
 
 const featureClasses = computed(() => [
   'flex items-start',
-  sizeConfig[props.size].spacing,
+  FEATURE_SIZE_CONFIG[props.size].spacing,
   'transition-colors duration-200',
   props.class
 ])

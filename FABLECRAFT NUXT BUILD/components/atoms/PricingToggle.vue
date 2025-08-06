@@ -41,6 +41,25 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+// Size configurations (moved outside to avoid recreation)
+const TOGGLE_SIZE_CONFIG = {
+  sm: {
+    container: 'max-w-[12rem]',
+    button: 'text-xs font-medium h-7',
+    discount: 'text-xs'
+  },
+  base: {
+    container: 'max-w-[14rem]',
+    button: 'text-sm font-medium h-8',
+    discount: 'text-xs'
+  },
+  lg: {
+    container: 'max-w-[16rem]',
+    button: 'text-base font-medium h-10',
+    discount: 'text-sm'
+  }
+} as const
+
 // Component props
 interface PricingToggleProps {
   modelValue: boolean // true = annual, false = monthly
@@ -48,7 +67,7 @@ interface PricingToggleProps {
   monthlyLabel?: string
   showDiscount?: boolean
   discountText?: string
-  size?: 'sm' | 'base' | 'lg'
+  size?: keyof typeof TOGGLE_SIZE_CONFIG
   class?: string | Record<string, boolean> | string[]
 }
 
@@ -67,25 +86,6 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
-// Size configurations
-const sizeConfig = {
-  sm: {
-    container: 'max-w-[12rem]',
-    button: 'text-xs font-medium h-7',
-    discount: 'text-xs'
-  },
-  base: {
-    container: 'max-w-[14rem]',
-    button: 'text-sm font-medium h-8',
-    discount: 'text-xs'
-  },
-  lg: {
-    container: 'max-w-[16rem]',
-    button: 'text-base font-medium h-10',
-    discount: 'text-sm'
-  }
-}
-
 // Event handlers
 const handleAnnualClick = () => {
   emit('update:modelValue', true)
@@ -98,7 +98,7 @@ const handleMonthlyClick = () => {
 // Computed properties
 const containerClasses = computed(() => [
   'flex justify-center m-auto',
-  sizeConfig[props.size].container,
+  TOGGLE_SIZE_CONFIG[props.size].container,
   props.class
 ])
 
@@ -106,17 +106,20 @@ const indicatorClasses = computed(() => [
   props.modelValue ? 'translate-x-0' : 'translate-x-full'
 ])
 
-const annualButtonClasses = computed(() => [
+const baseButtonClasses = [
   'relative flex-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors duration-200 ease-in-out',
-  sizeConfig[props.size].button,
+  TOGGLE_SIZE_CONFIG[props.size].button,
+]
+
+const annualButtonClasses = computed(() => [
+  ...baseButtonClasses,
   props.modelValue
     ? 'text-primary-foreground'
     : 'text-muted-foreground hover:text-foreground'
 ])
 
 const monthlyButtonClasses = computed(() => [
-  'relative flex-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors duration-200 ease-in-out',
-  sizeConfig[props.size].button,
+  ...baseButtonClasses,
   !props.modelValue
     ? 'text-primary-foreground'
     : 'text-muted-foreground hover:text-foreground'
@@ -124,7 +127,7 @@ const monthlyButtonClasses = computed(() => [
 
 const discountClasses = computed(() => [
   'ml-1 font-medium transition-colors duration-200',
-  sizeConfig[props.size].discount,
+  TOGGLE_SIZE_CONFIG[props.size].discount,
   props.modelValue
     ? 'text-primary-foreground/80'
     : 'text-muted-foreground/60'

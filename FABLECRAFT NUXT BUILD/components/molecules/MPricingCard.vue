@@ -202,10 +202,7 @@ const hoverEffectClasses = computed(() => [
 ])
 
 const ctaVariant = computed(() => {
-  if (props.isPopular) return 'default'
-  if (props.variant === 'highlighted') return 'default'
-  if (isCustomPricing.value) return 'outline'
-  return 'outline'
+  return (props.isPopular || props.variant === 'highlighted') ? 'default' : 'outline'
 })
 
 // Event handlers
