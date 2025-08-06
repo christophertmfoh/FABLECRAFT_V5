@@ -5,6 +5,7 @@
     role="article"
     :aria-label="`Testimonial from ${name}`"
     tabindex="0"
+    style="display: flex; flex-direction: column; min-height: 400px;"
     @click="handleClick"
     @keydown.enter="handleClick"
     @keydown.space.prevent="handleClick"
@@ -12,7 +13,7 @@
     <!-- Hover background effect -->
     <div :class="hoverEffectClasses" aria-hidden="true" />
     
-    <div class="p-comfortable relative z-10 flex flex-col h-full">
+    <div class="p-comfortable relative z-10 flex flex-col flex-1">
       <!-- Content Area (Star + Quote) -->
       <div class="flex-1 flex flex-col">
         <!-- Star Rating -->

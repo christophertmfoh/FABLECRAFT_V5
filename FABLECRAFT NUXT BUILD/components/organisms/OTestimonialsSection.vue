@@ -1,20 +1,45 @@
 <template>
   <section :class="sectionClasses" aria-label="Testimonials Section">
     <!-- Testimonials Header -->
-    <MFeatureHeader
-      :badge-text="headerBadgeText"
-      :title="headerTitle"
-      :highlight-text="headerHighlightText"
-      :subtitle="headerSubtitle"
-      :badge-size="isCompact ? 'sm' : 'base'"
-      :heading-size="isCompact ? 'sm' : 'lg'"
-      :heading-variant="isCompact ? 'compact' : 'default'"
-      :gradient-variant="gradientVariant"
-    />
+    <div class="text-center heading-group space-y-3">
+      <!-- Badge -->
+      <MHeroBadge
+        :text="headerBadgeText"
+        :variant="'default'"
+        :size="isCompact ? 'sm' : 'base'"
+        :dot-color="'primary'"
+        :clickable="false"
+      />
+
+      <!-- Custom heading with forced line break -->
+      <div class="heading-group flex flex-col pb-2 text-center space-y-2" role="heading" aria-level="1">
+        <h2 id="testimonials-heading" :class="headingClasses">
+          <!-- First line -->
+          <div class="text-foreground">
+            {{ headerTitle }}
+          </div>
+          <!-- Second line with gradient -->
+          <AGradientText
+            tag="div"
+            :variant="gradientVariant"
+            direction="to-right"
+            intensity="normal"
+            class="inline-block transition-all duration-300"
+          >
+            {{ headerHighlightText }}
+          </AGradientText>
+        </h2>
+        
+        <!-- Subtitle -->
+        <p :class="subtitleClasses" aria-describedby="testimonials-heading">
+          {{ headerSubtitle }}
+        </p>
+      </div>
+    </div>
 
     <!-- Testimonials Grid -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-normal mt-acquaintances"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-normal mt-acquaintances auto-rows-fr"
       role="region"
       aria-label="Customer testimonials"
     >
@@ -112,6 +137,18 @@ const testimonials = computed(() => props.customTestimonials || defaultTestimoni
 const sectionClasses = computed(() => [
   'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
   props.class,
+])
+
+// Heading classes
+const headingClasses = computed(() => [
+  'transition-all duration-300 font-black tracking-tight drop-shadow-sm',
+  isCompact.value ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-4xl sm:text-5xl lg:text-6xl'
+])
+
+// Subtitle classes  
+const subtitleClasses = computed(() => [
+  'text-muted-foreground font-medium transition-all duration-300 text-center max-w-4xl mx-auto',
+  isCompact.value ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'
 ])
 
 // Event handlers
