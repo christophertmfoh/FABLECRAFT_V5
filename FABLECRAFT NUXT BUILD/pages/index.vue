@@ -36,64 +36,76 @@
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
         <!-- Hero Section -->
-        <Section spacing="xl" class="hero-section">
-          <OHeroSection
-            id="hero"
-            variant="default"
-            @primary:click="handleNewProject"
-            @secondary:click="handleExploreExamples"
-            @badge:click="handleBadgeClick"
-          />
+        <Section spacing="none" class="hero-section">
+          <div class="py-20 sm:py-28">
+            <OHeroSection
+              id="hero"
+              variant="default"
+              @primary:click="handleNewProject"
+              @secondary:click="handleExploreExamples"
+              @badge:click="handleBadgeClick"
+            />
+          </div>
         </Section>
 
         <!-- Features Section -->
-        <Section spacing="xl" class="features-section">
-          <OFeaturesSection
-            id="features"
-            variant="default"
-            :show-trust-indicators="true"
-            :show-key-benefits="true"
-          />
+        <Section spacing="none" class="features-section">
+          <div class="py-20 sm:py-28">
+            <OFeaturesSection
+              id="features"
+              variant="default"
+              :show-trust-indicators="true"
+              :show-key-benefits="true"
+            />
+          </div>
         </Section>
 
         <!-- Process Section -->
-        <Section spacing="xl" class="process-section">
-          <Container size="xl">
-            <OProcessSection
-              id="process"
-              variant="default"
-              @step-click="handleProcessStepClick"
-            />
-          </Container>
+        <Section spacing="none" class="process-section">
+          <div class="py-20 sm:py-28">
+            <Container size="xl">
+              <OProcessSection
+                id="process"
+                variant="default"
+                @step-click="handleProcessStepClick"
+              />
+            </Container>
+          </div>
         </Section>
 
         <!-- Testimonials Section -->
-        <Section spacing="xl" class="testimonials-section">
-          <OTestimonialsSection
-            id="testimonials"
-            variant="default"
-            @testimonial-click="handleTestimonialClick"
-          />
+        <Section spacing="none" class="testimonials-section">
+          <div class="py-20 sm:py-28">
+            <OTestimonialsSection
+              id="testimonials"
+              variant="default"
+              @testimonial-click="handleTestimonialClick"
+            />
+          </div>
         </Section>
 
         <!-- Pricing Section -->
-        <Section spacing="xl" class="pricing-section">
-          <OPricingSection
-            id="pricing"
-            variant="default"
-            @plan-click="handlePlanClick"
-            @cta-click="handlePricingCtaClick"
-          />
+        <Section spacing="none" class="pricing-section">
+          <div class="py-20 sm:py-28">
+            <OPricingSection
+              id="pricing"
+              variant="default"
+              @plan-click="handlePlanClick"
+              @cta-click="handlePricingCtaClick"
+            />
+          </div>
         </Section>
 
         <!-- CTA Section -->
-        <Section spacing="xl" class="cta-section">
-          <OCtaSection
-            id="cta"
-            variant="default"
-            @primary-cta-click="handlePrimaryCtaClick"
-            @secondary-cta-click="handleSecondaryCtaClick"
-          />
+        <Section spacing="none" class="cta-section">
+          <div class="py-20 sm:py-28">
+            <OCtaSection
+              id="cta"
+              variant="default"
+              @primary-cta-click="handlePrimaryCtaClick"
+              @secondary-cta-click="handleSecondaryCtaClick"
+            />
+          </div>
         </Section>
       </main>
 
@@ -402,36 +414,67 @@ provide('landingPage', {
   @apply top-4;
 }
 
-/* Section-specific background patterns (optional) */
-.hero-section {
-  position: relative;
+/* Organism Section Spacing - Consistent & Professional */
+.hero-section,
+.features-section,
+.process-section,
+.testimonials-section,
+.pricing-section,
+.cta-section {
+  @apply relative;
 }
 
+/* Remove any conflicting background patterns for clean spacing */
 .hero-section::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image: radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%);
-  opacity: 0.03;
+  opacity: 0.02;
   pointer-events: none;
 }
 
-/* Responsive utilities */
+/* Ensure organisms have consistent internal spacing */
+.hero-section > div,
+.features-section > div,
+.process-section > div,
+.testimonials-section > div,
+.pricing-section > div,
+.cta-section > div {
+  @apply w-full;
+}
+
+/* Responsive organism spacing adjustments */
 @media (max-width: 768px) {
-  .mobile-spacing {
-    @apply space-y-8;
+  .hero-section > div,
+  .features-section > div,
+  .process-section > div,
+  .testimonials-section > div,
+  .pricing-section > div,
+  .cta-section > div {
+    @apply py-16;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .tablet-spacing {
-    @apply space-y-12;
+  .hero-section > div,
+  .features-section > div,
+  .process-section > div,
+  .testimonials-section > div,
+  .pricing-section > div,
+  .cta-section > div {
+    @apply py-24;
   }
 }
 
 @media (min-width: 1025px) {
-  .desktop-spacing {
-    @apply space-y-16;
+  .hero-section > div,
+  .features-section > div,
+  .process-section > div,
+  .testimonials-section > div,
+  .pricing-section > div,
+  .cta-section > div {
+    @apply py-28;
   }
 }
 </style>
