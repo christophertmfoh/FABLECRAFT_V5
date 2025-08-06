@@ -20,7 +20,7 @@
     </Badge>
 
     <!-- Card content -->
-    <CardContent :class="contentClasses">
+    <div :class="contentClasses">
       <!-- Plan name -->
       <Heading
         :level="3"
@@ -75,7 +75,7 @@
       >
         {{ ctaText }}
       </Button>
-    </CardContent>
+    </div>
   </Card>
 </template>
 

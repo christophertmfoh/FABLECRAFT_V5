@@ -193,7 +193,6 @@ interface PricingSectionEmits {
 }
 
 const props = withDefaults(defineProps<PricingSectionProps>(), {
-  tiers: () => defaultPricingTiers,
   title: 'Start Free, Scale with Your Stories',
   description: 'Whether you're writing your first novel or managing an entire creative universe, we have a plan that grows with your ambition.',
   badgeText: 'Simple, Transparent Pricing',
@@ -219,7 +218,8 @@ const sectionTitleId = computed(() => 'pricing-section-title')
 
 // Sort tiers with popular first
 const sortedTiers = computed(() => {
-  return sortTiersByPopularity(props.tiers || defaultPricingTiers)
+  const tiersToUse = props.tiers || defaultPricingTiers
+  return sortTiersByPopularity(tiersToUse)
 })
 
 // Card variant based on section variant
@@ -253,7 +253,8 @@ const handleNavigate = (route: string) => {
 
 const handleFeatureClick = (feature: PricingFeature) => {
   // Find which tier this feature belongs to
-  const tier = props.tiers?.find(t => 
+  const tiersToUse = props.tiers || defaultPricingTiers
+  const tier = tiersToUse.find(t => 
     t.features.some(f => f.id === feature.id)
   )
   emit('featureClick', feature, tier?.id || '')
@@ -261,7 +262,8 @@ const handleFeatureClick = (feature: PricingFeature) => {
 
 const handleFeatureExpand = (featureId: string, expanded: boolean) => {
   // Find which tier this feature belongs to
-  const tier = props.tiers?.find(t => 
+  const tiersToUse = props.tiers || defaultPricingTiers
+  const tier = tiersToUse.find(t => 
     t.features.some(f => f.id === featureId)
   )
   emit('featureExpand', featureId, expanded, tier?.id || '')
