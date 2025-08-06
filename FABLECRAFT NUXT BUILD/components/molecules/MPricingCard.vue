@@ -22,49 +22,51 @@
     <div :class="hoverEffectClasses" aria-hidden="true" />
     
     <div class="p-comfortable relative z-10 flex flex-col h-full text-center">
-      <!-- Plan header -->
-      <div class="mb-6">
-        <!-- Plan name -->
-        <Heading
-          :id="`pricing-plan-${planId}`"
-          tag="h3"
-          size="xl"
-          class="font-bold text-primary mb-4 text-center"
-        >
-          {{ name }}
-        </Heading>
+      <!-- Plan header (fixed height to ensure alignment) -->
+      <div class="mb-6 h-48 flex flex-col justify-between">
+        <div>
+          <!-- Plan name -->
+          <Heading
+            :id="`pricing-plan-${planId}`"
+            tag="h3"
+            size="xl"
+            class="font-bold text-primary mb-4 text-center"
+          >
+            {{ name }}
+          </Heading>
 
-        <!-- Pricing display -->
-        <div class="flex items-baseline justify-center mb-4">
-          <Text
-            tag="span"
-            size="3xl"
-            class="font-black text-foreground"
-          >
-            {{ displayPrice }}
-          </Text>
-          <Text
-            v-if="period && !isCustomPricing"
-            tag="span"
-            size="base"
-            class="text-muted-foreground ml-1"
-          >
-            {{ period }}
-          </Text>
+          <!-- Pricing display -->
+          <div class="flex items-baseline justify-center mb-4">
+            <Text
+              tag="span"
+              size="3xl"
+              class="font-black text-foreground"
+            >
+              {{ displayPrice }}
+            </Text>
+            <Text
+              v-if="period && !isCustomPricing"
+              tag="span"
+              size="base"
+              class="text-muted-foreground ml-1"
+            >
+              {{ period }}
+            </Text>
+          </div>
         </div>
 
-        <!-- Description -->
+        <!-- Description (always at bottom of header section) -->
         <Text
           tag="p"
           size="base"
-          class="text-muted-foreground mb-6 leading-relaxed text-center"
+          class="text-muted-foreground leading-relaxed text-center"
         >
           {{ description }}
         </Text>
       </div>
 
       <!-- Features section -->
-      <div class="flex-1 mb-8">
+      <div class="flex-1 mb-6">
         <Text
           tag="h4"
           size="base"
@@ -90,7 +92,7 @@
       </div>
 
       <!-- CTA Button at bottom -->
-      <div class="mt-auto pt-4">
+      <div class="mt-auto pt-6">
         <Button
           :variant="ctaVariant"
           size="lg"
