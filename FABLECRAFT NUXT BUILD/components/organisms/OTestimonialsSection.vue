@@ -22,7 +22,7 @@
           <AGradientText
             tag="div"
             :variant="gradientVariant"
-            direction="to-right"
+            direction="to-r"
             intensity="normal"
             class="inline-block transition-all duration-300"
           >
