@@ -23,10 +23,14 @@
         <a href="#main-content" class="skip-link"> Skip to main content </a>
       </VisuallyHidden>
 
-      <!-- Navigation Header -->
+      <!-- Navigation Header Organism -->
       <NavigationHeader
         :is-authenticated="isAuthenticated"
         :user="user"
+        :show-auth-button="true"
+        :show-brand-text="true"
+        :show-nav-items="true"
+        brand-text="FABLECRAFT"
         @auth:click="handleAuth"
         @auth:logout="handleLogout"
         @navigate="handleNavigate"
@@ -41,15 +45,19 @@
             <Container size="md">
               <!-- Space for login content goes here -->
               <div class="text-center">
-                <h1 class="text-4xl font-bold text-foreground mb-4">Login</h1>
-                <p class="text-muted-foreground">Content goes here</p>
+                <Heading as="h1" size="h1-compact" class="mb-4">
+                  Login
+                </Heading>
+                <Text size="lg" variant="muted" class="max-w-md mx-auto">
+                  Content goes here
+                </Text>
               </div>
             </Container>
           </div>
         </Section>
       </main>
 
-      <!-- Footer Section -->
+      <!-- Footer Organism -->
       <Footer
         id="footer"
         class="relative z-30"
