@@ -199,7 +199,7 @@ const defaultPricingPlans: PricingPlan[] = [
     name: 'Enterprise',
     monthlyPrice: 'Custom',
     annualPrice: 'Custom',
-    description: 'For teams and companies',
+    description: 'For teams at scale',
     isPopular: false,
     ctaText: 'Contact Sales',
     variant: 'enterprise',
