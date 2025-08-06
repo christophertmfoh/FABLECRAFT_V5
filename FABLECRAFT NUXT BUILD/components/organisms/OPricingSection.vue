@@ -1,16 +1,44 @@
 <template>
   <section :class="sectionClasses" aria-label="Pricing Section">
     <!-- Pricing Header -->
-    <MFeatureHeader
-      :badge-text="headerBadgeText"
-      :title="headerTitle"
-      :highlight-text="headerHighlightText"
-      :subtitle="headerSubtitle"
-      :heading-size="isCompact ? 'sm' : 'lg'"
-      :gradient-variant="gradientVariant"
-      gradient-direction="to-r"
-      gradient-intensity="normal"
-    />
+    <div class="text-center heading-group space-y-3">
+      <!-- Badge -->
+      <MHeroBadge
+        :text="headerBadgeText"
+        :variant="'default'"
+        :size="isCompact ? 'sm' : 'base'"
+        :dot-color="'primary'"
+        :clickable="false"
+      />
+
+      <!-- Custom heading with forced line break -->
+      <div class="heading-group flex flex-col pb-2 text-center space-y-2" role="heading" aria-level="2">
+        <!-- First line -->
+        <div :class="headingClasses">
+          {{ headerTitle }}
+        </div>
+        <!-- Second line with gradient -->
+        <AGradientText
+          tag="div"
+          :variant="gradientVariant"
+          direction="to-r"
+          intensity="normal"
+          class="inline-block transition-all duration-300"
+        >
+          {{ headerHighlightText }}
+        </AGradientText>
+      </div>
+
+      <!-- Subtitle -->
+      <Text
+        v-if="headerSubtitle"
+        tag="p"
+        :size="isCompact ? 'base' : 'lg'"
+        :class="subtitleClasses"
+      >
+        {{ headerSubtitle }}
+      </Text>
+    </div>
 
     <!-- Pricing Toggle -->
     <div class="mt-acquaintances">
