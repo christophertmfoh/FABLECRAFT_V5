@@ -9,7 +9,8 @@
     @keydown.enter="handleClick"
     @keydown.space.prevent="handleClick"
   >
-    <!-- Step Number -->
+    <!-- Step Number (removed for cleaner look) -->
+    <!--
     <div class="absolute -top-2 -left-2 z-20">
       <StepNumber
         :step="stepNumber"
@@ -18,6 +19,7 @@
         :size="stepNumberSize"
       />
     </div>
+    -->
 
     <!-- Icon Container -->
     <div
