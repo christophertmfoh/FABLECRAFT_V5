@@ -42,9 +42,9 @@ const props = withDefaults(defineProps<PopularBadgeProps>(), {
 
 // Position classes
 const positionClasses = {
-  'top-right': 'absolute top-0 right-0 -mt-3 mr-4',
-  'top-left': 'absolute top-0 left-0 -mt-3 ml-4',
-  'top-center': 'absolute top-0 left-1/2 transform -translate-x-1/2 -mt-3'
+  'top-right': 'absolute top-0 right-0 -mt-2 mr-6',
+  'top-left': 'absolute top-0 left-0 -mt-2 ml-6',
+  'top-center': 'absolute top-0 left-1/2 transform -translate-x-1/2 -mt-2'
 }
 
 // Computed properties

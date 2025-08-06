@@ -48,13 +48,13 @@
         :show-discount="showDiscount"
         :discount-text="discountText"
         size="base"
-        class="mb-acquaintances"
+        class="mb-12"
       />
     </div>
 
     <!-- Pricing Cards Grid -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-normal mt-acquaintances auto-rows-fr"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-normal mt-8 auto-rows-fr gap-6"
       role="region"
       aria-label="Pricing plans comparison"
     >
@@ -122,8 +122,8 @@ interface PricingProps {
 const props = withDefaults(defineProps<PricingProps>(), {
   variant: 'default',
   headerBadgeText: 'Simple, Transparent Pricing',
-  headerTitle: 'Start Free, Scale with',
-  headerHighlightText: 'Your Stories',
+  headerTitle: 'Start Free.',
+  headerHighlightText: 'Scale With Your Stories',
   headerSubtitle: 'Choose the perfect plan for your creative journey. Start with our free tier and upgrade as your projects grow.',
   gradientVariant: 'primary',
   annualLabel: 'Yearly',

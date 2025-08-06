@@ -21,7 +21,7 @@
     <!-- Hover background effect -->
     <div :class="hoverEffectClasses" aria-hidden="true" />
     
-    <div class="p-comfortable relative z-10 flex flex-col h-full">
+    <div class="p-comfortable relative z-10 flex flex-col h-full text-center">
       <!-- Plan header -->
       <div class="mb-6">
         <!-- Plan name -->
@@ -29,13 +29,13 @@
           :id="`pricing-plan-${planId}`"
           tag="h3"
           size="lg"
-          class="font-bold text-foreground mb-3"
+          class="font-bold text-foreground mb-4 text-center"
         >
           {{ name }}
         </Heading>
 
         <!-- Pricing display -->
-        <div class="flex items-baseline mb-3">
+        <div class="flex items-baseline justify-center mb-4">
           <Text
             tag="span"
             size="3xl"
@@ -57,34 +57,24 @@
         <Text
           tag="p"
           size="base"
-          class="text-muted-foreground mb-6 leading-relaxed"
+          class="text-muted-foreground mb-6 leading-relaxed text-center"
         >
           {{ description }}
         </Text>
-
-        <!-- CTA Button -->
-        <Button
-          :variant="ctaVariant"
-          size="lg"
-          class="w-full font-semibold"
-          @click="handleCtaClick"
-        >
-          {{ ctaText }}
-        </Button>
       </div>
 
       <!-- Features section -->
-      <div class="flex-1">
+      <div class="flex-1 mb-6">
         <Text
           tag="h4"
           size="base"
-          class="font-semibold text-foreground mb-4"
+          class="font-semibold text-foreground mb-4 text-center"
         >
           {{ featuresTitle }}
         </Text>
 
         <ul
-          class="space-y-3"
+          class="space-y-3 text-left"
           role="list"
           :aria-labelledby="`pricing-plan-${planId}`"
         >
@@ -97,6 +87,18 @@
             :size="featureSize"
           />
         </ul>
+      </div>
+
+      <!-- CTA Button at bottom -->
+      <div class="mt-auto">
+        <Button
+          :variant="ctaVariant"
+          size="lg"
+          class="w-full font-semibold"
+          @click="handleCtaClick"
+        >
+          {{ ctaText }}
+        </Button>
       </div>
     </div>
   </Card>
@@ -171,8 +173,8 @@ const displayPrice = computed(() => {
 })
 
 const cardClasses = computed(() => [
-  'group cursor-pointer transition-all duration-500',
-  'hover:shadow-xl hover:scale-105 hover:-translate-y-2',
+  'group cursor-pointer transition-all duration-300',
+  'hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1',
   'border-border hover:border-primary/50',
   'natural-depth gentle-hover',
   'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
