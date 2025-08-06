@@ -11,7 +11,7 @@
       :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
       :heading-tag="'h2'"
-      :heading-size="isCompact ? 'lg' : 'xl'"
+      :heading-size="isCompact ? 'sm' : 'lg'"
       :heading-variant="'default'"
       :gradient-variant="gradientVariant"
       :gradient-direction="'to-r'"
@@ -21,7 +21,7 @@
 
     <!-- Main CTA Card -->
     <Card :class="ctaCardClasses" variant="default">
-      <div class="p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto">
+              <div class="relative z-10 p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto">
         <!-- Icon Container (optional) -->
         <div
           v-if="showIcon && !isCompact"
@@ -63,23 +63,33 @@
           {{ supportingCopy }}
         </Text>
 
-        <!-- CTA Button Group -->
-        <div class="mt-acquaintances mb-8">
-          <MCtaButtonGroup
-            :primary-text="primaryCtaText"
-            :primary-variant="primaryCtaVariant"
-            :primary-icon="primaryCtaIcon"
-            :secondary-text="secondaryCtaText"
-            :secondary-variant="secondaryCtaVariant"
-            :secondary-icon="secondaryCtaIcon"
-            :button-size="ctaButtonSize"
-            :layout="ctaLayout"
-            :spacing="ctaSpacing"
-            :trust-signal="trustSignal"
-            @primary-click="handlePrimaryCtaClick"
-            @secondary-click="handleSecondaryCtaClick"
-          />
-        </div>
+        <!-- CTA Hero-Style Button Group -->
+        <MHeroActions
+          :primary-text="primaryCtaText"
+          :secondary-text="secondaryCtaText"
+          :primary-icon="primaryCtaIcon"
+          :secondary-icon="secondaryCtaIcon"
+          :primary-variant="primaryCtaVariant"
+          :secondary-variant="secondaryCtaVariant"
+          :button-size="ctaButtonSize"
+          :layout="ctaLayout"
+          :alignment="'center'"
+          :spacing="ctaSpacing"
+          :group-label="'Call to action buttons'"
+          class="mt-acquaintances mb-8"
+          @primary:click="handlePrimaryCtaClick"
+          @secondary:click="handleSecondaryCtaClick"
+        />
+        
+        <!-- Trust Signal -->
+        <Text
+          v-if="trustSignal"
+          tag="p"
+          size="sm"
+          class="text-muted-foreground text-center mt-6"
+        >
+          {{ trustSignal }}
+        </Text>
       </div>
     </Card>
   </section>
@@ -188,13 +198,22 @@ const sectionClasses = computed(() => [
 
 const ctaCardClasses = computed(() => {
   const baseClasses = [
-    'bg-card border-border mt-acquaintances',
-    'natural-depth gentle-hover',
-    'hover:shadow-xl transition-all duration-500',
+    'relative overflow-hidden',
+    'bg-gradient-to-br from-card via-background to-card/50',
+    'border border-border/50 backdrop-blur-sm',
+    'shadow-2xl hover:shadow-3xl',
+    'transition-all duration-700 ease-out',
+    'hover:scale-[1.02] hover:-translate-y-2',
+    'mt-acquaintances',
+    'rounded-2xl',
+    // Premium glow effect
+    'before:absolute before:inset-0 before:rounded-2xl',
+    'before:bg-gradient-to-r before:from-primary/5 before:via-transparent before:to-accent/5',
+    'before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-700',
   ]
   
   if (props.theme === 'gradient') {
-    baseClasses.push('bg-gradient-to-br from-card via-card/95 to-accent/30')
+    baseClasses.push('bg-gradient-to-br from-primary/5 via-card/95 to-accent/10')
   }
   
   return baseClasses
