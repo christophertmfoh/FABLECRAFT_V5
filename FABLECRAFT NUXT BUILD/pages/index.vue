@@ -54,7 +54,7 @@
         />
 
         <!-- Process Section -->
-        <Section id="process" spacing="lg" class="process-section bg-muted/30">
+        <Section id="process" spacing="lg" class="process-section">
           <Container size="xl">
             <OProcessSection
               id="process"

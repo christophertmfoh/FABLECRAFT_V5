@@ -12,18 +12,18 @@
       :gradient-variant="gradientVariant"
     />
 
-    <!-- Connection line for desktop -->
-    <div
-      class="absolute top-[calc(theme(spacing.acquaintances)+theme(spacing.16))] left-0 right-0 h-1 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 hidden lg:block rounded-full mx-4 sm:mx-6 lg:mx-8"
-      aria-hidden="true"
-    />
-
     <!-- Process Steps Grid -->
     <div
       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 grid-normal mt-acquaintances relative"
       role="list"
       aria-label="Creative process steps"
     >
+      <!-- Connection line for desktop - behind steps and constrained to first/last step -->
+      <div
+        class="absolute top-16 h-1 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 hidden xl:block rounded-full -z-10"
+        style="left: calc(100% / 12); right: calc(100% / 12);"
+        aria-hidden="true"
+      />
       <MProcessStep
         v-for="(step, index) in processSteps"
         :key="`process-step-${index}`"

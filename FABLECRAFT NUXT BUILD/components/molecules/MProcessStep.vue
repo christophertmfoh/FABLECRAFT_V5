@@ -147,20 +147,20 @@ const iconClasses = computed(() => [
 ])
 
 const titleClasses = computed(() => [
-  'font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight mt-best-friends'
+  'font-bold text-foreground group-hover:text-primary transition-colors duration-300 leading-tight mt-best-friends text-center'
 ])
 
 const descriptionClasses = computed(() => [
-  'text-muted-foreground group-hover:text-foreground transition-colors duration-300 font-medium leading-relaxed mt-best-friends'
+  'text-muted-foreground group-hover:text-foreground transition-colors duration-300 font-medium leading-relaxed mt-best-friends text-center'
 ])
 
 const detailClasses = computed(() => [
-  'text-muted-foreground transition-all duration-500 font-medium leading-relaxed mt-friends',
+  'text-muted-foreground transition-all duration-500 font-medium leading-relaxed mt-friends text-center',
   'opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0'
 ])
 
 const categoryClasses = computed(() => [
-  'text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-best-friends'
+  'text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-best-friends text-center'
 ])
 
 // Handle click events
