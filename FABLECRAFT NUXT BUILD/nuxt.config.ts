@@ -3,6 +3,12 @@ export default defineNuxtConfig({
   // Required for Nuxt 3.18+ to ensure future compatibility
   compatibilityDate: '2024-11-01',
 
+  // Development server configuration for Cursor port forwarding
+  devServer: {
+    port: 3000,
+    host: '0.0.0.0'
+  },
+
   // Enable essential modules for the core stack
   modules: [
     '@nuxtjs/supabase',
