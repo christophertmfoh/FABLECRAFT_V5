@@ -4,16 +4,18 @@
     role="group"
     :aria-label="groupLabel"
   >
-    <!-- Primary CTA Button -->
+    <!-- Primary CTA Button with 2025 enhancements -->
     <Button
       :variant="primaryVariant"
       :size="buttonSize"
       :class="primaryButtonClasses"
       @click="handlePrimaryClick"
     >
-      <span class="relative flex items-center">
+      <span class="relative flex items-center group">
         <slot name="primary-icon-before" />
-        {{ primaryText }}
+        <span class="transition-all duration-300 group-hover:scale-105">
+          {{ primaryText }}
+        </span>
         <slot name="primary-icon-after">
           <AtomIcon
             v-if="showPrimaryIcon"
@@ -25,7 +27,7 @@
       </span>
     </Button>
 
-    <!-- Secondary CTA Button (optional) -->
+    <!-- Secondary CTA Button with enhanced micro-interactions -->
     <Button
       v-if="secondaryText"
       :variant="secondaryVariant"
@@ -33,9 +35,11 @@
       :class="secondaryButtonClasses"
       @click="handleSecondaryClick"
     >
-      <span class="flex items-center">
+      <span class="flex items-center group">
         <slot name="secondary-icon-before" />
-        {{ secondaryText }}
+        <span class="transition-all duration-300 group-hover:scale-105">
+          {{ secondaryText }}
+        </span>
         <slot name="secondary-icon-after">
           <AtomIcon
             v-if="showSecondaryIcon"
