@@ -23,15 +23,19 @@
     
     <div class="p-comfortable relative z-10 flex flex-col h-full text-center">
       <!-- 1. Subscription Type (Fixed Height) -->
-      <div class="h-12 flex items-center justify-center mb-4">
-        <Heading
-          :id="`pricing-plan-${planId}`"
-          tag="h3"
-          size="xl"
-          class="font-bold text-primary text-center"
-        >
-          {{ name }}
-        </Heading>
+      <div class="h-16 flex items-center justify-center mb-6">
+        <div class="relative inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 border border-primary/20 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300 group-hover:border-primary/40 group-hover:from-primary/15 group-hover:via-primary/8 group-hover:to-primary/15">
+          <Heading
+            :id="`pricing-plan-${planId}`"
+            tag="h3"
+            size="2xl"
+            class="font-black text-primary text-center tracking-tight drop-shadow-sm relative z-10"
+          >
+            {{ name }}
+          </Heading>
+          <!-- Subtle shine effect on hover -->
+          <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
+        </div>
       </div>
 
       <!-- 2. Price (Fixed Height) -->
@@ -67,7 +71,7 @@
       </div>
 
       <!-- 4. Features (Fixed Height) -->
-      <div class="h-48 mb-6">
+      <div class="h-44 mb-6">
         <Text
           tag="h4"
           size="base"
