@@ -12,11 +12,7 @@
         @click="handleSocialLogin('google')"
       >
         <template #leading>
-          <AtomIcon
-            name="lucide:chrome"
-            :class="iconClasses"
-            aria-hidden="true"
-          />
+          <AtomIcon name="lucide:chrome" :class="iconClasses" aria-hidden="true" />
         </template>
         {{ getButtonText('google') }}
       </Button>
@@ -31,11 +27,7 @@
         @click="handleSocialLogin('github')"
       >
         <template #leading>
-          <AtomIcon
-            name="lucide:github"
-            :class="iconClasses"
-            aria-hidden="true"
-          />
+          <AtomIcon name="lucide:github" :class="iconClasses" aria-hidden="true" />
         </template>
         {{ getButtonText('github') }}
       </Button>
@@ -50,11 +42,7 @@
         @click="handleSocialLogin('apple')"
       >
         <template #leading>
-          <AtomIcon
-            name="lucide:apple"
-            :class="iconClasses"
-            aria-hidden="true"
-          />
+          <AtomIcon name="lucide:apple" :class="iconClasses" aria-hidden="true" />
         </template>
         {{ getButtonText('apple') }}
       </Button>
@@ -69,11 +57,7 @@
         @click="handleSocialLogin('microsoft')"
       >
         <template #leading>
-          <AtomIcon
-            name="lucide:window"
-            :class="iconClasses"
-            aria-hidden="true"
-          />
+          <AtomIcon name="lucide:window" :class="iconClasses" aria-hidden="true" />
         </template>
         {{ getButtonText('microsoft') }}
       </Button>
@@ -148,7 +132,7 @@ const providerConfig = {
     compactText: 'Google',
   },
   github: {
-    name: 'GitHub', 
+    name: 'GitHub',
     icon: 'lucide:github',
     fullText: 'Continue with GitHub',
     compactText: 'GitHub',
@@ -200,10 +184,7 @@ const buttonsContainerVariants = cva('w-full', {
 
 // Computed classes
 const containerClasses = computed(() => {
-  return cn(
-    containerVariants({ layout: props.layout }),
-    props.class
-  )
+  return cn(containerVariants({ layout: props.layout }), props.class)
 })
 
 const buttonsContainerClasses = computed(() => {
@@ -222,7 +203,7 @@ const socialButtonClasses = computed(() => {
     'icon-only': 'w-11 h-11 p-0 justify-center',
     compact: 'min-h-10',
   }
-  
+
   return cn(
     baseClasses,
     modeClasses[props.mode],
@@ -239,14 +220,10 @@ const iconClasses = computed(() => {
     default: 'h-4 w-4',
     lg: 'h-4.5 w-4.5',
   }
-  
-  return cn(
-    'flex-shrink-0',
-    sizeClasses[props.buttonSize],
-    {
-      'mr-0': props.mode === 'icon-only',
-    }
-  )
+
+  return cn('flex-shrink-0', sizeClasses[props.buttonSize], {
+    'mr-0': props.mode === 'icon-only',
+  })
 })
 
 const dividerClasses = computed(() => {
@@ -256,7 +233,7 @@ const dividerClasses = computed(() => {
 // Methods
 const getButtonText = (provider: SocialProvider): string => {
   if (props.mode === 'icon-only') return ''
-  
+
   const config = providerConfig[provider]
   return props.mode === 'compact' ? config.compactText : config.fullText
 }
@@ -275,22 +252,27 @@ const handleSocialLogin = (provider: SocialProvider) => {
 }
 
 /* Social button specific styles */
-button[class*="social-button"] {
+button[class*='social-button'] {
   position: relative;
 }
 
 /* Subtle gradient overlay on hover */
-button[class*="social-button"]:hover::before {
+button[class*='social-button']:hover::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 /* Loading state */
-button[class*="social-button"]:disabled {
+button[class*='social-button']:disabled {
   position: relative;
   overflow: hidden;
 }

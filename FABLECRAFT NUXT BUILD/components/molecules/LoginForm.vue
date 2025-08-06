@@ -56,17 +56,12 @@
       <template v-else-if="submitIcon" #leading>
         <AtomIcon :name="submitIcon" class="h-4 w-4" />
       </template>
-      
+
       {{ loading ? loadingText : submitText }}
     </Button>
 
     <!-- Form Message -->
-    <FormMessage
-      v-if="message"
-      :type="messageType"
-      :message="message"
-      class="mt-4"
-    />
+    <FormMessage v-if="message" :type="messageType" :message="message" class="mt-4" />
   </form>
 </template>
 
@@ -146,12 +141,12 @@ const errors = reactive<LoginFormErrors>({})
 // Validation functions
 const validateEmail = (email: string): string | undefined => {
   if (!email) return 'Email is required'
-  
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(email)) {
     return 'Please enter a valid email address'
   }
-  
+
   return undefined
 }
 
@@ -167,7 +162,7 @@ const validateField = (field: keyof LoginFormData) => {
   if (!props.enableValidation) return
 
   const value = formData[field]
-  
+
   switch (field) {
     case 'email':
       errors.email = validateEmail(value)
@@ -183,7 +178,7 @@ const validateForm = (): boolean => {
 
   validateField('email')
   validateField('password')
-  
+
   return !errors.email && !errors.password
 }
 
@@ -192,13 +187,8 @@ const isFormValid = computed(() => {
   if (!props.enableValidation) {
     return formData.email && formData.password
   }
-  
-  return (
-    formData.email &&
-    formData.password &&
-    !errors.email &&
-    !errors.password
-  )
+
+  return formData.email && formData.password && !errors.email && !errors.password
 })
 
 const formClasses = computed(() => {
@@ -207,12 +197,8 @@ const formClasses = computed(() => {
     md: 'space-y-6',
     lg: 'space-y-8',
   }
-  
-  return cn(
-    'w-full',
-    spacingClasses[props.spacing],
-    props.class
-  )
+
+  return cn('w-full', spacingClasses[props.spacing], props.class)
 })
 
 const forgotPasswordClasses = computed(() => {
@@ -220,20 +206,15 @@ const forgotPasswordClasses = computed(() => {
 })
 
 const submitClasses = computed(() => {
-  return cn(
-    'w-full',
-    'transition-all duration-200',
-    'hover:scale-[1.02] active:scale-[0.98]',
-    {
-      'opacity-50 cursor-not-allowed': !isFormValid.value || props.loading,
-    }
-  )
+  return cn('w-full', 'transition-all duration-200', 'hover:scale-[1.02] active:scale-[0.98]', {
+    'opacity-50 cursor-not-allowed': !isFormValid.value || props.loading,
+  })
 })
 
 // Event handlers
 const handleSubmit = () => {
   if (!validateForm() || props.loading) return
-  
+
   emit('submit', { ...formData })
 }
 
@@ -244,7 +225,7 @@ const handleForgotPassword = () => {
 // Watch for form changes
 watch(
   () => formData.email,
-  (newValue) => {
+  newValue => {
     emit('field-change', 'email', newValue)
     if (props.enableValidation && errors.email) {
       validateField('email')
@@ -254,7 +235,7 @@ watch(
 
 watch(
   () => formData.password,
-  (newValue) => {
+  newValue => {
     emit('field-change', 'password', newValue)
     if (props.enableValidation && errors.password) {
       validateField('password')
@@ -265,7 +246,7 @@ watch(
 // Clear errors when form is no longer loading
 watch(
   () => props.loading,
-  (newLoading) => {
+  newLoading => {
     if (!newLoading) {
       // Clear form errors when loading stops (successful submission)
       Object.keys(errors).forEach(key => {
@@ -287,13 +268,13 @@ form:has(button:disabled) {
 }
 
 /* Submit button enhancement */
-button[type="submit"] {
+button[type='submit'] {
   position: relative;
   overflow: hidden;
 }
 
 /* Loading state enhancement */
-button[type="submit"]:disabled {
+button[type='submit']:disabled {
   transform: none !important;
 }
 

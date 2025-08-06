@@ -201,7 +201,7 @@ const cardClasses = computed(() => {
     md: 'p-8',
     lg: 'p-10',
   }
-  
+
   return cn(
     'w-full max-w-md mx-auto',
     spacingClasses[props.spacing],
@@ -217,7 +217,7 @@ const headerClasses = computed(() => {
     md: 'mb-8',
     lg: 'mb-10',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -227,7 +227,7 @@ const socialSectionClasses = computed(() => {
     md: 'mb-6',
     lg: 'mb-8',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -237,7 +237,7 @@ const formSectionClasses = computed(() => {
     md: 'mb-6',
     lg: 'mb-8',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -247,7 +247,7 @@ const toggleSectionClasses = computed(() => {
     md: 'mb-6',
     lg: 'mb-8',
   }
-  
+
   return cn(spacingClasses[props.spacing])
 })
 
@@ -303,7 +303,9 @@ const handleFieldChange = (field: keyof LoginFormData, value: string) => {
 }
 
 /* Section transition effects */
-.mb-6, .mb-8, .mb-10 {
+.mb-6,
+.mb-8,
+.mb-10 {
   transition: all 0.3s ease-in-out;
 }
 

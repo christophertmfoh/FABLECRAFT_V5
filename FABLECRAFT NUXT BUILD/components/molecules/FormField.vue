@@ -29,7 +29,7 @@
         @focus="handleFocus"
         @input="handleInput"
       />
-      
+
       <!-- Trailing slot for icons, buttons, etc. -->
       <div v-if="slots.trailing" :class="trailingClasses">
         <slot name="trailing" />
@@ -125,7 +125,7 @@ const isFocused = ref(false)
 const fieldClasses = computed(() => {
   const spacingClasses = {
     sm: 'space-y-1.5',
-    md: 'space-y-2', 
+    md: 'space-y-2',
     lg: 'space-y-3',
   }
 
@@ -141,7 +141,8 @@ const labelClasses = computed(() => {
 
 const inputContainerClasses = computed(() => {
   return cn('relative flex items-center', {
-    'focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 rounded-md': !props.hasError,
+    'focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 rounded-md':
+      !props.hasError,
     'focus-within:ring-destructive': props.hasError,
   })
 })

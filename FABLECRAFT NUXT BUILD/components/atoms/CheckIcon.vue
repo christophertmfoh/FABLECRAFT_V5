@@ -1,15 +1,6 @@
 <template>
-  <span
-    :class="iconClasses"
-    :aria-hidden="ariaHidden"
-    role="img"
-    :aria-label="ariaLabel"
-  >
-    <AtomIcon
-      :name="iconName"
-      :size="iconSize"
-      :class="iconColorClasses"
-    />
+  <span :class="iconClasses" :aria-hidden="ariaHidden" role="img" :aria-label="ariaLabel">
+    <AtomIcon :name="iconName" :size="iconSize" :class="iconColorClasses" />
   </span>
 </template>
 
@@ -33,23 +24,23 @@ const props = withDefaults(defineProps<CheckIconProps>(), {
   color: 'success',
   class: '',
   ariaHidden: true,
-  ariaLabel: 'Feature included'
+  ariaLabel: 'Feature included',
 })
 
 // Icon name mapping
 const iconNameMap = {
   check: 'lucide:check',
   x: 'lucide:x',
-  minus: 'lucide:minus'
+  minus: 'lucide:minus',
 }
 
 // Size classes for the container
 const sizeClasses = {
   xs: 'w-3 h-3',
-  sm: 'w-4 h-4', 
+  sm: 'w-4 h-4',
   base: 'w-5 h-5',
   lg: 'w-6 h-6',
-  xl: 'w-7 h-7'
+  xl: 'w-7 h-7',
 }
 
 // Color classes for the icon (theme reactive)
@@ -58,7 +49,7 @@ const colorClasses = {
   error: 'text-destructive dark:text-destructive',
   warning: 'text-amber-500 dark:text-amber-400',
   primary: 'text-primary',
-  muted: 'text-muted-foreground'
+  muted: 'text-muted-foreground',
 }
 
 // Computed properties
@@ -69,11 +60,11 @@ const iconSize = computed(() => props.size)
 const iconClasses = computed(() => [
   'inline-flex items-center justify-center flex-shrink-0',
   sizeClasses[props.size],
-  props.class
+  props.class,
 ])
 
 const iconColorClasses = computed(() => [
   colorClasses[props.color],
-  'transition-colors duration-200'
+  'transition-colors duration-200',
 ])
 </script>

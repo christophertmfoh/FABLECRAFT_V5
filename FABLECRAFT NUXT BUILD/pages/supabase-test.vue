@@ -11,9 +11,7 @@
             <p><strong>Supabase URL:</strong> {{ supabaseUrl }}</p>
             <p>
               <strong>Status:</strong>
-              <span v-if="connectionStatus === 'connected'" class="text-success"
-                >✅ Connected</span
-              >
+              <span v-if="connectionStatus === 'connected'" class="text-success">✅ Connected</span>
               <span v-else-if="connectionStatus === 'checking'" class="text-yellow-500"
                 >⏳ Checking...</span
               >

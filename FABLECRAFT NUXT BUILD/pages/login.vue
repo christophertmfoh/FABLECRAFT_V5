@@ -195,13 +195,13 @@ const handleLegalClick = (payload: { text: string; href?: string }) => {
 const handleLoginSubmit = async (data: LoginFormData) => {
   loginLoading.value = true
   loginMessage.value = ''
-  
+
   try {
     const { error } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
     })
-    
+
     if (error) {
       loginMessage.value = error.message
       loginMessageType.value = 'error'
@@ -223,7 +223,7 @@ const handleLoginSubmit = async (data: LoginFormData) => {
 const handleSignupSubmit = async (data: SignupFormData) => {
   signupLoading.value = true
   signupMessage.value = ''
-  
+
   try {
     const { error } = await supabase.auth.signUp({
       email: data.email,
@@ -234,7 +234,7 @@ const handleSignupSubmit = async (data: SignupFormData) => {
         },
       },
     })
-    
+
     if (error) {
       signupMessage.value = error.message
       signupMessageType.value = 'error'
@@ -259,7 +259,7 @@ const handleSocialLogin = async (provider: SocialProvider) => {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
-    
+
     if (error) {
       const message = `Failed to sign in with ${provider}`
       if (activeAuthMode.value === 'login') {

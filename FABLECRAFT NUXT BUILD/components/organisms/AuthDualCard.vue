@@ -112,7 +112,7 @@ interface AuthDualCardProps {
   cardSpacing?: 'sm' | 'md' | 'lg'
   /** Gap between cards */
   gap?: 'sm' | 'md' | 'lg' | 'xl'
-  
+
   // Login configuration
   /** Login loading state */
   loginLoading?: boolean
@@ -124,7 +124,7 @@ interface AuthDualCardProps {
   loginMessage?: string
   /** Login message type */
   loginMessageType?: 'error' | 'success' | 'warning' | 'info' | 'default'
-  
+
   // Signup configuration
   /** Signup loading state */
   signupLoading?: boolean
@@ -136,7 +136,7 @@ interface AuthDualCardProps {
   signupMessage?: string
   /** Signup message type */
   signupMessageType?: 'error' | 'success' | 'warning' | 'info' | 'default'
-  
+
   // Shared configuration
   /** Show social login */
   showSocialLogin?: boolean
@@ -162,7 +162,7 @@ interface AuthDualCardProps {
   showTrustIndicators?: boolean
   /** Trust badges */
   trustBadges?: string[]
-  
+
   /** Footer message */
   footerMessage?: string
   /** Additional CSS classes */
@@ -252,11 +252,7 @@ const cardsContainerVariants = cva('w-full', {
 
 // Computed classes
 const containerClasses = computed(() => {
-  return cn(
-    containerVariants({ size: props.size }),
-    'mx-auto px-4 py-8',
-    props.class
-  )
+  return cn(containerVariants({ size: props.size }), 'mx-auto px-4 py-8', props.class)
 })
 
 const cardsContainerClasses = computed(() => {
@@ -271,52 +267,36 @@ const cardsContainerClasses = computed(() => {
 
 const loginCardWrapperClasses = computed(() => {
   const baseClasses = 'w-full'
-  
+
   if (props.layout === 'stacked') {
-    return cn(
-      baseClasses,
-      'absolute inset-0 transition-all duration-500 ease-in-out',
-      {
-        'opacity-100 z-10 transform translate-x-0': props.activeMode === 'login',
-        'opacity-0 z-0 transform -translate-x-full': props.activeMode === 'signup',
-      }
-    )
+    return cn(baseClasses, 'absolute inset-0 transition-all duration-500 ease-in-out', {
+      'opacity-100 z-10 transform translate-x-0': props.activeMode === 'login',
+      'opacity-0 z-0 transform -translate-x-full': props.activeMode === 'signup',
+    })
   }
-  
-  return cn(
-    baseClasses,
-    'transition-all duration-300 ease-in-out',
-    {
-      'lg:order-1': props.layout === 'horizontal',
-      'opacity-100': props.activeMode === 'login',
-      'opacity-70 scale-95': props.activeMode === 'signup' && props.layout === 'horizontal',
-    }
-  )
+
+  return cn(baseClasses, 'transition-all duration-300 ease-in-out', {
+    'lg:order-1': props.layout === 'horizontal',
+    'opacity-100': props.activeMode === 'login',
+    'opacity-70 scale-95': props.activeMode === 'signup' && props.layout === 'horizontal',
+  })
 })
 
 const signupCardWrapperClasses = computed(() => {
   const baseClasses = 'w-full'
-  
+
   if (props.layout === 'stacked') {
-    return cn(
-      baseClasses,
-      'absolute inset-0 transition-all duration-500 ease-in-out',
-      {
-        'opacity-100 z-10 transform translate-x-0': props.activeMode === 'signup',
-        'opacity-0 z-0 transform translate-x-full': props.activeMode === 'login',
-      }
-    )
+    return cn(baseClasses, 'absolute inset-0 transition-all duration-500 ease-in-out', {
+      'opacity-100 z-10 transform translate-x-0': props.activeMode === 'signup',
+      'opacity-0 z-0 transform translate-x-full': props.activeMode === 'login',
+    })
   }
-  
-  return cn(
-    baseClasses,
-    'transition-all duration-300 ease-in-out',
-    {
-      'lg:order-2': props.layout === 'horizontal',
-      'opacity-100': props.activeMode === 'signup',
-      'opacity-70 scale-95': props.activeMode === 'login' && props.layout === 'horizontal',
-    }
-  )
+
+  return cn(baseClasses, 'transition-all duration-300 ease-in-out', {
+    'lg:order-2': props.layout === 'horizontal',
+    'opacity-100': props.activeMode === 'signup',
+    'opacity-70 scale-95': props.activeMode === 'login' && props.layout === 'horizontal',
+  })
 })
 
 const loginCardClasses = computed(() => {
@@ -340,7 +320,7 @@ const footerClasses = computed(() => {
     lg: 'mt-8',
     xl: 'mt-12',
   }
-  
+
   return cn(gapClasses[props.gap], 'border-t border-border/30 pt-4')
 })
 
@@ -440,13 +420,13 @@ const handlePasswordStrengthChange = (strength: string, score: number) => {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   /* Disable complex animations on mobile for performance */
   .opacity-70 {
     opacity: 1;
     transform: none;
   }
-  
+
   .transition-all {
     transition: none;
   }

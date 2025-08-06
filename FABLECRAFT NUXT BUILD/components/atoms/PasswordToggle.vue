@@ -6,11 +6,7 @@
     :aria-pressed="isVisible"
     @click="handleToggle"
   >
-    <AtomIcon
-      :name="iconName"
-      :class="iconClasses"
-      aria-hidden="true"
-    />
+    <AtomIcon :name="iconName" :class="iconClasses" aria-hidden="true" />
   </button>
 </template>
 
@@ -31,7 +27,7 @@ const toggleVariants = cva(
       },
       size: {
         sm: 'h-7 w-7 rounded-sm',
-        md: 'h-8 w-8 rounded-md', 
+        md: 'h-8 w-8 rounded-md',
         lg: 'h-9 w-9 rounded-md',
       },
     },

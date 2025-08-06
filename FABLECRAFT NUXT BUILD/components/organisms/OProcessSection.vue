@@ -21,7 +21,7 @@
       <!-- Connection line for desktop - behind steps and constrained to first/last step -->
       <div
         class="absolute top-16 h-1 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 hidden xl:block rounded-full -z-10"
-        style="left: calc(100% / 12); right: calc(100% / 12);"
+        style="left: calc(100% / 12); right: calc(100% / 12)"
         aria-hidden="true"
       />
       <MProcessStep
@@ -64,7 +64,10 @@ interface OProcessSectionProps {
 }
 
 interface OProcessSectionEmits {
-  stepClick: [stepNumber: number, stepData: { title: string; description: string; detail?: string; category?: string }]
+  stepClick: [
+    stepNumber: number,
+    stepData: { title: string; description: string; detail?: string; category?: string },
+  ]
 }
 
 const props = withDefaults(defineProps<OProcessSectionProps>(), {
@@ -96,14 +99,16 @@ const defaultProcessSteps: ProcessStep[] = [
     icon: 'lucide:lightbulb',
     title: 'Ideation & World Building',
     description: 'From concept to living universes',
-    detail: 'Transform inspiration into rich creative concepts with AI-guided brainstorming and interconnected world creation',
+    detail:
+      'Transform inspiration into rich creative concepts with AI-guided brainstorming and interconnected world creation',
     category: 'Foundation',
   },
   {
     icon: 'lucide:pen-tool',
     title: 'Content Creation',
     description: 'Write across multiple formats',
-    detail: "Craft novels, screenplays, poetry, and D&D campaigns with AI that understands your world's context",
+    detail:
+      "Craft novels, screenplays, poetry, and D&D campaigns with AI that understands your world's context",
     category: 'Writing & Scripting',
   },
   {
@@ -117,14 +122,16 @@ const defaultProcessSteps: ProcessStep[] = [
     icon: 'lucide:camera',
     title: 'Video Production',
     description: 'Bring storyboards to life',
-    detail: 'Create professional pre-vis sequences and generate image-to-video content for demos and productions',
+    detail:
+      'Create professional pre-vis sequences and generate image-to-video content for demos and productions',
     category: 'Video Production',
   },
   {
     icon: 'lucide:music',
     title: 'Audio & Post-Production',
     description: 'Complete with sound and polish',
-    detail: 'Generate voices, compose scores, and finalize your multimedia projects with professional editing tools',
+    detail:
+      'Generate voices, compose scores, and finalize your multimedia projects with professional editing tools',
     category: 'Audio & Finishing',
   },
   {
@@ -142,14 +149,17 @@ const processSteps = computed(() => props.customProcessSteps || defaultProcessSt
 // Determine step status based on activeStep prop
 const getStepStatus = (index: number): 'pending' | 'active' | 'completed' => {
   if (props.activeStep === -1) return 'pending' // Default state when no active step
-  
+
   if (index < props.activeStep) return 'completed'
   if (index === props.activeStep) return 'active'
   return 'pending'
 }
 
 // Handle step click events
-const handleStepClick = (stepNumber: number, stepData: { title: string; description: string; detail?: string; category?: string }) => {
+const handleStepClick = (
+  stepNumber: number,
+  stepData: { title: string; description: string; detail?: string; category?: string }
+) => {
   emit('stepClick', stepNumber, stepData)
 }
 </script>

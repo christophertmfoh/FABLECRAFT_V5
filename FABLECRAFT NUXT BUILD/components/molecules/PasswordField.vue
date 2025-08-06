@@ -38,14 +38,10 @@
             Password strength: {{ strengthLabel }}
           </Text>
           <div :class="strengthBarClasses">
-            <div
-              v-for="(segment, index) in 4"
-              :key="index"
-              :class="getSegmentClasses(index)"
-            />
+            <div v-for="(segment, index) in 4" :key="index" :class="getSegmentClasses(index)" />
           </div>
         </div>
-        
+
         <!-- Password requirements -->
         <div v-if="showRequirements" class="space-y-1">
           <div
@@ -240,21 +236,18 @@ const strengthBarClasses = computed(() => {
 const getSegmentClasses = (index: number) => {
   const { score } = passwordStrength.value
   const isActive = index < Math.ceil(score / 1.5)
-  
+
   const baseClasses = 'flex-1 rounded-full transition-colors duration-300'
   const strengthColors = {
     0: 'bg-muted',
     1: 'bg-destructive',
-    2: 'bg-warning', 
+    2: 'bg-warning',
     3: 'bg-primary',
     4: 'bg-success',
   }
-  
+
   const colorScore = Math.min(score, 4)
-  return cn(
-    baseClasses,
-    isActive ? strengthColors[colorScore] : 'bg-muted'
-  )
+  return cn(baseClasses, isActive ? strengthColors[colorScore] : 'bg-muted')
 }
 
 const getRequirementClasses = (met: boolean) => {
@@ -271,7 +264,7 @@ const handleToggleVisibility = (visible: boolean) => {
 
 const handleInput = (event: Event) => {
   emit('input', event)
-  
+
   // Emit strength change
   if (props.showStrength) {
     const { strength, score } = passwordStrength.value

@@ -112,17 +112,12 @@
       <template v-else-if="submitIcon" #leading>
         <AtomIcon :name="submitIcon" class="h-4 w-4" />
       </template>
-      
+
       {{ loading ? loadingText : submitText }}
     </Button>
 
     <!-- Form Message -->
-    <FormMessage
-      v-if="message"
-      :type="messageType"
-      :message="message"
-      class="mt-4"
-    />
+    <FormMessage v-if="message" :type="messageType" :message="message" class="mt-4" />
   </form>
 </template>
 
@@ -228,12 +223,12 @@ const validateName = (name: string): string | undefined => {
 
 const validateEmail = (email: string): string | undefined => {
   if (!email) return 'Email is required'
-  
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(email)) {
     return 'Please enter a valid email address'
   }
-  
+
   return undefined
 }
 
@@ -264,7 +259,7 @@ const validateField = (field: keyof SignupFormData) => {
   if (!props.enableValidation) return
 
   const value = formData[field]
-  
+
   switch (field) {
     case 'name':
       errors.name = validateName(value as string)
@@ -296,22 +291,35 @@ const validateForm = (): boolean => {
   validateField('password')
   validateField('confirmPassword')
   validateField('acceptTerms')
-  
-  return !errors.name && !errors.email && !errors.password && !errors.confirmPassword && !errors.acceptTerms
+
+  return (
+    !errors.name &&
+    !errors.email &&
+    !errors.password &&
+    !errors.confirmPassword &&
+    !errors.acceptTerms
+  )
 }
 
 // Computed properties
 const isFormValid = computed(() => {
   if (!props.enableValidation) {
-    const hasRequiredFields = formData.name && formData.email && formData.password && formData.confirmPassword
+    const hasRequiredFields =
+      formData.name && formData.email && formData.password && formData.confirmPassword
     const hasAcceptedTerms = props.showTerms ? formData.acceptTerms : true
     return hasRequiredFields && hasAcceptedTerms
   }
-  
-  const hasRequiredFields = formData.name && formData.email && formData.password && formData.confirmPassword
+
+  const hasRequiredFields =
+    formData.name && formData.email && formData.password && formData.confirmPassword
   const hasAcceptedTerms = props.showTerms ? formData.acceptTerms : true
-  const hasNoErrors = !errors.name && !errors.email && !errors.password && !errors.confirmPassword && !errors.acceptTerms
-  
+  const hasNoErrors =
+    !errors.name &&
+    !errors.email &&
+    !errors.password &&
+    !errors.confirmPassword &&
+    !errors.acceptTerms
+
   return hasRequiredFields && hasAcceptedTerms && hasNoErrors
 })
 
@@ -321,12 +329,8 @@ const formClasses = computed(() => {
     md: 'space-y-6',
     lg: 'space-y-8',
   }
-  
-  return cn(
-    'w-full',
-    spacingClasses[props.spacing],
-    props.class
-  )
+
+  return cn('w-full', spacingClasses[props.spacing], props.class)
 })
 
 const termsClasses = computed(() => {
@@ -334,20 +338,15 @@ const termsClasses = computed(() => {
 })
 
 const submitClasses = computed(() => {
-  return cn(
-    'w-full',
-    'transition-all duration-200',
-    'hover:scale-[1.02] active:scale-[0.98]',
-    {
-      'opacity-50 cursor-not-allowed': !isFormValid.value || props.loading,
-    }
-  )
+  return cn('w-full', 'transition-all duration-200', 'hover:scale-[1.02] active:scale-[0.98]', {
+    'opacity-50 cursor-not-allowed': !isFormValid.value || props.loading,
+  })
 })
 
 // Event handlers
 const handleSubmit = () => {
   if (!validateForm() || props.loading) return
-  
+
   emit('submit', { ...formData })
 }
 
@@ -369,7 +368,7 @@ const watchFields = ['name', 'email', 'password', 'confirmPassword', 'acceptTerm
 watchFields.forEach(field => {
   watch(
     () => formData[field],
-    (newValue) => {
+    newValue => {
       emit('field-change', field, newValue)
       if (props.enableValidation && errors[field]) {
         validateField(field)
@@ -381,7 +380,7 @@ watchFields.forEach(field => {
 // Clear errors when form is no longer loading
 watch(
   () => props.loading,
-  (newLoading) => {
+  newLoading => {
     if (!newLoading) {
       Object.keys(errors).forEach(key => {
         delete errors[key as keyof SignupFormErrors]
@@ -407,13 +406,13 @@ label:hover {
 }
 
 /* Submit button enhancement */
-button[type="submit"] {
+button[type='submit'] {
   position: relative;
   overflow: hidden;
 }
 
 /* Loading state enhancement */
-button[type="submit"]:disabled {
+button[type='submit']:disabled {
   transform: none !important;
 }
 

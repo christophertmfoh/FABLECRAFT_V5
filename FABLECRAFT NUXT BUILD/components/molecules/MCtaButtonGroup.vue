@@ -1,9 +1,5 @@
 <template>
-  <div
-    :class="buttonGroupClasses"
-    role="group"
-    :aria-label="groupLabel"
-  >
+  <div :class="buttonGroupClasses" role="group" :aria-label="groupLabel">
     <!-- Primary CTA Button with 2025 enhancements -->
     <Button
       :variant="primaryVariant"
@@ -53,16 +49,9 @@
   </div>
 
   <!-- Trust Signal / Supporting Text (optional) -->
-  <div 
-    v-if="trustSignal || $slots.trustSignal"
-    :class="trustSignalClasses"
-  >
+  <div v-if="trustSignal || $slots.trustSignal" :class="trustSignalClasses">
     <slot name="trustSignal">
-      <Text
-        tag="p"
-        size="sm"
-        class="text-muted-foreground text-center"
-      >
+      <Text tag="p" size="sm" class="text-muted-foreground text-center">
         {{ trustSignal }}
       </Text>
     </slot>
@@ -79,23 +68,23 @@ interface CtaButtonGroupProps {
   primaryVariant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
   primaryIcon?: string
   showPrimaryIcon?: boolean
-  
+
   // Secondary button (optional)
   secondaryText?: string
   secondaryVariant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
   secondaryIcon?: string
   showSecondaryIcon?: boolean
-  
+
   // Layout and styling
   layout?: 'horizontal' | 'vertical' | 'responsive'
   alignment?: 'left' | 'center' | 'right'
   buttonSize?: 'sm' | 'base' | 'lg' | 'xl'
   spacing?: 'tight' | 'normal' | 'loose'
-  
+
   // Additional content
   trustSignal?: string
   groupLabel?: string
-  
+
   // Styling
   class?: string | Record<string, boolean> | string[]
 }
@@ -128,7 +117,7 @@ const layoutConfig = {
   responsive: 'flex-col sm:flex-row',
 }
 
-// Spacing configuration  
+// Spacing configuration
 const spacingConfig = {
   tight: 'gap-3',
   normal: 'gap-4 sm:gap-6',
@@ -146,7 +135,7 @@ const alignmentConfig = {
 const iconSize = computed(() => {
   const sizeMap = {
     sm: 'sm',
-    base: 'base', 
+    base: 'base',
     lg: 'lg',
     xl: 'xl',
   }
@@ -172,7 +161,7 @@ const primaryButtonClasses = computed(() => [
 
 const secondaryButtonClasses = computed(() => [
   'group',
-  'hover:scale-105 hover:-translate-y-1', 
+  'hover:scale-105 hover:-translate-y-1',
   'transition-all duration-300',
   'shadow-md hover:shadow-lg',
   'font-semibold',
@@ -186,9 +175,7 @@ const secondaryIconClasses = computed(() => [
   'ml-3 group-hover:scale-110 transition-transform duration-300',
 ])
 
-const trustSignalClasses = computed(() => [
-  'mt-6 text-center',
-])
+const trustSignalClasses = computed(() => ['mt-6 text-center'])
 
 // Event handlers
 const handlePrimaryClick = () => {

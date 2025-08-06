@@ -11,18 +11,13 @@
   >
     <!-- Hover background effect -->
     <div :class="hoverEffectClasses" aria-hidden="true" />
-    
+
     <div class="p-comfortable relative z-10 flex flex-col flex-1">
       <!-- Content Area (Star + Quote) -->
       <div class="flex-1 flex flex-col">
         <!-- Star Rating -->
         <div class="flex justify-center mb-6">
-          <StarRating
-            :rating="rating"
-            :max-rating="5"
-            size="base"
-            color="primary"
-          />
+          <StarRating :rating="rating" :max-rating="5" size="base" color="primary" />
         </div>
 
         <!-- Quote Content -->
@@ -50,7 +45,7 @@
           :gradient-from="gradientFrom"
           :gradient-to="gradientTo"
         />
-        
+
         <!-- Author Details -->
         <div class="text-center">
           <Heading
@@ -61,12 +56,8 @@
           >
             {{ name }}
           </Heading>
-          
-          <Text
-            tag="p"
-            size="sm"
-            class="text-muted-foreground leading-tight mt-1 text-center"
-          >
+
+          <Text tag="p" size="sm" class="text-muted-foreground leading-tight mt-1 text-center">
             {{ role }}
           </Text>
         </div>

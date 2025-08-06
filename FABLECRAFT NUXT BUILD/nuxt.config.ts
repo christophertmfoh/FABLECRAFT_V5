@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   // Development server configuration for Cursor port forwarding
   devServer: {
     port: 3000,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
 
   // Enable essential modules for the core stack
