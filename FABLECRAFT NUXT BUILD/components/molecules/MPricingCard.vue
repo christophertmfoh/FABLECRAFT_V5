@@ -28,7 +28,7 @@
         <Heading
           :id="`pricing-plan-${planId}`"
           tag="h3"
-          size="lg"
+          size="xl"
           class="font-bold text-foreground mb-4 text-center"
         >
           {{ name }}
@@ -64,7 +64,7 @@
       </div>
 
       <!-- Features section -->
-      <div class="flex-1 mb-6">
+      <div class="flex-1 mb-8">
         <Text
           tag="h4"
           size="base"
@@ -90,7 +90,7 @@
       </div>
 
       <!-- CTA Button at bottom -->
-      <div class="mt-auto">
+      <div class="mt-auto pt-4">
         <Button
           :variant="ctaVariant"
           size="lg"
