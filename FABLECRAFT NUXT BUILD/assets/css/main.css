@@ -1,4 +1,21 @@
-/* file: assets/css/main.css */
+/*
+ * MAIN CSS - FABLECRAFT NUXT PROJECT
+ * Foundation-first import strategy for optimal cascade
+ * Phase 1: Mathematical Foundation Systems
+ */
+
+/* ========================================
+   CSS IMPORTS MUST COME FIRST
+   Required by CSS specification
+======================================== */
+@import './design-tokens.css';
+@import './theme-system.css';
+@import './visual-effects.css';
+
+/* ========================================
+   TAILWIND CSS LAYERS
+   Standard Tailwind v3 imports for @nuxtjs/tailwindcss
+======================================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
