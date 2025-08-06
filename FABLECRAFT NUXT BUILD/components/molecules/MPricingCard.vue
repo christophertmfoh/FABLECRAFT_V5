@@ -22,61 +22,62 @@
     <div :class="hoverEffectClasses" aria-hidden="true" />
     
     <div class="p-comfortable relative z-10 flex flex-col h-full text-center">
-      <!-- Plan header (fixed height to ensure alignment) -->
-      <div class="mb-6 h-44 flex flex-col justify-between">
-        <div>
-          <!-- Plan name -->
-          <Heading
-            :id="`pricing-plan-${planId}`"
-            tag="h3"
-            size="xl"
-            class="font-bold text-primary mb-4 text-center"
+      <!-- 1. Subscription Type (Fixed Height) -->
+      <div class="h-12 flex items-center justify-center mb-4">
+        <Heading
+          :id="`pricing-plan-${planId}`"
+          tag="h3"
+          size="xl"
+          class="font-bold text-primary text-center"
+        >
+          {{ name }}
+        </Heading>
+      </div>
+
+      <!-- 2. Price (Fixed Height) -->
+      <div class="h-16 flex items-center justify-center mb-4">
+        <div class="flex items-baseline justify-center">
+          <Text
+            tag="span"
+            size="3xl"
+            class="font-black text-foreground"
           >
-            {{ name }}
-          </Heading>
-
-          <!-- Pricing display -->
-          <div class="flex items-baseline justify-center mb-4">
-            <Text
-              tag="span"
-              size="3xl"
-              class="font-black text-foreground"
-            >
-              {{ displayPrice }}
-            </Text>
-            <Text
-              v-if="period && !isCustomPricing"
-              tag="span"
-              size="base"
-              class="text-muted-foreground ml-1"
-            >
-              {{ period }}
-            </Text>
-          </div>
+            {{ cleanPrice }}
+          </Text>
+          <Text
+            v-if="period && !isCustomPricing"
+            tag="span"
+            size="base"
+            class="text-muted-foreground ml-1"
+          >
+            {{ period }}
+          </Text>
         </div>
+      </div>
 
-        <!-- Description (always at bottom of header section) -->
+      <!-- 3. Description (Fixed Height) -->
+      <div class="h-12 flex items-center justify-center mb-6">
         <Text
           tag="p"
           size="base"
-          class="text-muted-foreground leading-relaxed text-center"
+          class="text-muted-foreground text-center"
         >
           {{ description }}
         </Text>
       </div>
 
-      <!-- Features section (fixed spacing for uniformity) -->
-      <div class="flex-1 mb-6">
+      <!-- 4. Features (Fixed Height) -->
+      <div class="h-48 mb-6">
         <Text
           tag="h4"
           size="base"
-          class="font-semibold text-foreground mb-6 text-center"
+          class="font-semibold text-foreground mb-4 text-center"
         >
           {{ featuresTitle }}
         </Text>
 
         <ul
-          class="space-y-4 text-left min-h-[120px]"
+          class="space-y-3 text-left h-32"
           role="list"
           :aria-labelledby="`pricing-plan-${planId}`"
         >
@@ -91,8 +92,8 @@
         </ul>
       </div>
 
-      <!-- CTA Button at bottom -->
-      <div class="mt-auto pt-6">
+      <!-- 5. Button (Fixed Position) -->
+      <div class="mt-auto">
         <Button
           :variant="ctaVariant"
           size="lg"
@@ -162,8 +163,13 @@ const isCustomPricing = computed(() =>
    props.price.toLowerCase().includes('contact'))
 )
 
-const displayPrice = computed(() => {
+const cleanPrice = computed(() => {
   if (isCustomPricing.value) {
+    return props.price
+  }
+  
+  // Don't add $ to "Free"
+  if (typeof props.price === 'string' && props.price.toLowerCase() === 'free') {
     return props.price
   }
   
