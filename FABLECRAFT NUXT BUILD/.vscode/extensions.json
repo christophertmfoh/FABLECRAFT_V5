@@ -1,0 +1,34 @@
+{
+  "recommendations": [
+    // Vue & Nuxt Core Extensions
+    "Vue.volar",                           // Vue Language Features (Volar) - Official Vue 3 support
+    "Vue.vscode-typescript-vue-plugin",    // TypeScript Vue Plugin - TS support in Vue files
+    "Nuxt.mdc",                           // Nuxt MDC - Markdown component support
+    
+    // Enhanced Development Experience  
+    "bradlc.vscode-tailwindcss",          // Tailwind CSS IntelliSense
+    "esbenp.prettier-vscode",             // Prettier - Code formatter
+    "dbaeumer.vscode-eslint",             // ESLint - Linting
+    "ms-vscode.vscode-typescript-next",   // TypeScript Importer
+    
+    // Vue Ecosystem
+    "antfu.iconify",                      // Iconify IntelliSense - For @nuxt/icon
+    "antfu.unocss",                       // UnoCSS support (if using)
+    "johnsoncodehk.vscode-tsconfig-helper", // tsconfig.json helper
+    
+    // Utility Extensions
+    "christian-kohler.path-intellisense", // Path autocomplete
+    "bradlc.vscode-tailwindcss",          // Tailwind CSS class sorting/completion
+    "formulahendry.auto-rename-tag",      // Auto rename paired HTML/Vue tags
+    "ms-vscode.vscode-json",              // JSON support
+    
+    // Git & Productivity
+    "eamodio.gitlens",                    // Git blame and history
+    "gruntfuggly.todo-tree",              // TODO highlighting in sidebar
+    "aaron-bond.better-comments",         // Enhanced comment styling
+    
+    // Optional but Recommended
+    "streetsidesoftware.code-spell-checker", // Spell checker for docs/comments
+    "usernamehw.errorlens"                // Inline error display
+  ]
+}
