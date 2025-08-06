@@ -6,7 +6,7 @@
       :title="headerTitle"
       :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
-      :heading-size="isCompact ? 'lg' : 'xl'"
+      :heading-size="isCompact ? 'sm' : 'lg'"
       :gradient-variant="gradientVariant"
       gradient-direction="to-r"
       gradient-intensity="normal"

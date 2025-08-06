@@ -29,7 +29,7 @@
           :id="`pricing-plan-${planId}`"
           tag="h3"
           size="xl"
-          class="font-bold text-foreground mb-4 text-center"
+          class="font-bold text-accent mb-4 text-center"
         >
           {{ name }}
         </Heading>
