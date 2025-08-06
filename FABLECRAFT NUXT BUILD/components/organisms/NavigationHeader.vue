@@ -165,7 +165,9 @@
           </template>
 
           <!-- Advanced Theme Toggle -->
-          <ThemeToggle />
+          <ClientOnly>
+            <ThemeToggle />
+          </ClientOnly>
         </div>
       </div>
     </Container>
