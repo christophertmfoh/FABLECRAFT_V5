@@ -145,22 +145,21 @@ const emit = defineEmits<{
 // Reactive state
 const isAnnual = ref(true)
 
-// Default pricing plans data (matching old build structure)
+// Simplified pricing plans data for uniform layout
 const defaultPricingPlans: PricingPlan[] = [
   {
     id: 'free',
     name: 'Free',
     monthlyPrice: 'Free',
     annualPrice: 'Free',
-    description: 'Perfect for getting started with your creative projects',
+    description: 'Perfect for getting started',
     isPopular: false,
     ctaText: 'Start Free',
     features: [
-      { text: '3 Free Projects', included: true },
-      { text: 'Limited AI Credits/Month', included: true },
-      { text: 'All Basic Features', included: true },
-      { text: 'Community Access & Sharing', included: true },
-      { text: 'Standard Export & Sharing', included: true }
+      { text: '3 Projects', included: true },
+      { text: 'Basic AI Features', included: true },
+      { text: 'Community Access', included: true },
+      { text: 'Standard Export', included: true }
     ]
   },
   {
@@ -168,16 +167,14 @@ const defaultPricingPlans: PricingPlan[] = [
     name: 'Starter',
     monthlyPrice: 15,
     annualPrice: 12,
-    description: 'Perfect for serious creators building their portfolio',
+    description: 'For serious creators',
     isPopular: false,
     ctaText: 'Choose Starter',
     features: [
       { text: 'Unlimited Projects', included: true },
-      { text: 'Standard AI Credits/Month', included: true },
-      { text: 'Advanced Creative Features', included: true },
-      { text: 'Basic Collaboration Tools', included: true },
-      { text: 'Enhanced Export Options', included: true },
-      { text: 'Professional Project Templates', included: true }
+      { text: 'Standard AI Credits', included: true },
+      { text: 'Advanced Features', included: true },
+      { text: 'Enhanced Export', included: true }
     ]
   },
   {
@@ -185,37 +182,32 @@ const defaultPricingPlans: PricingPlan[] = [
     name: 'Creative Studio',
     monthlyPrice: 29,
     annualPrice: 23,
-    description: 'Complete multimedia production powerhouse for professionals',
+    description: 'Complete creative powerhouse',
     isPopular: true,
     popularText: 'Most Popular',
     variant: 'highlighted',
     ctaText: 'Unleash Full Power',
     features: [
-      { text: 'Unlimited Multimedia Projects', included: true },
-      { text: 'Premium AI Credits/Month', included: true },
-      { text: 'Pre-vis & Video Generation', included: true },
-      { text: 'Full Audio Production Suite & DAW', included: true },
-      { text: 'Advanced Collaboration Tools', included: true },
-      { text: 'Priority Support & Beta Access', included: true }
+      { text: 'Everything in Starter', included: true },
+      { text: 'Premium AI Credits', included: true },
+      { text: 'Video & Audio Production', included: true },
+      { text: 'Priority Support', included: true }
     ]
   },
   {
     id: 'enterprise',
     name: 'Enterprise',
-    monthlyPrice: 'Contact for Pricing',
-    annualPrice: 'Contact for Pricing',
-    description: 'Custom solutions for teams and organizations',
+    monthlyPrice: 'Custom',
+    annualPrice: 'Custom',
+    description: 'For teams & organizations',
     isPopular: false,
     ctaText: 'Contact Sales',
     variant: 'enterprise',
     features: [
-      { text: 'Everything in Creative Studio', included: true },
+      { text: 'Everything in Studio', included: true },
       { text: 'Unlimited AI Credits', included: true },
-      { text: 'Custom Integrations & API Access', included: true },
-      { text: 'Dedicated Account Manager', included: true },
-      { text: 'SSO & Advanced Security', included: true },
-      { text: 'Custom Training & Onboarding', included: true },
-      { text: 'SLA Guarantee', included: true }
+      { text: 'Custom Integrations', included: true },
+      { text: 'Dedicated Support', included: true }
     ]
   }
 ]

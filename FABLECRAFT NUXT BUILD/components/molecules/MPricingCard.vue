@@ -23,7 +23,7 @@
     
     <div class="p-comfortable relative z-10 flex flex-col h-full text-center">
       <!-- Plan header (fixed height to ensure alignment) -->
-      <div class="mb-6 h-48 flex flex-col justify-between">
+      <div class="mb-6 h-44 flex flex-col justify-between">
         <div>
           <!-- Plan name -->
           <Heading
@@ -65,18 +65,18 @@
         </Text>
       </div>
 
-      <!-- Features section -->
+      <!-- Features section (fixed spacing for uniformity) -->
       <div class="flex-1 mb-6">
         <Text
           tag="h4"
           size="base"
-          class="font-semibold text-foreground mb-4 text-center"
+          class="font-semibold text-foreground mb-6 text-center"
         >
           {{ featuresTitle }}
         </Text>
 
         <ul
-          class="space-y-3 text-left"
+          class="space-y-4 text-left min-h-[120px]"
           role="list"
           :aria-labelledby="`pricing-plan-${planId}`"
         >
