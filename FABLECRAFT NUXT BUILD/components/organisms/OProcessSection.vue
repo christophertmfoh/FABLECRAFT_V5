@@ -87,7 +87,6 @@ const isDetailed = computed(() => props.variant === 'detailed')
 // Section classes
 const sectionClasses = computed(() => [
   'relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
-  isCompact.value ? 'py-12' : 'section-spacing-compact',
   props.class,
 ])
 

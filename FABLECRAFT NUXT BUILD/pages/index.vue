@@ -36,25 +36,28 @@
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
         <!-- Hero Section -->
-        <OHeroSection
-          id="hero"
-          variant="default"
-          class="hero-section"
-          @primary:click="handleNewProject"
-          @secondary:click="handleExploreExamples"
-          @badge:click="handleBadgeClick"
-        />
+        <Section spacing="xl" class="hero-section">
+          <OHeroSection
+            id="hero"
+            variant="default"
+            @primary:click="handleNewProject"
+            @secondary:click="handleExploreExamples"
+            @badge:click="handleBadgeClick"
+          />
+        </Section>
 
         <!-- Features Section -->
-        <OFeaturesSection
-          id="features"
-          variant="default"
-          :show-trust-indicators="true"
-          :show-key-benefits="true"
-        />
+        <Section spacing="xl" class="features-section">
+          <OFeaturesSection
+            id="features"
+            variant="default"
+            :show-trust-indicators="true"
+            :show-key-benefits="true"
+          />
+        </Section>
 
         <!-- Process Section -->
-        <Section id="process" spacing="lg" class="process-section">
+        <Section spacing="xl" class="process-section">
           <Container size="xl">
             <OProcessSection
               id="process"
@@ -65,7 +68,7 @@
         </Section>
 
         <!-- Testimonials Section -->
-        <Section id="testimonials" spacing="lg" class="testimonials-section">
+        <Section spacing="xl" class="testimonials-section">
           <Container size="lg">
             <!-- Testimonials Component Placeholder -->
             <div
@@ -77,7 +80,7 @@
         </Section>
 
         <!-- Pricing Section -->
-        <Section id="pricing" spacing="lg" class="pricing-section bg-muted/20">
+        <Section spacing="xl" class="pricing-section bg-muted/20">
           <Container size="xl">
             <!-- Pricing Component Placeholder -->
             <div
@@ -89,7 +92,7 @@
         </Section>
 
         <!-- CTA Section -->
-        <Section id="cta" spacing="lg" class="cta-section">
+        <Section spacing="xl" class="cta-section">
           <Container size="md">
             <!-- CTA Component Placeholder -->
             <div
