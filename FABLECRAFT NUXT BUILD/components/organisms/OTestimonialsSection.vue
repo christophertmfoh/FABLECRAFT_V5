@@ -64,8 +64,8 @@ interface TestimonialsSectionProps {
 const props = withDefaults(defineProps<TestimonialsSectionProps>(), {
   variant: 'default',
   headerBadgeText: 'Trusted by Creators',
-  headerTitle: 'What Our Users Are',
-  headerHighlightText: 'Saying',
+  headerTitle: 'What Our Users',
+  headerHighlightText: 'Are Saying',
   headerSubtitle: 'Join thousands of creators who have transformed their storytelling with Fablecraft\'s comprehensive creative suite.',
   gradientVariant: 'primary',
 })

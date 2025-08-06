@@ -12,31 +12,34 @@
     <!-- Hover background effect -->
     <div :class="hoverEffectClasses" aria-hidden="true" />
     
-    <div class="p-comfortable relative z-10">
-      <!-- Star Rating -->
-      <div class="flex justify-center mb-6">
-        <StarRating
-          :rating="rating"
-          :max-rating="5"
-          size="base"
-          color="primary"
-        />
+    <div class="p-comfortable relative z-10 flex flex-col h-full">
+      <!-- Content Area (Star + Quote) -->
+      <div class="flex-1 flex flex-col">
+        <!-- Star Rating -->
+        <div class="flex justify-center mb-6">
+          <StarRating
+            :rating="rating"
+            :max-rating="5"
+            size="base"
+            color="primary"
+          />
+        </div>
+
+        <!-- Quote Content -->
+        <blockquote class="text-center mb-6 flex-1 flex items-center">
+          <Text
+            :id="`testimonial-quote-${testimonialId}`"
+            tag="p"
+            size="base"
+            class="text-foreground italic leading-relaxed text-center"
+          >
+            "{{ content }}"
+          </Text>
+        </blockquote>
       </div>
 
-      <!-- Quote Content -->
-      <blockquote class="text-center mb-6">
-        <Text
-          :id="`testimonial-quote-${testimonialId}`"
-          tag="p"
-          size="base"
-          class="text-foreground italic leading-relaxed text-center"
-        >
-          "{{ content }}"
-        </Text>
-      </blockquote>
-
-      <!-- Author Information -->
-      <div class="flex items-center justify-center gap-3">
+      <!-- Author Information (Always at bottom) -->
+      <div class="flex items-center justify-center gap-3 mt-auto">
         <!-- Avatar -->
         <Avatar
           :name="name"
@@ -117,7 +120,7 @@ const cardClasses = computed(() => [
   'natural-depth gentle-hover',
   'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
   'bg-card/90 backdrop-blur-sm',
-  'overflow-hidden relative',
+  'overflow-hidden relative h-full',
   props.class,
 ])
 
