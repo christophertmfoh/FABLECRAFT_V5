@@ -152,7 +152,7 @@ const defaultPricingPlans: PricingPlan[] = [
     name: 'Free',
     monthlyPrice: 'Free',
     annualPrice: 'Free',
-    description: 'Perfect for getting started',
+    description: 'Perfect for beginners',
     isPopular: false,
     ctaText: 'Start Free',
     features: [
@@ -182,7 +182,7 @@ const defaultPricingPlans: PricingPlan[] = [
     name: 'Creative Studio',
     monthlyPrice: 29,
     annualPrice: 23,
-    description: 'Complete creative powerhouse',
+    description: 'Complete creative suite',
     isPopular: true,
     popularText: 'Most Popular',
     variant: 'highlighted',
@@ -190,7 +190,7 @@ const defaultPricingPlans: PricingPlan[] = [
     features: [
       { text: 'Everything in Starter', included: true },
       { text: 'Premium AI Credits', included: true },
-      { text: 'Video & Audio Production', included: true },
+      { text: 'Media Production', included: true },
       { text: 'Priority Support', included: true }
     ]
   },
@@ -199,7 +199,7 @@ const defaultPricingPlans: PricingPlan[] = [
     name: 'Enterprise',
     monthlyPrice: 'Custom',
     annualPrice: 'Custom',
-    description: 'For teams & organizations',
+    description: 'For teams and companies',
     isPopular: false,
     ctaText: 'Contact Sales',
     variant: 'enterprise',
