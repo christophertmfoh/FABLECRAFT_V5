@@ -14,17 +14,17 @@
     
     <div class="p-comfortable relative z-10">
       <!-- Star Rating -->
-      <div class="flex justify-center mb-best-friends">
+      <div class="flex justify-center mb-6">
         <StarRating
           :rating="rating"
           :max-rating="5"
           size="base"
-          color="warning"
+          color="primary"
         />
       </div>
 
       <!-- Quote Content -->
-      <blockquote class="text-center mb-best-friends">
+      <blockquote class="text-center mb-6">
         <Text
           :id="`testimonial-quote-${testimonialId}`"
           tag="p"
@@ -62,7 +62,7 @@
           <Text
             tag="p"
             size="sm"
-            class="text-muted-foreground leading-tight mt-friends"
+            class="text-muted-foreground leading-tight mt-1"
           >
             {{ role }}
           </Text>

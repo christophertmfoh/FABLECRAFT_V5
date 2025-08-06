@@ -47,7 +47,7 @@ const starClasses = computed(() => (starNumber: number) => {
   const colorClasses = {
     primary: isActive ? 'text-primary' : 'text-muted-foreground/30',
     secondary: isActive ? 'text-secondary' : 'text-muted-foreground/30', 
-    warning: isActive ? 'text-yellow-500' : 'text-muted-foreground/30',
+    warning: isActive ? 'text-primary' : 'text-muted-foreground/30',
     success: isActive ? 'text-green-500' : 'text-muted-foreground/30',
   }
   
