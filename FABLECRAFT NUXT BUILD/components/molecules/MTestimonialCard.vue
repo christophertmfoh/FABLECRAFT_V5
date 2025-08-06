@@ -5,7 +5,6 @@
     role="article"
     :aria-label="`Testimonial from ${name}`"
     tabindex="0"
-    style="display: flex; flex-direction: column; min-height: 400px;"
     @click="handleClick"
     @keydown.enter="handleClick"
     @keydown.space.prevent="handleClick"
@@ -122,6 +121,7 @@ const cardClasses = computed(() => [
   'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
   'bg-card/90 backdrop-blur-sm',
   'overflow-hidden relative h-full',
+  'flex flex-col min-h-[400px]',
   props.class,
 ])
 

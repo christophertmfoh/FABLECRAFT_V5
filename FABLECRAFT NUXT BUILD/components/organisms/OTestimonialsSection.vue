@@ -131,7 +131,17 @@ const defaultTestimonials: Testimonial[] = [
 // Computed properties
 const isCompact = computed(() => props.variant === 'compact')
 
-const testimonials = computed(() => props.customTestimonials || defaultTestimonials)
+const testimonials = computed(() => {
+  const data = props.customTestimonials || defaultTestimonials
+  
+  // Validate testimonials data
+  if (!Array.isArray(data) || data.length === 0) {
+    console.warn('OTestimonialsSection: Invalid or empty testimonials data provided')
+    return defaultTestimonials
+  }
+  
+  return data
+})
 
 // Section classes
 const sectionClasses = computed(() => [
@@ -151,8 +161,8 @@ const subtitleClasses = computed(() => [
   isCompact.value ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'
 ])
 
-// Event handlers
-const handleTestimonialClick = (testimonial: any) => {
+// Event handlers  
+const handleTestimonialClick = (testimonial: Testimonial) => {
   const testimonialData = testimonials.value.find(t => 
     t.name === testimonial.name && t.role === testimonial.role
   )

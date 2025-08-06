@@ -11,7 +11,7 @@
       aria-hidden="true"
     >
       <AtomIcon
-        :name="star <= rating ? 'lucide:star' : 'lucide:star'"
+        name="lucide:star"
         :size="size"
         :class="star <= rating ? 'fill-current' : ''"
       />
@@ -58,14 +58,6 @@ const starClasses = computed(() => (starNumber: number) => {
   ]
 })
 
-// Size mapping for icons
-const sizeMap = {
-  xs: 'w-3 h-3',
-  sm: 'w-4 h-4',
-  base: 'w-5 h-5',
-  lg: 'w-6 h-6',
-  xl: 'w-7 h-7',
-}
-
-const size = computed(() => sizeMap[props.size])
+// Pass size directly to AtomIcon
+const size = computed(() => props.size)
 </script>
