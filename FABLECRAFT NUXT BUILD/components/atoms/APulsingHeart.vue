@@ -21,7 +21,7 @@ import { cn } from '~/components/atoms/Utils'
 // Props interface
 interface PulsingHeartProps {
   size?: 'sm' | 'md' | 'lg'
-  color?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive' | 'red' | 'theme-adaptive'
+  color?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive' | 'red'
   intensity?: 'subtle' | 'normal' | 'strong'
   speed?: 'slow' | 'normal' | 'fast'
   className?: string
@@ -30,14 +30,11 @@ interface PulsingHeartProps {
 // Component setup
 const props = withDefaults(defineProps<PulsingHeartProps>(), {
   size: 'md',
-  color: 'theme-adaptive',
+  color: 'primary', // Use theme's primary color by default
   intensity: 'normal',
   speed: 'normal',
   className: '',
 })
-
-// Import theme composable for theme-reactive colors
-const { isDark } = useTheme()
 
 // Computed classes
 const heartClasses = computed(() => {
@@ -77,9 +74,6 @@ const iconClasses = computed(() => {
     warning: 'text-warning',
     destructive: 'text-destructive',
     red: 'text-red-500',
-    'theme-adaptive': isDark.value 
-      ? 'text-red-400 hover:text-red-300' // Warmer, lighter red in dark theme
-      : 'text-red-600 hover:text-red-700', // Deeper red in light theme
   }
 
   const intensityClasses = {
@@ -145,28 +139,13 @@ const heartStyles = computed(() => {
   animation: pulse-heart 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Theme-adaptive glow effects */
-:deep(.theme-adaptive) {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Light theme glow */
-.light :deep(.theme-adaptive) {
-  filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.3));
-}
-
-/* Dark theme glow */
-.dark :deep(.theme-adaptive) {
-  filter: drop-shadow(0 0 3px rgba(248, 113, 113, 0.4));
-}
-
-/* Enhanced hover effects for theme-adaptive hearts */
-:deep(.theme-adaptive:hover) {
+/* Enhanced hover effects */
+:hover {
   animation-duration: 1.5s; /* Faster pulse on hover */
 }
 
-/* Theme transition smoothing */
-.theme-transition :deep(.theme-adaptive) {
+/* Theme transition smoothing for all hearts */
+.theme-transition {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
