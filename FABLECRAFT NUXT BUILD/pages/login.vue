@@ -35,19 +35,38 @@
 
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
-        <!-- Login Content Area -->
-        <Section spacing="none" class="login-section">
+        <!-- Auth Dual Card Section -->
+        <Section spacing="none" class="auth-section">
           <div class="py-20 sm:py-28">
-            <Container size="md">
-              <!-- Space for login content goes here -->
-              <div class="text-center">
-                <Heading as="h1" size="h1-compact" class="mb-4">
-                  Login
-                </Heading>
-                <Text size="lg" variant="muted" class="max-w-md mx-auto">
-                  Content goes here
-                </Text>
-              </div>
+            <Container size="lg">
+              <AuthDualCard
+                :active-mode="activeAuthMode"
+                layout="horizontal"
+                size="lg"
+                card-variant="light"
+                :login-loading="loginLoading"
+                :signup-loading="signupLoading"
+                :login-message="loginMessage"
+                :login-message-type="loginMessageType"
+                :signup-message="signupMessage"
+                :signup-message-type="signupMessageType"
+                :show-social-login="true"
+                :social-providers="['google', 'github']"
+                :show-trust-indicators="true"
+                :trust-badges="['ssl', 'privacy', 'secure']"
+                footer-message="Secure authentication powered by FABLECRAFT"
+                @login-submit="handleLoginSubmit"
+                @signup-submit="handleSignupSubmit"
+                @social-login="handleSocialLogin"
+                @forgot-password="handleForgotPassword"
+                @terms-click="handleTermsClick"
+                @privacy-click="handleAuthPrivacyClick"
+                @mode-toggle="handleModeToggle"
+                @badge-click="handleBadgeClick"
+                @login-field-change="handleLoginFieldChange"
+                @signup-field-change="handleSignupFieldChange"
+                @password-strength-change="handlePasswordStrengthChange"
+              />
             </Container>
           </div>
         </Section>
@@ -71,7 +90,25 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { logger } from '~/utils/logger'
+
+// Types
+type AuthMode = 'login' | 'signup'
+type SocialProvider = 'google' | 'github' | 'apple' | 'microsoft'
+
+interface LoginFormData {
+  email: string
+  password: string
+}
+
+interface SignupFormData {
+  name: string
+  email: string
+  password: string
+  confirmPassword: string
+  acceptTerms: boolean
+}
 
 // Core Nuxt 3 composables
 const route = useRoute()
@@ -92,6 +129,15 @@ const orbsEnabled = useState('orbs-enabled', () => false)
 const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
+
+// Auth form state
+const activeAuthMode = ref<AuthMode>('login')
+const loginLoading = ref(false)
+const signupLoading = ref(false)
+const loginMessage = ref('')
+const loginMessageType = ref<'error' | 'success' | 'warning' | 'info' | 'default'>('default')
+const signupMessage = ref('')
+const signupMessageType = ref<'error' | 'success' | 'warning' | 'info' | 'default'>('default')
 
 // Navigation handlers
 const handleAuth = () => {
@@ -143,5 +189,134 @@ const handleSocialClick = (platform: string) => {
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {
   logger.log('Legal link click:', payload)
+}
+
+// Auth event handlers
+const handleLoginSubmit = async (data: LoginFormData) => {
+  loginLoading.value = true
+  loginMessage.value = ''
+  
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    })
+    
+    if (error) {
+      loginMessage.value = error.message
+      loginMessageType.value = 'error'
+    } else {
+      loginMessage.value = 'Login successful! Redirecting...'
+      loginMessageType.value = 'success'
+      // Redirect to dashboard or home
+      setTimeout(() => router.push('/'), 1000)
+    }
+  } catch (error: any) {
+    loginMessage.value = 'An unexpected error occurred'
+    loginMessageType.value = 'error'
+    logger.error('Login error:', error)
+  } finally {
+    loginLoading.value = false
+  }
+}
+
+const handleSignupSubmit = async (data: SignupFormData) => {
+  signupLoading.value = true
+  signupMessage.value = ''
+  
+  try {
+    const { error } = await supabase.auth.signUp({
+      email: data.email,
+      password: data.password,
+      options: {
+        data: {
+          full_name: data.name,
+        },
+      },
+    })
+    
+    if (error) {
+      signupMessage.value = error.message
+      signupMessageType.value = 'error'
+    } else {
+      signupMessage.value = 'Account created! Please check your email to verify your account.'
+      signupMessageType.value = 'success'
+    }
+  } catch (error: any) {
+    signupMessage.value = 'An unexpected error occurred'
+    signupMessageType.value = 'error'
+    logger.error('Signup error:', error)
+  } finally {
+    signupLoading.value = false
+  }
+}
+
+const handleSocialLogin = async (provider: SocialProvider) => {
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: provider as any,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+    
+    if (error) {
+      const message = `Failed to sign in with ${provider}`
+      if (activeAuthMode.value === 'login') {
+        loginMessage.value = message
+        loginMessageType.value = 'error'
+      } else {
+        signupMessage.value = message
+        signupMessageType.value = 'error'
+      }
+    }
+  } catch (error: any) {
+    logger.error('Social login error:', error)
+  }
+}
+
+const handleForgotPassword = () => {
+  // Navigate to forgot password page or show modal
+  router.push('/forgot-password')
+}
+
+const handleTermsClick = () => {
+  // Navigate to terms of service
+  router.push('/terms')
+}
+
+const handleAuthPrivacyClick = () => {
+  // Navigate to privacy policy
+  router.push('/privacy')
+}
+
+const handleModeToggle = (mode: AuthMode) => {
+  activeAuthMode.value = mode
+  // Clear any existing messages when switching modes
+  loginMessage.value = ''
+  signupMessage.value = ''
+}
+
+const handleBadgeClick = (badge: string) => {
+  logger.log('Trust badge clicked:', badge)
+  // Could show info modal about security features
+}
+
+const handleLoginFieldChange = (field: keyof LoginFormData, value: string) => {
+  // Clear login message when user starts typing
+  if (loginMessage.value) {
+    loginMessage.value = ''
+  }
+}
+
+const handleSignupFieldChange = (field: keyof SignupFormData, value: string | boolean) => {
+  // Clear signup message when user starts typing
+  if (signupMessage.value) {
+    signupMessage.value = ''
+  }
+}
+
+const handlePasswordStrengthChange = (strength: string, score: number) => {
+  logger.log('Password strength:', { strength, score })
 }
 </script>
