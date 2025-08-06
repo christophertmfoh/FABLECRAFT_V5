@@ -56,12 +56,11 @@
         <!-- Process Section -->
         <Section id="process" spacing="lg" class="process-section bg-muted/30">
           <Container size="xl">
-            <!-- Process Component Placeholder -->
-            <div
-              class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Process Section</span>
-            </div>
+            <OProcessSection
+              id="process"
+              variant="default"
+              @step-click="handleProcessStepClick"
+            />
           </Container>
         </Section>
 
@@ -239,6 +238,12 @@ const handleSocialClick = (platform: string) => {
 const handleLegalClick = (payload: { text: string; href?: string }) => {
   logger.log('Legal link click:', payload)
   // Future: Handle legal page navigation
+}
+
+// Process section event handlers
+const handleProcessStepClick = (stepNumber: number, stepData: { title: string; description: string; detail?: string; category?: string }) => {
+  logger.log('Process step click:', { stepNumber, stepData })
+  // Future: Handle process step interactions - could show detailed view, navigate to specific feature, etc.
 }
 
 // Component mount lifecycle
