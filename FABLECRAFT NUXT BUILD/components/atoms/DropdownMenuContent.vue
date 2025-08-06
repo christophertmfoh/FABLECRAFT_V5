@@ -1,5 +1,5 @@
 <template>
-  <Teleport to="body">
+  <Teleport to="body" :disabled="!isMounted">
     <Transition
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transform opacity-0 scale-95"
@@ -9,7 +9,7 @@
       leave-to-class="transform opacity-0 scale-95"
     >
       <div
-        v-if="context.open.value"
+        v-if="context.open.value && isMounted"
         :id="context.contentId"
         ref="contentEl"
         role="menu"
@@ -32,6 +32,12 @@ import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { cn } from './Utils'
 import { useDropdownMenuContext, useDropdownFocus } from '~/composables/useDropdownMenu'
 import { onClickOutside } from '@vueuse/core'
+
+// SSR-safe mounting state
+const isMounted = ref(false)
+onMounted(() => {
+  isMounted.value = true
+})
 
 // Component props
 interface DropdownMenuContentProps {
@@ -66,8 +72,8 @@ const floatingStyles = computed(() => {
     zIndex: '50',
   }
 
-  // Position based on trigger
-  if (context.triggerRef.value) {
+  // Position based on trigger (only when mounted to avoid SSR issues)
+  if (context.triggerRef.value && isMounted.value) {
     const rect = context.triggerRef.value.getBoundingClientRect()
 
     switch (props.side) {

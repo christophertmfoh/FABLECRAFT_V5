@@ -36,69 +36,64 @@
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
         <!-- Hero Section -->
-        <OHeroSection
-          id="hero"
-          variant="default"
-          class="hero-section"
-          @primary:click="handleNewProject"
-          @secondary:click="handleExploreExamples"
-          @badge:click="handleBadgeClick"
-        />
+        <Section spacing="xl" class="hero-section">
+          <OHeroSection
+            id="hero"
+            variant="default"
+            @primary:click="handleNewProject"
+            @secondary:click="handleExploreExamples"
+            @badge:click="handleBadgeClick"
+          />
+        </Section>
 
         <!-- Features Section -->
-        <OFeaturesSection
-          id="features"
-          variant="default"
-          :show-trust-indicators="true"
-          :show-key-benefits="true"
-        />
+        <Section spacing="xl" class="features-section">
+          <OFeaturesSection
+            id="features"
+            variant="default"
+            :show-trust-indicators="true"
+            :show-key-benefits="true"
+          />
+        </Section>
 
         <!-- Process Section -->
-        <Section id="process" spacing="lg" class="process-section bg-muted/30">
+        <Section spacing="xl" class="process-section">
           <Container size="xl">
-            <!-- Process Component Placeholder -->
-            <div
-              class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Process Section</span>
-            </div>
+            <OProcessSection
+              id="process"
+              variant="default"
+              @step-click="handleProcessStepClick"
+            />
           </Container>
         </Section>
 
         <!-- Testimonials Section -->
-        <Section id="testimonials" spacing="lg" class="testimonials-section">
-          <Container size="lg">
-            <!-- Testimonials Component Placeholder -->
-            <div
-              class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Testimonials Section</span>
-            </div>
-          </Container>
+        <Section spacing="xl" class="testimonials-section">
+          <OTestimonialsSection
+            id="testimonials"
+            variant="default"
+            @testimonial-click="handleTestimonialClick"
+          />
         </Section>
 
         <!-- Pricing Section -->
-        <Section id="pricing" spacing="lg" class="pricing-section bg-muted/20">
-          <Container size="xl">
-            <!-- Pricing Component Placeholder -->
-            <div
-              class="min-h-[500px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Pricing Section</span>
-            </div>
-          </Container>
+        <Section spacing="xl" class="pricing-section">
+          <OPricingSection
+            id="pricing"
+            variant="default"
+            @plan-click="handlePlanClick"
+            @cta-click="handlePricingCtaClick"
+          />
         </Section>
 
         <!-- CTA Section -->
-        <Section id="cta" spacing="lg" class="cta-section">
-          <Container size="md">
-            <!-- CTA Component Placeholder -->
-            <div
-              class="min-h-[300px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">CTA Section</span>
-            </div>
-          </Container>
+        <Section spacing="xl" class="cta-section">
+          <OCtaSection
+            id="cta"
+            variant="default"
+            @primary-cta-click="handlePrimaryCtaClick"
+            @secondary-cta-click="handleSecondaryCtaClick"
+          />
         </Section>
       </main>
 
@@ -239,6 +234,66 @@ const handleSocialClick = (platform: string) => {
 const handleLegalClick = (payload: { text: string; href?: string }) => {
   logger.log('Legal link click:', payload)
   // Future: Handle legal page navigation
+}
+
+// Process section event handlers
+const handleProcessStepClick = (stepNumber: number, stepData: { title: string; description: string; detail?: string; category?: string }) => {
+  logger.log('Process step click:', { stepNumber, stepData })
+  // Future: Handle process step interactions - could show detailed view, navigate to specific feature, etc.
+}
+
+// Testimonials section event handlers
+const handleTestimonialClick = (testimonial: { id: string; name: string; role: string; content: string; rating: number }) => {
+  logger.log('Testimonial click:', testimonial)
+  // Future: Handle testimonial interactions - could show full testimonial, navigate to case study, etc.
+}
+
+// Pricing section event handlers
+const handlePlanClick = (plan: { id: string; name: string; price: string | number; description: string }) => {
+  logger.log('Pricing plan click:', plan)
+  // Future: Handle plan interactions - could show detailed comparison, features breakdown, etc.
+}
+
+const handlePricingCtaClick = (plan: { id: string; name: string; price: string | number; ctaText?: string }) => {
+  logger.log('Pricing CTA click:', plan)
+  // Future: Handle pricing CTA - could navigate to signup, payment flow, contact sales, etc.
+  
+  // Example routing based on plan type
+  if (plan.id === 'enterprise') {
+    // Could navigate to contact sales page
+    logger.log('Navigating to contact sales for enterprise plan')
+  } else if (plan.id === 'free') {
+    // Could navigate directly to signup
+    logger.log('Navigating to free signup')
+  } else {
+    // Could navigate to payment flow
+    logger.log('Navigating to payment flow for paid plan')
+  }
+}
+
+// CTA section event handlers
+const handlePrimaryCtaClick = () => {
+  logger.log('Primary CTA click: Start Creating Free')
+  // Future: Navigate to signup flow or dashboard
+  // For now, could navigate to sign up page
+  // navigateTo('/signup')
+  
+  // Or if user is already authenticated, go to dashboard
+  if (isAuthenticated.value) {
+    logger.log('User authenticated, navigating to dashboard')
+    // navigateTo('/dashboard')
+  } else {
+    logger.log('User not authenticated, navigating to signup')
+    // navigateTo('/signup?plan=free')
+  }
+}
+
+const handleSecondaryCtaClick = () => {
+  logger.log('Secondary CTA click: Watch Demo')
+  // Future: Open demo video, navigate to demo page, or trigger demo modal
+  // Could be a video modal, YouTube embed, or dedicated demo page
+  // Example: openDemoModal() or navigateTo('/demo')
+  logger.log('Opening demo experience')
 }
 
 // Component mount lifecycle

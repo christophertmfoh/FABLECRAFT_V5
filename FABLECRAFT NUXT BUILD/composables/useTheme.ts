@@ -1,4 +1,5 @@
 // Centralized theme management composable for SSR-safe theming
+import { getCurrentInstance } from 'vue'
 import { themes, themeCategories, getTheme, isThemeDark, themeTransition } from '../constants/data'
 
 export const useTheme = () => {
@@ -37,10 +38,12 @@ export const useTheme = () => {
 
     mediaQuery.addEventListener('change', handleSystemThemeChange)
 
-    // Cleanup listener on unmount
-    onUnmounted(() => {
-      mediaQuery.removeEventListener('change', handleSystemThemeChange)
-    })
+    // Cleanup listener on unmount (only if in component context)
+    if (getCurrentInstance()) {
+      onUnmounted(() => {
+        mediaQuery.removeEventListener('change', handleSystemThemeChange)
+      })
+    }
   }
 
   // Resolved theme (what actually gets applied to DOM)

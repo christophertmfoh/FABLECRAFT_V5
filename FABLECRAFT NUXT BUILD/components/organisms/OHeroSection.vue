@@ -175,9 +175,9 @@ const emit = defineEmits<HeroSectionEmits>()
 // Computed properties
 const heroSectionClasses = computed(() => {
   const variantClasses = {
-    default: 'hero-ambient-glow py-16 sm:py-20 lg:py-24',
-    compact: 'py-8 sm:py-12 lg:py-16',
-    dramatic: 'hero-ambient-glow py-20 sm:py-24 lg:py-32',
+    default: 'hero-ambient-glow',
+    compact: '',
+    dramatic: 'hero-ambient-glow',
   }
 
   const backgroundClasses = {
