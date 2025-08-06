@@ -54,7 +54,7 @@
             :id="`testimonial-author-${testimonialId}`"
             tag="h4"
             size="sm"
-            class="font-semibold text-foreground leading-tight"
+            class="font-semibold text-foreground leading-tight text-center"
           >
             {{ name }}
           </Heading>
@@ -62,7 +62,7 @@
           <Text
             tag="p"
             size="sm"
-            class="text-muted-foreground leading-tight mt-1"
+            class="text-muted-foreground leading-tight mt-1 text-center"
           >
             {{ role }}
           </Text>
