@@ -55,6 +55,7 @@ const copyrightClasses = computed(() => {
     'inline-block',
     'leading-relaxed',
     'tracking-normal',
+    'whitespace-nowrap', // Prevent text wrapping to keep "All rights reserved" on one line
     sizeClasses[props.size],
     variantClasses[props.variant],
     props.class

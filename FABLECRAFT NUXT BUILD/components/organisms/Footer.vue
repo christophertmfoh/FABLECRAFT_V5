@@ -58,13 +58,11 @@
       <!-- Made with Love -->
       <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground mt-8 pt-6">
         <span>{{ footerBranding.madeWithText }}</span>
-        <AnimatedOrb
+        <APulsingHeart
           size="md"
-          animation="pulse"
-          :colors="{
-            primary: 'hsl(var(--orb-primary))',
-            secondary: 'hsl(var(--orb-secondary))',
-          }"
+          color="red"
+          intensity="normal"
+          speed="normal"
         />
         <span>{{ footerBranding.madeForText }}</span>
       </div>
