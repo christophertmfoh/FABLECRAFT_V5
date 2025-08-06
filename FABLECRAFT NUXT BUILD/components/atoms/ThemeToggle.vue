@@ -1,198 +1,219 @@
 <template>
-  <DropdownMenu>
-    <DropdownMenuTrigger as-child>
+  <ClientOnly>
+    <DropdownMenu>
+      <DropdownMenuTrigger as-child>
+        <Button
+          variant="ghost"
+          size="icon"
+          class="relative group overflow-hidden border border-border/50 hover:border-border hover:bg-accent/20 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:outline-none transition-all duration-300"
+          aria-label="Open theme selection menu"
+        >
+          <!-- Gradient overlay effect (like old GradientButton) -->
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-foreground/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+            aria-hidden="true"
+          />
+
+          <!-- Icon with relative positioning -->
+          <div class="relative z-10">
+            <AtomIcon
+              :name="currentThemeIcon"
+              class="h-5 w-5 text-foreground transition-all duration-300"
+              aria-hidden="true"
+            />
+          </div>
+          <span class="sr-only">Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+
+      <DropdownMenuContent
+        align="end"
+        class="w-72 min-w-0 border-border bg-background/95 backdrop-blur-sm shadow-lg focus:outline-none theme-toggle-dropdown"
+      >
+        <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <!-- Scrollable content area with responsive max height -->
+        <div class="max-h-96 overflow-y-auto overflow-x-hidden">
+          <!-- System preference -->
+          <DropdownMenuItem
+            class="cursor-pointer"
+            @click="event => handleThemeChange('system', event)"
+          >
+            <div class="flex items-center gap-3 w-full min-w-0">
+              <AtomIcon name="lucide:monitor" class="h-4 w-4 flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <div class="font-medium truncate">System</div>
+                <div class="text-xs text-muted-foreground truncate">Follow system preference</div>
+              </div>
+              <div v-if="currentTheme === 'system'" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+            </div>
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel class="text-xs text-muted-foreground"> Core Themes </DropdownMenuLabel>
+
+          <!-- Core themes -->
+          <template v-for="theme in coreThemes" :key="theme">
+            <DropdownMenuItem
+              class="cursor-pointer"
+              @click="event => handleThemeChange(theme, event)"
+            >
+              <div class="flex items-center gap-3 w-full min-w-0">
+                <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                  <div class="text-xs text-muted-foreground truncate">
+                    {{ themeConfig[theme].description }}
+                  </div>
+                </div>
+                <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+              </div>
+            </DropdownMenuItem>
+          </template>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel class="text-xs text-muted-foreground">
+            Classic Light Themes
+          </DropdownMenuLabel>
+
+          <!-- Classic light themes -->
+          <template v-for="theme in classicLightThemes" :key="theme">
+            <DropdownMenuItem
+              class="cursor-pointer"
+              @click="event => handleThemeChange(theme, event)"
+            >
+              <div class="flex items-center gap-3 w-full min-w-0">
+                <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                  <div class="text-xs text-muted-foreground truncate">
+                    {{ themeConfig[theme].description }}
+                  </div>
+                </div>
+                <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+              </div>
+            </DropdownMenuItem>
+          </template>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel class="text-xs text-muted-foreground">
+            Classic Dark Themes
+          </DropdownMenuLabel>
+
+          <!-- Classic dark themes -->
+          <template v-for="theme in classicDarkThemes" :key="theme">
+            <DropdownMenuItem
+              class="cursor-pointer"
+              @click="event => handleThemeChange(theme, event)"
+            >
+              <div class="flex items-center gap-3 w-full min-w-0">
+                <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                  <div class="text-xs text-muted-foreground truncate">
+                    {{ themeConfig[theme].description }}
+                  </div>
+                </div>
+                <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+              </div>
+            </DropdownMenuItem>
+          </template>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel class="text-xs text-muted-foreground">
+            Modern Light Themes
+          </DropdownMenuLabel>
+
+          <!-- Modern light themes -->
+          <template v-for="theme in modernLightThemes" :key="theme">
+            <DropdownMenuItem
+              class="cursor-pointer"
+              @click="event => handleThemeChange(theme, event)"
+            >
+              <div class="flex items-center gap-3 w-full min-w-0">
+                <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                  <div class="text-xs text-muted-foreground truncate">
+                    {{ themeConfig[theme].description }}
+                  </div>
+                </div>
+                <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+              </div>
+            </DropdownMenuItem>
+          </template>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel class="text-xs text-muted-foreground">
+            Modern Dark Themes
+          </DropdownMenuLabel>
+
+          <!-- Modern dark themes -->
+          <template v-for="theme in modernDarkThemes" :key="theme">
+            <DropdownMenuItem
+              class="cursor-pointer"
+              @click="event => handleThemeChange(theme, event)"
+            >
+              <div class="flex items-center gap-3 w-full min-w-0">
+                <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                  <div class="text-xs text-muted-foreground truncate">
+                    {{ themeConfig[theme].description }}
+                  </div>
+                </div>
+                <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+              </div>
+            </DropdownMenuItem>
+          </template>
+
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel class="text-xs text-muted-foreground">
+            Specialty Themes
+          </DropdownMenuLabel>
+
+          <!-- Specialty themes -->
+          <template v-for="theme in specialtyThemes" :key="theme">
+            <DropdownMenuItem
+              class="cursor-pointer"
+              @click="event => handleThemeChange(theme, event)"
+            >
+              <div class="flex items-center gap-3 w-full min-w-0">
+                <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
+                  <div class="text-xs text-muted-foreground truncate">
+                    {{ themeConfig[theme].description }}
+                  </div>
+                </div>
+                <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
+              </div>
+            </DropdownMenuItem>
+          </template>
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+    
+    <template #fallback>
+      <!-- Fallback button while loading -->
       <Button
         variant="ghost"
         size="icon"
         class="relative group overflow-hidden border border-border/50 hover:border-border hover:bg-accent/20 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 focus-visible:outline-none transition-all duration-300"
-        aria-label="Open theme selection menu"
+        aria-label="Loading theme selector"
+        disabled
       >
-        <!-- Gradient overlay effect (like old GradientButton) -->
-        <div
-          class="absolute inset-0 bg-gradient-to-r from-foreground/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-          aria-hidden="true"
-        />
-
-        <!-- Icon with relative positioning -->
         <div class="relative z-10">
           <AtomIcon
-            :name="currentThemeIcon"
+            name="lucide:sun"
             class="h-5 w-5 text-foreground transition-all duration-300"
             aria-hidden="true"
           />
         </div>
-        <span class="sr-only">Toggle theme</span>
       </Button>
-    </DropdownMenuTrigger>
-
-    <DropdownMenuContent
-      align="end"
-      class="w-72 min-w-0 border-border bg-background/95 backdrop-blur-sm shadow-lg focus:outline-none theme-toggle-dropdown"
-    >
-      <DropdownMenuLabel>Theme Selection</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-
-      <!-- Scrollable content area with responsive max height -->
-      <div class="max-h-96 overflow-y-auto overflow-x-hidden">
-        <!-- System preference -->
-        <DropdownMenuItem
-          class="cursor-pointer"
-          @click="event => handleThemeChange('system', event)"
-        >
-          <div class="flex items-center gap-3 w-full min-w-0">
-            <AtomIcon name="lucide:monitor" class="h-4 w-4 flex-shrink-0" />
-            <div class="flex-1 min-w-0">
-              <div class="font-medium truncate">System</div>
-              <div class="text-xs text-muted-foreground truncate">Follow system preference</div>
-            </div>
-            <div v-if="currentTheme === 'system'" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-          </div>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel class="text-xs text-muted-foreground"> Core Themes </DropdownMenuLabel>
-
-        <!-- Core themes -->
-        <template v-for="theme in coreThemes" :key="theme">
-          <DropdownMenuItem
-            class="cursor-pointer"
-            @click="event => handleThemeChange(theme, event)"
-          >
-            <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground truncate">
-                  {{ themeConfig[theme].description }}
-                </div>
-              </div>
-              <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-            </div>
-          </DropdownMenuItem>
-        </template>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel class="text-xs text-muted-foreground">
-          Classic Light Themes
-        </DropdownMenuLabel>
-
-        <!-- Classic light themes -->
-        <template v-for="theme in classicLightThemes" :key="theme">
-          <DropdownMenuItem
-            class="cursor-pointer"
-            @click="event => handleThemeChange(theme, event)"
-          >
-            <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground truncate">
-                  {{ themeConfig[theme].description }}
-                </div>
-              </div>
-              <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-            </div>
-          </DropdownMenuItem>
-        </template>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel class="text-xs text-muted-foreground">
-          Classic Dark Themes
-        </DropdownMenuLabel>
-
-        <!-- Classic dark themes -->
-        <template v-for="theme in classicDarkThemes" :key="theme">
-          <DropdownMenuItem
-            class="cursor-pointer"
-            @click="event => handleThemeChange(theme, event)"
-          >
-            <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground truncate">
-                  {{ themeConfig[theme].description }}
-                </div>
-              </div>
-              <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-            </div>
-          </DropdownMenuItem>
-        </template>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel class="text-xs text-muted-foreground">
-          Modern Light Themes
-        </DropdownMenuLabel>
-
-        <!-- Modern light themes -->
-        <template v-for="theme in modernLightThemes" :key="theme">
-          <DropdownMenuItem
-            class="cursor-pointer"
-            @click="event => handleThemeChange(theme, event)"
-          >
-            <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground truncate">
-                  {{ themeConfig[theme].description }}
-                </div>
-              </div>
-              <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-            </div>
-          </DropdownMenuItem>
-        </template>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel class="text-xs text-muted-foreground">
-          Modern Dark Themes
-        </DropdownMenuLabel>
-
-        <!-- Modern dark themes -->
-        <template v-for="theme in modernDarkThemes" :key="theme">
-          <DropdownMenuItem
-            class="cursor-pointer"
-            @click="event => handleThemeChange(theme, event)"
-          >
-            <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground truncate">
-                  {{ themeConfig[theme].description }}
-                </div>
-              </div>
-              <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-            </div>
-          </DropdownMenuItem>
-        </template>
-
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel class="text-xs text-muted-foreground">
-          Specialty Themes
-        </DropdownMenuLabel>
-
-        <!-- Specialty themes -->
-        <template v-for="theme in specialtyThemes" :key="theme">
-          <DropdownMenuItem
-            class="cursor-pointer"
-            @click="event => handleThemeChange(theme, event)"
-          >
-            <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
-                <div class="text-xs text-muted-foreground truncate">
-                  {{ themeConfig[theme].description }}
-                </div>
-              </div>
-              <div v-if="currentTheme === theme" class="ml-auto h-2 w-2 rounded-full bg-primary" />
-            </div>
-          </DropdownMenuItem>
-        </template>
-      </div>
-    </DropdownMenuContent>
-  </DropdownMenu>
+    </template>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">

@@ -60,8 +60,8 @@ const props = withDefaults(defineProps<SocialLinksProps>(), {
 
 const emit = defineEmits<SocialLinksEmits>()
 
-// Generate unique ID for label
-const labelId = `social-links-label-${Math.random().toString(36).substr(2, 9)}`
+// Generate unique ID for accessibility - SSR safe
+const labelId = useId() || 'social-links-label'
 
 // Computed properties
 const socialLinksClasses = computed(() => {
