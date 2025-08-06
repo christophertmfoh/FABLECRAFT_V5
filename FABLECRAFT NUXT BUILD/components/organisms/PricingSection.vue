@@ -74,7 +74,7 @@ interface PricingSectionProps {
   
   /**
    * Section description
-   * @default 'Whether you're writing your first novel or managing an entire creative universe, we have a plan that grows with your ambition.'
+   * @default 'Whether you are writing your first novel or managing an entire creative universe, we have a plan that grows with your ambition.'
    */
   description?: string
   
@@ -194,7 +194,7 @@ interface PricingSectionEmits {
 
 const props = withDefaults(defineProps<PricingSectionProps>(), {
   title: 'Start Free, Scale with Your Stories',
-  description: 'Whether you're writing your first novel or managing an entire creative universe, we have a plan that grows with your ambition.',
+  description: 'Whether you are writing your first novel or managing an entire creative universe, we have a plan that grows with your ambition.',
   badgeText: 'Simple, Transparent Pricing',
   badgeVariant: 'secondary',
   showPulsingDot: true,
