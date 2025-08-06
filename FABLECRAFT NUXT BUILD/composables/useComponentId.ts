@@ -1,10 +1,9 @@
 /**
  * SSR-safe unique ID generator
- * Uses a consistent approach for server and client
+ * Uses Vue 3's built-in useId() for consistent server/client IDs
  */
 export const useComponentId = (prefix: string = 'fc'): string => {
-  // Use useState to ensure consistent IDs between server and client
-  const counter = useState(`id-counter-${prefix}`, () => 0)
-  counter.value++
-  return `${prefix}-${counter.value}`
+  // Use Vue's built-in useId() which is SSR-safe by design
+  const id = useId()
+  return prefix ? `${prefix}-${id}` : id
 }
