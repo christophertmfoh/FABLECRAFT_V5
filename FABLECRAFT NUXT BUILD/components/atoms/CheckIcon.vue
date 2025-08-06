@@ -52,11 +52,11 @@ const sizeClasses = {
   xl: 'w-7 h-7'
 }
 
-// Color classes for the icon
+// Color classes for the icon (theme reactive)
 const colorClasses = {
-  success: 'text-green-500 dark:text-green-400',
-  error: 'text-red-500 dark:text-red-400',
-  warning: 'text-yellow-500 dark:text-yellow-400',
+  success: 'text-primary dark:text-primary',
+  error: 'text-destructive dark:text-destructive',
+  warning: 'text-amber-500 dark:text-amber-400',
   primary: 'text-primary',
   muted: 'text-muted-foreground'
 }
