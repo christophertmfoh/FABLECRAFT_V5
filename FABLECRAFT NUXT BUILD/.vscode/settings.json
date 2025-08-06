@@ -4,5 +4,59 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "typescript.preferences.includePackageJsonAutoImports": "auto"
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  
+  // Vue & Nuxt Specific Settings
+  "vue.codeActions.enabled": true,
+  "vue.complete.casing.tags": "kebab",
+  "vue.complete.casing.props": "camel",
+  "vue.updateImportsOnFileMove.enabled": true,
+  
+  // Volar TypeScript Support
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.format.enable": true,
+  
+  // Tailwind CSS
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "vue": "html",
+    "vue-html": "html"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  
+  // File Associations  
+  "files.associations": {
+    "*.vue": "vue",
+    "*.md": "markdown"
+  },
+  
+  // Emmet Support
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  
+  // Error Lens (inline errors)
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+  "errorLens.fontSize": "12px",
+  
+  // TODO Tree Configuration
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK", 
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  
+  // Auto Import Optimization
+  "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
+  "vue.format.options.tabSize": 2,
+  "vue.format.options.useTabs": false
 }

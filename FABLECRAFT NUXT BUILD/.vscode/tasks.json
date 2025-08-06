@@ -1,0 +1,148 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Nuxt: Dev Server",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["dev"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "nuxt",
+        "pattern": {
+          "regexp": "^\\s*(ERROR|WARN)\\s+(.*)$",
+          "severity": 1,
+          "message": 2
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^\\s*Local:.*",
+          "endsPattern": "^\\s*ready in.*"
+        }
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Nuxt: Build",
+      "type": "shell", 
+      "command": "pnpm",
+      "args": ["build"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": {
+        "owner": "nuxt",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*)\\((\\d+),(\\d+)\\):\\s+(warning|error)\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "label": "ESLint: Fix All",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["lint:fix"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": "$eslint-stylish"
+    },
+    {
+      "label": "TypeScript: Check",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["typecheck"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": "$tsc"
+    },
+    {
+      "label": "Prettier: Format All",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["prettier:fix"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Clean Build",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["clean"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["install"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Supabase: Start",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["db:start"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      },
+      "isBackground": true
+    }
+  ]
+}
