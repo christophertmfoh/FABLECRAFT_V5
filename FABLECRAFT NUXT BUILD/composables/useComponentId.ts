@@ -1,9 +1,10 @@
 /**
  * SSR-safe unique ID generator
- * Uses Nuxt 3.10+ built-in useId
+ * Uses a consistent approach for server and client
  */
 export const useComponentId = (prefix: string = 'fc'): string => {
-  // Use Nuxt's built-in useId for consistent SSR/client IDs
-  const id = useId()
-  return prefix ? `${prefix}-${id}` : id
+  // Use useState to ensure consistent IDs between server and client
+  const counter = useState(`id-counter-${prefix}`, () => 0)
+  counter.value++
+  return `${prefix}-${counter.value}`
 }
