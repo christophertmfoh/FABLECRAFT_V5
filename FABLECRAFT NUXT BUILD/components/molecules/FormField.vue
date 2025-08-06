@@ -31,7 +31,7 @@
       />
       
       <!-- Trailing slot for icons, buttons, etc. -->
-      <div v-if="$slots.trailing" :class="trailingClasses">
+      <div v-if="slots.trailing" :class="trailingClasses">
         <slot name="trailing" />
       </div>
     </div>
@@ -46,16 +46,19 @@
     />
 
     <!-- Help text slot -->
-    <div v-if="$slots.help" class="mt-1">
+    <div v-if="slots.help" class="mt-1">
       <slot name="help" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, useSlots } from 'vue'
 import { cn } from '~/components/atoms/Utils'
 import { useComponentId } from '~/composables/useComponentId'
+
+// Access slots
+const slots = useSlots()
 
 // Component props
 interface FormFieldProps {
@@ -145,7 +148,7 @@ const inputContainerClasses = computed(() => {
 
 const inputClasses = computed(() => {
   return cn('flex-1', {
-    'pr-10': !!$slots.trailing, // Add padding for trailing content
+    'pr-10': !!slots.trailing, // Add padding for trailing content
     'border-destructive focus:border-destructive': props.hasError,
     'cursor-not-allowed opacity-60': props.disabled,
   })
