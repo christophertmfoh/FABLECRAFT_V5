@@ -125,5 +125,11 @@ export default defineNuxtConfig({
   },
 
   // Enable Nuxt DevTools for development
-  devtools: { enabled: true },
+  devtools: { 
+    enabled: true,
+    vscode: {
+      // Prevent filesystem access issues
+      enabled: false
+    }
+  },
 })
