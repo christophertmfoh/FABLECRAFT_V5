@@ -69,14 +69,11 @@
 
         <!-- Testimonials Section -->
         <Section spacing="xl" class="testimonials-section">
-          <Container size="lg">
-            <!-- Testimonials Component Placeholder -->
-            <div
-              class="min-h-[400px] flex items-center justify-center border-2 border-dashed border-muted-foreground/30 rounded-lg"
-            >
-              <span class="text-muted-foreground">Testimonials Section</span>
-            </div>
-          </Container>
+          <OTestimonialsSection
+            id="testimonials"
+            variant="default"
+            @testimonial-click="handleTestimonialClick"
+          />
         </Section>
 
         <!-- Pricing Section -->
@@ -247,6 +244,12 @@ const handleLegalClick = (payload: { text: string; href?: string }) => {
 const handleProcessStepClick = (stepNumber: number, stepData: { title: string; description: string; detail?: string; category?: string }) => {
   logger.log('Process step click:', { stepNumber, stepData })
   // Future: Handle process step interactions - could show detailed view, navigate to specific feature, etc.
+}
+
+// Testimonials section event handlers
+const handleTestimonialClick = (testimonial: { id: string; name: string; role: string; content: string; rating: number }) => {
+  logger.log('Testimonial click:', testimonial)
+  // Future: Handle testimonial interactions - could show full testimonial, navigate to case study, etc.
 }
 
 // Component mount lifecycle
