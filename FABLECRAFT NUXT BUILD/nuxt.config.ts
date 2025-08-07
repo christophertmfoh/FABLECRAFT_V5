@@ -196,6 +196,13 @@ export default defineNuxtConfig({
     headNext: true,           // ✅ NEW: Better head management (Nuxt 3.17+)
     typedPages: false,        // Skip for now - requires strict TypeScript
     granularCachedData: true, // ✅ NEW: Better data fetching consistency (Nuxt 3.17+)
+    
+    // ✅ Phase 4: Enhanced link prefetching configuration
+    defaults: {
+      nuxtLink: {
+        prefetchOn: 'interaction', // More conservative than 'viewport' - saves bandwidth
+      },
+    }
   },
 
   // Better error handling - explicit SSR
@@ -211,11 +218,22 @@ export default defineNuxtConfig({
           content: 'Modern development foundation for scalable web applications',
         },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        
+        // ✅ Phase 4: Network optimization meta tags
+        { 'http-equiv': 'x-dns-prefetch-control', content: 'on' },
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'msapplication-tap-highlight', content: 'no' },
+        { name: 'referrer', content: 'no-referrer-when-downgrade' },
       ],
       link: [
-        // Preconnect to Google Fonts for performance
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+        // ✅ Phase 4: Smart DNS prefetch strategy (faster than preconnect for distant resources)
+        { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
+        { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
+        
+        // ✅ Phase 4: Conditional Supabase DNS prefetch
+        ...(process.env.SUPABASE_URL ? [
+          { rel: 'dns-prefetch', href: new URL(process.env.SUPABASE_URL).origin }
+        ] : []),
         // ✅ OPTIMIZED: Inter with only used weights (400,500,600,700,900)
         {
           rel: 'stylesheet',
