@@ -2,6 +2,27 @@
 import { getCurrentInstance } from 'vue'
 import { themes, themeCategories, getTheme, isThemeDark, themeTransition } from '../constants/data'
 
+// Client-only CSS loader for per-theme CSS chunks (lazy themes)
+const loadedThemeCssNames = new Set<string>()
+// Note: import.meta.glob evaluated at build time; safe to declare here
+const themeCssModules = import.meta.glob('~/assets/css/themes/*.css')
+
+async function preloadThemeCssIfNeeded(themeName: string): Promise<void> {
+  if (!import.meta.client) return
+  if (!themeName || themeName === 'system' || themeName === 'light' || themeName === 'dark') return
+  if (loadedThemeCssNames.has(themeName)) return
+
+  const entry = Object.entries(themeCssModules).find(([path]) => path.endsWith(`${themeName}.css`))
+  if (!entry) return
+  const [, loader] = entry
+  try {
+    await loader()
+    loadedThemeCssNames.add(themeName)
+  } catch {
+    // Silently ignore; base theme variables still apply
+  }
+}
+
 export const useTheme = () => {
   // Use cookie for SSR persistence
   const themeCookie = useCookie<string>('theme', {
@@ -66,8 +87,12 @@ export const useTheme = () => {
     localStorage.setItem('theme', currentTheme.value)
   }
 
-  // Set theme function
-  const setTheme = (themeName: string) => {
+  // Set theme function (preload CSS chunk before applying to DOM)
+  const setTheme = async (themeName: string) => {
+    if (import.meta.client) {
+      await preloadThemeCssIfNeeded(themeName)
+    }
+
     // Update state
     currentTheme.value = themeName
 
@@ -96,8 +121,8 @@ export const useTheme = () => {
       themeToSet = 'system'
     }
 
-    // Set the theme (this will update DOM and cookie)
-    setTheme(themeToSet)
+    // Preload CSS (client) to avoid flash, then set the theme
+    void setTheme(themeToSet)
   }
 
   // Add theme transition class
@@ -111,9 +136,9 @@ export const useTheme = () => {
   }
 
   // Enhanced setTheme with transition
-  const setThemeWithTransition = (themeName: string) => {
+  const setThemeWithTransition = async (themeName: string) => {
     addThemeTransition()
-    setTheme(themeName)
+    await setTheme(themeName)
   }
 
   // Get current theme object
@@ -129,7 +154,7 @@ export const useTheme = () => {
   // Toggle between light and dark
   const toggleTheme = () => {
     const newTheme = isDark.value ? 'light' : 'dark'
-    setThemeWithTransition(newTheme)
+    void setThemeWithTransition(newTheme)
   }
 
   // Auto-initialize removed; initialization is handled by the client plugin to avoid duplicate work.
