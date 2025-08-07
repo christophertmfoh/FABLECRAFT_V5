@@ -8,7 +8,7 @@ export const useNetworkOptimization = () => {
    * @returns Promise resolving to connection time in milliseconds, or -1 if failed
    */
   const measureConnectionTime = async (url: string): Promise<number> => {
-    if (!process.client) return -1
+    if (!import.meta.client) return -1
     
     const start = performance.now()
     
@@ -29,7 +29,7 @@ export const useNetworkOptimization = () => {
    * @returns Network connection details or null if not supported
    */
   const diagnoseNetworkPerformance = async () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     try {
       // Modern browsers support connection API
@@ -55,7 +55,7 @@ export const useNetworkOptimization = () => {
    * @returns Object with DNS timing results
    */
   const testDNSPerformance = async () => {
-    if (!process.client) return {}
+    if (!import.meta.client) return {}
     
     const domains = [
       'https://fonts.googleapis.com',
@@ -92,7 +92,7 @@ export const useNetworkOptimization = () => {
    * @returns Object with resource hint validation results
    */
   const validateResourceHints = () => {
-    if (!process.client) return {}
+    if (!import.meta.client) return {}
     
     const hints = {
       dnsPrefetch: [] as string[],
@@ -129,7 +129,7 @@ export const useNetworkOptimization = () => {
    * Log comprehensive network performance report
    */
   const logNetworkReport = async () => {
-    if (!process.client || !process.dev) return
+    if (!import.meta.client || !import.meta.dev) return
     
     console.group('🌐 Phase 4: Network Performance Report')
     

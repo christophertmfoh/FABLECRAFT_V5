@@ -8,7 +8,7 @@ export const usePerformanceRegression = () => {
    * Store performance baseline for comparison
    */
   const storeBaseline = (metrics: Record<string, number>) => {
-    if (!process.client) return
+    if (!import.meta.client) return
     
     try {
       const baseline = {
@@ -41,7 +41,7 @@ export const usePerformanceRegression = () => {
    * Compare current performance with baseline
    */
   const compareWithBaseline = (currentMetrics: Record<string, number>) => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     try {
       const stored = localStorage.getItem(STORAGE_KEY)
@@ -93,7 +93,7 @@ export const usePerformanceRegression = () => {
    * Log regression analysis results
    */
   const logRegressionAnalysis = (comparison: any) => {
-    if (!comparison || !process.dev) return
+    if (!comparison || !import.meta.dev) return
     
     console.group('📈 Performance Regression Analysis')
     
@@ -130,7 +130,7 @@ export const usePerformanceRegression = () => {
    * Auto-store baseline from current performance
    */
   const autoStoreBaseline = () => {
-    if (!process.client) return
+    if (!import.meta.client) return
     
     setTimeout(() => {
       // Collect navigation timing metrics
@@ -164,7 +164,7 @@ export const usePerformanceRegression = () => {
    * Check for performance regressions
    */
   const checkForRegressions = () => {
-    if (!process.client || !process.dev) return
+    if (!import.meta.client || !import.meta.dev) return
     
     setTimeout(() => {
       // Collect current metrics
@@ -205,7 +205,7 @@ export const usePerformanceRegression = () => {
    * Clear stored baseline (useful for testing)
    */
   const clearBaseline = () => {
-    if (!process.client) return
+    if (!import.meta.client) return
     
     try {
       localStorage.removeItem(STORAGE_KEY)
@@ -219,7 +219,7 @@ export const usePerformanceRegression = () => {
    * Get stored baseline information
    */
   const getBaselineInfo = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     try {
       const stored = localStorage.getItem(STORAGE_KEY)

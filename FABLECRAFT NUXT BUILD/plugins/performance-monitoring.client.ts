@@ -2,7 +2,7 @@
 // Coordinates all performance monitoring tools for comprehensive analysis
 
 export default defineNuxtPlugin(() => {
-  if (!process.client || !process.dev) return
+  if (!import.meta.client || !import.meta.dev) return
 
   console.log('📊 Phase 6: Initializing comprehensive performance monitoring...')
 
@@ -28,7 +28,7 @@ export default defineNuxtPlugin(() => {
   setTimeout(initPerformanceMonitoring, 1000)
 
   // Add global access to monitoring tools for debugging
-  if (process.dev) {
+  if (import.meta.dev) {
     (window as any).__NUXT_PERFORMANCE__ = {
       webVitals: useWebVitals,
       dashboard: usePerformanceDashboard,

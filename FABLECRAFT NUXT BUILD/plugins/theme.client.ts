@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
     // Find matching CSS module for the theme
     const entry = Object.entries(themeCssModules).find(([path]) => path.endsWith(`${themeName}.css`))
     if (!entry) {
-      if (process.dev) console.warn(`[theme] no css module found for: ${themeName}`)
+      if (import.meta.dev) console.warn(`[theme] no css module found for: ${themeName}`)
       return
     }
 
@@ -21,11 +21,11 @@ export default defineNuxtPlugin(() => {
       await loader()
       loadedThemes.add(themeName)
     } catch (e) {
-      if (process.dev) console.warn(`[theme] failed to load theme css for: ${themeName}`, e)
+      if (import.meta.dev) console.warn(`[theme] failed to load theme css for: ${themeName}`, e)
     }
   }
 
-  if (process.client) {
+  if (import.meta.client) {
     const theme = currentTheme.value || 'light'
     loadThemeCss(theme)
 

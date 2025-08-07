@@ -2,7 +2,7 @@
 // Automated performance budget checking to prevent regressions
 
 export default defineNuxtPlugin(() => {
-  if (!process.client || !process.dev) return
+  if (!import.meta.client || !import.meta.dev) return
 
   const performanceBudget = {
     // Core Web Vitals budgets

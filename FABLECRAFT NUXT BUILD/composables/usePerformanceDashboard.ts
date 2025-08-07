@@ -6,7 +6,7 @@ export const usePerformanceDashboard = () => {
    * Collect comprehensive performance metrics
    */
   const collectPerformanceMetrics = async () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
 
     const metrics = {
       timestamp: Date.now(),
@@ -88,7 +88,7 @@ export const usePerformanceDashboard = () => {
    * Generate comprehensive performance report
    */
   const generatePerformanceReport = async () => {
-    if (!process.dev) return
+    if (!import.meta.dev) return
 
     console.group('📊 Phase 6: Comprehensive Performance Dashboard')
     console.log('🕐 Report generated at:', new Date().toLocaleTimeString())
@@ -191,7 +191,7 @@ export const usePerformanceDashboard = () => {
    */
   const calculatePerformanceScore = (metrics: any) => {
     let score = 100
-    let details = []
+    const details = []
 
     // Web Vitals scoring
     if (metrics.vitals.lcp > 2500) {
@@ -249,7 +249,7 @@ export const usePerformanceDashboard = () => {
    * Auto-generate performance reports on route changes
    */
   const initAutoReporting = () => {
-    if (!process.client || !process.dev) return
+    if (!import.meta.client || !import.meta.dev) return
 
     // Initial report after page load
     setTimeout(generatePerformanceReport, 4000)
@@ -285,7 +285,7 @@ export const usePerformanceDashboard = () => {
    * Export performance data for external analysis
    */
   const exportPerformanceData = async () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
 
     const metrics = await collectPerformanceMetrics()
     if (!metrics) return null
@@ -305,7 +305,7 @@ export const usePerformanceDashboard = () => {
     }
 
     // In development, log the data
-    if (process.dev) {
+    if (import.meta.dev) {
       console.log('📤 Performance data export:', exportData)
     }
 

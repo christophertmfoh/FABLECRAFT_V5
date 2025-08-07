@@ -7,7 +7,7 @@ export const useBundleOptimization = () => {
    * @returns Bundle composition analysis or null if not in client/dev mode
    */
   const analyzeBundleComposition = () => {
-    if (!process.client || !process.dev) return null
+    if (!import.meta.client || !import.meta.dev) return null
     
     // Get loaded script tags to understand chunking
     const scripts = Array.from(document.querySelectorAll('script[src]'))
@@ -48,7 +48,7 @@ export const useBundleOptimization = () => {
    * @returns Array of resource loading metrics or null
    */
   const monitorDependencyLoading = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     try {
       // Use Performance API to track resource loading
@@ -86,7 +86,7 @@ export const useBundleOptimization = () => {
    * @returns Analysis of vendor chunking strategy
    */
   const analyzeVendorChunking = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     const dependencies = monitorDependencyLoading()
     if (!dependencies) return null
@@ -115,7 +115,7 @@ export const useBundleOptimization = () => {
    * @returns Optimization recommendations
    */
   const analyzeOptimizationOpportunities = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     const dependencies = monitorDependencyLoading()
     const vendorAnalysis = analyzeVendorChunking()
@@ -174,7 +174,7 @@ export const useBundleOptimization = () => {
    * Log comprehensive bundle optimization report
    */
   const logBundleReport = () => {
-    if (!process.client || !process.dev) return
+    if (!import.meta.client || !import.meta.dev) return
     
     console.group('📦 Phase 5: Bundle Optimization Report')
     
@@ -226,7 +226,7 @@ export const useBundleOptimization = () => {
    * Compare current performance with Phase 5 expectations
    */
   const compareWithExpectations = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     
     const dependencies = monitorDependencyLoading()
     const vendorAnalysis = analyzeVendorChunking()

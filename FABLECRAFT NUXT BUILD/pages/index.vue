@@ -171,8 +171,8 @@ const router = useRouter()
 
 // CRITICAL FIX: Only initialize Supabase on client
 // This prevents blocking API calls during SSR
-const supabase = process.client ? useSupabaseClient() : null
-const user = process.client ? useSupabaseUser() : ref(null)
+const supabase = import.meta.client ? useSupabaseClient() : null
+const user = import.meta.client ? useSupabaseUser() : ref(null)
 
 // Compute authentication state safely
 const isAuthenticated = computed(() => !!user?.value)
@@ -234,7 +234,7 @@ const handleBadgeClick = () => {
 
 // Scroll handling (client-only)
 const handleScroll = () => {
-  if (!process.client) return
+  if (!import.meta.client) return
   
   const winScroll = document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
@@ -367,7 +367,7 @@ onMounted(() => {
 
 // Cleanup
 onUnmounted(() => {
-  if (showScrollProgress.value && process.client) {
+  if (showScrollProgress.value && import.meta.client) {
     window.removeEventListener('scroll', handleScroll)
   }
 })

@@ -6,7 +6,7 @@ export const useWebVitals = () => {
    * Initialize Core Web Vitals monitoring
    */
   const initWebVitals = () => {
-    if (!process.client) return
+    if (!import.meta.client) return
 
     // Dynamically import web-vitals for optimal performance
     import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB, getINP }) => {
@@ -56,7 +56,7 @@ export const useWebVitals = () => {
       })
 
       // Store vitals for access by other composables
-      if (process.dev) {
+      if (import.meta.dev) {
         (window as any).__NUXT_WEB_VITALS__ = vitals
       }
     }).catch(error => {
@@ -68,7 +68,7 @@ export const useWebVitals = () => {
    * Log vital metrics with performance analysis
    */
   const logVital = (name: string, metric: any) => {
-    if (!process.dev) return
+    if (!import.meta.dev) return
 
     const threshold = getThreshold(name, metric.value)
     const status = getStatus(name, metric.value)
@@ -113,7 +113,7 @@ export const useWebVitals = () => {
    * Get current web vitals values
    */
   const getWebVitals = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     return (window as any).__NUXT_WEB_VITALS__ || null
   }
 
@@ -121,7 +121,7 @@ export const useWebVitals = () => {
    * Generate web vitals summary report
    */
   const generateVitalsReport = () => {
-    if (!process.dev) return
+    if (!import.meta.dev) return
 
     const vitals = getWebVitals()
     if (!vitals) {

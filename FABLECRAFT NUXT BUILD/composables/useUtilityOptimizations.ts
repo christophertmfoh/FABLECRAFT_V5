@@ -83,7 +83,7 @@ export const useUtilityOptimizations = () => {
    * Measure import performance in development
    */
   const measureImportPerformance = () => {
-    if (!process.client || !process.dev) return null
+    if (!import.meta.client || !import.meta.dev) return null
     
     const start = performance.now()
     

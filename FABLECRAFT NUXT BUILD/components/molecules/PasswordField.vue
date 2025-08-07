@@ -1,6 +1,7 @@
 <template>
   <FormField
     v-model="modelValue"
+    :id="id"
     :label="label"
     :type="inputType"
     :placeholder="placeholder"
@@ -11,7 +12,6 @@
     :message-type="messageType"
     :error-message="errorMessage"
     :has-error="hasError"
-    :id="id"
     :spacing="spacing"
     :class="$props.class"
     v-bind="$attrs"
