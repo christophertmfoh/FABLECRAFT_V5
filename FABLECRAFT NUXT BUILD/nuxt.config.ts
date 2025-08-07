@@ -86,20 +86,20 @@ export default defineNuxtConfig({
         // Preconnect to Google Fonts for performance
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
-        // Load Inter with multiple weights
+        // ✅ OPTIMIZED: Inter with only used weights (400,500,600,700,900)
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap',
         },
-        // Load Playfair Display for serif headings
+        // ✅ OPTIMIZED: Playfair Display with used weights (400,500,600,700,900) 
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap',
         },
-        // Load JetBrains Mono for code blocks
+        // ✅ OPTIMIZED: JetBrains Mono with only weight 400 (most used for code)
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap',
         },
       ],
     },
