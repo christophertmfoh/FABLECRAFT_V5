@@ -343,17 +343,23 @@ export default defineNuxtConfig({
         console.warn(`⚠️ Slow route ${url}: ${result.duration}ms`)
       }
     },
-    'nitro:build:public-assets': (assets) => {
-      const cssFiles = assets.filter(a => a.fileName.endsWith('.css'))
-      const jsFiles = assets.filter(a => a.fileName.endsWith('.js'))
-      console.log(`📊 Build assets: ${cssFiles.length} CSS, ${jsFiles.length} JS files`)
-      
-      // Flag potential issues for Phase 3
-      if (cssFiles.length > 10) {
-        console.warn('⚠️ High CSS file count - consider consolidation in Phase 3')
-      }
-      if (jsFiles.length > 20) {
-        console.warn('⚠️ High JS chunk count - review code splitting strategy')
+    'nitro:build:public-assets': (nitro) => {
+      // Check if we have assets array in nitro build context
+      if (nitro && nitro.options && nitro.options.assets) {
+        const assets = nitro.options.assets
+        const cssFiles = assets.filter(a => a.fileName && a.fileName.endsWith('.css'))
+        const jsFiles = assets.filter(a => a.fileName && a.fileName.endsWith('.js'))
+        console.log(`📊 Build assets: ${cssFiles.length} CSS, ${jsFiles.length} JS files`)
+        
+        // Flag potential issues for Phase 3
+        if (cssFiles.length > 10) {
+          console.warn('⚠️ High CSS file count - consider consolidation in Phase 3')
+        }
+        if (jsFiles.length > 20) {
+          console.warn('⚠️ High JS chunk count - review code splitting strategy')
+        }
+      } else {
+        console.log('📊 Build completed - assets analysis not available in this hook')
       }
     }
   },
