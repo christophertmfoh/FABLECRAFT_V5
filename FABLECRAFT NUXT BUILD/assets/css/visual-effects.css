@@ -363,10 +363,11 @@
   border-radius: 50%;
   filter: blur(var(--effect-glow-spread));
   opacity: var(--effect-opacity-subtle);
-  background: hsl(var(--orb-primary) / 0.3);
+  background: hsl(var(--primary) / 0.25);
   animation: glow-pulse var(--effect-duration-slow) ease-in-out infinite alternate;
 }
 
+/* Orbs removed from build; retaining generic glow keyframe for other uses */
 @keyframes glow-pulse {
   from {
     transform: scale(1);

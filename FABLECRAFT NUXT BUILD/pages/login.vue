@@ -9,8 +9,6 @@
       <!-- Paper Texture -->
       <PaperTexture v-if="paperTextureEnabled" />
 
-      <!-- Background Orbs (disabled) -->
-      <!-- <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" /> -->
 
       <!-- Firefly Effect -->
       <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
@@ -125,7 +123,7 @@ const isAuthenticated = computed(() => !!user.value)
 const { currentTheme, isDark, isThemeTransitioning, setThemeWithTransition } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
-const orbsEnabled = useState('orbs-enabled', () => false)
+// Orbs removed
 const firefliesEnabled = useState('fireflies-enabled', () => true)
 const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
