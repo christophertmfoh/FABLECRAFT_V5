@@ -14,14 +14,14 @@
         <!-- Product Links -->
         <NavigationColumn
           title="Product"
-          :links="footerLinks.product"
+          :links="productLinks"
           @link-click="handleNavigate"
         />
 
         <!-- Company Links -->
         <NavigationColumn
           title="Company"
-          :links="footerLinks.company"
+          :links="companyLinks"
           @link-click="handleNavigate"
         />
 
@@ -36,7 +36,7 @@
 
           <NavigationColumn
             title="Support"
-            :links="footerLinks.support"
+            :links="supportLinks"
             variant="compact"
             @link-click="handleNavigate"
           />
@@ -47,8 +47,8 @@
       <FooterBottom
         class="pt-8"
         :default-company="companyInfo.name"
-        :legal-links="footerLinks.legal"
-        :social-links="socialLinks"
+        :legal-links="legalLinks"
+        :social-links="socials"
         :follow-text="footerBranding.followText"
         layout="split"
         @legal-click="handleLegalClick"
@@ -102,6 +102,18 @@ const emit = defineEmits<FooterEmits>()
 // Footer content composable
 const { companyInfo, footerLinks, newsletterContent, socialLinks, footerBranding } =
   useFooterContent()
+
+type ReadonlyArrayOf<T> = ReadonlyArray<T>
+type LinkItem = string
+type LegalLinkItem = string
+type SocialLink = { icon: string; label: string; href?: string }
+
+// Adapt readonly arrays from content to mutable type expectations if needed
+const productLinks: LinkItem[] = [...(footerLinks.product as ReadonlyArrayOf<LinkItem>)]
+const companyLinks: LinkItem[] = [...(footerLinks.company as ReadonlyArrayOf<LinkItem>)]
+const supportLinks: LinkItem[] = [...(footerLinks.support as ReadonlyArrayOf<LinkItem>)]
+const legalLinks: LegalLinkItem[] = [...(footerLinks.legal as ReadonlyArrayOf<LegalLinkItem>)]
+const socials: SocialLink[] = [...(socialLinks as ReadonlyArrayOf<SocialLink>)]
 
 // Computed properties
 const tagline = computed(() => {

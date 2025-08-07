@@ -177,8 +177,8 @@ const handleNewsletterError = (error: string) => {
   logger.log('Newsletter subscription error:', error)
 }
 
-const handleSocialClick = (platform: string) => {
-  logger.log('Social media click:', platform)
+const handleSocialClick = (payload: { platform: string; href?: string }) => {
+  logger.log('Social media click:', payload.platform)
 }
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {
