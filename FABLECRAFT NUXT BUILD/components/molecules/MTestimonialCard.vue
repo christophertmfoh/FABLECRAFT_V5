@@ -41,7 +41,7 @@
           :initials="initials"
           :src="avatarSrc"
           size="base"
-          gradient="true"
+          :gradient="true"
           :gradient-from="gradientFrom"
           :gradient-to="gradientTo"
         />
