@@ -262,15 +262,47 @@ export default defineNuxtConfig({
       minify: !isDev ? 'terser' : false,
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ['vue', 'vue-router']
+          // ✅ Phase 5: Enhanced manual chunks strategy
+          manualChunks: (id) => {
+            // Vendor chunk for core dependencies
+            if (id.includes('node_modules')) {
+              // Separate Vue ecosystem
+              if (id.includes('vue') || id.includes('@vue')) {
+                return 'vue-vendor'
+              }
+              // Separate VueUse utilities
+              if (id.includes('@vueuse')) {
+                return 'vueuse-vendor'
+              }
+              // Separate Nuxt ecosystem
+              if (id.includes('nuxt') || id.includes('@nuxt')) {
+                return 'nuxt-vendor'
+              }
+              // Separate styling utilities
+              if (id.includes('class-variance-authority') || 
+                  id.includes('clsx') || 
+                  id.includes('tailwind-merge')) {
+                return 'styling-vendor'
+              }
+              // Everything else in general vendor
+              return 'vendor'
+            }
           }
         }
       }
     },
-    // ✅ NEW: Development optimizations
+    // ✅ Phase 5: Enhanced dependency pre-bundling
     optimizeDeps: {
-      include: ['vue', 'vue-router', '@vueuse/core']
+      include: [
+        'vue',
+        'vue-router',
+        '@vueuse/core',
+        'class-variance-authority',
+        'clsx',
+        'tailwind-merge'
+      ],
+      // Exclude development-only dependencies
+      exclude: ['@nuxt/devtools']
     },
     // ✅ NEW: Phase 3 - Enhanced CSS processing
     css: {
