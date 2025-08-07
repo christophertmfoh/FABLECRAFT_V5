@@ -196,8 +196,8 @@
 </template>
 
 <script setup lang="ts">
-// ✅ HYDRATION FIX: Use theme composable with hydration safety
-const { currentTheme, setTheme, isHydrated } = useTheme()
+// ✅ FIXED: Use theme composable (simplified)
+const { currentTheme, setTheme } = useTheme()
 
 // Theme configuration matching React version exactly
 const themeConfig = {
@@ -256,13 +256,8 @@ const modernLightThemes = ['sunset-coral', 'lavender-dusk', 'moonlit-garden'] as
 const modernDarkThemes = ['cherry-lacquer', 'dragons-hoard'] as const
 const specialtyThemes = ['halloween', 'netrunner'] as const
 
-// ✅ HYDRATION FIX: Get current theme icon with hydration safety
+// ✅ FIXED: Get current theme icon (SSR-safe)
 const currentThemeIcon = computed(() => {
-  // During SSR or before hydration, always show light icon to prevent mismatch
-  if (!isHydrated.value) {
-    return themeConfig.light.icon
-  }
-  
   const config = themeConfig[currentTheme.value as keyof typeof themeConfig]
   return config?.icon ?? themeConfig.light.icon
 })

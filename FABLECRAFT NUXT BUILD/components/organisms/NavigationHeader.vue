@@ -19,11 +19,10 @@
 
         <!-- Navigation Actions -->
         <div class="flex items-center space-x-4">
-          <!-- ✅ HYDRATION FIX: Authentication Section with ClientOnly -->
-          <ClientOnly v-if="showAuthButton">
-            <template v-if="isAuthenticated && (supabaseUser || user)">
-              <!-- Authenticated User Dropdown -->
-              <DropdownMenu>
+          <!-- ✅ FIXED: Authentication Section (no ClientOnly needed) -->
+          <template v-if="showAuthButton">
+            <!-- Authenticated User Dropdown -->
+            <DropdownMenu v-if="isAuthenticated && user">
                 <DropdownMenuTrigger as-child>
                   <GradientButton
                     variant="default"
@@ -146,39 +145,27 @@
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
-            </template>
 
             <!-- Unauthenticated User Sign In Button -->
-            <template v-else>
-              <GradientButton
-                variant="default"
-                size="default"
-                :show-gradient-overlay="true"
-                gradient-colors="from-primary-foreground/25 to-transparent"
-                class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
-                :aria-label="authButtonText"
-                @click="handleAuthClick"
-              >
-                <template #leading>
-                  <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
-                </template>
-                {{ authButtonText }}
-              </GradientButton>
-            </template>
-            
-            <!-- ✅ HYDRATION FIX: Fallback for SSR -->
-            <template #fallback>
-              <div class="w-32 h-10 bg-muted/20 rounded-xl animate-pulse" aria-hidden="true" />
-            </template>
-          </ClientOnly>
+            <GradientButton
+              v-else
+              variant="default"
+              size="default"
+              :show-gradient-overlay="true"
+              gradient-colors="from-primary-foreground/25 to-transparent"
+              class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+              :aria-label="authButtonText"
+              @click="handleAuthClick"
+            >
+              <template #leading>
+                <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
+              </template>
+              {{ authButtonText }}
+            </GradientButton>
+          </template>
 
-          <!-- ✅ HYDRATION FIX: Advanced Theme Toggle -->
-          <ClientOnly>
-            <ThemeToggle />
-            <template #fallback>
-              <div class="w-10 h-10 bg-muted/20 rounded-lg animate-pulse" aria-hidden="true" />
-            </template>
-          </ClientOnly>
+          <!-- ✅ FIXED: Theme Toggle (no ClientOnly needed) -->
+          <ThemeToggle />
         </div>
       </div>
     </Container>
@@ -188,7 +175,6 @@
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
-import { logger } from '~/utils/logger'
 
 // User interface for authentication
 interface User {
@@ -236,33 +222,16 @@ const emit = defineEmits<{
   'logo:click': []
 }>()
 
-// ✅ HYDRATION FIX: Authentication composables with SSR safety
-const supabaseUser = useSupabaseUser()
-const supabase = useSupabaseClient()
+// ✅ FIXED: Simple prop-based authentication (no duplicate logic)
+const isAuthenticated = computed(() => props.isAuthenticated)
 
-// ✅ HYDRATION FIX: Track client hydration state
-const isClientHydrated = ref(false)
-
-// ✅ HYDRATION FIX: Compute authentication state with hydration safety
-const isAuthenticated = computed(() => {
-  // During SSR, only use prop value to prevent hydration mismatch
-  if (!isClientHydrated.value) {
-    return props.isAuthenticated || false
-  }
-  // After hydration, include Supabase user state
-  return props.isAuthenticated || !!supabaseUser.value
-})
-
-// ✅ HYDRATION FIX: Compute display name with hydration safety
+// ✅ FIXED: Simple prop-based display name
 const displayName = computed(() => {
-  // During SSR, use fallback to prevent hydration mismatch
-  if (!isClientHydrated.value) {
-    return 'User'
-  }
-  // After hydration, use actual user data
+  if (!props.user) return 'User'
+  
   return (
-    supabaseUser.value?.user_metadata?.username ||
-    supabaseUser.value?.email?.split('@')[0] ||
+    props.user.user_metadata?.username ||
+    props.user.email?.split('@')[0] ||
     'User'
   )
 })
@@ -279,14 +248,9 @@ const handleAuthClick = () => {
   navigateTo('/auth')
 }
 
-// Handle logout
-const handleLogout = async () => {
-  try {
-    await supabase.auth.signOut()
-    emit('auth:logout')
-  } catch (error) {
-    logger.error('Error during logout:', error)
-  }
+// Handle logout - delegate to parent
+const handleLogout = () => {
+  emit('auth:logout')
 }
 
 // Handle navigation (updated to work with NavigationMenu molecule)
@@ -305,10 +269,7 @@ const handleNavigate = (item: string | { id: string }, href?: string) => {
   }
 }
 
-// ✅ HYDRATION FIX: Initialize client hydration on mount
-onMounted(() => {
-  isClientHydrated.value = true
-})
+// Note: Removed unnecessary hydration tracking - using props-based auth instead
 
 // Compute header classes (simplified - only using default behavior)
 const headerClasses = computed(() => {
