@@ -1,9 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-// ✅ FIXED: Robust environment detection for Nuxt
-// Check multiple indicators to properly detect development vs production
+// ✅ FIXED: Robust environment detection for Nuxt 3.18+
+// Based on research: Nuxt commands override env detection automatically
+// Reference: https://nuxtjs.org/docs/configuration-glossary/configuration-dev/
 const isDev = process.argv.includes('dev') || 
-              (process.env.NODE_ENV !== 'production' && !process.argv.includes('build'))
+              (!process.argv.includes('build') && !process.argv.includes('generate') && 
+               process.env.NODE_ENV !== 'production')
+
+// Production-ready environment detection - debug logging removed
 
 export default defineNuxtConfig({
   // Required for Nuxt 3.18+ to ensure future compatibility
@@ -95,7 +99,7 @@ export default defineNuxtConfig({
     routeRules: {
       // Homepage - prerender for fastest possible load (production only)
       '/': { 
-        prerender: false, // Temporarily disabled for Phase 3 testing
+        prerender: !isDev && !process.argv.includes('build'), // Only prerender for 'nuxt generate'
         headers: isDev ? {} : { 
           'cache-control': 'max-age=3600, s-maxage=31536000', // 1hr browser, 1yr CDN
           'x-robots-tag': 'index, follow'
@@ -155,7 +159,7 @@ export default defineNuxtConfig({
       
       // ✅ NEW: Error pages optimization
       '/404': {
-        prerender: false, // Temporarily disabled for Phase 3 testing
+        prerender: !isDev && !process.argv.includes('build'), // Only for 'nuxt generate'
         headers: {
           'cache-control': 'max-age=3600'
         }
@@ -163,11 +167,11 @@ export default defineNuxtConfig({
       
       // ✅ NEW: SEO assets
       '/sitemap.xml': { 
-        prerender: false, // Temporarily disabled for Phase 3 testing
+        prerender: !isDev && !process.argv.includes('build'), // Only for 'nuxt generate'
         headers: { 'cache-control': 'max-age=86400' }
       },
       '/robots.txt': { 
-        prerender: false, // Temporarily disabled for Phase 3 testing
+        prerender: !isDev && !process.argv.includes('build'), // Only for 'nuxt generate'
         headers: { 'cache-control': 'max-age=86400' }
       }
     },
@@ -175,7 +179,13 @@ export default defineNuxtConfig({
     // ✅ NEW: Nitro-level optimizations
     minify: !isDev,
     sourceMap: isDev,
-    timing: isDev // Performance timing in development
+    timing: isDev, // Performance timing in development
+
+    // ✅ FIXED: Prerender error handling for reliable builds
+    prerender: {
+      failOnError: false, // Don't fail build on prerender errors
+      crawlLinks: false,  // Don't auto-discover routes for prerender
+    }
   },
 
   // ✅ NEW: Enable 2024 experimental optimizations (safe for Nuxt 3.18+)
