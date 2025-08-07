@@ -85,7 +85,8 @@ interface FooterProps {
 // Events interface
 interface FooterEmits {
   (e: 'navigate', payload: { type: string; item: string; category: string }): void
-  (e: 'newsletter:subscribe' | 'newsletter:success' | 'newsletter:error' | 'social:click', data: string): void
+  (e: 'newsletter:subscribe' | 'newsletter:success' | 'newsletter:error', data: string): void
+  (e: 'social:click', payload: { platform: string; href?: string }): void
   (e: 'legal:click', payload: { text: string; href?: string }): void
 }
 
@@ -153,7 +154,7 @@ const handleNewsletterError = (error: string) => {
 }
 
 const handleSocialClick = (platform: string) => {
-  emit('social:click', platform)
+  emit('social:click', { platform })
 
   // Track social click
   trackEvent('social_click', {

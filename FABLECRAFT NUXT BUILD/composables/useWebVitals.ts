@@ -1,7 +1,7 @@
 // ✅ Phase 6: Core Web Vitals monitoring with web-vitals library
 // Provides real-time monitoring of Core Web Vitals performance metrics
 
-import { onCLS, onFID, onFCP, onLCP, onTTFB, onINP } from 'web-vitals'
+import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals'
 
 export const useWebVitals = () => {
   /**
@@ -23,12 +23,6 @@ export const useWebVitals = () => {
     onCLS(metric => {
       vitals.cls = metric.value
       logVital('CLS', metric)
-    })
-
-    // Track First Input Delay
-    onFID(metric => {
-      vitals.fid = metric.value
-      logVital('FID', metric)
     })
 
     // Track First Contentful Paint
@@ -67,10 +61,10 @@ export const useWebVitals = () => {
   const logVital = (name: string, metric: any) => {
     if (!import.meta.dev) return
 
-    const threshold = getThreshold(name, metric.value)
-    const status = getStatus(name, metric.value)
+    const threshold = getThreshold(name, Number(metric.value))
+    const status = getStatus(name, Number(metric.value))
     
-    console.log(`📊 ${name}: ${metric.value.toFixed(2)}${name === 'CLS' ? '' : 'ms'}`, {
+    console.log(`📊 ${name}: ${Number(metric.value).toFixed(2)}${name === 'CLS' ? '' : 'ms'}`, {
       status,
       threshold,
       rating: metric.rating,
@@ -129,9 +123,9 @@ export const useWebVitals = () => {
     console.group('📊 Core Web Vitals Summary')
     
     Object.entries(vitals).forEach(([name, value]) => {
-      if (value > 0) {
-        const status = getStatus(name.toUpperCase(), value as number)
-        console.log(`${name.toUpperCase()}: ${(value as number).toFixed(2)}${name === 'cls' ? '' : 'ms'} ${status}`)
+      if (Number(value) > 0) {
+        const status = getStatus(name.toUpperCase(), Number(value))
+        console.log(`${name.toUpperCase()}: ${Number(value).toFixed(2)}${name === 'cls' ? '' : 'ms'} ${status}`)
       }
     })
     
