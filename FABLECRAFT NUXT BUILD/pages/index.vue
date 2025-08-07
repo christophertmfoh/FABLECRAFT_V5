@@ -10,7 +10,6 @@
       <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Lazy load each effect component -->
         <LazyPaperTexture v-if="paperTextureEnabled" />
-        <LazyBackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
         <LazyFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
       </div>
       
@@ -184,7 +183,6 @@ const { currentTheme, isDark, isThemeTransitioning } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
 // Default to false for most effects to improve initial load
-const orbsEnabled = useState('orbs-enabled', () => false)
 const firefliesEnabled = useState('fireflies-enabled', () => false) // Changed to false by default
 const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => false) // Changed to false by default
