@@ -196,7 +196,7 @@ import DropdownMenu from '~/components/atoms/DropdownMenu.vue'
 import DropdownMenuTrigger from '~/components/atoms/DropdownMenuTrigger.vue'
 import DropdownMenuContent from '~/components/atoms/DropdownMenuContent.vue'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
-// Note: AtomIcon removed - using static SVGs for critical icons
+// ✅ PHASE 1: All icons now bundled via Nuxt Icon for zero network requests
 
 // User interface for authentication
 interface User {

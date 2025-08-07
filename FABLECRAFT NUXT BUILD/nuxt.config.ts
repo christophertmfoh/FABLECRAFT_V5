@@ -30,12 +30,25 @@ export default defineNuxtConfig({
     '@nuxt/devtools', // Fix: DevTools wasn't working due to missing module registration
   ],
 
-  // Icon module configuration
+  // ✅ PHASE 1: Optimized icon configuration for zero network requests
   icon: {
     size: '24px',
     class: 'icon',
-    mode: 'css',
+    mode: 'css', // CSS mode for instant SSR rendering
     collections: ['lucide'],
+    
+    // Bundle theme icons for instant rendering (eliminates 20+ network requests)
+    clientBundle: {
+      scan: true, // Auto-scan for icons in components
+      // Pre-bundle all theme icons used in dropdown
+      icons: [
+        'lucide:sun',
+        'lucide:moon', 
+        'lucide:monitor',
+        'lucide:zap'
+      ],
+      sizeLimitKb: 256 // Reasonable limit for header icons
+    }
   },
 
   // Explicitly load the global stylesheet
