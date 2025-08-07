@@ -9,8 +9,8 @@
       <!-- Paper Texture -->
       <PaperTexture v-if="paperTextureEnabled" />
 
-      <!-- Background Orbs -->
-      <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
+      <!-- Background Orbs (disabled) -->
+      <!-- <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" /> -->
 
       <!-- Firefly Effect -->
       <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />

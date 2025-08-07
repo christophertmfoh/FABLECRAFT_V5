@@ -2,7 +2,7 @@
   <div
     ref="containerRef"
     class="effects-container firefly-container"
-    :class="{ initialized: isInitialized }"
+    :class="{ initialized: isInitialized, paused: !isVisible }"
     :data-performance="performanceMode"
     aria-hidden="true"
   >
@@ -43,6 +43,7 @@ const props = withDefaults(defineProps<FireflyProps>(), {
 const containerRef = ref<HTMLElement>()
 const isInitialized = ref(false)
 const isVisible = ref(false)
+let rafId: number | null = null
 
 // Predefined positions similar to old build (spread across width)
 const fireflyPositions = [
@@ -115,20 +116,29 @@ const fireflies = computed<Firefly[]>(() => {
 // Intersection observer for performance
 let observer: IntersectionObserver | null = null
 
+const setVisibility = (visible: boolean) => {
+  // Batch DOM style change via rAF to avoid layout thrash
+  if (rafId) cancelAnimationFrame(rafId)
+  rafId = requestAnimationFrame(() => {
+    isVisible.value = visible
+  })
+}
+
 onMounted(() => {
   if (import.meta.client && containerRef.value) {
     // Start visible for immediate effect
-    isVisible.value = true
+    setVisibility(true)
 
     // Create intersection observer for performance optimization
     observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-          isVisible.value = entry.isIntersecting
+          setVisibility(entry.isIntersecting)
         })
       },
       {
-        threshold: 0.1,
+        rootMargin: '0px 0px -20% 0px',
+        threshold: [0, 0.1, 0.5, 1],
       }
     )
 
@@ -146,6 +156,7 @@ onUnmounted(() => {
     observer.unobserve(containerRef.value)
     observer.disconnect()
   }
+  if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
@@ -167,11 +178,20 @@ onUnmounted(() => {
   opacity: 1;
 }
 
+.firefly-container.paused .firefly {
+  animation-play-state: paused !important;
+}
+
 /* Fireflies are only animated on client side */
 @media (prefers-reduced-motion: no-preference) {
   .firefly {
     opacity: 0;
     animation-fill-mode: both;
   }
+}
+
+/* Prefer GPU-friendly animation; keep opacity transitions minimal */
+.firefly {
+  will-change: transform, opacity;
 }
 </style>

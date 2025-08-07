@@ -3,7 +3,7 @@
     v-show="enabled"
     ref="containerRef"
     class="effects-container orb-container"
-    :class="{ initialized: isInitialized }"
+    :class="{ initialized: isInitialized, paused: !isVisible }"
     :data-performance="performanceMode"
     aria-hidden="true"
   >
@@ -220,11 +220,16 @@ onUnmounted(() => {
   opacity: 1;
 }
 
+.orb-container.paused .orb {
+  animation-play-state: paused !important;
+}
+
 /* Orbs with animation-fill-mode to keep final state */
 .orb {
   opacity: 0.2;
   animation-delay: var(--orb-delay, 0s);
   animation-fill-mode: both;
+  will-change: transform, opacity;
 }
 
 /* Only animate on client side with motion preference */
