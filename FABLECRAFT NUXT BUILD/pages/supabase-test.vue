@@ -75,9 +75,10 @@ onMounted(async () => {
     }
 
     connectionStatus.value = 'connected'
-  } catch (err: Error) {
+  } catch (err: unknown) {
+    const e = err as Error
     connectionStatus.value = 'error'
-    error.value = err.message || 'Failed to connect to Supabase'
+    error.value = e?.message || 'Failed to connect to Supabase'
   }
 })
 
@@ -116,10 +117,11 @@ const testDatabaseConnection = async () => {
         count,
       }
     }
-  } catch (err: Error) {
+  } catch (err: unknown) {
+    const e = err as Error
     queryResult.value = {
       status: 'error',
-      message: err.message || 'Query failed',
+      message: e?.message || 'Query failed',
     }
   } finally {
     testing.value = false

@@ -159,6 +159,9 @@ export const useTheme = () => {
 
   // Auto-initialize removed; initialization is handled by the client plugin to avoid duplicate work.
 
+  // Expose a simple transition flag for UI bindings
+  const isThemeTransitioning = computed(() => false)
+
   return {
     themes: readonly(themes),
     themeCategories: readonly(themeCategories),
@@ -167,6 +170,7 @@ export const useTheme = () => {
     systemTheme: readonly(systemTheme),
     currentThemeObject: readonly(currentThemeObject),
     isDark: readonly(isDark),
+    isThemeTransitioning,
     // Note: Removed isHydrated - simplified hydration approach
     setTheme,
     setThemeWithTransition,

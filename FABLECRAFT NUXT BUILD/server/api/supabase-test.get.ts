@@ -1,5 +1,6 @@
-export default defineEventHandler(async event => {
-  const { serverSupabaseClient } = useSupabase()
+import { serverSupabaseClient } from '#supabase/server'
+
+export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient(event)
 
   try {
@@ -26,11 +27,12 @@ export default defineEventHandler(async event => {
       hasDatabase: !dbError || dbError.message.includes('does not exist'),
       databaseMessage: dbError ? dbError.message : 'Database accessible',
     }
-  } catch (err: Error) {
+  } catch (err: unknown) {
+    const e = err as Error
     return {
       status: 'error',
       message: 'Connection test failed',
-      error: err.message,
+      error: e?.message,
     }
   }
 })
