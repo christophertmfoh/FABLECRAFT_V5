@@ -119,6 +119,13 @@ export default defineNuxtConfig({
         }
       },
       
+      // ✅ PHASE 2: Preload header icons on all pages for faster header rendering
+      '/**': {
+        headers: isDev ? {} : {
+          'Link': '</_nuxt/assets/icons/header-icons.css>; rel=preload; as=style'
+        }
+      },
+      
       // Static assets - aggressive caching (production only)
       '/_nuxt/**': { 
         headers: isDev ? {} : { 

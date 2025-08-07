@@ -177,7 +177,16 @@
           </template>
 
           <!-- ✅ FIXED: Theme Toggle (no ClientOnly needed) -->
-          <ThemeToggle />
+                      <!-- ✅ PHASE 2: Component-level lazy loading for ThemeToggle -->
+            <ClientOnly>
+              <ThemeToggle />
+              <template #fallback>
+                <!-- Static fallback icon with same styling -->
+                <Button variant="ghost" size="icon" disabled class="h-8 w-8">
+                  <Icon name="lucide:sun" class="h-4 w-4" mode="css" />
+                </Button>
+              </template>
+            </ClientOnly>
         </div>
       </div>
     </Container>
