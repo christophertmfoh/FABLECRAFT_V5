@@ -41,6 +41,9 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
+      h3-compression:
+        specifier: 0.3.2
+        version: 0.3.2(h3@1.15.4)
       nuxt:
         specifier: 3.18.0
         version: 3.18.0(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@20.14.15)(@vue/compiler-sfc@3.5.18)(db0@0.3.2)(eslint@9.32.0(jiti@2.5.1))(ioredis@5.7.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.46.2)(terser@5.43.1)(typescript@5.4.5)(vite@7.0.6(@types/node@20.14.15)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.0))(vue-tsc@3.0.5(typescript@5.4.5))(yaml@2.8.0)
@@ -3562,6 +3565,11 @@ packages:
   gzip-size@7.0.0:
     resolution: {integrity: sha512-O1Ld7Dr+nqPnmGpdhzLmMTQ4vAsD+rHwMm1NLUmoUFFymBOMKxCCrtDxqdBRYXdeEPEi3SyoR4TizJLQrnKBNA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
+  h3-compression@0.3.2:
+    resolution: {integrity: sha512-B+yCKyDRnO0BXSfjAP4tCXJgJwmnKp3GyH5Yh66mY9KuOCrrGQSPk/gBFG2TgH7OyB/6mvqNZ1X0XNVuy0qRsw==}
+    peerDependencies:
+      h3: ^1.6.0
 
   h3@1.15.4:
     resolution: {integrity: sha512-z5cFQWDffyOe4vQ9xIqNfCZdV4p//vy6fBnr8Q1AWnVZ0teurKMG66rLj++TKwKPUP3u7iMUvrvKaEUiQw2QWQ==}
@@ -10108,6 +10116,10 @@ snapshots:
   gzip-size@7.0.0:
     dependencies:
       duplexer: 0.1.2
+
+  h3-compression@0.3.2(h3@1.15.4):
+    dependencies:
+      h3: 1.15.4
 
   h3@1.15.4:
     dependencies:
