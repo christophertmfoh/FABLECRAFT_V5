@@ -111,5 +111,22 @@ export default {
       },
     },
   },
+
+  // ✅ NEW: Phase 3 - Disable unused core plugins for smaller CSS
+  corePlugins: {
+    preflight: true, // Keep for reset styles
+    container: false, // Using custom containers via design tokens
+    accessibility: true, // Keep for a11y
+    // Disable unused layout utilities
+    float: false,
+    clear: false,
+    objectPosition: false,
+    objectFit: false,
+    overscrollBehavior: false,
+    // Disable unused typography utilities if not used
+    fontVariantNumeric: false,
+    // Keep all others that might be used in atomic design components
+  },
+
   plugins: [],
 } satisfies Config

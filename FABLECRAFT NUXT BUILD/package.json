@@ -40,7 +40,10 @@
     "build:prod": "NODE_ENV=production nuxt build && nuxt preview",
     "performance": "nuxt build && npx nuxi analyze",
     "lighthouse": "npm run build:prod & sleep 10 && npx lighthouse http://localhost:3000 --only-categories=performance --output=json --output-path=lighthouse-report.json",
-    "test:cache-headers": "curl -I http://localhost:3000/ && curl -I http://localhost:3000/_nuxt/"
+    "test:cache-headers": "curl -I http://localhost:3000/ && curl -I http://localhost:3000/_nuxt/",
+    "analyze:css": "nuxt build --analyze && echo 'CSS Analysis Complete'",
+    "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
+    "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.60",
@@ -70,6 +73,7 @@
     "@types/node": "20.14.15",
     "@typescript-eslint/parser": "8.39.0",
     "@vue/test-utils": "2.4.6",
+    "cssnano": "7.1.0",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-vue": "10.4.0",

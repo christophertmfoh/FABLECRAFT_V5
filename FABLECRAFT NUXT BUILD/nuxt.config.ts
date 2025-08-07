@@ -37,6 +37,29 @@ export default defineNuxtConfig({
   // Explicitly load the global stylesheet
   css: ['~/assets/css/main.css'],
 
+  // ✅ NEW: Phase 3 - Modern PostCSS optimization
+  postcss: {
+    plugins: {
+      'tailwindcss/nesting': {},
+      tailwindcss: {},
+      autoprefixer: {},
+      ...(isDev ? {} : {
+        cssnano: {
+          preset: ['default', {
+            // Preserve important CSS for design system
+            reduceIdents: false,
+            zindex: false,
+            // Optimize safely
+            normalizeWhitespace: true,
+            colormin: true,
+            minifyFontValues: true,
+            minifySelectors: true,
+          }],
+        },
+      }),
+    },
+  },
+
   // Component auto-import configuration (disable path prefixing for atomic design)
   components: [
     {
@@ -220,6 +243,10 @@ export default defineNuxtConfig({
     // ✅ NEW: Development optimizations
     optimizeDeps: {
       include: ['vue', 'vue-router', '@vueuse/core']
+    },
+    // ✅ NEW: Phase 3 - Enhanced CSS processing
+    css: {
+      devSourcemap: isDev,
     }
   },
 
