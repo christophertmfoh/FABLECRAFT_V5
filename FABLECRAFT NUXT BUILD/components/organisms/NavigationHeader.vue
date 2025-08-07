@@ -33,15 +33,23 @@
                     :aria-label="`User menu for ${displayName}`"
                   >
                     <template #leading>
-                      <AtomIcon name="lucide:user-circle" class="h-4 w-4" aria-hidden="true" />
+                      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                      </svg>
                     </template>
                     Welcome {{ displayName }}
                     <template #trailing>
-                      <AtomIcon
-                        name="lucide:chevron-down"
+                      <svg 
                         class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300"
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2"
                         aria-hidden="true"
-                      />
+                      >
+                        <path d="m6 9 6 6 6-6"/>
+                      </svg>
                     </template>
                   </GradientButton>
                 </DropdownMenuTrigger>
@@ -62,11 +70,10 @@
                     @select="() => handleNavigate('projects')"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon
-                        name="lucide:book-open"
-                        class="h-4 w-4 text-primary"
-                        aria-hidden="true"
-                      />
+                      <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                      </svg>
                       <div>
                         <div class="font-medium">Creative Workspace</div>
                         <div class="text-xs text-muted-foreground">
@@ -89,11 +96,10 @@
                     @select="() => handleNavigate('profile')"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon
-                        name="lucide:user"
-                        class="h-4 w-4 text-primary"
-                        aria-hidden="true"
-                      />
+                      <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                      </svg>
                       <div>
                         <div class="font-medium">Profile & Settings</div>
                         <div class="text-xs text-muted-foreground">Manage your account</div>
@@ -114,11 +120,12 @@
                     @select="() => handleNavigate('community')"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon
-                        name="lucide:users"
-                        class="h-4 w-4 text-primary"
-                        aria-hidden="true"
-                      />
+                      <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="m22 21-3-3 3-3"/>
+                        <path d="M16 11h6"/>
+                      </svg>
                       <div>
                         <div class="font-medium">Writer Community</div>
                         <div class="text-xs text-muted-foreground">Connect with other writers</div>
@@ -134,11 +141,11 @@
                     @select="handleLogout"
                   >
                     <div class="flex items-center gap-3">
-                      <AtomIcon
-                        name="lucide:log-out"
-                        class="h-4 w-4 text-destructive"
-                        aria-hidden="true"
-                      />
+                      <svg class="h-4 w-4 text-destructive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16,17 21,12 16,7"/>
+                        <line x1="21" x2="9" y1="12" y2="12"/>
+                      </svg>
                       <span class="font-medium text-destructive"> Sign Out </span>
                     </div>
                   </DropdownMenuItem>
@@ -158,7 +165,12 @@
               @click="handleAuthClick"
             >
               <template #leading>
-                <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="m22 21-3-3 3-3"/>
+                  <path d="M16 11h6"/>
+                </svg>
               </template>
               {{ authButtonText }}
             </GradientButton>
@@ -174,7 +186,17 @@
 
 <script setup lang="ts">
 import { cn } from '~/components/atoms/Utils'
+// ✅ PERFORMANCE: Explicit imports for better bundling and faster loading
+import NavigationLogo from '~/components/atoms/NavigationLogo.vue'
+import NavigationMenu from '~/components/molecules/NavigationMenu.vue'
+import Container from '~/components/atoms/Container.vue'
+import GradientButton from '~/components/atoms/GradientButton.vue'
+import ThemeToggle from '~/components/atoms/ThemeToggle.vue'
+import DropdownMenu from '~/components/atoms/DropdownMenu.vue'
+import DropdownMenuTrigger from '~/components/atoms/DropdownMenuTrigger.vue'
+import DropdownMenuContent from '~/components/atoms/DropdownMenuContent.vue'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
+// Note: AtomIcon removed - using static SVGs for critical icons
 
 // User interface for authentication
 interface User {
