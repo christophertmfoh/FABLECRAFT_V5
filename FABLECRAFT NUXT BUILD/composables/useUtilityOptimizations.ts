@@ -5,9 +5,7 @@
 // import { ref, computed, watch } from '@vueuse/core'
 
 // ✅ Better: Specific imports for optimal tree shaking
-import { ref } from '@vueuse/core'
-import { computed } from '@vueuse/core' 
-import { watch } from '@vueuse/core'
+import { ref, computed, watch } from '@vueuse/core'
 
 // ✅ Utility libraries already optimized
 import { cva } from 'class-variance-authority' // Already optimal
