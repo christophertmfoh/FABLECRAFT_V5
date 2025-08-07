@@ -34,7 +34,13 @@
     "db:diff": "supabase db diff",
     "db:types": "supabase gen types typescript --local > types/supabase.ts",
     "db:status": "supabase status",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze": "nuxt build --analyze",
+    "analyze:prod": "NODE_ENV=production nuxt build --analyze",
+    "build:prod": "NODE_ENV=production nuxt build && nuxt preview",
+    "performance": "nuxt build && npx nuxi analyze",
+    "lighthouse": "npm run build:prod & sleep 10 && npx lighthouse http://localhost:3000 --only-categories=performance --output=json --output-path=lighthouse-report.json",
+    "test:cache-headers": "curl -I http://localhost:3000/ && curl -I http://localhost:3000/_nuxt/"
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.60",
@@ -70,10 +76,12 @@
     "glob": "11.0.3",
     "happy-dom": "^15.11.7",
     "husky": "9.1.7",
+    "lighthouse": "12.8.1",
     "prettier": "3.6.2",
     "supabase": "2.33.9",
     "typescript": "5.4.5",
     "vitest": "3.2.4",
-    "vue-tsc": "3.0.5"
+    "vue-tsc": "3.0.5",
+    "webpack-bundle-analyzer": "4.10.2"
   }
 }
