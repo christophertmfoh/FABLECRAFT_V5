@@ -34,7 +34,16 @@
     "db:diff": "supabase db diff",
     "db:types": "supabase gen types typescript --local > types/supabase.ts",
     "db:status": "supabase status",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze": "nuxt build --analyze",
+    "analyze:prod": "NODE_ENV=production nuxt build --analyze",
+    "build:prod": "NODE_ENV=production nuxt build && nuxt preview",
+    "performance": "nuxt build && npx nuxi analyze",
+    "lighthouse": "npm run build:prod & sleep 10 && npx lighthouse http://localhost:3000 --only-categories=performance --output=json --output-path=lighthouse-report.json",
+    "test:cache-headers": "curl -I http://localhost:3000/ && curl -I http://localhost:3000/_nuxt/",
+    "analyze:css": "nuxt build --analyze && echo 'CSS Analysis Complete'",
+    "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
+    "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.60",
@@ -42,16 +51,16 @@
     "@nuxt/icon": "1.15.0",
     "@nuxtjs/supabase": "1.6.0",
     "@pinia/nuxt": "0.11.2",
-    "@tiptap/starter-kit": "3.0.9",
-    "@tiptap/vue-3": "3.0.9",
     "@vueuse/core": "13.6.0",
     "@vueuse/nuxt": "13.6.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "h3-compression": "0.3.2",
     "nuxt": "3.18.0",
     "tailwind-merge": "3.3.1",
     "vue": "3.5.18",
-    "vue-router": "4.5.1"
+    "vue-router": "4.5.1",
+    "web-vitals": "5.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "19.8.1",
@@ -63,16 +72,19 @@
     "@types/node": "20.14.15",
     "@typescript-eslint/parser": "8.39.0",
     "@vue/test-utils": "2.4.6",
+    "cssnano": "7.1.0",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-vue": "10.4.0",
     "glob": "11.0.3",
     "happy-dom": "^15.11.7",
     "husky": "9.1.7",
+    "lighthouse": "12.8.1",
     "prettier": "3.6.2",
     "supabase": "2.33.9",
     "typescript": "5.4.5",
     "vitest": "3.2.4",
-    "vue-tsc": "3.0.5"
+    "vue-tsc": "3.0.5",
+    "webpack-bundle-analyzer": "4.10.2"
   }
 }

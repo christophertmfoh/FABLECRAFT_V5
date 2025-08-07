@@ -1,8 +1,19 @@
 <template>
   <button type="button" :class="logoClasses" :aria-label="ariaLabel" @click="handleClick">
-    <!-- Feather Icon Container (matching React original) -->
+    <!-- Feather Icon Container (static SVG for instant loading) -->
     <div class="icon-container">
-      <AtomIcon name="lucide:feather" class="w-7 h-7 text-primary-foreground" aria-hidden="true" />
+      <svg 
+        class="w-7 h-7 text-primary-foreground" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/>
+        <path d="M16 8 2 22"/>
+        <path d="M17.5 15H9"/>
+      </svg>
     </div>
 
     <!-- Brand Text (matching React original) -->
@@ -58,11 +69,16 @@ const logoClasses = computed(() => {
 </script>
 
 <style scoped>
-/* Icon container (matching footer solid style) */
+/* Icon container (matching footer solid style) - PERFORMANCE OPTIMIZED */
 .icon-container {
   @apply w-14 h-14 rounded-xl flex items-center justify-center shadow-md;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
   transition: all 0.3s ease;
+  /* CRITICAL: Reserve exact space to prevent layout shifts */
+  min-width: 3.5rem;
+  min-height: 3.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 .icon-container:hover {

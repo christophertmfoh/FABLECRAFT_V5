@@ -13,13 +13,27 @@
           aria-hidden="true"
         />
 
-        <!-- Icon with relative positioning -->
+        <!-- Icon with relative positioning - Static for performance -->
         <div class="relative z-10">
-          <AtomIcon
-            :name="currentThemeIcon"
+          <svg 
             class="h-5 w-5 text-foreground transition-all duration-300"
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2"
             aria-hidden="true"
-          />
+          >
+            <!-- Universal theme icon (sun/moon combined) -->
+            <circle cx="12" cy="12" r="4"/>
+            <path d="m12 1v2"/>
+            <path d="m12 21v2"/>
+            <path d="m4.22 4.22l1.42 1.42"/>
+            <path d="m18.36 18.36l1.42 1.42"/>
+            <path d="m1 12h2"/>
+            <path d="m21 12h2"/>
+            <path d="m4.22 19.78l1.42-1.42"/>
+            <path d="m18.36 5.64l1.42-1.42"/>
+          </svg>
         </div>
         <span class="sr-only">Toggle theme</span>
       </Button>
@@ -40,7 +54,11 @@
           @click="event => handleThemeChange('system', event)"
         >
           <div class="flex items-center gap-3 w-full min-w-0">
-            <AtomIcon name="lucide:monitor" class="h-4 w-4 flex-shrink-0" />
+            <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="14" x="2" y="3" rx="2"/>
+              <line x1="8" x2="16" y1="21" y2="21"/>
+              <line x1="12" x2="12" y1="17" y2="21"/>
+            </svg>
             <div class="flex-1 min-w-0">
               <div class="font-medium truncate">System</div>
               <div class="text-xs text-muted-foreground truncate">Follow system preference</div>
@@ -196,7 +214,10 @@
 </template>
 
 <script setup lang="ts">
-// Use theme composable
+// ✅ PERFORMANCE: Explicit import for AtomIcon (used in dropdown)
+import AtomIcon from '~/components/atoms/AtomIcon.vue'
+
+// ✅ FIXED: Use theme composable (simplified)
 const { currentTheme, setTheme } = useTheme()
 
 // Theme configuration matching React version exactly
@@ -256,11 +277,7 @@ const modernLightThemes = ['sunset-coral', 'lavender-dusk', 'moonlit-garden'] as
 const modernDarkThemes = ['cherry-lacquer', 'dragons-hoard'] as const
 const specialtyThemes = ['halloween', 'netrunner'] as const
 
-// Get current theme icon with proper fallback
-const currentThemeIcon = computed(() => {
-  const config = themeConfig[currentTheme.value as keyof typeof themeConfig]
-  return config?.icon ?? themeConfig.light.icon
-})
+// Note: Removed dynamic theme icon - using static universal icon for performance
 
 // Handle theme change with proper focus management (Claude's approach)
 const handleThemeChange = (theme: string, event?: Event) => {
