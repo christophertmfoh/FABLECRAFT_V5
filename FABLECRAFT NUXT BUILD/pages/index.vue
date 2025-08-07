@@ -10,7 +10,6 @@
       <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Lazy load each effect component -->
         <LazyPaperTexture v-if="paperTextureEnabled" />
-        <LazyFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
       </div>
       
       <!-- Fallback while effects load (invisible placeholder) -->
@@ -183,8 +182,8 @@ const { currentTheme, isDark, isThemeTransitioning } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
 // Default to false for most effects to improve initial load
-const firefliesEnabled = useState('fireflies-enabled', () => false) // Changed to false by default
-const fireflyCount = useState('firefly-count', () => 15)
+// Fireflies removed
+// Fireflies removed
 const paperTextureEnabled = useState('paper-texture-enabled', () => false) // Changed to false by default
 
 // Scroll progress (client-only feature)
@@ -340,7 +339,7 @@ onMounted(() => {
     paperTextureEnabled.value = true
     
     setTimeout(() => {
-      firefliesEnabled.value = true
+      // Fireflies removed
     }, 500)
     
     setTimeout(() => {
@@ -360,8 +359,8 @@ onMounted(() => {
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {
-    orbsEnabled.value = false
-    firefliesEnabled.value = false
+    // Orbs removed
+    // Fireflies removed
     paperTextureEnabled.value = false
   }
 })

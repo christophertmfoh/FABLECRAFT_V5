@@ -10,8 +10,6 @@
       <PaperTexture v-if="paperTextureEnabled" />
 
 
-      <!-- Firefly Effect -->
-      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
     </div>
 
     <!-- Main Content Layer -->
@@ -124,8 +122,6 @@ const { currentTheme, isDark, isThemeTransitioning, setThemeWithTransition } = u
 
 // Visual effects state (using useState for SSR compatibility)
 // Orbs removed
-const firefliesEnabled = useState('fireflies-enabled', () => true)
-const fireflyCount = useState('firefly-count', () => 15)
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
 
 // Auth form state
