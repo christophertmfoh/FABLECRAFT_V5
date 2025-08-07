@@ -52,7 +52,7 @@ interface ProcessStep {
 }
 
 interface OProcessSectionProps {
-  variant?: 'default' | 'compact' | 'detailed'
+  variant?: 'default' | 'compact'
   customProcessSteps?: ProcessStep[]
   headerBadgeText?: string
   headerTitle?: string
@@ -85,7 +85,7 @@ const emit = defineEmits<OProcessSectionEmits>()
 
 // Variant checks
 const isCompact = computed(() => props.variant === 'compact')
-const isDetailed = computed(() => props.variant === 'detailed')
+const isDetailed = computed(() => false)
 
 // Section classes
 const sectionClasses = computed(() => [

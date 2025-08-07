@@ -143,14 +143,13 @@ const handleSubmit = async (event: Event) => {
 
   const result = await submitNewsletter()
 
-  if (result.success) {
+  if (result && result.success) {
     emit('subscribe', email.value)
     emit('success', email.value)
 
-    // Focus back to input for next use
     await nextTick()
     emailInput.value?.focus()
-  } else {
+  } else if (result && !result.success) {
     emit('error', result.error || 'Subscription failed')
   }
 }

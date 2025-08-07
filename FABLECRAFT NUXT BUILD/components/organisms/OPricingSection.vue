@@ -78,8 +78,8 @@
         :popular-text="plan.popularText"
         :variant="plan.variant"
         :features-title="plan.featuresTitle"
-        @click="handlePlanClick"
-        @cta-click="handleCtaClick"
+        @click="() => handlePlanClick(plan)"
+        @cta-click="() => handleCtaClick(plan)"
       />
     </div>
   </section>
