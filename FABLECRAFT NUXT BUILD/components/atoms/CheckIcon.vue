@@ -10,7 +10,7 @@ import { computed } from 'vue'
 // Component props
 interface CheckIconProps {
   variant?: 'check' | 'x' | 'minus'
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   color?: 'success' | 'error' | 'warning' | 'primary' | 'muted'
   class?: string | Record<string, boolean> | string[]
   ariaHidden?: boolean
@@ -20,7 +20,7 @@ interface CheckIconProps {
 // Define props with defaults
 const props = withDefaults(defineProps<CheckIconProps>(), {
   variant: 'check',
-  size: 'base',
+  size: 'md',
   color: 'success',
   class: '',
   ariaHidden: true,
@@ -38,7 +38,7 @@ const iconNameMap = {
 const sizeClasses = {
   xs: 'w-3 h-3',
   sm: 'w-4 h-4',
-  base: 'w-5 h-5',
+  md: 'w-5 h-5',
   lg: 'w-6 h-6',
   xl: 'w-7 h-7',
 }

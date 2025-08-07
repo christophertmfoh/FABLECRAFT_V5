@@ -17,7 +17,7 @@
       <div class="flex-1 flex flex-col">
         <!-- Star Rating -->
         <div class="flex justify-center mb-6">
-          <StarRating :rating="rating" :max-rating="5" size="base" color="primary" />
+          <StarRating :rating="rating" :max-rating="5" size="md" color="primary" />
         </div>
 
         <!-- Quote Content -->
@@ -51,7 +51,7 @@
           <Heading
             :id="`testimonial-author-${testimonialId}`"
             tag="h4"
-            size="sm"
+            size="h5"
             class="font-semibold text-foreground leading-tight text-center"
           >
             {{ name }}

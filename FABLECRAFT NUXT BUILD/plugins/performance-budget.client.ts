@@ -45,7 +45,7 @@ export default defineNuxtPlugin(() => {
       
       if (navigation) {
         // DOM ready check
-        const domReady = navigation.domContentLoadedEventEnd - navigation.navigationStart
+        const domReady = navigation.domContentLoadedEventEnd - navigation.startTime
         if (domReady > performanceBudget.domReady) {
           results.errors.push(`DOM ready time: ${Math.round(domReady)}ms exceeds budget of ${performanceBudget.domReady}ms`)
           results.failed++
@@ -54,7 +54,7 @@ export default defineNuxtPlugin(() => {
         }
 
         // Load complete check
-        const loadComplete = navigation.loadEventEnd - navigation.navigationStart
+        const loadComplete = navigation.loadEventEnd - navigation.startTime
         if (loadComplete > performanceBudget.loadComplete) {
           results.errors.push(`Load complete time: ${Math.round(loadComplete)}ms exceeds budget of ${performanceBudget.loadComplete}ms`)
           results.failed++

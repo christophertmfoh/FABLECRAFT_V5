@@ -51,8 +51,8 @@ const FEATURE_SIZE_CONFIG = {
     text: 'sm' as const,
     spacing: 'gap-2.5',
   },
-  base: {
-    icon: 'base' as const,
+  md: {
+    icon: 'md' as const,
     text: 'base' as const,
     spacing: 'gap-3',
   },

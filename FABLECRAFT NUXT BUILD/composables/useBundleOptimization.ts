@@ -19,6 +19,7 @@ export const useBundleOptimization = () => {
     const chunks = nuxtScripts.map(script => {
       const src = script.getAttribute('src') || ''
       const filename = src.split('/').pop() || 'unknown'
+      const el = script as HTMLScriptElement
       
       return {
         src,
@@ -26,7 +27,7 @@ export const useBundleOptimization = () => {
         type: filename.includes('vendor') ? 'vendor' : 
               filename.includes('entry') ? 'entry' : 
               filename.includes('.css') ? 'style' : 'chunk',
-        loaded: script.readyState === 'loaded' || script.readyState === 'complete'
+        loaded: (el as any).readyState ? ((el as any).readyState === 'loaded' || (el as any).readyState === 'complete') : true
       }
     })
     

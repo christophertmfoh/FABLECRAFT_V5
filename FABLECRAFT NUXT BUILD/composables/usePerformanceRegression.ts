@@ -144,9 +144,9 @@ export const usePerformanceRegression = () => {
         response: navigation.responseEnd - navigation.responseStart,
         dom: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
         load: navigation.loadEventEnd - navigation.loadEventStart,
-        total: navigation.loadEventEnd - navigation.navigationStart,
-        domReady: navigation.domContentLoadedEventEnd - navigation.navigationStart,
-        loadComplete: navigation.loadEventEnd - navigation.navigationStart,
+        total: navigation.loadEventEnd - navigation.startTime,
+        domReady: navigation.domContentLoadedEventEnd - navigation.startTime,
+        loadComplete: navigation.loadEventEnd - navigation.startTime,
       }
 
       // Add web vitals if available
@@ -178,9 +178,9 @@ export const usePerformanceRegression = () => {
         response: navigation.responseEnd - navigation.responseStart,
         dom: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
         load: navigation.loadEventEnd - navigation.loadEventStart,
-        total: navigation.loadEventEnd - navigation.navigationStart,
-        domReady: navigation.domContentLoadedEventEnd - navigation.navigationStart,
-        loadComplete: navigation.loadEventEnd - navigation.navigationStart,
+        total: navigation.loadEventEnd - navigation.startTime,
+        domReady: navigation.domContentLoadedEventEnd - navigation.startTime,
+        loadComplete: navigation.loadEventEnd - navigation.startTime,
       }
 
       // Add web vitals if available

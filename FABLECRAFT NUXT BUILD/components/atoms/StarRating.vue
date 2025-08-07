@@ -22,7 +22,7 @@ import { computed } from 'vue'
 interface StarRatingProps {
   rating: number
   maxRating?: number
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   color?: 'primary' | 'secondary' | 'warning' | 'success'
   class?: string | Record<string, boolean> | string[]
 }
@@ -30,7 +30,7 @@ interface StarRatingProps {
 // Define props with defaults
 const props = withDefaults(defineProps<StarRatingProps>(), {
   maxRating: 5,
-  size: 'base',
+  size: 'md',
   color: 'warning',
 })
 

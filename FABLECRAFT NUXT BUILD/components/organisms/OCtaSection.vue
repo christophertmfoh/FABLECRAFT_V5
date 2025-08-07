@@ -4,14 +4,14 @@
     <MFeatureHeader
       :badge-text="headerBadgeText"
       :badge-variant="'default'"
-      :badge-size="isCompact ? 'sm' : 'base'"
+      :badge-size="isCompact ? 'sm' : 'default'"
       :badge-dot-color="'primary'"
       :badge-clickable="false"
       :title="headerTitle"
       :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
       :heading-tag="'h2'"
-      :heading-size="isCompact ? 'sm' : 'lg'"
+      :heading-size="isCompact ? 'h3' : 'h2'"
       :heading-variant="'default'"
       :gradient-variant="gradientVariant"
       :gradient-direction="'to-r'"
@@ -63,8 +63,8 @@
           :secondary-icon="secondaryCtaIcon"
           :primary-variant="primaryCtaVariant"
           :secondary-variant="secondaryCtaVariant"
-          :button-size="ctaButtonSize"
-          :layout="ctaLayout"
+          :button-size="ctaButtonSize === 'base' ? 'default' : ctaButtonSize"
+          :layout="ctaLayout === 'horizontal' ? 'horizontal' : ctaLayout === 'vertical' ? 'vertical' : 'responsive'"
           :alignment="'center'"
           :spacing="ctaSpacing"
           :group-label="'Call to action buttons'"
@@ -165,8 +165,8 @@ const isMinimal = computed(() => props.variant === 'minimal')
 // Dynamic sizing based on variant
 const headingTag = computed(() => (isCompact.value ? 'h3' : 'h2'))
 const mainHeadingSize = computed(() => {
-  if (isCompact.value) return '2xl'
-  return '4xl'
+  if (isCompact.value) return 'h3'
+  return 'h2'
 })
 const supportingCopySize = computed(() => {
   if (isCompact.value) return 'base'

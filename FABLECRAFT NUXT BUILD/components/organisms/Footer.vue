@@ -174,8 +174,8 @@ const handleLegalClick = (payload: { text: string; href?: string }) => {
 
 // Simple analytics utility
 const trackEvent = (eventName: string, parameters: Record<string, any>) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, parameters)
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    ;(window as any).gtag('event', eventName, parameters)
   }
 }
 </script>

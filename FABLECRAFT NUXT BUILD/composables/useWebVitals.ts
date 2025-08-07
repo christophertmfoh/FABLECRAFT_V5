@@ -1,6 +1,8 @@
 // ✅ Phase 6: Core Web Vitals monitoring with web-vitals library
 // Provides real-time monitoring of Core Web Vitals performance metrics
 
+import { onCLS, onFID, onFCP, onLCP, onTTFB, onINP } from 'web-vitals'
+
 export const useWebVitals = () => {
   /**
    * Initialize Core Web Vitals monitoring
@@ -8,60 +10,55 @@ export const useWebVitals = () => {
   const initWebVitals = () => {
     if (!import.meta.client) return
 
-    // Dynamically import web-vitals for optimal performance
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB, getINP }) => {
-      const vitals = {
-        cls: 0,
-        fid: 0,
-        fcp: 0,
-        lcp: 0,
-        ttfb: 0,
-        inp: 0,
-      }
+    const vitals = {
+      cls: 0,
+      fid: 0,
+      fcp: 0,
+      lcp: 0,
+      ttfb: 0,
+      inp: 0,
+    }
 
-      // Track Cumulative Layout Shift
-      getCLS(metric => {
-        vitals.cls = metric.value
-        logVital('CLS', metric)
-      })
-
-      // Track First Input Delay
-      getFID(metric => {
-        vitals.fid = metric.value
-        logVital('FID', metric)
-      })
-
-      // Track First Contentful Paint
-      getFCP(metric => {
-        vitals.fcp = metric.value
-        logVital('FCP', metric)
-      })
-
-      // Track Largest Contentful Paint
-      getLCP(metric => {
-        vitals.lcp = metric.value
-        logVital('LCP', metric)
-      })
-
-      // Track Time to First Byte
-      getTTFB(metric => {
-        vitals.ttfb = metric.value
-        logVital('TTFB', metric)
-      })
-
-      // Track Interaction to Next Paint (modern FID replacement)
-      getINP(metric => {
-        vitals.inp = metric.value
-        logVital('INP', metric)
-      })
-
-      // Store vitals for access by other composables
-      if (import.meta.dev) {
-        (window as any).__NUXT_WEB_VITALS__ = vitals
-      }
-    }).catch(error => {
-      console.warn('Failed to load web-vitals:', error)
+    // Track Cumulative Layout Shift
+    onCLS(metric => {
+      vitals.cls = metric.value
+      logVital('CLS', metric)
     })
+
+    // Track First Input Delay
+    onFID(metric => {
+      vitals.fid = metric.value
+      logVital('FID', metric)
+    })
+
+    // Track First Contentful Paint
+    onFCP(metric => {
+      vitals.fcp = metric.value
+      logVital('FCP', metric)
+    })
+
+    // Track Largest Contentful Paint
+    onLCP(metric => {
+      vitals.lcp = metric.value
+      logVital('LCP', metric)
+    })
+
+    // Track Time to First Byte
+    onTTFB(metric => {
+      vitals.ttfb = metric.value
+      logVital('TTFB', metric)
+    })
+
+    // Track Interaction to Next Paint (modern FID replacement)
+    onINP(metric => {
+      vitals.inp = metric.value
+      logVital('INP', metric)
+    })
+
+    // Store vitals for access by other composables
+    if (import.meta.dev) {
+      (window as any).__NUXT_WEB_VITALS__ = vitals
+    }
   }
 
   /**

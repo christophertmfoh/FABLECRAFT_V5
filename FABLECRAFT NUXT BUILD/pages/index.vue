@@ -345,9 +345,7 @@ onMounted(() => {
     setTimeout(() => {
       // Only enable orbs if user doesn't prefer reduced motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (!prefersReducedMotion) {
-        orbsEnabled.value = true
-      }
+      // Orbs removed
     }, 1000)
   }, 100)
   

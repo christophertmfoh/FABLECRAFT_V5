@@ -9,7 +9,7 @@
       :value="value"
       :disabled="disabled"
       :required="required"
-      :aria-checked="internalValue"
+      :aria-checked="internalAriaChecked"
       :aria-disabled="disabled"
       :aria-required="required"
       :aria-describedby="description ? `${componentId}-description` : undefined"
@@ -80,6 +80,12 @@ const internalValue = computed({
   set(newValue) {
     emit('update:modelValue', newValue)
   },
+})
+
+// Coerced ARIA value
+const internalAriaChecked = computed<boolean | 'mixed'>(() => {
+  // If you later add tri-state, handle 'mixed' here
+  return Boolean(internalValue.value)
 })
 
 // Watch for changes to emit change event

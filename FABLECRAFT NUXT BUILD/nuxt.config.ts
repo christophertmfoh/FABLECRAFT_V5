@@ -153,7 +153,6 @@ export default defineNuxtConfig({
       },
       
       // Dev/test pages - no cache + development optimizations
-
       '/supabase-test': { 
         headers: { 
           'cache-control': 'no-cache, no-store, must-revalidate'
@@ -208,7 +207,7 @@ export default defineNuxtConfig({
     // ✅ Phase 4: Enhanced link prefetching configuration
     defaults: {
       nuxtLink: {
-        prefetchOn: 'interaction', // More conservative than 'viewport' - saves bandwidth
+        prefetchOn: { interaction: true }, // More conservative than 'viewport' - saves bandwidth
       },
     }
   },
@@ -218,116 +217,7 @@ export default defineNuxtConfig({
 
   // Add head defaults
   app: {
-    head: {
-      title: 'Fablecraft',
-      meta: [
-        {
-          name: 'description',
-          content: 'Modern development foundation for scalable web applications',
-        },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        
-        // ✅ Phase 4: Network optimization meta tags
-        { 'http-equiv': 'x-dns-prefetch-control', content: 'on' },
-        { name: 'format-detection', content: 'telephone=no' },
-        { name: 'msapplication-tap-highlight', content: 'no' },
-        { name: 'referrer', content: 'no-referrer-when-downgrade' },
-      ],
-      link: [
-        // ✅ Phase 4: Smart DNS prefetch strategy (faster than preconnect for distant resources)
-        { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
-        { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
-        
-        // ✅ Phase 4: Conditional Supabase DNS prefetch
-        ...(process.env.SUPABASE_URL ? [
-          { rel: 'dns-prefetch', href: new URL(process.env.SUPABASE_URL).origin }
-        ] : []),
-        // ✅ OPTIMIZED: Inter with only used weights (400,500,600,700,900)
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap',
-        },
-        // ✅ OPTIMIZED: Playfair Display with used weights (400,500,600,700,900) 
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap',
-        },
-        // ✅ OPTIMIZED: JetBrains Mono with only weight 400 (most used for code)
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap',
-        },
-      ],
-    },
-  },
-
-  // ✅ ENHANCED: Better build optimizations
-  vite: {
-    build: {
-      target: 'esnext', // ✅ Keep existing
-      cssCodeSplit: true, // ✅ NEW: Better CSS chunk splitting
-      sourcemap: isDev,
-      minify: !isDev ? 'terser' : false,
-      rollupOptions: {
-        output: {
-          // ✅ Phase 5: Enhanced manual chunks strategy
-          manualChunks: (id) => {
-            // Vendor chunk for core dependencies
-            if (id.includes('node_modules')) {
-              // Separate Vue ecosystem
-              if (id.includes('vue') || id.includes('@vue')) {
-                return 'vue-vendor'
-              }
-              // Separate VueUse utilities
-              if (id.includes('@vueuse')) {
-                return 'vueuse-vendor'
-              }
-              // Separate Nuxt ecosystem
-              if (id.includes('nuxt') || id.includes('@nuxt')) {
-                return 'nuxt-vendor'
-              }
-              // Separate styling utilities
-              if (id.includes('class-variance-authority') || 
-                  id.includes('clsx') || 
-                  id.includes('tailwind-merge')) {
-                return 'styling-vendor'
-              }
-              // Everything else in general vendor
-              return 'vendor'
-            }
-          }
-        }
-      }
-    },
-    // ✅ Phase 5: Enhanced dependency pre-bundling
-    optimizeDeps: {
-      include: [
-        'vue',
-        'vue-router',
-        '@vueuse/core',
-        'class-variance-authority',
-        'clsx',
-        'tailwind-merge'
-      ],
-      // Exclude development-only dependencies
-      exclude: ['@nuxt/devtools']
-    },
-    // ✅ NEW: Phase 3 - Enhanced CSS processing
-    css: {
-      devSourcemap: isDev,
-    }
-  },
-
-  // TypeScript configuration with compatibility settings
-  typescript: {
-    strict: false,
-    typeCheck: false, // Disabled due to Vite plugin compatibility issues
-    tsConfig: {
-      compilerOptions: {
-        skipLibCheck: true,
-        strict: false
-      }
-    }
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
 
   // Enable Nuxt DevTools for development
@@ -342,33 +232,10 @@ export default defineNuxtConfig({
   // ✅ NEW: Performance monitoring hooks
   hooks: {
     'nitro:build:before': () => {
-      console.log('🚀 Phase 2 route rules optimization enabled')
-      console.log('📊 Environment:', process.env.NODE_ENV)
-      console.log('🔧 Components detected: 127 Vue files')
-    },
-    'render:route': (url, result) => {
-      if (isDev && result.duration > 100) {
-        console.warn(`⚠️ Slow route ${url}: ${result.duration}ms`)
+      if (isDev) {
+        console.log('🚀 Phase 2 route rules optimization enabled')
       }
     },
-    'nitro:build:public-assets': (nitro) => {
-      // Check if we have assets array in nitro build context
-      if (nitro && nitro.options && nitro.options.assets) {
-        const assets = nitro.options.assets
-        const cssFiles = assets.filter(a => a.fileName && a.fileName.endsWith('.css'))
-        const jsFiles = assets.filter(a => a.fileName && a.fileName.endsWith('.js'))
-        console.log(`📊 Build assets: ${cssFiles.length} CSS, ${jsFiles.length} JS files`)
-        
-        // Flag potential issues for Phase 3
-        if (cssFiles.length > 10) {
-          console.warn('⚠️ High CSS file count - consider consolidation in Phase 3')
-        }
-        if (jsFiles.length > 20) {
-          console.warn('⚠️ High JS chunk count - review code splitting strategy')
-        }
-      } else {
-        console.log('📊 Build completed - assets analysis not available in this hook')
-      }
-    }
+    // Remove unsupported custom asset analysis hook to satisfy types
   },
 })

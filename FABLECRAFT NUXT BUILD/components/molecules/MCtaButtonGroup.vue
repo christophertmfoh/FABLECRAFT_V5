@@ -78,7 +78,7 @@ interface CtaButtonGroupProps {
   // Layout and styling
   layout?: 'horizontal' | 'vertical' | 'responsive'
   alignment?: 'left' | 'center' | 'right'
-  buttonSize?: 'sm' | 'base' | 'lg' | 'xl'
+  buttonSize?: 'default' | 'sm' | 'lg'
   spacing?: 'tight' | 'normal' | 'loose'
 
   // Additional content
@@ -133,13 +133,12 @@ const alignmentConfig = {
 
 // Icon size based on button size
 const iconSize = computed(() => {
-  const sizeMap = {
+  const sizeMap: Record<NonNullable<CtaButtonGroupProps['buttonSize']>, 'sm' | 'md' | 'lg'> = {
     sm: 'sm',
-    base: 'base',
+    default: 'md',
     lg: 'lg',
-    xl: 'xl',
   }
-  return sizeMap[props.buttonSize] || 'base'
+  return sizeMap[props.buttonSize]
 })
 
 // Computed classes

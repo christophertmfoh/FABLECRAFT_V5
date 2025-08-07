@@ -30,7 +30,7 @@
           <Heading
             :id="`pricing-plan-${planId}`"
             tag="h3"
-            size="2xl"
+            size="h3"
             class="font-black text-primary text-center tracking-tight drop-shadow-sm relative z-10"
           >
             {{ name }}
@@ -46,7 +46,7 @@
       <!-- 2. Price (Fixed Height) -->
       <div class="h-16 flex items-center justify-center mb-4">
         <div class="flex items-baseline justify-center">
-          <Text tag="span" size="3xl" class="font-black text-foreground">
+          <Text tag="span" size="display-value" class="font-black text-foreground">
             {{ cleanPrice }}
           </Text>
           <Text
@@ -107,6 +107,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useComponentId } from '~/composables/useComponentId'
+import { cn } from '~/components/atoms/Utils'
 
 // Types
 interface PricingFeature {
@@ -127,7 +128,7 @@ interface PricingCardProps {
   popularText?: string
   variant?: 'default' | 'highlighted' | 'enterprise'
   featuresTitle?: string
-  featureSize?: 'xs' | 'sm' | 'base' | 'lg'
+  featureSize?: 'xs' | 'sm' | 'md' | 'lg'
   class?: string | Record<string, boolean> | string[]
 }
 
@@ -176,21 +177,21 @@ const cleanPrice = computed(() => {
   return props.price.startsWith('$') ? props.price : `$${props.price}`
 })
 
-const cardClasses = computed(() => [
-  'group cursor-pointer transition-all duration-300',
-  'hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1',
-  'border-border hover:border-primary/50',
-  'natural-depth gentle-hover',
-  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
-  'bg-card/90 backdrop-blur-sm',
-  'overflow-hidden relative h-full',
-  'flex flex-col',
-  {
-    'border-primary shadow-lg': props.isPopular,
-    'bg-gradient-to-br from-card via-card to-primary/5': props.variant === 'highlighted',
-  },
-  props.class,
-])
+const cardClasses = computed(() =>
+  cn(
+    'group cursor-pointer transition-all duration-300',
+    'hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1',
+    'border-border hover:border-primary/50',
+    'natural-depth gentle-hover',
+    'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
+    'bg-card/90 backdrop-blur-sm',
+    'overflow-hidden relative h-full',
+    'flex flex-col',
+    props.isPopular && 'border-primary shadow-lg',
+    props.variant === 'highlighted' && 'bg-gradient-to-br from-card via-card to-primary/5',
+    props.class
+  )
+)
 
 const hoverEffectClasses = computed(() => [
   'absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none',
