@@ -49,12 +49,14 @@ export default defineNuxtConfig({
         }
       },
       
-      // API routes - no cache (Supabase integration)
-      '/api/**': { 
-        headers: { 
-          'cache-control': 'no-store' 
-        }
-      },
+             // API routes - explicit no-cache (Supabase integration)
+       '/api/**': { 
+         headers: { 
+           'cache-control': 'no-store, max-age=0, must-revalidate',
+           'pragma': 'no-cache',
+           'expires': '0'
+         }
+       },
       
       // Auth pages - short cache
       '/login': { 
@@ -88,14 +90,29 @@ export default defineNuxtConfig({
     }
   },
 
-  // ✅ NEW: Enable 2024 experimental optimizations (safe for Nuxt 3.18+)
-  experimental: {
-    payloadExtraction: false, // ✅ Keep for visual effects
-    viewTransition: true,     // ✅ NEW: Smooth navigation
-    renderJsonPayloads: true, // ✅ NEW: Better performance than default
-    headNext: true,           // ✅ NEW: Better head management
-    typedPages: false,        // Skip for simplicity, can enable later
-  },
+     // ✅ NEW: Enable 2024 experimental optimizations (safe for Nuxt 3.18+)
+   experimental: {
+     payloadExtraction: false, // ✅ Keep for visual effects
+     viewTransition: true,     // ✅ NEW: Smooth navigation
+     renderJsonPayloads: true, // ✅ NEW: Better performance than default
+     headNext: true,           // ✅ NEW: Better head management (requires Nuxt 3.12+)
+     typedPages: false,        // Skip for simplicity, can enable later
+   },
+   
+   // ✅ NEW: Monitoring hooks for performance tracking
+   hooks: {
+     'nitro:build:before': () => {
+       console.log('🚀 Route rules optimization enabled')
+     },
+     'render:route': (url, result) => {
+       console.log(`Route ${url} rendered in ${result.duration}ms`)
+     },
+     'nitro:build:public-assets': (assets) => {
+       // CSS waterfall visibility
+       const cssFiles = assets.filter(a => a.fileName.endsWith('.css'))
+       console.log(`⚠️ Found ${cssFiles.length} CSS files - consider consolidation in Phase 3`)
+     }
+   },
 })
 ```
 
@@ -172,16 +189,22 @@ nitro: {
 }
 ```
 
-### **Step 2.2: Bundle Analysis Scripts (5 minutes)**
+### **Step 2.2: Enhanced Bundle Analysis & Performance Scripts (5 minutes)**
 **Add to `package.json`:**
 ```json
 {
   "scripts": {
     "analyze": "nuxt build --analyze",
     "build:prod": "nuxt build && nuxt preview",
-    "performance": "nuxt build && npx nuxi analyze"
+    "performance": "nuxt build && npx nuxi analyze",
+    "test:performance": "npm run build && npm run preview & sleep 5 && lighthouse http://localhost:3000 --only-categories=performance --output=json > lighthouse-report.json"
   }
 }
+```
+
+**Install Lighthouse for comprehensive testing:**
+```bash
+npm install -D lighthouse
 ```
 
 ### **Step 2.3: Experimental Optimizations (5 minutes)**
@@ -290,11 +313,23 @@ This phase focuses on the **infrastructure** for optimization, creating the tool
 
 ## 📋 **Implementation Checklist**
 
-### **Pre-Implementation (5 minutes)**
+### **Pre-Implementation (10 minutes)**
+- [ ] **CRITICAL:** Verify Nuxt version compatibility
 - [ ] Git commit current state
 - [ ] Run baseline performance test
 - [ ] Document current page load time
 - [ ] Verify visual effects work correctly
+
+#### **🚨 Critical Version Check:**
+```bash
+# Verify Nuxt version for compatibility
+npx nuxi info
+
+# Required versions:
+# - Nuxt 3.11+ for most experimental features
+# - Nuxt 3.12+ for headNext optimization
+# - Nuxt 3.18+ for all features (current project)
+```
 
 ### **Implementation (35 minutes total)**
 - [ ] **Step 2.1:** Basic route rules (15 min)
@@ -315,4 +350,44 @@ This phase focuses on the **infrastructure** for optimization, creating the tool
 - [ ] Bundle analysis shows insights
 - [ ] Ready for Phase 3
 
-**Total Time Investment: ~55 minutes for 15-25% performance improvement** 🚀
+**Total Time Investment: ~60 minutes for 15-25% performance improvement** 🚀
+
+---
+
+## 🚀 **Enhanced Features Based on Expert Feedback**
+
+### **✅ Key Improvements Added:**
+
+1. **🔒 Enhanced API Security**
+   - More explicit no-cache headers for Supabase APIs
+   - Prevents edge cases with aggressive CDNs
+   - Added `pragma: no-cache` and `expires: 0` for full coverage
+
+2. **📊 Performance Monitoring**
+   - Build-time route optimization confirmation
+   - Real-time route rendering duration tracking
+   - CSS file count visibility for Phase 3 planning
+
+3. **🧪 Comprehensive Testing**
+   - Lighthouse integration for industry-standard metrics
+   - Automated performance testing pipeline
+   - JSON output for tracking improvements over time
+
+4. **⚠️ CSS Waterfall Immediate Visibility**
+   - Hook to log CSS file count during build
+   - Sets up foundation for Phase 3 CSS optimization
+   - Tracks the main performance bottleneck identified
+
+5. **🔍 Version Compatibility Check**
+   - Critical pre-implementation verification
+   - Ensures all experimental features will work
+   - Prevents implementation issues
+
+### **🎯 Why These Improvements Matter:**
+- **Enhanced API security** prevents caching edge cases that could affect Supabase
+- **Performance monitoring** provides data-driven insights into actual improvements
+- **Lighthouse testing** gives industry-standard metrics for comparison
+- **CSS visibility** addresses the main 30-file bottleneck proactively
+- **Version checking** prevents implementation failures
+
+This enhanced plan maintains the same **realistic expectations** while providing **better monitoring and safety** for implementation. 🎯
