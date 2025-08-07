@@ -1,7 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-// ✅ NEW: Environment-aware configuration for Phase 2 optimization
-const isDev = process.env.NODE_ENV === 'development'
+// ✅ FIXED: Robust environment detection for Nuxt
+// Check multiple indicators to properly detect development vs production
+const isDev = process.argv.includes('dev') || 
+              (process.env.NODE_ENV !== 'production' && !process.argv.includes('build'))
 
 export default defineNuxtConfig({
   // Required for Nuxt 3.18+ to ensure future compatibility
