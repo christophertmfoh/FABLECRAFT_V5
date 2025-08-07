@@ -132,13 +132,7 @@ export const useTheme = () => {
     setThemeWithTransition(newTheme)
   }
 
-  // Auto-initialize theme on client
-  if (import.meta.client) {
-    // Use onMounted to ensure DOM is ready
-    onMounted(() => {
-      initializeTheme()
-    })
-  }
+  // Auto-initialize removed; initialization is handled by the client plugin to avoid duplicate work.
 
   return {
     themes: readonly(themes),

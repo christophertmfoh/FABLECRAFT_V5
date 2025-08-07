@@ -37,6 +37,15 @@
     stroke 300ms ease-in-out !important;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none !important;
+  }
+}
+
 /* ========================================
    SPACING FRIENDSHIP LEVELS
    Migrated from old build for visual parity

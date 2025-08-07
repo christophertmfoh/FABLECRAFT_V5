@@ -773,15 +773,7 @@
    Smooth transitions without layout shift
 ======================================== */
 
-/* Smooth theme transitions */
-* {
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease,
-    fill 0.3s ease,
-    stroke 0.3s ease;
-}
+/* Smooth theme transitions are applied via the `.theme-transition` class only (see assets/css/main.css) to avoid global repaint costs. */
 
 /* Prevent transition on page load to avoid flash */
 .theme-transition-disabled * {

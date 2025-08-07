@@ -100,7 +100,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
-      exclude: ['/', '/login', '/confirm', '/supabase-test', '/api-test', '/devview'], // Exclude public pages from auth redirect
+      exclude: ['/', '/login', '/confirm', '/supabase-test', '/api-test'], // Exclude public pages from auth redirect
     },
   },
 
@@ -153,12 +153,7 @@ export default defineNuxtConfig({
       },
       
       // Dev/test pages - no cache + development optimizations
-      '/devview': { 
-        ssr: false, // Client-side only for dev tools
-        headers: { 
-          'cache-control': 'no-cache, no-store, must-revalidate'
-        }
-      },
+
       '/supabase-test': { 
         headers: { 
           'cache-control': 'no-cache, no-store, must-revalidate'

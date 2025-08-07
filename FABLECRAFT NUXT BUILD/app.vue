@@ -33,10 +33,7 @@ useHead({
   ],
 })
 
-// Initialize theme on client mount to ensure proper hydration
-onMounted(() => {
-  initializeTheme()
-})
+// Initialize theme on client mount removed (handled by plugin)
 </script>
 
 <template>
