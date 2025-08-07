@@ -286,21 +286,11 @@ const handleTestimonialClick = (testimonial: {
 }
 
 // Pricing section event handlers
-const handlePlanClick = (plan: {
-  id: string
-  name: string
-  price: string | number
-  description: string
-}) => {
+const handlePlanClick = (plan: any) => {
   logger.log('Pricing plan click:', plan)
 }
 
-const handlePricingCtaClick = (plan: {
-  id: string
-  name: string
-  price: string | number
-  ctaText?: string
-}) => {
+const handlePricingCtaClick = (plan: any) => {
   logger.log('Pricing CTA click:', plan)
   
   if (plan.id === 'enterprise') {

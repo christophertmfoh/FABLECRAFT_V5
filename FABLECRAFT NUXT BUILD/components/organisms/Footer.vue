@@ -165,12 +165,12 @@ const handleNewsletterError = (error: string) => {
   emit('newsletter:error', error)
 }
 
-const handleSocialClick = (platform: string) => {
-  emit('social:click', { platform })
+const handleSocialClick = (payload: { platform: string; href?: string }) => {
+  emit('social:click', payload)
 
   // Track social click
   trackEvent('social_click', {
-    platform: platform,
+    platform: payload.platform,
     location: 'footer',
   })
 }

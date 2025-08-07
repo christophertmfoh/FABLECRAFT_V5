@@ -146,11 +146,11 @@ export const usePerformanceDashboard = () => {
       }
 
       // 6. Resource hints validation (Phase 4)
-      const hints = validateResourceHints()
+      const hints: any = validateResourceHints()
       console.log('💡 Resource Hints:', {
-        dnsPrefetch: hints.dnsPrefetch?.length || 0,
-        preconnect: hints.preconnect?.length || 0,
-        preload: hints.preload?.length || 0,
+        dnsPrefetch: (hints && 'dnsPrefetch' in hints && Array.isArray(hints.dnsPrefetch)) ? hints.dnsPrefetch.length : 0,
+        preconnect: (hints && 'preconnect' in hints && Array.isArray(hints.preconnect)) ? hints.preconnect.length : 0,
+        preload: (hints && 'preload' in hints && Array.isArray(hints.preload)) ? hints.preload.length : 0,
       })
 
       // 7. Device & Environment Info

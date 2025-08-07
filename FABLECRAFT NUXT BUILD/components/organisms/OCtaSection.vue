@@ -64,7 +64,7 @@
           :primary-variant="primaryCtaVariant"
           :secondary-variant="secondaryCtaVariant"
           :button-size="ctaButtonSize === 'base' ? 'default' : (ctaButtonSize === 'xl' ? 'lg' : ctaButtonSize)"
-          :layout="ctaLayout === 'horizontal' ? 'horizontal' : ctaLayout === 'vertical' ? 'vertical' : 'responsive'"
+          :layout="ctaLayout === 'horizontal' ? 'inline' : ctaLayout === 'vertical' ? 'stacked' : 'responsive'"
           :alignment="'center'"
           :spacing="ctaSpacing === 'loose' ? 'relaxed' : ctaSpacing"
           :group-label="'Call to action buttons'"
