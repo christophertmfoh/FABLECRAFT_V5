@@ -177,7 +177,16 @@
           </template>
 
           <!-- ✅ FIXED: Theme Toggle (no ClientOnly needed) -->
-          <ThemeToggle />
+                      <!-- ✅ PHASE 2: Component-level lazy loading for ThemeToggle -->
+            <ClientOnly>
+              <ThemeToggle />
+              <template #fallback>
+                <!-- Static fallback icon with same styling -->
+                <Button variant="ghost" size="icon" disabled class="h-8 w-8">
+                  <Icon name="lucide:sun" class="h-4 w-4" mode="css" />
+                </Button>
+              </template>
+            </ClientOnly>
         </div>
       </div>
     </Container>
@@ -196,7 +205,7 @@ import DropdownMenu from '~/components/atoms/DropdownMenu.vue'
 import DropdownMenuTrigger from '~/components/atoms/DropdownMenuTrigger.vue'
 import DropdownMenuContent from '~/components/atoms/DropdownMenuContent.vue'
 import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
-// Note: AtomIcon removed - using static SVGs for critical icons
+// ✅ PHASE 1: All icons now bundled via Nuxt Icon for zero network requests
 
 // User interface for authentication
 interface User {

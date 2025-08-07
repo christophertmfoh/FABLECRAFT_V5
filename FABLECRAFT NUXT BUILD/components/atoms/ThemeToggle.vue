@@ -77,7 +77,12 @@
             @click="event => handleThemeChange(theme, event)"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <!-- ✅ PHASE 1: Direct Icon usage with CSS mode for instant rendering -->
+              <Icon 
+                :name="themeConfig[theme].icon" 
+                class="h-4 w-4 flex-shrink-0" 
+                mode="css"
+              />
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
                 <div class="text-xs text-muted-foreground truncate">
@@ -101,7 +106,12 @@
             @click="event => handleThemeChange(theme, event)"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <!-- ✅ PHASE 1: Direct Icon usage with CSS mode for instant rendering -->
+              <Icon 
+                :name="themeConfig[theme].icon" 
+                class="h-4 w-4 flex-shrink-0" 
+                mode="css"
+              />
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
                 <div class="text-xs text-muted-foreground truncate">
@@ -125,7 +135,12 @@
             @click="event => handleThemeChange(theme, event)"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <!-- ✅ PHASE 1: Direct Icon usage with CSS mode for instant rendering -->
+              <Icon 
+                :name="themeConfig[theme].icon" 
+                class="h-4 w-4 flex-shrink-0" 
+                mode="css"
+              />
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
                 <div class="text-xs text-muted-foreground truncate">
@@ -149,7 +164,12 @@
             @click="event => handleThemeChange(theme, event)"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <!-- ✅ PHASE 1: Direct Icon usage with CSS mode for instant rendering -->
+              <Icon 
+                :name="themeConfig[theme].icon" 
+                class="h-4 w-4 flex-shrink-0" 
+                mode="css"
+              />
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
                 <div class="text-xs text-muted-foreground truncate">
@@ -173,7 +193,12 @@
             @click="event => handleThemeChange(theme, event)"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <!-- ✅ PHASE 1: Direct Icon usage with CSS mode for instant rendering -->
+              <Icon 
+                :name="themeConfig[theme].icon" 
+                class="h-4 w-4 flex-shrink-0" 
+                mode="css"
+              />
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
                 <div class="text-xs text-muted-foreground truncate">
@@ -197,7 +222,12 @@
             @click="event => handleThemeChange(theme, event)"
           >
             <div class="flex items-center gap-3 w-full min-w-0">
-              <AtomIcon :name="themeConfig[theme].icon" class="h-4 w-4 flex-shrink-0" />
+              <!-- ✅ PHASE 1: Direct Icon usage with CSS mode for instant rendering -->
+              <Icon 
+                :name="themeConfig[theme].icon" 
+                class="h-4 w-4 flex-shrink-0" 
+                mode="css"
+              />
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ themeConfig[theme].label }}</div>
                 <div class="text-xs text-muted-foreground truncate">
@@ -214,8 +244,14 @@
 </template>
 
 <script setup lang="ts">
-// ✅ PERFORMANCE: Explicit import for AtomIcon (used in dropdown)
-import AtomIcon from '~/components/atoms/AtomIcon.vue'
+// ✅ PHASE 1: Explicit imports for proper tree-shaking and zero tech debt
+import Button from '~/components/atoms/Button.vue'
+import DropdownMenu from '~/components/atoms/DropdownMenu.vue'
+import DropdownMenuTrigger from '~/components/atoms/DropdownMenuTrigger.vue'
+import DropdownMenuContent from '~/components/atoms/DropdownMenuContent.vue'
+import DropdownMenuItem from '~/components/atoms/DropdownMenuItem.vue'
+import DropdownMenuLabel from '~/components/atoms/DropdownMenuLabel.vue'
+import DropdownMenuSeparator from '~/components/atoms/DropdownMenuSeparator.vue'
 
 // ✅ FIXED: Use theme composable (simplified)
 const { currentTheme, setTheme } = useTheme()

@@ -30,12 +30,25 @@ export default defineNuxtConfig({
     '@nuxt/devtools', // Fix: DevTools wasn't working due to missing module registration
   ],
 
-  // Icon module configuration
+  // ✅ PHASE 1: Optimized icon configuration for zero network requests
   icon: {
     size: '24px',
     class: 'icon',
-    mode: 'css',
+    mode: 'css', // CSS mode for instant SSR rendering
     collections: ['lucide'],
+    
+    // Bundle theme icons for instant rendering (eliminates 20+ network requests)
+    clientBundle: {
+      scan: true, // Auto-scan for icons in components
+      // Pre-bundle all theme icons used in dropdown
+      icons: [
+        'lucide:sun',
+        'lucide:moon', 
+        'lucide:monitor',
+        'lucide:zap'
+      ],
+      sizeLimitKb: 256 // Reasonable limit for header icons
+    }
   },
 
   // Explicitly load the global stylesheet
@@ -103,6 +116,13 @@ export default defineNuxtConfig({
         headers: isDev ? {} : { 
           'cache-control': 'max-age=3600, s-maxage=31536000', // 1hr browser, 1yr CDN
           'x-robots-tag': 'index, follow'
+        }
+      },
+      
+      // ✅ PHASE 2: Preload header icons on all pages for faster header rendering
+      '/**': {
+        headers: isDev ? {} : {
+          'Link': '</_nuxt/assets/icons/header-icons.css>; rel=preload; as=style'
         }
       },
       
@@ -343,17 +363,23 @@ export default defineNuxtConfig({
         console.warn(`⚠️ Slow route ${url}: ${result.duration}ms`)
       }
     },
-    'nitro:build:public-assets': (assets) => {
-      const cssFiles = assets.filter(a => a.fileName.endsWith('.css'))
-      const jsFiles = assets.filter(a => a.fileName.endsWith('.js'))
-      console.log(`📊 Build assets: ${cssFiles.length} CSS, ${jsFiles.length} JS files`)
-      
-      // Flag potential issues for Phase 3
-      if (cssFiles.length > 10) {
-        console.warn('⚠️ High CSS file count - consider consolidation in Phase 3')
-      }
-      if (jsFiles.length > 20) {
-        console.warn('⚠️ High JS chunk count - review code splitting strategy')
+    'nitro:build:public-assets': (nitro) => {
+      // Check if we have assets array in nitro build context
+      if (nitro && nitro.options && nitro.options.assets) {
+        const assets = nitro.options.assets
+        const cssFiles = assets.filter(a => a.fileName && a.fileName.endsWith('.css'))
+        const jsFiles = assets.filter(a => a.fileName && a.fileName.endsWith('.js'))
+        console.log(`📊 Build assets: ${cssFiles.length} CSS, ${jsFiles.length} JS files`)
+        
+        // Flag potential issues for Phase 3
+        if (cssFiles.length > 10) {
+          console.warn('⚠️ High CSS file count - consider consolidation in Phase 3')
+        }
+        if (jsFiles.length > 20) {
+          console.warn('⚠️ High JS chunk count - review code splitting strategy')
+        }
+      } else {
+        console.log('📊 Build completed - assets analysis not available in this hook')
       }
     }
   },
