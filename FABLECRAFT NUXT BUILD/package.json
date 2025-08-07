@@ -2,6 +2,9 @@
   "name": "fablecraft-foundation",
   "private": true,
   "type": "module",
+  "imports": {
+    "#internal/nuxt/paths": "./node_modules/nuxt/dist/core/runtime/nitro/utils/paths.mjs"
+  },
   "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "init": "./AGENT_INIT.sh",
