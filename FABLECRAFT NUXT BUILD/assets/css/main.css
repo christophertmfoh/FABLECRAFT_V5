@@ -9,7 +9,7 @@
    Required by CSS specification
 ======================================== */
 @import './design-tokens.css';
-@import './theme-system.css';
+@import './theme-base.css';
 @import './visual-effects.css';
 @import './paper-texture.css';
 

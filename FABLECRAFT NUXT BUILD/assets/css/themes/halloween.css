@@ -1,0 +1,28 @@
+/* Halloween theme variables */
+[data-theme='halloween'] {
+  --background: 20 8% 8%;
+  --foreground: 35 15% 90%;
+  --card: 20 12% 12%;
+  --card-foreground: 35 15% 90%;
+  --popover: 20 15% 15%;
+  --popover-foreground: 35 15% 90%;
+  --primary: 25 100% 55%;
+  --primary-foreground: 20 8% 8%;
+  --secondary: 20 8% 18%;
+  --secondary-foreground: 35 15% 90%;
+  --muted: 20 8% 15%;
+  --muted-foreground: 35 10% 65%;
+  --accent: 45 90% 50%;
+  --accent-foreground: 45 20% 15%;
+  --destructive: 0 85% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 20 8% 8%;
+  --border: 20 15% 25%;
+  --input: 20 15% 18%;
+  --ring: 25 100% 55%;
+  --orb-primary: 25 100% 65%;
+  --orb-secondary: 45 90% 60%;
+  --auth-button-primary: 25 100% 50%;
+  --auth-button-primary-hover: 25 100% 40%;
+}

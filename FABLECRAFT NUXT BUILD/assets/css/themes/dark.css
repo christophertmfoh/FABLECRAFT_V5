@@ -1,0 +1,28 @@
+/* Dark theme variables */
+[data-theme='dark'] {
+  --background: 220 15% 13%;
+  --foreground: 45 15% 90%;
+  --card: 220 15% 17%;
+  --card-foreground: 45 15% 90%;
+  --popover: 220 15% 20%;
+  --popover-foreground: 45 15% 90%;
+  --primary: 35 75% 55%;
+  --primary-foreground: 220 15% 13%;
+  --secondary: 220 15% 25%;
+  --secondary-foreground: 45 15% 90%;
+  --muted: 220 15% 20%;
+  --muted-foreground: 45 10% 65%;
+  --accent: 35 60% 50%;
+  --accent-foreground: 220 15% 13%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 220 15% 13%;
+  --border: 220 15% 25%;
+  --input: 220 15% 25%;
+  --ring: 35 75% 55%;
+  --orb-primary: 35 75% 55%;
+  --orb-secondary: 220 15% 35%;
+  --auth-button-primary: 35 75% 50%;
+  --auth-button-primary-hover: 35 75% 45%;
+}

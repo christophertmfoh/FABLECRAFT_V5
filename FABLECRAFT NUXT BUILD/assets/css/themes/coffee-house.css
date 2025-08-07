@@ -1,0 +1,28 @@
+/* Coffee House theme variables */
+[data-theme='coffee-house'] {
+  --background: 25 20% 14%;
+  --foreground: 35 20% 88%;
+  --card: 25 20% 18%;
+  --card-foreground: 35 20% 88%;
+  --popover: 25 20% 21%;
+  --popover-foreground: 35 20% 88%;
+  --primary: 25 60% 50%;
+  --primary-foreground: 25 20% 14%;
+  --secondary: 25 15% 26%;
+  --secondary-foreground: 35 20% 88%;
+  --muted: 25 15% 22%;
+  --muted-foreground: 35 15% 65%;
+  --accent: 25 45% 45%;
+  --accent-foreground: 25 20% 14%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 25 20% 14%;
+  --border: 25 15% 26%;
+  --input: 25 15% 26%;
+  --ring: 25 60% 50%;
+  --orb-primary: 25 60% 50%;
+  --orb-secondary: 25 15% 35%;
+  --auth-button-primary: 25 60% 45%;
+  --auth-button-primary-hover: 25 60% 40%;
+}

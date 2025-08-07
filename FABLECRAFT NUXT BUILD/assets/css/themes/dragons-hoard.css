@@ -1,0 +1,29 @@
+/* Dragon's Hoard theme variables */
+[data-theme='dragons-hoard'] {
+  --background: 65 25% 8%;
+  --foreground: 45 25% 88%;
+  --card: 65 30% 12%;
+  --card-foreground: 45 25% 88%;
+  --popover: 65 35% 15%;
+  --popover-foreground: 45 25% 88%;
+  --primary: 45 95% 55%;
+  --primary-foreground: 65 25% 8%;
+  --secondary: 65 20% 18%;
+  --secondary-foreground: 45 25% 88%;
+  --muted: 65 20% 15%;
+  --muted-foreground: 45 20% 65%;
+  --accent: 35 85% 50%;
+  --accent-foreground: 35 25% 15%;
+  --destructive: 0 85% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 65 25% 8%;
+  --border: 65 25% 22%;
+  --input: 65 25% 18%;
+  --ring: 45 95% 55%;
+  --radius: 0.75rem;
+  --orb-primary: 45 95% 65%;
+  --orb-secondary: 35 85% 60%;
+  --auth-button-primary: 45 95% 50%;
+  --auth-button-primary-hover: 45 95% 45%;
+}

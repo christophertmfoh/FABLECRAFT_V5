@@ -1,0 +1,29 @@
+/* Moonlit Garden theme variables */
+[data-theme='moonlit-garden'] {
+  --background: 95 15% 96%;
+  --foreground: 95 35% 18%;
+  --card: 95 20% 98%;
+  --card-foreground: 95 35% 18%;
+  --popover: 95 20% 97%;
+  --popover-foreground: 95 35% 18%;
+  --primary: 95 60% 45%;
+  --primary-foreground: 95 15% 96%;
+  --secondary: 95 10% 88%;
+  --secondary-foreground: 95 35% 18%;
+  --muted: 95 8% 90%;
+  --muted-foreground: 95 25% 45%;
+  --accent: 85 50% 50%;
+  --accent-foreground: 85 20% 15%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 50% 45%;
+  --success-foreground: 0 0% 98%;
+  --border: 95 12% 85%;
+  --input: 95 12% 92%;
+  --ring: 95 60% 45%;
+  --radius: 0.75rem;
+  --orb-primary: 95 60% 55%;
+  --orb-secondary: 85 50% 60%;
+  --auth-button-primary: 95 60% 40%;
+  --auth-button-primary-hover: 95 60% 35%;
+}

@@ -1,0 +1,28 @@
+/* Forest Manuscript theme variables */
+[data-theme='forest-manuscript'] {
+  --background: 150 20% 12%;
+  --foreground: 90 15% 88%;
+  --card: 150 20% 16%;
+  --card-foreground: 90 15% 88%;
+  --popover: 150 20% 19%;
+  --popover-foreground: 90 15% 88%;
+  --primary: 140 50% 50%;
+  --primary-foreground: 150 20% 12%;
+  --secondary: 150 15% 24%;
+  --secondary-foreground: 90 15% 88%;
+  --muted: 150 15% 20%;
+  --muted-foreground: 90 10% 65%;
+  --accent: 140 40% 45%;
+  --accent-foreground: 150 20% 12%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 150 20% 12%;
+  --border: 150 15% 24%;
+  --input: 150 15% 24%;
+  --ring: 140 50% 50%;
+  --orb-primary: 140 50% 50%;
+  --orb-secondary: 150 15% 35%;
+  --auth-button-primary: 140 50% 45%;
+  --auth-button-primary-hover: 140 50% 40%;
+}
