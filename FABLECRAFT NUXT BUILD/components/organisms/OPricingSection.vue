@@ -301,3 +301,12 @@ const handleCtaClick = (plan: PricingPlan) => {
   emit('ctaClick', plan)
 }
 </script>
+
+<style scoped>
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
