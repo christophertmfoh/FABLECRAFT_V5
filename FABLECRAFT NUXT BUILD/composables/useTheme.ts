@@ -12,16 +12,19 @@ export const useTheme = () => {
     default: () => 'system', // Default to system theme
   })
 
-  // Current theme state
+  // ✅ HYDRATION FIX: Use SSR-safe theme state initialization
   const currentTheme = useState<string>('currentTheme', () => {
-    // SSR: Use cookie value if available, otherwise default to system
-    return themeCookie.value || 'system'
+    // Always start with 'system' on SSR to avoid hydration mismatch
+    return import.meta.server ? 'system' : (themeCookie.value || 'system')
   })
 
-  // System theme detection
+  // ✅ HYDRATION FIX: System theme detection with SSR safety
   const systemTheme = ref<'light' | 'dark'>('light')
+  
+  // ✅ HYDRATION FIX: Flag to track if client hydration is complete
+  const isHydrated = ref(false)
 
-  // Initialize system theme detection on client
+  // Initialize system theme detection on client only
   if (import.meta.client) {
     // Set initial system theme
     systemTheme.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -44,19 +47,30 @@ export const useTheme = () => {
         mediaQuery.removeEventListener('change', handleSystemThemeChange)
       })
     }
+
+    // Mark as hydrated after initial setup
+    nextTick(() => {
+      isHydrated.value = true
+    })
   }
 
-  // Resolved theme (what actually gets applied to DOM)
+  // ✅ HYDRATION FIX: Resolved theme with hydration safety
   const resolvedTheme = computed(() => {
+    // During SSR or before hydration, always use 'light' to prevent mismatch
+    if (import.meta.server || !isHydrated.value) {
+      return currentTheme.value === 'system' ? 'light' : currentTheme.value
+    }
+    
+    // After hydration, use actual system preference
     if (currentTheme.value === 'system') {
       return systemTheme.value
     }
     return currentTheme.value
   })
 
-  // Update DOM with current theme
+  // ✅ HYDRATION FIX: Update DOM with current theme (hydration-safe)
   const updateDOMTheme = () => {
-    if (!import.meta.client) return
+    if (!import.meta.client || !isHydrated.value) return
 
     const resolved = resolvedTheme.value
     document.documentElement.setAttribute('data-theme', resolved)
@@ -77,9 +91,19 @@ export const useTheme = () => {
     updateDOMTheme()
   }
 
-  // Initialize theme on client
+  // ✅ HYDRATION FIX: Initialize theme on client (hydration-safe)
   const initializeTheme = () => {
     if (!import.meta.client) return
+
+    // Wait for hydration to complete before initializing
+    if (!isHydrated.value) {
+      nextTick(() => {
+        if (isHydrated.value) {
+          initializeTheme()
+        }
+      })
+      return
+    }
 
     let themeToSet = currentTheme.value
 
@@ -147,6 +171,7 @@ export const useTheme = () => {
     systemTheme: readonly(systemTheme),
     currentThemeObject: readonly(currentThemeObject),
     isDark: readonly(isDark),
+    isHydrated: readonly(isHydrated), // ✅ HYDRATION FIX: Expose hydration state
     setTheme,
     setThemeWithTransition,
     toggleTheme,

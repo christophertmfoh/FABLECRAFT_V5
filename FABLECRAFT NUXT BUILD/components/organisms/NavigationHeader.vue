@@ -19,32 +19,33 @@
 
         <!-- Navigation Actions -->
         <div class="flex items-center space-x-4">
-          <!-- Authentication Section -->
-          <template v-if="showAuthButton">
-            <!-- Authenticated User Dropdown -->
-            <DropdownMenu v-if="isAuthenticated && user">
-              <DropdownMenuTrigger as-child>
-                <GradientButton
-                  variant="default"
-                  size="default"
-                  :show-gradient-overlay="true"
-                  gradient-colors="from-primary-foreground/25 to-transparent"
-                  class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
-                  :aria-label="`User menu for ${displayName}`"
-                >
-                  <template #leading>
-                    <AtomIcon name="lucide:user-circle" class="h-4 w-4" aria-hidden="true" />
-                  </template>
-                  Welcome {{ displayName }}
-                  <template #trailing>
-                    <AtomIcon
-                      name="lucide:chevron-down"
-                      class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300"
-                      aria-hidden="true"
-                    />
-                  </template>
-                </GradientButton>
-              </DropdownMenuTrigger>
+          <!-- ✅ HYDRATION FIX: Authentication Section with ClientOnly -->
+          <ClientOnly v-if="showAuthButton">
+            <template v-if="isAuthenticated && (supabaseUser || user)">
+              <!-- Authenticated User Dropdown -->
+              <DropdownMenu>
+                <DropdownMenuTrigger as-child>
+                  <GradientButton
+                    variant="default"
+                    size="default"
+                    :show-gradient-overlay="true"
+                    gradient-colors="from-primary-foreground/25 to-transparent"
+                    class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                    :aria-label="`User menu for ${displayName}`"
+                  >
+                    <template #leading>
+                      <AtomIcon name="lucide:user-circle" class="h-4 w-4" aria-hidden="true" />
+                    </template>
+                    Welcome {{ displayName }}
+                    <template #trailing>
+                      <AtomIcon
+                        name="lucide:chevron-down"
+                        class="h-4 w-4 group-hover:rotate-180 transition-transform duration-300"
+                        aria-hidden="true"
+                      />
+                    </template>
+                  </GradientButton>
+                </DropdownMenuTrigger>
 
               <DropdownMenuContent
                 align="end"
@@ -145,28 +146,38 @@
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>
+            </template>
 
             <!-- Unauthenticated User Sign In Button -->
-            <GradientButton
-              v-else
-              variant="default"
-              size="default"
-              :show-gradient-overlay="true"
-              gradient-colors="from-primary-foreground/25 to-transparent"
-              class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
-              :aria-label="authButtonText"
-              @click="handleAuthClick"
-            >
-              <template #leading>
-                <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
-              </template>
-              {{ authButtonText }}
-            </GradientButton>
-          </template>
+            <template v-else>
+              <GradientButton
+                variant="default"
+                size="default"
+                :show-gradient-overlay="true"
+                gradient-colors="from-primary-foreground/25 to-transparent"
+                class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                :aria-label="authButtonText"
+                @click="handleAuthClick"
+              >
+                <template #leading>
+                  <AtomIcon name="lucide:users" class="h-4 w-4" aria-hidden="true" />
+                </template>
+                {{ authButtonText }}
+              </GradientButton>
+            </template>
+            
+            <!-- ✅ HYDRATION FIX: Fallback for SSR -->
+            <template #fallback>
+              <div class="w-32 h-10 bg-muted/20 rounded-xl animate-pulse" aria-hidden="true" />
+            </template>
+          </ClientOnly>
 
-          <!-- Advanced Theme Toggle -->
+          <!-- ✅ HYDRATION FIX: Advanced Theme Toggle -->
           <ClientOnly>
             <ThemeToggle />
+            <template #fallback>
+              <div class="w-10 h-10 bg-muted/20 rounded-lg animate-pulse" aria-hidden="true" />
+            </template>
           </ClientOnly>
         </div>
       </div>
@@ -225,17 +236,30 @@ const emit = defineEmits<{
   'logo:click': []
 }>()
 
-// Authentication composable
+// ✅ HYDRATION FIX: Authentication composables with SSR safety
 const supabaseUser = useSupabaseUser()
 const supabase = useSupabaseClient()
 
-// Compute authentication state
+// ✅ HYDRATION FIX: Track client hydration state
+const isClientHydrated = ref(false)
+
+// ✅ HYDRATION FIX: Compute authentication state with hydration safety
 const isAuthenticated = computed(() => {
+  // During SSR, only use prop value to prevent hydration mismatch
+  if (!isClientHydrated.value) {
+    return props.isAuthenticated || false
+  }
+  // After hydration, include Supabase user state
   return props.isAuthenticated || !!supabaseUser.value
 })
 
-// Compute display name
+// ✅ HYDRATION FIX: Compute display name with hydration safety
 const displayName = computed(() => {
+  // During SSR, use fallback to prevent hydration mismatch
+  if (!isClientHydrated.value) {
+    return 'User'
+  }
+  // After hydration, use actual user data
   return (
     supabaseUser.value?.user_metadata?.username ||
     supabaseUser.value?.email?.split('@')[0] ||
@@ -280,6 +304,11 @@ const handleNavigate = (item: string | { id: string }, href?: string) => {
     navigateTo(`/${view}`)
   }
 }
+
+// ✅ HYDRATION FIX: Initialize client hydration on mount
+onMounted(() => {
+  isClientHydrated.value = true
+})
 
 // Compute header classes (simplified - only using default behavior)
 const headerClasses = computed(() => {
