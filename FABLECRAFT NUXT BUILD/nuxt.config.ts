@@ -95,7 +95,7 @@ export default defineNuxtConfig({
     routeRules: {
       // Homepage - prerender for fastest possible load (production only)
       '/': { 
-        prerender: !isDev,
+        prerender: false, // Temporarily disabled for Phase 3 testing
         headers: isDev ? {} : { 
           'cache-control': 'max-age=3600, s-maxage=31536000', // 1hr browser, 1yr CDN
           'x-robots-tag': 'index, follow'
@@ -155,7 +155,7 @@ export default defineNuxtConfig({
       
       // ✅ NEW: Error pages optimization
       '/404': {
-        prerender: true,
+        prerender: false, // Temporarily disabled for Phase 3 testing
         headers: {
           'cache-control': 'max-age=3600'
         }
@@ -163,11 +163,11 @@ export default defineNuxtConfig({
       
       // ✅ NEW: SEO assets
       '/sitemap.xml': { 
-        prerender: true,
+        prerender: false, // Temporarily disabled for Phase 3 testing
         headers: { 'cache-control': 'max-age=86400' }
       },
       '/robots.txt': { 
-        prerender: true,
+        prerender: false, // Temporarily disabled for Phase 3 testing
         headers: { 'cache-control': 'max-age=86400' }
       }
     },
