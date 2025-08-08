@@ -193,7 +193,10 @@ const scrollProgress = ref(0)
 // ===== EVENT HANDLERS (No changes needed) =====
 // Navigation handlers
 const handleAuth = () => {
-  navigateTo('/auth')
+  if (process.client) {
+    const { open } = useAuthOverlay()
+    open('login')
+  }
 }
 
 const handleLogout = async () => {
