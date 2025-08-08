@@ -44,10 +44,10 @@
     "performance": "nuxt build && npx nuxi analyze",
     "lighthouse": "npm run build:prod & sleep 10 && npx lighthouse http://localhost:3000 --only-categories=performance --output=json --output-path=lighthouse-report.json",
     "test:cache-headers": "curl -I http://localhost:3000/ && curl -I http://localhost:3000/_nuxt/",
-    "analyze:css": "nuxt build --analyze && echo 'CSS Analysis Complete'",
-    "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
-    "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
-  },
+          "analyze:css": "nuxt build --analyze && echo 'CSS Analysis Complete'",
+      "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
+      "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
+    },
   "dependencies": {
     "@iconify-json/lucide": "1.2.60",
     "@nuxt/devtools": "1.6.0",
@@ -71,7 +71,6 @@
     "@nuxt/eslint": "1.7.1",
     "@nuxt/kit": "3.18.0",
     "@nuxtjs/tailwindcss": "6.14.0",
-    "@tailwindcss/postcss": "4.1.11",
     "@testing-library/vue": "8.1.0",
     "@types/node": "20.19.9",
     "@typescript-eslint/parser": "8.39.0",
@@ -88,7 +87,7 @@
     "lighthouse": "12.8.1",
     "prettier": "3.6.2",
     "supabase": "2.33.9",
-    "tailwindcss": "4.1.11",
+    "tailwindcss": "3.4.17",
     "typescript": "5.8.2",
     "vitest": "3.2.4",
     "vue-tsc": "3.0.5",
