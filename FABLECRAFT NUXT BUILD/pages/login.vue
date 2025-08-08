@@ -135,8 +135,10 @@ const signupMessageType = ref<'error' | 'success' | 'warning' | 'info' | 'defaul
 
 // Navigation handlers
 const handleAuth = () => {
-  // Navigate to auth page or trigger auth modal
-  navigateTo('/auth')
+  if (process.client) {
+    const { open } = useAuthOverlay()
+    open('login')
+  }
 }
 
 const handleLogout = async () => {

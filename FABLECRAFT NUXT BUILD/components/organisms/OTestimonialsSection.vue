@@ -1,5 +1,5 @@
 <template>
-  <section :class="sectionClasses" aria-label="Testimonials Section">
+  <section :class="[sectionClasses, 'surface-atmo rounded-2xl p-6']" aria-label="Testimonials Section">
     <!-- Testimonials Header -->
     <div class="text-center heading-group space-y-3">
       <!-- Badge -->

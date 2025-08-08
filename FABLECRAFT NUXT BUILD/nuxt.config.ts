@@ -15,7 +15,7 @@ export default defineNuxtConfig({
 
   // Development server configuration for Cursor port forwarding
   devServer: {
-    port: 3000,
+    port: 8000,
     host: '0.0.0.0',
   },
 
@@ -54,19 +54,16 @@ export default defineNuxtConfig({
   // Explicitly load the global stylesheet
   css: ['~/assets/css/main.css'],
 
-  // ✅ NEW: Phase 3 - Modern PostCSS optimization
+  // ✅ Tailwind v3-compatible PostCSS integration
   postcss: {
     plugins: {
-      'tailwindcss/nesting': {},
       tailwindcss: {},
       autoprefixer: {},
       ...(isDev ? {} : {
         cssnano: {
           preset: ['default', {
-            // Preserve important CSS for design system
             reduceIdents: false,
             zindex: false,
-            // Optimize safely
             normalizeWhitespace: true,
             colormin: true,
             minifyFontValues: true,
@@ -186,7 +183,7 @@ export default defineNuxtConfig({
     // ✅ NEW: Nitro-level optimizations
     minify: !isDev,
     sourceMap: isDev,
-    timing: isDev, // Performance timing in development
+    timing: false, // Disable timing to avoid missing dev timing file issues
 
     // ✅ FIXED: Prerender error handling for reliable builds
     prerender: {

@@ -6,9 +6,16 @@
         {{ title }}
       </span>
 
-      <!-- Highlighted gradient text part -->
+      <!-- Highlighted text part (no gradient if disabled) -->
+      <br v-if="breakHighlight" />
+      <span
+        v-if="highlightText && disableGradient"
+        class="inline-block text-foreground transition-all duration-300"
+      >
+        {{ highlightText }}
+      </span>
       <AGradientText
-        v-if="highlightText"
+        v-else-if="highlightText"
         :tag="'span'"
         :variant="gradientVariant"
         :direction="gradientDirection"
@@ -51,6 +58,8 @@ interface HeroHeadingProps {
   gradientAnimation?: 'none' | 'shimmer' | 'pulse' | 'flow'
   spacing?: 'tight' | 'normal' | 'relaxed'
   className?: string
+  breakHighlight?: boolean
+  disableGradient?: boolean
 }
 
 // Component setup
@@ -70,6 +79,8 @@ const props = withDefaults(defineProps<HeroHeadingProps>(), {
   gradientAnimation: 'none',
   spacing: 'normal',
   className: '',
+  breakHighlight: false,
+  disableGradient: false,
 })
 
 // Computed properties
@@ -96,10 +107,10 @@ const headingContainerClasses = computed(() => {
 
 const headingClasses = computed(() => {
   const variantClasses = {
-    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm', // Removed mb-4 since webkit fix handles clipping
-    compact: 'font-bold leading-tight tracking-normal',
-    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg', // Removed mb-6 since webkit fix handles clipping
-  }
+  default: 'font-black leading-[1.2] tracking-tight drop-shadow-md', // Slightly stronger for readability over effects
+  compact: 'font-bold leading-tight tracking-normal',
+  dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg', // Removed mb-6 since webkit fix handles clipping
+}
 
   const sizeClasses = {
     sm: 'text-2xl sm:text-3xl lg:text-4xl',
@@ -132,7 +143,7 @@ const subheadingClasses = computed(() => {
   }
 
   return cn(
-    'text-muted-foreground leading-normal font-medium', // Changed from leading-relaxed to leading-normal
+    'text-foreground leading-normal font-medium', // use foreground for black/white per theme
     'transition-all duration-300',
     alignmentClasses[props.alignment],
     sizeClasses[props.size]

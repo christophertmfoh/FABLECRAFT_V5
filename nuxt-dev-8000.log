@@ -1,0 +1,230 @@
+
+> fablecraft-foundation@ predev /workspace/FABLECRAFT NUXT BUILD
+> ./AGENT_INIT.sh
+
+🚀 Agent initialization complete
+⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️
+
+> fablecraft-foundation@ dev /workspace/FABLECRAFT NUXT BUILD
+> echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev --port 8000 --host 0.0.0.0
+
+⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️
+[nuxi] Nuxt 3.18.0 with Nitro 2.12.4
+[get-port] Unable to find an available port (tried 8000 on host "0.0.0.0"). Using alternative port 3000.
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ ██▄ █▀▀▄█▀█ █▀▀▀█ █
+              █ █   █ ██▀█▀▄▄▄███ █   █ █
+              █ ▀▀▀▀▀ █▀█ █ ▄▀█ █ ▀▀▀▀▀ █
+              █▀▀█▀▀█▀█▄▀  █▄█▄ █▀█████▀█
+              █▄▀ █▀█▀█▄▄▀▀▄█▀ ▄ ▀▀▄ ▄▄▀█
+              █ ▄▀█  ▀█  ▄  █▀▀▄ ▀▄█▄▄▄ █
+              █ ▀▄▀▄ ▀▄  █▀▀ █ ▀▀█▄▄▀▀ ▀█
+              █ █▄▄  ▀▄▄ ▄▄█▀ ▄▀▀▀▀ █ ▀▄█
+              █▀▀▀▀▀▀▀█▄█▀ ▄▀ █ █▀█ ▀█▄▀█
+              █ █▀▀▀█ █▀ ██ ▄▄▀ ▀▀▀ ▀█ ▀█
+              █ █   █ █▄ ██▀ ▄▀▄█▄▄▀▄▀  █
+              █ ▀▀▀▀▀ █ ▀██▀▀  ▀▄▄▄▄▀▄▄ █
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://0.0.0.0:3000/
+  ➜ Network:  http://172.30.0.2:3000/ [QR code]
+
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 32ms
+✔ Vite server built in 460ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 644ms
+ℹ Vite client warmed up in 2ms
+ℹ Vite server warmed up in 1266ms
+ℹ hmr update /components/molecules/MHeroHeading.vue, /node_modules/.pnpm/tailwindcss@3.4.17/node_modules/tailwindcss/tailwind.css, /assets/css/main.css, /node_modules/.pnpm/tailwindcss@3.4.17/node_modules/tailwindcss/tailwind.css?direct, /assets/css/main.css?direct, /components/molecules/MHeroHeading.vue?direct&vue&type=style&index=0&scoped=409560ab&lang.css
+ℹ page reload components/atoms/BadgeWithDot.vue
+✔ Vite server hmr 11 files in 12.732ms
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 15ms
+✔ Vite server built in 956ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 587ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 1459ms
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 11ms
+✔ Vite server built in 602ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 552ms
+ℹ Vite client warmed up in 227ms
+ℹ Vite server warmed up in 1955ms
+ℹ page reload components/molecules/MHeroHeading.vue
+ℹ page reload components/organisms/OHeroSection.vue
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 33ms
+✔ Vite server built in 1130ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 766ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 1742ms
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 19ms
+✔ Vite server built in 693ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 530ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 1377ms
+ERROR  [request error] [unhandled] [GET] http://127.0.0.1:46341/
+
+ 
+[31mℹ Error: Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs[39m
+
+[2m ⁃ at [3mimportNotDefined[23m ([3mnode:internal/modules/esm/resolve:301:10[23m)[22m
+[2m ⁃ at [3mpackageImportsResolve[23m ([3mnode:internal/modules/esm/resolve:751:9[23m)[22m
+[2m ⁃ at [3mmoduleResolve[23m ([3mnode:internal/modules/esm/resolve:844:16[23m)[22m
+[2m ⁃ at [3mdefaultResolve[23m ([3mnode:internal/modules/esm/resolve:984:11[23m)[22m
+[2m ⁃ at [3mModuleLoader.defaultResolve[23m ([3mnode:internal/modules/esm/loader:780:12[23m)[22m
+[2m ⁃ at [3m#cachedDefaultResolve[23m ([3mnode:internal/modules/esm/loader:704:25[23m)[22m
+[2m ⁃ at [3mModuleLoader.resolve[23m ([3mnode:internal/modules/esm/loader:687:38[23m)[22m
+[2m ⁃ at [3mModuleLoader.getModuleJobForImport[23m ([3mnode:internal/modules/esm/loader:305:38[23m)[22m
+[2m ⁃ at [3mModuleJob._link[23m ([3mnode:internal/modules/esm/module_job:137:49[23m)[22m
+
+[31m[CAUSE][39m
+TypeError {
+  stack: 'Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs\n' +
+  '    at importNotDefined (node:internal/modules/esm/resolve:301:10)\n' +
+  '    at packageImportsResolve (node:internal/modules/esm/resolve:751:9)\n' +
+  '    at moduleResolve (node:internal/modules/esm/resolve:844:16)\n' +
+  '    at defaultResolve (node:internal/modules/esm/resolve:984:11)\n' +
+  '    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)\n' +
+  '    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)\n' +
+  '    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)\n' +
+  '    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)\n' +
+  '    at ModuleJob._link (node:internal/modules/esm/module_job:137:49)',
+  code: 'ERR_PACKAGE_IMPORT_NOT_DEFINED',
+  message: 'Package import specifier "#internal/nuxt/paths" is not defined in 
+  package ./package.json imported from 
+  ./.nuxt/dist/server/server.mjs',
+}
+ERROR  [request error] [unhandled] [GET] http://127.0.0.1:46341/__nuxt_error?error=true&url=%2F&statusCode=500&statusMessage=Server+Error&message=Package+import+specifier+%22%23internal%2Fnuxt%2Fpaths%22+is+not+defined+in+package+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2Fpackage.json+imported+from+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2F.nuxt%2Fdist%2Fserver%2Fserver.mjs&stack=Package+import+specifier+%22%23internal%2Fnuxt%2Fpaths%22+is+not+defined+in+package+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2Fpackage.json+imported+from+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2F.nuxt%2Fdist%2Fserver%2Fserver.mjs%0Aat+importNotDefined+(node:internal%2Fmodules%2Fesm%2Fresolve:301:10)%0Aat+packageImportsResolve+(node:internal%2Fmodules%2Fesm%2Fresolve:751:9)%0Aat+moduleResolve+(node:internal%2Fmodules%2Fesm%2Fresolve:844:16)%0Aat+defaultResolve+(node:internal%2Fmodules%2Fesm%2Fresolve:984:11)%0Aat+ModuleLoader.defaultResolve+(node:internal%2Fmodules%2Fesm%2Floader:780:12)%0Aat+%23cachedDefaultResolve+(node:internal%2Fmodules%2Fesm%2Floader:704:25)%0Aat+ModuleLoader.resolve+(node:internal%2Fmodules%2Fesm%2Floader:687:38)%0Aat+ModuleLoader.getModuleJobForImport+(node:internal%2Fmodules%2Fesm%2Floader:305:38)%0Aat+ModuleJob._link+(node:internal%2Fmodules%2Fesm%2Fmodule_job:137:49)
+
+ 
+[31mℹ Error: Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs[39m
+
+[2m ⁃ at [3mimportNotDefined[23m ([3mnode:internal/modules/esm/resolve:301:10[23m)[22m
+[2m ⁃ at [3mpackageImportsResolve[23m ([3mnode:internal/modules/esm/resolve:751:9[23m)[22m
+[2m ⁃ at [3mmoduleResolve[23m ([3mnode:internal/modules/esm/resolve:844:16[23m)[22m
+[2m ⁃ at [3mdefaultResolve[23m ([3mnode:internal/modules/esm/resolve:984:11[23m)[22m
+[2m ⁃ at [3mModuleLoader.defaultResolve[23m ([3mnode:internal/modules/esm/loader:780:12[23m)[22m
+[2m ⁃ at [3m#cachedDefaultResolve[23m ([3mnode:internal/modules/esm/loader:704:25[23m)[22m
+[2m ⁃ at [3mModuleLoader.resolve[23m ([3mnode:internal/modules/esm/loader:687:38[23m)[22m
+[2m ⁃ at [3mModuleLoader.getModuleJobForImport[23m ([3mnode:internal/modules/esm/loader:305:38[23m)[22m
+[2m ⁃ at [3mModuleJob._link[23m ([3mnode:internal/modules/esm/module_job:137:49[23m)[22m
+
+[31m[CAUSE][39m
+TypeError {
+  stack: 'Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs\n' +
+  '    at importNotDefined (node:internal/modules/esm/resolve:301:10)\n' +
+  '    at packageImportsResolve (node:internal/modules/esm/resolve:751:9)\n' +
+  '    at moduleResolve (node:internal/modules/esm/resolve:844:16)\n' +
+  '    at defaultResolve (node:internal/modules/esm/resolve:984:11)\n' +
+  '    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)\n' +
+  '    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)\n' +
+  '    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)\n' +
+  '    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)\n' +
+  '    at ModuleJob._link (node:internal/modules/esm/module_job:137:49)',
+  code: 'ERR_PACKAGE_IMPORT_NOT_DEFINED',
+  message: 'Package import specifier "#internal/nuxt/paths" is not defined in 
+  package ./package.json imported from 
+  ./.nuxt/dist/server/server.mjs',
+}
+ERROR  [request error] [unhandled] [GET] http://127.0.0.1:46341/?vscodeBrowserReqId=1754629373611
+
+ 
+[31mℹ Error: Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs[39m
+
+[2m ⁃ at [3mimportNotDefined[23m ([3mnode:internal/modules/esm/resolve:301:10[23m)[22m
+[2m ⁃ at [3mpackageImportsResolve[23m ([3mnode:internal/modules/esm/resolve:751:9[23m)[22m
+[2m ⁃ at [3mmoduleResolve[23m ([3mnode:internal/modules/esm/resolve:844:16[23m)[22m
+[2m ⁃ at [3mdefaultResolve[23m ([3mnode:internal/modules/esm/resolve:984:11[23m)[22m
+[2m ⁃ at [3mModuleLoader.defaultResolve[23m ([3mnode:internal/modules/esm/loader:780:12[23m)[22m
+[2m ⁃ at [3m#cachedDefaultResolve[23m ([3mnode:internal/modules/esm/loader:704:25[23m)[22m
+[2m ⁃ at [3mModuleLoader.resolve[23m ([3mnode:internal/modules/esm/loader:687:38[23m)[22m
+[2m ⁃ at [3mModuleLoader.getModuleJobForImport[23m ([3mnode:internal/modules/esm/loader:305:38[23m)[22m
+[2m ⁃ at [3mModuleJob._link[23m ([3mnode:internal/modules/esm/module_job:137:49[23m)[22m
+
+[31m[CAUSE][39m
+TypeError {
+  stack: 'Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs\n' +
+  '    at importNotDefined (node:internal/modules/esm/resolve:301:10)\n' +
+  '    at packageImportsResolve (node:internal/modules/esm/resolve:751:9)\n' +
+  '    at moduleResolve (node:internal/modules/esm/resolve:844:16)\n' +
+  '    at defaultResolve (node:internal/modules/esm/resolve:984:11)\n' +
+  '    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)\n' +
+  '    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)\n' +
+  '    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)\n' +
+  '    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)\n' +
+  '    at ModuleJob._link (node:internal/modules/esm/module_job:137:49)',
+  code: 'ERR_PACKAGE_IMPORT_NOT_DEFINED',
+  message: 'Package import specifier "#internal/nuxt/paths" is not defined in 
+  package ./package.json imported from 
+  ./.nuxt/dist/server/server.mjs',
+}
+ERROR  [request error] [unhandled] [GET] http://127.0.0.1:46341/__nuxt_error?error=true&url=%2F?vscodeBrowserReqId=1754629373611&statusCode=500&statusMessage=Server+Error&message=Package+import+specifier+%22%23internal%2Fnuxt%2Fpaths%22+is+not+defined+in+package+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2Fpackage.json+imported+from+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2F.nuxt%2Fdist%2Fserver%2Fserver.mjs&stack=Package+import+specifier+%22%23internal%2Fnuxt%2Fpaths%22+is+not+defined+in+package+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2Fpackage.json+imported+from+%2Fworkspace%2FFABLECRAFT+NUXT+BUILD%2F.nuxt%2Fdist%2Fserver%2Fserver.mjs%0Aat+importNotDefined+(node:internal%2Fmodules%2Fesm%2Fresolve:301:10)%0Aat+packageImportsResolve+(node:internal%2Fmodules%2Fesm%2Fresolve:751:9)%0Aat+moduleResolve+(node:internal%2Fmodules%2Fesm%2Fresolve:844:16)%0Aat+defaultResolve+(node:internal%2Fmodules%2Fesm%2Fresolve:984:11)%0Aat+ModuleLoader.defaultResolve+(node:internal%2Fmodules%2Fesm%2Floader:780:12)%0Aat+%23cachedDefaultResolve+(node:internal%2Fmodules%2Fesm%2Floader:704:25)%0Aat+ModuleLoader.resolve+(node:internal%2Fmodules%2Fesm%2Floader:687:38)%0Aat+ModuleLoader.getModuleJobForImport+(node:internal%2Fmodules%2Fesm%2Floader:305:38)%0Aat+ModuleJob._link+(node:internal%2Fmodules%2Fesm%2Fmodule_job:137:49)
+
+ 
+[31mℹ Error: Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs[39m
+
+[2m ⁃ at [3mimportNotDefined[23m ([3mnode:internal/modules/esm/resolve:301:10[23m)[22m
+[2m ⁃ at [3mpackageImportsResolve[23m ([3mnode:internal/modules/esm/resolve:751:9[23m)[22m
+[2m ⁃ at [3mmoduleResolve[23m ([3mnode:internal/modules/esm/resolve:844:16[23m)[22m
+[2m ⁃ at [3mdefaultResolve[23m ([3mnode:internal/modules/esm/resolve:984:11[23m)[22m
+[2m ⁃ at [3mModuleLoader.defaultResolve[23m ([3mnode:internal/modules/esm/loader:780:12[23m)[22m
+[2m ⁃ at [3m#cachedDefaultResolve[23m ([3mnode:internal/modules/esm/loader:704:25[23m)[22m
+[2m ⁃ at [3mModuleLoader.resolve[23m ([3mnode:internal/modules/esm/loader:687:38[23m)[22m
+[2m ⁃ at [3mModuleLoader.getModuleJobForImport[23m ([3mnode:internal/modules/esm/loader:305:38[23m)[22m
+[2m ⁃ at [3mModuleJob._link[23m ([3mnode:internal/modules/esm/module_job:137:49[23m)[22m
+
+[31m[CAUSE][39m
+TypeError {
+  stack: 'Package import specifier "#internal/nuxt/paths" is not defined in package ./package.json imported from ./.nuxt/dist/server/server.mjs\n' +
+  '    at importNotDefined (node:internal/modules/esm/resolve:301:10)\n' +
+  '    at packageImportsResolve (node:internal/modules/esm/resolve:751:9)\n' +
+  '    at moduleResolve (node:internal/modules/esm/resolve:844:16)\n' +
+  '    at defaultResolve (node:internal/modules/esm/resolve:984:11)\n' +
+  '    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12)\n' +
+  '    at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25)\n' +
+  '    at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38)\n' +
+  '    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38)\n' +
+  '    at ModuleJob._link (node:internal/modules/esm/module_job:137:49)',
+  code: 'ERR_PACKAGE_IMPORT_NOT_DEFINED',
+  message: 'Package import specifier "#internal/nuxt/paths" is not defined in 
+  package ./package.json imported from 
+  ./.nuxt/dist/server/server.mjs',
+}

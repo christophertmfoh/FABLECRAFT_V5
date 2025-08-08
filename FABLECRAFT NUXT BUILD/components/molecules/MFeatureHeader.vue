@@ -22,6 +22,7 @@
       :gradient-direction="gradientDirection"
       :gradient-intensity="gradientIntensity"
       :spacing="headingSpacing"
+      :break-highlight="true"
     />
   </div>
 </template>

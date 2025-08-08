@@ -125,3 +125,134 @@
   transform: translateY(-1px) translateZ(0);
   filter: drop-shadow(0 4px 12px hsl(var(--foreground) / 0.08));
 }
+
+/* Atmospheric utilities */
+.surface-atmo {
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--card) / 0.32) 0%,
+      hsl(var(--card) / 0.22) 100%
+    );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsl(var(--border) / 0.35);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.18),
+    inset 0 1px 0 hsl(var(--foreground) / 0.04);
+}
+
+.text-pop {
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.04),
+    0 2px 8px rgba(0,0,0,0.10);
+}
+
+.shadow-atmo {
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.18),
+    0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ========================================
+   PREMIUM INTERACTIVE UTILITIES
+   Glassy buttons with animated sheen
+======================================== */
+ .button-premium {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 0.75rem; /* match rounded-xl */
+    /* subtle depth + inner highlight */
+    box-shadow:
+      0 10px 25px hsl(var(--foreground) / 0.10),
+      0 2px 6px hsl(var(--foreground) / 0.06),
+      inset 0 1px 0 hsla(0, 0%, 100%, 0.20);
+  }
+
+.button-premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+.button-premium::before {
+  content: '';
+  position: absolute;
+  top: -120%;
+  left: -160%;
+  width: 55%;
+  height: 340%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+  transform: translateX(0) rotate(25deg);
+  transition: transform 600ms ease, opacity 600ms ease;
+  opacity: 0.0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.button-premium:hover::before {
+  transform: translateX(360%) rotate(25deg);
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-premium::before {
+    transition: none;
+  }
+}
+
+/* Gradient border that uses theme colors like the feather stroke */
+.button-gradient-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--card) / 0.40) 0%,
+      hsl(var(--card) / 0.26) 100%
+    ) padding-box,
+    linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 50%,
+      hsl(var(--primary)) 100%
+    ) border-box;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Subtle colored glow echoing the feather */
+.button-color-glow {
+  box-shadow:
+    0 0 0 1px hsl(var(--border) / 0.35) inset,
+    0 10px 24px hsl(var(--primary) / 0.18),
+    0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Feather-style button surface: dark glass base + accent gradient border */
+.button-feather {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--card) / 0.40) 0%,
+      hsl(var(--card) / 0.26) 100%
+    ) padding-box,
+    linear-gradient(
+      135deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--primary)) 100%
+    ) border-box;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.20),
+    inset 0 1px 0 hsl(var(--foreground) / 0.06);
+}
+
+/* Inherit border radius utility for overlays matching parent rounding */
+.rounded-inherit { border-radius: inherit; }

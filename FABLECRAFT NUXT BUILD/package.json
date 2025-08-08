@@ -2,9 +2,6 @@
   "name": "fablecraft-foundation",
   "private": true,
   "type": "module",
-  "imports": {
-    "#internal/nuxt/paths": "./node_modules/nuxt/dist/core/runtime/nitro/utils/paths.js"
-  },
   "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "init": "./AGENT_INIT.sh",
@@ -44,9 +41,12 @@
     "performance": "nuxt build && npx nuxi analyze",
     "lighthouse": "npm run build:prod & sleep 10 && npx lighthouse http://localhost:3000 --only-categories=performance --output=json --output-path=lighthouse-report.json",
     "test:cache-headers": "curl -I http://localhost:3000/ && curl -I http://localhost:3000/_nuxt/",
-    "analyze:css": "nuxt build --analyze && echo 'CSS Analysis Complete'",
-    "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
-    "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
+          "analyze:css": "nuxt build --analyze && echo 'CSS Analysis Complete'",
+      "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
+      "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
+    },
+  "imports": {
+    "#internal/nuxt/paths": "./.nuxt/dist/server/_nuxt/paths.mjs"
   },
   "dependencies": {
     "@iconify-json/lucide": "1.2.60",
@@ -76,6 +76,7 @@
     "@typescript-eslint/parser": "8.39.0",
     "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.6",
+    "autoprefixer": "10.4.21",
     "cssnano": "7.1.0",
     "eslint": "9.32.0",
     "eslint-config-prettier": "10.1.8",
@@ -86,7 +87,7 @@
     "lighthouse": "12.8.1",
     "prettier": "3.6.2",
     "supabase": "2.33.9",
-    "tailwindcss": "4.1.11",
+    "tailwindcss": "3.4.17",
     "typescript": "5.8.2",
     "vitest": "3.2.4",
     "vue-tsc": "3.0.5",

@@ -1,17 +1,19 @@
 <template>
   <div class="inline-flex items-center gap-2">
-    <!-- Pulsing dot -->
+    <!-- Pulsing dot with premium sheen -->
     <span :class="dotClasses" :aria-hidden="true">
       <span
         v-if="animated"
         class="absolute inset-0 rounded-full animate-ping"
         :class="dotPingClasses"
       />
-      <span class="relative block w-full h-full rounded-full" :class="dotCoreClasses" />
+      <span class="relative block w-full h-full rounded-full shadow-atmo" :class="dotCoreClasses">
+        <span class="absolute inset-0 rounded-full" :class="dotSheenClasses" />
+      </span>
     </span>
 
-    <!-- Badge content -->
-    <Badge :variant="variant" :size="size" :class="badgeClass">
+    <!-- Badge content with feather-style surface -->
+    <Badge :variant="variant" :size="size" :class="cn('button-feather rounded-xl px-2.5 py-1.5 text-foreground font-semibold', badgeClass)">
       <slot />
     </Badge>
   </div>
@@ -91,5 +93,10 @@ const dotPingClasses = computed(() => {
 // Compute dot core classes
 const dotCoreClasses = computed(() => {
   return cn(dotColorClasses[props.dotColor])
+})
+
+// Add subtle sheen overlay to dot
+const dotSheenClasses = computed(() => {
+  return cn('pointer-events-none', 'bg-[linear-gradient(180deg,rgba(255,255,255,0.35),rgba(255,255,255,0))]')
 })
 </script>

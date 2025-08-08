@@ -133,9 +133,10 @@ const fieldClasses = computed(() => {
 })
 
 const labelClasses = computed(() => {
-  return cn('transition-colors duration-200', {
+  return cn('transition-colors duration-200 text-foreground', {
     'text-primary': isFocused.value && !props.hasError,
     'text-destructive': props.hasError,
+    'text-muted-foreground': props.disabled,
   })
 })
 

@@ -1,5 +1,5 @@
 <template>
-  <section :class="sectionClasses" aria-label="Features Section">
+  <section :class="[sectionClasses, 'surface-atmo rounded-2xl p-6']" aria-label="Features Section">
     <!-- Feature Header -->
     <MFeatureHeader
       :badge-text="headerBadgeText"

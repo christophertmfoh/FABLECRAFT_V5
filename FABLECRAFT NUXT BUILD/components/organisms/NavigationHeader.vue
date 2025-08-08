@@ -6,6 +6,7 @@
         <NavigationLogo
           :brand-text="brandText"
           :show-text="showBrandText"
+          class="text-pop"
           @click="handleLogoClick"
         />
 
@@ -27,9 +28,8 @@
                   <GradientButton
                     variant="default"
                     size="default"
-                    :show-gradient-overlay="true"
-                    gradient-colors="from-primary-foreground/25 to-transparent"
-                    class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                    :show-gradient-overlay="false"
+                    class="px-4 py-2 font-semibold rounded-2xl"
                     :aria-label="`User menu for ${displayName}`"
                   >
                     <template #leading>
@@ -158,9 +158,8 @@
               v-else
               variant="default"
               size="default"
-              :show-gradient-overlay="true"
-              gradient-colors="from-primary-foreground/25 to-transparent"
-              class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+              :show-gradient-overlay="false"
+              class="px-4 py-2 font-semibold rounded-2xl"
               :aria-label="authButtonText"
               @click="handleAuthClick"
             >
@@ -267,7 +266,10 @@ const handleLogoClick = () => {
 // Handle authentication click
 const handleAuthClick = () => {
   emit('auth:click')
-  navigateTo('/auth')
+  if (process.client) {
+    const { open } = useAuthOverlay()
+    open('login')
+  }
 }
 
 // Handle logout - delegate to parent
