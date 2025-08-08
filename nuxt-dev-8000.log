@@ -72,3 +72,31 @@
 [nitro] ✔ Nuxt Nitro server built in 552ms
 ℹ Vite client warmed up in 227ms
 ℹ Vite server warmed up in 1955ms
+ℹ page reload components/molecules/MHeroHeading.vue
+ℹ page reload components/organisms/OHeroSection.vue
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 33ms
+✔ Vite server built in 1130ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 766ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 1742ms
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 19ms
+✔ Vite server built in 693ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 530ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 1377ms

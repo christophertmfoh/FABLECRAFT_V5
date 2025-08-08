@@ -6,10 +6,16 @@
         {{ title }}
       </span>
 
-      <!-- Highlighted gradient text part -->
+      <!-- Highlighted text part (no gradient if disabled) -->
       <br v-if="breakHighlight" />
+      <span
+        v-if="highlightText && disableGradient"
+        class="inline-block text-foreground transition-all duration-300"
+      >
+        {{ highlightText }}
+      </span>
       <AGradientText
-        v-if="highlightText"
+        v-else-if="highlightText"
         :tag="'span'"
         :variant="gradientVariant"
         :direction="gradientDirection"
@@ -53,6 +59,7 @@ interface HeroHeadingProps {
   spacing?: 'tight' | 'normal' | 'relaxed'
   className?: string
   breakHighlight?: boolean
+  disableGradient?: boolean
 }
 
 // Component setup
@@ -73,6 +80,7 @@ const props = withDefaults(defineProps<HeroHeadingProps>(), {
   spacing: 'normal',
   className: '',
   breakHighlight: false,
+  disableGradient: false,
 })
 
 // Computed properties

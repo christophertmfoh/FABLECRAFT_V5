@@ -1,56 +1,60 @@
 <template>
   <section :class="heroSectionClasses" :aria-labelledby="headingId" role="banner">
     <Container size="xl">
-      <!-- Hero Content -->
-      <div class="hero-content">
-        <!-- Hero Badge -->
-        <MHeroBadge
-          :text="badgeText"
-          :variant="badgeVariant"
-          :size="badgeSize"
-          :dot-color="badgeDotColor"
-          :dot-speed="badgeDotSpeed"
-          :clickable="badgeClickable"
-          @click="handleBadgeClick"
-        />
+      <!-- Glass wrapper experiment -->
+      <GlassCard variant="heavy" class="surface-atmo rounded-2xl ring-1 ring-border/40 p-8">
+        <!-- Hero Content -->
+        <div class="hero-content">
+          <!-- Hero Badge -->
+          <MHeroBadge
+            :text="badgeText"
+            :variant="badgeVariant"
+            :size="badgeSize"
+            :dot-color="badgeDotColor"
+            :dot-speed="badgeDotSpeed"
+            :clickable="badgeClickable"
+            @click="handleBadgeClick"
+          />
 
-        <!-- Hero Heading -->
-        <MHeroHeading class="text-pop"
-          :title="title"
-          :highlight-text="highlightText"
-          :subheading="description"
-          :heading-tag="headingTag"
-          :heading-id="headingId"
-          :variant="headingVariant"
-          :size="headingSize"
-          :alignment="alignment"
-          :gradient-variant="gradientVariant"
-          :gradient-direction="gradientDirection"
-          :gradient-intensity="gradientIntensity"
-          :gradient-animation="gradientAnimation"
-          :spacing="headingSpacing"
-        />
+          <!-- Hero Heading (gradient disabled) -->
+          <MHeroHeading class="text-pop"
+            :title="title"
+            :highlight-text="highlightText"
+            :subheading="description"
+            :heading-tag="headingTag"
+            :heading-id="headingId"
+            :variant="headingVariant"
+            :size="headingSize"
+            :alignment="alignment"
+            :gradient-variant="gradientVariant"
+            :gradient-direction="gradientDirection"
+            :gradient-intensity="gradientIntensity"
+            :gradient-animation="gradientAnimation"
+            :spacing="headingSpacing"
+            :disable-gradient="true"
+          />
 
-        <!-- Hero Actions -->
-        <MHeroActions
-          :primary-text="primaryButtonText"
-          :secondary-text="secondaryButtonText"
-          :primary-icon="primaryButtonIcon"
-          :secondary-icon="secondaryButtonIcon"
-          :primary-variant="primaryButtonVariant"
-          :secondary-variant="secondaryButtonVariant"
-          :button-size="buttonSize"
-          :layout="buttonLayout"
-          :alignment="alignment"
-          :spacing="buttonSpacing"
-          :primary-disabled="primaryDisabled"
-          :secondary-disabled="secondaryDisabled"
-          :group-label="buttonGroupLabel"
-          :class="actionsClasses"
-          @primary:click="handlePrimaryClick"
-          @secondary:click="handleSecondaryClick"
-        />
-      </div>
+          <!-- Hero Actions -->
+          <MHeroActions
+            :primary-text="primaryButtonText"
+            :secondary-text="secondaryButtonText"
+            :primary-icon="primaryButtonIcon"
+            :secondary-icon="secondaryButtonIcon"
+            :primary-variant="primaryButtonVariant"
+            :secondary-variant="secondaryButtonVariant"
+            :button-size="buttonSize"
+            :layout="buttonLayout"
+            :alignment="alignment"
+            :spacing="buttonSpacing"
+            :primary-disabled="primaryDisabled"
+            :secondary-disabled="secondaryDisabled"
+            :group-label="buttonGroupLabel"
+            :class="actionsClasses"
+            @primary:click="handlePrimaryClick"
+            @secondary:click="handleSecondaryClick"
+          />
+        </div>
+      </GlassCard>
     </Container>
   </section>
 </template>
