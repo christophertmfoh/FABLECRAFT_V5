@@ -42,4 +42,55 @@
 🚀 Phase 2 route rules optimization enabled
 [nitro] ✔ Nuxt Nitro server built in 720ms
 ℹ Vite client warmed up in 2ms
-ℹ Vite server warmed up in 1352ms
+ℹ Vite server warmed up in 1352mℹ hmr update /assets/css/main.css, /ℹ hmr update /components/atoms/Button.vue, /node_modules/.pnpm/tailwindcss@3.4.17/node_modules/tailwindcss/tailwind.css, /assets/css/main.css
+ℹ page reload components/atoms/GradientButton.vue
+ℹ page reload components/organisms/NavigationHeader.vue
+ℹ page reload components/organisms/NavigationHeader.vue (x2)
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 84ms
+✔ Vite server built in 2655ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 1748ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 3137ms
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 22ms
+✔ Vite server built in 1053ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 1148ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 2441ms
+ set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 31ms
+✔ Vite server built in 2097ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 1454ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 4452ms
+ℹ .nuxt/dist directory has been removed. Restarting Nuxt...
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 55ms
+✔ Vite server built in 1515ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 1381ms
+ℹ Vite client warmed up in 1ms
+ℹ Vite server warmed up in 2460ms

@@ -28,8 +28,7 @@
                   <GradientButton
                     variant="default"
                     size="default"
-                    :show-gradient-overlay="true"
-                    gradient-colors="from-primary-foreground/25 to-transparent"
+                    :show-gradient-overlay="false"
                     class="px-4 py-2 font-semibold rounded-2xl"
                     :aria-label="`User menu for ${displayName}`"
                   >
@@ -159,8 +158,7 @@
               v-else
               variant="default"
               size="default"
-              :show-gradient-overlay="true"
-              gradient-colors="from-primary-foreground/25 to-transparent"
+              :show-gradient-overlay="false"
               class="px-4 py-2 font-semibold rounded-2xl"
               :aria-label="authButtonText"
               @click="handleAuthClick"

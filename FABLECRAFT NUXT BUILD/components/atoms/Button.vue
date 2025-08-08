@@ -33,14 +33,14 @@ import type { RouteLocationRaw } from 'vue-router'
 
 // Button variants using CVA
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 button-premium hover:translate-y-[-1px] [&>*]:rounded-inherit',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 button-premium hover:translate-y-[-1px] [&>*]:rounded-inherit button-feather',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-foreground hover:bg-primary/90 button-gradient-border button-color-glow',
+        default: 'text-foreground',
         destructive: 'bg-destructive text-foreground hover:bg-destructive/90',
         outline:
-          'border border-transparent text-foreground button-gradient-border hover:bg-accent/20 button-color-glow',
+          'text-foreground',
         secondary: 'bg-secondary text-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent/20 text-foreground/80 hover:text-foreground',
         link: 'text-foreground underline-offset-4 hover:underline no-underline',

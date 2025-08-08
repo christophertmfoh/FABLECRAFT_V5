@@ -233,5 +233,26 @@
     0 2px 8px rgba(0,0,0,0.12);
 }
 
+/* Feather-style button surface: dark glass base + accent gradient border */
+.button-feather {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--card) / 0.40) 0%,
+      hsl(var(--card) / 0.26) 100%
+    ) padding-box,
+    linear-gradient(
+      135deg,
+      hsl(var(--accent)) 0%,
+      hsl(var(--primary)) 100%
+    ) border-box;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.20),
+    inset 0 1px 0 hsl(var(--foreground) / 0.06);
+}
+
 /* Inherit border radius utility for overlays matching parent rounding */
 .rounded-inherit { border-radius: inherit; }
