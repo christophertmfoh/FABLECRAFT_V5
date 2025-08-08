@@ -1,7 +1,7 @@
 <template>
   <Button
     v-bind="$props"
-    :class="cn('relative overflow-hidden group button-premium', $attrs.class)"
+    :class="cn('relative overflow-hidden group button-premium button-gradient-border button-color-glow rounded-xl', $attrs.class)"
     @click="$emit('click', $event)"
   >
     <!-- Gradient overlay -->
