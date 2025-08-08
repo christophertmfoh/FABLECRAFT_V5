@@ -1,50 +1,23 @@
 <template>
   <section :class="sectionClasses" aria-label="Pricing Section">
     <!-- Pricing Header -->
-    <div class="text-center heading-group space-y-3">
-      <!-- Badge -->
-      <MHeroBadge
-        :text="headerBadgeText"
-        :variant="'default'"
-        :size="isCompact ? 'sm' : 'base'"
-        :dot-color="'primary'"
-        :clickable="false"
-      />
-
-      <!-- Custom heading with forced line break -->
-      <div
-        class="heading-group flex flex-col pb-2 text-center space-y-2"
-        role="heading"
-        aria-level="2"
-      >
-        <h2 :class="headingClasses">
-          <!-- First line -->
-          <div class="text-foreground">
-            {{ headerTitle }}
-          </div>
-          <!-- Second line with gradient -->
-          <AGradientText
-            tag="div"
-            :variant="gradientVariant"
-            direction="to-r"
-            intensity="normal"
-            class="inline-block transition-all duration-300"
-          >
-            {{ headerHighlightText }}
-          </AGradientText>
-        </h2>
-      </div>
-
-      <!-- Subtitle -->
-      <Text
-        v-if="headerSubtitle"
-        tag="p"
-        :size="isCompact ? 'base' : 'lg'"
-        :class="subtitleClasses"
-      >
-        {{ headerSubtitle }}
-      </Text>
-    </div>
+    <MFeatureHeader
+      :badge-text="headerBadgeText"
+      :badge-variant="'default'"
+      :badge-size="isCompact ? 'sm' : 'base'"
+      :badge-dot-color="'primary'"
+      :badge-clickable="false"
+      :title="headerTitle"
+      :highlight-text="headerHighlightText"
+      :subtitle="headerSubtitle"
+      :heading-tag="'h2'"
+      :heading-size="isCompact ? 'lg' : '2xl'"
+      :heading-variant="'default'"
+      :gradient-variant="gradientVariant === 'default' ? 'primary' : gradientVariant"
+      :gradient-direction="'to-r'"
+      :gradient-intensity="'normal'"
+      :heading-spacing="'normal'"
+    />
 
     <!-- Pricing Toggle -->
     <div class="mt-acquaintances">
@@ -78,8 +51,8 @@
         :popular-text="plan.popularText"
         :variant="plan.variant"
         :features-title="plan.featuresTitle"
-        @click="handlePlanClick"
-        @cta-click="handleCtaClick"
+        @click="() => handlePlanClick(plan)"
+        @cta-click="() => handleCtaClick(plan)"
       />
     </div>
   </section>
@@ -301,3 +274,12 @@ const handleCtaClick = (plan: PricingPlan) => {
   emit('ctaClick', plan)
 }
 </script>
+
+<style scoped>
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>

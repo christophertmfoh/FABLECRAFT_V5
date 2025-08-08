@@ -127,8 +127,8 @@ const handleSocialClick = (payload: { platform: string; href?: string }) => {
   emit('social-click', payload)
 
   // Track social media clicks for analytics
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'social_click', {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    ;(window as any).gtag('event', 'social_click', {
       social_platform: payload.platform.toLowerCase(),
       link_url: payload.href,
     })

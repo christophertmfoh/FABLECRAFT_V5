@@ -73,20 +73,7 @@ interface MProcessStepProps {
   stepNumberVariant?: 'default' | 'outline' | 'solid'
   stepNumberSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   titleTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-  titleSize?:
-    | 'xs'
-    | 'sm'
-    | 'base'
-    | 'lg'
-    | 'xl'
-    | '2xl'
-    | '3xl'
-    | '4xl'
-    | '5xl'
-    | '6xl'
-    | '7xl'
-    | '8xl'
-    | '9xl'
+  titleSize?: 'h1' | 'h1-compact' | 'h2' | 'h2-compact' | 'h2-display' | 'h3' | 'h3-section' | 'h4' | 'h5' | 'h6' | 'display' | 'hero'
   descriptionSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
   detailSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
   showCategory?: boolean
@@ -107,7 +94,7 @@ const props = withDefaults(defineProps<MProcessStepProps>(), {
   stepNumberVariant: 'solid',
   stepNumberSize: 'sm',
   titleTag: 'h3',
-  titleSize: 'lg',
+  titleSize: 'h3',
   descriptionSize: 'sm',
   detailSize: 'xs',
   showCategory: false,

@@ -1,79 +1,70 @@
 // ✅ Phase 6: Core Web Vitals monitoring with web-vitals library
 // Provides real-time monitoring of Core Web Vitals performance metrics
 
+import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals'
+
 export const useWebVitals = () => {
   /**
    * Initialize Core Web Vitals monitoring
    */
   const initWebVitals = () => {
-    if (!process.client) return
+    if (!import.meta.client) return
 
-    // Dynamically import web-vitals for optimal performance
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB, getINP }) => {
-      const vitals = {
-        cls: 0,
-        fid: 0,
-        fcp: 0,
-        lcp: 0,
-        ttfb: 0,
-        inp: 0,
-      }
+    const vitals = {
+      cls: 0,
+      fid: 0,
+      fcp: 0,
+      lcp: 0,
+      ttfb: 0,
+      inp: 0,
+    }
 
-      // Track Cumulative Layout Shift
-      getCLS(metric => {
-        vitals.cls = metric.value
-        logVital('CLS', metric)
-      })
-
-      // Track First Input Delay
-      getFID(metric => {
-        vitals.fid = metric.value
-        logVital('FID', metric)
-      })
-
-      // Track First Contentful Paint
-      getFCP(metric => {
-        vitals.fcp = metric.value
-        logVital('FCP', metric)
-      })
-
-      // Track Largest Contentful Paint
-      getLCP(metric => {
-        vitals.lcp = metric.value
-        logVital('LCP', metric)
-      })
-
-      // Track Time to First Byte
-      getTTFB(metric => {
-        vitals.ttfb = metric.value
-        logVital('TTFB', metric)
-      })
-
-      // Track Interaction to Next Paint (modern FID replacement)
-      getINP(metric => {
-        vitals.inp = metric.value
-        logVital('INP', metric)
-      })
-
-      // Store vitals for access by other composables
-      if (process.dev) {
-        (window as any).__NUXT_WEB_VITALS__ = vitals
-      }
-    }).catch(error => {
-      console.warn('Failed to load web-vitals:', error)
+    // Track Cumulative Layout Shift
+    onCLS(metric => {
+      vitals.cls = metric.value
+      logVital('CLS', metric)
     })
+
+    // Track First Contentful Paint
+    onFCP(metric => {
+      vitals.fcp = metric.value
+      logVital('FCP', metric)
+    })
+
+    // Track Largest Contentful Paint
+    onLCP(metric => {
+      vitals.lcp = metric.value
+      logVital('LCP', metric)
+    })
+
+    // Track Time to First Byte
+    onTTFB(metric => {
+      vitals.ttfb = metric.value
+      logVital('TTFB', metric)
+    })
+
+    // Track Interaction to Next Paint (modern FID replacement)
+    onINP(metric => {
+      vitals.inp = metric.value
+      logVital('INP', metric)
+    })
+
+    // Store vitals for access by other composables
+    if (import.meta.dev) {
+      (window as any).__NUXT_WEB_VITALS__ = vitals
+    }
   }
 
   /**
    * Log vital metrics with performance analysis
    */
   const logVital = (name: string, metric: any) => {
-    if (!process.dev) return
+    if (!import.meta.dev) return
 
-    const threshold = getThreshold(name, metric.value)
-    const status = getStatus(name, metric.value)
+    const threshold = getThreshold(name, Number(metric.value))
+    const status = getStatus(name, Number(metric.value))
     
-    console.log(`📊 ${name}: ${metric.value.toFixed(2)}${name === 'CLS' ? '' : 'ms'}`, {
+    console.log(`📊 ${name}: ${Number(metric.value).toFixed(2)}${name === 'CLS' ? '' : 'ms'}`, {
       status,
       threshold,
       rating: metric.rating,
@@ -113,7 +104,7 @@ export const useWebVitals = () => {
    * Get current web vitals values
    */
   const getWebVitals = () => {
-    if (!process.client) return null
+    if (!import.meta.client) return null
     return (window as any).__NUXT_WEB_VITALS__ || null
   }
 
@@ -121,7 +112,7 @@ export const useWebVitals = () => {
    * Generate web vitals summary report
    */
   const generateVitalsReport = () => {
-    if (!process.dev) return
+    if (!import.meta.dev) return
 
     const vitals = getWebVitals()
     if (!vitals) {
@@ -132,9 +123,9 @@ export const useWebVitals = () => {
     console.group('📊 Core Web Vitals Summary')
     
     Object.entries(vitals).forEach(([name, value]) => {
-      if (value > 0) {
-        const status = getStatus(name.toUpperCase(), value as number)
-        console.log(`${name.toUpperCase()}: ${(value as number).toFixed(2)}${name === 'cls' ? '' : 'ms'} ${status}`)
+      if (Number(value) > 0) {
+        const status = getStatus(name.toUpperCase(), Number(value))
+        console.log(`${name.toUpperCase()}: ${Number(value).toFixed(2)}${name === 'cls' ? '' : 'ms'} ${status}`)
       }
     })
     

@@ -41,9 +41,27 @@ const positionClasses = {
 // Computed properties
 const badgeClasses = computed(() => [positionClasses[props.position], 'z-10', props.class])
 
-const badgeVariant = computed(() => props.variant)
+const badgeVariant = computed<"default" | "secondary" | "destructive" | "outline" | "landing">(() => {
+  const map: Record<NonNullable<PopularBadgeProps['variant']>, 'default' | 'secondary' | 'destructive' | 'outline' | 'landing'> = {
+    default: 'default',
+    primary: 'default',
+    secondary: 'secondary',
+    success: 'default',
+    warning: 'default',
+    destructive: 'destructive',
+  }
+  return map[props.variant]
+})
 
-const badgeSize = computed(() => props.size)
+const badgeSize = computed<"default" | "sm" | "lg">(() => {
+  const map: Record<NonNullable<PopularBadgeProps['size']>, 'default' | 'sm' | 'lg'> = {
+    xs: 'sm',
+    sm: 'sm',
+    base: 'default',
+    lg: 'lg',
+  }
+  return map[props.size]
+})
 
 const innerBadgeClasses = computed(() => [
   'font-semibold shadow-lg backdrop-blur-sm',

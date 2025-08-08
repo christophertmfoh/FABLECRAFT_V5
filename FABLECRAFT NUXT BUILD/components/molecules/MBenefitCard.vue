@@ -71,8 +71,8 @@ interface MBenefitCardProps {
   iconVariant?: 'default' | 'ghost' | 'soft' | 'subtle' | 'outline' | 'gradient'
   iconShape?: 'circle' | 'square' | 'rounded'
   // Badge customization
-  categoryBadgeVariant?: 'default' | 'secondary' | 'accent' | 'outline'
-  categoryBadgeSize?: 'sm' | 'base' | 'md' | 'lg'
+  categoryBadgeVariant?: 'default' | 'secondary' | 'destructive' | 'outline' | 'landing'
+  categoryBadgeSize?: 'default' | 'sm' | 'lg'
   // Text customization
   descriptionSize?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
 }

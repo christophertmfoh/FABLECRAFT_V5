@@ -72,7 +72,7 @@ interface MTrustIndicatorCardProps {
   iconVariant?: 'default' | 'ghost' | 'soft' | 'subtle' | 'outline' | 'gradient'
   iconShape?: 'circle' | 'square' | 'rounded'
   // Text customization
-  numberSize?: 'display-value' | 'xl' | '2xl' | '3xl'
+  numberSize?: 'display-value' | 'xl' | '2xl'
   numberWeight?: 'normal' | 'medium' | 'semibold' | 'bold' | 'black'
   labelSize?: 'xs' | 'sm' | 'base' | 'lg'
   labelWeight?: 'normal' | 'medium' | 'semibold' | 'bold'

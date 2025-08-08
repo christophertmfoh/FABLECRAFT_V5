@@ -123,8 +123,8 @@ const handleLinkClick = (payload: { text: string; href?: string }) => {
   })
 
   // Track legal link clicks for compliance
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'legal_link_click', {
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'legal_link_click', {
       link_text: payload.text,
       link_url: payload.href,
     })

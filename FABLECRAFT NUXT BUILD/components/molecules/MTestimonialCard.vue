@@ -17,7 +17,7 @@
       <div class="flex-1 flex flex-col">
         <!-- Star Rating -->
         <div class="flex justify-center mb-6">
-          <StarRating :rating="rating" :max-rating="5" size="base" color="primary" />
+          <StarRating :rating="rating" :max-rating="5" size="md" color="primary" />
         </div>
 
         <!-- Quote Content -->
@@ -51,7 +51,7 @@
           <Heading
             :id="`testimonial-author-${testimonialId}`"
             tag="h4"
-            size="sm"
+            size="h5"
             class="font-semibold text-foreground leading-tight text-center"
           >
             {{ name }}
@@ -69,6 +69,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useComponentId } from '~/composables/useComponentId'
+import { cn } from '~/components/atoms/Utils'
 
 // Component props
 interface TestimonialCardProps {
@@ -104,17 +105,19 @@ const testimonialId = useComponentId('testimonial')
 const isCompact = computed(() => props.variant === 'compact')
 
 // Card classes
-const cardClasses = computed(() => [
-  'group cursor-pointer transition-all duration-500',
-  'hover:shadow-xl hover:scale-105 hover:-translate-y-2',
-  'border-border hover:border-primary/50',
-  'natural-depth gentle-hover',
-  'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
-  'bg-card/90 backdrop-blur-sm',
-  'overflow-hidden relative h-full',
-  'flex flex-col min-h-[400px]',
-  props.class,
-])
+const cardClasses = computed(() =>
+  cn(
+    'group cursor-pointer transition-all duration-500',
+    'hover:shadow-xl hover:scale-105 hover:-translate-y-2',
+    'border-border hover:border-primary/50',
+    'natural-depth gentle-hover',
+    'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
+    'bg-card/90 backdrop-blur-sm',
+    'overflow-hidden relative h-full',
+    'flex flex-col min-h-[400px]',
+    props.class
+  )
+)
 
 // Hover effect classes
 const hoverEffectClasses = computed(() => [

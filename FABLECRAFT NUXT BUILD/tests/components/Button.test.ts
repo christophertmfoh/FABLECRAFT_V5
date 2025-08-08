@@ -6,8 +6,8 @@ describe('Button Component', () => {
   it('renders correctly with default props', () => {
     const wrapper = mount(Button, {
       props: {
-        variant: 'primary',
-        size: 'md',
+        variant: 'default',
+        size: 'default',
       },
     })
 
@@ -18,8 +18,8 @@ describe('Button Component', () => {
   it('renders with correct text when label is provided', () => {
     const wrapper = mount(Button, {
       props: {
-        variant: 'primary',
-        size: 'md',
+        variant: 'default',
+        size: 'default',
         label: 'Test Button',
       },
     })
@@ -30,8 +30,8 @@ describe('Button Component', () => {
   it('emits click event when clicked', async () => {
     const wrapper = mount(Button, {
       props: {
-        variant: 'primary',
-        size: 'md',
+        variant: 'default',
+        size: 'default',
       },
     })
 

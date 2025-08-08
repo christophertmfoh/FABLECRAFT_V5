@@ -158,3 +158,12 @@ const defaultKeyBenefits: KeyBenefit[] = [
 const trustIndicators = computed(() => props.customTrustIndicators || defaultTrustIndicators)
 const keyBenefits = computed(() => props.customKeyBenefits || defaultKeyBenefits)
 </script>
+
+<style scoped>
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>

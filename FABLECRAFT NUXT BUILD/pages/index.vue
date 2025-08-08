@@ -10,7 +10,6 @@
       <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Lazy load each effect component -->
         <LazyPaperTexture v-if="paperTextureEnabled" />
-        <LazyFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
       </div>
       
       <!-- Fallback while effects load (invisible placeholder) -->
@@ -172,8 +171,8 @@ const router = useRouter()
 
 // CRITICAL FIX: Only initialize Supabase on client
 // This prevents blocking API calls during SSR
-const supabase = process.client ? useSupabaseClient() : null
-const user = process.client ? useSupabaseUser() : ref(null)
+const supabase = import.meta.client ? useSupabaseClient() : null
+const user = import.meta.client ? useSupabaseUser() : ref(null)
 
 // Compute authentication state safely
 const isAuthenticated = computed(() => !!user?.value)
@@ -183,8 +182,8 @@ const { currentTheme, isDark, isThemeTransitioning } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
 // Default to false for most effects to improve initial load
-const firefliesEnabled = useState('fireflies-enabled', () => false) // Changed to false by default
-const fireflyCount = useState('firefly-count', () => 15)
+// Fireflies removed
+// Fireflies removed
 const paperTextureEnabled = useState('paper-texture-enabled', () => false) // Changed to false by default
 
 // Scroll progress (client-only feature)
@@ -235,7 +234,7 @@ const handleBadgeClick = () => {
 
 // Scroll handling (client-only)
 const handleScroll = () => {
-  if (!process.client) return
+  if (!import.meta.client) return
   
   const winScroll = document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
@@ -259,8 +258,8 @@ const handleNewsletterError = (error: string) => {
   logger.log('Newsletter subscription error:', error)
 }
 
-const handleSocialClick = (platform: string) => {
-  logger.log('Social media click:', platform)
+const handleSocialClick = (payload: { platform: string; href?: string }) => {
+  logger.log('Social media click:', payload.platform)
 }
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {
@@ -287,21 +286,11 @@ const handleTestimonialClick = (testimonial: {
 }
 
 // Pricing section event handlers
-const handlePlanClick = (plan: {
-  id: string
-  name: string
-  price: string | number
-  description: string
-}) => {
+const handlePlanClick = (plan: any) => {
   logger.log('Pricing plan click:', plan)
 }
 
-const handlePricingCtaClick = (plan: {
-  id: string
-  name: string
-  price: string | number
-  ctaText?: string
-}) => {
+const handlePricingCtaClick = (plan: any) => {
   logger.log('Pricing CTA click:', plan)
   
   if (plan.id === 'enterprise') {
@@ -340,15 +329,13 @@ onMounted(() => {
     paperTextureEnabled.value = true
     
     setTimeout(() => {
-      firefliesEnabled.value = true
+      // Fireflies removed
     }, 500)
     
     setTimeout(() => {
       // Only enable orbs if user doesn't prefer reduced motion
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (!prefersReducedMotion) {
-        orbsEnabled.value = true
-      }
+      // Orbs removed
     }, 1000)
   }, 100)
   
@@ -360,15 +347,15 @@ onMounted(() => {
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {
-    orbsEnabled.value = false
-    firefliesEnabled.value = false
+    // Orbs removed
+    // Fireflies removed
     paperTextureEnabled.value = false
   }
 })
 
 // Cleanup
 onUnmounted(() => {
-  if (showScrollProgress.value && process.client) {
+  if (showScrollProgress.value && import.meta.client) {
     window.removeEventListener('scroll', handleScroll)
   }
 })

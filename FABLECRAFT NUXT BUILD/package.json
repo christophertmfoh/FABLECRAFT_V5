@@ -2,6 +2,9 @@
   "name": "fablecraft-foundation",
   "private": true,
   "type": "module",
+  "imports": {
+    "#internal/nuxt/paths": "./node_modules/nuxt/dist/core/runtime/nitro/utils/paths.js"
+  },
   "_SAFETY_WARNING": "NEVER run 'kill node' or 'pkill node' - Use Ctrl+C to stop processes safely",
   "scripts": {
     "init": "./AGENT_INIT.sh",
@@ -68,9 +71,11 @@
     "@nuxt/eslint": "1.7.1",
     "@nuxt/kit": "3.18.0",
     "@nuxtjs/tailwindcss": "6.14.0",
+    "@tailwindcss/postcss": "4.1.11",
     "@testing-library/vue": "8.1.0",
-    "@types/node": "20.14.15",
+    "@types/node": "20.19.9",
     "@typescript-eslint/parser": "8.39.0",
+    "@vitejs/plugin-vue": "6.0.1",
     "@vue/test-utils": "2.4.6",
     "cssnano": "7.1.0",
     "eslint": "9.32.0",
@@ -82,9 +87,11 @@
     "lighthouse": "12.8.1",
     "prettier": "3.6.2",
     "supabase": "2.33.9",
-    "typescript": "5.4.5",
+    "tailwindcss": "4.1.11",
+    "typescript": "5.8.2",
     "vitest": "3.2.4",
     "vue-tsc": "3.0.5",
     "webpack-bundle-analyzer": "4.10.2"
-  }
+  },
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }

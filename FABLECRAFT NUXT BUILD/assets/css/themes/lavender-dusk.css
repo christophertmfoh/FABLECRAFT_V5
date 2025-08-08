@@ -1,0 +1,28 @@
+/* Lavender Dusk theme variables */
+[data-theme='lavender-dusk'] {
+  --background: 280 8% 96%;
+  --foreground: 280 25% 20%;
+  --card: 280 10% 98%;
+  --card-foreground: 280 25% 20%;
+  --popover: 280 10% 97%;
+  --popover-foreground: 280 25% 20%;
+  --primary: 280 35% 40%;
+  --primary-foreground: 280 8% 96%;
+  --secondary: 280 6% 88%;
+  --secondary-foreground: 280 25% 20%;
+  --muted: 280 4% 90%;
+  --muted-foreground: 280 15% 45%;
+  --accent: 320 30% 55%;
+  --accent-foreground: 320 10% 15%;
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 50% 45%;
+  --success-foreground: 0 0% 98%;
+  --border: 280 8% 85%;
+  --input: 280 8% 92%;
+  --ring: 280 35% 40%;
+  --orb-primary: 280 35% 50%;
+  --orb-secondary: 320 30% 65%;
+  --auth-button-primary: 280 35% 45%;
+  --auth-button-primary-hover: 280 35% 35%;
+}

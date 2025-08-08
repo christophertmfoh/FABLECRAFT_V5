@@ -1,0 +1,28 @@
+/* Starlit Prose theme variables */
+[data-theme='starlit-prose'] {
+  --background: 260 25% 11%;
+  --foreground: 250 20% 90%;
+  --card: 260 25% 15%;
+  --card-foreground: 250 20% 90%;
+  --popover: 260 25% 18%;
+  --popover-foreground: 250 20% 90%;
+  --primary: 270 65% 65%;
+  --primary-foreground: 260 25% 11%;
+  --secondary: 260 20% 23%;
+  --secondary-foreground: 250 20% 90%;
+  --muted: 260 20% 19%;
+  --muted-foreground: 250 15% 65%;
+  --accent: 270 50% 60%;
+  --accent-foreground: 260 25% 11%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 260 25% 11%;
+  --border: 260 20% 23%;
+  --input: 260 20% 23%;
+  --ring: 270 65% 65%;
+  --orb-primary: 270 65% 65%;
+  --orb-secondary: 260 20% 35%;
+  --auth-button-primary: 270 65% 60%;
+  --auth-button-primary-hover: 270 65% 55%;
+}

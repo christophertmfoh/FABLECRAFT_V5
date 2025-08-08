@@ -14,14 +14,14 @@
         <!-- Product Links -->
         <NavigationColumn
           title="Product"
-          :links="footerLinks.product"
+          :links="productLinks"
           @link-click="handleNavigate"
         />
 
         <!-- Company Links -->
         <NavigationColumn
           title="Company"
-          :links="footerLinks.company"
+          :links="companyLinks"
           @link-click="handleNavigate"
         />
 
@@ -36,7 +36,7 @@
 
           <NavigationColumn
             title="Support"
-            :links="footerLinks.support"
+            :links="supportLinks"
             variant="compact"
             @link-click="handleNavigate"
           />
@@ -47,8 +47,8 @@
       <FooterBottom
         class="pt-8"
         :default-company="companyInfo.name"
-        :legal-links="footerLinks.legal"
-        :social-links="socialLinks"
+        :legal-links="legalLinks"
+        :social-links="socials"
         :follow-text="footerBranding.followText"
         layout="split"
         @legal-click="handleLegalClick"
@@ -85,7 +85,8 @@ interface FooterProps {
 // Events interface
 interface FooterEmits {
   (e: 'navigate', payload: { type: string; item: string; category: string }): void
-  (e: 'newsletter:subscribe' | 'newsletter:success' | 'newsletter:error' | 'social:click', data: string): void
+  (e: 'newsletter:subscribe' | 'newsletter:success' | 'newsletter:error', data: string): void
+  (e: 'social:click', payload: { platform: string; href?: string }): void
   (e: 'legal:click', payload: { text: string; href?: string }): void
 }
 
@@ -101,6 +102,18 @@ const emit = defineEmits<FooterEmits>()
 // Footer content composable
 const { companyInfo, footerLinks, newsletterContent, socialLinks, footerBranding } =
   useFooterContent()
+
+type ReadonlyArrayOf<T> = ReadonlyArray<T>
+type LinkItem = string
+type LegalLinkItem = string
+type SocialLink = { icon: string; label: string; href?: string }
+
+// Adapt readonly arrays from content to mutable type expectations if needed
+const productLinks: LinkItem[] = [...(footerLinks.product as ReadonlyArrayOf<LinkItem>)]
+const companyLinks: LinkItem[] = [...(footerLinks.company as ReadonlyArrayOf<LinkItem>)]
+const supportLinks: LinkItem[] = [...(footerLinks.support as ReadonlyArrayOf<LinkItem>)]
+const legalLinks: LegalLinkItem[] = [...(footerLinks.legal as ReadonlyArrayOf<LegalLinkItem>)]
+const socials: SocialLink[] = [...(socialLinks as ReadonlyArrayOf<SocialLink>)]
 
 // Computed properties
 const tagline = computed(() => {
@@ -152,12 +165,12 @@ const handleNewsletterError = (error: string) => {
   emit('newsletter:error', error)
 }
 
-const handleSocialClick = (platform: string) => {
-  emit('social:click', platform)
+const handleSocialClick = (payload: { platform: string; href?: string }) => {
+  emit('social:click', payload)
 
   // Track social click
   trackEvent('social_click', {
-    platform: platform,
+    platform: payload.platform,
     location: 'footer',
   })
 }
@@ -174,8 +187,8 @@ const handleLegalClick = (payload: { text: string; href?: string }) => {
 
 // Simple analytics utility
 const trackEvent = (eventName: string, parameters: Record<string, any>) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, parameters)
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    ;(window as any).gtag('event', eventName, parameters)
   }
 }
 </script>

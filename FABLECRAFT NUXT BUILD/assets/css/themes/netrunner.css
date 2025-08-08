@@ -1,0 +1,29 @@
+/* Netrunner theme variables */
+[data-theme='netrunner'] {
+  --background: 220 25% 8%;
+  --foreground: 60 25% 95%;
+  --card: 220 30% 12%;
+  --card-foreground: 60 25% 95%;
+  --popover: 220 35% 15%;
+  --popover-foreground: 60 25% 95%;
+  --primary: 220 40% 25%;
+  --primary-foreground: 60 100% 85%;
+  --secondary: 220 20% 18%;
+  --secondary-foreground: 60 25% 85%;
+  --muted: 220 15% 15%;
+  --muted-foreground: 60 15% 65%;
+  --accent: 60 100% 60%;
+  --accent-foreground: 220 25% 8%;
+  --destructive: 0 100% 65%;
+  --destructive-foreground: 220 25% 8%;
+  --success: 140 60% 55%;
+  --success-foreground: 220 25% 8%;
+  --border: 220 20% 25%;
+  --input: 220 25% 20%;
+  --ring: 60 100% 60%;
+  --radius: 0.125rem;
+  --orb-primary: 60 100% 70%;
+  --orb-secondary: 195 100% 60%;
+  --auth-button-primary: 220 40% 30%;
+  --auth-button-primary-hover: 220 40% 25%;
+}

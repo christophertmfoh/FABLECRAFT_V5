@@ -1,0 +1,29 @@
+/* Midnight Ink theme variables */
+[data-theme='midnight-ink'] {
+  --background: 230 25% 10%;
+  --foreground: 210 20% 88%;
+  --card: 230 25% 14%;
+  --card-foreground: 210 20% 88%;
+  --popover: 230 25% 17%;
+  --popover-foreground: 210 20% 88%;
+  --primary: 210 80% 60%;
+  --primary-foreground: 230 25% 10%;
+  --secondary: 230 20% 22%;
+  --secondary-foreground: 210 20% 88%;
+  --muted: 230 20% 18%;
+  --muted-foreground: 210 15% 63%;
+  --accent: 210 65% 55%;
+  --accent-foreground: 230 25% 10%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 230 25% 10%;
+  --border: 230 20% 22%;
+  --input: 230 20% 22%;
+  --ring: 210 80% 60%;
+  --radius: 0.375rem;
+  --orb-primary: 210 80% 60%;
+  --orb-secondary: 230 20% 30%;
+  --auth-button-primary: 210 80% 55%;
+  --auth-button-primary-hover: 210 80% 50%;
+}

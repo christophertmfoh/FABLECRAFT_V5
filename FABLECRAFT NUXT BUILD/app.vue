@@ -9,10 +9,10 @@ useHead({
   },
   script: [
     {
-      children: `
+      innerHTML: `
         (function() {
           try {
-            var theme = document.cookie.replace(/(?:(?:^|.*;\\s*)theme\\s*=\\s*([^;]*).*$)|^.*$/, '$1') || 'system';
+            var theme = document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*=\s*([^;]*).*$)|^.*$/, '$1') || 'system';
             var resolvedTheme = theme;
             
             if (theme === 'system') {
@@ -33,10 +33,7 @@ useHead({
   ],
 })
 
-// Initialize theme on client mount to ensure proper hydration
-onMounted(() => {
-  initializeTheme()
-})
+// Initialize theme on client mount removed (handled by plugin)
 </script>
 
 <template>

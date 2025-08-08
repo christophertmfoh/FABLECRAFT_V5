@@ -11,7 +11,7 @@
       :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
       :heading-tag="'h2'"
-      :heading-size="isCompact ? 'sm' : 'lg'"
+      :heading-size="isCompact ? 'md' : 'xl'"
       :heading-variant="'default'"
       :gradient-variant="gradientVariant"
       :gradient-direction="'to-r'"
@@ -63,10 +63,10 @@
           :secondary-icon="secondaryCtaIcon"
           :primary-variant="primaryCtaVariant"
           :secondary-variant="secondaryCtaVariant"
-          :button-size="ctaButtonSize"
-          :layout="ctaLayout"
+          :button-size="ctaButtonSize === 'base' ? 'default' : (ctaButtonSize === 'xl' ? 'lg' : ctaButtonSize)"
+          :layout="ctaLayout === 'horizontal' ? 'inline' : ctaLayout === 'vertical' ? 'stacked' : 'responsive'"
           :alignment="'center'"
-          :spacing="ctaSpacing"
+          :spacing="ctaSpacing === 'loose' ? 'relaxed' : ctaSpacing"
           :group-label="'Call to action buttons'"
           class="mt-8 mb-8"
           @primary:click="handlePrimaryCtaClick"
@@ -165,8 +165,8 @@ const isMinimal = computed(() => props.variant === 'minimal')
 // Dynamic sizing based on variant
 const headingTag = computed(() => (isCompact.value ? 'h3' : 'h2'))
 const mainHeadingSize = computed(() => {
-  if (isCompact.value) return '2xl'
-  return '4xl'
+  if (isCompact.value) return 'h3'
+  return 'h2'
 })
 const supportingCopySize = computed(() => {
   if (isCompact.value) return 'base'
@@ -229,3 +229,12 @@ const handleSecondaryCtaClick = () => {
   emit('secondaryCtaClick')
 }
 </script>
+
+<style scoped>
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>

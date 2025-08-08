@@ -9,11 +9,7 @@
       <!-- Paper Texture -->
       <PaperTexture v-if="paperTextureEnabled" />
 
-      <!-- Background Orbs -->
-      <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
 
-      <!-- Firefly Effect -->
-      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
     </div>
 
     <!-- Main Content Layer -->
@@ -125,9 +121,7 @@ const isAuthenticated = computed(() => !!user.value)
 const { currentTheme, isDark, isThemeTransitioning, setThemeWithTransition } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
-const orbsEnabled = useState('orbs-enabled', () => false)
-const firefliesEnabled = useState('fireflies-enabled', () => true)
-const fireflyCount = useState('firefly-count', () => 15)
+// Orbs removed
 const paperTextureEnabled = useState('paper-texture-enabled', () => true)
 
 // Auth form state
@@ -183,8 +177,8 @@ const handleNewsletterError = (error: string) => {
   logger.log('Newsletter subscription error:', error)
 }
 
-const handleSocialClick = (platform: string) => {
-  logger.log('Social media click:', platform)
+const handleSocialClick = (payload: { platform: string; href?: string }) => {
+  logger.log('Social media click:', payload.platform)
 }
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {

@@ -1,0 +1,28 @@
+/* Golden Hour theme variables */
+[data-theme='golden-hour'] {
+  --background: 50 40% 96%;
+  --foreground: 20 30% 15%;
+  --card: 50 35% 93%;
+  --card-foreground: 20 30% 15%;
+  --popover: 50 30% 90%;
+  --popover-foreground: 20 30% 15%;
+  --primary: 45 85% 50%;
+  --primary-foreground: 20 30% 15%;
+  --secondary: 40 50% 85%;
+  --secondary-foreground: 20 30% 15%;
+  --muted: 45 25% 88%;
+  --muted-foreground: 20 25% 40%;
+  --accent: 45 60% 80%;
+  --accent-foreground: 20 30% 15%;
+  --destructive: 0 65% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 50% 45%;
+  --success-foreground: 0 0% 98%;
+  --border: 45 30% 85%;
+  --input: 45 30% 85%;
+  --ring: 45 85% 50%;
+  --orb-primary: 45 85% 50%;
+  --orb-secondary: 40 50% 70%;
+  --auth-button-primary: 45 85% 45%;
+  --auth-button-primary-hover: 45 85% 40%;
+}

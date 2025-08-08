@@ -1,0 +1,135 @@
+/* Base theme variables for SSR and initial paint */
+
+:root,
+[data-theme='light'] {
+  --background: 45 25% 96%;
+  --foreground: 15 25% 15%;
+  --card: 45 20% 93%;
+  --card-foreground: 15 25% 15%;
+  --popover: 45 20% 90%;
+  --popover-foreground: 15 25% 15%;
+  --primary: 350 70% 40%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 35 40% 85%;
+  --secondary-foreground: 15 25% 15%;
+  --muted: 40 15% 88%;
+  --muted-foreground: 15 20% 40%;
+  --accent: 35 45% 80%;
+  --accent-foreground: 15 25% 15%;
+  --destructive: 0 65% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 50% 45%;
+  --success-foreground: 0 0% 98%;
+  --border: 35 20% 85%;
+  --input: 35 20% 85%;
+  --ring: 350 70% 40%;
+  --radius: 0.5rem;
+  /* orb variables removed */
+  --auth-button-primary: 350 70% 35%;
+  --auth-button-primary-hover: 350 70% 30%;
+  --glow-primary: 220deg 60% 70%;
+  --glow-secondary: 280deg 40% 75%;
+  --glow-opacity-primary: 0.25;
+  --glow-opacity-secondary: 0.15;
+  --glow-blend-mode: overlay;
+}
+
+[data-theme='dark'] {
+  --background: 220 15% 13%;
+  --foreground: 45 15% 90%;
+  --card: 220 15% 17%;
+  --card-foreground: 45 15% 90%;
+  --popover: 220 15% 20%;
+  --popover-foreground: 45 15% 90%;
+  --primary: 35 75% 55%;
+  --primary-foreground: 220 15% 13%;
+  --secondary: 220 15% 25%;
+  --secondary-foreground: 45 15% 90%;
+  --muted: 220 15% 20%;
+  --muted-foreground: 45 10% 65%;
+  --accent: 35 60% 50%;
+  --accent-foreground: 220 15% 13%;
+  --destructive: 0 70% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 140 60% 55%;
+  --success-foreground: 220 15% 13%;
+  --border: 220 15% 25%;
+  --input: 220 15% 25%;
+  --ring: 35 75% 55%;
+  /* orb variables removed */
+  --auth-button-primary: 35 75% 50%;
+  --auth-button-primary-hover: 35 75% 45%;
+  --glow-primary: 220deg 100% 50%;
+  --glow-secondary: 280deg 100% 50%;
+  --glow-opacity-primary: 0.2;
+  --glow-opacity-secondary: 0.15;
+  --glow-blend-mode: screen;
+}
+
+@media (prefers-color-scheme: light) {
+  [data-theme='system'] {
+    --background: 45 25% 96%;
+    --foreground: 15 25% 15%;
+    --card: 45 20% 93%;
+    --card-foreground: 15 25% 15%;
+    --popover: 45 20% 90%;
+    --popover-foreground: 15 25% 15%;
+    --primary: 350 70% 40%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 35 40% 85%;
+    --secondary-foreground: 15 25% 15%;
+    --muted: 40 15% 88%;
+    --muted-foreground: 15 20% 40%;
+    --accent: 35 45% 80%;
+    --accent-foreground: 15 25% 15%;
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 140 50% 45%;
+    --success-foreground: 0 0% 98%;
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 350 70% 40%;
+    /* orb variables removed */
+    --auth-button-primary: 350 70% 35%;
+    --auth-button-primary-hover: 350 70% 30%;
+    --glow-primary: 220deg 60% 70%;
+    --glow-secondary: 280deg 40% 75%;
+    --glow-opacity-primary: 0.25;
+    --glow-opacity-secondary: 0.15;
+    --glow-blend-mode: overlay;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme='system'] {
+    --background: 220 15% 13%;
+    --foreground: 45 15% 90%;
+    --card: 220 15% 17%;
+    --card-foreground: 45 15% 90%;
+    --popover: 220 15% 20%;
+    --popover-foreground: 45 15% 90%;
+    --primary: 35 75% 55%;
+    --primary-foreground: 220 15% 13%;
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 45 15% 90%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 45 10% 65%;
+    --accent: 35 60% 50%;
+    --accent-foreground: 220 15% 13%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 140 60% 55%;
+    --success-foreground: 220 15% 13%;
+    --border: 220 15% 25%;
+    --input: 220 15% 25%;
+    --ring: 35 75% 55%;
+    /* orb variables removed */
+    --auth-button-primary: 35 75% 50%;
+    --auth-button-primary-hover: 35 75% 45%;
+    --glow-primary: 220deg 100% 50%;
+    --glow-secondary: 280deg 100% 50%;
+    --glow-opacity-primary: 0.2;
+    --glow-opacity-secondary: 0.15;
+    --glow-blend-mode: screen;
+  }
+}

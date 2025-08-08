@@ -5,9 +5,7 @@
 // import { ref, computed, watch } from '@vueuse/core'
 
 // ✅ Better: Specific imports for optimal tree shaking
-import { ref } from '@vueuse/core'
-import { computed } from '@vueuse/core' 
-import { watch } from '@vueuse/core'
+import { ref, computed, watch } from 'vue'
 
 // ✅ Utility libraries already optimized
 import { cva } from 'class-variance-authority' // Already optimal
@@ -83,7 +81,7 @@ export const useUtilityOptimizations = () => {
    * Measure import performance in development
    */
   const measureImportPerformance = () => {
-    if (!process.client || !process.dev) return null
+    if (!import.meta.client || !import.meta.dev) return null
     
     const start = performance.now()
     
