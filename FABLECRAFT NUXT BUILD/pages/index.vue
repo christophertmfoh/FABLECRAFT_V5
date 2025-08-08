@@ -10,7 +10,7 @@
       <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Lazy load each effect component -->
         <LazyPaperTexture v-if="paperTextureEnabled" />
-        <LazyFireflyRise density="low" />
+        <LazyFireflyRiseLite density="low" :target-fps="30" :glow="true" />
       </div>
       
       <!-- Fallback while effects load (invisible placeholder) -->
