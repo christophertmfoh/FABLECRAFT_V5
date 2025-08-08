@@ -11,6 +11,7 @@
         <!-- Lazy load each effect component -->
         <LazyPaperTexture v-if="paperTextureEnabled" />
         <LazyGradientNoiseBackdrop />
+        <LazyAmbientOrbs opacity="0.10" :blur="80" />
         <LazyVignetteOverlay strength="subtle" />
       </div>
       
