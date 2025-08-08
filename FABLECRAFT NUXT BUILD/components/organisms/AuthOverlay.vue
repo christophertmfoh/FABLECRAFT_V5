@@ -18,7 +18,7 @@
               <GlassCard variant="heavy" class="overflow-hidden rounded-2xl ring-1 ring-border/50 text-foreground surface-atmo">
                 <!-- Header / Branding -->
                 <div class="px-6 pt-6">
-                  <div class="flex items-center justify-center gap-2">
+                  <div class="flex items-center justify-center gap-2 text-pop">
                     <AtomIcon name="lucide:feather" class="h-5 w-5 text-primary" />
                     <AGradientText tag="span" variant="primary" class="text-lg font-extrabold tracking-tight">Fablecraft</AGradientText>
                   </div>

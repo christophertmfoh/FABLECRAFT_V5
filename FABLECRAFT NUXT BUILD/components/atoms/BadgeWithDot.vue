@@ -7,7 +7,7 @@
         class="absolute inset-0 rounded-full animate-ping"
         :class="dotPingClasses"
       />
-      <span class="relative block w-full h-full rounded-full" :class="dotCoreClasses" />
+      <span class="relative block w-full h-full rounded-full shadow-atmo" :class="dotCoreClasses" />
     </span>
 
     <!-- Badge content -->

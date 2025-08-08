@@ -6,6 +6,7 @@
         <NavigationLogo
           :brand-text="brandText"
           :show-text="showBrandText"
+          class="text-pop"
           @click="handleLogoClick"
         />
 
