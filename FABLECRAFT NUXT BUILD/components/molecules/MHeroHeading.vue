@@ -99,10 +99,10 @@ const headingContainerClasses = computed(() => {
 
 const headingClasses = computed(() => {
   const variantClasses = {
-    default: 'font-black leading-[1.2] tracking-tight drop-shadow-sm', // Removed mb-4 since webkit fix handles clipping
-    compact: 'font-bold leading-tight tracking-normal',
-    dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg', // Removed mb-6 since webkit fix handles clipping
-  }
+  default: 'font-black leading-[1.2] tracking-tight drop-shadow-md', // Slightly stronger for readability over effects
+  compact: 'font-bold leading-tight tracking-normal',
+  dramatic: 'font-black leading-[1.1] tracking-tighter drop-shadow-lg', // Removed mb-6 since webkit fix handles clipping
+}
 
   const sizeClasses = {
     sm: 'text-2xl sm:text-3xl lg:text-4xl',

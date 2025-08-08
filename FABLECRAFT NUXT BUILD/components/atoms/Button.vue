@@ -37,12 +37,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-md hover:shadow-lg',
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground',
+          'border border-border bg-background text-foreground hover:bg-accent hover:text-accent-foreground shadow-sm hover:shadow',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        ghost: 'hover:bg-accent hover:text-accent-foreground', // keep flat to avoid over-glow
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {

@@ -15,7 +15,7 @@
         />
 
         <!-- Hero Heading -->
-        <MHeroHeading
+        <MHeroHeading class="[text-shadow:_0_1px_0_rgba(0,0,0,.04),_0_2px_8px_rgba(0,0,0,.08)]"
           :title="title"
           :highlight-text="highlightText"
           :subheading="description"
