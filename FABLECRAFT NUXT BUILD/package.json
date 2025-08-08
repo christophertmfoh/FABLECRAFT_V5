@@ -45,6 +45,9 @@
       "css:size": "npm run build && find .nuxt/dist -name '*.css' -exec wc -c {} + | sort -n",
       "css:gzip": "npm run build && find .nuxt/dist -name '*.css' -exec gzip -c {} \\; | wc -c"
     },
+  "imports": {
+    "#internal/nuxt/paths": "./.nuxt/dist/server/_nuxt/paths.mjs"
+  },
   "dependencies": {
     "@iconify-json/lucide": "1.2.60",
     "@nuxt/devtools": "1.6.0",
