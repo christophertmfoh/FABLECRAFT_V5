@@ -9,6 +9,7 @@
     <ClientOnly>
       <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Lazy load each effect component -->
+        <LazyVantaFog />
         <LazyPaperTexture v-if="paperTextureEnabled" />
                   <LazyGradientNoiseBackdrop />
           <LazyVignetteOverlay strength="subtle" />
