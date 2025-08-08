@@ -267,7 +267,10 @@ const handleLogoClick = () => {
 // Handle authentication click
 const handleAuthClick = () => {
   emit('auth:click')
-  navigateTo('/auth')
+  if (process.client) {
+    const { open } = useAuthOverlay()
+    open('login')
+  }
 }
 
 // Handle logout - delegate to parent

@@ -39,5 +39,7 @@ useHead({
 <template>
   <div>
     <NuxtPage />
+    <!-- Mount auth overlay globally -->
+    <AuthOverlay />
   </div>
 </template>
