@@ -30,7 +30,7 @@
                     size="default"
                     :show-gradient-overlay="true"
                     gradient-colors="from-primary-foreground/25 to-transparent"
-                    class="px-4 py-2 font-semibold rounded-xl"
+                    class="px-4 py-2 font-semibold rounded-2xl"
                     :aria-label="`User menu for ${displayName}`"
                   >
                     <template #leading>
@@ -161,7 +161,7 @@
               size="default"
               :show-gradient-overlay="true"
               gradient-colors="from-primary-foreground/25 to-transparent"
-              class="px-4 py-2 font-semibold rounded-xl"
+              class="px-4 py-2 font-semibold rounded-2xl"
               :aria-label="authButtonText"
               @click="handleAuthClick"
             >
