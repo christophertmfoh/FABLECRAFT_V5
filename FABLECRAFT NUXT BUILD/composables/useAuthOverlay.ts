@@ -1,5 +1,3 @@
-import { Ref } from 'vue'
-
 export type AuthOverlayMode = 'login' | 'signup'
 
 export function useAuthOverlay() {
