@@ -29,12 +29,12 @@ interface VantaFogProps {
 const props = withDefaults(defineProps<VantaFogProps>(), {
   speed: 0.3,
   zoom: 0.6,
-  blurFactor: 0.5,
+  blurFactor: 0.52,
   mouseControls: true,
   touchControls: true,
   gyroControls: false,
   scale: 2,
-  scaleMobile: 3,
+  scaleMobile: 4,
 })
 
 const containerRef = ref<HTMLDivElement | null>(null)
