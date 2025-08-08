@@ -183,7 +183,7 @@ export default defineNuxtConfig({
     // ✅ NEW: Nitro-level optimizations
     minify: !isDev,
     sourceMap: isDev,
-    timing: isDev, // Performance timing in development
+    timing: false, // Disable timing to avoid missing dev timing file issues
 
     // ✅ FIXED: Prerender error handling for reliable builds
     prerender: {

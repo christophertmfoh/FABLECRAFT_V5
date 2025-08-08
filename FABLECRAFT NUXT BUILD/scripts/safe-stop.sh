@@ -20,7 +20,7 @@ for PORT in "${PORTS[@]}"; do
 done
 
 # Also collect any nuxt dev processes within this project directory
-MAPFILE -t NUXT_PIDS < <(ps aux | grep -E "nuxt\.mjs dev|nuxi dev" | grep -F "$PROJECT_DIR" | awk '{print $2}' | sort -u)
+mapfile -t NUXT_PIDS < <(ps aux | grep -E "nuxt\.mjs dev|nuxi dev" | grep -F "$PROJECT_DIR" | awk '{print $2}' | sort -u)
 for PID in "${NUXT_PIDS[@]:-}"; do
   if [ -n "$PID" ]; then
     PIDS+=("$PID")
