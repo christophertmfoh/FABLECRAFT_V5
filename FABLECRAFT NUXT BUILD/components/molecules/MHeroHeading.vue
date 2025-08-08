@@ -135,7 +135,7 @@ const subheadingClasses = computed(() => {
   }
 
   return cn(
-    'text-muted-foreground leading-normal font-medium', // Changed from leading-relaxed to leading-normal
+    'text-foreground leading-normal font-medium', // use foreground for black/white per theme
     'transition-all duration-300',
     alignmentClasses[props.alignment],
     sizeClasses[props.size]
