@@ -15,7 +15,7 @@
           <Transition name="pop">
             <div v-show="isOpen" class="relative w-full max-w-md">
               <!-- Card -->
-              <GlassCard variant="heavy" class="overflow-hidden shadow-2xl rounded-2xl ring-1 ring-border/50 text-foreground">
+              <GlassCard variant="heavy" class="overflow-hidden rounded-2xl ring-1 ring-border/50 text-foreground surface-atmo">
                 <!-- Header / Branding -->
                 <div class="px-6 pt-6">
                   <div class="flex items-center justify-center gap-2">

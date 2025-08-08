@@ -20,7 +20,7 @@
     />
 
     <!-- Main CTA Card -->
-    <GlassCard variant="heavy" :hover="true" :class="ctaCardClasses">
+    <GlassCard variant="heavy" :hover="true" :class="[ctaCardClasses, 'surface-atmo']">
       <div class="relative p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto">
         <!-- Icon Container (optional) -->
         <div v-if="showIcon && !isCompact" :class="iconContainerClasses" aria-hidden="true">
