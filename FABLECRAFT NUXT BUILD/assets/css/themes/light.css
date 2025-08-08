@@ -2,19 +2,19 @@
 :root,
 [data-theme='light'] {
   --background: 45 25% 96%;
-  --foreground: 15 25% 15%;
+  --foreground: 0 0% 0%;
   --card: 45 20% 93%;
-  --card-foreground: 15 25% 15%;
+  --card-foreground: 0 0% 0%;
   --popover: 45 20% 90%;
-  --popover-foreground: 15 25% 15%;
+  --popover-foreground: 0 0% 0%;
   --primary: 350 70% 40%;
   --primary-foreground: 0 0% 98%;
   --secondary: 35 40% 85%;
-  --secondary-foreground: 15 25% 15%;
+  --secondary-foreground: 0 0% 0%;
   --muted: 40 15% 88%;
-  --muted-foreground: 15 20% 40%;
+  --muted-foreground: 0 0% 35%;
   --accent: 35 45% 80%;
-  --accent-foreground: 15 25% 15%;
+  --accent-foreground: 0 0% 0%;
   --destructive: 0 65% 50%;
   --destructive-foreground: 0 0% 98%;
   --success: 140 50% 45%;
