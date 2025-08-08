@@ -153,3 +153,55 @@
     0 8px 24px rgba(0,0,0,0.18),
     0 2px 8px rgba(0,0,0,0.12);
 }
+
+/* ========================================
+   PREMIUM INTERACTIVE UTILITIES
+   Glassy buttons with animated sheen
+======================================== */
+ .button-premium {
+   position: relative;
+   overflow: hidden;
+   isolation: isolate;
+   border-radius: inherit;
+   /* subtle depth + inner highlight */
+   box-shadow:
+     0 10px 25px hsl(var(--foreground) / 0.10),
+     0 2px 6px hsl(var(--foreground) / 0.06),
+     inset 0 1px 0 hsla(0, 0%, 100%, 0.20);
+ }
+
+.button-premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+.button-premium::before {
+  content: '';
+  position: absolute;
+  top: -120%;
+  left: -160%;
+  width: 55%;
+  height: 340%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+  transform: translateX(0) rotate(25deg);
+  transition: transform 600ms ease, opacity 600ms ease;
+  opacity: 0.0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.button-premium:hover::before {
+  transform: translateX(360%) rotate(25deg);
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-premium::before {
+    transition: none;
+  }
+}

@@ -30,7 +30,7 @@
                     size="default"
                     :show-gradient-overlay="true"
                     gradient-colors="from-primary-foreground/25 to-transparent"
-                    class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+                    class="px-4 py-2 font-semibold transition-all duration-300 hover:scale-[1.015]"
                     :aria-label="`User menu for ${displayName}`"
                   >
                     <template #leading>
@@ -161,7 +161,7 @@
               size="default"
               :show-gradient-overlay="true"
               gradient-colors="from-primary-foreground/25 to-transparent"
-              class="px-4 py-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-xl"
+              class="px-4 py-2 font-semibold transition-all duration-300 hover:scale-[1.015]"
               :aria-label="authButtonText"
               @click="handleAuthClick"
             >
