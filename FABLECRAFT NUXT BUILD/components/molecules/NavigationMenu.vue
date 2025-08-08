@@ -6,19 +6,16 @@
     :aria-label="ariaLabel"
   >
     <div class="nav-items">
-      <!-- Navigation buttons using Button atom -->
-      <Button
+      <button
         v-for="item in navigationItems"
         :key="item.id"
-        variant="ghost"
-        size="sm"
         :disabled="item.disabled"
         :aria-label="item.ariaLabel"
-        class="text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 tracking-wide uppercase"
+        class="text-sm font-semibold text-foreground/90 hover:text-foreground transition-colors duration-200 tracking-wide uppercase"
         @click="() => handleNavigate(item, item.href)"
       >
         {{ item.label }}
-      </Button>
+      </button>
     </div>
   </nav>
 </template>

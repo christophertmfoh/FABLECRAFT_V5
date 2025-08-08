@@ -37,13 +37,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90 button-gradient-border button-color-glow',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        default: 'bg-primary text-foreground hover:bg-primary/90 button-gradient-border button-color-glow',
+        destructive: 'bg-destructive text-foreground hover:bg-destructive/90',
         outline:
           'border border-transparent text-foreground button-gradient-border hover:bg-accent/20 button-color-glow',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent/20 hover:text-accent-foreground',
-        link: 'text-primary underline-offset-4 hover:underline no-underline',
+        secondary: 'bg-secondary text-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent/20 text-foreground/80 hover:text-foreground',
+        link: 'text-foreground underline-offset-4 hover:underline no-underline',
       },
       size: {
         default: 'h-11 px-5',
