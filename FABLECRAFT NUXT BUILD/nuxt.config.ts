@@ -57,9 +57,7 @@ export default defineNuxtConfig({
   // ✅ NEW: Phase 3 - Modern PostCSS optimization
   postcss: {
     plugins: {
-      'tailwindcss/nesting': {},
-      tailwindcss: {},
-      autoprefixer: {},
+      '@tailwindcss/postcss': {},
       ...(isDev ? {} : {
         cssnano: {
           preset: ['default', {
