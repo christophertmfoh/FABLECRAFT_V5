@@ -5,5 +5,9 @@ declare module 'vue' {
     LazyFireflyRise: typeof import('./effects/FireflyRise.vue')['default']
     FireflyRiseLite: typeof import('./effects/FireflyRiseLite.vue')['default']
     LazyFireflyRiseLite: typeof import('./effects/FireflyRiseLite.vue')['default']
+    VignetteOverlay: typeof import('./effects/VignetteOverlay.vue')['default']
+    LazyVignetteOverlay: typeof import('./effects/VignetteOverlay.vue')['default']
+    GradientNoiseBackdrop: typeof import('./effects/GradientNoiseBackdrop.vue')['default']
+    LazyGradientNoiseBackdrop: typeof import('./effects/GradientNoiseBackdrop.vue')['default']
   }
 }
