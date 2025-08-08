@@ -1,0 +1,45 @@
+
+> fablecraft-foundation@ predev /workspace/FABLECRAFT NUXT BUILD
+> ./AGENT_INIT.sh
+
+🚀 Agent initialization complete
+⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️
+
+> fablecraft-foundation@ dev /workspace/FABLECRAFT NUXT BUILD
+> echo '⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️' && npx nuxi dev --port 8000 --host 0.0.0.0
+
+⚠️  REMINDER: Use Ctrl+C to stop the server, NEVER use killall/pkill node! ⚠️
+[nuxi] Nuxt 3.18.0 with Nitro 2.12.4
+[get-port] Unable to find an available port (tried 8000 on host "0.0.0.0"). Using alternative port 3003.
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ ██▄ █▀▀▄█▀█ █▀▀▀█ █
+              █ █   █ ██▀█▀▄▄▄███ █   █ █
+              █ ▀▀▀▀▀ █▀█ █ ▄▀█ █ ▀▀▀▀▀ █
+              █▀▀█▀▀█▀█▄▀  █▄█▄ █▀█████▀█
+              █▀▀▀▀▀█▀▀ ▄▀▀▄█▀ ▄ ▀▀▄ ▄▄▀█
+              █  ▀▀▄ ▀   ▄  █▀▀▄ ▀▄█▄▄▄ █
+              █  ▀▀█▀▀█ ▄▀▀▀ █ ▀▀█▄▄▀▀ ▀█
+              █ ██▄▀▀▀█▄  ▄█▀ ▄▀▀▀▀ █ ▀▄█
+              █▀▀▀▀▀▀▀█▄▀▀ ▄█ █ █▀█ ▀█▄▀█
+              █ █▀▀▀█ █▀▀▄█ ▄█▀ ▀▀▀ ▀█ ▀█
+              █ █   █ █▄█ █▀ ▄▀▄█▄▄▀▄▀  █
+              █ ▀▀▀▀▀ █ ▀▄█▀▀  ▀▄▄▄▄▀▄▄ █
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://0.0.0.0:3003/
+  ➜ Network:  http://172.30.0.2:3003/ [QR code]
+
+[nuxt:tailwindcss] ℹ Using default Tailwind CSS file
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.6.0)
+
+ℹ Nuxt Icon server bundle mode is set to local
+✔ Nuxt Icon discovered local-installed 1 collections: lucide
+ℹ Nuxt Icon client bundle consist of 48 icons with 13.92KB(uncompressed) in size
+✔ Vite client built in 28ms
+✔ Vite server built in 423ms
+🚀 Phase 2 route rules optimization enabled
+[nitro] ✔ Nuxt Nitro server built in 720ms
+ℹ Vite client warmed up in 2ms
+ℹ Vite server warmed up in 1352ms
