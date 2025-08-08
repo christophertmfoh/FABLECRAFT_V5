@@ -10,9 +10,8 @@
       <div class="fixed inset-0 pointer-events-none z-0">
         <!-- Lazy load each effect component -->
         <LazyPaperTexture v-if="paperTextureEnabled" />
-        <LazyGradientNoiseBackdrop />
-        <LazyAmbientOrbs opacity="0.10" :blur="80" />
-        <LazyVignetteOverlay strength="subtle" />
+                  <LazyGradientNoiseBackdrop />
+          <LazyVignetteOverlay strength="subtle" />
       </div>
       
       <!-- Fallback while effects load (invisible placeholder) -->
