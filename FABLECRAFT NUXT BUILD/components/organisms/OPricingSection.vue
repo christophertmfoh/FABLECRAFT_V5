@@ -13,7 +13,7 @@
       :heading-tag="'h2'"
       :heading-size="isCompact ? 'lg' : '2xl'"
       :heading-variant="'default'"
-      :gradient-variant="gradientVariant"
+      :gradient-variant="gradientVariant === 'default' ? 'primary' : gradientVariant"
       :gradient-direction="'to-r'"
       :gradient-intensity="'normal'"
       :heading-spacing="'normal'"
