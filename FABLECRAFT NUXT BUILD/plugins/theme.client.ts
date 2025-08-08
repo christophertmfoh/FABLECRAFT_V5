@@ -3,7 +3,7 @@ export default defineNuxtPlugin(() => {
   const { initializeTheme, currentTheme } = useTheme()
 
   const loadedThemes = new Set<string>()
-  const themeCssModules = import.meta.glob('~/assets/css/themes/*.css')
+  const themeCssModules = import.meta.glob('@/assets/css/themes/*.css')
 
   const loadThemeCss = async (themeName: string) => {
     if (themeName === 'system') return

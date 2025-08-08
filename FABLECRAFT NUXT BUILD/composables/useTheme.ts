@@ -5,7 +5,7 @@ import { themes, themeCategories, getTheme, isThemeDark, themeTransition } from 
 // Client-only CSS loader for per-theme CSS chunks (lazy themes)
 const loadedThemeCssNames = new Set<string>()
 // Note: import.meta.glob evaluated at build time; safe to declare here
-const themeCssModules = import.meta.glob('~/assets/css/themes/*.css')
+const themeCssModules = import.meta.glob('@/assets/css/themes/*.css')
 
 async function preloadThemeCssIfNeeded(themeName: string): Promise<void> {
   if (!import.meta.client) return
