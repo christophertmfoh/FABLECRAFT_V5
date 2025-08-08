@@ -7,6 +7,7 @@
       </span>
 
       <!-- Highlighted gradient text part -->
+      <br v-if="breakHighlight" />
       <AGradientText
         v-if="highlightText"
         :tag="'span'"
@@ -51,6 +52,7 @@ interface HeroHeadingProps {
   gradientAnimation?: 'none' | 'shimmer' | 'pulse' | 'flow'
   spacing?: 'tight' | 'normal' | 'relaxed'
   className?: string
+  breakHighlight?: boolean
 }
 
 // Component setup
@@ -70,6 +72,7 @@ const props = withDefaults(defineProps<HeroHeadingProps>(), {
   gradientAnimation: 'none',
   spacing: 'normal',
   className: '',
+  breakHighlight: false,
 })
 
 // Computed properties

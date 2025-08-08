@@ -11,7 +11,7 @@
       :highlight-text="headerHighlightText"
       :subtitle="headerSubtitle"
       :heading-tag="'h2'"
-      :heading-size="isCompact ? 'md' : 'xl'"
+      :heading-size="isCompact ? 'sm' : 'lg'"
       :heading-variant="'default'"
       :gradient-variant="gradientVariant"
       :gradient-direction="'to-r'"
