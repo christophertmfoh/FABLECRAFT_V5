@@ -1,11 +1,11 @@
 <template>
   <Button
     v-bind="$props"
-    :class="cn('relative overflow-hidden group button-premium button-gradient-border button-color-glow rounded-xl', $attrs.class)"
+    :class="cn('relative overflow-hidden group button-premium button-gradient-border button-color-glow rounded-xl [&>*]:rounded-inherit', $attrs.class)"
     @click="$emit('click', $event)"
   >
     <!-- Gradient overlay -->
-    <span v-if="showGradientOverlay" :class="gradientOverlayClasses" aria-hidden="true" />
+    <span v-if="showGradientOverlay" :class="gradientOverlayClasses + ' rounded-inherit'" aria-hidden="true" />
 
     <!-- Button content with relative z-index -->
     <span class="relative z-10 flex items-center gap-2">

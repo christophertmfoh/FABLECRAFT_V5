@@ -232,3 +232,6 @@
     0 10px 24px hsl(var(--primary) / 0.18),
     0 2px 8px rgba(0,0,0,0.12);
 }
+
+/* Inherit border radius utility for overlays matching parent rounding */
+.rounded-inherit { border-radius: inherit; }
