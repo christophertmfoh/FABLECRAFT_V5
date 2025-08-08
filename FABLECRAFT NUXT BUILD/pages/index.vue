@@ -166,8 +166,6 @@ import { logger } from '~/utils/logger'
 // Avoid blocking operations during SSR
 
 // Core Nuxt 3 composables
-const route = useRoute()
-const router = useRouter()
 
 // CRITICAL FIX: Only initialize Supabase on client
 // This prevents blocking API calls during SSR
@@ -208,6 +206,7 @@ const handleLogout = async () => {
 }
 
 const handleNavigate = (view: string) => {
+  if (process.server) return
   if (view === 'home') {
     navigateTo('/')
   } else {
@@ -216,19 +215,23 @@ const handleNavigate = (view: string) => {
 }
 
 const handleHome = () => {
+  if (process.server) return
   navigateTo('/')
 }
 
 // Hero section event handlers
 const handleNewProject = () => {
+  if (process.server) return
   navigateTo('/projects/new')
 }
 
 const handleExploreExamples = () => {
+  if (process.server) return
   navigateTo('/examples')
 }
 
 const handleBadgeClick = () => {
+  if (process.server) return
   navigateTo('/features')
 }
 
@@ -304,6 +307,7 @@ const handlePricingCtaClick = (plan: any) => {
 
 // CTA section event handlers
 const handlePrimaryCtaClick = () => {
+  if (process.server) return
   logger.log('Primary CTA click: Start Creating Free')
   
   if (isAuthenticated.value) {
@@ -316,6 +320,7 @@ const handlePrimaryCtaClick = () => {
 }
 
 const handleSecondaryCtaClick = () => {
+  if (process.server) return
   logger.log('Secondary CTA click: Watch Demo')
   logger.log('Opening demo experience')
 }
@@ -362,46 +367,23 @@ onUnmounted(() => {
 
 // ===== SEO AND META TAGS =====
 // These are important for SSR
-useHead({
+useSeoMeta({
   title: 'Fablecraft - Create Amazing Stories with AI',
+  description: "Transform your ideas into captivating stories with Fablecraft's AI-powered storytelling platform. Create, collaborate, and share your narratives.",
+  ogTitle: 'Fablecraft - AI-Powered Storytelling Platform',
+  ogDescription: 'Transform your ideas into captivating stories with AI. Start creating for free.',
+  ogType: 'website',
+  ogImage: '/og-image.png',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Fablecraft - Create Amazing Stories',
+  twitterDescription: 'AI-powered storytelling platform for creators',
+})
+
+useHead({
   meta: [
-    {
-      name: 'description',
-      content: 'Transform your ideas into captivating stories with Fablecraft\'s AI-powered storytelling platform. Create, collaborate, and share your narratives.',
-    },
     {
       name: 'viewport',
       content: 'width=device-width, initial-scale=1',
-    },
-    // Open Graph
-    {
-      property: 'og:title',
-      content: 'Fablecraft - AI-Powered Storytelling Platform',
-    },
-    {
-      property: 'og:description',
-      content: 'Transform your ideas into captivating stories with AI. Start creating for free.',
-    },
-    {
-      property: 'og:type',
-      content: 'website',
-    },
-    {
-      property: 'og:image',
-      content: '/og-image.png',
-    },
-    // Twitter Card
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:title',
-      content: 'Fablecraft - Create Amazing Stories',
-    },
-    {
-      name: 'twitter:description',
-      content: 'AI-powered storytelling platform for creators',
     },
   ],
   bodyAttrs: {
