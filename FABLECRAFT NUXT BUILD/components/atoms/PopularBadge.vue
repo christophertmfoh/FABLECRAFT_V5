@@ -31,15 +31,15 @@ const props = withDefaults(defineProps<PopularBadgeProps>(), {
   ariaLabel: 'Most popular plan',
 })
 
-// Position classes
+// Position classes - adjusted to be higher and more to the corner
 const positionClasses = {
-  'top-right': 'absolute top-3 right-3',
-  'top-left': 'absolute top-3 left-3',
-  'top-center': 'absolute top-3 left-1/2 transform -translate-x-1/2',
+  'top-right': 'absolute -top-2 -right-2',
+  'top-left': 'absolute -top-2 -left-2',
+  'top-center': 'absolute -top-2 left-1/2 transform -translate-x-1/2',
 }
 
 // Computed properties
-const badgeClasses = computed(() => [positionClasses[props.position], 'z-10', props.class])
+const badgeClasses = computed(() => [positionClasses[props.position], 'z-20', props.class])
 
 const badgeVariant = computed<"default" | "secondary" | "destructive" | "outline" | "landing">(() => {
   const map: Record<NonNullable<PopularBadgeProps['variant']>, 'default' | 'secondary' | 'destructive' | 'outline' | 'landing'> = {
@@ -65,8 +65,9 @@ const badgeSize = computed<"default" | "sm" | "lg">(() => {
 
 const innerBadgeClasses = computed(() => [
   'font-semibold shadow-lg backdrop-blur-sm',
-  'px-3 py-1.5',
+  'px-2 py-1',
   'border border-background/20',
   'animate-in fade-in slide-in-from-top-2 duration-300',
+  'rotate-3 hover:rotate-0 transition-transform duration-200',
 ])
 </script>

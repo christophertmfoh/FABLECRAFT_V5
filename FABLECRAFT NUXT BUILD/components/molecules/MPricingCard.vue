@@ -185,7 +185,7 @@ const cardClasses = computed(() =>
     'natural-depth gentle-hover',
     'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
     'bg-card/90 backdrop-blur-sm',
-    'overflow-hidden relative h-full',
+    'relative h-full',
     'flex flex-col',
     props.isPopular && 'border-primary shadow-lg',
     props.variant === 'highlighted' && 'bg-gradient-to-br from-card via-card to-primary/5',

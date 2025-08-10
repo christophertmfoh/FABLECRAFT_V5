@@ -34,7 +34,7 @@
 
     <!-- Pricing Cards Grid -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-normal mt-8 auto-rows-fr gap-6"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-normal mt-8 auto-rows-fr gap-6 pt-3 px-3"
       role="region"
       aria-label="Pricing plans comparison"
     >
