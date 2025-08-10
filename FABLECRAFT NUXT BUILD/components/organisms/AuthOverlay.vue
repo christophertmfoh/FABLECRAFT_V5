@@ -19,7 +19,7 @@
                 <!-- Header / Branding -->
                 <div class="px-6 pt-6">
                   <div class="flex items-center justify-center gap-2">
-                    <AtomIcon name="lucide:feather" class="h-5 w-5 text-primary" />
+                    <Icon name="lucide:feather" class="h-5 w-5 text-primary" />
                     <AGradientText tag="span" variant="primary" class="text-lg font-extrabold tracking-tight">Fablecraft</AGradientText>
                   </div>
 
@@ -61,9 +61,10 @@
 
                   <form class="space-y-4" @submit.prevent="handleSubmit">
                     <template v-if="mode === 'signup'">
-                      <FormField label="Name">
-                        <div class="relative">
-                          <AtomIcon name="lucide:user" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <div>
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Name</label>
+                        <div class="relative mt-2">
+                          <Icon name="lucide:user" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                           <input 
                             ref="nameFieldRef" 
                             v-model="formData.name"
@@ -75,12 +76,13 @@
                             required
                           />
                         </div>
-                      </FormField>
+                      </div>
                     </template>
 
-                    <FormField label="Email">
-                      <div class="relative">
-                        <AtomIcon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <div>
+                      <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
+                      <div class="relative mt-2">
+                        <Icon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <input 
                           ref="emailFieldRef"
                           v-model="formData.email"
@@ -92,11 +94,12 @@
                           required
                         />
                       </div>
-                    </FormField>
+                    </div>
 
-                    <FormField label="Password">
-                      <div class="relative">
-                        <AtomIcon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <div>
+                      <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Password</label>
+                      <div class="relative mt-2">
+                        <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <input 
                           v-model="formData.password"
                           :type="showPassword ? 'text' : 'password'"
@@ -114,12 +117,13 @@
                           <Icon :name="showPassword ? 'lucide:eye-off' : 'lucide:eye'" class="h-4 w-4" />
                         </button>
                       </div>
-                    </FormField>
+                    </div>
 
                     <template v-if="mode === 'signup'">
-                      <FormField label="Confirm password">
-                        <div class="relative">
-                          <AtomIcon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <div>
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Confirm password</label>
+                        <div class="relative mt-2">
+                          <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                           <input 
                             v-model="formData.confirmPassword"
                             :type="showConfirmPassword ? 'text' : 'password'"
@@ -137,7 +141,7 @@
                             <Icon :name="showConfirmPassword ? 'lucide:eye-off' : 'lucide:eye'" class="h-4 w-4" />
                           </button>
                         </div>
-                      </FormField>
+                      </div>
 
                       <label class="flex items-center gap-2 text-sm text-muted-foreground">
                         <Checkbox v-model="formData.acceptTerms" :disabled="loading" />
@@ -177,7 +181,7 @@
                       :disabled="loading"
                       @click="handleSocialLogin('google')"
                     >
-                      <AtomIcon name="logos:google-icon" class="mr-2 h-4 w-4" />
+                      <Icon name="logos:google-icon" class="mr-2 h-4 w-4" />
                       Continue with Google
                     </Button>
                     <Button 
@@ -186,7 +190,7 @@
                       :disabled="loading"
                       @click="handleSocialLogin('github')"
                     >
-                      <AtomIcon name="mdi:github" class="mr-2 h-4 w-4" />
+                      <Icon name="mdi:github" class="mr-2 h-4 w-4" />
                       Continue with GitHub
                     </Button>
                   </div>
@@ -389,6 +393,15 @@ const handleSocialLogin = async (provider: 'google' | 'github') => {
     loading.value = false
   }
 }
+
+// Debug watcher - remove this after testing
+watch(formData, (newVal) => {
+  console.log('Form data changed:', {
+    email: newVal.email,
+    passwordLength: newVal.password?.length,
+    mode: mode.value
+  })
+}, { deep: true })
 
 // Focus management
 watch(
