@@ -262,9 +262,10 @@ const isAuthenticated = computed(() => props.isAuthenticated)
 const displayName = computed(() => {
   if (!props.user) return 'User'
   
+  // Priority: username > full_name > email prefix
   return (
-    props.user.user_metadata?.full_name ||
     props.user.user_metadata?.username ||
+    props.user.user_metadata?.full_name ||
     props.user.email?.split('@')[0] ||
     'User'
   )

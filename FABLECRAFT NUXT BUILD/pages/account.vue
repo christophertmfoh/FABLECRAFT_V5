@@ -46,6 +46,21 @@
             <Card class="p-6 sm:p-8">
               <!-- Profile Tab -->
               <div v-if="activeTab === 'profile'" class="space-y-6">
+                <!-- Welcome Banner -->
+                <Card v-if="user" class="p-4 bg-primary/5 border-primary/20">
+                  <div class="flex items-center gap-3">
+                    <Icon name="lucide:sparkles" class="h-5 w-5 text-primary" />
+                    <div>
+                      <Text class="font-medium">
+                        Welcome, {{ profileData.username || user.email?.split('@')[0] || 'User' }}!
+                      </Text>
+                      <Text class="text-sm text-muted-foreground">
+                        {{ profileData.username ? 'Your username is displayed in the navigation bar' : 'Set a username below to personalize your display name' }}
+                      </Text>
+                    </div>
+                  </div>
+                </Card>
+
                 <div>
                   <Heading tag="h2" size="h3" class="mb-1">Profile Information</Heading>
                   <Text class="text-muted-foreground">Update your personal details and public profile</Text>
@@ -92,13 +107,19 @@
                       />
                     </div>
                     <div>
-                      <label class="text-sm font-medium">Username</label>
+                      <label class="text-sm font-medium">
+                        Username 
+                        <span class="text-xs text-primary ml-1">(displayed in navigation)</span>
+                      </label>
                       <input
                         v-model="profileData.username"
                         type="text"
                         class="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        placeholder="Choose a username"
+                        placeholder="Choose your display username"
+                        pattern="^[a-zA-Z0-9_-]{3,20}$"
+                        title="Username must be 3-20 characters, letters, numbers, underscore or hyphen only"
                       />
+                      <Text class="text-xs text-muted-foreground mt-1">This will be shown in the navigation bar</Text>
                     </div>
                   </div>
 
@@ -345,7 +366,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import { logger } from '~/utils/logger'
 
 // Page meta
@@ -466,6 +487,14 @@ const updateProfile = async () => {
     message.value = 'Profile updated successfully!'
     messageType.value = 'success'
     originalProfileData.value = { ...profileData }
+    
+    // Refresh the session to get updated user metadata
+    const { data: { user: refreshedUser } } = await supabase.auth.getUser()
+    if (refreshedUser) {
+      // The user-profile plugin will automatically sync the profile data
+      // Just trigger a small delay to ensure the UI updates
+      await nextTick()
+    }
 
     // Clear message after 3 seconds
     setTimeout(() => {
