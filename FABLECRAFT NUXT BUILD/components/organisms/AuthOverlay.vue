@@ -64,12 +64,13 @@
                       <FormField label="Name">
                         <div class="relative">
                           <AtomIcon name="lucide:user" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <Input 
+                          <input 
                             ref="nameFieldRef" 
                             v-model="formData.name"
+                            type="text"
                             autocomplete="name" 
                             placeholder="Your name" 
-                            class="pl-9"
+                            class="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             :disabled="loading"
                             required
                           />
@@ -80,13 +81,13 @@
                     <FormField label="Email">
                       <div class="relative">
                         <AtomIcon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input 
+                        <input 
                           ref="emailFieldRef"
                           v-model="formData.email"
+                          type="email"
                           autocomplete="email" 
-                          type="email" 
                           placeholder="you@domain.com" 
-                          class="pl-9"
+                          class="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                           :disabled="loading"
                           required
                         />
@@ -96,15 +97,22 @@
                     <FormField label="Password">
                       <div class="relative">
                         <AtomIcon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <PasswordField 
+                        <input 
                           v-model="formData.password"
+                          :type="showPassword ? 'text' : 'password'"
                           :autocomplete="mode === 'login' ? 'current-password' : 'new-password'"
-                          :show-toggle="true" 
                           placeholder="••••••••" 
-                          class="pl-9"
+                          class="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-10 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                           :disabled="loading"
                           required
                         />
+                        <button
+                          type="button"
+                          class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                          @click="showPassword = !showPassword"
+                        >
+                          <Icon :name="showPassword ? 'lucide:eye-off' : 'lucide:eye'" class="h-4 w-4" />
+                        </button>
                       </div>
                     </FormField>
 
@@ -112,15 +120,22 @@
                       <FormField label="Confirm password">
                         <div class="relative">
                           <AtomIcon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <PasswordField 
+                          <input 
                             v-model="formData.confirmPassword"
+                            :type="showConfirmPassword ? 'text' : 'password'"
                             autocomplete="new-password" 
-                            :show-toggle="true" 
                             placeholder="••••••••" 
-                            class="pl-9"
+                            class="flex h-10 w-full rounded-md border border-input bg-background pl-9 pr-10 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             :disabled="loading"
                             required
                           />
+                          <button
+                            type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                            @click="showConfirmPassword = !showConfirmPassword"
+                          >
+                            <Icon :name="showConfirmPassword ? 'lucide:eye-off' : 'lucide:eye'" class="h-4 w-4" />
+                          </button>
                         </div>
                       </FormField>
 
@@ -226,6 +241,8 @@ const formData = reactive({
 const loading = ref(false)
 const message = ref('')
 const messageType = ref<'error' | 'success'>('error')
+const showPassword = ref(false)
+const showConfirmPassword = ref(false)
 
 // Computed
 const modeLabel = computed(() => (mode.value === 'login' ? 'Log in to Fablecraft' : 'Create your Fablecraft account'))
@@ -266,6 +283,19 @@ const handleSubmit = async () => {
 
 const handleLogin = async () => {
   loading.value = true
+  
+  // Debug log to check form data
+  console.log('Login attempt with:', { 
+    email: formData.email, 
+    passwordLength: formData.password?.length 
+  })
+  
+  if (!formData.email || !formData.password) {
+    message.value = 'Please enter both email and password'
+    messageType.value = 'error'
+    loading.value = false
+    return
+  }
   
   try {
     const { error } = await supabase.auth.signInWithPassword({
