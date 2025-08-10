@@ -54,12 +54,25 @@
                 <div class="px-6 pb-6 pt-4">
                   <h2 :id="headingId" class="sr-only">{{ modeLabel }}</h2>
 
-                  <form class="space-y-4" @submit.prevent>
+                  <!-- Error/Success Messages -->
+                  <div v-if="message" class="mb-4 p-3 rounded-lg text-sm" :class="messageClass">
+                    {{ message }}
+                  </div>
+
+                  <form class="space-y-4" @submit.prevent="handleSubmit">
                     <template v-if="mode === 'signup'">
                       <FormField label="Name">
                         <div class="relative">
                           <AtomIcon name="lucide:user" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <Input ref="firstFieldRef" autocomplete="name" placeholder="Your name" class="pl-9" />
+                          <Input 
+                            ref="nameFieldRef" 
+                            v-model="formData.name"
+                            autocomplete="name" 
+                            placeholder="Your name" 
+                            class="pl-9"
+                            :disabled="loading"
+                            required
+                          />
                         </div>
                       </FormField>
                     </template>
@@ -67,14 +80,31 @@
                     <FormField label="Email">
                       <div class="relative">
                         <AtomIcon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input :ref="mode === 'login' ? 'firstFieldRef' : undefined" autocomplete="email" type="email" placeholder="you@domain.com" class="pl-9" />
+                        <Input 
+                          ref="emailFieldRef"
+                          v-model="formData.email"
+                          autocomplete="email" 
+                          type="email" 
+                          placeholder="you@domain.com" 
+                          class="pl-9"
+                          :disabled="loading"
+                          required
+                        />
                       </div>
                     </FormField>
 
                     <FormField label="Password">
                       <div class="relative">
                         <AtomIcon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <PasswordField autocomplete="current-password" :show-toggle="true" placeholder="••••••••" class="pl-9" />
+                        <PasswordField 
+                          v-model="formData.password"
+                          :autocomplete="mode === 'login' ? 'current-password' : 'new-password'"
+                          :show-toggle="true" 
+                          placeholder="••••••••" 
+                          class="pl-9"
+                          :disabled="loading"
+                          required
+                        />
                       </div>
                     </FormField>
 
@@ -82,21 +112,36 @@
                       <FormField label="Confirm password">
                         <div class="relative">
                           <AtomIcon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <PasswordField autocomplete="new-password" :show-toggle="true" placeholder="••••••••" class="pl-9" />
+                          <PasswordField 
+                            v-model="formData.confirmPassword"
+                            autocomplete="new-password" 
+                            :show-toggle="true" 
+                            placeholder="••••••••" 
+                            class="pl-9"
+                            :disabled="loading"
+                            required
+                          />
                         </div>
                       </FormField>
 
                       <label class="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Checkbox />
+                        <Checkbox v-model="formData.acceptTerms" :disabled="loading" />
                         <span>I agree to the Terms & Privacy</span>
                       </label>
                     </template>
 
                     <div class="pt-2">
-                      <Button variant="default" class="w-full group" size="lg">
+                      <Button 
+                        type="submit"
+                        variant="default" 
+                        class="w-full group" 
+                        size="lg"
+                        :disabled="loading || (mode === 'signup' && !formData.acceptTerms)"
+                      >
+                        <Spinner v-if="loading" class="mr-2 h-4 w-4" />
                         <span class="relative">
-                          {{ mode === 'login' ? 'Continue' : 'Create account' }}
-                          <span class="ml-2 inline-block transition-transform group-hover:translate-x-0.5">→</span>
+                          {{ loading ? 'Please wait...' : mode === 'login' ? 'Continue' : 'Create account' }}
+                          <span v-if="!loading" class="ml-2 inline-block transition-transform group-hover:translate-x-0.5">→</span>
                         </span>
                       </Button>
                     </div>
@@ -109,13 +154,23 @@
                     <div class="h-px flex-1 bg-border" />
                   </div>
 
-                  <!-- Social providers (stub) -->
+                  <!-- Social providers -->
                   <div class="grid grid-cols-1 gap-3">
-                    <Button variant="outline" class="w-full">
+                    <Button 
+                      variant="outline" 
+                      class="w-full"
+                      :disabled="loading"
+                      @click="handleSocialLogin('google')"
+                    >
                       <AtomIcon name="logos:google-icon" class="mr-2 h-4 w-4" />
                       Continue with Google
                     </Button>
-                    <Button variant="outline" class="w-full">
+                    <Button 
+                      variant="outline" 
+                      class="w-full"
+                      :disabled="loading"
+                      @click="handleSocialLogin('github')"
+                    >
                       <AtomIcon name="mdi:github" class="mr-2 h-4 w-4" />
                       Continue with GitHub
                     </Button>
@@ -147,25 +202,178 @@
 </template>
 
 <script setup lang="ts">
+import { logger } from '~/utils/logger'
+
 const { isOpen, mode, open, close } = useAuthOverlay()
+const supabase = useSupabaseClient()
+const router = useRouter()
 const headingId = `auth-overlay-heading`
 
 const overlayRef = ref<HTMLDivElement | null>(null)
+const nameFieldRef = ref<HTMLInputElement | null>(null)
+const emailFieldRef = ref<HTMLInputElement | null>(null)
 
-const setMode = (m: 'login' | 'signup') => {
-  if (mode.value !== m) open(m)
-}
+// Form data
+const formData = reactive({
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  acceptTerms: false,
+})
 
+// State
+const loading = ref(false)
+const message = ref('')
+const messageType = ref<'error' | 'success'>('error')
+
+// Computed
 const modeLabel = computed(() => (mode.value === 'login' ? 'Log in to Fablecraft' : 'Create your Fablecraft account'))
 
-const firstFieldRef = ref<HTMLInputElement | null>(null)
+const messageClass = computed(() => {
+  return messageType.value === 'error' 
+    ? 'bg-destructive/10 text-destructive border border-destructive/20'
+    : 'bg-success/10 text-success border border-success/20'
+})
+
+// Methods
+const setMode = (m: 'login' | 'signup') => {
+  if (mode.value !== m) {
+    open(m)
+    // Clear form and messages when switching modes
+    resetForm()
+  }
+}
+
+const resetForm = () => {
+  formData.name = ''
+  formData.email = ''
+  formData.password = ''
+  formData.confirmPassword = ''
+  formData.acceptTerms = false
+  message.value = ''
+}
+
+const handleSubmit = async () => {
+  message.value = ''
+  
+  if (mode.value === 'signup') {
+    await handleSignup()
+  } else {
+    await handleLogin()
+  }
+}
+
+const handleLogin = async () => {
+  loading.value = true
+  
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    })
+
+    if (error) {
+      message.value = error.message
+      messageType.value = 'error'
+    } else {
+      message.value = 'Login successful! Redirecting...'
+      messageType.value = 'success'
+      
+      // Close overlay and redirect
+      setTimeout(() => {
+        close()
+        router.push('/')
+      }, 1000)
+    }
+  } catch (error: any) {
+    message.value = 'An unexpected error occurred'
+    messageType.value = 'error'
+    logger.error('Login error:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+const handleSignup = async () => {
+  // Validate passwords match
+  if (formData.password !== formData.confirmPassword) {
+    message.value = 'Passwords do not match'
+    messageType.value = 'error'
+    return
+  }
+
+  loading.value = true
+  
+  try {
+    const { error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          full_name: formData.name,
+        },
+        emailRedirectTo: `${window.location.origin}/confirm`,
+      },
+    })
+
+    if (error) {
+      message.value = error.message
+      messageType.value = 'error'
+    } else {
+      message.value = 'Account created! Please check your email to verify your account.'
+      messageType.value = 'success'
+      
+      // Keep overlay open to show success message
+      // User will close it manually or click the email link
+    }
+  } catch (error: any) {
+    message.value = 'An unexpected error occurred'
+    messageType.value = 'error'
+    logger.error('Signup error:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+const handleSocialLogin = async (provider: 'google' | 'github') => {
+  try {
+    loading.value = true
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/confirm`,
+      },
+    })
+
+    if (error) {
+      message.value = `Failed to sign in with ${provider}`
+      messageType.value = 'error'
+      logger.error('Social login error:', error)
+    }
+  } catch (error: any) {
+    message.value = 'An unexpected error occurred'
+    messageType.value = 'error'
+    logger.error('Social login error:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// Focus management
 watch(
   () => isOpen.value,
   (v) => {
     if (v) {
+      resetForm()
       nextTick(() => {
         overlayRef.value?.focus()
-        firstFieldRef.value?.focus()
+        // Focus appropriate field based on mode
+        if (mode.value === 'signup') {
+          nameFieldRef.value?.focus()
+        } else {
+          emailFieldRef.value?.focus()
+        }
       })
       document.documentElement.style.overflow = 'hidden'
     } else {
