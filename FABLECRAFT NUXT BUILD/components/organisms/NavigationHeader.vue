@@ -10,8 +10,9 @@
         />
 
         <!-- Professional Navigation Menu - Using NavigationMenu molecule -->
+        <!-- Only show when NOT authenticated -->
         <NavigationMenu
-          v-if="showNavItems"
+          v-if="showNavItems && !isAuthenticated"
           :show-items="showNavItems"
           class="hidden md:flex"
           @navigate="handleNavigate"
@@ -58,95 +59,104 @@
                 align="end"
                 class="w-64 bg-card/95 backdrop-blur-xl border border-border shadow-xl rounded-xl mt-2"
               >
-                <!-- Workspace Section -->
+                <!-- Main Navigation -->
                 <div class="p-2 border-b border-border/20">
-                  <div
-                    class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
-                  >
-                    Workspace
-                  </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @select="() => handleNavigate('projects')"
+                    @select="() => handleNavigate('dashboard')"
                   >
                     <div class="flex items-center gap-3">
-                      <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                      </svg>
-                      <div>
-                        <div class="font-medium">Creative Workspace</div>
-                        <div class="text-xs text-muted-foreground">
-                          Projects, characters & world bible
-                        </div>
-                      </div>
+                      <Icon name="lucide:layout-dashboard" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Dashboard</span>
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('community')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:users" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Community</span>
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('gallery')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:image" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Gallery</span>
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('library')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:book-open" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Library</span>
+                    </div>
+                  </DropdownMenuItem>
+                </div>
+
+                <!-- Info Section -->
+                <div class="p-2 border-b border-border/20">
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('about')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:info" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">About</span>
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('contact')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:mail" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Contact</span>
                     </div>
                   </DropdownMenuItem>
                 </div>
 
                 <!-- Account Section -->
                 <div class="p-2 border-b border-border/20">
-                  <div
-                    class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
-                  >
-                    Account
-                  </div>
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @select="() => handleNavigate('profile')"
+                    @select="() => handleNavigate('settings')"
                   >
                     <div class="flex items-center gap-3">
-                      <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                      </svg>
-                      <div>
-                        <div class="font-medium">Profile & Settings</div>
-                        <div class="text-xs text-muted-foreground">Manage your account</div>
-                      </div>
+                      <Icon name="lucide:settings" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Settings</span>
+                    </div>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('account')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:user" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Account</span>
                     </div>
                   </DropdownMenuItem>
                 </div>
 
-                <!-- Community Section -->
-                <div class="p-2 border-b border-border/20">
-                  <div
-                    class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2"
-                  >
-                    Community
-                  </div>
-                  <DropdownMenuItem
-                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @select="() => handleNavigate('community')"
-                  >
-                    <div class="flex items-center gap-3">
-                      <svg class="h-4 w-4 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="m22 21-3-3 3-3"/>
-                        <path d="M16 11h6"/>
-                      </svg>
-                      <div>
-                        <div class="font-medium">Writer Community</div>
-                        <div class="text-xs text-muted-foreground">Connect with other writers</div>
-                      </div>
-                    </div>
-                  </DropdownMenuItem>
-                </div>
-
-                <!-- Sign Out -->
+                <!-- Logout -->
                 <div class="p-2">
                   <DropdownMenuItem
-                    class="cursor-pointer hover:bg-destructive/10 py-3 px-4 rounded-lg transition-colors"
+                    class="cursor-pointer hover:bg-destructive/10 py-3 px-4 rounded-lg transition-colors text-destructive"
                     @select="handleLogout"
                   >
                     <div class="flex items-center gap-3">
-                      <svg class="h-4 w-4 text-destructive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                        <polyline points="16,17 21,12 16,7"/>
-                        <line x1="21" x2="9" y1="12" y2="12"/>
-                      </svg>
-                      <span class="font-medium text-destructive"> Sign Out </span>
+                      <Icon name="lucide:log-out" class="h-4 w-4" />
+                      <span class="font-medium">Log out</span>
                     </div>
                   </DropdownMenuItem>
                 </div>
@@ -273,9 +283,23 @@ const handleAuthClick = () => {
   }
 }
 
-// Handle logout - delegate to parent
-const handleLogout = () => {
-  emit('auth:logout')
+// Handle logout - sign out with Supabase
+const handleLogout = async () => {
+  const supabase = useSupabaseClient()
+  const router = useRouter()
+  
+  try {
+    await supabase.auth.signOut()
+    emit('auth:logout')
+    // Redirect to home page after logout
+    await router.push('/')
+    // Refresh the page to clear any cached user state
+    if (process.client) {
+      window.location.reload()
+    }
+  } catch (error) {
+    console.error('Logout error:', error)
+  }
 }
 
 // Handle navigation (updated to work with NavigationMenu molecule)
