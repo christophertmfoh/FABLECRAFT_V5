@@ -216,6 +216,7 @@ interface User {
   user_metadata?: {
     username?: string
     email?: string
+    full_name?: string
   }
 }
 
@@ -262,6 +263,7 @@ const displayName = computed(() => {
   if (!props.user) return 'User'
   
   return (
+    props.user.user_metadata?.full_name ||
     props.user.user_metadata?.username ||
     props.user.email?.split('@')[0] ||
     'User'
