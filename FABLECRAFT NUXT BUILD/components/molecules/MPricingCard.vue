@@ -4,10 +4,7 @@
     variant="default"
     role="article"
     :aria-label="`${name} pricing plan`"
-    tabindex="0"
     @click="handleClick"
-    @keydown.enter="handleClick"
-    @keydown.space.prevent="handleClick"
   >
     <!-- Popular badge -->
     <PopularBadge
@@ -183,7 +180,7 @@ const cardClasses = computed(() =>
     'hover:shadow-lg hover:scale-[1.02] hover:-translate-y-1',
     'border-border hover:border-primary/50',
     'natural-depth gentle-hover',
-    'focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2',
+    'focus:outline-none', // Remove focus ring, just keep outline-none
     'bg-card/90 backdrop-blur-sm',
     'relative h-full',
     'flex flex-col',

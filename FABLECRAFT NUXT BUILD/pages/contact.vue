@@ -11,14 +11,16 @@
     
     <!-- Navigation Header -->
     <NavigationHeader 
+      :is-authenticated="isAuthenticated"
+      :user="user"
       :show-auth="true"
       :show-nav-items="true"
       :show-theme-toggle="true"
       variant="default"
       @navigate="handleNavigate"
-      @auth="handleAuth"
-      @logout="handleLogout"
-      @home="handleHome"
+      @auth:click="handleAuth"
+      @auth:logout="handleLogout"
+      @logo:click="handleHome"
     />
     
     <!-- Main Content -->
@@ -191,30 +193,30 @@
                   <!-- Name and Email Row -->
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="name" class="block text-sm font-semibold text-foreground mb-2.5">
+                      <Label for="name" class="block text-sm font-semibold text-foreground mb-2.5">
                         Full Name <span class="text-destructive">*</span>
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         id="name"
                         v-model="formData.name"
                         type="text"
                         required
-                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="John Doe"
+                        class="h-12"
                       />
                     </div>
                     
                     <div>
-                      <label for="email" class="block text-sm font-semibold text-foreground mb-2.5">
+                      <Label for="email" class="block text-sm font-semibold text-foreground mb-2.5">
                         Email Address <span class="text-destructive">*</span>
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         id="email"
                         v-model="formData.email"
                         type="email"
                         required
-                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="john@example.com"
+                        class="h-12"
                       />
                     </div>
                   </div>
@@ -222,28 +224,28 @@
                   <!-- Company and Phone Row -->
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="company" class="block text-sm font-semibold text-foreground mb-2.5">
+                      <Label for="company" class="block text-sm font-semibold text-foreground mb-2.5">
                         Company
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         id="company"
                         v-model="formData.company"
                         type="text"
-                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="Acme Inc."
+                        class="h-12"
                       />
                     </div>
                     
                     <div>
-                      <label for="phone" class="block text-sm font-semibold text-foreground mb-2.5">
+                      <Label for="phone" class="block text-sm font-semibold text-foreground mb-2.5">
                         Phone Number
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         id="phone"
                         v-model="formData.phone"
                         type="tel"
-                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="+1 (555) 123-4567"
+                        class="h-12"
                       />
                     </div>
                   </div>
@@ -272,16 +274,16 @@
                   
                   <!-- Message -->
                   <div>
-                    <label for="message" class="block text-sm font-semibold text-foreground mb-2.5">
+                    <Label for="message" class="block text-sm font-semibold text-foreground mb-2.5">
                       Message <span class="text-destructive">*</span>
-                    </label>
-                    <textarea
+                    </Label>
+                    <Textarea
                       id="message"
                       v-model="formData.message"
                       required
                       rows="6"
-                      class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all resize-none"
                       placeholder="Tell us how we can help you..."
+                      class="min-h-[150px]"
                     />
                     <Text size="sm" class="text-muted-foreground mt-2">
                       {{ formData.message.length }}/1000 characters
@@ -290,17 +292,16 @@
                   
                   <!-- Newsletter Opt-in -->
                   <div class="flex items-start">
-                    <input
+                    <Checkbox
                       id="newsletter"
                       v-model="formData.newsletter"
-                      type="checkbox"
-                      class="mt-1 h-4 w-4 rounded border-border bg-muted/50 text-primary focus:ring-primary focus:ring-offset-background checked:bg-primary checked:border-primary cursor-pointer"
+                      class="mt-1"
                     />
-                    <label for="newsletter" class="ml-3">
+                    <Label for="newsletter" class="ml-3 cursor-pointer">
                       <Text size="sm" class="text-foreground">
                         I'd like to receive updates about Fablecraft products and services
                       </Text>
-                    </label>
+                    </Label>
                   </div>
                   
                   <!-- Submit Button -->
@@ -508,8 +509,8 @@
                 
                 <GlassCard variant="light" class="p-10 natural-depth shadow-lg hover:shadow-xl transition-all duration-300 group">
                   <div class="flex items-start gap-6">
-                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-secondary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:clock" class="h-8 w-8 text-accent" />
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:clock" class="h-8 w-8 text-primary" />
                     </div>
                     <div>
                       <Heading tag="h3" size="h4" class="text-foreground mb-3 font-bold">
@@ -600,7 +601,12 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { useHead, navigateTo, useSupabaseClient, useAuthOverlay } from '#imports'
+import { useHead, navigateTo, useSupabaseClient, useSupabaseUser, useAuthOverlay } from '#imports'
+
+// Authentication state
+const supabase = import.meta.client ? useSupabaseClient() : null
+const user = import.meta.client ? useSupabaseUser() : ref(null)
+const isAuthenticated = computed(() => !!user?.value)
 
 // Page meta
 useHead({
@@ -690,8 +696,14 @@ const handleAuth = () => {
 }
 
 const handleLogout = async () => {
-  const supabase = useSupabaseClient()
-  await supabase.auth.signOut()
+  if (!supabase) return
+  
+  try {
+    await supabase.auth.signOut()
+    console.log('Logged out successfully')
+  } catch (error) {
+    console.error('Error during logout:', error)
+  }
 }
 
 const handleHome = () => {

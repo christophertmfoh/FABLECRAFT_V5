@@ -60,6 +60,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { PRICING_CONFIG } from '~/constants/pricing'
 
 // Types
 interface PricingFeature {
@@ -123,72 +124,19 @@ const emit = defineEmits<{
 // Reactive state
 const isAnnual = ref(true)
 
-// Simplified pricing plans data for uniform layout
-const defaultPricingPlans: PricingPlan[] = [
-  {
-    id: 'free',
-    name: 'Free',
-    monthlyPrice: 'Free',
-    annualPrice: 'Free',
-    description: 'Perfect for beginners',
-    isPopular: false,
-    ctaText: 'Start Free',
-    features: [
-      { text: '3 Projects', included: true },
-      { text: 'Basic AI Features', included: true },
-      { text: 'Community Access', included: true },
-      { text: 'Standard Export', included: true },
-    ],
-  },
-  {
-    id: 'starter',
-    name: 'Starter',
-    monthlyPrice: 15,
-    annualPrice: 12,
-    description: 'For serious creators',
-    isPopular: false,
-    ctaText: 'Choose Starter',
-    features: [
-      { text: 'Unlimited Projects', included: true },
-      { text: 'Standard AI Credits', included: true },
-      { text: 'Advanced Features', included: true },
-      { text: 'Enhanced Export', included: true },
-    ],
-  },
-  {
-    id: 'professional',
-    name: 'Creative Studio',
-    monthlyPrice: 29,
-    annualPrice: 23,
-    description: 'Complete creative suite',
-    isPopular: true,
-    popularText: 'Most Popular',
-    variant: 'highlighted',
-    ctaText: 'Unleash Full Power',
-    features: [
-      { text: 'Everything in Starter', included: true },
-      { text: 'Premium AI Credits', included: true },
-      { text: 'Media Production', included: true },
-      { text: 'Priority Support', included: true },
-    ],
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise',
-    monthlyPrice: 'Custom',
-    annualPrice: 'Custom',
-    description: 'For teams at scale',
-    isPopular: false,
-    ctaText: 'Contact Sales',
-    variant: 'enterprise',
-    features: [
-      { text: 'Everything in Studio', included: true },
-      { text: 'Unlimited AI Credits', included: true },
-      { text: 'Custom Integrations', included: true },
-      { text: 'Dedicated Support', included: true },
-    ],
-  },
-]
+// Transform pricing config to match component format
+const defaultPricingPlans: PricingPlan[] = Object.entries(PRICING_CONFIG.plans).map(([key, plan]) => ({
+  id: plan.id,
+  name: plan.name,
+  monthlyPrice: plan.prices.monthly === 0 ? 'Free' : (plan.prices.monthly === 'custom' ? 'Custom' : plan.prices.monthly),
+  annualPrice: plan.prices.yearly === 0 ? 'Free' : (plan.prices.yearly === 'custom' ? 'Custom' : plan.prices.yearly),
+  description: plan.description,
+  isPopular: plan.isPopular || false,
+  popularText: plan.popularText,
+  variant: plan.id === 'pro' ? 'highlighted' : (plan.id === 'enterprise' ? 'enterprise' : 'default'),
+  ctaText: plan.ctaText,
+  features: plan.features.map(f => ({ text: f, included: true })),
+}))
 
 // Computed properties
 const isCompact = computed(() => props.variant === 'compact')
@@ -262,7 +210,9 @@ const handlePlanClick = (plan: PricingPlan) => {
     console.warn('OPricingSection: Invalid plan data in click handler')
     return
   }
-  emit('planClick', plan)
+  
+  // Navigate to pricing page with selected plan
+  navigateTo(`/pricing?plan=${plan.id}`)
 }
 
 const handleCtaClick = (plan: PricingPlan) => {
@@ -271,7 +221,9 @@ const handleCtaClick = (plan: PricingPlan) => {
     console.warn('OPricingSection: Invalid plan data in CTA click handler')
     return
   }
-  emit('ctaClick', plan)
+  
+  // Navigate to pricing page with selected plan
+  navigateTo(`/pricing?plan=${plan.id}`)
 }
 </script>
 

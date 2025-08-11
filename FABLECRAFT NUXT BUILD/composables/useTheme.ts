@@ -80,10 +80,11 @@ export const useTheme = () => {
   const updateDOMTheme = () => {
     if (!import.meta.client) return
 
-    const resolved = resolvedTheme.value
-    document.documentElement.setAttribute('data-theme', resolved)
+    // Set data-theme to the actual selected theme (including 'system')
+    document.documentElement.setAttribute('data-theme', currentTheme.value)
     
-    // Apply dark class for Tailwind dark mode
+    // For dark mode class, use the resolved theme
+    const resolved = resolvedTheme.value
     const darkThemes = ['dark', 'midnight-ink', 'forest-manuscript', 'starlit-prose', 'coffee-house', 'cherry-lacquer', 'dragons-hoard', 'halloween', 'netrunner']
     if (darkThemes.includes(resolved)) {
       document.documentElement.classList.add('dark')

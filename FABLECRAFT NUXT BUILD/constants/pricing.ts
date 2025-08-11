@@ -1,0 +1,294 @@
+// Page Content
+export const PRICING_HERO = {
+  badge: 'Simple, transparent pricing',
+  title: 'Choose Your',
+  highlight: 'Subscription',
+  description: '30-day free trial on all paid plans. No credit card required to start.',
+}
+
+export const COMPARISON_CONTENT = {
+  title: 'Detailed Feature Comparison',
+}
+
+export const FAQ_CONTENT = {
+  title: 'Frequently Asked Questions',
+}
+
+// Pricing Configuration
+export const PRICING_CONFIG = {
+  trialDays: 30,
+  labels: {
+    everythingIncluded: 'Everything included:',
+    trialNotice: 'Start with 30-day free trial - No credit card required',
+    paymentMethod: 'Payment Method (for after trial)',
+    emailAddress: 'Email Address',
+    emailPlaceholder: 'you@example.com',
+    termsPrefix: 'I agree to the',
+    termsOfService: 'Terms of Service',
+    and: 'and',
+    privacyPolicy: 'Privacy Policy',
+    secureCheckout: 'Secure checkout',
+    cancelAnytime: 'Cancel anytime',
+    enterpriseMessage: 'Enterprise plans are customized for your organization\'s needs. Our team will work with you to create the perfect solution.',
+  },
+  buttons: {
+    startTrial: 'Start 30-Day Free Trial',
+    contactSales: 'Contact Sales Team',
+  },
+  billing: {
+    monthly: {
+      label: 'Monthly',
+      period: 'per month',
+    },
+    yearly: {
+      label: 'Yearly',
+      sublabel: 'billed yearly',
+      period: 'per year',
+    },
+    perMonth: '/month',
+  },
+  discount: {
+    yearly: 20, // percentage
+    label: 'Save 20%',
+  },
+  plans: {
+    free: {
+      id: 'free',
+      name: 'Free',
+      description: 'Perfect for beginners',
+      prices: {
+        monthly: 0,
+        yearly: 0,
+      },
+      ctaText: 'Start Free',
+      features: [
+        '3 Projects',
+        'Basic AI Features',
+        'Community Access',
+        'Standard Export',
+      ],
+      limits: {
+        projects: 3,
+        storage: '1 GB',
+        collaborators: 0,
+        versionHistory: '7 days',
+      },
+    },
+    starter: {
+      id: 'starter',
+      name: 'Starter',
+      description: 'For serious creators',
+      prices: {
+        monthly: 15,
+        yearly: 144, // $12/month billed yearly
+      },
+      ctaText: 'Choose Starter',
+      features: [
+        'Unlimited Projects',
+        'Standard AI Credits',
+        'Advanced Features',
+        'Enhanced Export',
+      ],
+      limits: {
+        projects: 10,
+        storage: '10 GB',
+        collaborators: 3,
+        versionHistory: '30 days',
+      },
+    },
+    pro: {
+      id: 'pro',
+      name: 'Creative Studio',
+      description: 'Complete creative suite',
+      prices: {
+        monthly: 29,
+        yearly: 276, // $23/month billed yearly
+      },
+      isPopular: true,
+      ctaText: 'Unleash Full Power',
+      popularText: 'Most Popular',
+      features: [
+        'Everything in Starter',
+        'Premium AI Credits',
+        'Media Production',
+        'Priority Support',
+      ],
+      limits: {
+        projects: -1, // unlimited
+        storage: '100 GB',
+        collaborators: 10,
+        versionHistory: -1, // unlimited
+      },
+    },
+    enterprise: {
+      id: 'enterprise',
+      name: 'Enterprise',
+      description: 'For teams at scale',
+      prices: {
+        monthly: 'custom',
+        yearly: 'custom',
+      },
+      ctaText: 'Contact Sales',
+      features: [
+        'Everything in Studio',
+        'Unlimited AI Credits',
+        'Custom Integrations',
+        'Dedicated Support',
+      ],
+      limits: {
+        projects: -1,
+        storage: -1,
+        collaborators: -1,
+        versionHistory: -1,
+      },
+    },
+  },
+}
+
+// Trust Metrics
+export const TRUST_METRICS = {
+  activeUsers: '50K+',
+  activeUsersLabel: 'Active Creators',
+  rating: '4.9/5',
+  ratingLabel: 'Average Rating',
+  uptime: '99.9%',
+  uptimeLabel: 'Uptime SLA',
+  support: '24/7',
+  supportLabel: 'Support',
+}
+
+// Comparison Features
+export const COMPARISON_FEATURES = [
+  {
+    name: 'Projects per month',
+    key: 'projects',
+    free: '3',
+    starter: '10',
+    pro: 'Unlimited',
+    enterprise: 'Unlimited',
+  },
+  {
+    name: 'AI Writing Assistant',
+    key: 'ai',
+    free: true,
+    starter: true,
+    pro: true,
+    enterprise: true,
+    tooltip: 'AI-powered writing suggestions and completions',
+  },
+  {
+    name: 'AI Model',
+    key: 'aiModel',
+    free: 'Basic',
+    starter: 'Advanced',
+    pro: 'GPT-4',
+    enterprise: 'Custom',
+  },
+  {
+    name: 'Story Templates',
+    key: 'templates',
+    free: '10',
+    starter: '50+',
+    pro: '200+',
+    enterprise: 'Custom',
+  },
+  {
+    name: 'Export Formats',
+    key: 'export',
+    free: 'PDF',
+    starter: 'All formats',
+    pro: 'All formats',
+    enterprise: 'All formats + API',
+  },
+  {
+    name: 'Collaboration',
+    key: 'collaboration',
+    free: false,
+    starter: '3 users',
+    pro: '10 users',
+    enterprise: 'Unlimited',
+  },
+  {
+    name: 'Version History',
+    key: 'versionHistory',
+    free: '7 days',
+    starter: '30 days',
+    pro: 'Unlimited',
+    enterprise: 'Unlimited',
+  },
+  {
+    name: 'Storage',
+    key: 'storage',
+    free: '1 GB',
+    starter: '10 GB',
+    pro: '100 GB',
+    enterprise: 'Unlimited',
+  },
+  {
+    name: 'Support',
+    key: 'support',
+    free: 'Community',
+    starter: 'Email',
+    pro: 'Priority',
+    enterprise: 'Dedicated',
+  },
+  {
+    name: 'API Access',
+    key: 'api',
+    free: false,
+    starter: false,
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Custom Branding',
+    key: 'branding',
+    free: false,
+    starter: false,
+    pro: true,
+    enterprise: true,
+  },
+  {
+    name: 'Analytics',
+    key: 'analytics',
+    free: 'Basic',
+    starter: 'Advanced',
+    pro: 'Advanced',
+    enterprise: 'Custom',
+  },
+]
+
+// FAQ Data
+export const PRICING_FAQS = [
+  {
+    question: 'Can I change plans anytime?',
+    answer: 'Yes! You can upgrade or downgrade your plan at any time. When upgrading, you\'ll be charged the prorated difference. When downgrading, you\'ll receive credit for the unused time.',
+  },
+  {
+    question: 'Do you offer refunds?',
+    answer: 'We offer a 30-day money-back guarantee for all paid plans. If you\'re not satisfied, contact our support team for a full refund.',
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and wire transfers for enterprise customers.',
+  },
+  {
+    question: 'Is there a free trial for paid plans?',
+    answer: `Yes! All paid plans come with a ${PRICING_CONFIG.trialDays}-day free trial. No credit card required to start your trial.`,
+  },
+  {
+    question: 'What happens when I reach my project limit?',
+    answer: 'You\'ll receive a notification when you\'re close to your limit. You can either upgrade your plan or wait until the next billing cycle for your limit to reset.',
+  },
+  {
+    question: 'Do you offer discounts for students or non-profits?',
+    answer: 'Yes! We offer 50% off for verified students and non-profit organizations. Contact our support team with proof of eligibility.',
+  },
+]
+
+// Payment Methods
+export const PAYMENT_METHODS = [
+  { id: 'card', name: 'Credit/Debit Card', icon: 'lucide:credit-card' },
+  { id: 'paypal', name: 'PayPal', icon: 'lucide:wallet' },
+  { id: 'wire', name: 'Wire Transfer', icon: 'lucide:building-2', enterprise: true },
+]
