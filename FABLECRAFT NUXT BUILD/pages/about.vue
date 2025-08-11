@@ -103,7 +103,7 @@
                           tag="span"
                           variant="primary"
                           direction="to-r"
-                          intensity="strong"
+                          intensity="vibrant"
                           class="bg-clip-text text-transparent"
                         >
                           Come Alive
