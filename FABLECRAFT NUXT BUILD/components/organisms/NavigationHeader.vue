@@ -129,16 +129,6 @@
                 <div class="p-2 border-b border-border/20">
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
-                    @select="() => handleNavigate('settings')"
-                  >
-                    <div class="flex items-center gap-3">
-                      <Icon name="lucide:settings" class="h-4 w-4 text-primary" />
-                      <span class="font-medium">Settings</span>
-                    </div>
-                  </DropdownMenuItem>
-
-                  <DropdownMenuItem
-                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
                     @select="() => handleNavigate('account')"
                   >
                     <div class="flex items-center gap-3">
