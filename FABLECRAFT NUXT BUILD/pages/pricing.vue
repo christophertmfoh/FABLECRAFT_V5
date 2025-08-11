@@ -98,7 +98,7 @@
                 size="sm" 
                 class="absolute -top-3 left-1/2 -translate-x-1/2"
               >
-                {{ plan.popularText || 'Most Popular' }}
+                {{ plan.popularText }}
               </Badge>
 
               <!-- Plan Name -->
@@ -112,14 +112,14 @@
                   {{ formatPrice(plan, billingPeriod) }}
                 </span>
                 <span v-if="plan.prices[billingPeriod] !== 'custom'" class="text-muted-foreground">
-                  /month
+                  {{ config.billing.perMonth }}
                 </span>
                 <Text 
                   v-if="billingPeriod === 'yearly' && plan.prices.yearly !== 'custom' && plan.prices.yearly > 0" 
                   size="xs" 
                   class="text-muted-foreground/70 block"
                 >
-                  billed yearly
+                  {{ config.billing.yearly.sublabel }}
                 </Text>
               </div>
 
@@ -141,10 +141,10 @@
               </ul>
 
               <!-- CTA Button -->
-              <div class="mt-auto text-center">
+              <div class="mt-auto text-center w-full">
                 <Text 
                   size="sm" 
-                  class="font-medium"
+                  class="font-medium text-center block"
                   :class="selectedPlan === key ? 'text-primary' : 'text-muted-foreground'"
                 >
                   {{ plan.ctaText }}
@@ -170,15 +170,15 @@
                 </Heading>
                 <Text size="lg" class="text-primary font-semibold">
                   {{ formatPrice(config.plans[selectedPlan], billingPeriod) }}
-                  <span class="text-muted-foreground font-normal">
-                    {{ billingPeriod === 'yearly' ? 'per year' : 'per month' }}
-                  </span>
+                                  <span class="text-muted-foreground font-normal">
+                  {{ config.billing[billingPeriod].period }}
+                </span>
                 </Text>
               </div>
 
               <!-- All Features -->
               <div class="mb-6">
-                <Text size="sm" class="font-semibold mb-3">Everything included:</Text>
+                <Text size="sm" class="font-semibold mb-3">{{ config.labels.everythingIncluded }}</Text>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <li 
                     v-for="(feature, idx) in config.plans[selectedPlan].features" 
@@ -197,15 +197,15 @@
                 <div class="p-4 bg-success/10 rounded-lg border border-success/20">
                   <div class="flex items-center gap-2">
                     <Icon name="lucide:gift" class="h-5 w-5 text-success" />
-                    <Text size="sm" class="font-medium">
-                      Start with {{ config.trialDays }}-day free trial - No credit card required
-                    </Text>
+                                      <Text size="sm" class="font-medium">
+                    {{ config.labels.trialNotice }}
+                  </Text>
                   </div>
                 </div>
 
                 <!-- Payment Method Selection (for after trial) -->
                 <div v-if="!startTrial">
-                  <Label class="mb-2">Payment Method (for after trial)</Label>
+                  <Label class="mb-2">{{ config.labels.paymentMethod }}</Label>
                   <div class="grid grid-cols-2 gap-3">
                     <button
                       v-for="method in paymentMethods.filter(m => !m.enterprise)"
@@ -226,12 +226,12 @@
 
                 <!-- Email Input (for trial) -->
                 <div v-if="!isAuthenticated">
-                  <Label for="email" class="mb-2">Email Address</Label>
+                  <Label for="email" class="mb-2">{{ config.labels.emailAddress }}</Label>
                   <Input
                     id="email"
                     v-model="checkoutEmail"
                     type="email"
-                    placeholder="you@example.com"
+                    :placeholder="config.labels.emailPlaceholder"
                     required
                   />
                 </div>
@@ -243,8 +243,8 @@
                     v-model="acceptedTerms"
                   />
                   <Label for="terms" class="text-sm">
-                    I agree to the <a href="/terms" class="text-primary hover:underline">Terms of Service</a> 
-                    and <a href="/privacy" class="text-primary hover:underline">Privacy Policy</a>
+                    {{ config.labels.termsPrefix }} <a href="/terms" class="text-primary hover:underline">{{ config.labels.termsOfService }}</a> 
+                    {{ config.labels.and }} <a href="/privacy" class="text-primary hover:underline">{{ config.labels.privacyPolicy }}</a>
                   </Label>
                 </div>
 
@@ -267,11 +267,11 @@
                 <div class="flex items-center justify-center gap-4 text-xs text-muted-foreground">
                   <div class="flex items-center gap-1">
                     <Icon name="lucide:lock" class="h-3 w-3" />
-                    <span>Secure checkout</span>
+                    <span>{{ config.labels.secureCheckout }}</span>
                   </div>
                   <div class="flex items-center gap-1">
                     <Icon name="lucide:shield-check" class="h-3 w-3" />
-                    <span>Cancel anytime</span>
+                    <span>{{ config.labels.cancelAnytime }}</span>
                   </div>
                 </div>
               </div>
@@ -280,8 +280,7 @@
               <div v-else class="space-y-4">
                 <div class="p-4 bg-primary/5 rounded-lg">
                   <Text size="sm">
-                    Enterprise plans are customized for your organization's needs. 
-                    Our team will work with you to create the perfect solution.
+                    {{ config.labels.enterpriseMessage }}
                   </Text>
                 </div>
                 <Button
@@ -397,19 +396,19 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div class="text-center">
                 <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.activeUsers }}</div>
-                <Text size="sm" class="text-muted-foreground">Active Creators</Text>
+                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.activeUsersLabel }}</Text>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.rating }}</div>
-                <Text size="sm" class="text-muted-foreground">Average Rating</Text>
+                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.ratingLabel }}</Text>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.uptime }}</div>
-                <Text size="sm" class="text-muted-foreground">Uptime SLA</Text>
+                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.uptimeLabel }}</Text>
               </div>
               <div class="text-center">
                 <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.support }}</div>
-                <Text size="sm" class="text-muted-foreground">Support</Text>
+                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.supportLabel }}</Text>
               </div>
             </div>
           </Container>

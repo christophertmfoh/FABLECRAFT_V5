@@ -17,6 +17,20 @@ export const FAQ_CONTENT = {
 // Pricing Configuration
 export const PRICING_CONFIG = {
   trialDays: 30,
+  labels: {
+    everythingIncluded: 'Everything included:',
+    trialNotice: 'Start with 30-day free trial - No credit card required',
+    paymentMethod: 'Payment Method (for after trial)',
+    emailAddress: 'Email Address',
+    emailPlaceholder: 'you@example.com',
+    termsPrefix: 'I agree to the',
+    termsOfService: 'Terms of Service',
+    and: 'and',
+    privacyPolicy: 'Privacy Policy',
+    secureCheckout: 'Secure checkout',
+    cancelAnytime: 'Cancel anytime',
+    enterpriseMessage: 'Enterprise plans are customized for your organization\'s needs. Our team will work with you to create the perfect solution.',
+  },
   buttons: {
     startTrial: 'Start 30-Day Free Trial',
     contactSales: 'Contact Sales Team',
@@ -24,10 +38,14 @@ export const PRICING_CONFIG = {
   billing: {
     monthly: {
       label: 'Monthly',
+      period: 'per month',
     },
     yearly: {
       label: 'Yearly',
+      sublabel: 'billed yearly',
+      period: 'per year',
     },
+    perMonth: '/month',
   },
   discount: {
     yearly: 20, // percentage
@@ -130,9 +148,13 @@ export const PRICING_CONFIG = {
 // Trust Metrics
 export const TRUST_METRICS = {
   activeUsers: '50K+',
+  activeUsersLabel: 'Active Creators',
   rating: '4.9/5',
+  ratingLabel: 'Average Rating',
   uptime: '99.9%',
+  uptimeLabel: 'Uptime SLA',
   support: '24/7',
+  supportLabel: 'Support',
 }
 
 // Comparison Features
