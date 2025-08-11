@@ -163,12 +163,12 @@
 
           <!-- Selected Plan Details & Checkout -->
           <div v-if="selectedPlan" class="max-w-2xl mx-auto">
-            <Card class="p-8">
+            <Card class="p-8 text-center">
               <div class="mb-6">
-                <Heading tag="h2" size="h3" class="mb-2 text-foreground">
+                <Heading tag="h2" size="h3" class="mb-2 text-foreground text-center">
                   {{ config.plans[selectedPlan].name }} Plan
                 </Heading>
-                <Text size="lg" class="text-primary font-semibold">
+                <Text size="lg" class="text-primary font-semibold text-center block">
                   {{ formatPrice(config.plans[selectedPlan], billingPeriod) }}
                                   <span class="text-muted-foreground font-normal">
                   {{ config.billing[billingPeriod].period }}
@@ -178,14 +178,14 @@
 
               <!-- All Features -->
               <div class="mb-6">
-                <Text size="sm" class="font-semibold mb-3">{{ config.labels.everythingIncluded }}</Text>
+                <Text size="sm" class="font-semibold mb-3 text-center block">{{ config.labels.everythingIncluded }}</Text>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <li 
                     v-for="(feature, idx) in config.plans[selectedPlan].features" 
                     :key="idx"
-                    class="flex items-start gap-2 text-sm text-foreground"
+                    class="flex items-center justify-center gap-2 text-sm text-foreground"
                   >
-                    <Icon name="lucide:check" class="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
+                    <Icon name="lucide:check" class="h-4 w-4 text-success flex-shrink-0" />
                     <span>{{ feature }}</span>
                   </li>
                 </ul>
@@ -195,9 +195,9 @@
               <div v-if="selectedPlan !== 'enterprise'" class="space-y-4">
                 <!-- Trial Notice -->
                 <div class="p-4 bg-success/10 rounded-lg border border-success/20">
-                  <div class="flex items-center gap-2">
+                  <div class="flex items-center justify-center gap-2">
                     <Icon name="lucide:gift" class="h-5 w-5 text-success" />
-                                      <Text size="sm" class="font-medium">
+                                      <Text size="sm" class="font-medium text-center">
                     {{ config.labels.trialNotice }}
                   </Text>
                   </div>
@@ -218,7 +218,7 @@
                     >
                       <div class="flex items-center gap-2">
                         <Icon :name="method.icon" class="h-5 w-5" />
-                        <span class="text-sm font-medium">{{ method.name }}</span>
+                        <span class="text-sm font-medium text-foreground">{{ method.name }}</span>
                       </div>
                     </button>
                   </div>
@@ -237,12 +237,12 @@
                 </div>
 
                 <!-- Terms -->
-                <div class="flex items-start gap-2">
+                <div class="flex items-center justify-center gap-2">
                   <Checkbox
                     id="terms"
                     v-model="acceptedTerms"
                   />
-                  <Label for="terms" class="text-sm">
+                  <Label for="terms" class="text-sm text-center">
                     {{ config.labels.termsPrefix }} <a href="/terms" class="text-primary hover:underline">{{ config.labels.termsOfService }}</a> 
                     {{ config.labels.and }} <a href="/privacy" class="text-primary hover:underline">{{ config.labels.privacyPolicy }}</a>
                   </Label>
@@ -319,7 +319,7 @@
                       :key="key"
                       class="text-center py-4 px-6 text-foreground"
                     >
-                      <div class="font-semibold">{{ plan.name }}</div>
+                      <div class="font-semibold text-foreground">{{ plan.name }}</div>
                       <div class="text-sm text-muted-foreground">
                         {{ formatPrice(plan, 'monthly') }}
                       </div>
@@ -435,9 +435,9 @@
                   @click="toggleFaq(index)"
                 >
                   <div class="flex justify-between items-center">
-                    <Heading tag="h3" size="h4" class="pr-4">
-                      {{ faq.question }}
-                    </Heading>
+                                      <Heading tag="h3" size="h4" class="pr-4 text-foreground">
+                    {{ faq.question }}
+                  </Heading>
                     <Icon
                       :name="expandedFaq === index ? 'lucide:minus' : 'lucide:plus'"
                       class="h-5 w-5 text-muted-foreground group-hover:text-primary transition-all duration-200"
