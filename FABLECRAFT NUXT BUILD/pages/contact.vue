@@ -26,64 +26,29 @@
       <!-- Hero Section -->
       <Section spacing="none" class="hero-section">
         <div class="py-20 sm:py-28">
-          <Container size="xl">
-            <div class="text-center max-w-4xl mx-auto">
-              <!-- Badge -->
-              <MHeroBadge
-                text="Available 24/7 • Global Support"
-                variant="default"
-                size="base"
-                dot-color="primary"
-                dot-speed="normal"
-                class="mb-6"
-              />
-              
-              <!-- Heading -->
-              <MHeroHeading
-                title="Get in"
-                highlight-text="Touch"
-                :break-highlight="true"
-                subheading="Have a question? Need enterprise features? Want to partner with us? We're here to help and would love to hear from you."
-                heading-tag="h1"
-                heading-id="contact-heading"
-                variant="default"
-                size="2xl"
-                alignment="center"
-                gradient-variant="primary"
-                gradient-direction="to-r"
-                gradient-intensity="normal"
-                spacing="relaxed"
-              />
-              
-              <!-- Quick Actions -->
-              <div class="flex flex-wrap gap-4 justify-center mt-8">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  @click="scrollToForm"
-                >
-                  <Icon name="lucide:mail" class="mr-2 h-4 w-4" />
-                  Send Message
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  @click="scrollToFAQ"
-                >
-                  <Icon name="lucide:help-circle" class="mr-2 h-4 w-4" />
-                  View FAQ
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  @click="handleScheduleCall"
-                >
-                  <Icon name="lucide:calendar" class="mr-2 h-4 w-4" />
-                  Schedule Call
-                </Button>
-              </div>
-            </div>
-          </Container>
+          <OHeroSection
+            id="contact-hero"
+            badge-text="Available 24/7 • Global Support"
+            title="Get in"
+            highlight-text="Touch"
+            :break-highlight="true"
+            description="Have a question? Need enterprise features? Want to partner with us? We're here to help and would love to hear from you."
+            primary-button-text="Send Message"
+            secondary-button-text="Schedule Call"
+            primary-button-icon="lucide:mail"
+            secondary-button-icon="lucide:calendar"
+            variant="default"
+            alignment="center"
+            badge-variant="default"
+            badge-size="base"
+            badge-dot-color="primary"
+            badge-dot-speed="normal"
+            primary-button-variant="primary"
+            secondary-button-variant="outline"
+            @primary:click="scrollToForm"
+            @secondary:click="handleScheduleCall"
+            @badge:click="handleBadgeClick"
+          />
         </div>
       </Section>
       
@@ -772,6 +737,14 @@ const scrollToFAQ = () => {
 const handleScheduleCall = () => {
   // Open calendar scheduling tool (e.g., Calendly)
   window.open('https://calendly.com/fablecraft/demo', '_blank')
+}
+
+const handleBadgeClick = () => {
+  // Scroll to contact options when badge is clicked
+  const element = document.querySelector('.contact-options-section')
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
 const handleStartChat = () => {

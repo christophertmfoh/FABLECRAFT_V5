@@ -1,11 +1,10 @@
 <template>
   <div :class="badgeContainerClasses" role="banner" aria-label="Product announcement badge">
-    <div class="flex items-center justify-center">
-      <APulsingDot :size="dotSize" :color="dotColor" :speed="dotSpeed" :intensity="dotIntensity" />
-    </div>
-
     <Badge :class="badgeClasses" v-bind="$attrs" @click="handleBadgeClick">
-      <slot>{{ text }}</slot>
+      <div class="flex items-center gap-2">
+        <APulsingDot :size="dotSize" :color="dotColor" :speed="dotSpeed" :intensity="dotIntensity" />
+        <slot>{{ text }}</slot>
+      </div>
     </Badge>
   </div>
 </template>
@@ -47,17 +46,9 @@ const emit = defineEmits<HeroBadgeEmits>()
 
 // Computed properties
 const badgeContainerClasses = computed(() => {
-  const sizeClasses = {
-    sm: 'gap-1.5', // 6px - small gap
-    base: 'gap-2.5', // 10px - perfect gap for base size
-    md: 'gap-3', // 12px - increased from gap-2
-    lg: 'gap-4', // 16px - increased from gap-3
-  }
-
   return cn(
-    'flex items-center justify-center',
+    'inline-flex items-center justify-center',
     'transition-all duration-300',
-    sizeClasses[props.size],
     props.clickable && 'cursor-pointer hover:scale-105',
     props.className
   )
