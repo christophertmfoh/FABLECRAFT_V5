@@ -164,65 +164,93 @@
 
         <!-- Values Section -->
         <Section spacing="none" class="values-section">
-          <div class="py-16 sm:py-20">
+          <div class="py-20 sm:py-24">
             <Container size="xl">
-              <div class="text-center max-w-3xl mx-auto mb-12">
-                <MHeroBadge
-                  text="Our Values"
-                  variant="outline"
-                  size="sm"
-                  dot-color="primary"
-                  class="mb-6"
-                />
+              <!-- Section Header -->
+              <div class="text-center max-w-4xl mx-auto mb-16">
+                <div class="flex justify-center mb-8">
+                  <MHeroBadge
+                    text="Our Values"
+                    variant="default"
+                    size="base"
+                    dot-color="primary"
+                    dot-speed="normal"
+                  />
+                </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-4">
-                  Principles That Guide Us
+                <Heading tag="h2" size="h1" class="text-foreground mb-8">
+                  Principles That 
+                  <AGradientText
+                    tag="span"
+                    variant="primary"
+                    direction="to-r"
+                    intensity="vibrant"
+                  >
+                    Guide Us
+                  </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground">
+                <Text size="lg" class="text-muted-foreground leading-relaxed">
                   Every decision we make is guided by our commitment to these core values
                 </Text>
               </div>
               
-              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover">
-                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4">
-                    <Icon name="lucide:lightbulb" class="h-6 w-6 text-primary" />
+              <!-- Values Grid -->
+              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Creativity -->
+                <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
+                  <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:lightbulb" class="h-7 w-7 text-primary" />
+                    </div>
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Creativity</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                      Fostering imagination and original thinking in everything we do
+                    </Text>
                   </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Creativity</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Fostering imagination and original thinking in everything we do
-                  </Text>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover">
-                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-muted/50 mb-4">
-                    <Icon name="lucide:shield-check" class="h-6 w-6 text-foreground" />
+                <!-- Trust -->
+                <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
+                  <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:shield-check" class="h-7 w-7 text-accent" />
+                    </div>
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Trust</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                      Building transparent relationships with our community
+                    </Text>
                   </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Trust</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Building transparent relationships with our community
-                  </Text>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover">
-                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-muted/50 mb-4">
-                    <Icon name="lucide:globe" class="h-6 w-6 text-foreground" />
+                <!-- Accessibility -->
+                <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
+                  <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:globe" class="h-7 w-7 text-secondary" />
+                    </div>
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Accessibility</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                      Making creative tools available to everyone, everywhere
+                    </Text>
                   </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Accessibility</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Making creative tools available to everyone, everywhere
-                  </Text>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover">
-                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4">
-                    <Icon name="lucide:rocket" class="h-6 w-6 text-primary" />
+                <!-- Excellence -->
+                <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
+                  <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div class="relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:rocket" class="h-7 w-7 text-primary" />
+                    </div>
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Excellence</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                      Continuously improving and exceeding expectations
+                    </Text>
                   </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Excellence</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Continuously improving and exceeding expectations
-                  </Text>
                 </GlassCard>
               </div>
             </Container>
@@ -231,22 +259,33 @@
 
         <!-- Team Section -->
         <Section spacing="none" class="team-section">
-          <div class="py-16 sm:py-20">
+          <div class="py-20 sm:py-24">
             <Container size="xl">
-              <div class="text-center max-w-3xl mx-auto mb-12">
-                <MHeroBadge
-                  text="Leadership Team"
-                  variant="outline"
-                  size="sm"
-                  dot-color="primary"
-                  class="mb-6"
-                />
+              <!-- Section Header -->
+              <div class="text-center max-w-4xl mx-auto mb-16">
+                <div class="flex justify-center mb-8">
+                  <MHeroBadge
+                    text="Leadership Team"
+                    variant="default"
+                    size="base"
+                    dot-color="accent"
+                    dot-speed="normal"
+                  />
+                </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-4">
-                  Meet Our Visionaries
+                <Heading tag="h2" size="h1" class="text-foreground mb-8">
+                  Meet Our 
+                  <AGradientText
+                    tag="span"
+                    variant="accent"
+                    direction="to-r"
+                    intensity="vibrant"
+                  >
+                    Visionaries
+                  </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground">
+                <Text size="lg" class="text-muted-foreground leading-relaxed">
                   Industry veterans from Hartford, CT, leading the charge in democratizing creative tools
                 </Text>
               </div>
@@ -376,199 +415,6 @@
           </div>
         </Section>
 
-        <!-- Journey Section -->
-        <Section spacing="none" class="journey-section">
-          <div class="py-16 sm:py-20">
-            <Container size="xl">
-              <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                  <MHeroBadge
-                    text="Our Journey"
-                    variant="outline"
-                    size="sm"
-                    dot-color="primary"
-                    class="mb-6"
-                  />
-                  
-                  <Heading tag="h2" size="h2" class="text-foreground mb-4">
-                    Building the Future, Step by Step
-                  </Heading>
-                  
-                  <Text size="lg" class="text-muted-foreground">
-                    From Hartford to the world, our journey of empowering creators
-                  </Text>
-                </div>
-                
-                <div class="relative">
-                  <!-- Timeline line -->
-                  <div class="absolute left-[27px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-accent/20 to-secondary/20" />
-                  
-                  <div class="space-y-8">
-                    <!-- 2022 - Foundation -->
-                    <div class="relative flex gap-8 group">
-                      <div class="flex-shrink-0 relative z-10">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Text size="sm" class="font-bold text-background">2022</Text>
-                        </div>
-
-                      </div>
-                      <div class="flex-1 pb-4">
-                        <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
-                          <div class="flex items-start justify-between mb-3">
-                            <Heading tag="h3" size="h4" class="text-foreground">The Foundation</Heading>
-                            <Badge variant="outline" class="text-xs">Q1 2022</Badge>
-                          </div>
-                          <Text size="base" class="text-muted-foreground mb-4">
-                            Founded in Hartford, CT with a vision to democratize creative tools. Assembled our core team and began developing revolutionary AI technology.
-                          </Text>
-                          <div class="flex flex-wrap gap-2">
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-primary" />
-                              <span class="text-foreground">Company Founded</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-primary" />
-                              <span class="text-foreground">Seed Funding</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-primary" />
-                              <span class="text-foreground">Team of 5</span>
-                            </div>
-                          </div>
-                        </GlassCard>
-                      </div>
-                    </div>
-                    
-                    <!-- 2023 - Launch -->
-                    <div class="relative flex gap-8 group">
-                      <div class="flex-shrink-0 relative z-10">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-secondary border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Text size="sm" class="font-bold text-background">2023</Text>
-                        </div>
-                      </div>
-                      <div class="flex-1 pb-4">
-                        <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
-                          <div class="flex items-start justify-between mb-3">
-                            <Heading tag="h3" size="h4" class="text-foreground">Product Launch</Heading>
-                            <Badge variant="outline" class="text-xs">Q2 2023</Badge>
-                          </div>
-                          <Text size="base" class="text-muted-foreground mb-4">
-                            Launched our beta platform to early adopters. Rapid iteration based on user feedback led to 10x growth in just 6 months.
-                          </Text>
-                          <div class="flex flex-wrap gap-2">
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-accent" />
-                              <span class="text-foreground">Beta Launch</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-accent" />
-                              <span class="text-foreground">10,000+ Users</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-accent" />
-                              <span class="text-foreground">Series A</span>
-                            </div>
-                          </div>
-                        </GlassCard>
-                      </div>
-                    </div>
-                    
-                    <!-- 2024 - Scale -->
-                    <div class="relative flex gap-8 group">
-                      <div class="flex-shrink-0 relative z-10">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-secondary to-primary border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Text size="sm" class="font-bold text-background">2024</Text>
-                        </div>
-                      </div>
-                      <div class="flex-1 pb-4">
-                        <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
-                          <div class="flex items-start justify-between mb-3">
-                            <Heading tag="h3" size="h4" class="text-foreground">Global Expansion</Heading>
-                            <Badge variant="outline" class="text-xs">Full Year</Badge>
-                          </div>
-                          <Text size="base" class="text-muted-foreground mb-4">
-                            Scaled to serve creators in 150+ countries. Introduced enterprise features and established partnerships with major creative platforms.
-                          </Text>
-                          <div class="flex flex-wrap gap-2">
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-secondary" />
-                              <span class="text-foreground">100K+ Users</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-secondary" />
-                              <span class="text-foreground">Enterprise Launch</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/10 text-xs">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-secondary" />
-                              <span class="text-foreground">50+ Team</span>
-                            </div>
-                          </div>
-                        </GlassCard>
-                      </div>
-                    </div>
-                    
-                    <!-- 2025 - Now -->
-                    <div class="relative flex gap-8 group">
-                      <div class="flex-shrink-0 relative z-10">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary border-3 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <Text size="sm" class="font-bold text-background">2025</Text>
-                        </div>
-                        <div class="absolute inset-0 w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary opacity-20 animate-pulse" />
-                      </div>
-                      <div class="flex-1">
-                        <GlassCard variant="heavy" class="p-6 natural-depth gentle-hover border-2 border-primary/20">
-                          <div class="flex items-start justify-between mb-3">
-                            <Heading tag="h3" size="h4" class="text-foreground">The Future is Now</Heading>
-                            <Badge variant="default" class="text-xs animate-pulse">CURRENT</Badge>
-                          </div>
-                          <Text size="base" class="text-muted-foreground mb-4">
-                            Revolutionizing creative workflows with next-gen AI. Building the platform where imagination has no limits.
-                          </Text>
-                          <div class="flex flex-wrap gap-2">
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 text-xs">
-                              <Icon name="lucide:sparkles" class="h-3 w-3 text-primary animate-pulse" />
-                              <span class="text-foreground font-semibold">AI Revolution</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-accent/10 to-secondary/10 text-xs">
-                              <Icon name="lucide:globe" class="h-3 w-3 text-accent animate-pulse" />
-                              <span class="text-foreground font-semibold">1M+ Goal</span>
-                            </div>
-                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-secondary/10 to-primary/10 text-xs">
-                              <Icon name="lucide:rocket" class="h-3 w-3 text-secondary animate-pulse" />
-                              <span class="text-foreground font-semibold">IPO Ready</span>
-                            </div>
-                          </div>
-                        </GlassCard>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Container>
-
-          </div>
-        </Section>
-
-        <!-- CTA Section using OCtaSection component -->
-        <OCtaSection
-          variant="default"
-          header-badge-text="Start Today"
-          header-title="Ready to Join"
-          header-highlight-text="the Revolution?"
-          header-subtitle=""
-          main-headline="Transform Your Ideas Into Reality"
-          main-gradient-variant="primary"
-          supporting-copy="Join thousands of creators who are already building amazing things with Fablecraft"
-          primary-cta-text="Get Started Free"
-          secondary-cta-text="Contact Sales"
-          primary-cta-icon="lucide:rocket"
-          secondary-cta-icon="lucide:message-circle"
-          trust-signal="Trusted by 100,000+ creators in 150+ countries"
-          cta-icon="lucide:sparkles"
-          :show-icon="true"
-          @primary:click="handleGetStarted"
-          @secondary:click="handleContactSales"
-        />
       </main>
 
       <!-- Footer -->
