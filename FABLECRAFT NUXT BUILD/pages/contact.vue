@@ -53,24 +53,28 @@
             <div class="grid lg:grid-cols-3 gap-8">
               <!-- Email Support Card -->
               <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover group">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon name="lucide:mail" class="h-8 w-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+                <div class="flex justify-center mb-6">
+                  <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 group-hover:scale-110 transition-transform duration-300">
+                    <Icon name="lucide:mail" class="h-10 w-10 text-primary" />
+                  </div>
                 </div>
-                <Heading tag="h3" size="h4" class="text-foreground mb-3">
+                <Heading tag="h3" size="h4" class="text-foreground mb-4 text-center font-bold">
                   Email Support
                 </Heading>
-                <Text size="base" class="text-muted-foreground mb-4">
+                <Text size="base" class="text-muted-foreground mb-6 text-center">
                   Get a response within 24 hours
                 </Text>
-                <a 
-                  href="mailto:support@fablecraft.com" 
-                  class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium group"
-                >
-                  support@fablecraft.com
-                  <Icon name="lucide:external-link" class="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </a>
-                <div class="mt-4 pt-4 border-t border-border/20">
-                  <Text size="sm" class="text-muted-foreground">
+                <div class="flex justify-center mb-6">
+                  <a 
+                    href="mailto:support@fablecraft.com" 
+                    class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-all duration-300 font-medium group hover:scale-105"
+                  >
+                    <span>support@fablecraft.com</span>
+                    <Icon name="lucide:external-link" class="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </div>
+                <div class="pt-6 border-t border-border/30">
+                  <Text size="sm" class="text-muted-foreground/80 text-center">
                     Average response time: 4 hours
                   </Text>
                 </div>
@@ -78,32 +82,36 @@
               
               <!-- Live Chat Card -->
               <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover relative overflow-hidden group">
-                <div class="absolute top-3 right-3">
-                  <Badge variant="default" class="animate-pulse">
-                    <APulsingDot variant="primary" speed="fast" class="mr-1" />
-                    Online
+                <div class="absolute top-4 right-4">
+                  <Badge variant="default" class="bg-primary text-primary-foreground animate-pulse shadow-lg">
+                    <APulsingDot color="success" speed="fast" size="xs" class="mr-1.5" />
+                    <span class="font-semibold">Online</span>
                   </Badge>
                 </div>
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon name="lucide:message-circle" class="h-8 w-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+                <div class="flex justify-center mb-6">
+                  <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 group-hover:scale-110 transition-transform duration-300">
+                    <Icon name="lucide:message-circle" class="h-10 w-10 text-primary" />
+                  </div>
                 </div>
-                <Heading tag="h3" size="h4" class="text-foreground mb-3">
+                <Heading tag="h3" size="h4" class="text-foreground mb-4 text-center font-bold">
                   Live Chat
                 </Heading>
-                <Text size="base" class="text-muted-foreground mb-4">
+                <Text size="base" class="text-muted-foreground mb-6 text-center">
                   Chat with our team instantly
                 </Text>
-                <Button 
-                  variant="primary" 
-                  size="default"
-                  @click="handleStartChat"
-                  class="w-full"
-                >
-                  <Icon name="lucide:message-square" class="mr-2 h-4 w-4" />
-                  Start Chat Now
-                </Button>
-                <div class="mt-4 pt-4 border-t border-border/20">
-                  <Text size="sm" class="text-muted-foreground">
+                <div class="flex justify-center mb-6">
+                  <Button 
+                    variant="default" 
+                    size="lg"
+                    @click="handleStartChat"
+                    class="min-w-[200px] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    <Icon name="lucide:message-square" class="mr-2 h-5 w-5" />
+                    Start Chat Now
+                  </Button>
+                </div>
+                <div class="pt-6 border-t border-border/30">
+                  <Text size="sm" class="text-muted-foreground/80 text-center">
                     Available Mon-Fri, 9AM-6PM EST
                   </Text>
                 </div>
@@ -111,24 +119,28 @@
               
               <!-- Phone Support Card -->
               <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover group">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-accent/10 to-secondary/10 mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Icon name="lucide:phone" class="h-8 w-8 text-accent group-hover:scale-110 transition-transform duration-300" />
+                <div class="flex justify-center mb-6">
+                  <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-accent/20 to-secondary/20 group-hover:scale-110 transition-transform duration-300">
+                    <Icon name="lucide:phone" class="h-10 w-10 text-accent" />
+                  </div>
                 </div>
-                <Heading tag="h3" size="h4" class="text-foreground mb-3">
+                <Heading tag="h3" size="h4" class="text-foreground mb-4 text-center font-bold">
                   Phone Support
                 </Heading>
-                <Text size="base" class="text-muted-foreground mb-4">
+                <Text size="base" class="text-muted-foreground mb-6 text-center">
                   Speak directly with our team
                 </Text>
-                <a 
-                  href="tel:+18605551234" 
-                  class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium group"
-                >
-                  +1 (860) 555-1234
-                  <Icon name="lucide:phone-call" class="h-4 w-4 group-hover:animate-pulse" />
-                </a>
-                <div class="mt-4 pt-4 border-t border-border/20">
-                  <Text size="sm" class="text-muted-foreground">
+                <div class="flex justify-center mb-6">
+                  <a 
+                    href="tel:+18605551234" 
+                    class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-all duration-300 font-medium group hover:scale-105"
+                  >
+                    <span class="font-semibold">+1 (860) 555-1234</span>
+                    <Icon name="lucide:phone-call" class="h-4 w-4 transition-transform group-hover:animate-pulse" />
+                  </a>
+                </div>
+                <div class="pt-6 border-t border-border/30">
+                  <Text size="sm" class="text-muted-foreground/80 text-center">
                     Enterprise customers only
                   </Text>
                 </div>
