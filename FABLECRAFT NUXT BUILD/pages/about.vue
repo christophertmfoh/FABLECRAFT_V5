@@ -123,7 +123,7 @@
                         <!-- Video Element -->
                         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
                           <div class="w-20 h-20 bg-background/90 backdrop-blur-sm border border-border/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-4000">
-                            <Icon name="lucide:video" class="h-8 w-8 text-secondary" />
+                            <Icon name="lucide:film" class="h-8 w-8 text-secondary" />
                           </div>
                         </div>
                         
