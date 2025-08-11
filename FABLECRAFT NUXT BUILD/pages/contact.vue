@@ -581,7 +581,7 @@
                     <!-- Map overlay text -->
                     <div class="absolute bottom-6 left-6 right-6">
                       <GlassCard variant="heavy" class="p-6 shadow-xl">
-                        <div class="flex items-center justify-between gap-4">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                           <div>
                             <Heading tag="h4" size="h5" class="font-bold text-foreground mb-1">
                               Fablecraft HQ
@@ -592,12 +592,12 @@
                           </div>
                           <Button
                             variant="default"
-                            size="base"
+                            size="md"
                             @click="handleGetDirections"
-                            class="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
+                            class="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold whitespace-nowrap"
                           >
-                            <Icon name="lucide:navigation" class="mr-2 h-4 w-4" />
-                            Get Directions
+                            <Icon name="lucide:navigation" class="mr-2 h-4 w-4 flex-shrink-0" />
+                            <span>Get Directions</span>
                           </Button>
                         </div>
                       </GlassCard>
@@ -778,7 +778,7 @@ const handleStartChat = () => {
 }
 
 const handleGetDirections = () => {
-  window.open('https://maps.google.com/?q=Hartford,CT', '_blank')
+  window.open('https://maps.google.com/?q=158+Forest+Street+Manchester+CT+06040', '_blank')
 }
 </script>
 
