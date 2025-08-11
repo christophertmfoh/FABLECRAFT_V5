@@ -237,15 +237,17 @@
                 </div>
 
                 <!-- Terms -->
-                <div class="flex items-center justify-center gap-2">
-                  <Checkbox
-                    id="terms"
-                    v-model="acceptedTerms"
-                  />
-                  <Label for="terms" class="text-sm text-center">
-                    {{ config.labels.termsPrefix }} <a href="/terms" class="text-primary hover:underline">{{ config.labels.termsOfService }}</a> 
-                    {{ config.labels.and }} <a href="/privacy" class="text-primary hover:underline">{{ config.labels.privacyPolicy }}</a>
-                  </Label>
+                <div class="flex justify-center">
+                  <div class="flex items-center gap-2">
+                    <Checkbox
+                      id="terms"
+                      v-model="acceptedTerms"
+                    />
+                    <Label for="terms" class="text-sm">
+                      {{ config.labels.termsPrefix }} <a href="/terms" class="text-primary hover:underline">{{ config.labels.termsOfService }}</a> 
+                      {{ config.labels.and }} <a href="/privacy" class="text-primary hover:underline">{{ config.labels.privacyPolicy }}</a>
+                    </Label>
+                  </div>
                 </div>
 
                 <!-- Action Buttons -->
@@ -299,7 +301,7 @@
       </Section>
 
       <!-- Comparison Table Section -->
-      <Section spacing="none" class="comparison-section bg-muted/30">
+      <Section spacing="none" class="comparison-section">
         <div class="py-12 sm:py-16">
           <Container size="xl">
             <div class="text-center mb-8">
@@ -310,7 +312,7 @@
 
             <!-- Desktop Table -->
             <div class="hidden lg:block overflow-x-auto">
-              <table class="w-full bg-card rounded-xl overflow-hidden">
+              <table class="w-full rounded-xl overflow-hidden">
                 <thead class="bg-muted/50">
                   <tr class="border-b border-border">
                     <th class="text-left py-4 px-6 font-semibold text-foreground">Features</th>
@@ -362,7 +364,7 @@
             <div class="lg:hidden space-y-4">
               <select 
                 v-model="mobileComparisonPlan"
-                class="w-full p-3 rounded-lg border border-border bg-card"
+                class="w-full p-3 rounded-lg border border-border"
               >
                 <option v-for="(plan, key) in config.plans" :key="key" :value="key">
                   {{ plan.name }} - {{ formatPrice(plan, 'monthly') }}
@@ -416,7 +418,7 @@
       </Section>
 
       <!-- FAQ Section -->
-      <Section spacing="none" class="faq-section bg-muted/30">
+      <Section spacing="none" class="faq-section">
         <div class="py-12 sm:py-16">
           <Container size="lg">
             <div class="text-center mb-8">
@@ -431,7 +433,7 @@
                 :key="index"
               >
                 <button
-                  class="w-full text-left p-6 bg-card rounded-xl hover:bg-accent/5 transition-all duration-200 group"
+                  class="w-full text-left p-6 rounded-xl hover:bg-accent/5 transition-all duration-200 group"
                   @click="toggleFaq(index)"
                 >
                   <div class="flex justify-between items-center">
