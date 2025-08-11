@@ -71,7 +71,7 @@
               >
                 Yearly
               </Text>
-              <Badge variant="default" size="sm" class="bg-green-500/10 text-green-600 border-green-500/20">
+              <Badge variant="default" size="sm" class="bg-success/10 text-success border-success/20">
                 {{ config.discount.label }}
               </Badge>
             </div>
@@ -128,7 +128,7 @@
                   :key="idx"
                   class="flex items-start gap-2 text-sm"
                 >
-                  <Icon name="lucide:check" class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                  <Icon name="lucide:check" class="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
                   <span>{{ feature }}</span>
                 </li>
               </ul>
@@ -167,7 +167,7 @@
                     :key="idx"
                     class="flex items-start gap-2 text-sm"
                   >
-                    <Icon name="lucide:check" class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <Icon name="lucide:check" class="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
                     <span>{{ feature }}</span>
                   </li>
                 </ul>
@@ -176,9 +176,9 @@
               <!-- Checkout Section -->
               <div v-if="selectedPlan !== 'enterprise'" class="space-y-4">
                 <!-- Trial Notice -->
-                <div class="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
+                <div class="p-4 bg-success/10 rounded-lg border border-success/20">
                   <div class="flex items-center gap-2">
-                    <Icon name="lucide:gift" class="h-5 w-5 text-green-600" />
+                    <Icon name="lucide:gift" class="h-5 w-5 text-success" />
                     <Text size="sm" class="font-medium">
                       Start with {{ config.trialDays }}-day free trial - No credit card required
                     </Text>

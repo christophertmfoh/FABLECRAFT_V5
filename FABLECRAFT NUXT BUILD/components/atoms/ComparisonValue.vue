@@ -54,7 +54,7 @@ const iconClasses = computed(() => {
   return cn(
     sizeClasses[props.size],
     typeof props.value === 'boolean' && props.value
-      ? 'text-green-600 dark:text-green-500'
+      ? 'text-success'
       : 'text-muted-foreground/50'
   )
 })
