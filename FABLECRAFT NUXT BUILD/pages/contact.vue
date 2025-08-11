@@ -526,8 +526,8 @@
                 
                 <GlassCard variant="light" class="p-10 natural-depth shadow-lg hover:shadow-xl transition-all duration-300 group">
                   <div class="flex items-start gap-6">
-                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:train" class="h-8 w-8 text-secondary" />
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:train" class="h-8 w-8 text-primary" />
                     </div>
                     <div>
                       <Heading tag="h3" size="h4" class="text-foreground mb-3 font-bold">
