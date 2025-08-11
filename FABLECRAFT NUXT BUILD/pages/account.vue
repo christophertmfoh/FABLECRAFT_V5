@@ -1,493 +1,522 @@
 <template>
-  <div class="min-h-screen bg-background">
-    <!-- Navigation Header -->
-    <NavigationHeader
-      :is-authenticated="!!user"
-      :user="user"
-      @auth:click="handleAuth"
-      @auth:logout="handleLogout"
-      @navigate="handleNavigate"
-      @logo:click="handleHome"
-    />
+  <div class="min-h-screen bg-background transition-colors duration-300">
+    <!-- Background Effects Layer -->
+    <ClientOnly>
+      <div class="fixed inset-0 pointer-events-none z-0">
+        <LazyPaperTexture />
+        <LazyGradientNoiseBackdrop />
+        <LazyVignetteOverlay strength="subtle" />
+      </div>
+    </ClientOnly>
 
-    <!-- Main Content -->
-    <main class="relative z-10">
-      <Container size="xl" class="py-8 sm:py-12">
-        <!-- Page Header with Breadcrumb -->
-        <div class="mb-8">
-          <div class="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-            <NuxtLink to="/" class="hover:text-foreground transition-colors">Home</NuxtLink>
-            <Icon name="lucide:chevron-right" class="h-4 w-4" />
-            <span class="text-foreground">Account Settings</span>
-          </div>
-          <Heading tag="h1" size="h1" class="mb-2">Account Settings</Heading>
-          <Text class="text-muted-foreground">Manage your profile and preferences</Text>
-        </div>
+    <!-- Main Content Layer -->
+    <div class="relative z-10">
+      <!-- Navigation Header -->
+      <NavigationHeader
+        :is-authenticated="!!user"
+        :user="user"
+        @auth:click="handleAuth"
+        @auth:logout="handleLogout"
+        @navigate="handleNavigate"
+        @logo:click="handleHome"
+      />
 
-        <!-- Two Column Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <!-- Sidebar Navigation -->
-          <aside class="lg:col-span-1">
-            <Card class="p-2 bg-card/50 backdrop-blur-sm">
-              <nav class="space-y-1">
-                <button
-                  v-for="tab in tabs"
-                  :key="tab.id"
-                  @click="activeTab = tab.id"
-                  :class="[
-                    'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200',
-                    activeTab === tab.id
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  ]"
-                >
-                  <Icon :name="tab.icon" class="h-5 w-5 flex-shrink-0" />
-                  <span class="font-medium">{{ tab.label }}</span>
-                  <Icon 
-                    v-if="activeTab === tab.id" 
-                    name="lucide:chevron-right" 
-                    class="h-4 w-4 ml-auto"
-                  />
-                </button>
-              </nav>
-            </Card>
-          </aside>
+      <!-- Main Content -->
+      <main class="relative z-20">
+        <Section spacing="md" class="account-section">
+          <Container size="xl">
+            <!-- Page Header with Breadcrumb -->
+            <div class="mb-8">
+              <div class="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                <NuxtLink to="/" class="hover:text-foreground transition-colors">
+                  <Text size="sm">Home</Text>
+                </NuxtLink>
+                <Icon name="lucide:chevron-right" class="h-4 w-4" />
+                <Text size="sm" class="text-foreground">Account Settings</Text>
+              </div>
+              
+              <!-- Use proper heading component with gradient -->
+              <MHeroHeading
+                title="Account"
+                highlight-text="Settings"
+                subheading="Manage your profile and preferences"
+                heading-tag="h1"
+                heading-id="account-heading"
+                variant="compact"
+                size="lg"
+                alignment="left"
+                gradient-variant="primary"
+                gradient-animation="none"
+                spacing="tight"
+              />
+            </div>
 
-          <!-- Main Content Area -->
-          <div class="lg:col-span-3">
-            <Card class="p-6 sm:p-8 bg-card/50 backdrop-blur-sm">
-              <!-- Profile Tab -->
-              <Transition name="tab-fade" mode="out-in">
-                <div v-if="activeTab === 'profile'" class="space-y-6">
-                  <!-- Welcome Banner -->
-                  <Card v-if="user" class="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
-                    <div class="flex items-center gap-3">
-                      <div class="p-2 bg-primary/10 rounded-lg">
-                        <Icon name="lucide:sparkles" class="h-5 w-5 text-primary" />
+            <!-- Two Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              <!-- Sidebar Navigation -->
+              <aside class="lg:col-span-1">
+                <GlassCard variant="light" class="p-2">
+                  <nav class="space-y-1">
+                    <button
+                      v-for="tab in tabs"
+                      :key="tab.id"
+                      @click="activeTab = tab.id"
+                      :class="[
+                        'w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200',
+                        activeTab === tab.id
+                          ? 'bg-primary text-primary-foreground shadow-sm'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                      ]"
+                    >
+                      <Icon :name="tab.icon" class="h-5 w-5 flex-shrink-0" />
+                      <Text size="sm" class="font-medium">{{ tab.label }}</Text>
+                      <Icon 
+                        v-if="activeTab === tab.id" 
+                        name="lucide:chevron-right" 
+                        class="h-4 w-4 ml-auto"
+                      />
+                    </button>
+                  </nav>
+                </GlassCard>
+              </aside>
+
+              <!-- Main Content Area -->
+              <div class="lg:col-span-3">
+                <GlassCard variant="light" class="p-6 sm:p-8 natural-depth">
+                  <!-- Profile Tab -->
+                  <Transition name="tab-fade" mode="out-in">
+                    <div v-if="activeTab === 'profile'" class="space-y-6">
+                      <!-- Welcome Banner -->
+                      <Card v-if="user" class="p-4 bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20 gentle-hover">
+                        <div class="flex items-center gap-3">
+                          <div class="p-2 bg-primary/10 rounded-lg">
+                            <Icon name="lucide:sparkles" class="h-5 w-5 text-primary" />
+                          </div>
+                          <div class="flex-1">
+                            <Heading tag="h3" size="h4" class="text-foreground">
+                              Welcome, {{ profileData.username || user.email?.split('@')[0] || 'User' }}!
+                            </Heading>
+                            <Text size="sm" class="text-muted-foreground">
+                              {{ profileData.username ? 'Your username is displayed in the navigation bar' : 'Set a username below to personalize your display name' }}
+                            </Text>
+                          </div>
+                        </div>
+                      </Card>
+
+                      <div>
+                        <Heading tag="h2" size="h3" class="mb-1">Profile Information</Heading>
+                        <Text class="text-muted-foreground">Update your personal details and public profile</Text>
                       </div>
-                      <div class="flex-1">
-                        <Text class="font-semibold text-foreground">
-                          Welcome, {{ profileData.username || user.email?.split('@')[0] || 'User' }}!
-                        </Text>
-                        <Text class="text-sm text-muted-foreground">
-                          {{ profileData.username ? 'Your username is displayed in the navigation bar' : 'Set a username below to personalize your display name' }}
-                        </Text>
-                      </div>
-                    </div>
-                  </Card>
 
-                  <div>
-                    <Heading tag="h2" size="h3" class="mb-1">Profile Information</Heading>
-                    <Text class="text-muted-foreground">Update your personal details and public profile</Text>
-                  </div>
-
-                  <!-- Enhanced Avatar Section -->
-                  <div class="space-y-4">
-                    <Text class="font-medium">Profile Photo</Text>
-                    <div class="flex flex-col sm:flex-row items-start gap-6">
-                      <div 
-                        class="relative group"
-                        @dragover.prevent="isDragging = true"
-                        @dragleave.prevent="isDragging = false"
-                        @drop.prevent="handleDrop"
-                      >
-                        <!-- Avatar Display -->
-                        <div :class="[
-                          'relative overflow-hidden rounded-2xl transition-all duration-300',
-                          isDragging ? 'ring-4 ring-primary ring-offset-2 ring-offset-background scale-105' : '',
-                          'group-hover:ring-2 group-hover:ring-primary/50'
-                        ]">
-                          <Avatar 
-                            :src="avatarPreview || profileData.avatar_url" 
-                            :alt="profileData.full_name || 'User avatar'"
-                            class="h-32 w-32"
-                          />
-                          <!-- Overlay on hover -->
-                          <div class="absolute inset-0 bg-foreground/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                            <div class="text-center text-background p-3">
-                              <Icon name="lucide:upload" class="h-6 w-6 mx-auto mb-1" />
-                              <Text class="text-xs font-medium">Click or drag to upload</Text>
+                      <!-- Enhanced Avatar Section -->
+                      <div class="space-y-4">
+                        <Heading tag="h3" size="h5">Profile Photo</Heading>
+                        <div class="flex flex-col sm:flex-row items-start gap-6">
+                          <div 
+                            class="relative group"
+                            @dragover.prevent="isDragging = true"
+                            @dragleave.prevent="isDragging = false"
+                            @drop.prevent="handleDrop"
+                          >
+                            <!-- Avatar Display -->
+                            <div :class="[
+                              'relative overflow-hidden rounded-2xl transition-all duration-300',
+                              isDragging ? 'ring-4 ring-primary ring-offset-2 ring-offset-background scale-105' : '',
+                              'group-hover:ring-2 group-hover:ring-primary/50'
+                            ]">
+                              <Avatar 
+                                :src="avatarPreview || profileData.avatar_url" 
+                                :alt="profileData.full_name || 'User avatar'"
+                                class="h-32 w-32"
+                              />
+                              <!-- Overlay on hover -->
+                              <div class="absolute inset-0 bg-foreground/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                                <div class="text-center text-background p-3">
+                                  <Icon name="lucide:upload" class="h-6 w-6 mx-auto mb-1" />
+                                  <Text size="xs" class="font-medium">Click or drag to upload</Text>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Upload Button -->
+                            <button
+                              @click="triggerAvatarUpload"
+                              class="absolute -bottom-2 -right-2 p-2.5 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-110"
+                            >
+                              <Icon name="lucide:camera" class="h-4 w-4" />
+                            </button>
+                            <input
+                              ref="avatarInput"
+                              type="file"
+                              accept="image/*"
+                              class="hidden"
+                              @change="handleAvatarUpload"
+                            />
+                          </div>
+                          <div class="flex-1 space-y-3">
+                            <div>
+                              <Heading tag="h4" size="h6">Upload Requirements</Heading>
+                              <ul class="mt-2 space-y-1">
+                                <li class="flex items-center gap-2">
+                                  <Icon name="lucide:check-circle" class="h-3 w-3 text-success" />
+                                  <Text size="xs" class="text-muted-foreground">JPG, PNG or GIF format</Text>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                  <Icon name="lucide:check-circle" class="h-3 w-3 text-success" />
+                                  <Text size="xs" class="text-muted-foreground">Maximum file size: 5MB</Text>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                  <Icon name="lucide:check-circle" class="h-3 w-3 text-success" />
+                                  <Text size="xs" class="text-muted-foreground">Recommended: Square image, 400x400px</Text>
+                                </li>
+                              </ul>
+                            </div>
+                            <div v-if="profileData.avatar_url" class="flex gap-2">
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                @click="removeAvatar"
+                                class="text-destructive hover:bg-destructive/10"
+                              >
+                                <Icon name="lucide:trash-2" class="h-4 w-4 mr-1" />
+                                Remove
+                              </Button>
                             </div>
                           </div>
                         </div>
-                        <!-- Upload Button -->
-                        <button
-                          @click="triggerAvatarUpload"
-                          class="absolute -bottom-2 -right-2 p-2.5 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-all duration-200 hover:scale-110"
-                        >
-                          <Icon name="lucide:camera" class="h-4 w-4" />
-                        </button>
-                        <input
-                          ref="avatarInput"
-                          type="file"
-                          accept="image/*"
-                          class="hidden"
-                          @change="handleAvatarUpload"
-                        />
                       </div>
-                      <div class="flex-1 space-y-3">
-                        <div>
-                          <Text class="text-sm font-medium text-foreground">Upload Requirements</Text>
-                          <ul class="mt-2 space-y-1 text-xs text-muted-foreground">
-                            <li class="flex items-center gap-2">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-success" />
-                              JPG, PNG or GIF format
-                            </li>
-                            <li class="flex items-center gap-2">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-success" />
-                              Maximum file size: 5MB
-                            </li>
-                            <li class="flex items-center gap-2">
-                              <Icon name="lucide:check-circle" class="h-3 w-3 text-success" />
-                              Recommended: Square image, 400x400px
-                            </li>
-                          </ul>
+
+                      <!-- Profile Form -->
+                      <form @submit.prevent="updateProfile" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <div class="space-y-2">
+                            <label class="text-sm font-medium text-foreground">Full Name</label>
+                            <div class="relative">
+                              <Icon name="lucide:user" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                              <input
+                                v-model="profileData.full_name"
+                                type="text"
+                                class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+                                placeholder="Enter your full name"
+                              />
+                            </div>
+                          </div>
+                          <div class="space-y-2">
+                            <label class="text-sm font-medium text-foreground">
+                              Username 
+                              <Badge variant="secondary" class="ml-1 text-xs">Display Name</Badge>
+                            </label>
+                            <div class="relative">
+                              <Icon name="lucide:at-sign" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                              <input
+                                v-model="profileData.username"
+                                type="text"
+                                class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+                                placeholder="Choose your display username"
+                                pattern="^[a-zA-Z0-9_-]{3,20}$"
+                                title="Username must be 3-20 characters, letters, numbers, underscore or hyphen only"
+                              />
+                            </div>
+                            <Text size="xs" class="text-muted-foreground">This will be shown in the navigation bar</Text>
+                          </div>
                         </div>
-                        <div v-if="profileData.avatar_url" class="flex gap-2">
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            @click="removeAvatar"
-                            class="text-destructive hover:bg-destructive/10"
-                          >
-                            <Icon name="lucide:trash-2" class="h-4 w-4 mr-1" />
-                            Remove
+
+                        <div class="space-y-2">
+                          <label class="text-sm font-medium text-foreground">Email</label>
+                          <div class="relative">
+                            <Icon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                            <input
+                              :value="user?.email"
+                              type="email"
+                              disabled
+                              class="flex h-11 w-full rounded-lg border border-input bg-muted pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+                            />
+                          </div>
+                          <Text size="xs" class="text-muted-foreground">Email cannot be changed</Text>
+                        </div>
+
+                        <div class="space-y-2">
+                          <label class="text-sm font-medium text-foreground">Bio</label>
+                          <div class="relative">
+                            <Icon name="lucide:file-text" class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                            <textarea
+                              v-model="profileData.bio"
+                              rows="4"
+                              class="flex w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all duration-200"
+                              placeholder="Tell us about yourself"
+                              maxlength="500"
+                            />
+                          </div>
+                          <div class="flex justify-between">
+                            <Text size="xs" class="text-muted-foreground">Brief description for your profile</Text>
+                            <Text size="xs" class="text-muted-foreground">{{ profileData.bio?.length || 0 }}/500</Text>
+                          </div>
+                        </div>
+
+                        <div class="flex justify-end gap-3 pt-4">
+                          <Button type="button" variant="outline" @click="resetProfile">
+                            <Icon name="lucide:x" class="h-4 w-4 mr-2" />
+                            Cancel
+                          </Button>
+                          <Button type="submit" :disabled="saving">
+                            <Spinner v-if="saving" class="mr-2 h-4 w-4" />
+                            <Icon v-else name="lucide:save" class="h-4 w-4 mr-2" />
+                            {{ saving ? 'Saving...' : 'Save Changes' }}
                           </Button>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Profile Form -->
-                  <form @submit.prevent="updateProfile" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div class="space-y-2">
-                        <label class="text-sm font-medium text-foreground">Full Name</label>
-                        <div class="relative">
-                          <Icon name="lucide:user" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <input
-                            v-model="profileData.full_name"
-                            type="text"
-                            class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
-                            placeholder="Enter your full name"
-                          />
-                        </div>
-                      </div>
-                      <div class="space-y-2">
-                        <label class="text-sm font-medium text-foreground">
-                          Username 
-                          <Badge variant="secondary" class="ml-1 text-xs">Display Name</Badge>
-                        </label>
-                        <div class="relative">
-                          <Icon name="lucide:at-sign" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <input
-                            v-model="profileData.username"
-                            type="text"
-                            class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
-                            placeholder="Choose your display username"
-                            pattern="^[a-zA-Z0-9_-]{3,20}$"
-                            title="Username must be 3-20 characters, letters, numbers, underscore or hyphen only"
-                          />
-                        </div>
-                        <Text class="text-xs text-muted-foreground">This will be shown in the navigation bar</Text>
-                      </div>
+                      </form>
                     </div>
 
-                    <div class="space-y-2">
-                      <label class="text-sm font-medium text-foreground">Email</label>
-                      <div class="relative">
-                        <Icon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <input
-                          :value="user?.email"
-                          type="email"
-                          disabled
-                          class="flex h-11 w-full rounded-lg border border-input bg-muted pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
-                        />
-                      </div>
-                      <Text class="text-xs text-muted-foreground">Email cannot be changed</Text>
-                    </div>
-
-                    <div class="space-y-2">
-                      <label class="text-sm font-medium text-foreground">Bio</label>
-                      <div class="relative">
-                        <Icon name="lucide:file-text" class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <textarea
-                          v-model="profileData.bio"
-                          rows="4"
-                          class="flex w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all duration-200"
-                          placeholder="Tell us about yourself"
-                          maxlength="500"
-                        />
-                      </div>
-                      <div class="flex justify-between">
-                        <Text class="text-xs text-muted-foreground">Brief description for your profile</Text>
-                        <Text class="text-xs text-muted-foreground">{{ profileData.bio?.length || 0 }}/500</Text>
-                      </div>
-                    </div>
-
-                    <div class="flex justify-end gap-3 pt-4">
-                      <Button type="button" variant="outline" @click="resetProfile">
-                        <Icon name="lucide:x" class="h-4 w-4 mr-2" />
-                        Cancel
-                      </Button>
-                      <Button type="submit" :disabled="saving">
-                        <Spinner v-if="saving" class="mr-2 h-4 w-4" />
-                        <Icon v-else name="lucide:save" class="h-4 w-4 mr-2" />
-                        {{ saving ? 'Saving...' : 'Save Changes' }}
-                      </Button>
-                    </div>
-                  </form>
-                </div>
-
-                <!-- Preferences Tab -->
-                <div v-else-if="activeTab === 'preferences'" class="space-y-6">
-                  <div>
-                    <Heading tag="h2" size="h3" class="mb-1">Preferences</Heading>
-                    <Text class="text-muted-foreground">Customize your experience</Text>
-                  </div>
-
-                  <div class="space-y-6">
-                    <!-- Theme Preference -->
-                    <Card class="p-4">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div class="p-2 bg-muted rounded-lg">
-                            <Icon name="lucide:palette" class="h-5 w-5 text-foreground" />
-                          </div>
-                          <div>
-                            <Text class="font-medium text-foreground">Theme</Text>
-                            <Text class="text-sm text-muted-foreground">Choose your preferred theme</Text>
-                          </div>
-                        </div>
-                        <ThemeToggle />
-                      </div>
-                    </Card>
-
-                    <!-- Language -->
-                    <Card class="p-4">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div class="p-2 bg-muted rounded-lg">
-                            <Icon name="lucide:globe" class="h-5 w-5 text-foreground" />
-                          </div>
-                          <div>
-                            <Text class="font-medium text-foreground">Language</Text>
-                            <Text class="text-sm text-muted-foreground">Select your preferred language</Text>
-                          </div>
-                        </div>
-                        <select class="px-4 py-2 rounded-lg border border-input bg-background text-sm font-medium transition-colors hover:bg-muted">
-                          <option>English</option>
-                          <option>Spanish</option>
-                          <option>French</option>
-                          <option>German</option>
-                        </select>
-                      </div>
-                    </Card>
-
-                    <!-- Timezone -->
-                    <Card class="p-4">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div class="p-2 bg-muted rounded-lg">
-                            <Icon name="lucide:clock" class="h-5 w-5 text-foreground" />
-                          </div>
-                          <div>
-                            <Text class="font-medium text-foreground">Timezone</Text>
-                            <Text class="text-sm text-muted-foreground">Set your local timezone</Text>
-                          </div>
-                        </div>
-                        <select class="px-4 py-2 rounded-lg border border-input bg-background text-sm font-medium transition-colors hover:bg-muted">
-                          <option>UTC</option>
-                          <option>EST</option>
-                          <option>PST</option>
-                          <option>GMT</option>
-                        </select>
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-
-                <!-- Notifications Tab -->
-                <div v-else-if="activeTab === 'notifications'" class="space-y-6">
-                  <div>
-                    <Heading tag="h2" size="h3" class="mb-1">Notifications</Heading>
-                    <Text class="text-muted-foreground">Manage how you receive updates</Text>
-                  </div>
-
-                  <div class="space-y-4">
-                    <Card 
-                      v-for="notification in notifications" 
-                      :key="notification.id" 
-                      class="p-4 transition-all duration-200 hover:shadow-sm"
-                    >
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div class="p-2 bg-muted rounded-lg">
-                            <Icon :name="notification.icon" class="h-5 w-5 text-foreground" />
-                          </div>
-                          <div>
-                            <Text class="font-medium text-foreground">{{ notification.label }}</Text>
-                            <Text class="text-sm text-muted-foreground">{{ notification.description }}</Text>
-                          </div>
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                          <input 
-                            type="checkbox" 
-                            :checked="notification.enabled"
-                            @change="toggleNotification(notification.id)"
-                            class="sr-only peer"
-                          >
-                          <div class="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-background after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-background after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary transition-colors"></div>
-                        </label>
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-
-                <!-- Security Tab -->
-                <div v-else-if="activeTab === 'security'" class="space-y-6">
-                  <div>
-                    <Heading tag="h2" size="h3" class="mb-1">Security</Heading>
-                    <Text class="text-muted-foreground">Keep your account secure</Text>
-                  </div>
-
-                  <!-- Change Password -->
-                  <Card class="p-4">
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-muted rounded-lg">
-                          <Icon name="lucide:lock" class="h-5 w-5 text-foreground" />
-                        </div>
-                        <div>
-                          <Text class="font-medium text-foreground">Password</Text>
-                          <Text class="text-sm text-muted-foreground">Secure your account with a strong password</Text>
-                        </div>
-                      </div>
-                      <Button variant="outline" @click="showPasswordModal = true">
-                        Change Password
-                      </Button>
-                    </div>
-                  </Card>
-
-                  <!-- Two-Factor Authentication -->
-                  <Card class="p-4">
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-muted rounded-lg">
-                          <Icon name="lucide:smartphone" class="h-5 w-5 text-foreground" />
-                        </div>
-                        <div>
-                          <Text class="font-medium text-foreground">Two-Factor Authentication</Text>
-                          <Text class="text-sm text-muted-foreground">Add an extra layer of security</Text>
-                        </div>
-                      </div>
-                      <Badge variant="outline">Coming Soon</Badge>
-                    </div>
-                  </Card>
-
-                  <!-- Active Sessions -->
-                  <div>
-                    <Text class="font-medium text-foreground mb-3">Active Sessions</Text>
-                    <Card class="p-4">
-                      <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div class="p-2 bg-success/10 rounded-lg">
-                            <Icon name="lucide:monitor" class="h-5 w-5 text-success" />
-                          </div>
-                          <div>
-                            <Text class="font-medium text-foreground">Current Session</Text>
-                            <Text class="text-sm text-muted-foreground">{{ currentDevice }} • Active now</Text>
-                          </div>
-                        </div>
-                        <Badge variant="default">Active</Badge>
-                      </div>
-                    </Card>
-                  </div>
-
-                  <!-- Delete Account -->
-                  <Card class="p-4 border-destructive/20 bg-destructive/5">
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center gap-3">
-                        <div class="p-2 bg-destructive/10 rounded-lg">
-                          <Icon name="lucide:trash-2" class="h-5 w-5 text-destructive" />
-                        </div>
-                        <div>
-                          <Text class="font-medium text-destructive">Delete Account</Text>
-                          <Text class="text-sm text-muted-foreground">Permanently delete your account and all data</Text>
-                        </div>
-                      </div>
-                      <Button variant="destructive" @click="showDeleteModal = true">
-                        Delete Account
-                      </Button>
-                    </div>
-                  </Card>
-                </div>
-
-                <!-- Billing Tab -->
-                <div v-else-if="activeTab === 'billing'" class="space-y-6">
-                  <div>
-                    <Heading tag="h2" size="h3" class="mb-1">Billing & Subscription</Heading>
-                    <Text class="text-muted-foreground">Manage your subscription and payment methods</Text>
-                  </div>
-
-                  <!-- Current Plan -->
-                  <Card class="p-6 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-                    <div class="flex items-center justify-between mb-4">
+                    <!-- Preferences Tab -->
+                    <div v-else-if="activeTab === 'preferences'" class="space-y-6">
                       <div>
-                        <Text class="font-semibold text-lg text-foreground">Free Plan</Text>
-                        <Text class="text-sm text-muted-foreground">Your current subscription</Text>
+                        <Heading tag="h2" size="h3" class="mb-1">Preferences</Heading>
+                        <Text class="text-muted-foreground">Customize your experience</Text>
                       </div>
-                      <Badge variant="default">Active</Badge>
-                    </div>
-                    <div class="space-y-2 mb-6">
-                      <div class="flex items-center gap-2">
-                        <Icon name="lucide:check-circle" class="h-4 w-4 text-success flex-shrink-0" />
-                        <Text class="text-sm">3 Projects</Text>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <Icon name="lucide:check-circle" class="h-4 w-4 text-success flex-shrink-0" />
-                        <Text class="text-sm">Basic AI Features</Text>
-                      </div>
-                      <div class="flex items-center gap-2">
-                        <Icon name="lucide:check-circle" class="h-4 w-4 text-success flex-shrink-0" />
-                        <Text class="text-sm">Community Access</Text>
-                      </div>
-                    </div>
-                    <Button class="w-full" @click="navigateTo('/pricing')">
-                      <Icon name="lucide:zap" class="h-4 w-4 mr-2" />
-                      Upgrade Plan
-                    </Button>
-                  </Card>
 
-                  <!-- Payment Methods -->
-                  <div>
-                    <Text class="font-medium text-foreground mb-3">Payment Methods</Text>
-                    <Card class="p-8 text-center">
-                      <Icon name="lucide:credit-card" class="h-12 w-12 mx-auto mb-3 text-muted-foreground" />
-                      <Text class="text-muted-foreground mb-4">No payment methods added</Text>
-                      <Button variant="outline">
-                        <Icon name="lucide:plus" class="h-4 w-4 mr-2" />
-                        Add Payment Method
-                      </Button>
-                    </Card>
-                  </div>
-                </div>
-              </Transition>
-            </Card>
-          </div>
-        </div>
-      </Container>
-    </main>
+                      <div class="space-y-6">
+                        <!-- Theme Preference -->
+                        <Card class="p-4 natural-depth gentle-hover">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                              <div class="p-2 bg-muted rounded-lg">
+                                <Icon name="lucide:palette" class="h-5 w-5 text-foreground" />
+                              </div>
+                              <div>
+                                <Heading tag="h3" size="h6">Theme</Heading>
+                                <Text size="sm" class="text-muted-foreground">Choose your preferred theme</Text>
+                              </div>
+                            </div>
+                            <ThemeToggle />
+                          </div>
+                        </Card>
 
-    <!-- Footer -->
-    <Footer />
+                        <!-- Language -->
+                        <Card class="p-4 natural-depth gentle-hover">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                              <div class="p-2 bg-muted rounded-lg">
+                                <Icon name="lucide:globe" class="h-5 w-5 text-foreground" />
+                              </div>
+                              <div>
+                                <Heading tag="h3" size="h6">Language</Heading>
+                                <Text size="sm" class="text-muted-foreground">Select your preferred language</Text>
+                              </div>
+                            </div>
+                            <select class="px-4 py-2 rounded-lg border border-input bg-background text-sm font-medium transition-colors hover:bg-muted">
+                              <option>English</option>
+                              <option>Spanish</option>
+                              <option>French</option>
+                              <option>German</option>
+                            </select>
+                          </div>
+                        </Card>
+
+                        <!-- Timezone -->
+                        <Card class="p-4 natural-depth gentle-hover">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                              <div class="p-2 bg-muted rounded-lg">
+                                <Icon name="lucide:clock" class="h-5 w-5 text-foreground" />
+                              </div>
+                              <div>
+                                <Heading tag="h3" size="h6">Timezone</Heading>
+                                <Text size="sm" class="text-muted-foreground">Set your local timezone</Text>
+                              </div>
+                            </div>
+                            <select class="px-4 py-2 rounded-lg border border-input bg-background text-sm font-medium transition-colors hover:bg-muted">
+                              <option>UTC</option>
+                              <option>EST</option>
+                              <option>PST</option>
+                              <option>GMT</option>
+                            </select>
+                          </div>
+                        </Card>
+                      </div>
+                    </div>
+
+                    <!-- Notifications Tab -->
+                    <div v-else-if="activeTab === 'notifications'" class="space-y-6">
+                      <div>
+                        <Heading tag="h2" size="h3" class="mb-1">Notifications</Heading>
+                        <Text class="text-muted-foreground">Manage how you receive updates</Text>
+                      </div>
+
+                      <div class="space-y-4">
+                        <Card 
+                          v-for="notification in notifications" 
+                          :key="notification.id" 
+                          class="p-4 natural-depth gentle-hover transition-all duration-200"
+                        >
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                              <div class="p-2 bg-muted rounded-lg">
+                                <Icon :name="notification.icon" class="h-5 w-5 text-foreground" />
+                              </div>
+                              <div>
+                                <Heading tag="h3" size="h6">{{ notification.label }}</Heading>
+                                <Text size="sm" class="text-muted-foreground">{{ notification.description }}</Text>
+                              </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                              <input 
+                                type="checkbox" 
+                                :checked="notification.enabled"
+                                @change="toggleNotification(notification.id)"
+                                class="sr-only peer"
+                              >
+                              <div class="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-background after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-background after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary transition-colors"></div>
+                            </label>
+                          </div>
+                        </Card>
+                      </div>
+                    </div>
+
+                    <!-- Security Tab -->
+                    <div v-else-if="activeTab === 'security'" class="space-y-6">
+                      <div>
+                        <Heading tag="h2" size="h3" class="mb-1">Security</Heading>
+                        <Text class="text-muted-foreground">Keep your account secure</Text>
+                      </div>
+
+                      <!-- Change Password -->
+                      <Card class="p-4 natural-depth gentle-hover">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3">
+                            <div class="p-2 bg-muted rounded-lg">
+                              <Icon name="lucide:lock" class="h-5 w-5 text-foreground" />
+                            </div>
+                            <div>
+                              <Heading tag="h3" size="h6">Password</Heading>
+                              <Text size="sm" class="text-muted-foreground">Secure your account with a strong password</Text>
+                            </div>
+                          </div>
+                          <Button variant="outline" @click="showPasswordModal = true">
+                            Change Password
+                          </Button>
+                        </div>
+                      </Card>
+
+                      <!-- Two-Factor Authentication -->
+                      <Card class="p-4 natural-depth gentle-hover">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3">
+                            <div class="p-2 bg-muted rounded-lg">
+                              <Icon name="lucide:smartphone" class="h-5 w-5 text-foreground" />
+                            </div>
+                            <div>
+                              <Heading tag="h3" size="h6">Two-Factor Authentication</Heading>
+                              <Text size="sm" class="text-muted-foreground">Add an extra layer of security</Text>
+                            </div>
+                          </div>
+                          <Badge variant="outline">Coming Soon</Badge>
+                        </div>
+                      </Card>
+
+                      <!-- Active Sessions -->
+                      <div>
+                        <Heading tag="h3" size="h5" class="mb-3">Active Sessions</Heading>
+                        <Card class="p-4 natural-depth">
+                          <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                              <div class="p-2 bg-success/10 rounded-lg">
+                                <Icon name="lucide:monitor" class="h-5 w-5 text-success" />
+                              </div>
+                              <div>
+                                <Heading tag="h4" size="h6">Current Session</Heading>
+                                <Text size="sm" class="text-muted-foreground">{{ currentDevice }} • Active now</Text>
+                              </div>
+                            </div>
+                            <Badge variant="default">Active</Badge>
+                          </div>
+                        </Card>
+                      </div>
+
+                      <!-- Delete Account -->
+                      <Card class="p-4 border-destructive/20 bg-destructive/5 natural-depth">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center gap-3">
+                            <div class="p-2 bg-destructive/10 rounded-lg">
+                              <Icon name="lucide:trash-2" class="h-5 w-5 text-destructive" />
+                            </div>
+                            <div>
+                              <Heading tag="h3" size="h6" class="text-destructive">Delete Account</Heading>
+                              <Text size="sm" class="text-muted-foreground">Permanently delete your account and all data</Text>
+                            </div>
+                          </div>
+                          <Button variant="destructive" @click="showDeleteModal = true">
+                            Delete Account
+                          </Button>
+                        </div>
+                      </Card>
+                    </div>
+
+                    <!-- Billing Tab -->
+                    <div v-else-if="activeTab === 'billing'" class="space-y-6">
+                      <div>
+                        <Heading tag="h2" size="h3" class="mb-1">Billing & Subscription</Heading>
+                        <Text class="text-muted-foreground">Manage your subscription and payment methods</Text>
+                      </div>
+
+                      <!-- Current Plan -->
+                      <Card class="p-6 bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20 natural-depth gentle-hover">
+                        <div class="flex items-center justify-between mb-4">
+                          <div>
+                            <Heading tag="h3" size="h4">Free Plan</Heading>
+                            <Text size="sm" class="text-muted-foreground">Your current subscription</Text>
+                          </div>
+                          <Badge variant="default">Active</Badge>
+                        </div>
+                        <div class="space-y-2 mb-6">
+                          <div class="flex items-center gap-2">
+                            <Icon name="lucide:check-circle" class="h-4 w-4 text-success flex-shrink-0" />
+                            <Text size="sm">3 Projects</Text>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <Icon name="lucide:check-circle" class="h-4 w-4 text-success flex-shrink-0" />
+                            <Text size="sm">Basic AI Features</Text>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <Icon name="lucide:check-circle" class="h-4 w-4 text-success flex-shrink-0" />
+                            <Text size="sm">Community Access</Text>
+                          </div>
+                        </div>
+                        <Button class="w-full" @click="navigateTo('/pricing')">
+                          <Icon name="lucide:zap" class="h-4 w-4 mr-2" />
+                          Upgrade Plan
+                        </Button>
+                      </Card>
+
+                      <!-- Payment Methods -->
+                      <div>
+                        <Heading tag="h3" size="h5" class="mb-3">Payment Methods</Heading>
+                        <Card class="p-8 text-center natural-depth">
+                          <Icon name="lucide:credit-card" class="h-12 w-12 mx-auto mb-3 text-muted-foreground" />
+                          <Text class="text-muted-foreground mb-4">No payment methods added</Text>
+                          <Button variant="outline">
+                            <Icon name="lucide:plus" class="h-4 w-4 mr-2" />
+                            Add Payment Method
+                          </Button>
+                        </Card>
+                      </div>
+                    </div>
+                  </Transition>
+                </GlassCard>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      </main>
+
+      <!-- Footer -->
+      <Footer />
+    </div>
 
     <!-- Password Change Modal -->
     <Teleport to="body">
       <Transition name="modal">
         <div v-if="showPasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" @click="showPasswordModal = false"></div>
-          <Card class="relative z-10 w-full max-w-md p-6 bg-card">
+          <GlassCard variant="heavy" class="relative z-10 w-full max-w-md p-6">
             <div class="flex items-center justify-between mb-4">
               <Heading tag="h3" size="h4">Change Password</Heading>
               <button @click="showPasswordModal = false" class="text-muted-foreground hover:text-foreground transition-colors">
@@ -571,7 +600,7 @@
                 </Button>
               </div>
             </form>
-          </Card>
+          </GlassCard>
         </div>
       </Transition>
     </Teleport>
@@ -581,7 +610,7 @@
       <Transition name="modal">
         <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" @click="showDeleteModal = false"></div>
-          <Card class="relative z-10 w-full max-w-md p-6 bg-card">
+          <GlassCard variant="heavy" class="relative z-10 w-full max-w-md p-6">
             <div class="mb-4">
               <div class="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
                 <Icon name="lucide:alert-triangle" class="h-6 w-6 text-destructive" />
@@ -594,7 +623,7 @@
             
             <div class="space-y-4">
               <Card class="p-3 bg-destructive/5 border-destructive/20">
-                <Text class="text-sm text-destructive">
+                <Text size="sm" class="text-destructive">
                   Type <span class="font-mono font-semibold">DELETE</span> to confirm
                 </Text>
               </Card>
@@ -621,7 +650,7 @@
                 </Button>
               </div>
             </div>
-          </Card>
+          </GlassCard>
         </div>
       </Transition>
     </Teleport>
@@ -631,7 +660,7 @@
       <Transition name="toast">
         <div v-if="message" class="fixed bottom-4 right-4 z-50">
           <Card :class="[
-            'p-4 shadow-lg backdrop-blur-sm',
+            'p-4 shadow-lg backdrop-blur-sm natural-depth',
             messageType === 'success' ? 'bg-success/10 border-success/20' : 'bg-destructive/10 border-destructive/20'
           ]">
             <div class="flex items-center gap-3">
