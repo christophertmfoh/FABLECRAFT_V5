@@ -544,26 +544,36 @@
               </div>
               
               <!-- Map Visual -->
-              <div class="relative">
-                <GlassCard variant="heavy" class="p-3 natural-depth shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-                  <div class="relative min-h-[450px] md:min-h-[550px] bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 rounded-xl flex items-center justify-center">
-                    <!-- Animated Map Placeholder -->
-                    <div class="absolute inset-0 flex items-center justify-center">
+              <div class="relative h-full">
+                <GlassCard variant="heavy" class="p-3 natural-depth shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
+                  <div class="relative h-full min-h-[600px] md:min-h-[700px] rounded-xl overflow-hidden">
+                    <!-- Actual Map iframe -->
+                    <iframe
+                      src="https://www.openstreetmap.org/export/embed.html?bbox=-72.68552780151369%2C41.76326504915824%2C-72.67316818237306%2C41.76962089305098&amp;layer=mapnik&amp;marker=41.76644299999999%2C-72.67934799999999"
+                      class="absolute inset-0 w-full h-full"
+                      style="border: 0; filter: contrast(0.9) brightness(0.95);"
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      title="Fablecraft Headquarters Location"
+                    />
+                    
+                    <!-- Overlay gradient for better theme integration -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
+                    
+                    <!-- Animated Location Marker Overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <div class="relative">
                         <!-- Ripple effect -->
                         <div class="absolute inset-0 flex items-center justify-center">
-                          <div class="w-40 h-40 rounded-full border-2 border-primary/40 animate-ping" />
+                          <div class="w-32 h-32 rounded-full border-2 border-primary/60 animate-ping" />
                         </div>
                         <div class="absolute inset-0 flex items-center justify-center animation-delay-2000">
-                          <div class="w-32 h-32 rounded-full border-2 border-accent/40 animate-ping" />
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center animation-delay-4000">
-                          <div class="w-20 h-20 rounded-full border-2 border-secondary/40 animate-ping" />
+                          <div class="w-24 h-24 rounded-full border-2 border-accent/60 animate-ping" />
                         </div>
                         
                         <!-- Location pin -->
-                        <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl flex items-center justify-center animate-float">
-                          <Icon name="lucide:map-pin" class="h-10 w-10 text-primary-foreground" />
+                        <div class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl flex items-center justify-center animate-float backdrop-blur-sm">
+                          <Icon name="lucide:map-pin" class="h-8 w-8 text-primary-foreground" />
                         </div>
                       </div>
                     </div>
