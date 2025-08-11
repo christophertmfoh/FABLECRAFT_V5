@@ -274,19 +274,20 @@
                   />
                 </div>
                 
-                <Heading tag="h2" size="h1" class="text-foreground mb-8">
-                  Meet Our 
+                <Heading tag="h2" size="h1" class="text-foreground mb-8 text-center">
+                  <span class="block">Meet</span>
                   <AGradientText
                     tag="span"
                     variant="accent"
                     direction="to-r"
                     intensity="vibrant"
+                    class="block"
                   >
-                    Visionaries
+                    Our Visionaries
                   </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground leading-relaxed">
+                <Text size="lg" class="text-muted-foreground leading-relaxed text-center">
                   Industry veterans from Hartford, CT, leading the charge in democratizing creative tools
                 </Text>
               </div>
@@ -308,15 +309,17 @@
                         </div>
                       </div>
                       
-                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors text-center">
                         Chris Johanson
                       </Heading>
                       
-                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border mb-4">
-                        <Text size="sm" class="font-bold text-foreground">Chief Executive Officer</Text>
+                      <div class="flex justify-center mb-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border">
+                          <Text size="sm" class="font-bold text-foreground">Chief Executive Officer</Text>
+                        </div>
                       </div>
                       
-                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
+                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6 text-center">
                         Visionary leader with 20+ years transforming digital experiences. Chris drives our mission to make creative tools accessible to everyone.
                       </Text>
                       
@@ -348,15 +351,17 @@
                         </div>
                       </div>
                       
-                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-accent transition-colors">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-accent transition-colors text-center">
                         Jason Michaud
                       </Heading>
                       
-                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border mb-4">
-                        <Text size="sm" class="font-bold text-foreground">Chief Financial Officer</Text>
+                      <div class="flex justify-center mb-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border">
+                          <Text size="sm" class="font-bold text-foreground">Chief Financial Officer</Text>
+                        </div>
                       </div>
                       
-                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
+                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6 text-center">
                         Strategic financial architect ensuring sustainable growth. Jason's expertise scales creative tech companies globally.
                       </Text>
                       
@@ -388,15 +393,17 @@
                         </div>
                       </div>
                       
-                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors text-center">
                         Frank Rocca
                       </Heading>
                       
-                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border mb-4">
-                        <Text size="sm" class="font-bold text-foreground">Chief Technology Officer</Text>
+                      <div class="flex justify-center mb-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border">
+                          <Text size="sm" class="font-bold text-foreground">Chief Technology Officer</Text>
+                        </div>
                       </div>
                       
-                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
+                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6 text-center">
                         AI pioneer revolutionizing creative workflows. Frank leads our technical innovation, building tomorrow's tools today.
                       </Text>
                       
