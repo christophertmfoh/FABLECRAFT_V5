@@ -55,94 +55,94 @@
             <Container size="xl">
               <!-- Mission Header -->
               <div class="text-center max-w-4xl mx-auto mb-12">
-                <MHeroBadge
-                  text="Our Mission"
-                  variant="default"
-                  size="base"
-                  dot-color="primary"
-                  dot-speed="normal"
-                  class="mb-6"
-                />
+                <div class="flex justify-center mb-6">
+                  <MHeroBadge
+                    text="Our Mission"
+                    variant="default"
+                    size="base"
+                    dot-color="primary"
+                    dot-speed="normal"
+                  />
+                </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-6">
-                  Democratizing 
+                <Heading tag="h2" size="h2" class="text-foreground mb-6 text-center">
+                  <span class="block">Democratizing</span>
                   <AGradientText
                     tag="span"
                     variant="primary"
                     direction="to-r"
                     intensity="normal"
-                    class="bg-clip-text text-transparent"
+                    class="bg-clip-text text-transparent block"
                   >
                     Creative Excellence
                   </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground leading-relaxed">
+                <Text size="lg" class="text-muted-foreground leading-relaxed text-center">
                   We believe everyone has a story to tell and the potential to create something extraordinary. 
-                  Fablecraft removes the technical barriers between imagination and creation, empowering creators 
-                  of all skill levels to bring their visions to life.
+                  Fablecraft removes the technical barriers between imagination and creation.
                 </Text>
               </div>
 
-              <!-- Mission Cards Grid -->
-              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Community First Card -->
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover group">
-                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Icon name="lucide:users" class="h-7 w-7 text-primary" />
-                  </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Community First</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Building a supportive ecosystem where creators inspire and learn from each other
-                  </Text>
-                </GlassCard>
-                
-                <!-- Innovation Driven Card -->
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover group">
-                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Icon name="lucide:zap" class="h-7 w-7 text-accent" />
-                  </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Innovation Driven</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Leveraging cutting-edge AI and technology to push creative boundaries
-                  </Text>
-                </GlassCard>
-                
-                <!-- Passion Powered Card -->
-                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover group">
-                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Icon name="lucide:heart" class="h-7 w-7 text-secondary" />
-                  </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Passion Powered</Heading>
-                  <Text size="sm" class="text-muted-foreground">
-                    Created by creators, for creators, with love for the craft
-                  </Text>
-                </GlassCard>
-                
-                <!-- Magical Storybook Card -->
-                <GlassCard variant="light" class="p-6 relative overflow-hidden natural-depth gentle-hover">
-                  <div class="relative h-full flex flex-col">
-                    <!-- Background gradient animation -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 animate-gradient-shift rounded-lg opacity-50" />
+              <!-- Stories Come Alive Animation Box -->
+              <div class="max-w-4xl mx-auto">
+                <GlassCard variant="light" class="p-12 relative overflow-hidden natural-depth">
+                  <div class="relative h-96 flex items-center justify-center">
+                    <!-- Subtle background gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/3 via-accent/3 to-secondary/3 animate-gradient-shift rounded-lg" />
                     
-                    <!-- Animated Book Icon -->
-                    <div class="relative z-10 mx-auto mb-4">
-                      <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center animate-float">
-                        <Icon name="lucide:book-open" class="h-7 w-7 text-background" />
+                    <!-- Main Animation Container -->
+                    <div class="relative z-10">
+                      <!-- Central Book -->
+                      <div class="relative">
+                        <div class="w-48 h-56 bg-gradient-to-br from-primary to-accent rounded-lg shadow-2xl transform rotate-3 animate-float">
+                          <div class="absolute inset-2 bg-background/95 rounded flex items-center justify-center">
+                            <Icon name="lucide:book-open" class="h-20 w-20 text-primary" />
+                          </div>
+                        </div>
+                        
+                        <!-- Floating Pages -->
+                        <div class="absolute -top-8 -left-12 w-16 h-20 bg-background border border-border rounded shadow-xl transform -rotate-12 animate-page-float-1">
+                          <div class="p-2">
+                            <div class="h-1.5 bg-gradient-to-r from-primary/20 to-accent/20 rounded mb-2" />
+                            <div class="h-1 bg-muted/60 rounded mb-1.5" />
+                            <div class="h-1 bg-muted/60 rounded mb-1.5 w-3/4" />
+                            <div class="h-1 bg-muted/60 rounded w-1/2" />
+                          </div>
+                        </div>
+                        
+                        <div class="absolute -top-4 -right-16 w-16 h-20 bg-background border border-border rounded shadow-xl transform rotate-6 animate-page-float-2 animation-delay-2000">
+                          <div class="p-2">
+                            <div class="h-1.5 bg-gradient-to-r from-accent/20 to-secondary/20 rounded mb-2" />
+                            <div class="h-1 bg-muted/60 rounded mb-1.5 w-2/3" />
+                            <div class="h-1 bg-muted/60 rounded mb-1.5" />
+                            <div class="h-1 bg-muted/60 rounded w-3/4" />
+                          </div>
+                        </div>
+                        
+                        <div class="absolute -bottom-6 -left-8 w-16 h-20 bg-background border border-border rounded shadow-xl transform rotate-12 animate-page-float-3 animation-delay-4000">
+                          <div class="p-2">
+                            <div class="h-1.5 bg-gradient-to-r from-secondary/20 to-primary/20 rounded mb-2" />
+                            <div class="h-1 bg-muted/60 rounded mb-1.5" />
+                            <div class="h-1 bg-muted/60 rounded mb-1.5 w-1/2" />
+                            <div class="h-1 bg-muted/60 rounded w-2/3" />
+                          </div>
+                        </div>
+                        
+                        <!-- Sparkles -->
+                        <Icon name="lucide:sparkles" class="absolute -top-4 left-1/2 h-6 w-6 text-primary animate-twinkle" />
+                        <Icon name="lucide:sparkles" class="absolute top-1/2 -right-8 h-5 w-5 text-accent animate-twinkle animation-delay-2000" />
+                        <Icon name="lucide:sparkles" class="absolute -bottom-2 -left-4 h-7 w-7 text-secondary animate-twinkle animation-delay-4000" />
+                        <Icon name="lucide:sparkles" class="absolute top-8 right-12 h-4 w-4 text-primary/60 animate-twinkle animation-delay-1000" />
                       </div>
-                      
-                      <!-- Mini floating pages -->
-                      <div class="absolute -top-1 -right-1 w-3 h-4 bg-background border border-border/50 rounded shadow-sm transform rotate-12 animate-page-float-1" />
-                      <div class="absolute -top-2 -left-1 w-3 h-4 bg-background border border-border/50 rounded shadow-sm transform -rotate-12 animate-page-float-2" />
-                      
-                      <!-- Mini sparkles -->
-                      <Icon name="lucide:sparkles" class="absolute -top-2 right-0 h-2 w-2 text-primary animate-twinkle" />
-                      <Icon name="lucide:sparkles" class="absolute -bottom-1 left-0 h-2 w-2 text-accent animate-twinkle animation-delay-2000" />
                     </div>
                     
-                    <div class="relative z-10 text-center">
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">Stories Come Alive</Heading>
-                      <Text size="sm" class="text-muted-foreground">
+                    <!-- Title Text -->
+                    <div class="absolute bottom-8 left-0 right-0 text-center">
+                      <Heading tag="h3" size="h3" class="text-foreground mb-2">
+                        Stories Come Alive
+                      </Heading>
+                      <Text size="base" class="text-muted-foreground">
                         Where imagination meets creation through magical tools
                       </Text>
                     </div>
