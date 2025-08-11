@@ -97,7 +97,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
-      exclude: ['/', '/login', '/confirm', '/supabase-test', '/api-test'], // Exclude public pages from auth redirect
+      exclude: ['/', '/login', '/confirm', '/supabase-test', '/api-test', '/about', '/contact'], // Exclude public pages from auth redirect
     },
   },
 
