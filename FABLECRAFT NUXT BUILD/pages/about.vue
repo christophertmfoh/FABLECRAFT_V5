@@ -205,8 +205,8 @@
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:lightbulb" class="h-7 w-7 text-primary" />
                     </div>
-                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Creativity</Heading>
-                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Creativity</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed text-center">
                       Fostering imagination and original thinking in everything we do
                     </Text>
                   </div>
@@ -219,8 +219,8 @@
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:shield-check" class="h-7 w-7 text-accent" />
                     </div>
-                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Trust</Heading>
-                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Trust</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed text-center">
                       Building transparent relationships with our community
                     </Text>
                   </div>
@@ -233,8 +233,8 @@
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:share-2" class="h-7 w-7 text-accent" />
                     </div>
-                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Accessibility</Heading>
-                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Accessibility</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed text-center">
                       Making creative tools available to everyone, everywhere
                     </Text>
                   </div>
@@ -247,8 +247,8 @@
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:rocket" class="h-7 w-7 text-primary" />
                     </div>
-                    <Heading tag="h3" size="h5" class="text-foreground mb-3">Excellence</Heading>
-                    <Text size="sm" class="text-muted-foreground leading-relaxed">
+                    <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Excellence</Heading>
+                    <Text size="sm" class="text-muted-foreground leading-relaxed text-center">
                       Continuously improving and exceeding expectations
                     </Text>
                   </div>
