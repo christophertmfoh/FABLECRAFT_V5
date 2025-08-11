@@ -29,6 +29,7 @@
           :gradient-intensity="gradientIntensity"
           :gradient-animation="gradientAnimation"
           :spacing="headingSpacing"
+          :break-highlight="breakHighlight"
         />
 
         <!-- Hero Actions -->
@@ -110,6 +111,7 @@ interface HeroSectionProps {
   spacing?: 'tight' | 'normal' | 'relaxed' | 'spacious'
   background?: 'default' | 'gradient' | 'transparent'
   className?: string
+  breakHighlight?: boolean
 }
 
 // Events interface
@@ -168,6 +170,7 @@ const props = withDefaults(defineProps<HeroSectionProps>(), {
   spacing: 'normal',
   background: 'default',
   className: '',
+  breakHighlight: false,
 })
 
 const emit = defineEmits<HeroSectionEmits>()
