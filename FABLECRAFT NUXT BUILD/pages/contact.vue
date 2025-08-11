@@ -11,14 +11,16 @@
     
     <!-- Navigation Header -->
     <NavigationHeader 
+      :is-authenticated="isAuthenticated"
+      :user="user"
       :show-auth="true"
       :show-nav-items="true"
       :show-theme-toggle="true"
       variant="default"
       @navigate="handleNavigate"
-      @auth="handleAuth"
-      @logout="handleLogout"
-      @home="handleHome"
+      @auth:click="handleAuth"
+      @auth:logout="handleLogout"
+      @logo:click="handleHome"
     />
     
     <!-- Main Content -->
@@ -600,7 +602,12 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { useHead, navigateTo, useSupabaseClient, useAuthOverlay } from '#imports'
+import { useHead, navigateTo, useSupabaseClient, useSupabaseUser, useAuthOverlay } from '#imports'
+
+// Authentication state
+const supabase = import.meta.client ? useSupabaseClient() : null
+const user = import.meta.client ? useSupabaseUser() : ref(null)
+const isAuthenticated = computed(() => !!user?.value)
 
 // Page meta
 useHead({
@@ -690,8 +697,14 @@ const handleAuth = () => {
 }
 
 const handleLogout = async () => {
-  const supabase = useSupabaseClient()
-  await supabase.auth.signOut()
+  if (!supabase) return
+  
+  try {
+    await supabase.auth.signOut()
+    console.log('Logged out successfully')
+  } catch (error) {
+    console.error('Error during logout:', error)
+  }
 }
 
 const handleHome = () => {
