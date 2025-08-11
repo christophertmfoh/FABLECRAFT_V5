@@ -50,88 +50,128 @@ export default defineNuxtPlugin(() => {
     }
     
     styleEl.textContent = `
-      /* Crisp Chat Theme Overrides */
-      .crisp-client {
+      /* Crisp Chat Theme Overrides - Aggressive approach */
+      
+      /* Main chat widget container */
+      .crisp-client[data-last-operator-face] {
         font-family: inherit !important;
       }
       
-      /* Chat bubble button */
-      .crisp-client .cc-l3zb .cc-1c0v .cc-gye0 .cc-11yd .cc-15ak {
+      /* Chat bubble/launcher button */
+      .crisp-client .crisp-1rjpbb7[data-chat-status] {
         background: hsl(var(--primary)) !important;
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+        box-shadow: 0 10px 25px -5px hsl(var(--primary) / 0.3) !important;
       }
       
-      /* Chat window header */
-      .crisp-client .cc-l3zb .cc-1hqm {
+      .crisp-client .crisp-1rjpbb7[data-chat-status]:hover {
+        background: hsl(var(--primary) / 0.9) !important;
+        transform: scale(1.05) !important;
+      }
+      
+      /* Main chat window */
+      .crisp-client .crisp-1rjpbb7[data-chat-status][data-visible="true"] .crisp-1rf4xdh {
+        background: hsl(var(--background)) !important;
+        border: 1px solid hsl(var(--border)) !important;
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1) !important;
+      }
+      
+      /* Header */
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr {
         background: hsl(var(--background)) !important;
         border-bottom: 1px solid hsl(var(--border)) !important;
       }
       
-      /* Chat window background */
-      .crisp-client .cc-l3zb .cc-gye0 {
+      /* Header text */
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr .crisp-1xmtdlg,
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr .crisp-12w4w1a {
+        color: hsl(var(--foreground)) !important;
+      }
+      
+      /* Chat messages container */
+      .crisp-client .crisp-1rf4xdh .crisp-lgu84d {
         background: hsl(var(--background)) !important;
       }
       
-      /* Message bubbles - user */
-      .crisp-client .cc-l3zb .cc-1vax .cc-1awy.cc-1v07 .cc-unoo {
+      /* User messages (right side) */
+      .crisp-client .crisp-1rf4xdh .crisp-lgu84d .crisp-1ohjrf0 .crisp-bhspdv[data-from="operator"] {
         background: hsl(var(--primary)) !important;
         color: hsl(var(--primary-foreground)) !important;
       }
       
-      /* Message bubbles - agent */
-      .crisp-client .cc-l3zb .cc-1vax .cc-1awy.cc-qdpz .cc-unoo {
+      .crisp-client .crisp-1rf4xdh .crisp-lgu84d .crisp-1ohjrf0 .crisp-bhspdv[data-type="text"][data-from="visitor"] {
+        background: hsl(var(--primary)) !important;
+        color: hsl(var(--primary-foreground)) !important;
+      }
+      
+      /* Agent messages (left side) */
+      .crisp-client .crisp-1rf4xdh .crisp-lgu84d .crisp-1ohjrf0 .crisp-bhspdv[data-from="operator"] {
         background: hsl(var(--muted)) !important;
         color: hsl(var(--foreground)) !important;
       }
       
-      /* Input field */
-      .crisp-client .cc-l3zb .cc-lq3u .cc-lbdv {
+      /* All message text */
+      .crisp-client .crisp-1rf4xdh .crisp-lgu84d .crisp-1ohjrf0 .crisp-bhspdv .crisp-1o2g4mc * {
+        color: inherit !important;
+      }
+      
+      /* Input container */
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr.crisp-1784wh6 {
         background: hsl(var(--background)) !important;
         border-top: 1px solid hsl(var(--border)) !important;
       }
       
-      .crisp-client .cc-l3zb .cc-lq3u .cc-1mk8 {
+      /* Input field */
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr.crisp-1784wh6 .crisp-6cw6fl,
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr.crisp-1784wh6 textarea {
         background: hsl(var(--muted) / 0.5) !important;
         color: hsl(var(--foreground)) !important;
+        border: 1px solid hsl(var(--border)) !important;
       }
       
-      .crisp-client .cc-l3zb .cc-lq3u .cc-1mk8::placeholder {
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr.crisp-1784wh6 textarea::placeholder {
         color: hsl(var(--muted-foreground)) !important;
       }
       
       /* Send button */
-      .crisp-client .cc-l3zb .cc-lq3u .cc-1w72 {
-        background: hsl(var(--primary)) !important;
-        color: hsl(var(--primary-foreground)) !important;
-      }
-      
-      /* Links and buttons */
-      .crisp-client .cc-l3zb a,
-      .crisp-client .cc-l3zb .cc-162m {
+      .crisp-client .crisp-1rf4xdh .crisp-kquevr.crisp-1784wh6 .crisp-1t2fu6j {
         color: hsl(var(--primary)) !important;
       }
       
-      /* Text colors */
-      .crisp-client .cc-l3zb .cc-1hqm .cc-1qhx,
-      .crisp-client .cc-l3zb .cc-1hqm .cc-1bue {
+      /* All buttons */
+      .crisp-client .crisp-1rf4xdh button {
         color: hsl(var(--foreground)) !important;
       }
       
-      /* Scrollbar */
-      .crisp-client .cc-l3zb ::-webkit-scrollbar-thumb {
-        background: hsl(var(--muted)) !important;
+      /* Links */
+      .crisp-client .crisp-1rf4xdh a {
+        color: hsl(var(--primary)) !important;
       }
       
-      /* Make corners match your design */
-      .crisp-client .cc-l3zb .cc-gye0 {
+      /* Powered by text */
+      .crisp-client .crisp-1rf4xdh .crisp-4oo1n4 {
+        color: hsl(var(--muted-foreground)) !important;
+      }
+      
+      /* Dark mode specific overrides */
+      .dark .crisp-client .crisp-1rf4xdh {
+        filter: none !important;
+      }
+      
+      /* Force all text to use our colors */
+      .crisp-client .crisp-1rf4xdh * {
+        border-color: hsl(var(--border)) !important;
+      }
+      
+      /* Rounded corners */
+      .crisp-client .crisp-1rf4xdh {
         border-radius: 0.75rem !important;
+        overflow: hidden !important;
       }
       
-      /* Glass effect for premium feel */
-      .crisp-client .cc-l3zb .cc-gye0 {
+      /* Glass effect */
+      .crisp-client .crisp-1rf4xdh {
         backdrop-filter: blur(10px) !important;
-        background: hsl(var(--background) / 0.95) !important;
-        border: 1px solid hsl(var(--border)) !important;
+        background: hsl(var(--background) / 0.98) !important;
       }
     `
   }
