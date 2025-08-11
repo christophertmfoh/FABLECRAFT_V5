@@ -305,7 +305,7 @@
         <div class="py-12 sm:py-16">
           <Container size="xl">
             <div class="text-center mb-8">
-              <Heading tag="h2" size="h2" class="text-center">
+              <Heading tag="h2" size="h2" class="text-center text-foreground">
                 {{ comparisonContent.title }}
               </Heading>
             </div>
@@ -396,7 +396,7 @@
         <div class="py-12 sm:py-16">
           <Container size="lg">
             <div class="text-center mb-8">
-              <Heading tag="h2" size="h2" class="text-center">
+              <Heading tag="h2" size="h2" class="text-center text-foreground">
                 {{ faqContent.title }}
               </Heading>
             </div>
