@@ -138,11 +138,24 @@
                     </div>
                     
                     <!-- Title Text -->
-                    <div class="absolute bottom-8 left-0 right-0 text-center">
-                      <Heading tag="h3" size="h3" class="text-foreground mb-2">
-                        Stories Come Alive
-                      </Heading>
-                      <Text size="base" class="text-muted-foreground">
+                    <div class="absolute bottom-8 left-0 right-0 text-center px-8">
+                      <div class="inline-flex items-center gap-2 mb-3">
+                        <div class="h-px w-12 bg-gradient-to-r from-transparent to-primary/40" />
+                        <Heading tag="h3" size="h3" class="text-foreground">
+                          Stories 
+                          <AGradientText
+                            tag="span"
+                            variant="primary"
+                            direction="to-r"
+                            intensity="normal"
+                            class="bg-clip-text text-transparent"
+                          >
+                            Come Alive
+                          </AGradientText>
+                        </Heading>
+                        <div class="h-px w-12 bg-gradient-to-l from-transparent to-accent/40" />
+                      </div>
+                      <Text size="sm" class="text-muted-foreground/80 max-w-md mx-auto">
                         Where imagination meets creation through magical tools
                       </Text>
                     </div>
