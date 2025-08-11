@@ -156,41 +156,43 @@
           <Container size="xl">
             <div class="max-w-4xl mx-auto">
               <!-- Section Header -->
-              <div class="text-center mb-12">
-                <MHeroBadge
-                  text="Send Us a Message"
-                  variant="outline"
-                  size="sm"
-                  dot-color="primary"
-                  class="mb-6"
-                />
+              <div class="text-center mb-16 animate-fade-in-scale">
+                <div class="mb-8">
+                  <MHeroBadge
+                    text="Send Us a Message"
+                    variant="default"
+                    size="base"
+                    dot-color="primary"
+                    dot-speed="normal"
+                  />
+                </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-4 text-center">
+                <Heading tag="h2" size="h1" class="text-foreground mb-6 text-center font-black">
                   <span class="block">How Can We</span>
                   <AGradientText
                     tag="span"
                     variant="primary"
                     direction="to-r"
-                    intensity="normal"
-                    class="block"
+                    intensity="strong"
+                    class="block mt-1"
                   >
                     Help You?
                   </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground text-center">
+                <Text size="xl" class="text-muted-foreground text-center max-w-2xl mx-auto leading-relaxed">
                   Fill out the form below and we'll get back to you as soon as possible
                 </Text>
               </div>
               
               <!-- Contact Form -->
-              <GlassCard variant="heavy" class="p-8 natural-depth">
-                <form @submit.prevent="handleSubmitForm" class="space-y-6">
+              <GlassCard variant="heavy" class="p-10 natural-depth shadow-2xl hover:shadow-3xl transition-all duration-500">
+                <form @submit.prevent="handleSubmitForm" class="space-y-8">
                   <!-- Name and Email Row -->
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="name" class="block text-sm font-medium text-foreground mb-2">
-                        Full Name *
+                      <label for="name" class="block text-sm font-semibold text-foreground mb-2.5">
+                        Full Name <span class="text-destructive">*</span>
                       </label>
                       <input
                         id="name"
@@ -203,8 +205,8 @@
                     </div>
                     
                     <div>
-                      <label for="email" class="block text-sm font-medium text-foreground mb-2">
-                        Email Address *
+                      <label for="email" class="block text-sm font-semibold text-foreground mb-2.5">
+                        Email Address <span class="text-destructive">*</span>
                       </label>
                       <input
                         id="email"
@@ -220,7 +222,7 @@
                   <!-- Company and Phone Row -->
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="company" class="block text-sm font-medium text-foreground mb-2">
+                      <label for="company" class="block text-sm font-semibold text-foreground mb-2.5">
                         Company
                       </label>
                       <input
@@ -233,7 +235,7 @@
                     </div>
                     
                     <div>
-                      <label for="phone" class="block text-sm font-medium text-foreground mb-2">
+                      <label for="phone" class="block text-sm font-semibold text-foreground mb-2.5">
                         Phone Number
                       </label>
                       <input
@@ -248,8 +250,8 @@
                   
                   <!-- Subject -->
                   <div>
-                    <label for="subject" class="block text-sm font-medium text-foreground mb-2">
-                      Subject *
+                    <label for="subject" class="block text-sm font-semibold text-foreground mb-2.5">
+                      Subject <span class="text-destructive">*</span>
                     </label>
                     <select
                       id="subject"
@@ -270,8 +272,8 @@
                   
                   <!-- Message -->
                   <div>
-                    <label for="message" class="block text-sm font-medium text-foreground mb-2">
-                      Message *
+                    <label for="message" class="block text-sm font-semibold text-foreground mb-2.5">
+                      Message <span class="text-destructive">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -302,16 +304,16 @@
                   </div>
                   
                   <!-- Submit Button -->
-                  <div class="flex gap-4">
+                  <div class="flex gap-4 pt-6 border-t border-border/20">
                     <Button
                       type="submit"
-                      variant="primary"
+                      variant="default"
                       size="lg"
                       :disabled="isSubmitting"
-                      class="flex-1"
+                      class="flex-1 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] min-h-[52px] text-base font-semibold"
                     >
-                      <Spinner v-if="isSubmitting" class="mr-2 h-4 w-4" />
-                      <Icon v-else name="lucide:send" class="mr-2 h-4 w-4" />
+                      <Spinner v-if="isSubmitting" class="mr-2 h-5 w-5" />
+                      <Icon v-else name="lucide:send" class="mr-2 h-5 w-5" />
                       {{ isSubmitting ? 'Sending...' : 'Send Message' }}
                     </Button>
                     
@@ -320,8 +322,9 @@
                       variant="outline"
                       size="lg"
                       @click="resetForm"
+                      class="min-w-[140px] hover:scale-[1.02] transition-all duration-300 border-2"
                     >
-                      <Icon name="lucide:rotate-ccw" class="mr-2 h-4 w-4" />
+                      <Icon name="lucide:rotate-ccw" class="mr-2 h-5 w-5" />
                       Reset
                     </Button>
                   </div>
