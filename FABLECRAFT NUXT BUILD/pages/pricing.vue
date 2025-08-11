@@ -391,32 +391,6 @@
         </div>
       </Section>
 
-      <!-- Trust Section -->
-      <Section spacing="none" class="trust-section">
-        <div class="py-12">
-          <Container size="xl">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.activeUsers }}</div>
-                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.activeUsersLabel }}</Text>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.rating }}</div>
-                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.ratingLabel }}</Text>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.uptime }}</div>
-                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.uptimeLabel }}</Text>
-              </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.support }}</div>
-                <Text size="sm" class="text-muted-foreground">{{ trustMetrics.supportLabel }}</Text>
-              </div>
-            </div>
-          </Container>
-        </div>
-      </Section>
-
       <!-- FAQ Section -->
       <Section spacing="none" class="faq-section">
         <div class="py-12 sm:py-16">
@@ -482,7 +456,6 @@ import {
   COMPARISON_CONTENT,
   FAQ_CONTENT,
   PRICING_CONFIG, 
-  TRUST_METRICS, 
   COMPARISON_FEATURES, 
   PRICING_FAQS,
   PAYMENT_METHODS 
@@ -499,7 +472,6 @@ const heroContent = PRICING_HERO
 const comparisonContent = COMPARISON_CONTENT
 const faqContent = FAQ_CONTENT
 const config = PRICING_CONFIG
-const trustMetrics = TRUST_METRICS
 const comparisonFeatures = COMPARISON_FEATURES
 const pricingFaqs = PRICING_FAQS
 const paymentMethods = PAYMENT_METHODS
