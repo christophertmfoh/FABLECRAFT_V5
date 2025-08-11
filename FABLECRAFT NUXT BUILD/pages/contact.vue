@@ -471,7 +471,7 @@
                 <span class="block">Hartford</span>
                 <AGradientText
                   tag="span"
-                  variant="secondary"
+                  variant="primary"
                   direction="to-r"
                   intensity="vibrant"
                   class="block mt-1"
