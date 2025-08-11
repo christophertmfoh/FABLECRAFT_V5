@@ -436,15 +436,18 @@
                   <Text size="lg" class="text-muted-foreground mb-8 text-center max-w-md mx-auto">
                     Can't find what you're looking for? Our support team is here to help.
                   </Text>
-                  <Button
+                  <GradientButton
                     variant="default"
                     size="lg"
                     @click="scrollToForm"
                     class="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[200px]"
+                    :show-gradient-overlay="true"
+                    gradient-direction="to-r"
+                    :adaptive-gradient="false"
                   >
                     <Icon name="lucide:mail" class="mr-2 h-5 w-5" />
                     Contact Support
-                  </Button>
+                  </GradientButton>
                 </GlassCard>
               </div>
             </div>
