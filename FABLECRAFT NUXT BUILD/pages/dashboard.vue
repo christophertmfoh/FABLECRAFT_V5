@@ -37,13 +37,37 @@
               <!-- Dashboard Header -->
               <div class="mb-8">
                 <div class="flex items-center justify-between">
-                  <div>
-                    <Heading tag="h1" size="h2" class="text-foreground mb-2">
-                      Welcome back, {{ displayName }}
-                    </Heading>
-                    <Text size="lg" class="text-muted-foreground">
-                      Your creative workspace awaits
-                    </Text>
+                  <div class="flex items-start gap-4">
+                    <!-- User Avatar -->
+                    <div v-if="avatarUrl || profileLoading" class="flex-shrink-0">
+                      <div v-if="profileLoading" class="w-16 h-16 rounded-full bg-muted animate-pulse" />
+                      <img
+                        v-else-if="avatarUrl"
+                        :src="avatarUrl"
+                        :alt="displayName"
+                        class="w-16 h-16 rounded-full object-cover border-2 border-border"
+                      />
+                    </div>
+                    
+                    <!-- Welcome Message -->
+                    <div>
+                      <Heading tag="h1" size="h2" class="text-foreground mb-2">
+                        <span v-if="profileLoading" class="inline-flex items-center gap-2">
+                          Welcome back
+                          <span class="inline-block w-32 h-8 bg-muted rounded animate-pulse" />
+                        </span>
+                        <span v-else>
+                          Welcome back, {{ displayName }}
+                        </span>
+                      </Heading>
+                      <Text size="lg" class="text-muted-foreground">
+                        <span v-if="profile?.bio">{{ profile.bio }}</span>
+                        <span v-else>Your creative workspace awaits</span>
+                      </Text>
+                      <Text v-if="profile?.username" size="sm" class="text-muted-foreground/70 mt-1">
+                        @{{ profile.username }}
+                      </Text>
+                    </div>
                   </div>
                   
                   <!-- Quick Actions -->
@@ -65,6 +89,31 @@
                       Quick Write
                     </Button>
                   </div>
+                </div>
+              </div>
+
+              <!-- Profile Completion Reminder -->
+              <div v-if="!profileLoading && (!profile?.full_name || !profile?.username)" 
+                   class="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <Icon name="lucide:info" class="h-5 w-5 text-primary" />
+                    <div>
+                      <Text size="sm" class="text-foreground font-medium">
+                        Complete your profile
+                      </Text>
+                      <Text size="xs" class="text-muted-foreground">
+                        Add your name and username to personalize your experience
+                      </Text>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    @click="() => navigateTo('/account')"
+                  >
+                    Update Profile
+                  </Button>
                 </div>
               </div>
 
@@ -156,19 +205,17 @@ const { currentTheme } = useTheme()
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 
+// Profile composable with real-time updates
+const { 
+  profile, 
+  displayName, 
+  avatarUrl, 
+  loading: profileLoading,
+  error: profileError 
+} = useUserProfile()
+
 // Computed properties
 const isAuthenticated = computed(() => !!user.value)
-
-const displayName = computed(() => {
-  if (!user.value) return 'User'
-  
-  // Try to get display name from metadata, then email
-  const metadata = user.value.user_metadata
-  return metadata?.full_name || 
-         metadata?.name || 
-         user.value.email?.split('@')[0] || 
-         'User'
-})
 
 // Navigation handlers
 const handleAuth = () => {
@@ -216,6 +263,13 @@ const handleQuickWrite = () => {
   // TODO: Implement quick write feature
   console.log('Quick write clicked')
 }
+
+// TEST REAL-TIME UPDATES:
+// 1. Open this dashboard in your browser (must be logged in)
+// 2. Open the /account page in another tab
+// 3. Update your name, username, or bio in the account page
+// 4. Watch the dashboard update automatically without refreshing!
+// The profile data syncs in real-time across all tabs/windows
 
 // SEO Meta
 useHead({
