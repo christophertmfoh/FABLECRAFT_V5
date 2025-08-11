@@ -4,14 +4,6 @@ export const PRICING_HERO = {
   title: 'Choose Your',
   highlight: 'Subscription',
   description: '30-day free trial on all paid plans. No credit card required to start.',
-  primaryButton: {
-    text: 'View Plans',
-    icon: 'lucide:sparkles',
-  },
-  secondaryButton: {
-    text: 'Compare Features',
-    icon: 'lucide:scale',
-  },
 }
 
 export const COMPARISON_CONTENT = {

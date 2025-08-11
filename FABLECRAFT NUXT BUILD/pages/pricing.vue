@@ -33,16 +33,11 @@
             :badge-text="heroContent.badge"
             :title="heroContent.title"
             :highlight-text="heroContent.highlight"
+            :break-highlight="true"
             :description="heroContent.description"
-            :primary-button-text="heroContent.primaryButton.text"
-            :secondary-button-text="heroContent.secondaryButton.text"
-            :primary-button-icon="heroContent.primaryButton.icon"
-            :secondary-button-icon="heroContent.secondaryButton.icon"
+            :show-buttons="false"
             variant="default"
             alignment="center"
-            @primary:click="handleHeroPrimary"
-            @secondary:click="handleHeroSecondary"
-            @badge:click="handleBadgeClick"
           />
         </div>
       </Section>
@@ -570,23 +565,6 @@ const handleContactSales = () => {
 
 const toggleFaq = (index: number) => {
   expandedFaq.value = expandedFaq.value === index ? null : index
-}
-
-// Hero handlers
-const handleHeroPrimary = () => {
-  // Scroll to plan selector
-  const planSection = document.querySelector('.plan-selector-section')
-  planSection?.scrollIntoView({ behavior: 'smooth' })
-}
-
-const handleHeroSecondary = () => {
-  // Scroll to comparison table
-  const comparisonSection = document.querySelector('.comparison-section')
-  comparisonSection?.scrollIntoView({ behavior: 'smooth' })
-}
-
-const handleBadgeClick = () => {
-  console.log('Badge clicked')
 }
 
 // Navigation handlers
