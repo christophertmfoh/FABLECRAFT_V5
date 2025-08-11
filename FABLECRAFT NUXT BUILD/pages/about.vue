@@ -32,53 +32,42 @@
       <main id="main-content" class="relative z-20">
         <!-- Hero Section -->
         <Section spacing="none" class="hero-section relative overflow-hidden">
-          <div class="py-24 sm:py-32 lg:py-40">
+          <div class="py-16 sm:py-20 lg:py-24">
             <Container size="xl">
-              <div class="text-center max-w-5xl mx-auto">
-                <!-- Hero Badge with perfect alignment -->
-                <div class="mb-8">
-                  <MHeroBadge
-                    text="Innovating Since 2022"
-                    variant="default"
-                    size="md"
-                    dot-color="primary"
-                    dot-speed="normal"
-                    clickable
-                  />
-                </div>
+              <div class="text-center max-w-4xl mx-auto">
+                <!-- Hero Badge -->
+                <MHeroBadge
+                  text="Innovating Since 2022"
+                  variant="default"
+                  size="base"
+                  dot-color="primary"
+                  dot-speed="normal"
+                  class="mb-6"
+                />
                 
-                <!-- Hero Heading with better spacing -->
-                <div class="mb-8">
-                  <MHeroHeading
-                    title="About "
-                    highlight-text="Fablecraft"
-                    subheading="Empowering creators worldwide with AI-powered tools that transform imagination into reality"
-                    heading-tag="h1"
-                    heading-id="about-heading"
-                    variant="default"
-                    size="xl"
-                    alignment="center"
-                    gradient-variant="primary"
-                    gradient-animation="shimmer"
-                    spacing="tight"
-                  />
-                </div>
+                <!-- Hero Heading -->
+                <MHeroHeading
+                  title="About "
+                  highlight-text="Fablecraft"
+                  subheading="Empowering creators worldwide with AI-powered tools that transform imagination into reality"
+                  heading-tag="h1"
+                  heading-id="about-heading"
+                  variant="default"
+                  size="xl"
+                  alignment="center"
+                  gradient-variant="primary"
+                  gradient-animation="shimmer"
+                  spacing="tight"
+                  class="mb-6"
+                />
                 
-                <!-- Location Badge with animation -->
-                <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 backdrop-blur-sm transform hover:scale-105 transition-all duration-300">
-                  <div class="relative">
-                    <Icon name="lucide:map-pin" class="h-5 w-5 text-primary animate-bounce" />
-                    <div class="absolute inset-0 h-5 w-5 rounded-full bg-primary/30 animate-ping" />
-                  </div>
-                  <Text size="base" class="font-semibold text-foreground">Hartford, Connecticut</Text>
-                  <Text size="sm" class="text-muted-foreground">• Innovation Hub</Text>
-                </div>
+                <!-- Location Badge using proper Badge component -->
+                <Badge variant="outline" class="px-4 py-2">
+                  <Icon name="lucide:map-pin" class="h-4 w-4 mr-2 text-primary" />
+                  <span class="font-medium">Hartford, Connecticut</span>
+                </Badge>
               </div>
             </Container>
-            
-            <!-- Decorative elements -->
-            <div class="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse animation-delay-2000" />
           </div>
         </Section>
 
@@ -229,28 +218,28 @@
         </Section>
 
         <!-- Team Section -->
-        <Section spacing="none" class="team-section relative">
-          <div class="py-24 sm:py-32">
+        <Section spacing="none" class="team-section">
+          <div class="py-16 sm:py-20">
             <Container size="xl">
-              <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-8">
-                  <Icon name="lucide:users-2" class="h-5 w-5 text-primary" />
-                  <Text size="base" class="font-semibold text-primary">Leadership Team</Text>
-                </div>
+              <div class="text-center max-w-3xl mx-auto mb-12">
+                <Badge variant="outline" class="mb-6">
+                  <Icon name="lucide:users-2" class="h-4 w-4 mr-2" />
+                  Leadership Team
+                </Badge>
                 
-                <Heading tag="h2" size="h1" class="text-foreground mb-6">
+                <Heading tag="h2" size="h2" class="text-foreground mb-4">
                   Meet Our Visionaries
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground leading-relaxed">
-                  Industry veterans from Hartford, CT, leading the charge in democratizing creative tools for everyone
+                <Text size="lg" class="text-muted-foreground">
+                  Industry veterans from Hartford, CT, leading the charge in democratizing creative tools
                 </Text>
               </div>
               
-              <div class="grid md:grid-cols-3 gap-10 lg:gap-12">
+              <div class="grid md:grid-cols-3 gap-8">
                 <!-- CEO - Chris Johanson -->
                 <div class="group relative">
-                  <GlassCard variant="light" class="p-8 h-full natural-depth gentle-hover overflow-hidden">
+                  <GlassCard variant="light" class="p-6 h-full natural-depth gentle-hover overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div class="relative text-center">
                       <div class="relative inline-block mb-6">
@@ -290,7 +279,7 @@
                 
                 <!-- CFO - Jason Michaud -->
                 <div class="group relative">
-                  <GlassCard variant="light" class="p-8 h-full natural-depth gentle-hover overflow-hidden">
+                  <GlassCard variant="light" class="p-6 h-full natural-depth gentle-hover overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div class="relative text-center">
                       <div class="relative inline-block mb-6">
@@ -330,7 +319,7 @@
                 
                 <!-- CTO - Frank Rocca -->
                 <div class="group relative">
-                  <GlassCard variant="light" class="p-8 h-full natural-depth gentle-hover overflow-hidden">
+                  <GlassCard variant="light" class="p-6 h-full natural-depth gentle-hover overflow-hidden">
                     <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div class="relative text-center">
                       <div class="relative inline-block mb-6">
@@ -373,22 +362,22 @@
         </Section>
 
         <!-- Journey Section -->
-        <Section spacing="none" class="journey-section bg-gradient-to-b from-muted/30 to-transparent relative overflow-hidden">
-          <div class="py-24 sm:py-32">
+        <Section spacing="none" class="journey-section bg-muted/30">
+          <div class="py-16 sm:py-20">
             <Container size="xl">
-              <div class="max-w-5xl mx-auto">
-                <div class="text-center mb-16">
-                  <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-8">
-                    <Icon name="lucide:rocket" class="h-5 w-5 text-primary" />
-                    <Text size="base" class="font-semibold text-primary">Our Journey</Text>
-                  </div>
+              <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                  <Badge variant="outline" class="mb-6">
+                    <Icon name="lucide:rocket" class="h-4 w-4 mr-2" />
+                    Our Journey
+                  </Badge>
                   
-                  <Heading tag="h2" size="h1" class="text-foreground mb-6">
+                  <Heading tag="h2" size="h2" class="text-foreground mb-4">
                     Building the Future, Step by Step
                   </Heading>
                   
-                  <Text size="lg" class="text-muted-foreground max-w-2xl mx-auto">
-                    From Hartford to the world, our journey of empowering creators everywhere
+                  <Text size="lg" class="text-muted-foreground">
+                    From Hartford to the world, our journey of empowering creators
                   </Text>
                 </div>
                 
@@ -396,7 +385,7 @@
                   <!-- Timeline line -->
                   <div class="absolute left-[27px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-accent/20 to-secondary/20" />
                   
-                  <div class="space-y-12">
+                  <div class="space-y-8">
                     <!-- 2022 - Foundation -->
                     <div class="relative flex gap-8 group">
                       <div class="flex-shrink-0 relative z-10">
@@ -545,61 +534,26 @@
           </div>
         </Section>
 
-        <!-- CTA Section -->
-        <Section spacing="none" class="cta-section">
-          <div class="py-20 sm:py-28">
-            <Container size="xl">
-              <GlassCard variant="heavy" class="p-12 text-center natural-depth">
-                <div class="max-w-3xl mx-auto">
-                  <Heading tag="h2" size="h2" class="text-foreground mb-4">
-                    Ready to Create Something Amazing?
-                  </Heading>
-                  
-                  <Text size="lg" class="text-muted-foreground mb-8">
-                    Join thousands of creators who are already transforming their ideas into reality with Fablecraft
-                  </Text>
-                  
-                  <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button
-                      size="lg"
-                      variant="default"
-                      class="px-8"
-                      @click="handleGetStarted"
-                    >
-                      <Icon name="lucide:rocket" class="mr-2 h-5 w-5" />
-                      Get Started Free
-                    </Button>
-                    
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      class="px-8"
-                      @click="handleContactSales"
-                    >
-                      <Icon name="lucide:message-circle" class="mr-2 h-5 w-5" />
-                      Contact Sales
-                    </Button>
-                  </div>
-                  
-                  <div class="flex items-center justify-center gap-8 mt-12 pt-8 border-t border-border/20">
-                    <div class="text-center">
-                      <Text size="2xl" class="font-bold text-foreground">1M+</Text>
-                      <Text size="sm" class="text-muted-foreground">Creations</Text>
-                    </div>
-                    <div class="text-center">
-                      <Text size="2xl" class="font-bold text-foreground">150+</Text>
-                      <Text size="sm" class="text-muted-foreground">Countries</Text>
-                    </div>
-                    <div class="text-center">
-                      <Text size="2xl" class="font-bold text-foreground">4.9</Text>
-                      <Text size="sm" class="text-muted-foreground">Rating</Text>
-                    </div>
-                  </div>
-                </div>
-              </GlassCard>
-            </Container>
-          </div>
-        </Section>
+        <!-- CTA Section using OCtaSection component -->
+        <OCtaSection
+          variant="default"
+          header-badge-text="Start Today"
+          header-title="Ready to Join"
+          header-highlight-text="the Revolution?"
+          header-subtitle=""
+          main-headline="Transform Your Ideas Into Reality"
+          main-gradient-variant="primary"
+          supporting-copy="Join thousands of creators who are already building amazing things with Fablecraft"
+          primary-cta-text="Get Started Free"
+          secondary-cta-text="Contact Sales"
+          primary-cta-icon="lucide:rocket"
+          secondary-cta-icon="lucide:message-circle"
+          trust-signal="Trusted by 100,000+ creators in 150+ countries"
+          cta-icon="lucide:sparkles"
+          :show-icon="true"
+          @primary:click="handleGetStarted"
+          @secondary:click="handleContactSales"
+        />
       </main>
 
       <!-- Footer -->
