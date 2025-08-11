@@ -456,29 +456,31 @@
       <Section spacing="none" class="location-section">
         <div class="py-20 sm:py-28">
           <Container size="xl">
-            <div class="text-center mb-12">
-              <MHeroBadge
-                text="Visit Our Office"
-                variant="outline"
-                size="sm"
-                dot-color="primary"
-                class="mb-6"
-              />
+            <div class="text-center mb-16 animate-fade-in-scale">
+              <div class="mb-8">
+                <MHeroBadge
+                  text="Visit Our Office"
+                  variant="default"
+                  size="base"
+                  dot-color="primary"
+                  dot-speed="normal"
+                />
+              </div>
               
-              <Heading tag="h2" size="h2" class="text-foreground mb-4 text-center">
+              <Heading tag="h2" size="h1" class="text-foreground mb-6 text-center font-black">
                 <span class="block">Hartford</span>
                 <AGradientText
                   tag="span"
                   variant="secondary"
                   direction="to-r"
-                  intensity="normal"
-                  class="block"
+                  intensity="vibrant"
+                  class="block mt-1"
                 >
                   Innovation Hub
                 </AGradientText>
               </Heading>
               
-              <Text size="lg" class="text-muted-foreground text-center">
+              <Text size="xl" class="text-muted-foreground text-center max-w-2xl mx-auto leading-relaxed">
                 Located in the heart of Connecticut's creative tech corridor
               </Text>
             </div>
@@ -486,16 +488,16 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
               <!-- Office Info -->
               <div class="space-y-8">
-                <GlassCard variant="light" class="p-8 natural-depth gentle-hover group">
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:map-pin" class="h-6 w-6 text-primary" />
+                <GlassCard variant="light" class="p-10 natural-depth shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:map-pin" class="h-8 w-8 text-primary" />
                     </div>
                     <div>
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-3 font-bold">
                         Headquarters
                       </Heading>
-                      <Text size="base" class="text-muted-foreground">
+                      <Text size="lg" class="text-muted-foreground leading-relaxed">
                         123 Innovation Drive<br />
                         Hartford, CT 06103<br />
                         United States
@@ -504,16 +506,16 @@
                   </div>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-8 natural-depth gentle-hover group">
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:clock" class="h-6 w-6 text-accent" />
+                <GlassCard variant="light" class="p-10 natural-depth shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-secondary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:clock" class="h-8 w-8 text-accent" />
                     </div>
                     <div>
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-3 font-bold">
                         Office Hours
                       </Heading>
-                      <Text size="base" class="text-muted-foreground">
+                      <Text size="lg" class="text-muted-foreground leading-relaxed">
                         Monday - Friday: 9:00 AM - 6:00 PM EST<br />
                         Saturday: 10:00 AM - 2:00 PM EST<br />
                         Sunday: Closed
@@ -522,16 +524,16 @@
                   </div>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-8 natural-depth gentle-hover group">
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:train" class="h-6 w-6 text-secondary" />
+                <GlassCard variant="light" class="p-10 natural-depth shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:train" class="h-8 w-8 text-secondary" />
                     </div>
                     <div>
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-3 font-bold">
                         Transportation
                       </Heading>
-                      <Text size="base" class="text-muted-foreground">
+                      <Text size="lg" class="text-muted-foreground leading-relaxed">
                         5 min walk from Union Station<br />
                         Free parking available<br />
                         CTfastrak Blue Line nearby
@@ -543,47 +545,48 @@
               
               <!-- Map Visual -->
               <div class="relative">
-                <GlassCard variant="heavy" class="p-2 natural-depth overflow-hidden">
-                  <div class="relative min-h-[400px] md:min-h-[500px] bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 rounded-lg flex items-center justify-center">
+                <GlassCard variant="heavy" class="p-3 natural-depth shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                  <div class="relative min-h-[450px] md:min-h-[550px] bg-gradient-to-br from-primary/10 via-accent/10 to-secondary/10 rounded-xl flex items-center justify-center">
                     <!-- Animated Map Placeholder -->
                     <div class="absolute inset-0 flex items-center justify-center">
                       <div class="relative">
                         <!-- Ripple effect -->
                         <div class="absolute inset-0 flex items-center justify-center">
-                          <div class="w-32 h-32 rounded-full border-2 border-primary/30 animate-ping" />
+                          <div class="w-40 h-40 rounded-full border-2 border-primary/40 animate-ping" />
                         </div>
                         <div class="absolute inset-0 flex items-center justify-center animation-delay-2000">
-                          <div class="w-24 h-24 rounded-full border-2 border-accent/30 animate-ping" />
+                          <div class="w-32 h-32 rounded-full border-2 border-accent/40 animate-ping" />
                         </div>
                         <div class="absolute inset-0 flex items-center justify-center animation-delay-4000">
-                          <div class="w-16 h-16 rounded-full border-2 border-secondary/30 animate-ping" />
+                          <div class="w-20 h-20 rounded-full border-2 border-secondary/40 animate-ping" />
                         </div>
                         
                         <!-- Location pin -->
-                        <div class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl flex items-center justify-center animate-float">
-                          <Icon name="lucide:map-pin" class="h-8 w-8 text-background" />
+                        <div class="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl flex items-center justify-center animate-float">
+                          <Icon name="lucide:map-pin" class="h-10 w-10 text-primary-foreground" />
                         </div>
                       </div>
                     </div>
                     
                     <!-- Map overlay text -->
-                    <div class="absolute bottom-4 left-4 right-4">
-                      <GlassCard variant="heavy" class="p-4">
-                        <div class="flex items-center justify-between">
+                    <div class="absolute bottom-6 left-6 right-6">
+                      <GlassCard variant="heavy" class="p-6 shadow-xl">
+                        <div class="flex items-center justify-between gap-4">
                           <div>
-                            <Text size="sm" class="font-medium text-foreground">
+                            <Heading tag="h4" size="h5" class="font-bold text-foreground mb-1">
                               Fablecraft HQ
-                            </Text>
-                            <Text size="xs" class="text-muted-foreground">
+                            </Heading>
+                            <Text size="base" class="text-muted-foreground">
                               Hartford, Connecticut
                             </Text>
                           </div>
                           <Button
-                            variant="primary"
-                            size="sm"
+                            variant="default"
+                            size="base"
                             @click="handleGetDirections"
+                            class="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold"
                           >
-                            <Icon name="lucide:navigation" class="mr-2 h-3 w-3" />
+                            <Icon name="lucide:navigation" class="mr-2 h-4 w-4" />
                             Get Directions
                           </Button>
                         </div>
