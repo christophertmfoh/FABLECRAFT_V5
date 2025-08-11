@@ -103,8 +103,8 @@
                             class="h-32 w-32"
                           />
                           <!-- Overlay on hover -->
-                          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                            <div class="text-center text-white p-3">
+                          <div class="absolute inset-0 bg-foreground/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                            <div class="text-center text-background p-3">
                               <Icon name="lucide:upload" class="h-6 w-6 mx-auto mb-1" />
                               <Text class="text-xs font-medium">Click or drag to upload</Text>
                             </div>
@@ -337,7 +337,7 @@
                             @change="toggleNotification(notification.id)"
                             class="sr-only peer"
                           >
-                          <div class="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary transition-colors"></div>
+                          <div class="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-background after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-background after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary transition-colors"></div>
                         </label>
                       </div>
                     </Card>
@@ -399,7 +399,7 @@
                             <Text class="text-sm text-muted-foreground">{{ currentDevice }} • Active now</Text>
                           </div>
                         </div>
-                        <Badge variant="default" class="bg-success text-success-foreground">Active</Badge>
+                        <Badge variant="default">Active</Badge>
                       </div>
                     </Card>
                   </div>
@@ -437,7 +437,7 @@
                         <Text class="font-semibold text-lg text-foreground">Free Plan</Text>
                         <Text class="text-sm text-muted-foreground">Your current subscription</Text>
                       </div>
-                      <Badge variant="default" class="bg-success text-success-foreground">Active</Badge>
+                      <Badge variant="default">Active</Badge>
                     </div>
                     <div class="space-y-2 mb-6">
                       <div class="flex items-center gap-2">
@@ -486,7 +486,7 @@
     <Teleport to="body">
       <Transition name="modal">
         <div v-if="showPasswordModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="showPasswordModal = false"></div>
+          <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" @click="showPasswordModal = false"></div>
           <Card class="relative z-10 w-full max-w-md p-6 bg-card">
             <div class="flex items-center justify-between mb-4">
               <Heading tag="h3" size="h4">Change Password</Heading>
@@ -580,7 +580,7 @@
     <Teleport to="body">
       <Transition name="modal">
         <div v-if="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="showDeleteModal = false"></div>
+          <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" @click="showDeleteModal = false"></div>
           <Card class="relative z-10 w-full max-w-md p-6 bg-card">
             <div class="mb-4">
               <div class="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
@@ -632,14 +632,17 @@
         <div v-if="message" class="fixed bottom-4 right-4 z-50">
           <Card :class="[
             'p-4 shadow-lg backdrop-blur-sm',
-            messageType === 'success' ? 'bg-success/90 border-success text-success-foreground' : 'bg-destructive/90 border-destructive text-destructive-foreground'
+            messageType === 'success' ? 'bg-success/10 border-success/20' : 'bg-destructive/10 border-destructive/20'
           ]">
             <div class="flex items-center gap-3">
               <Icon 
                 :name="messageType === 'success' ? 'lucide:check-circle' : 'lucide:x-circle'"
-                class="h-5 w-5 flex-shrink-0"
+                :class="[
+                  'h-5 w-5 flex-shrink-0',
+                  messageType === 'success' ? 'text-success' : 'text-destructive'
+                ]"
               />
-              <Text class="font-medium">{{ message }}</Text>
+              <Text class="font-medium text-foreground">{{ message }}</Text>
             </div>
           </Card>
         </div>
