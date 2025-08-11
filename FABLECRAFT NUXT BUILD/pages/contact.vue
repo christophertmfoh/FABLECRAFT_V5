@@ -468,7 +468,7 @@
               </div>
               
               <Heading tag="h2" size="h1" class="text-foreground mb-6 text-center font-black">
-                <span class="block">Hartford</span>
+                <span class="block">Manchester</span>
                 <AGradientText
                   tag="span"
                   variant="primary"
@@ -476,7 +476,7 @@
                   intensity="vibrant"
                   class="block mt-1"
                 >
-                  Innovation Hub
+                  Creative Studio
                 </AGradientText>
               </Heading>
               
@@ -498,8 +498,8 @@
                         Headquarters
                       </Heading>
                       <Text size="lg" class="text-muted-foreground leading-relaxed">
-                        123 Innovation Drive<br />
-                        Hartford, CT 06103<br />
+                        158 Forest Street<br />
+                        Manchester, CT 06040<br />
                         United States
                       </Text>
                     </div>
@@ -544,17 +544,17 @@
               </div>
               
               <!-- Map Visual -->
-              <div class="relative h-full">
-                <GlassCard variant="heavy" class="p-3 natural-depth shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden h-full">
-                  <div class="relative h-full min-h-[600px] md:min-h-[700px] rounded-xl overflow-hidden">
-                    <!-- Actual Map iframe -->
+              <div class="relative">
+                <GlassCard variant="heavy" class="p-3 natural-depth shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                  <div class="relative rounded-xl overflow-hidden" style="height: calc(3 * 160px + 4rem);">
+                    <!-- Actual Map iframe with theme-reactive filters -->
                     <iframe
-                      src="https://www.openstreetmap.org/export/embed.html?bbox=-72.68552780151369%2C41.76326504915824%2C-72.67316818237306%2C41.76962089305098&amp;layer=mapnik&amp;marker=41.76644299999999%2C-72.67934799999999"
-                      class="absolute inset-0 w-full h-full"
-                      style="border: 0; filter: contrast(0.9) brightness(0.95);"
+                      src="https://www.openstreetmap.org/export/embed.html?bbox=-72.54419326782228%2C41.77234627371066%2C-72.51946449279787%2C41.78507796149617&amp;layer=mapnik&amp;marker=41.77871%2C-72.53183"
+                      class="absolute inset-0 w-full h-full dark:invert dark:hue-rotate-180 dark:contrast-90 dark:brightness-95"
+                      style="border: 0;"
                       loading="lazy"
                       referrerpolicy="no-referrer-when-downgrade"
-                      title="Fablecraft Headquarters Location"
+                      title="Fablecraft Headquarters Location - 158 Forest St, Manchester CT"
                     />
                     
                     <!-- Overlay gradient for better theme integration -->
@@ -587,7 +587,7 @@
                               Fablecraft HQ
                             </Heading>
                             <Text size="base" class="text-muted-foreground">
-                              Hartford, Connecticut
+                              Manchester, Connecticut
                             </Text>
                           </div>
                           <Button
