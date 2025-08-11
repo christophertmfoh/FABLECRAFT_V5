@@ -199,8 +199,8 @@
                 </GlassCard>
                 
                 <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover">
-                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 mb-4">
-                    <Icon name="lucide:shield-check" class="h-6 w-6 text-accent" />
+                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-muted/50 mb-4">
+                    <Icon name="lucide:shield-check" class="h-6 w-6 text-foreground" />
                   </div>
                   <Heading tag="h3" size="h5" class="text-foreground mb-2">Trust</Heading>
                   <Text size="sm" class="text-muted-foreground">
@@ -209,8 +209,8 @@
                 </GlassCard>
                 
                 <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover">
-                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-secondary/10 mb-4">
-                    <Icon name="lucide:globe" class="h-6 w-6 text-secondary" />
+                  <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-muted/50 mb-4">
+                    <Icon name="lucide:globe" class="h-6 w-6 text-foreground" />
                   </div>
                   <Heading tag="h3" size="h5" class="text-foreground mb-2">Accessibility</Heading>
                   <Text size="sm" class="text-muted-foreground">
@@ -275,8 +275,8 @@
                         Chris Johanson
                       </Heading>
                       
-                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-                        <Text size="sm" class="font-bold text-primary">Chief Executive Officer</Text>
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border mb-4">
+                        <Text size="sm" class="font-bold text-foreground">Chief Executive Officer</Text>
                       </div>
                       
                       <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
@@ -315,8 +315,8 @@
                         Jason Michaud
                       </Heading>
                       
-                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-4">
-                        <Text size="sm" class="font-bold text-accent">Chief Financial Officer</Text>
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border mb-4">
+                        <Text size="sm" class="font-bold text-foreground">Chief Financial Officer</Text>
                       </div>
                       
                       <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
@@ -338,25 +338,25 @@
                 <!-- CTO - Frank Rocca -->
                 <div class="group relative">
                   <GlassCard variant="light" class="p-6 h-full natural-depth gentle-hover overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-br from-muted/5 via-transparent to-muted/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div class="relative text-center">
                       <div class="relative inline-block mb-6">
-                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-secondary to-primary p-0.5 group-hover:scale-105 transition-transform duration-500">
+                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-primary to-accent p-0.5 group-hover:scale-105 transition-transform duration-500">
                           <div class="w-full h-full rounded-full bg-background flex items-center justify-center">
-                            <Icon name="lucide:cpu" class="h-20 w-20 text-secondary" />
+                            <Icon name="lucide:cpu" class="h-20 w-20 text-primary" />
                           </div>
                         </div>
-                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-secondary border-4 border-background flex items-center justify-center shadow-xl">
+                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-primary border-4 border-background flex items-center justify-center shadow-xl">
                           <Icon name="lucide:code-2" class="h-6 w-6 text-background" />
                         </div>
                       </div>
                       
-                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-secondary transition-colors">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors">
                         Frank Rocca
                       </Heading>
                       
-                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 mb-4">
-                        <Text size="sm" class="font-bold text-secondary">Chief Technology Officer</Text>
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted/50 border border-border mb-4">
+                        <Text size="sm" class="font-bold text-foreground">Chief Technology Officer</Text>
                       </div>
                       
                       <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
@@ -364,11 +364,11 @@
                       </Text>
                       
                       <div class="flex justify-center gap-3">
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-secondary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:github" class="h-5 w-5 text-muted-foreground group-hover/btn:text-secondary transition-colors" />
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:github" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
                         </button>
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-secondary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-secondary transition-colors" />
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
                         </button>
                       </div>
                     </div>
