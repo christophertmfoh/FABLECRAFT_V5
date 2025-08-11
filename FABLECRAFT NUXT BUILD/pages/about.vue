@@ -178,19 +178,20 @@
                   />
                 </div>
                 
-                <Heading tag="h2" size="h1" class="text-foreground mb-8">
-                  Principles That 
+                <Heading tag="h2" size="h1" class="text-foreground mb-8 text-center">
+                  <span class="block">Principles</span>
                   <AGradientText
                     tag="span"
                     variant="primary"
                     direction="to-r"
                     intensity="vibrant"
+                    class="block"
                   >
-                    Guide Us
+                    That Guide Us
                   </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground leading-relaxed">
+                <Text size="lg" class="text-muted-foreground leading-relaxed text-center">
                   Every decision we make is guided by our commitment to these core values
                 </Text>
               </div>
@@ -230,7 +231,7 @@
                   <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div class="relative z-10">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:globe" class="h-7 w-7 text-secondary" />
+                      <Icon name="lucide:globe-2" class="h-7 w-7 text-secondary" />
                     </div>
                     <Heading tag="h3" size="h5" class="text-foreground mb-3">Accessibility</Heading>
                     <Text size="sm" class="text-muted-foreground leading-relaxed">
