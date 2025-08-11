@@ -30,47 +30,22 @@
 
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
-        <!-- Hero Section -->
-        <Section spacing="none" class="hero-section relative overflow-hidden">
-          <div class="py-16 sm:py-20 lg:py-24">
-            <Container size="xl">
-              <div class="text-center max-w-4xl mx-auto">
-                <!-- Hero Badge -->
-                <MHeroBadge
-                  text="Innovating Since 2022"
-                  variant="default"
-                  size="base"
-                  dot-color="primary"
-                  dot-speed="normal"
-                  class="mb-6"
-                />
-                
-                <!-- Hero Heading -->
-                <MHeroHeading
-                  title="About "
-                  highlight-text="Fablecraft"
-                  subheading="Empowering creators worldwide with AI-powered tools that transform imagination into reality"
-                  heading-tag="h1"
-                  heading-id="about-heading"
-                  variant="default"
-                  size="xl"
-                  alignment="center"
-                  gradient-variant="primary"
-                  gradient-animation="shimmer"
-                  spacing="tight"
-                  class="mb-6"
-                />
-                
-                <!-- Location Badge -->
-                <MHeroBadge
-                  text="Hartford, Connecticut"
-                  variant="outline"
-                  size="sm"
-                  dot-color="primary"
-                  clickable
-                />
-              </div>
-            </Container>
+        <!-- Hero Section - Identical to Landing Page -->
+        <Section spacing="none" class="hero-section">
+          <div class="py-20 sm:py-28">
+            <OHeroSection
+              id="about-hero"
+              badge-text="Innovating Since 2022 • Hartford, CT"
+              title="About "
+              highlight-text="Fablecraft"
+              description="Empowering creators worldwide with AI-powered tools that transform imagination into reality. From our innovation hub in Hartford, Connecticut, we're building the future of creative technology."
+              primary-button-text="Join Our Mission"
+              secondary-button-text="View Our Story"
+              variant="default"
+              @primary:click="handleGetStarted"
+              @secondary:click="scrollToJourney"
+              @badge:click="handleBadgeClick"
+            />
           </div>
         </Section>
 
@@ -643,6 +618,19 @@ const handleContactSales = () => {
 const handleSocialClick = (platform: string) => {
   // Handle social media clicks
   console.log('Social click:', platform)
+}
+
+const scrollToJourney = () => {
+  // Scroll to journey section
+  const journeySection = document.querySelector('.journey-section')
+  if (journeySection) {
+    journeySection.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
+const handleBadgeClick = () => {
+  // Handle badge click
+  console.log('Badge clicked')
 }
 
 // SEO Meta
