@@ -7,21 +7,17 @@
         <MHeroBadge
           v-if="badgeText"
           :text="badgeText"
-          :icon="badgeIcon"
           :variant="badgeVariant"
           :size="badgeSize"
-          :alignment="alignment"
-          :spacing="badgeSpacing"
+          :clickable="false"
           :class="badgeClasses"
-          @click="handleBadgeClick"
         />
 
         <!-- Heading -->
         <MHeroHeading
           :title="title"
           :highlight-text="highlightText"
-          :subtitle="subtitle"
-          :description="description"
+          :subheading="description"
           :alignment="alignment"
           :size="headingSize"
           :spacing="headingSpacing"
@@ -43,8 +39,6 @@ interface SimpleHeroProps {
   id?: string
   /** Badge text displayed above the heading */
   badgeText?: string
-  /** Icon for the badge */
-  badgeIcon?: string
   /** Badge variant */
   badgeVariant?: 'default' | 'outline' | 'secondary' | 'success' | 'warning' | 'error'
   /** Badge size */
@@ -53,8 +47,6 @@ interface SimpleHeroProps {
   title?: string
   /** Highlighted text (appears with gradient) */
   highlightText?: string
-  /** Subtitle text (appears above title) */
-  subtitle?: string
   /** Description text (appears below title) */
   description?: string
   /** Whether to break the highlight text to a new line */
@@ -68,7 +60,6 @@ interface SimpleHeroProps {
   /** Heading size */
   headingSize?: 'sm' | 'md' | 'lg' | 'xl'
   /** Spacing between elements */
-  badgeSpacing?: 'none' | 'xs' | 'sm' | 'md' | 'lg'
   headingSpacing?: 'none' | 'xs' | 'sm' | 'md' | 'lg'
   /** Additional classes */
   class?: string | Record<string, boolean> | string[]
@@ -83,15 +74,9 @@ const props = withDefaults(defineProps<SimpleHeroProps>(), {
   containerSize: 'lg',
   alignment: 'center',
   headingSize: 'lg',
-  badgeSpacing: 'md',
   headingSpacing: 'md',
   breakHighlight: false,
 })
-
-// Emits
-const emit = defineEmits<{
-  'badge:click': []
-}>()
 
 // Computed classes
 const heroClasses = computed(() => {
@@ -119,15 +104,10 @@ const contentClasses = computed(() => {
 
 const badgeClasses = computed(() => {
   return cn(
-    'hero-badge',
+    'hero-badge mb-4',
     props.alignment === 'center' && 'mx-auto'
   )
 })
-
-// Event handlers
-const handleBadgeClick = () => {
-  emit('badge:click')
-}
 </script>
 
 <style scoped>
