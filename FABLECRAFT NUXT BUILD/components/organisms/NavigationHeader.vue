@@ -113,6 +113,16 @@
                       <span class="font-medium">About</span>
                     </div>
                   </DropdownMenuItem>
+                  
+                  <DropdownMenuItem
+                    class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
+                    @select="() => handleNavigate('contact')"
+                  >
+                    <div class="flex items-center gap-3">
+                      <Icon name="lucide:mail" class="h-4 w-4 text-primary" />
+                      <span class="font-medium">Contact</span>
+                    </div>
+                  </DropdownMenuItem>
 
                   <DropdownMenuItem
                     class="cursor-pointer hover:bg-accent/10 py-3 px-4 rounded-lg transition-colors"
