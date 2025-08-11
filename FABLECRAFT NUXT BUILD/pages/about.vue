@@ -118,7 +118,7 @@
                         <!-- Image Element -->
                         <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
                           <div class="w-20 h-20 bg-background/90 backdrop-blur-sm border border-border/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-2000">
-                            <Icon name="lucide:image" class="h-8 w-8 text-accent" />
+                            <Icon name="lucide:image" class="h-8 w-8 text-primary" />
                           </div>
                         </div>
                         
@@ -218,8 +218,8 @@
                 <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
                   <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:shield-check" class="h-7 w-7 text-accent" />
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:shield-check" class="h-7 w-7 text-primary" />
                     </div>
                     <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Trust</Heading>
                     <Text size="sm" class="text-muted-foreground leading-relaxed text-center">
@@ -232,8 +232,8 @@
                 <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
                   <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon name="lucide:share-2" class="h-7 w-7 text-accent" />
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <Icon name="lucide:share-2" class="h-7 w-7 text-primary" />
                     </div>
                     <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Accessibility</Heading>
                     <Text size="sm" class="text-muted-foreground leading-relaxed text-center">
@@ -246,7 +246,7 @@
                 <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
                   <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:rocket" class="h-7 w-7 text-primary" />
                     </div>
                     <Heading tag="h3" size="h5" class="text-foreground mb-3 text-center">Excellence</Heading>
@@ -353,17 +353,17 @@
                     <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div class="relative text-center">
                       <div class="relative inline-block mb-6">
-                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-accent to-secondary p-0.5 group-hover:scale-105 transition-transform duration-500">
+                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-primary to-accent p-0.5 group-hover:scale-105 transition-transform duration-500">
                           <div class="w-full h-full rounded-full bg-background flex items-center justify-center">
-                            <Icon name="lucide:trending-up" class="h-20 w-20 text-accent" />
+                            <Icon name="lucide:trending-up" class="h-20 w-20 text-primary" />
                           </div>
                         </div>
-                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-accent border-4 border-background flex items-center justify-center shadow-xl">
+                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-primary border-4 border-background flex items-center justify-center shadow-xl">
                           <Icon name="lucide:dollar-sign" class="h-6 w-6 text-background" />
                         </div>
                       </div>
                       
-                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-accent transition-colors text-center">
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors text-center">
                         Jason Michaud
                       </Heading>
                       
@@ -381,7 +381,7 @@
                         <Button
                           variant="ghost"
                           size="icon"
-                          class="w-10 h-10 rounded-full hover:bg-accent/10"
+                          class="w-10 h-10 rounded-full hover:bg-primary/10"
                           aria-label="LinkedIn"
                         >
                           <Icon name="lucide:linkedin" class="h-5 w-5" />
@@ -389,7 +389,7 @@
                         <Button
                           variant="ghost"
                           size="icon"
-                          class="w-10 h-10 rounded-full hover:bg-accent/10"
+                          class="w-10 h-10 rounded-full hover:bg-primary/10"
                           aria-label="Twitter"
                         >
                           <Icon name="lucide:twitter" class="h-5 w-5" />
