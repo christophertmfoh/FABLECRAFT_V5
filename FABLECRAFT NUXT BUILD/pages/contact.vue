@@ -93,9 +93,9 @@
           <Container size="xl">
             <div class="grid lg:grid-cols-3 gap-8">
               <!-- Email Support Card -->
-              <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 mb-6">
-                  <Icon name="lucide:mail" class="h-8 w-8 text-primary" />
+              <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover group">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Icon name="lucide:mail" class="h-8 w-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <Heading tag="h3" size="h4" class="text-foreground mb-3">
                   Email Support
@@ -108,7 +108,7 @@
                   class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium group"
                 >
                   support@fablecraft.com
-                  <Icon name="lucide:external-link" class="h-4 w-4" />
+                  <Icon name="lucide:external-link" class="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </a>
                 <div class="mt-4 pt-4 border-t border-border/20">
                   <Text size="sm" class="text-muted-foreground">
@@ -118,15 +118,15 @@
               </GlassCard>
               
               <!-- Live Chat Card -->
-              <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover relative overflow-hidden">
+              <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover relative overflow-hidden group">
                 <div class="absolute top-3 right-3">
-                  <Badge variant="default" class="animate-pulse bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
-                    <APulsingDot variant="primary" speed="normal" class="mr-1" />
+                  <Badge variant="default" class="animate-pulse">
+                    <APulsingDot variant="primary" speed="fast" class="mr-1" />
                     Online
                   </Badge>
                 </div>
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-500/10 to-primary/10 mb-6">
-                  <Icon name="lucide:message-circle" class="h-8 w-8 text-green-600 dark:text-green-400" />
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Icon name="lucide:message-circle" class="h-8 w-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <Heading tag="h3" size="h4" class="text-foreground mb-3">
                   Live Chat
@@ -151,9 +151,9 @@
               </GlassCard>
               
               <!-- Phone Support Card -->
-              <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-accent/10 to-secondary/10 mb-6">
-                  <Icon name="lucide:phone" class="h-8 w-8 text-accent" />
+              <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover group">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-accent/10 to-secondary/10 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Icon name="lucide:phone" class="h-8 w-8 text-accent group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <Heading tag="h3" size="h4" class="text-foreground mb-3">
                   Phone Support
@@ -166,7 +166,7 @@
                   class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium group"
                 >
                   +1 (860) 555-1234
-                  <Icon name="lucide:phone-call" class="h-4 w-4" />
+                  <Icon name="lucide:phone-call" class="h-4 w-4 group-hover:animate-pulse" />
                 </a>
                 <div class="mt-4 pt-4 border-t border-border/20">
                   <Text size="sm" class="text-muted-foreground">
@@ -357,9 +357,9 @@
                 </form>
                 
                 <!-- Success Message -->
-                <div v-if="showSuccess" class="mt-6 p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                <div v-if="showSuccess" class="mt-6 p-4 rounded-lg bg-primary/10 border border-primary/20">
                   <div class="flex items-start gap-3">
-                    <Icon name="lucide:check-circle" class="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
+                    <Icon name="lucide:check-circle" class="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <Text size="sm" class="font-medium text-foreground">
                         Message sent successfully!
@@ -428,8 +428,8 @@
                     </div>
                     <Icon 
                       :name="expandedFAQ === index ? 'lucide:minus' : 'lucide:plus'"
-                      class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 transition-transform"
-                      :class="{ 'rotate-180': expandedFAQ === index }"
+                      class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 transition-all duration-300"
+                      :class="{ 'rotate-90': expandedFAQ === index }"
                     />
                   </button>
                   
@@ -452,8 +452,8 @@
               
               <!-- Still have questions? -->
               <div class="mt-12 text-center">
-                <GlassCard variant="heavy" class="p-8 natural-depth">
-                  <Icon name="lucide:help-circle" class="h-12 w-12 text-primary mx-auto mb-4" />
+                <GlassCard variant="heavy" class="p-8 natural-depth gentle-hover">
+                  <Icon name="lucide:help-circle" class="h-12 w-12 text-primary mx-auto mb-4 animate-float" />
                   <Heading tag="h3" size="h4" class="text-foreground mb-3">
                     Still have questions?
                   </Heading>
@@ -509,9 +509,9 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
               <!-- Office Info -->
               <div class="space-y-8">
-                <GlassCard variant="light" class="p-8 natural-depth">
+                <GlassCard variant="light" class="p-8 natural-depth gentle-hover group">
                   <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:map-pin" class="h-6 w-6 text-primary" />
                     </div>
                     <div>
@@ -527,9 +527,9 @@
                   </div>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-8 natural-depth">
+                <GlassCard variant="light" class="p-8 natural-depth gentle-hover group">
                   <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:clock" class="h-6 w-6 text-accent" />
                     </div>
                     <div>
@@ -545,9 +545,9 @@
                   </div>
                 </GlassCard>
                 
-                <GlassCard variant="light" class="p-8 natural-depth">
+                <GlassCard variant="light" class="p-8 natural-depth gentle-hover group">
                   <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center flex-shrink-0">
+                    <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:train" class="h-6 w-6 text-secondary" />
                     </div>
                     <div>
@@ -567,7 +567,7 @@
               <!-- Map Visual -->
               <div class="relative">
                 <GlassCard variant="heavy" class="p-2 natural-depth overflow-hidden">
-                  <div class="relative h-[500px] bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 rounded-lg flex items-center justify-center">
+                  <div class="relative min-h-[400px] md:min-h-[500px] bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 rounded-lg flex items-center justify-center">
                     <!-- Animated Map Placeholder -->
                     <div class="absolute inset-0 flex items-center justify-center">
                       <div class="relative">
