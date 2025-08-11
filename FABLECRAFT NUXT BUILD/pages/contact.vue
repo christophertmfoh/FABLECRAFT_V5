@@ -356,67 +356,69 @@
           <Container size="xl">
             <div class="max-w-4xl mx-auto">
               <!-- Section Header -->
-              <div class="text-center mb-12">
-                <MHeroBadge
-                  text="Frequently Asked Questions"
-                  variant="outline"
-                  size="sm"
-                  dot-color="primary"
-                  class="mb-6"
-                />
+              <div class="text-center mb-16 animate-fade-in-scale">
+                <div class="mb-8">
+                  <MHeroBadge
+                    text="Frequently Asked Questions"
+                    variant="default"
+                    size="base"
+                    dot-color="primary"
+                    dot-speed="normal"
+                  />
+                </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-4 text-center">
+                <Heading tag="h2" size="h1" class="text-foreground mb-6 text-center font-black">
                   <span class="block">Quick</span>
                   <AGradientText
                     tag="span"
                     variant="accent"
                     direction="to-r"
-                    intensity="vibrant"
-                    class="block"
+                    intensity="strong"
+                    class="block mt-1"
                   >
                     Answers
                   </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground text-center">
+                <Text size="xl" class="text-muted-foreground text-center max-w-2xl mx-auto leading-relaxed">
                   Find answers to common questions about Fablecraft
                 </Text>
               </div>
               
               <!-- FAQ Items -->
-              <div class="space-y-4">
+              <div class="space-y-6">
                 <GlassCard 
                   v-for="(faq, index) in faqs" 
                   :key="index"
                   variant="light" 
-                  class="overflow-hidden natural-depth gentle-hover"
+                  class="overflow-hidden natural-depth gentle-hover shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <button
                     @click="toggleFAQ(index)"
-                    class="w-full p-6 text-left flex items-start justify-between gap-4 hover:bg-accent/5 transition-all duration-200"
+                    class="w-full p-8 text-left flex items-start justify-between gap-4 hover:bg-accent/10 transition-all duration-200"
                   >
                     <div class="flex-1">
-                      <Heading tag="h3" size="h5" class="text-foreground">
+                      <Heading tag="h3" size="h4" class="text-foreground font-semibold">
                         {{ faq.question }}
                       </Heading>
                     </div>
                     <Icon 
                       :name="expandedFAQ === index ? 'lucide:minus' : 'lucide:plus'"
-                      class="h-5 w-5 text-primary flex-shrink-0 mt-0.5 transition-all duration-300"
-                      :class="{ 'rotate-90': expandedFAQ === index }"
+                      class="h-6 w-6 text-primary flex-shrink-0 mt-0.5 transition-all duration-300"
+                      :class="{ 'rotate-180': expandedFAQ === index }"
                     />
                   </button>
                   
                   <Transition
                     enter-active-class="transition-all duration-300 ease-out"
                     enter-from-class="max-h-0 opacity-0"
-                    enter-to-class="max-h-96 opacity-100"
+                    enter-to-class="max-h-[500px] opacity-100"
                     leave-active-class="transition-all duration-300 ease-in"
-                    leave-from-class="max-h-96 opacity-100"
+                    leave-from-class="max-h-[500px] opacity-100"
                     leave-to-class="max-h-0 opacity-0"
                   >
-                    <div v-if="expandedFAQ === index" class="px-6 pb-6">
-                      <Text size="base" class="text-muted-foreground leading-relaxed">
+                    <div v-if="expandedFAQ === index" class="px-8 pb-8 -mt-2">
+                      <Text size="lg" class="text-muted-foreground leading-relaxed">
                         {{ faq.answer }}
                       </Text>
                     </div>
@@ -425,21 +427,22 @@
               </div>
               
               <!-- Still have questions? -->
-              <div class="mt-12 text-center">
-                <GlassCard variant="heavy" class="p-8 natural-depth gentle-hover">
-                  <Icon name="lucide:help-circle" class="h-12 w-12 text-primary mx-auto mb-4 animate-float" />
-                  <Heading tag="h3" size="h4" class="text-foreground mb-3">
+              <div class="mt-16 text-center">
+                <GlassCard variant="heavy" class="p-10 natural-depth shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <Icon name="lucide:help-circle" class="h-14 w-14 text-primary mx-auto mb-6 animate-float" />
+                  <Heading tag="h3" size="h3" class="text-foreground mb-4 text-center font-bold">
                     Still have questions?
                   </Heading>
-                  <Text size="base" class="text-muted-foreground mb-6">
+                  <Text size="lg" class="text-muted-foreground mb-8 text-center max-w-md mx-auto">
                     Can't find what you're looking for? Our support team is here to help.
                   </Text>
                   <Button
-                    variant="primary"
+                    variant="default"
                     size="lg"
                     @click="scrollToForm"
+                    class="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[200px]"
                   >
-                    <Icon name="lucide:mail" class="mr-2 h-4 w-4" />
+                    <Icon name="lucide:mail" class="mr-2 h-5 w-5" />
                     Contact Support
                   </Button>
                 </GlassCard>
