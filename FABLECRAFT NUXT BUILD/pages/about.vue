@@ -87,7 +87,7 @@
               <!-- Stories Come Alive Animation Box -->
               <div class="max-w-4xl mx-auto">
                 <GlassCard variant="light" class="p-12 relative overflow-hidden natural-depth">
-                  <div class="relative h-96 flex items-center justify-center">
+                  <div class="relative h-80 flex items-center justify-center">
                     <!-- Subtle background gradient -->
                     <div class="absolute inset-0 bg-gradient-to-br from-primary/3 via-accent/3 to-secondary/3 animate-gradient-shift rounded-lg" />
                     
@@ -136,31 +136,27 @@
                         <Icon name="lucide:sparkles" class="absolute top-8 right-12 h-4 w-4 text-primary/60 animate-twinkle animation-delay-1000" />
                       </div>
                     </div>
-                    
-                    <!-- Title Text -->
-                    <div class="absolute bottom-8 left-0 right-0 text-center px-8">
-                      <div class="inline-flex items-center gap-2 mb-3">
-                        <div class="h-px w-12 bg-gradient-to-r from-transparent to-primary/40" />
-                        <Heading tag="h3" size="h3" class="text-foreground">
-                          Stories 
-                          <AGradientText
-                            tag="span"
-                            variant="primary"
-                            direction="to-r"
-                            intensity="normal"
-                            class="bg-clip-text text-transparent"
-                          >
-                            Come Alive
-                          </AGradientText>
-                        </Heading>
-                        <div class="h-px w-12 bg-gradient-to-l from-transparent to-accent/40" />
-                      </div>
-                      <Text size="sm" class="text-muted-foreground/80 max-w-md mx-auto">
-                        Where imagination meets creation through magical tools
-                      </Text>
-                    </div>
                   </div>
                 </GlassCard>
+                
+                <!-- Title Text Below Card -->
+                <div class="text-center mt-8">
+                  <Heading tag="h3" size="h3" class="text-foreground mb-3">
+                    Stories 
+                    <AGradientText
+                      tag="span"
+                      variant="primary"
+                      direction="to-r"
+                      intensity="normal"
+                      class="bg-clip-text text-transparent"
+                    >
+                      Come Alive
+                    </AGradientText>
+                  </Heading>
+                  <Text size="base" class="text-muted-foreground max-w-2xl mx-auto">
+                    Where imagination meets creation through magical tools that transform your ideas into immersive experiences
+                  </Text>
+                </div>
               </div>
             </Container>
           </div>
