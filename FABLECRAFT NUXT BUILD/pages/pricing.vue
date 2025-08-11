@@ -28,15 +28,13 @@
       <!-- Hero Section -->
       <Section spacing="none" class="hero-section">
         <div class="py-20 sm:py-28">
-          <OHeroSection
+          <OSimpleHero
             id="pricing-hero"
             :badge-text="heroContent.badge"
             :title="heroContent.title"
             :highlight-text="heroContent.highlight"
             :break-highlight="true"
             :description="heroContent.description"
-            primary-button-text=""
-            secondary-button-text=""
             variant="default"
             alignment="center"
           />
