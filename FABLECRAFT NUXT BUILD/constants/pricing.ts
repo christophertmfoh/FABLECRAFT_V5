@@ -37,17 +37,17 @@ export const PRICING_CONFIG = {
     free: {
       id: 'free',
       name: 'Free',
-      description: 'Perfect for trying out Fablecraft',
+      description: 'Perfect for beginners',
       prices: {
         monthly: 0,
         yearly: 0,
       },
+      ctaText: 'Start Free',
       features: [
-        '3 projects per month',
-        'Basic AI assistance',
-        'Community support',
-        'Export to PDF',
-        'Basic templates',
+        '3 Projects',
+        'Basic AI Features',
+        'Community Access',
+        'Standard Export',
       ],
       limits: {
         projects: 3,
@@ -59,18 +59,17 @@ export const PRICING_CONFIG = {
     starter: {
       id: 'starter',
       name: 'Starter',
-      description: 'For hobbyists and beginners',
+      description: 'For serious creators',
       prices: {
-        monthly: 9,
-        yearly: 84, // $7/month billed yearly
+        monthly: 15,
+        yearly: 144, // $12/month billed yearly
       },
+      ctaText: 'Choose Starter',
       features: [
-        '10 projects per month',
-        'Advanced AI assistance',
-        'Priority email support',
-        'All export formats',
-        'Premium templates',
-        '30-day free trial',
+        'Unlimited Projects',
+        'Standard AI Credits',
+        'Advanced Features',
+        'Enhanced Export',
       ],
       limits: {
         projects: 10,
@@ -81,21 +80,20 @@ export const PRICING_CONFIG = {
     },
     pro: {
       id: 'pro',
-      name: 'Pro',
-      description: 'For serious creators',
+      name: 'Creative Studio',
+      description: 'Complete creative suite',
       prices: {
         monthly: 29,
-        yearly: 288, // $24/month billed yearly
+        yearly: 276, // $23/month billed yearly
       },
       isPopular: true,
+      ctaText: 'Unleash Full Power',
+      popularText: 'Most Popular',
       features: [
-        'Unlimited projects',
-        'Pro AI with GPT-4',
-        'Priority support',
-        'Advanced collaboration',
-        'Custom branding',
-        'API access',
-        '30-day free trial',
+        'Everything in Starter',
+        'Premium AI Credits',
+        'Media Production',
+        'Priority Support',
       ],
       limits: {
         projects: -1, // unlimited
@@ -107,18 +105,17 @@ export const PRICING_CONFIG = {
     enterprise: {
       id: 'enterprise',
       name: 'Enterprise',
-      description: 'For teams and organizations',
+      description: 'For teams at scale',
       prices: {
         monthly: 'custom',
         yearly: 'custom',
       },
+      ctaText: 'Contact Sales',
       features: [
-        'Everything in Pro',
-        'Custom AI training',
-        'Dedicated support',
-        'SSO & advanced security',
-        'SLA guarantee',
-        'Custom integrations',
+        'Everything in Studio',
+        'Unlimited AI Credits',
+        'Custom Integrations',
+        'Dedicated Support',
       ],
       limits: {
         projects: -1,

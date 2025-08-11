@@ -82,7 +82,7 @@
             <button
               v-for="(plan, key) in config.plans"
               :key="key"
-              class="plan-selector-card p-6 rounded-xl border-2 transition-all duration-200 text-left relative"
+              class="plan-selector-card p-6 rounded-xl border-2 transition-all duration-200 text-center relative flex flex-col min-h-[320px]"
               :class="[
                 selectedPlan === key 
                   ? 'border-primary bg-primary/5 shadow-lg' 
@@ -98,40 +98,51 @@
                 size="sm" 
                 class="absolute -top-3 left-1/2 -translate-x-1/2"
               >
-                Most Popular
+                {{ plan.popularText || 'Most Popular' }}
               </Badge>
 
               <!-- Plan Name -->
-              <Heading tag="h3" size="h4" class="mb-2">
+              <Heading tag="h3" size="h4" class="mb-2 text-center">
                 {{ plan.name }}
               </Heading>
 
               <!-- Price -->
-              <div class="mb-3">
+              <div class="mb-3 text-center">
                 <span class="text-3xl font-bold">
                   {{ formatPrice(plan, billingPeriod) }}
                 </span>
                 <span v-if="plan.prices[billingPeriod] !== 'custom'" class="text-muted-foreground">
-                  /{{ billingPeriod === 'yearly' ? 'year' : 'month' }}
+                  /{{ billingPeriod === 'yearly' ? 'month' : 'year' }}
                 </span>
               </div>
 
               <!-- Description -->
-              <Text size="sm" class="text-muted-foreground mb-4">
+              <Text size="sm" class="text-muted-foreground mb-4 text-center">
                 {{ plan.description }}
               </Text>
 
               <!-- Key Features (first 3) -->
-              <ul class="space-y-2">
+              <ul class="space-y-2 mb-6">
                 <li 
                   v-for="(feature, idx) in plan.features.slice(0, 3)" 
                   :key="idx"
-                  class="flex items-start gap-2 text-sm"
+                  class="flex items-center justify-center gap-2 text-sm"
                 >
-                  <Icon name="lucide:check" class="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
+                  <Icon name="lucide:check" class="h-4 w-4 text-success flex-shrink-0" />
                   <span>{{ feature }}</span>
                 </li>
               </ul>
+
+              <!-- CTA Button -->
+              <div class="mt-auto">
+                <Text 
+                  size="sm" 
+                  class="font-medium text-primary"
+                  :class="selectedPlan === key ? 'text-primary' : 'text-muted-foreground'"
+                >
+                  {{ plan.ctaText }}
+                </Text>
+              </div>
 
               <!-- Selected Indicator -->
               <div 
@@ -526,12 +537,12 @@ const selectPlan = (planId: string) => {
 
 const formatPrice = (plan: any, period: string) => {
   const price = plan.prices[period]
-  if (price === 'custom') return 'Custom'
+  if (typeof price === 'string' && price === 'custom') return 'Custom'
   if (price === 0) return 'Free'
   
   if (period === 'yearly') {
-    const monthlyPrice = Math.round(price / 12)
-    return `$${monthlyPrice}`
+    const monthlyPrice = price / 12
+    return `$${Math.floor(monthlyPrice)}`
   }
   
   return `$${price}`
