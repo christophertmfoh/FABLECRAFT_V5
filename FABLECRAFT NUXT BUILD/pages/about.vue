@@ -31,34 +31,54 @@
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
         <!-- Hero Section -->
-        <Section spacing="none" class="hero-section">
-          <div class="py-20 sm:py-28">
+        <Section spacing="none" class="hero-section relative overflow-hidden">
+          <div class="py-24 sm:py-32 lg:py-40">
             <Container size="xl">
-              <div class="text-center max-w-4xl mx-auto">
-                <!-- Hero Badge -->
-                <MHeroBadge
-                  text="Building the Future"
-                  variant="gradient"
-                  icon="lucide:sparkles"
-                  class="mb-6"
-                />
+              <div class="text-center max-w-5xl mx-auto">
+                <!-- Hero Badge with perfect alignment -->
+                <div class="mb-8">
+                  <MHeroBadge
+                    text="Innovating Since 2022"
+                    variant="default"
+                    size="md"
+                    dot-color="primary"
+                    dot-speed="normal"
+                    clickable
+                  />
+                </div>
                 
-                <!-- Hero Heading -->
-                <MHeroHeading
-                  title="About "
-                  highlight-text="Fablecraft"
-                  subheading="Where creativity meets technology to transform your wildest ideas into reality"
-                  heading-tag="h1"
-                  heading-id="about-heading"
-                  variant="default"
-                  size="xl"
-                  alignment="center"
-                  gradient-variant="primary"
-                  gradient-animation="shimmer"
-                  spacing="default"
-                />
+                <!-- Hero Heading with better spacing -->
+                <div class="mb-8">
+                  <MHeroHeading
+                    title="About "
+                    highlight-text="Fablecraft"
+                    subheading="Empowering creators worldwide with AI-powered tools that transform imagination into reality"
+                    heading-tag="h1"
+                    heading-id="about-heading"
+                    variant="default"
+                    size="xl"
+                    alignment="center"
+                    gradient-variant="primary"
+                    gradient-animation="shimmer"
+                    spacing="tight"
+                  />
+                </div>
+                
+                <!-- Location Badge with animation -->
+                <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 backdrop-blur-sm transform hover:scale-105 transition-all duration-300">
+                  <div class="relative">
+                    <Icon name="lucide:map-pin" class="h-5 w-5 text-primary animate-bounce" />
+                    <div class="absolute inset-0 h-5 w-5 rounded-full bg-primary/30 animate-ping" />
+                  </div>
+                  <Text size="base" class="font-semibold text-foreground">Hartford, Connecticut</Text>
+                  <Text size="sm" class="text-muted-foreground">• Innovation Hub</Text>
+                </div>
               </div>
             </Container>
+            
+            <!-- Decorative elements -->
+            <div class="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-pulse animation-delay-2000" />
           </div>
         </Section>
 
@@ -209,74 +229,143 @@
         </Section>
 
         <!-- Team Section -->
-        <Section spacing="none" class="team-section">
-          <div class="py-16 sm:py-20">
+        <Section spacing="none" class="team-section relative">
+          <div class="py-24 sm:py-32">
             <Container size="xl">
-              <div class="text-center max-w-3xl mx-auto mb-12">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                  <Icon name="lucide:users-2" class="h-4 w-4 text-primary" />
-                  <Text size="sm" class="font-medium text-primary">Our Team</Text>
+              <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-8">
+                  <Icon name="lucide:users-2" class="h-5 w-5 text-primary" />
+                  <Text size="base" class="font-semibold text-primary">Leadership Team</Text>
                 </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-4">
-                  Meet the Creators
+                <Heading tag="h2" size="h1" class="text-foreground mb-6">
+                  Meet Our Visionaries
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground">
-                  A passionate team of designers, developers, and dreamers working together to revolutionize creative tools
+                <Text size="lg" class="text-muted-foreground leading-relaxed">
+                  Industry veterans from Hartford, CT, leading the charge in democratizing creative tools for everyone
                 </Text>
               </div>
               
-              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Team Member 1 -->
-                <div class="text-center">
-                  <div class="relative inline-block mb-4">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <Icon name="lucide:user" class="h-12 w-12 text-primary" />
+              <div class="grid md:grid-cols-3 gap-10 lg:gap-12">
+                <!-- CEO - Chris Johanson -->
+                <div class="group relative">
+                  <GlassCard variant="light" class="p-8 h-full natural-depth gentle-hover overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div class="relative text-center">
+                      <div class="relative inline-block mb-6">
+                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-primary to-accent p-0.5 group-hover:scale-105 transition-transform duration-500">
+                          <div class="w-full h-full rounded-full bg-background flex items-center justify-center">
+                            <Icon name="lucide:crown" class="h-20 w-20 text-primary" />
+                          </div>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-primary border-4 border-background flex items-center justify-center shadow-xl">
+                          <Icon name="lucide:briefcase" class="h-6 w-6 text-background" />
+                        </div>
+                      </div>
+                      
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-primary transition-colors">
+                        Chris Johanson
+                      </Heading>
+                      
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
+                        <Text size="sm" class="font-bold text-primary">Chief Executive Officer</Text>
+                      </div>
+                      
+                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
+                        Visionary leader with 20+ years transforming digital experiences. Chris drives our mission to make creative tools accessible to everyone.
+                      </Text>
+                      
+                      <div class="flex justify-center gap-3">
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
+                        </button>
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:mail" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
+                        </button>
+                      </div>
                     </div>
-                    <div class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-success border-2 border-background flex items-center justify-center">
-                      <Icon name="lucide:check" class="h-4 w-4 text-background" />
-                    </div>
-                  </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-1">Alex Chen</Heading>
-                  <Text size="sm" class="text-primary mb-2">Founder & CEO</Text>
-                  <Text size="sm" class="text-muted-foreground">
-                    Visionary leader with 15+ years in creative technology
-                  </Text>
+                  </GlassCard>
                 </div>
                 
-                <!-- Team Member 2 -->
-                <div class="text-center">
-                  <div class="relative inline-block mb-4">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-accent/20 to-secondary/20 flex items-center justify-center">
-                      <Icon name="lucide:user" class="h-12 w-12 text-accent" />
+                <!-- CFO - Jason Michaud -->
+                <div class="group relative">
+                  <GlassCard variant="light" class="p-8 h-full natural-depth gentle-hover overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div class="relative text-center">
+                      <div class="relative inline-block mb-6">
+                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-accent to-secondary p-0.5 group-hover:scale-105 transition-transform duration-500">
+                          <div class="w-full h-full rounded-full bg-background flex items-center justify-center">
+                            <Icon name="lucide:trending-up" class="h-20 w-20 text-accent" />
+                          </div>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-accent border-4 border-background flex items-center justify-center shadow-xl">
+                          <Icon name="lucide:dollar-sign" class="h-6 w-6 text-background" />
+                        </div>
+                      </div>
+                      
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-accent transition-colors">
+                        Jason Michaud
+                      </Heading>
+                      
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 mb-4">
+                        <Text size="sm" class="font-bold text-accent">Chief Financial Officer</Text>
+                      </div>
+                      
+                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
+                        Strategic financial architect ensuring sustainable growth. Jason's expertise scales creative tech companies globally.
+                      </Text>
+                      
+                      <div class="flex justify-center gap-3">
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-accent/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-accent transition-colors" />
+                        </button>
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-accent/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:twitter" class="h-5 w-5 text-muted-foreground group-hover/btn:text-accent transition-colors" />
+                        </button>
+                      </div>
                     </div>
-                    <div class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-success border-2 border-background flex items-center justify-center">
-                      <Icon name="lucide:check" class="h-4 w-4 text-background" />
-                    </div>
-                  </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-1">Sarah Williams</Heading>
-                  <Text size="sm" class="text-primary mb-2">Head of Design</Text>
-                  <Text size="sm" class="text-muted-foreground">
-                    Award-winning designer passionate about user experience
-                  </Text>
+                  </GlassCard>
                 </div>
                 
-                <!-- Team Member 3 -->
-                <div class="text-center">
-                  <div class="relative inline-block mb-4">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center">
-                      <Icon name="lucide:user" class="h-12 w-12 text-secondary" />
+                <!-- CTO - Frank Rocca -->
+                <div class="group relative">
+                  <GlassCard variant="light" class="p-8 h-full natural-depth gentle-hover overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div class="relative text-center">
+                      <div class="relative inline-block mb-6">
+                        <div class="w-40 h-40 rounded-full bg-gradient-to-br from-secondary to-primary p-0.5 group-hover:scale-105 transition-transform duration-500">
+                          <div class="w-full h-full rounded-full bg-background flex items-center justify-center">
+                            <Icon name="lucide:cpu" class="h-20 w-20 text-secondary" />
+                          </div>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-secondary border-4 border-background flex items-center justify-center shadow-xl">
+                          <Icon name="lucide:code-2" class="h-6 w-6 text-background" />
+                        </div>
+                      </div>
+                      
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2 group-hover:text-secondary transition-colors">
+                        Frank Rocca
+                      </Heading>
+                      
+                      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 mb-4">
+                        <Text size="sm" class="font-bold text-secondary">Chief Technology Officer</Text>
+                      </div>
+                      
+                      <Text size="sm" class="text-muted-foreground leading-relaxed mb-6">
+                        AI pioneer revolutionizing creative workflows. Frank leads our technical innovation, building tomorrow's tools today.
+                      </Text>
+                      
+                      <div class="flex justify-center gap-3">
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-secondary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:github" class="h-5 w-5 text-muted-foreground group-hover/btn:text-secondary transition-colors" />
+                        </button>
+                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-secondary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
+                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-secondary transition-colors" />
+                        </button>
+                      </div>
                     </div>
-                    <div class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-success border-2 border-background flex items-center justify-center">
-                      <Icon name="lucide:check" class="h-4 w-4 text-background" />
-                    </div>
-                  </div>
-                  <Heading tag="h3" size="h5" class="text-foreground mb-1">Marcus Johnson</Heading>
-                  <Text size="sm" class="text-primary mb-2">CTO</Text>
-                  <Text size="sm" class="text-muted-foreground">
-                    AI expert building the future of creative tools
-                  </Text>
+                  </GlassCard>
                 </div>
               </div>
             </Container>
@@ -284,76 +373,175 @@
         </Section>
 
         <!-- Journey Section -->
-        <Section spacing="none" class="journey-section bg-muted/30">
-          <div class="py-16 sm:py-20">
+        <Section spacing="none" class="journey-section bg-gradient-to-b from-muted/30 to-transparent relative overflow-hidden">
+          <div class="py-24 sm:py-32">
             <Container size="xl">
-              <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                  <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                    <Icon name="lucide:map" class="h-4 w-4 text-primary" />
-                    <Text size="sm" class="font-medium text-primary">Our Journey</Text>
+              <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                  <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 mb-8">
+                    <Icon name="lucide:rocket" class="h-5 w-5 text-primary" />
+                    <Text size="base" class="font-semibold text-primary">Our Journey</Text>
                   </div>
                   
-                  <Heading tag="h2" size="h2" class="text-foreground mb-4">
-                    From Idea to Impact
+                  <Heading tag="h2" size="h1" class="text-foreground mb-6">
+                    Building the Future, Step by Step
                   </Heading>
+                  
+                  <Text size="lg" class="text-muted-foreground max-w-2xl mx-auto">
+                    From Hartford to the world, our journey of empowering creators everywhere
+                  </Text>
                 </div>
                 
-                <div class="space-y-8">
-                  <!-- Timeline Item 1 -->
-                  <div class="flex gap-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
-                      <Text size="sm" class="font-bold text-primary">2020</Text>
-                    </div>
-                    <div class="flex-1 pb-8 border-l-2 border-border/50 pl-6 -ml-6">
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">The Spark</Heading>
-                      <Text size="sm" class="text-muted-foreground">
-                        Fablecraft was born from a simple idea: make creative tools that anyone can use
-                      </Text>
-                    </div>
-                  </div>
+                <div class="relative">
+                  <!-- Timeline line -->
+                  <div class="absolute left-[27px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/20 via-accent/20 to-secondary/20" />
                   
-                  <!-- Timeline Item 2 -->
-                  <div class="flex gap-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 border-2 border-accent flex items-center justify-center">
-                      <Text size="sm" class="font-bold text-accent">2021</Text>
+                  <div class="space-y-12">
+                    <!-- 2022 - Foundation -->
+                    <div class="relative flex gap-8 group">
+                      <div class="flex-shrink-0 relative z-10">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Text size="sm" class="font-bold text-background">2022</Text>
+                        </div>
+                        <div class="absolute inset-0 w-14 h-14 rounded-full bg-primary/30 animate-ping" />
+                      </div>
+                      <div class="flex-1 pb-4">
+                        <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
+                          <div class="flex items-start justify-between mb-3">
+                            <Heading tag="h3" size="h4" class="text-foreground">The Foundation</Heading>
+                            <Badge variant="outline" class="text-xs">Q1 2022</Badge>
+                          </div>
+                          <Text size="base" class="text-muted-foreground mb-4">
+                            Founded in Hartford, CT with a vision to democratize creative tools. Assembled our core team and began developing revolutionary AI technology.
+                          </Text>
+                          <div class="flex flex-wrap gap-2">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-primary" />
+                              <span class="text-foreground">Company Founded</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-primary" />
+                              <span class="text-foreground">Seed Funding</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-primary" />
+                              <span class="text-foreground">Team of 5</span>
+                            </div>
+                          </div>
+                        </GlassCard>
+                      </div>
                     </div>
-                    <div class="flex-1 pb-8 border-l-2 border-border/50 pl-6 -ml-6">
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">Building the Foundation</Heading>
-                      <Text size="sm" class="text-muted-foreground">
-                        Assembled a world-class team and developed our core AI technology
-                      </Text>
+                    
+                    <!-- 2023 - Launch -->
+                    <div class="relative flex gap-8 group">
+                      <div class="flex-shrink-0 relative z-10">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-secondary border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Text size="sm" class="font-bold text-background">2023</Text>
+                        </div>
+                      </div>
+                      <div class="flex-1 pb-4">
+                        <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
+                          <div class="flex items-start justify-between mb-3">
+                            <Heading tag="h3" size="h4" class="text-foreground">Product Launch</Heading>
+                            <Badge variant="outline" class="text-xs">Q2 2023</Badge>
+                          </div>
+                          <Text size="base" class="text-muted-foreground mb-4">
+                            Launched our beta platform to early adopters. Rapid iteration based on user feedback led to 10x growth in just 6 months.
+                          </Text>
+                          <div class="flex flex-wrap gap-2">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-accent" />
+                              <span class="text-foreground">Beta Launch</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-accent" />
+                              <span class="text-foreground">10,000+ Users</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-accent" />
+                              <span class="text-foreground">Series A</span>
+                            </div>
+                          </div>
+                        </GlassCard>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <!-- Timeline Item 3 -->
-                  <div class="flex gap-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 border-2 border-secondary flex items-center justify-center">
-                      <Text size="sm" class="font-bold text-secondary">2022</Text>
+                    
+                    <!-- 2024 - Scale -->
+                    <div class="relative flex gap-8 group">
+                      <div class="flex-shrink-0 relative z-10">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-secondary to-primary border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Text size="sm" class="font-bold text-background">2024</Text>
+                        </div>
+                      </div>
+                      <div class="flex-1 pb-4">
+                        <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
+                          <div class="flex items-start justify-between mb-3">
+                            <Heading tag="h3" size="h4" class="text-foreground">Global Expansion</Heading>
+                            <Badge variant="outline" class="text-xs">Full Year</Badge>
+                          </div>
+                          <Text size="base" class="text-muted-foreground mb-4">
+                            Scaled to serve creators in 150+ countries. Introduced enterprise features and established partnerships with major creative platforms.
+                          </Text>
+                          <div class="flex flex-wrap gap-2">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-secondary" />
+                              <span class="text-foreground">100K+ Users</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-secondary" />
+                              <span class="text-foreground">Enterprise Launch</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/10 text-xs">
+                              <Icon name="lucide:check-circle" class="h-3 w-3 text-secondary" />
+                              <span class="text-foreground">50+ Team</span>
+                            </div>
+                          </div>
+                        </GlassCard>
+                      </div>
                     </div>
-                    <div class="flex-1 pb-8 border-l-2 border-border/50 pl-6 -ml-6">
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">Community Launch</Heading>
-                      <Text size="sm" class="text-muted-foreground">
-                        Opened our doors to creators worldwide and grew to 100,000+ users
-                      </Text>
-                    </div>
-                  </div>
-                  
-                  <!-- Timeline Item 4 -->
-                  <div class="flex gap-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary border-2 border-primary flex items-center justify-center">
-                      <Text size="sm" class="font-bold text-background">2024</Text>
-                    </div>
-                    <div class="flex-1">
-                      <Heading tag="h3" size="h5" class="text-foreground mb-2">The Future</Heading>
-                      <Text size="sm" class="text-muted-foreground">
-                        Expanding our platform with revolutionary features and global reach
-                      </Text>
+                    
+                    <!-- 2025 - Now -->
+                    <div class="relative flex gap-8 group">
+                      <div class="flex-shrink-0 relative z-10">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary border-3 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-pulse">
+                          <Text size="sm" class="font-bold text-background">2025</Text>
+                        </div>
+                        <div class="absolute inset-0 w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary opacity-30 animate-ping" />
+                      </div>
+                      <div class="flex-1">
+                        <GlassCard variant="heavy" class="p-6 natural-depth gentle-hover border-2 border-primary/20">
+                          <div class="flex items-start justify-between mb-3">
+                            <Heading tag="h3" size="h4" class="text-foreground">The Future is Now</Heading>
+                            <Badge variant="default" class="text-xs animate-pulse">CURRENT</Badge>
+                          </div>
+                          <Text size="base" class="text-muted-foreground mb-4">
+                            Revolutionizing creative workflows with next-gen AI. Building the platform where imagination has no limits.
+                          </Text>
+                          <div class="flex flex-wrap gap-2">
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 text-xs">
+                              <Icon name="lucide:sparkles" class="h-3 w-3 text-primary animate-pulse" />
+                              <span class="text-foreground font-semibold">AI Revolution</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-accent/10 to-secondary/10 text-xs">
+                              <Icon name="lucide:globe" class="h-3 w-3 text-accent animate-pulse" />
+                              <span class="text-foreground font-semibold">1M+ Goal</span>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-secondary/10 to-primary/10 text-xs">
+                              <Icon name="lucide:rocket" class="h-3 w-3 text-secondary animate-pulse" />
+                              <span class="text-foreground font-semibold">IPO Ready</span>
+                            </div>
+                          </div>
+                        </GlassCard>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </Container>
+            
+            <!-- Decorative elements -->
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+            <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
           </div>
         </Section>
 
@@ -514,7 +702,7 @@ useHead({
 </script>
 
 <style scoped>
-/* Page-specific styles if needed */
+/* Page-specific styles */
 .hero-section {
   position: relative;
 }
@@ -530,5 +718,70 @@ useHead({
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+}
+
+/* Animation delay utility */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Enhanced hover effects */
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-animation {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Timeline pulse effect */
+@keyframes timeline-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+.timeline-pulse {
+  animation: timeline-pulse 2s ease-in-out infinite;
+}
+
+/* Smooth entrance animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
 }
 </style>

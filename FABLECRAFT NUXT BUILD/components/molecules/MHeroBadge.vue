@@ -1,6 +1,8 @@
 <template>
   <div :class="badgeContainerClasses" role="banner" aria-label="Product announcement badge">
-    <APulsingDot :size="dotSize" :color="dotColor" :speed="dotSpeed" :intensity="dotIntensity" />
+    <div class="flex items-center justify-center">
+      <APulsingDot :size="dotSize" :color="dotColor" :speed="dotSpeed" :intensity="dotIntensity" />
+    </div>
 
     <Badge :class="badgeClasses" v-bind="$attrs" @click="handleBadgeClick">
       <slot>{{ text }}</slot>
