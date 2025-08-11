@@ -230,7 +230,7 @@
                 <GlassCard variant="light" class="relative p-8 text-center natural-depth gentle-hover group overflow-hidden">
                   <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary/10 to-accent/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon name="lucide:share-2" class="h-7 w-7 text-secondary" />
                     </div>
                     <Heading tag="h3" size="h5" class="text-foreground mb-3">Accessibility</Heading>
