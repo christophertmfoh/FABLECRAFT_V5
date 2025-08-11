@@ -53,8 +53,8 @@
         <Section spacing="none" class="mission-section">
           <div class="py-16 sm:py-20">
             <Container size="xl">
+              <!-- Mission Header -->
               <div class="text-center max-w-4xl mx-auto mb-12">
-                <!-- Mission Badge -->
                 <MHeroBadge
                   text="Our Mission"
                   variant="default"
@@ -64,7 +64,6 @@
                   class="mb-6"
                 />
                 
-                <!-- Mission Heading with Gradient -->
                 <Heading tag="h2" size="h2" class="text-foreground mb-6">
                   Democratizing 
                   <AGradientText
@@ -78,104 +77,77 @@
                   </AGradientText>
                 </Heading>
                 
-                <Text size="lg" class="text-muted-foreground leading-relaxed mb-12">
+                <Text size="lg" class="text-muted-foreground leading-relaxed">
                   We believe everyone has a story to tell and the potential to create something extraordinary. 
                   Fablecraft removes the technical barriers between imagination and creation, empowering creators 
                   of all skill levels to bring their visions to life.
                 </Text>
               </div>
 
-              <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <!-- Mission Points -->
-                <div class="space-y-6">
-                  <div class="flex flex-col items-center text-center space-y-2">
-                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2">
-                      <Icon name="lucide:users" class="h-6 w-6 text-primary" />
-                    </div>
-                    <Heading tag="h3" size="h5" class="text-foreground">Community First</Heading>
-                    <Text size="sm" class="text-muted-foreground">
-                      Building a supportive ecosystem where creators inspire and learn from each other
-                    </Text>
+              <!-- Mission Cards Grid -->
+              <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Community First Card -->
+                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover group">
+                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Icon name="lucide:users" class="h-7 w-7 text-primary" />
                   </div>
-                  
-                  <div class="flex flex-col items-center text-center space-y-2">
-                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2">
-                      <Icon name="lucide:zap" class="h-6 w-6 text-primary" />
-                    </div>
-                    <Heading tag="h3" size="h5" class="text-foreground">Innovation Driven</Heading>
-                    <Text size="sm" class="text-muted-foreground">
-                      Leveraging cutting-edge AI and technology to push creative boundaries
-                    </Text>
-                  </div>
-                  
-                  <div class="flex flex-col items-center text-center space-y-2">
-                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2">
-                      <Icon name="lucide:heart" class="h-6 w-6 text-primary" />
-                    </div>
-                    <Heading tag="h3" size="h5" class="text-foreground">Passion Powered</Heading>
-                    <Text size="sm" class="text-muted-foreground">
-                      Created by creators, for creators, with love for the craft
-                    </Text>
-                  </div>
-                </div>
+                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Community First</Heading>
+                  <Text size="sm" class="text-muted-foreground">
+                    Building a supportive ecosystem where creators inspire and learn from each other
+                  </Text>
+                </GlassCard>
                 
-                <!-- Animated Storybook Magic Box -->
-                <div class="flex items-center justify-center">
-                  <GlassCard variant="light" class="p-8 relative overflow-hidden natural-depth">
-                    <div class="relative w-80 h-80 flex items-center justify-center">
-                      <!-- Background gradient animation -->
-                      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 animate-gradient-shift rounded-lg" />
-                      
-                      <!-- Floating pages animation -->
-                      <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="relative w-48 h-64">
-                          <!-- Book base -->
-                          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-48 bg-gradient-to-br from-primary to-accent rounded-lg shadow-2xl transform rotate-3 animate-float">
-                            <div class="absolute inset-2 bg-background/90 rounded flex items-center justify-center">
-                              <Icon name="lucide:book-open" class="h-16 w-16 text-primary" />
-                            </div>
-                          </div>
-                          
-                          <!-- Flying pages -->
-                          <div class="absolute top-0 left-1/4 w-12 h-16 bg-background border border-border rounded shadow-lg transform -rotate-12 animate-page-float-1">
-                            <div class="p-1">
-                              <div class="h-1 bg-muted rounded mb-1" />
-                              <div class="h-1 bg-muted rounded mb-1 w-3/4" />
-                              <div class="h-1 bg-muted rounded w-1/2" />
-                            </div>
-                          </div>
-                          
-                          <div class="absolute top-4 right-1/4 w-12 h-16 bg-background border border-border rounded shadow-lg transform rotate-6 animate-page-float-2 animation-delay-2000">
-                            <div class="p-1">
-                              <div class="h-1 bg-muted rounded mb-1" />
-                              <div class="h-1 bg-muted rounded mb-1 w-2/3" />
-                              <div class="h-1 bg-muted rounded w-3/4" />
-                            </div>
-                          </div>
-                          
-                          <div class="absolute -top-2 left-1/2 w-12 h-16 bg-background border border-border rounded shadow-lg transform rotate-12 animate-page-float-3 animation-delay-4000">
-                            <div class="p-1">
-                              <div class="h-1 bg-muted rounded mb-1 w-2/3" />
-                              <div class="h-1 bg-muted rounded mb-1" />
-                              <div class="h-1 bg-muted rounded w-1/2" />
-                            </div>
-                          </div>
-                          
-                          <!-- Sparkles -->
-                          <Icon name="lucide:sparkles" class="absolute top-8 left-8 h-4 w-4 text-primary animate-twinkle" />
-                          <Icon name="lucide:sparkles" class="absolute top-12 right-8 h-3 w-3 text-accent animate-twinkle animation-delay-2000" />
-                          <Icon name="lucide:sparkles" class="absolute bottom-20 left-12 h-5 w-5 text-secondary animate-twinkle animation-delay-4000" />
-                        </div>
+                <!-- Innovation Driven Card -->
+                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover group">
+                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent/10 to-secondary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Icon name="lucide:zap" class="h-7 w-7 text-accent" />
+                  </div>
+                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Innovation Driven</Heading>
+                  <Text size="sm" class="text-muted-foreground">
+                    Leveraging cutting-edge AI and technology to push creative boundaries
+                  </Text>
+                </GlassCard>
+                
+                <!-- Passion Powered Card -->
+                <GlassCard variant="light" class="p-6 text-center natural-depth gentle-hover group">
+                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Icon name="lucide:heart" class="h-7 w-7 text-secondary" />
+                  </div>
+                  <Heading tag="h3" size="h5" class="text-foreground mb-2">Passion Powered</Heading>
+                  <Text size="sm" class="text-muted-foreground">
+                    Created by creators, for creators, with love for the craft
+                  </Text>
+                </GlassCard>
+                
+                <!-- Magical Storybook Card -->
+                <GlassCard variant="light" class="p-6 relative overflow-hidden natural-depth gentle-hover">
+                  <div class="relative h-full flex flex-col">
+                    <!-- Background gradient animation -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 animate-gradient-shift rounded-lg opacity-50" />
+                    
+                    <!-- Animated Book Icon -->
+                    <div class="relative z-10 mx-auto mb-4">
+                      <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center animate-float">
+                        <Icon name="lucide:book-open" class="h-7 w-7 text-background" />
                       </div>
                       
-                      <!-- Text -->
-                      <div class="absolute bottom-4 left-0 right-0 text-center">
-                        <Heading tag="h3" size="h5" class="text-foreground mb-1">Stories Come Alive</Heading>
-                        <Text size="sm" class="text-muted-foreground">Where imagination meets creation</Text>
-                      </div>
+                      <!-- Mini floating pages -->
+                      <div class="absolute -top-1 -right-1 w-3 h-4 bg-background border border-border/50 rounded shadow-sm transform rotate-12 animate-page-float-1" />
+                      <div class="absolute -top-2 -left-1 w-3 h-4 bg-background border border-border/50 rounded shadow-sm transform -rotate-12 animate-page-float-2" />
+                      
+                      <!-- Mini sparkles -->
+                      <Icon name="lucide:sparkles" class="absolute -top-2 right-0 h-2 w-2 text-primary animate-twinkle" />
+                      <Icon name="lucide:sparkles" class="absolute -bottom-1 left-0 h-2 w-2 text-accent animate-twinkle animation-delay-2000" />
                     </div>
-                  </GlassCard>
-                </div>
+                    
+                    <div class="relative z-10 text-center">
+                      <Heading tag="h3" size="h5" class="text-foreground mb-2">Stories Come Alive</Heading>
+                      <Text size="sm" class="text-muted-foreground">
+                        Where imagination meets creation through magical tools
+                      </Text>
+                    </div>
+                  </div>
+                </GlassCard>
               </div>
             </Container>
           </div>
