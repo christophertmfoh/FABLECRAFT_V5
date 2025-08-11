@@ -173,7 +173,7 @@
                     tag="span"
                     variant="primary"
                     direction="to-r"
-                    intensity="strong"
+                    intensity="vibrant"
                     class="block mt-1"
                   >
                     Help You?
@@ -373,7 +373,7 @@
                     tag="span"
                     variant="accent"
                     direction="to-r"
-                    intensity="strong"
+                    intensity="vibrant"
                     class="block mt-1"
                   >
                     Answers
