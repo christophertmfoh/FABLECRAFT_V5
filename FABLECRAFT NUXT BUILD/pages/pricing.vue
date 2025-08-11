@@ -239,41 +239,147 @@
                   </div>
                 </div>
 
-                <!-- Credit Card Fields (for paid plans) -->
-                <div v-if="selectedPlan !== 'free' && selectedPaymentMethod === 'card'" class="space-y-3">
+                <!-- Billing Information (for paid plans) -->
+                <div v-if="selectedPlan !== 'free'" class="space-y-4">
+                  <!-- Cardholder Name -->
                   <div>
-                    <Label for="cardNumber" class="mb-2">Card Number</Label>
+                    <Label for="cardholderName" class="mb-2">Cardholder Name</Label>
                     <Input
-                      id="cardNumber"
-                      v-model="cardNumber"
+                      id="cardholderName"
+                      v-model="cardholderName"
                       type="text"
-                      placeholder="1234 5678 9012 3456"
-                      maxlength="19"
+                      placeholder="John Doe"
                       required
                     />
                   </div>
-                  <div class="grid grid-cols-2 gap-3">
+
+                  <!-- Credit Card Fields -->
+                  <div v-if="selectedPaymentMethod === 'card'" class="space-y-3">
                     <div>
-                      <Label for="cardExpiry" class="mb-2">Expiry Date</Label>
+                      <Label for="cardNumber" class="mb-2">Card Number</Label>
                       <Input
-                        id="cardExpiry"
-                        v-model="cardExpiry"
+                        id="cardNumber"
+                        v-model="cardNumber"
                         type="text"
-                        placeholder="MM/YY"
-                        maxlength="5"
+                        placeholder="1234 5678 9012 3456"
+                        maxlength="19"
+                        pattern="[0-9\s]*"
+                        inputmode="numeric"
+                        autocomplete="cc-number"
                         required
                       />
                     </div>
+                    <div class="grid grid-cols-2 gap-3">
+                      <div>
+                        <Label for="cardExpiry" class="mb-2">Expiry Date</Label>
+                        <Input
+                          id="cardExpiry"
+                          v-model="cardExpiry"
+                          type="text"
+                          placeholder="MM/YY"
+                          maxlength="5"
+                          pattern="[0-9/]*"
+                          inputmode="numeric"
+                          autocomplete="cc-exp"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label for="cardCvc" class="mb-2">Security Code</Label>
+                        <Input
+                          id="cardCvc"
+                          v-model="cardCvc"
+                          type="text"
+                          placeholder="123"
+                          maxlength="4"
+                          pattern="[0-9]*"
+                          inputmode="numeric"
+                          autocomplete="cc-csc"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Billing Address -->
+                  <div class="space-y-3">
+                    <Heading tag="h4" size="h5" class="text-foreground">Billing Address</Heading>
+                    
                     <div>
-                      <Label for="cardCvc" class="mb-2">CVC</Label>
+                      <Label for="billingAddress" class="mb-2">Street Address</Label>
                       <Input
-                        id="cardCvc"
-                        v-model="cardCvc"
+                        id="billingAddress"
+                        v-model="billingAddress"
                         type="text"
-                        placeholder="123"
-                        maxlength="4"
+                        placeholder="123 Main Street"
+                        autocomplete="billing street-address"
                         required
                       />
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                      <div>
+                        <Label for="billingCity" class="mb-2">City</Label>
+                        <Input
+                          id="billingCity"
+                          v-model="billingCity"
+                          type="text"
+                          placeholder="New York"
+                          autocomplete="billing address-level2"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label for="billingState" class="mb-2">State/Province</Label>
+                        <Input
+                          id="billingState"
+                          v-model="billingState"
+                          type="text"
+                          placeholder="NY"
+                          autocomplete="billing address-level1"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                      <div>
+                        <Label for="billingZip" class="mb-2">ZIP/Postal Code</Label>
+                        <Input
+                          id="billingZip"
+                          v-model="billingZip"
+                          type="text"
+                          placeholder="10001"
+                          autocomplete="billing postal-code"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label for="billingCountry" class="mb-2">Country</Label>
+                        <select
+                          id="billingCountry"
+                          v-model="billingCountry"
+                          class="w-full p-2 rounded-lg border border-border bg-background text-foreground"
+                          autocomplete="billing country"
+                          required
+                        >
+                          <option value="">Select Country</option>
+                          <option value="US">United States</option>
+                          <option value="CA">Canada</option>
+                          <option value="GB">United Kingdom</option>
+                          <option value="AU">Australia</option>
+                          <option value="DE">Germany</option>
+                          <option value="FR">France</option>
+                          <option value="ES">Spain</option>
+                          <option value="IT">Italy</option>
+                          <option value="JP">Japan</option>
+                          <option value="CN">China</option>
+                          <option value="IN">India</option>
+                          <option value="BR">Brazil</option>
+                          <option value="MX">Mexico</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -310,7 +416,7 @@
                     size="lg"
                     variant="default"
                     class="flex-1"
-                    :disabled="!acceptedTerms || (!isAuthenticated && !checkoutEmail) || (selectedPlan !== 'free' && selectedPaymentMethod === 'card' && (!cardNumber || !cardExpiry || !cardCvc)) || isProcessing"
+                    :disabled="!acceptedTerms || (!isAuthenticated && !checkoutEmail) || (selectedPlan !== 'free' && (!cardholderName || !billingAddress || !billingCity || !billingState || !billingZip || !billingCountry || (selectedPaymentMethod === 'card' && (!cardNumber || !cardExpiry || !cardCvc)))) || isProcessing"
                     @click="handleStartTrial"
                   >
                     <Spinner v-if="isProcessing" class="mr-2 h-4 w-4" />
@@ -320,14 +426,26 @@
                 </div>
 
                 <!-- Security Notice -->
-                <div class="flex items-center justify-center gap-4 text-xs text-muted-foreground">
-                  <div class="flex items-center gap-1">
-                    <Icon name="lucide:lock" class="h-3 w-3" />
-                    <span>{{ config.labels.secureCheckout }}</span>
+                <div class="space-y-2">
+                  <div class="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+                    <div class="flex items-center gap-1">
+                      <Icon name="lucide:lock" class="h-3 w-3" />
+                      <span>{{ config.labels.secureCheckout }}</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <Icon name="lucide:shield-check" class="h-3 w-3" />
+                      <span>{{ config.labels.cancelAnytime }}</span>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-1">
-                    <Icon name="lucide:shield-check" class="h-3 w-3" />
-                    <span>{{ config.labels.cancelAnytime }}</span>
+                  <!-- Payment Processing Note -->
+                  <div class="p-3 bg-warning/10 rounded-lg border border-warning/20">
+                    <div class="flex items-start gap-2">
+                      <Icon name="lucide:info" class="h-4 w-4 text-warning mt-0.5" />
+                      <Text size="xs" class="text-warning">
+                        Note: To process actual payments, integrate with Stripe using their Payment Elements or Checkout API. 
+                        This form is for demonstration purposes.
+                      </Text>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -554,6 +672,12 @@ const startTrial = ref(true)
 const cardNumber = ref('')
 const cardExpiry = ref('')
 const cardCvc = ref('')
+const cardholderName = ref('')
+const billingAddress = ref('')
+const billingCity = ref('')
+const billingState = ref('')
+const billingZip = ref('')
+const billingCountry = ref('')
 
 // Initialize from URL params
 onMounted(() => {
