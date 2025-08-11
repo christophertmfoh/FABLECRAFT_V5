@@ -85,24 +85,6 @@
 
               <!-- Stories Come Alive Section -->
               <div class="relative max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                  <Heading tag="h3" size="h2" class="mb-4">
-                    <span class="text-foreground">Where Stories</span>
-                    <span> </span>
-                    <AGradientText
-                      tag="span"
-                      variant="rainbow"
-                      direction="to-r"
-                      intensity="vibrant"
-                    >
-                      Come Alive
-                    </AGradientText>
-                  </Heading>
-                  <Text size="lg" class="text-muted-foreground max-w-2xl mx-auto">
-                    Transform your imagination into reality with AI-powered creative tools
-                  </Text>
-                </div>
-                
                 <!-- Interactive Canvas Area -->
                 <div class="relative h-[500px] rounded-2xl bg-gradient-to-br from-background via-background/95 to-background border border-border/50 overflow-hidden">
                   <!-- Animated Grid Background -->
@@ -126,28 +108,28 @@
                       <div class="absolute inset-0 animate-spin-slow">
                         <!-- Text Element -->
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                          <div class="w-20 h-20 bg-background border border-primary/30 rounded-xl flex items-center justify-center shadow-lg animate-float">
+                          <div class="w-20 h-20 bg-background/90 backdrop-blur-sm border border-border/30 rounded-xl flex items-center justify-center shadow-lg animate-float">
                             <Icon name="lucide:type" class="h-8 w-8 text-primary" />
                           </div>
                         </div>
                         
                         <!-- Image Element -->
                         <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2">
-                          <div class="w-20 h-20 bg-background border border-accent/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-2000">
+                          <div class="w-20 h-20 bg-background/90 backdrop-blur-sm border border-border/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-2000">
                             <Icon name="lucide:image" class="h-8 w-8 text-accent" />
                           </div>
                         </div>
                         
                         <!-- Video Element -->
                         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                          <div class="w-20 h-20 bg-background border border-secondary/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-4000">
+                          <div class="w-20 h-20 bg-background/90 backdrop-blur-sm border border-border/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-4000">
                             <Icon name="lucide:video" class="h-8 w-8 text-secondary" />
                           </div>
                         </div>
                         
                         <!-- Audio Element -->
                         <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2">
-                          <div class="w-20 h-20 bg-background border border-primary/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-1000">
+                          <div class="w-20 h-20 bg-background/90 backdrop-blur-sm border border-border/30 rounded-xl flex items-center justify-center shadow-lg animate-float animation-delay-1000">
                             <Icon name="lucide:music" class="h-8 w-8 text-primary" />
                           </div>
                         </div>
@@ -173,19 +155,6 @@
                         <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-primary/40 rounded-full animate-float-particle-4" />
                       </div>
                     </div>
-                  </div>
-                  
-                  <!-- Corner Labels -->
-                  <div class="absolute top-6 left-6 px-3 py-1.5 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full">
-                    <Text size="xs" class="text-muted-foreground">Input: Text & Ideas</Text>
-                  </div>
-                  
-                  <div class="absolute top-6 right-6 px-3 py-1.5 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full">
-                    <Text size="xs" class="text-muted-foreground">Output: Multimedia</Text>
-                  </div>
-                  
-                  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full">
-                    <Text size="sm" class="text-foreground font-medium">AI-Powered Transformation</Text>
                   </div>
                 </div>
               </div>
