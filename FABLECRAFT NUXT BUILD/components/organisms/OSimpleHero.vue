@@ -9,6 +9,9 @@
           :text="badgeText"
           :variant="badgeVariant"
           :size="badgeSize"
+          :dot-color="badgeDotColor"
+          :dot-speed="badgeDotSpeed"
+          :dot-intensity="badgeDotIntensity"
           :clickable="false"
           :class="badgeClasses"
         />
@@ -40,9 +43,15 @@ interface SimpleHeroProps {
   /** Badge text displayed above the heading */
   badgeText?: string
   /** Badge variant */
-  badgeVariant?: 'default' | 'outline' | 'secondary' | 'success' | 'warning' | 'error'
+  badgeVariant?: 'default' | 'accent' | 'secondary' | 'outline'
   /** Badge size */
-  badgeSize?: 'sm' | 'default' | 'lg'
+  badgeSize?: 'sm' | 'base' | 'md' | 'lg'
+  /** Badge dot color */
+  badgeDotColor?: 'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive'
+  /** Badge dot animation speed */
+  badgeDotSpeed?: 'slow' | 'normal' | 'fast'
+  /** Badge dot intensity */
+  badgeDotIntensity?: 'subtle' | 'normal' | 'strong'
   /** Main title text */
   title?: string
   /** Highlighted text (appears with gradient) */
@@ -69,7 +78,10 @@ interface SimpleHeroProps {
 const props = withDefaults(defineProps<SimpleHeroProps>(), {
   id: 'simple-hero',
   badgeVariant: 'default',
-  badgeSize: 'default',
+  badgeSize: 'base',
+  badgeDotColor: 'primary',
+  badgeDotSpeed: 'normal',
+  badgeDotIntensity: 'normal',
   variant: 'default',
   containerSize: 'lg',
   alignment: 'center',
