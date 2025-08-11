@@ -30,11 +30,11 @@
         <div class="py-12 sm:py-16">
           <Container size="lg">
             <div class="text-center max-w-3xl mx-auto">
-              <Heading tag="h1" size="h1" class="mb-4">
-                Choose Your Subscription
+              <Heading tag="h1" size="h1" class="mb-4 text-center">
+                {{ heroContent.title }}
               </Heading>
-              <Text size="lg" class="text-muted-foreground">
-                {{ config.trialDays }}-day free trial on all paid plans. No credit card required.
+              <Text size="lg" class="text-muted-foreground text-center">
+                {{ heroContent.description }}
               </Text>
             </div>
           </Container>
@@ -48,10 +48,10 @@
           <div class="flex items-center justify-center gap-4 mb-8">
             <Text 
               size="base" 
-              class="font-medium transition-colors"
+              class="font-medium transition-colors text-center"
               :class="billingPeriod === 'monthly' ? 'text-foreground' : 'text-muted-foreground'"
             >
-              Monthly
+              {{ config.billing.monthly.label }}
             </Text>
             <button
               class="relative inline-flex h-6 w-11 items-center rounded-full bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
@@ -66,10 +66,10 @@
             <div class="flex items-center gap-2">
               <Text 
                 size="base" 
-                class="font-medium transition-colors"
+                class="font-medium transition-colors text-center"
                 :class="billingPeriod === 'yearly' ? 'text-foreground' : 'text-muted-foreground'"
               >
-                Yearly
+                {{ config.billing.yearly.label }}
               </Text>
               <Badge variant="default" size="sm" class="bg-success/10 text-success border-success/20">
                 {{ config.discount.label }}
@@ -241,7 +241,7 @@
                   >
                     <Spinner v-if="isProcessing" class="mr-2 h-4 w-4" />
                     <Icon v-else name="lucide:rocket" class="mr-2 h-4 w-4" />
-                    Start {{ config.trialDays }}-Day Free Trial
+                    {{ config.buttons.startTrial }}
                   </Button>
                 </div>
 
@@ -273,7 +273,7 @@
                   @click="handleContactSales"
                 >
                   <Icon name="lucide:phone" class="mr-2 h-4 w-4" />
-                  Contact Sales Team
+                  {{ config.buttons.contactSales }}
                 </Button>
               </div>
             </Card>
@@ -286,8 +286,8 @@
         <div class="py-12 sm:py-16">
           <Container size="xl">
             <div class="text-center mb-8">
-              <Heading tag="h2" size="h2">
-                Detailed Feature Comparison
+              <Heading tag="h2" size="h2" class="text-center">
+                {{ comparisonContent.title }}
               </Heading>
             </div>
 
@@ -403,8 +403,8 @@
         <div class="py-12 sm:py-16">
           <Container size="lg">
             <div class="text-center mb-8">
-              <Heading tag="h2" size="h2">
-                Frequently Asked Questions
+              <Heading tag="h2" size="h2" class="text-center">
+                {{ faqContent.title }}
               </Heading>
             </div>
 
@@ -459,6 +459,9 @@
 import { ref, computed, onMounted } from 'vue'
 import { useHead, navigateTo, useSupabaseClient, useSupabaseUser, useRoute } from '#imports'
 import { 
+  PRICING_HERO,
+  COMPARISON_CONTENT,
+  FAQ_CONTENT,
   PRICING_CONFIG, 
   TRUST_METRICS, 
   COMPARISON_FEATURES, 
@@ -473,6 +476,9 @@ const isAuthenticated = computed(() => !!user?.value)
 const route = useRoute()
 
 // Configuration
+const heroContent = PRICING_HERO
+const comparisonContent = COMPARISON_CONTENT
+const faqContent = FAQ_CONTENT
 const config = PRICING_CONFIG
 const trustMetrics = TRUST_METRICS
 const comparisonFeatures = COMPARISON_FEATURES

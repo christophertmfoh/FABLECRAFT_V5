@@ -1,6 +1,32 @@
+// Page Content
+export const PRICING_HERO = {
+  title: 'Choose Your Subscription',
+  description: '30-day free trial on all paid plans. No credit card required.',
+}
+
+export const COMPARISON_CONTENT = {
+  title: 'Detailed Feature Comparison',
+}
+
+export const FAQ_CONTENT = {
+  title: 'Frequently Asked Questions',
+}
+
 // Pricing Configuration
 export const PRICING_CONFIG = {
   trialDays: 30,
+  buttons: {
+    startTrial: 'Start 30-Day Free Trial',
+    contactSales: 'Contact Sales Team',
+  },
+  billing: {
+    monthly: {
+      label: 'Monthly',
+    },
+    yearly: {
+      label: 'Yearly',
+    },
+  },
   discount: {
     yearly: 20, // percentage
     label: 'Save 20%',
