@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
 
   // Initialize Crisp
   window.$crisp = []
-  window.CRISP_WEBSITE_ID = "YOUR-CRISP-ID" // You'll replace this with your actual ID
+  window.CRISP_WEBSITE_ID = "064d5aea-f316-42cf-a63d-a94caccf0b64"
 
   // Load Crisp script
   const script = document.createElement('script')
