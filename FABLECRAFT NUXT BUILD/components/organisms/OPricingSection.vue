@@ -129,7 +129,7 @@ const defaultPricingPlans: PricingPlan[] = Object.entries(PRICING_CONFIG.plans).
   id: plan.id,
   name: plan.name,
   monthlyPrice: plan.prices.monthly === 0 ? 'Free' : (plan.prices.monthly === 'custom' ? 'Custom' : plan.prices.monthly),
-  annualPrice: plan.prices.yearly === 0 ? 'Free' : (plan.prices.yearly === 'custom' ? 'Custom' : Math.floor(plan.prices.yearly / 12)),
+  annualPrice: plan.prices.yearly === 0 ? 'Free' : (plan.prices.yearly === 'custom' ? 'Custom' : plan.prices.yearly),
   description: plan.description,
   isPopular: plan.isPopular || false,
   popularText: plan.popularText,

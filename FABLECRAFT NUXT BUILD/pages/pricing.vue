@@ -112,14 +112,14 @@
                   {{ formatPrice(plan, billingPeriod) }}
                 </span>
                 <span v-if="plan.prices[billingPeriod] !== 'custom'" class="text-muted-foreground">
-                  {{ config.billing.perMonth }}
+                  {{ billingPeriod === 'yearly' ? '/year' : '/month' }}
                 </span>
                 <Text 
                   v-if="billingPeriod === 'yearly' && plan.prices.yearly !== 'custom' && plan.prices.yearly > 0" 
                   size="xs" 
-                  class="text-muted-foreground/70 block"
+                  class="text-muted-foreground/70 block text-center mt-1"
                 >
-                  {{ config.billing.yearly.sublabel }}
+                  (${{ Math.floor(plan.prices.yearly / 12) }}/month, billed yearly)
                 </Text>
               </div>
 
@@ -171,8 +171,15 @@
                 <Text size="lg" class="text-primary font-semibold text-center block">
                   {{ formatPrice(config.plans[selectedPlan], billingPeriod) }}
                                   <span class="text-muted-foreground font-normal">
-                  {{ config.billing[billingPeriod].period }}
+                  {{ billingPeriod === 'yearly' ? 'per year' : 'per month' }}
                 </span>
+                </Text>
+                <Text 
+                  v-if="billingPeriod === 'yearly' && config.plans[selectedPlan].prices.yearly !== 'custom' && config.plans[selectedPlan].prices.yearly > 0" 
+                  size="sm" 
+                  class="text-muted-foreground text-center block mt-1"
+                >
+                  (${{ Math.floor(config.plans[selectedPlan].prices.yearly / 12) }}/month when billed yearly)
                 </Text>
               </div>
 
@@ -573,11 +580,7 @@ const formatPrice = (plan: any, period: string) => {
   const price = plan.prices[period]
   if (typeof price === 'string' && price === 'custom') return 'Custom'
   
-  if (period === 'yearly') {
-    const monthlyPrice = price / 12
-    return `$${Math.floor(monthlyPrice)}`
-  }
-  
+  // Always show the actual price for the period
   return `$${price}`
 }
 
