@@ -49,9 +49,9 @@
           </div>
         </Section>
 
-                <!-- Mission Section -->
-        <Section spacing="none" class="mission-section">
-          <div class="py-16 sm:py-20">
+                      <!-- Mission Section -->
+      <Section spacing="none" class="mission-section">
+        <div class="py-20 sm:py-28">
             <Container size="xl">
               <!-- Mission Header -->
               <div class="text-center max-w-3xl mx-auto mb-16">
@@ -163,8 +163,8 @@
         </Section>
 
         <!-- Values Section -->
-        <Section spacing="none" class="values-section">
-          <div class="py-20 sm:py-24">
+              <Section spacing="none" class="values-section">
+        <div class="py-20 sm:py-28">
             <Container size="xl">
               <!-- Section Header -->
               <div class="text-center max-w-4xl mx-auto mb-16">
@@ -259,8 +259,8 @@
         </Section>
 
         <!-- Team Section -->
-        <Section spacing="none" class="team-section">
-          <div class="py-20 sm:py-24">
+              <Section spacing="none" class="team-section">
+        <div class="py-20 sm:py-28">
             <Container size="xl">
               <!-- Section Header -->
               <div class="text-center max-w-4xl mx-auto mb-16">
