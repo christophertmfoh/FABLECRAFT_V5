@@ -1,8 +1,13 @@
 <template>
-  <div class="contact-page relative min-h-screen">
+  <div class="contact-page relative min-h-screen bg-background">
     <!-- Background Effects -->
-    <LazyGradientNoiseBackdrop />
-    <LazyPaperTexture />
+    <ClientOnly>
+      <div class="fixed inset-0 pointer-events-none z-0">
+        <LazyPaperTexture />
+        <LazyGradientNoiseBackdrop />
+        <LazyVignetteOverlay strength="subtle" />
+      </div>
+    </ClientOnly>
     
     <!-- Navigation Header -->
     <NavigationHeader 
@@ -28,7 +33,7 @@
                 text="Available 24/7 • Global Support"
                 variant="default"
                 size="base"
-                dot-color="success"
+                dot-color="primary"
                 dot-speed="normal"
                 class="mb-6"
               />
@@ -100,7 +105,7 @@
                 </Text>
                 <a 
                   href="mailto:support@fablecraft.com" 
-                  class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+                  class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium group"
                 >
                   support@fablecraft.com
                   <Icon name="lucide:external-link" class="h-4 w-4" />
@@ -115,13 +120,13 @@
               <!-- Live Chat Card -->
               <GlassCard variant="light" class="p-8 text-center natural-depth gentle-hover relative overflow-hidden">
                 <div class="absolute top-3 right-3">
-                  <Badge variant="success" class="animate-pulse">
-                    <APulsingDot variant="success" speed="normal" class="mr-1" />
+                  <Badge variant="default" class="animate-pulse bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
+                    <APulsingDot variant="primary" speed="normal" class="mr-1" />
                     Online
                   </Badge>
                 </div>
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-success/10 to-primary/10 mb-6">
-                  <Icon name="lucide:message-circle" class="h-8 w-8 text-success" />
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-green-500/10 to-primary/10 mb-6">
+                  <Icon name="lucide:message-circle" class="h-8 w-8 text-green-600 dark:text-green-400" />
                 </div>
                 <Heading tag="h3" size="h4" class="text-foreground mb-3">
                   Live Chat
@@ -158,7 +163,7 @@
                 </Text>
                 <a 
                   href="tel:+18605551234" 
-                  class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+                  class="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium group"
                 >
                   +1 (860) 555-1234
                   <Icon name="lucide:phone-call" class="h-4 w-4" />
@@ -221,7 +226,7 @@
                         v-model="formData.name"
                         type="text"
                         required
-                        class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="John Doe"
                       />
                     </div>
@@ -235,7 +240,7 @@
                         v-model="formData.email"
                         type="email"
                         required
-                        class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -251,7 +256,7 @@
                         id="company"
                         v-model="formData.company"
                         type="text"
-                        class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="Acme Inc."
                       />
                     </div>
@@ -264,7 +269,7 @@
                         id="phone"
                         v-model="formData.phone"
                         type="tel"
-                        class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all"
                         placeholder="+1 (555) 123-4567"
                       />
                     </div>
@@ -279,16 +284,16 @@
                       id="subject"
                       v-model="formData.subject"
                       required
-                      class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all appearance-none cursor-pointer"
                     >
-                      <option value="">Select a topic</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="support">Technical Support</option>
-                      <option value="sales">Sales & Pricing</option>
-                      <option value="enterprise">Enterprise Solutions</option>
-                      <option value="partnership">Partnership Opportunities</option>
-                      <option value="media">Media & Press</option>
-                      <option value="feedback">Product Feedback</option>
+                      <option value="" class="bg-background text-muted-foreground">Select a topic</option>
+                      <option value="general" class="bg-background text-foreground">General Inquiry</option>
+                      <option value="support" class="bg-background text-foreground">Technical Support</option>
+                      <option value="sales" class="bg-background text-foreground">Sales & Pricing</option>
+                      <option value="enterprise" class="bg-background text-foreground">Enterprise Solutions</option>
+                      <option value="partnership" class="bg-background text-foreground">Partnership Opportunities</option>
+                      <option value="media" class="bg-background text-foreground">Media & Press</option>
+                      <option value="feedback" class="bg-background text-foreground">Product Feedback</option>
                     </select>
                   </div>
                   
@@ -302,7 +307,7 @@
                       v-model="formData.message"
                       required
                       rows="6"
-                      class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      class="w-full px-4 py-3 rounded-lg bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary/50 hover:border-primary/30 transition-all resize-none"
                       placeholder="Tell us how we can help you..."
                     />
                     <Text size="sm" class="text-muted-foreground mt-2">
@@ -316,7 +321,7 @@
                       id="newsletter"
                       v-model="formData.newsletter"
                       type="checkbox"
-                      class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                      class="mt-1 h-4 w-4 rounded border-border bg-muted/50 text-primary focus:ring-primary focus:ring-offset-background checked:bg-primary checked:border-primary cursor-pointer"
                     />
                     <label for="newsletter" class="ml-3">
                       <Text size="sm" class="text-foreground">
@@ -352,9 +357,9 @@
                 </form>
                 
                 <!-- Success Message -->
-                <div v-if="showSuccess" class="mt-6 p-4 rounded-lg bg-success/10 border border-success/20">
+                <div v-if="showSuccess" class="mt-6 p-4 rounded-lg bg-green-500/10 border border-green-500/20">
                   <div class="flex items-start gap-3">
-                    <Icon name="lucide:check-circle" class="h-5 w-5 text-success mt-0.5" />
+                    <Icon name="lucide:check-circle" class="h-5 w-5 text-green-600 dark:text-green-400 mt-0.5" />
                     <div>
                       <Text size="sm" class="font-medium text-foreground">
                         Message sent successfully!
@@ -410,11 +415,11 @@
                   v-for="(faq, index) in faqs" 
                   :key="index"
                   variant="light" 
-                  class="overflow-hidden natural-depth"
+                  class="overflow-hidden natural-depth gentle-hover"
                 >
                   <button
                     @click="toggleFAQ(index)"
-                    class="w-full p-6 text-left flex items-start justify-between gap-4 hover:bg-muted/5 transition-colors"
+                    class="w-full p-6 text-left flex items-start justify-between gap-4 hover:bg-accent/5 transition-all duration-200"
                   >
                     <div class="flex-1">
                       <Heading tag="h3" size="h5" class="text-foreground">
@@ -573,6 +578,9 @@
                         <div class="absolute inset-0 flex items-center justify-center animation-delay-2000">
                           <div class="w-24 h-24 rounded-full border-2 border-accent/30 animate-ping" />
                         </div>
+                        <div class="absolute inset-0 flex items-center justify-center animation-delay-4000">
+                          <div class="w-16 h-16 rounded-full border-2 border-secondary/30 animate-ping" />
+                        </div>
                         
                         <!-- Location pin -->
                         <div class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl flex items-center justify-center animate-float">
@@ -620,7 +628,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { useHead, navigateTo } from '#imports'
+import { useHead, navigateTo, useSupabaseClient, useAuthOverlay } from '#imports'
 
 // Page meta
 useHead({
