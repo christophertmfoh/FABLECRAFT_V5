@@ -194,18 +194,26 @@
               <!-- Checkout Section -->
               <div v-if="selectedPlan !== 'enterprise'" class="space-y-4">
                 <!-- Trial Notice -->
-                <div class="p-4 bg-success/10 rounded-lg border border-success/20">
+                <div v-if="selectedPlan === 'free'" class="p-4 bg-success/10 rounded-lg border border-success/20">
                   <div class="flex items-center justify-center gap-2">
                     <Icon name="lucide:gift" class="h-5 w-5 text-success" />
                                       <Text size="sm" class="font-medium text-center">
-                    {{ config.labels.trialNotice }}
+                    Start free - No credit card required
                   </Text>
                   </div>
                 </div>
+                <div v-else class="p-4 bg-info/10 rounded-lg border border-info/20">
+                  <div class="flex items-center justify-center gap-2">
+                    <Icon name="lucide:credit-card" class="h-5 w-5 text-info" />
+                    <Text size="sm" class="font-medium text-center">
+                      30-day free trial - Credit card required (cancel anytime)
+                    </Text>
+                  </div>
+                </div>
 
-                <!-- Payment Method Selection (for after trial) -->
-                <div v-if="!startTrial">
-                  <Label class="mb-2">{{ config.labels.paymentMethod }}</Label>
+                <!-- Payment Method Selection (required for paid plans) -->
+                <div v-if="selectedPlan !== 'free'">
+                  <Label class="mb-2">Payment Method</Label>
                   <div class="grid grid-cols-2 gap-3">
                     <button
                       v-for="method in paymentMethods.filter(m => !m.enterprise)"
@@ -224,7 +232,46 @@
                   </div>
                 </div>
 
-                <!-- Email Input (for trial) -->
+                <!-- Credit Card Fields (for paid plans) -->
+                <div v-if="selectedPlan !== 'free' && selectedPaymentMethod === 'card'" class="space-y-3">
+                  <div>
+                    <Label for="cardNumber" class="mb-2">Card Number</Label>
+                    <Input
+                      id="cardNumber"
+                      v-model="cardNumber"
+                      type="text"
+                      placeholder="1234 5678 9012 3456"
+                      maxlength="19"
+                      required
+                    />
+                  </div>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <Label for="cardExpiry" class="mb-2">Expiry Date</Label>
+                      <Input
+                        id="cardExpiry"
+                        v-model="cardExpiry"
+                        type="text"
+                        placeholder="MM/YY"
+                        maxlength="5"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label for="cardCvc" class="mb-2">CVC</Label>
+                      <Input
+                        id="cardCvc"
+                        v-model="cardCvc"
+                        type="text"
+                        placeholder="123"
+                        maxlength="4"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Email Input (for all plans) -->
                 <div v-if="!isAuthenticated">
                   <Label for="email" class="mb-2">{{ config.labels.emailAddress }}</Label>
                   <Input
@@ -256,12 +303,12 @@
                     size="lg"
                     variant="default"
                     class="flex-1"
-                    :disabled="!acceptedTerms || (!isAuthenticated && !checkoutEmail) || isProcessing"
+                    :disabled="!acceptedTerms || (!isAuthenticated && !checkoutEmail) || (selectedPlan !== 'free' && selectedPaymentMethod === 'card' && (!cardNumber || !cardExpiry || !cardCvc)) || isProcessing"
                     @click="handleStartTrial"
                   >
                     <Spinner v-if="isProcessing" class="mr-2 h-4 w-4" />
                     <Icon v-else name="lucide:rocket" class="mr-2 h-4 w-4" />
-                    {{ config.buttons.startTrial }}
+                    {{ selectedPlan === 'free' ? 'Start Free' : config.buttons.startTrial }}
                   </Button>
                 </div>
 
@@ -497,12 +544,19 @@ const checkoutEmail = ref('')
 const acceptedTerms = ref(false)
 const isProcessing = ref(false)
 const startTrial = ref(true)
+const cardNumber = ref('')
+const cardExpiry = ref('')
+const cardCvc = ref('')
 
 // Initialize from URL params
 onMounted(() => {
   const planParam = route.query.plan as string
   if (planParam && config.plans[planParam]) {
     selectedPlan.value = planParam
+    // Default to card payment for paid plans
+    if (planParam !== 'free') {
+      selectedPaymentMethod.value = 'card'
+    }
   }
 })
 
