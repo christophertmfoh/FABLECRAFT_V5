@@ -560,24 +560,6 @@
                     <!-- Overlay gradient for better theme integration -->
                     <div class="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
                     
-                    <!-- Animated Location Marker Overlay -->
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div class="relative">
-                        <!-- Ripple effect -->
-                        <div class="absolute inset-0 flex items-center justify-center">
-                          <div class="w-32 h-32 rounded-full border-2 border-primary/60 animate-ping" />
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center animation-delay-2000">
-                          <div class="w-24 h-24 rounded-full border-2 border-accent/60 animate-ping" />
-                        </div>
-                        
-                        <!-- Location pin -->
-                        <div class="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent shadow-2xl flex items-center justify-center animate-float backdrop-blur-sm">
-                          <Icon name="lucide:map-pin" class="h-8 w-8 text-primary-foreground" />
-                        </div>
-                      </div>
-                    </div>
-                    
                     <!-- Map overlay text -->
                     <div class="absolute bottom-6 left-6 right-6">
                       <GlassCard variant="heavy" class="p-6 shadow-xl">
