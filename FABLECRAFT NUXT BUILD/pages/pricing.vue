@@ -35,7 +35,8 @@
             :highlight-text="heroContent.highlight"
             :break-highlight="true"
             :description="heroContent.description"
-            :show-buttons="false"
+            primary-button-text=""
+            secondary-button-text=""
             variant="default"
             alignment="center"
           />
