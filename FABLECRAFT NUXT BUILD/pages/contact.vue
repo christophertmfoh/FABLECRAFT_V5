@@ -574,12 +574,12 @@
                           </div>
                           <Button
                             variant="default"
-                            size="md"
+                            size="lg"
                             @click="handleGetDirections"
-                            class="shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-semibold whitespace-nowrap"
+                            class="min-w-[160px] font-semibold"
                           >
-                            <Icon name="lucide:navigation" class="mr-2 h-4 w-4 flex-shrink-0" />
-                            <span>Get Directions</span>
+                            <Icon name="lucide:navigation" class="mr-2 h-5 w-5" />
+                            Get Directions
                           </Button>
                         </div>
                       </GlassCard>
