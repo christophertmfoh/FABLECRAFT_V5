@@ -27,179 +27,285 @@
     <main class="relative z-10">
       <!-- Hero Section -->
       <Section spacing="none" class="pricing-hero-section">
-        <div class="py-16 sm:py-20">
-          <Container size="xl">
+        <div class="py-12 sm:py-16">
+          <Container size="lg">
             <div class="text-center max-w-3xl mx-auto">
-              <!-- Badge -->
-              <Badge variant="outline" class="mb-6 inline-flex items-center gap-2">
-                <Icon name="lucide:sparkles" class="h-3 w-3" />
-                <span>Simple, transparent pricing</span>
-              </Badge>
-
-              <!-- Title -->
-              <Heading tag="h1" size="display" class="mb-4">
-                Choose the perfect plan for your
-                <AGradientText variant="primary" intensity="vibrant" class="inline-block mx-2">
-                  creative journey
-                </AGradientText>
+              <Heading tag="h1" size="h1" class="mb-4">
+                Choose Your Subscription
               </Heading>
-
-              <!-- Description -->
-              <Text size="lg" class="text-muted-foreground mb-8">
-                Start free, upgrade when you need more. All plans include core features.
-                No hidden fees, cancel anytime.
+              <Text size="lg" class="text-muted-foreground">
+                {{ config.trialDays }}-day free trial on all paid plans. No credit card required.
               </Text>
-
-              <!-- Billing Toggle -->
-              <div class="flex items-center justify-center gap-4 mb-12">
-                <Text 
-                  size="base" 
-                  class="font-medium transition-colors"
-                  :class="billingPeriod === 'monthly' ? 'text-foreground' : 'text-muted-foreground'"
-                >
-                  Monthly
-                </Text>
-                <PricingToggle
-                  v-model="billingPeriod"
-                  :options="['monthly', 'yearly']"
-                  @change="handleBillingChange"
-                />
-                <div class="flex items-center gap-2">
-                  <Text 
-                    size="base" 
-                    class="font-medium transition-colors"
-                    :class="billingPeriod === 'yearly' ? 'text-foreground' : 'text-muted-foreground'"
-                  >
-                    Yearly
-                  </Text>
-                  <Badge variant="default" size="sm" class="bg-green-500/10 text-green-600 border-green-500/20">
-                    Save 20%
-                  </Badge>
-                </div>
-              </div>
             </div>
           </Container>
         </div>
       </Section>
 
-      <!-- Pricing Cards Section -->
-      <Section spacing="none" class="pricing-cards-section">
-        <Container size="xl">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <!-- Free Plan -->
-            <div class="pricing-card-wrapper">
-              <MPricingCard
-                name="Free"
-                :price="0"
-                period=""
-                description="Perfect for trying out Fablecraft"
-                :features="freeFeatures"
-                cta-text="Start Free"
-                :variant="selectedPlan === 'free' ? 'highlighted' : 'default'"
-                @click="selectPlan('free')"
-                @cta-click="handleSubscribe('free')"
+      <!-- Plan Selector Section -->
+      <Section spacing="none" class="plan-selector-section">
+        <Container size="lg">
+          <!-- Billing Toggle -->
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <Text 
+              size="base" 
+              class="font-medium transition-colors"
+              :class="billingPeriod === 'monthly' ? 'text-foreground' : 'text-muted-foreground'"
+            >
+              Monthly
+            </Text>
+            <button
+              class="relative inline-flex h-6 w-11 items-center rounded-full bg-muted transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              :class="billingPeriod === 'yearly' ? 'bg-primary' : 'bg-muted'"
+              @click="toggleBilling"
+            >
+              <span
+                class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
+                :class="billingPeriod === 'yearly' ? 'translate-x-6' : 'translate-x-1'"
               />
+            </button>
+            <div class="flex items-center gap-2">
+              <Text 
+                size="base" 
+                class="font-medium transition-colors"
+                :class="billingPeriod === 'yearly' ? 'text-foreground' : 'text-muted-foreground'"
+              >
+                Yearly
+              </Text>
+              <Badge variant="default" size="sm" class="bg-green-500/10 text-green-600 border-green-500/20">
+                {{ config.discount.label }}
+              </Badge>
             </div>
+          </div>
 
-            <!-- Starter Plan -->
-            <div class="pricing-card-wrapper">
-              <MPricingCard
-                name="Starter"
-                :price="billingPeriod === 'monthly' ? 9 : 7"
-                :period="billingPeriod === 'monthly' ? '/month' : '/month billed yearly'"
-                description="For hobbyists and beginners"
-                :features="starterFeatures"
-                cta-text="Start 7-day trial"
-                :variant="selectedPlan === 'starter' ? 'highlighted' : 'default'"
-                @click="selectPlan('starter')"
-                @cta-click="handleSubscribe('starter')"
-              />
-            </div>
+          <!-- Plan Selection Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-12">
+            <button
+              v-for="(plan, key) in config.plans"
+              :key="key"
+              class="plan-selector-card p-6 rounded-xl border-2 transition-all duration-200 text-left relative"
+              :class="[
+                selectedPlan === key 
+                  ? 'border-primary bg-primary/5 shadow-lg' 
+                  : 'border-border hover:border-primary/50 hover:bg-muted/50',
+                plan.isPopular ? 'ring-2 ring-primary/20' : ''
+              ]"
+              @click="selectPlan(key)"
+            >
+              <!-- Popular Badge -->
+              <Badge 
+                v-if="plan.isPopular" 
+                variant="default" 
+                size="sm" 
+                class="absolute -top-3 left-1/2 -translate-x-1/2"
+              >
+                Most Popular
+              </Badge>
 
-            <!-- Pro Plan -->
-            <div class="pricing-card-wrapper">
-              <MPricingCard
-                name="Pro"
-                :price="billingPeriod === 'monthly' ? 29 : 24"
-                :period="billingPeriod === 'monthly' ? '/month' : '/month billed yearly'"
-                description="For serious creators"
-                :features="proFeatures"
-                cta-text="Start 7-day trial"
-                :is-popular="true"
-                popular-text="Most Popular"
-                :variant="selectedPlan === 'pro' ? 'highlighted' : 'default'"
-                @click="selectPlan('pro')"
-                @cta-click="handleSubscribe('pro')"
-              />
-            </div>
+              <!-- Plan Name -->
+              <Heading tag="h3" size="h4" class="mb-2">
+                {{ plan.name }}
+              </Heading>
 
-            <!-- Enterprise Plan -->
-            <div class="pricing-card-wrapper">
-              <MPricingCard
-                name="Enterprise"
-                price="Custom"
-                period=""
-                description="For teams and organizations"
-                :features="enterpriseFeatures"
-                cta-text="Contact Sales"
-                :variant="selectedPlan === 'enterprise' ? 'highlighted' : 'default'"
-                @click="selectPlan('enterprise')"
-                @cta-click="handleSubscribe('enterprise')"
-              />
-            </div>
+              <!-- Price -->
+              <div class="mb-3">
+                <span class="text-3xl font-bold">
+                  {{ formatPrice(plan, billingPeriod) }}
+                </span>
+                <span v-if="plan.prices[billingPeriod] !== 'custom'" class="text-muted-foreground">
+                  /{{ billingPeriod === 'yearly' ? 'year' : 'month' }}
+                </span>
+              </div>
+
+              <!-- Description -->
+              <Text size="sm" class="text-muted-foreground mb-4">
+                {{ plan.description }}
+              </Text>
+
+              <!-- Key Features (first 3) -->
+              <ul class="space-y-2">
+                <li 
+                  v-for="(feature, idx) in plan.features.slice(0, 3)" 
+                  :key="idx"
+                  class="flex items-start gap-2 text-sm"
+                >
+                  <Icon name="lucide:check" class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>{{ feature }}</span>
+                </li>
+              </ul>
+
+              <!-- Selected Indicator -->
+              <div 
+                v-if="selectedPlan === key"
+                class="absolute top-4 right-4"
+              >
+                <Icon name="lucide:check-circle" class="h-6 w-6 text-primary" />
+              </div>
+            </button>
+          </div>
+
+          <!-- Selected Plan Details & Checkout -->
+          <div v-if="selectedPlan" class="max-w-2xl mx-auto">
+            <Card class="p-8">
+              <div class="mb-6">
+                <Heading tag="h2" size="h3" class="mb-2">
+                  {{ config.plans[selectedPlan].name }} Plan
+                </Heading>
+                <Text size="lg" class="text-primary font-semibold">
+                  {{ formatPrice(config.plans[selectedPlan], billingPeriod) }}
+                  <span class="text-muted-foreground font-normal">
+                    {{ billingPeriod === 'yearly' ? 'per year' : 'per month' }}
+                  </span>
+                </Text>
+              </div>
+
+              <!-- All Features -->
+              <div class="mb-6">
+                <Text size="sm" class="font-semibold mb-3">Everything included:</Text>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <li 
+                    v-for="(feature, idx) in config.plans[selectedPlan].features" 
+                    :key="idx"
+                    class="flex items-start gap-2 text-sm"
+                  >
+                    <Icon name="lucide:check" class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    <span>{{ feature }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Checkout Section -->
+              <div v-if="selectedPlan !== 'enterprise'" class="space-y-4">
+                <!-- Trial Notice -->
+                <div class="p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
+                  <div class="flex items-center gap-2">
+                    <Icon name="lucide:gift" class="h-5 w-5 text-green-600" />
+                    <Text size="sm" class="font-medium">
+                      Start with {{ config.trialDays }}-day free trial - No credit card required
+                    </Text>
+                  </div>
+                </div>
+
+                <!-- Payment Method Selection (for after trial) -->
+                <div v-if="!startTrial">
+                  <Label class="mb-2">Payment Method (for after trial)</Label>
+                  <div class="grid grid-cols-2 gap-3">
+                    <button
+                      v-for="method in paymentMethods.filter(m => !m.enterprise)"
+                      :key="method.id"
+                      class="p-3 rounded-lg border-2 transition-all"
+                      :class="selectedPaymentMethod === method.id 
+                        ? 'border-primary bg-primary/5' 
+                        : 'border-border hover:border-primary/50'"
+                      @click="selectedPaymentMethod = method.id"
+                    >
+                      <div class="flex items-center gap-2">
+                        <Icon :name="method.icon" class="h-5 w-5" />
+                        <span class="text-sm font-medium">{{ method.name }}</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Email Input (for trial) -->
+                <div v-if="!isAuthenticated">
+                  <Label for="email" class="mb-2">Email Address</Label>
+                  <Input
+                    id="email"
+                    v-model="checkoutEmail"
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+
+                <!-- Terms -->
+                <div class="flex items-start gap-2">
+                  <Checkbox
+                    id="terms"
+                    v-model="acceptedTerms"
+                  />
+                  <Label for="terms" class="text-sm">
+                    I agree to the <a href="/terms" class="text-primary hover:underline">Terms of Service</a> 
+                    and <a href="/privacy" class="text-primary hover:underline">Privacy Policy</a>
+                  </Label>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3">
+                  <Button
+                    size="lg"
+                    variant="default"
+                    class="flex-1"
+                    :disabled="!acceptedTerms || (!isAuthenticated && !checkoutEmail) || isProcessing"
+                    @click="handleStartTrial"
+                  >
+                    <Spinner v-if="isProcessing" class="mr-2 h-4 w-4" />
+                    <Icon v-else name="lucide:rocket" class="mr-2 h-4 w-4" />
+                    Start {{ config.trialDays }}-Day Free Trial
+                  </Button>
+                </div>
+
+                <!-- Security Notice -->
+                <div class="flex items-center justify-center gap-4 text-xs text-muted-foreground">
+                  <div class="flex items-center gap-1">
+                    <Icon name="lucide:lock" class="h-3 w-3" />
+                    <span>Secure checkout</span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <Icon name="lucide:shield-check" class="h-3 w-3" />
+                    <span>Cancel anytime</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enterprise Contact -->
+              <div v-else class="space-y-4">
+                <div class="p-4 bg-primary/5 rounded-lg">
+                  <Text size="sm">
+                    Enterprise plans are customized for your organization's needs. 
+                    Our team will work with you to create the perfect solution.
+                  </Text>
+                </div>
+                <Button
+                  size="lg"
+                  variant="default"
+                  class="w-full"
+                  @click="handleContactSales"
+                >
+                  <Icon name="lucide:phone" class="mr-2 h-4 w-4" />
+                  Contact Sales Team
+                </Button>
+              </div>
+            </Card>
           </div>
         </Container>
       </Section>
 
       <!-- Comparison Table Section -->
       <Section spacing="none" class="comparison-section bg-muted/30">
-        <div class="py-16 sm:py-20">
+        <div class="py-12 sm:py-16">
           <Container size="xl">
-            <!-- Section Header -->
-            <div class="text-center max-w-3xl mx-auto mb-12">
-              <Badge variant="outline" class="mb-4">
-                <Icon name="lucide:scale" class="h-3 w-3 mr-2" />
-                Detailed Comparison
-              </Badge>
-              <Heading tag="h2" size="h2" class="mb-4">
-                Compare all features across plans
+            <div class="text-center mb-8">
+              <Heading tag="h2" size="h2">
+                Detailed Feature Comparison
               </Heading>
-              <Text size="lg" class="text-muted-foreground">
-                Every plan includes our core features. Higher tiers unlock advanced capabilities.
-              </Text>
             </div>
 
-            <!-- Comparison Table -->
-            <div class="overflow-x-auto">
-              <table class="w-full comparison-table">
-                <thead>
+            <!-- Desktop Table -->
+            <div class="hidden lg:block overflow-x-auto">
+              <table class="w-full bg-card rounded-xl overflow-hidden">
+                <thead class="bg-muted/50">
                   <tr class="border-b border-border">
                     <th class="text-left py-4 px-6 font-semibold">Features</th>
-                    <th class="text-center py-4 px-6">
-                      <div class="font-semibold">Free</div>
-                      <div class="text-sm text-muted-foreground">$0</div>
-                    </th>
-                    <th class="text-center py-4 px-6">
-                      <div class="font-semibold">Starter</div>
+                    <th 
+                      v-for="(plan, key) in config.plans" 
+                      :key="key"
+                      class="text-center py-4 px-6"
+                    >
+                      <div class="font-semibold">{{ plan.name }}</div>
                       <div class="text-sm text-muted-foreground">
-                        ${{ billingPeriod === 'monthly' ? '9' : '7' }}/mo
+                        {{ formatPrice(plan, 'monthly') }}
                       </div>
-                    </th>
-                    <th class="text-center py-4 px-6 relative">
-                      <PopularBadge
-                        :show="true"
-                        text="Popular"
-                        position="top-center"
-                        size="xs"
-                      />
-                      <div class="font-semibold mt-2">Pro</div>
-                      <div class="text-sm text-muted-foreground">
-                        ${{ billingPeriod === 'monthly' ? '29' : '24' }}/mo
-                      </div>
-                    </th>
-                    <th class="text-center py-4 px-6">
-                      <div class="font-semibold">Enterprise</div>
-                      <div class="text-sm text-muted-foreground">Custom</div>
                     </th>
                   </tr>
                 </thead>
@@ -222,45 +328,45 @@
                         </Tooltip>
                       </div>
                     </td>
-                    <td class="text-center py-4 px-6">
-                      <ComparisonValue :value="feature.free" />
-                    </td>
-                    <td class="text-center py-4 px-6">
-                      <ComparisonValue :value="feature.starter" />
-                    </td>
-                    <td class="text-center py-4 px-6 bg-primary/5">
-                      <ComparisonValue :value="feature.pro" />
-                    </td>
-                    <td class="text-center py-4 px-6">
-                      <ComparisonValue :value="feature.enterprise" />
+                    <td 
+                      v-for="planKey in ['free', 'starter', 'pro', 'enterprise']" 
+                      :key="planKey"
+                      class="text-center py-4 px-6"
+                      :class="{ 'bg-primary/5': config.plans[planKey]?.isPopular }"
+                    >
+                      <ComparisonValue :value="feature[planKey]" />
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <!-- Mobile Comparison (Card View) -->
-            <div class="lg:hidden mt-8 space-y-4">
-              <div v-for="plan in ['free', 'starter', 'pro', 'enterprise']" :key="plan">
-                <Card class="p-6">
-                  <Heading tag="h3" size="h4" class="mb-4 capitalize">
-                    {{ plan }}
-                    <Badge v-if="plan === 'pro'" variant="default" size="sm" class="ml-2">
-                      Popular
-                    </Badge>
-                  </Heading>
-                  <div class="space-y-3">
-                    <div 
-                      v-for="(feature, index) in comparisonFeatures" 
-                      :key="index"
-                      class="flex justify-between items-center py-2 border-b border-border/50 last:border-0"
-                    >
-                      <span class="text-sm">{{ feature.name }}</span>
-                      <ComparisonValue :value="feature[plan]" size="sm" />
-                    </div>
+            <!-- Mobile Comparison -->
+            <div class="lg:hidden space-y-4">
+              <select 
+                v-model="mobileComparisonPlan"
+                class="w-full p-3 rounded-lg border border-border bg-card"
+              >
+                <option v-for="(plan, key) in config.plans" :key="key" :value="key">
+                  {{ plan.name }} - {{ formatPrice(plan, 'monthly') }}
+                </option>
+              </select>
+
+              <Card class="p-6">
+                <Heading tag="h3" size="h4" class="mb-4">
+                  {{ config.plans[mobileComparisonPlan].name }} Features
+                </Heading>
+                <div class="space-y-3">
+                  <div 
+                    v-for="(feature, index) in comparisonFeatures" 
+                    :key="index"
+                    class="flex justify-between items-center py-2 border-b border-border/50 last:border-0"
+                  >
+                    <span class="text-sm">{{ feature.name }}</span>
+                    <ComparisonValue :value="feature[mobileComparisonPlan]" size="sm" />
                   </div>
-                </Card>
-              </div>
+                </div>
+              </Card>
             </div>
           </Container>
         </div>
@@ -268,23 +374,23 @@
 
       <!-- Trust Section -->
       <Section spacing="none" class="trust-section">
-        <div class="py-16">
+        <div class="py-12">
           <Container size="xl">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">50K+</div>
+                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.activeUsers }}</div>
                 <Text size="sm" class="text-muted-foreground">Active Creators</Text>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">4.9/5</div>
+                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.rating }}</div>
                 <Text size="sm" class="text-muted-foreground">Average Rating</Text>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">99.9%</div>
+                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.uptime }}</div>
                 <Text size="sm" class="text-muted-foreground">Uptime SLA</Text>
               </div>
               <div class="text-center">
-                <div class="text-3xl font-bold text-primary mb-2">24/7</div>
+                <div class="text-3xl font-bold text-primary mb-2">{{ trustMetrics.support }}</div>
                 <Text size="sm" class="text-muted-foreground">Support</Text>
               </div>
             </div>
@@ -294,26 +400,18 @@
 
       <!-- FAQ Section -->
       <Section spacing="none" class="faq-section bg-muted/30">
-        <div class="py-16 sm:py-20">
+        <div class="py-12 sm:py-16">
           <Container size="lg">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-              <Badge variant="outline" class="mb-4">
-                <Icon name="lucide:help-circle" class="h-3 w-3 mr-2" />
-                FAQ
-              </Badge>
-              <Heading tag="h2" size="h2" class="mb-4">
-                Frequently asked questions
+            <div class="text-center mb-8">
+              <Heading tag="h2" size="h2">
+                Frequently Asked Questions
               </Heading>
-              <Text size="lg" class="text-muted-foreground">
-                Everything you need to know about our pricing and plans
-              </Text>
             </div>
 
             <div class="max-w-3xl mx-auto space-y-4">
               <div
                 v-for="(faq, index) in pricingFaqs"
                 :key="index"
-                class="faq-item"
               >
                 <button
                   class="w-full text-left p-6 bg-card rounded-xl hover:bg-accent/5 transition-all duration-200 group"
@@ -326,7 +424,6 @@
                     <Icon
                       :name="expandedFaq === index ? 'lucide:minus' : 'lucide:plus'"
                       class="h-5 w-5 text-muted-foreground group-hover:text-primary transition-all duration-200"
-                      :class="{ 'rotate-180': expandedFaq === index }"
                     />
                   </div>
                   <Transition name="faq">
@@ -339,43 +436,6 @@
                 </button>
               </div>
             </div>
-          </Container>
-        </div>
-      </Section>
-
-      <!-- CTA Section -->
-      <Section spacing="none" class="cta-section">
-        <div class="py-20">
-          <Container size="lg">
-            <Card class="p-12 text-center bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border-primary/20">
-              <Heading tag="h2" size="h2" class="mb-4">
-                Ready to start creating?
-              </Heading>
-              <Text size="lg" class="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of creators who are already using Fablecraft to bring their stories to life.
-                Start with our free plan and upgrade anytime.
-              </Text>
-              <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  variant="default"
-                  class="font-semibold"
-                  @click="handleStartFree"
-                >
-                  <Icon name="lucide:sparkles" class="mr-2 h-4 w-4" />
-                  Start Free
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  class="font-semibold"
-                  @click="handleContactSales"
-                >
-                  <Icon name="lucide:phone" class="mr-2 h-4 w-4" />
-                  Talk to Sales
-                </Button>
-              </div>
-            </Card>
           </Container>
         </div>
       </Section>
@@ -396,21 +456,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useHead, navigateTo, useSupabaseClient, useSupabaseUser } from '#imports'
+import { ref, computed, onMounted } from 'vue'
+import { useHead, navigateTo, useSupabaseClient, useSupabaseUser, useRoute } from '#imports'
+import { 
+  PRICING_CONFIG, 
+  TRUST_METRICS, 
+  COMPARISON_FEATURES, 
+  PRICING_FAQS,
+  PAYMENT_METHODS 
+} from '~/constants/pricing'
 
 // Authentication state
 const supabase = import.meta.client ? useSupabaseClient() : null
 const user = import.meta.client ? useSupabaseUser() : ref(null)
 const isAuthenticated = computed(() => !!user?.value)
+const route = useRoute()
+
+// Configuration
+const config = PRICING_CONFIG
+const trustMetrics = TRUST_METRICS
+const comparisonFeatures = COMPARISON_FEATURES
+const pricingFaqs = PRICING_FAQS
+const paymentMethods = PAYMENT_METHODS
 
 // Page meta
 useHead({
-  title: 'Pricing - Fablecraft | Simple, Transparent Pricing',
+  title: 'Pricing - Fablecraft | Start Your 30-Day Free Trial',
   meta: [
     {
       name: 'description',
-      content: 'Choose the perfect Fablecraft plan for your creative journey. Free to start, with flexible pricing for hobbyists, professionals, and enterprises.',
+      content: `Choose the perfect Fablecraft plan. ${config.trialDays}-day free trial on all plans. No credit card required.`,
     },
   ],
 })
@@ -418,194 +493,71 @@ useHead({
 // State
 const billingPeriod = ref<'monthly' | 'yearly'>('monthly')
 const selectedPlan = ref<string | null>(null)
+const selectedPaymentMethod = ref<string>('card')
 const expandedFaq = ref<number | null>(null)
+const mobileComparisonPlan = ref<string>('free')
+const checkoutEmail = ref('')
+const acceptedTerms = ref(false)
+const isProcessing = ref(false)
+const startTrial = ref(true)
 
-// Plan features
-const freeFeatures = [
-  { text: '3 projects per month', included: true },
-  { text: 'Basic AI assistance', included: true },
-  { text: 'Community support', included: true },
-  { text: 'Export to PDF', included: true },
-  { text: 'Basic templates', included: true },
-]
-
-const starterFeatures = [
-  { text: '10 projects per month', included: true },
-  { text: 'Advanced AI assistance', included: true },
-  { text: 'Priority support', included: true },
-  { text: 'All export formats', included: true },
-  { text: 'Premium templates', included: true },
-]
-
-const proFeatures = [
-  { text: 'Unlimited projects', included: true },
-  { text: 'Pro AI with GPT-4', included: true },
-  { text: 'Priority support', included: true },
-  { text: 'Advanced collaboration', included: true },
-  { text: 'Custom branding', included: true },
-]
-
-const enterpriseFeatures = [
-  { text: 'Everything in Pro', included: true },
-  { text: 'Custom AI training', included: true },
-  { text: 'Dedicated support', included: true },
-  { text: 'SSO & advanced security', included: true },
-  { text: 'SLA guarantee', included: true },
-]
-
-// Comparison table features
-const comparisonFeatures = [
-  {
-    name: 'Projects per month',
-    free: '3',
-    starter: '10',
-    pro: 'Unlimited',
-    enterprise: 'Unlimited',
-  },
-  {
-    name: 'AI Writing Assistant',
-    free: true,
-    starter: true,
-    pro: true,
-    enterprise: true,
-    tooltip: 'AI-powered writing suggestions and completions',
-  },
-  {
-    name: 'AI Model',
-    free: 'Basic',
-    starter: 'Advanced',
-    pro: 'GPT-4',
-    enterprise: 'Custom',
-  },
-  {
-    name: 'Story Templates',
-    free: '10',
-    starter: '50+',
-    pro: '200+',
-    enterprise: 'Custom',
-  },
-  {
-    name: 'Export Formats',
-    free: 'PDF',
-    starter: 'All formats',
-    pro: 'All formats',
-    enterprise: 'All formats + API',
-  },
-  {
-    name: 'Collaboration',
-    free: false,
-    starter: '3 users',
-    pro: '10 users',
-    enterprise: 'Unlimited',
-  },
-  {
-    name: 'Version History',
-    free: '7 days',
-    starter: '30 days',
-    pro: 'Unlimited',
-    enterprise: 'Unlimited',
-  },
-  {
-    name: 'Storage',
-    free: '1 GB',
-    starter: '10 GB',
-    pro: '100 GB',
-    enterprise: 'Unlimited',
-  },
-  {
-    name: 'Support',
-    free: 'Community',
-    starter: 'Email',
-    pro: 'Priority',
-    enterprise: 'Dedicated',
-  },
-  {
-    name: 'API Access',
-    free: false,
-    starter: false,
-    pro: true,
-    enterprise: true,
-  },
-  {
-    name: 'Custom Branding',
-    free: false,
-    starter: false,
-    pro: true,
-    enterprise: true,
-  },
-  {
-    name: 'Analytics',
-    free: 'Basic',
-    starter: 'Advanced',
-    pro: 'Advanced',
-    enterprise: 'Custom',
-  },
-]
-
-// FAQ data
-const pricingFaqs = [
-  {
-    question: 'Can I change plans anytime?',
-    answer: 'Yes! You can upgrade or downgrade your plan at any time. When upgrading, you\'ll be charged the prorated difference. When downgrading, you\'ll receive credit for the unused time.',
-  },
-  {
-    question: 'Do you offer refunds?',
-    answer: 'We offer a 30-day money-back guarantee for all paid plans. If you\'re not satisfied, contact our support team for a full refund.',
-  },
-  {
-    question: 'What payment methods do you accept?',
-    answer: 'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and wire transfers for enterprise customers.',
-  },
-  {
-    question: 'Is there a free trial for paid plans?',
-    answer: 'Yes! All paid plans come with a 7-day free trial. No credit card required to start your trial.',
-  },
-  {
-    question: 'What happens when I reach my project limit?',
-    answer: 'You\'ll receive a notification when you\'re close to your limit. You can either upgrade your plan or wait until the next billing cycle for your limit to reset.',
-  },
-  {
-    question: 'Do you offer discounts for students or non-profits?',
-    answer: 'Yes! We offer 50% off for verified students and non-profit organizations. Contact our support team with proof of eligibility.',
-  },
-]
-
-// Event handlers
-const handleBillingChange = (value: 'monthly' | 'yearly') => {
-  billingPeriod.value = value
-}
-
-const selectPlan = (plan: string) => {
-  selectedPlan.value = plan
-}
-
-const handleSubscribe = (plan: string) => {
-  if (plan === 'free') {
-    if (!isAuthenticated.value) {
-      // Open auth overlay for signup
-      navigateTo('/signup?plan=free')
-    } else {
-      // Already logged in, just switch to free plan
-      console.log('Switching to free plan')
-    }
-  } else if (plan === 'enterprise') {
-    navigateTo('/contact?subject=enterprise')
-  } else {
-    // For paid plans, go to checkout
-    navigateTo(`/checkout?plan=${plan}&billing=${billingPeriod.value}`)
+// Initialize from URL params
+onMounted(() => {
+  const planParam = route.query.plan as string
+  if (planParam && config.plans[planParam]) {
+    selectedPlan.value = planParam
   }
+})
+
+// Methods
+const toggleBilling = () => {
+  billingPeriod.value = billingPeriod.value === 'monthly' ? 'yearly' : 'monthly'
+}
+
+const selectPlan = (planId: string) => {
+  selectedPlan.value = planId
+}
+
+const formatPrice = (plan: any, period: string) => {
+  const price = plan.prices[period]
+  if (price === 'custom') return 'Custom'
+  if (price === 0) return 'Free'
+  
+  if (period === 'yearly') {
+    const monthlyPrice = Math.round(price / 12)
+    return `$${monthlyPrice}`
+  }
+  
+  return `$${price}`
+}
+
+const handleStartTrial = async () => {
+  if (!acceptedTerms.value) return
+  
+  isProcessing.value = true
+  
+  // Simulate processing
+  await new Promise(resolve => setTimeout(resolve, 1500))
+  
+  if (!isAuthenticated.value) {
+    // Redirect to signup with plan info
+    navigateTo(`/signup?plan=${selectedPlan.value}&trial=true&email=${checkoutEmail.value}`)
+  } else {
+    // Start trial for authenticated user
+    console.log('Starting trial for plan:', selectedPlan.value)
+    // Here you would make an API call to start the trial
+    navigateTo('/account?trial=started')
+  }
+  
+  isProcessing.value = false
+}
+
+const handleContactSales = () => {
+  navigateTo('/contact?subject=enterprise')
 }
 
 const toggleFaq = (index: number) => {
   expandedFaq.value = expandedFaq.value === index ? null : index
-}
-
-const handleStartFree = () => {
-  handleSubscribe('free')
-}
-
-const handleContactSales = () => {
-  navigateTo('/contact?subject=sales')
 }
 
 // Navigation handlers
@@ -645,17 +597,9 @@ const handleLegalClick = (payload: any) => {
 </script>
 
 <style scoped>
-/* Comparison table styles */
-.comparison-table {
-  @apply bg-card rounded-xl overflow-hidden;
-}
-
-.comparison-table thead {
-  @apply bg-muted/50;
-}
-
-.comparison-table tbody tr:last-child {
-  @apply border-b-0;
+/* Plan selector cards */
+.plan-selector-card {
+  @apply cursor-pointer;
 }
 
 /* FAQ transition */
@@ -672,16 +616,7 @@ const handleLegalClick = (payload: any) => {
   max-height: 0;
 }
 
-/* Pricing card wrapper */
-.pricing-card-wrapper {
-  @apply transform transition-all duration-300;
-}
-
-.pricing-card-wrapper:hover {
-  @apply -translate-y-1;
-}
-
-/* Trust section numbers */
+/* Trust section */
 .trust-section {
   @apply relative;
 }
