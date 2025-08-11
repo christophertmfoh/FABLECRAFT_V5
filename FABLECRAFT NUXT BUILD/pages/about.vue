@@ -85,113 +85,108 @@
 
               <!-- Stories Come Alive Section -->
               <div class="relative max-w-5xl mx-auto">
-                <!-- Background Glow Effect -->
+                <!-- Background Glow -->
                 <div class="absolute inset-0 -z-10">
-                  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 rounded-full blur-3xl animate-pulse" />
+                  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 rounded-full blur-3xl" />
                 </div>
                 
-                <!-- Main Content Card -->
-                <GlassCard variant="heavy" class="relative overflow-hidden">
-                  <!-- Top Section with Title -->
-                  <div class="relative z-20 px-8 py-6 border-b border-border/10">
-                    <div class="flex items-center justify-center gap-4">
-                      <div class="h-px w-20 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-                      <Heading tag="h3" size="h3" class="text-center">
-                        <span class="text-foreground">Stories</span>
-                        <span> </span>
-                        <AGradientText
-                          tag="span"
-                          variant="primary"
-                          direction="to-r"
-                          intensity="vibrant"
-                          class="bg-clip-text text-transparent"
-                        >
-                          Come Alive
-                        </AGradientText>
-                      </Heading>
-                      <div class="h-px w-20 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
-                    </div>
+                <!-- Main Card -->
+                <GlassCard variant="light" class="relative overflow-hidden">
+                  <!-- Header -->
+                  <div class="px-8 py-6 text-center">
+                    <Heading tag="h3" size="h3">
+                      <span class="text-foreground">Stories</span>
+                      <span> </span>
+                      <AGradientText
+                        tag="span"
+                        variant="primary"
+                        direction="to-r"
+                        intensity="vibrant"
+                      >
+                        Come Alive
+                      </AGradientText>
+                    </Heading>
+                    <Text size="sm" class="text-muted-foreground mt-2">
+                      Watch your words transform into worlds
+                    </Text>
                   </div>
                   
                   <!-- Animation Area -->
-                  <div class="relative h-[400px] flex items-center justify-center p-8">
-                    <!-- Animated Background Pattern -->
-                    <div class="absolute inset-0 opacity-30">
-                      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 animate-gradient-xy" />
-                      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(var(--primary),0.03)_50%,transparent_100%)] animate-pulse-slow" />
+                  <div class="relative h-[350px] flex items-center justify-center px-8 pb-8">
+                    <!-- Text Input Area -->
+                    <div class="absolute left-8 top-1/2 -translate-y-1/2 w-1/3">
+                      <div class="space-y-3">
+                        <!-- Typing Animation -->
+                        <div class="bg-background/50 border border-border/50 rounded-lg p-4">
+                          <div class="space-y-2">
+                            <div class="flex items-center gap-2">
+                              <div class="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                              <Text size="xs" class="text-muted-foreground">AI Prompt</Text>
+                            </div>
+                            <div class="font-mono text-sm text-foreground typing-animation">
+                              "A magical forest with glowing mushrooms..."
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- Keywords floating out -->
+                        <div class="relative h-20">
+                          <span class="absolute text-xs text-primary/60 animate-float-word-1">magical</span>
+                          <span class="absolute text-xs text-accent/60 animate-float-word-2 left-12">forest</span>
+                          <span class="absolute text-xs text-secondary/60 animate-float-word-3 left-6 top-8">glowing</span>
+                        </div>
+                      </div>
                     </div>
                     
-                    <!-- Central Interactive Book Scene -->
-                    <div class="relative">
-                      <!-- Book Container with 3D Effect -->
-                      <div class="relative transform-gpu perspective-1000">
-                        <!-- Main Book -->
-                        <div class="relative w-64 h-72 transform rotate-y-15 preserve-3d">
-                          <!-- Book Cover -->
-                          <div class="absolute inset-0 bg-gradient-to-br from-primary via-accent to-secondary rounded-lg shadow-2xl transform rotate-3 animate-book-breathe">
-                            <div class="absolute inset-[3px] bg-background/90 rounded-lg flex flex-col items-center justify-center">
-                              <Icon name="lucide:book-open" class="h-24 w-24 text-primary mb-4" />
-                              <div class="text-center px-4">
-                                <Text size="sm" class="text-foreground font-semibold">Fablecraft</Text>
-                                <Text size="xs" class="text-muted-foreground">Create Magic</Text>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <!-- Animated Pages Turning -->
-                          <div class="absolute inset-0 pointer-events-none">
-                            <!-- Page 1 - Flipping -->
-                            <div class="absolute top-4 right-0 w-[120px] h-[140px] bg-background border border-border/50 rounded shadow-lg origin-left animate-page-turn-1">
-                              <div class="p-3 opacity-70">
-                                <div class="h-2 bg-gradient-to-r from-primary/30 to-accent/30 rounded mb-2 animate-shimmer" />
-                                <div class="space-y-1.5">
-                                  <div class="h-1 bg-muted/40 rounded" />
-                                  <div class="h-1 bg-muted/40 rounded w-4/5" />
-                                  <div class="h-1 bg-muted/40 rounded w-3/5" />
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <!-- Page 2 - Flipping Delayed -->
-                            <div class="absolute top-6 right-2 w-[120px] h-[140px] bg-background border border-border/50 rounded shadow-lg origin-left animate-page-turn-2 animation-delay-2000">
-                              <div class="p-3 opacity-70">
-                                <div class="h-2 bg-gradient-to-r from-accent/30 to-secondary/30 rounded mb-2 animate-shimmer animation-delay-2000" />
-                                <div class="space-y-1.5">
-                                  <div class="h-1 bg-muted/40 rounded w-3/4" />
-                                  <div class="h-1 bg-muted/40 rounded" />
-                                  <div class="h-1 bg-muted/40 rounded w-2/3" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <!-- Magical Elements -->
-                          <div class="absolute inset-0 pointer-events-none">
-                            <!-- Sparkle Trail -->
-                            <div class="absolute top-0 left-1/2 w-1 h-1 bg-primary rounded-full animate-sparkle-trail-1">
-                              <Icon name="lucide:sparkles" class="h-4 w-4 text-primary -translate-x-1/2 -translate-y-1/2" />
-                            </div>
-                            <div class="absolute top-1/3 right-0 w-1 h-1 bg-accent rounded-full animate-sparkle-trail-2 animation-delay-1000">
-                              <Icon name="lucide:sparkles" class="h-3 w-3 text-accent -translate-x-1/2 -translate-y-1/2" />
-                            </div>
-                            <div class="absolute bottom-1/4 left-0 w-1 h-1 bg-secondary rounded-full animate-sparkle-trail-3 animation-delay-2000">
-                              <Icon name="lucide:sparkles" class="h-5 w-5 text-secondary -translate-x-1/2 -translate-y-1/2" />
-                            </div>
-                            
-                            <!-- Glow Orbs -->
-                            <div class="absolute -top-8 -right-8 w-16 h-16 bg-primary/20 rounded-full blur-xl animate-float-slow" />
-                            <div class="absolute -bottom-6 -left-6 w-12 h-12 bg-accent/20 rounded-full blur-xl animate-float-slow animation-delay-2000" />
+                    <!-- Transformation Particles -->
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                      <div class="relative w-32 h-32">
+                        <!-- Particle Stream -->
+                        <div class="absolute inset-0">
+                          <div class="particle-1 absolute w-1 h-1 bg-primary rounded-full animate-particle-flow-1" />
+                          <div class="particle-2 absolute w-1 h-1 bg-accent rounded-full animate-particle-flow-2" />
+                          <div class="particle-3 absolute w-1 h-1 bg-secondary rounded-full animate-particle-flow-3" />
+                          <div class="particle-4 absolute w-1.5 h-1.5 bg-primary/60 rounded-full animate-particle-flow-4" />
+                          <div class="particle-5 absolute w-0.5 h-0.5 bg-accent/60 rounded-full animate-particle-flow-5" />
+                        </div>
+                        
+                        <!-- Central Transform Icon -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                          <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center animate-pulse">
+                            <Icon name="lucide:wand-2" class="h-8 w-8 text-primary animate-spin-slow" />
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  <!-- Bottom Description -->
-                  <div class="relative z-20 px-8 py-6 border-t border-border/10 bg-muted/5">
-                    <Text size="base" class="text-center text-muted-foreground max-w-2xl mx-auto">
-                      Transform your imagination into immersive experiences with AI-powered creative tools
-                    </Text>
+                    
+                    <!-- Output Media Grid -->
+                    <div class="absolute right-8 top-1/2 -translate-y-1/2 w-1/3">
+                      <div class="grid grid-cols-2 gap-3">
+                        <!-- Image Output -->
+                        <div class="bg-gradient-to-br from-primary/10 to-accent/10 rounded-lg p-3 animate-fade-in-scale animation-delay-1000">
+                          <Icon name="lucide:image" class="h-6 w-6 text-primary mb-2" />
+                          <div class="h-12 bg-gradient-to-r from-primary/20 to-accent/20 rounded animate-shimmer" />
+                        </div>
+                        
+                        <!-- Video Output -->
+                        <div class="bg-gradient-to-br from-accent/10 to-secondary/10 rounded-lg p-3 animate-fade-in-scale animation-delay-2000">
+                          <Icon name="lucide:video" class="h-6 w-6 text-accent mb-2" />
+                          <div class="h-12 bg-gradient-to-r from-accent/20 to-secondary/20 rounded animate-shimmer animation-delay-2000" />
+                        </div>
+                        
+                        <!-- Audio Output -->
+                        <div class="bg-gradient-to-br from-secondary/10 to-primary/10 rounded-lg p-3 animate-fade-in-scale animation-delay-3000">
+                          <Icon name="lucide:music" class="h-6 w-6 text-secondary mb-2" />
+                          <div class="h-12 bg-gradient-to-r from-secondary/20 to-primary/20 rounded animate-shimmer animation-delay-3000" />
+                        </div>
+                        
+                        <!-- 3D Output -->
+                        <div class="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg p-3 animate-fade-in-scale animation-delay-4000">
+                          <Icon name="lucide:box" class="h-6 w-6 text-primary mb-2" />
+                          <div class="h-12 bg-gradient-to-r from-primary/20 to-secondary/20 rounded animate-shimmer animation-delay-4000" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </GlassCard>
               </div>
@@ -852,178 +847,208 @@ html {
   animation: gradient-shift 10s ease-in-out infinite;
 }
 
-/* Book breathing animation */
-@keyframes book-breathe {
-  0%, 100% {
-    transform: rotate(3deg) scale(1);
-  }
-  50% {
-    transform: rotate(3deg) scale(1.02);
-  }
+/* Typing animation */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
 }
 
-.animate-book-breathe {
-  animation: book-breathe 4s ease-in-out infinite;
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(40, end) infinite;
 }
 
-/* Page turning animations */
-@keyframes page-turn-1 {
-  0%, 100% {
-    transform: rotateY(0deg);
-    opacity: 0;
-  }
-  20%, 80% {
-    opacity: 1;
-  }
-  50% {
-    transform: rotateY(-180deg);
-    opacity: 1;
-  }
-}
-
-@keyframes page-turn-2 {
-  0%, 100% {
-    transform: rotateY(0deg);
-    opacity: 0;
-  }
-  20%, 80% {
-    opacity: 1;
-  }
-  50% {
-    transform: rotateY(-180deg);
-    opacity: 1;
-  }
-}
-
-.animate-page-turn-1 {
-  animation: page-turn-1 8s ease-in-out infinite;
-}
-
-.animate-page-turn-2 {
-  animation: page-turn-2 8s ease-in-out infinite;
-}
-
-/* Sparkle trail animations */
-@keyframes sparkle-trail-1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(0);
+/* Words floating animation */
+@keyframes float-word-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
     opacity: 0;
   }
   20% {
-    transform: translate(-30px, 30px) scale(1);
     opacity: 1;
   }
-  80% {
-    transform: translate(30px, -30px) scale(1);
-    opacity: 1;
+  100% {
+    transform: translate(80px, -40px) scale(0.8);
+    opacity: 0;
   }
 }
 
-@keyframes sparkle-trail-2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(0);
+@keyframes float-word-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
     opacity: 0;
   }
   20% {
-    transform: translate(20px, -20px) scale(1);
     opacity: 1;
   }
-  80% {
-    transform: translate(-40px, 20px) scale(1);
-    opacity: 1;
+  100% {
+    transform: translate(60px, -50px) scale(0.8);
+    opacity: 0;
   }
 }
 
-@keyframes sparkle-trail-3 {
-  0%, 100% {
-    transform: translate(0, 0) scale(0);
+@keyframes float-word-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
     opacity: 0;
   }
   20% {
-    transform: translate(25px, 25px) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(70px, -30px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.animate-float-word-1 {
+  animation: float-word-1 4s ease-out infinite;
+}
+
+.animate-float-word-2 {
+  animation: float-word-2 4s ease-out infinite 0.5s;
+}
+
+.animate-float-word-3 {
+  animation: float-word-3 4s ease-out infinite 1s;
+}
+
+/* Particle flow animations */
+@keyframes particle-flow-1 {
+  0% {
+    transform: translate(-60px, 0);
+    opacity: 0;
+  }
+  20% {
     opacity: 1;
   }
   80% {
-    transform: translate(-25px, -25px) scale(1);
     opacity: 1;
   }
-}
-
-.animate-sparkle-trail-1 {
-  animation: sparkle-trail-1 4s ease-in-out infinite;
-}
-
-.animate-sparkle-trail-2 {
-  animation: sparkle-trail-2 5s ease-in-out infinite;
-}
-
-.animate-sparkle-trail-3 {
-  animation: sparkle-trail-3 6s ease-in-out infinite;
-}
-
-/* Slow float animation */
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
+  100% {
+    transform: translate(60px, 0);
+    opacity: 0;
   }
 }
 
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-/* Gradient XY animation */
-@keyframes gradient-xy {
-  0%, 100% {
-    transform: translate(0, 0);
+@keyframes particle-flow-2 {
+  0% {
+    transform: translate(-60px, -10px);
+    opacity: 0;
   }
-  25% {
-    transform: translate(10%, 10%);
+  20% {
+    opacity: 0.8;
   }
-  50% {
-    transform: translate(-10%, 10%);
+  80% {
+    opacity: 0.8;
   }
-  75% {
-    transform: translate(-10%, -10%);
+  100% {
+    transform: translate(60px, 10px);
+    opacity: 0;
   }
 }
 
-.animate-gradient-xy {
-  animation: gradient-xy 20s ease-in-out infinite;
+@keyframes particle-flow-3 {
+  0% {
+    transform: translate(-60px, 10px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(60px, -10px);
+    opacity: 0;
+  }
 }
 
-/* Slow pulse */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.3;
+@keyframes particle-flow-4 {
+  0% {
+    transform: translate(-60px, 5px);
+    opacity: 0;
   }
-  50% {
+  20% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(60px, -5px);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-flow-5 {
+  0% {
+    transform: translate(-60px, -5px);
+    opacity: 0;
+  }
+  20% {
     opacity: 0.5;
   }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(60px, 5px);
+    opacity: 0;
+  }
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
+.animate-particle-flow-1 {
+  animation: particle-flow-1 2s linear infinite;
 }
 
-/* 3D transforms */
-.perspective-1000 {
-  perspective: 1000px;
+.animate-particle-flow-2 {
+  animation: particle-flow-2 2s linear infinite 0.2s;
 }
 
-.preserve-3d {
-  transform-style: preserve-3d;
+.animate-particle-flow-3 {
+  animation: particle-flow-3 2s linear infinite 0.4s;
 }
 
-.rotate-y-15 {
-  transform: rotateY(-15deg);
+.animate-particle-flow-4 {
+  animation: particle-flow-4 2s linear infinite 0.6s;
 }
 
-.origin-left {
-  transform-origin: left center;
+.animate-particle-flow-5 {
+  animation: particle-flow-5 2s linear infinite 0.8s;
+}
+
+/* Fade in and scale */
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Slow spin */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
 
 /* Enhanced hover effects */
