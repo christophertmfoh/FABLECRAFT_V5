@@ -61,11 +61,14 @@
                   class="mb-6"
                 />
                 
-                <!-- Location Badge using proper Badge component -->
-                <Badge variant="outline" class="px-4 py-2">
-                  <Icon name="lucide:map-pin" class="h-4 w-4 mr-2 text-primary" />
-                  <span class="font-medium">Hartford, Connecticut</span>
-                </Badge>
+                <!-- Location Badge -->
+                <MHeroBadge
+                  text="Hartford, Connecticut"
+                  variant="outline"
+                  size="sm"
+                  dot-color="primary"
+                  clickable
+                />
               </div>
             </Container>
           </div>
@@ -77,10 +80,12 @@
             <Container size="xl">
               <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
-                  <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-                    <Icon name="lucide:target" class="h-4 w-4 text-primary" />
-                    <Text size="sm" class="font-medium text-primary">Our Mission</Text>
-                  </div>
+                                  <MHeroBadge
+                  text="Our Mission"
+                  variant="outline"
+                  size="sm"
+                  dot-color="primary"
+                />
                   
                   <Heading tag="h2" size="h2" class="text-foreground">
                     Democratizing Creative Excellence
@@ -131,22 +136,29 @@
                   </div>
                 </div>
                 
-                <!-- Visual Element -->
-                <div class="relative">
-                  <GlassCard variant="light" class="p-8">
-                    <div class="aspect-square rounded-lg bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 flex items-center justify-center">
-                      <div class="text-center space-y-4">
-                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-background/80 backdrop-blur-sm">
-                          <Icon name="lucide:palette" class="h-10 w-10 text-primary" />
-                        </div>
-                        <Text size="lg" class="font-semibold text-foreground">Creating Magic Together</Text>
-                      </div>
+                <!-- Visual Element with Animation -->
+                <div class="relative flex items-center justify-center">
+                  <div class="relative w-full max-w-md">
+                    <!-- Animated rings -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div class="w-64 h-64 rounded-full border border-primary/20 animate-ping" />
                     </div>
-                  </GlassCard>
-                  
-                  <!-- Decorative elements -->
-                  <div class="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-                  <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
+                    <div class="absolute inset-0 flex items-center justify-center animation-delay-2000">
+                      <div class="w-48 h-48 rounded-full border border-accent/20 animate-ping" />
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center animation-delay-4000">
+                      <div class="w-32 h-32 rounded-full border border-secondary/20 animate-ping" />
+                    </div>
+                    
+                    <!-- Center content -->
+                    <div class="relative z-10 text-center py-20">
+                      <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary to-accent mb-4 animate-pulse">
+                        <Icon name="lucide:sparkles" class="h-12 w-12 text-background" />
+                      </div>
+                      <Heading tag="h3" size="h4" class="text-foreground mb-2">Creating Magic</Heading>
+                      <Text size="base" class="text-muted-foreground">Together</Text>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Container>
@@ -154,14 +166,17 @@
         </Section>
 
         <!-- Values Section -->
-        <Section spacing="none" class="values-section bg-muted/30">
+        <Section spacing="none" class="values-section">
           <div class="py-16 sm:py-20">
             <Container size="xl">
               <div class="text-center max-w-3xl mx-auto mb-12">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                  <Icon name="lucide:star" class="h-4 w-4 text-primary" />
-                  <Text size="sm" class="font-medium text-primary">Our Values</Text>
-                </div>
+                <MHeroBadge
+                  text="Our Values"
+                  variant="outline"
+                  size="sm"
+                  dot-color="primary"
+                  class="mb-6"
+                />
                 
                 <Heading tag="h2" size="h2" class="text-foreground mb-4">
                   Principles That Guide Us
@@ -222,10 +237,13 @@
           <div class="py-16 sm:py-20">
             <Container size="xl">
               <div class="text-center max-w-3xl mx-auto mb-12">
-                <Badge variant="outline" class="mb-6">
-                  <Icon name="lucide:users-2" class="h-4 w-4 mr-2" />
-                  Leadership Team
-                </Badge>
+                <MHeroBadge
+                  text="Leadership Team"
+                  variant="outline"
+                  size="sm"
+                  dot-color="primary"
+                  class="mb-6"
+                />
                 
                 <Heading tag="h2" size="h2" class="text-foreground mb-4">
                   Meet Our Visionaries
@@ -362,15 +380,18 @@
         </Section>
 
         <!-- Journey Section -->
-        <Section spacing="none" class="journey-section bg-muted/30">
+        <Section spacing="none" class="journey-section">
           <div class="py-16 sm:py-20">
             <Container size="xl">
               <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
-                  <Badge variant="outline" class="mb-6">
-                    <Icon name="lucide:rocket" class="h-4 w-4 mr-2" />
-                    Our Journey
-                  </Badge>
+                  <MHeroBadge
+                    text="Our Journey"
+                    variant="outline"
+                    size="sm"
+                    dot-color="primary"
+                    class="mb-6"
+                  />
                   
                   <Heading tag="h2" size="h2" class="text-foreground mb-4">
                     Building the Future, Step by Step
@@ -392,7 +413,7 @@
                         <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <Text size="sm" class="font-bold text-background">2022</Text>
                         </div>
-                        <div class="absolute inset-0 w-14 h-14 rounded-full bg-primary/30 animate-ping" />
+
                       </div>
                       <div class="flex-1 pb-4">
                         <GlassCard variant="light" class="p-6 natural-depth gentle-hover">
@@ -492,10 +513,10 @@
                     <!-- 2025 - Now -->
                     <div class="relative flex gap-8 group">
                       <div class="flex-shrink-0 relative z-10">
-                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary border-3 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-pulse">
+                        <div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary border-3 border-background shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <Text size="sm" class="font-bold text-background">2025</Text>
                         </div>
-                        <div class="absolute inset-0 w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary opacity-30 animate-ping" />
+                        <div class="absolute inset-0 w-14 h-14 rounded-full bg-gradient-to-br from-primary via-accent to-secondary opacity-20 animate-pulse" />
                       </div>
                       <div class="flex-1">
                         <GlassCard variant="heavy" class="p-6 natural-depth gentle-hover border-2 border-primary/20">
@@ -527,10 +548,7 @@
                 </div>
               </div>
             </Container>
-            
-            <!-- Decorative elements -->
-            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-            <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+
           </div>
         </Section>
 
@@ -674,9 +692,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Animation delay utility */
+/* Animation delay utilities */
 .animation-delay-2000 {
   animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 
 /* Enhanced hover effects */
