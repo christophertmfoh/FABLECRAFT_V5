@@ -539,7 +539,7 @@
           <div class="absolute inset-0 bg-background/80 backdrop-blur-sm" @click="showPasswordModal = false"></div>
           <GlassCard variant="heavy" class="relative z-10 w-full max-w-md p-6">
             <div class="flex items-center justify-between mb-4">
-              <Heading tag="h3" size="h4">Change Password</Heading>
+              <Heading tag="h3" size="h4" class="text-foreground">{{ t('button.changePassword', 'Change Password') }}</Heading>
               <button @click="showPasswordModal = false" class="text-muted-foreground hover:text-foreground transition-colors">
                 <Icon name="lucide:x" class="h-5 w-5" />
               </button>
@@ -547,7 +547,7 @@
             
             <form @submit.prevent="changePassword" class="space-y-4">
               <div class="space-y-2">
-                <Text size="sm" class="font-medium text-foreground">Current Password</Text>
+                <Text size="sm" class="font-medium text-foreground">{{ t('security.currentPassword', 'Current Password') }}</Text>
                 <div class="relative">
                   <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
@@ -568,7 +568,7 @@
               </div>
 
               <div class="space-y-2">
-                <Text size="sm" class="font-medium text-foreground">New Password</Text>
+                <Text size="sm" class="font-medium text-foreground">{{ t('security.newPassword', 'New Password') }}</Text>
                 <div class="relative">
                   <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
@@ -590,7 +590,7 @@
               </div>
 
               <div class="space-y-2">
-                <Text size="sm" class="font-medium text-foreground">Confirm New Password</Text>
+                <Text size="sm" class="font-medium text-foreground">{{ t('security.confirmPassword', 'Confirm New Password') }}</Text>
                 <div class="relative">
                   <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
@@ -613,11 +613,11 @@
 
               <div class="flex gap-3 pt-2">
                 <Button type="button" variant="outline" class="flex-1" @click="showPasswordModal = false">
-                  Cancel
+                  {{ t('button.cancel', 'Cancel') }}
                 </Button>
                 <Button type="submit" class="flex-1" :disabled="changingPassword">
                   <Spinner v-if="changingPassword" class="mr-2 h-4 w-4" />
-                  {{ changingPassword ? 'Changing...' : 'Change Password' }}
+                  {{ changingPassword ? 'Changing...' : t('button.changePassword', 'Change Password') }}
                 </Button>
               </div>
             </form>
@@ -636,7 +636,7 @@
               <div class="w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
                 <Icon name="lucide:alert-triangle" class="h-6 w-6 text-destructive" />
               </div>
-              <Heading tag="h3" size="h4" class="mb-2">Delete Account</Heading>
+              <Heading tag="h3" size="h4" class="mb-2 text-foreground">Delete Account</Heading>
               <Text class="text-muted-foreground">
                 This action cannot be undone. This will permanently delete your account and remove all your data from our servers.
               </Text>
@@ -715,6 +715,7 @@ definePageMeta({
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const router = useRouter()
+const { t, locale } = useI18n()
 
 // State
 const activeTab = ref('profile')
@@ -1031,10 +1032,9 @@ const toggleNotification = (id: string) => {
 // Change language
 const changeLanguage = async () => {
   try {
-    // Store language preference in localStorage
-    if (process.client) {
-      localStorage.setItem('preferred-language', selectedLanguage.value)
-    }
+    // Use the i18n composable to set the locale
+    const { setLocale } = useI18n()
+    setLocale(selectedLanguage.value)
     
     // Update user metadata if logged in
     if (user.value) {
@@ -1062,8 +1062,13 @@ const changeLanguage = async () => {
     messageType.value = 'success'
     setTimeout(() => message.value = '', 3000)
     
-    // In a real app, you would trigger i18n locale change here
-    // await $i18n.setLocale(selectedLanguage.value)
+    // Refresh the page to apply translations
+    // In production, you'd use reactive translations instead
+    if (process.client) {
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
+    }
   } catch (error) {
     logger.error('Error changing language:', error)
     message.value = 'Failed to change language'
