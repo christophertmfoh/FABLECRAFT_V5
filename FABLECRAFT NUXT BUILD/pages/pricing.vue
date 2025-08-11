@@ -102,13 +102,13 @@
               </Badge>
 
               <!-- Plan Name -->
-              <Heading tag="h3" size="h4" class="mb-2 text-center">
+              <Heading tag="h3" size="h4" class="mb-2 text-center text-foreground">
                 {{ plan.name }}
               </Heading>
 
               <!-- Price -->
               <div class="mb-3 text-center">
-                <span class="text-3xl font-bold">
+                <span class="text-3xl font-bold text-foreground">
                   {{ formatPrice(plan, billingPeriod) }}
                 </span>
                 <span v-if="plan.prices[billingPeriod] !== 'custom'" class="text-muted-foreground">
@@ -133,7 +133,7 @@
                 <li 
                   v-for="(feature, idx) in plan.features.slice(0, 3)" 
                   :key="idx"
-                  class="flex items-center justify-center gap-2 text-sm"
+                  class="flex items-center justify-center gap-2 text-sm text-foreground"
                 >
                   <Icon name="lucide:check" class="h-4 w-4 text-success flex-shrink-0" />
                   <span>{{ feature }}</span>
@@ -165,7 +165,7 @@
           <div v-if="selectedPlan" class="max-w-2xl mx-auto">
             <Card class="p-8">
               <div class="mb-6">
-                <Heading tag="h2" size="h3" class="mb-2">
+                <Heading tag="h2" size="h3" class="mb-2 text-foreground">
                   {{ config.plans[selectedPlan].name }} Plan
                 </Heading>
                 <Text size="lg" class="text-primary font-semibold">
@@ -183,7 +183,7 @@
                   <li 
                     v-for="(feature, idx) in config.plans[selectedPlan].features" 
                     :key="idx"
-                    class="flex items-start gap-2 text-sm"
+                    class="flex items-start gap-2 text-sm text-foreground"
                   >
                     <Icon name="lucide:check" class="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
                     <span>{{ feature }}</span>
@@ -313,11 +313,11 @@
               <table class="w-full bg-card rounded-xl overflow-hidden">
                 <thead class="bg-muted/50">
                   <tr class="border-b border-border">
-                    <th class="text-left py-4 px-6 font-semibold">Features</th>
+                    <th class="text-left py-4 px-6 font-semibold text-foreground">Features</th>
                     <th 
                       v-for="(plan, key) in config.plans" 
                       :key="key"
-                      class="text-center py-4 px-6"
+                      class="text-center py-4 px-6 text-foreground"
                     >
                       <div class="font-semibold">{{ plan.name }}</div>
                       <div class="text-sm text-muted-foreground">
@@ -334,7 +334,7 @@
                   >
                     <td class="py-4 px-6">
                       <div class="flex items-center gap-2">
-                        <span class="font-medium">{{ feature.name }}</span>
+                        <span class="font-medium text-foreground">{{ feature.name }}</span>
                         <Tooltip v-if="feature.tooltip">
                           <TooltipTrigger>
                             <Icon name="lucide:info" class="h-3 w-3 text-muted-foreground" />
