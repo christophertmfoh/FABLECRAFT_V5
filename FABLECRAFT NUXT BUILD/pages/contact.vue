@@ -755,8 +755,14 @@ const handleBadgeClick = () => {
 }
 
 const handleStartChat = () => {
-  // Initialize chat widget
-  console.log('Starting live chat...')
+  // Open Crisp chat widget
+  const { $crisp } = useNuxtApp()
+  if ($crisp) {
+    $crisp.open()
+  } else {
+    // Fallback if Crisp isn't loaded yet
+    console.log('Chat is loading, please try again...')
+  }
 }
 
 const handleGetDirections = () => {
