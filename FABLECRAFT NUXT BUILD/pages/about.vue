@@ -54,8 +54,8 @@
           <div class="py-16 sm:py-20">
             <Container size="xl">
               <!-- Mission Header -->
-              <div class="text-center max-w-4xl mx-auto mb-12">
-                <div class="flex justify-center mb-6">
+              <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="flex justify-center mb-8">
                   <MHeroBadge
                     text="Our Mission"
                     variant="default"
@@ -65,98 +65,135 @@
                   />
                 </div>
                 
-                <Heading tag="h2" size="h2" class="text-foreground mb-6 text-center">
-                  <span class="block">Democratizing</span>
+                <Heading tag="h2" size="h1" class="text-foreground mb-8 text-center">
+                  <span class="block mb-2">Democratizing</span>
                   <AGradientText
                     tag="span"
                     variant="primary"
                     direction="to-r"
                     intensity="normal"
-                    class="bg-clip-text text-transparent block"
+                    class="bg-clip-text text-transparent"
                   >
                     Creative Excellence
                   </AGradientText>
                 </Heading>
                 
                 <Text size="lg" class="text-muted-foreground leading-relaxed text-center">
-                  We believe everyone has a story to tell and the potential to create something extraordinary. 
-                  Fablecraft removes the technical barriers between imagination and creation.
+                  We believe everyone has a story to tell. Fablecraft transforms imagination into reality.
                 </Text>
               </div>
 
-              <!-- Stories Come Alive Animation Box -->
-              <div class="max-w-4xl mx-auto">
-                <GlassCard variant="light" class="p-12 relative overflow-hidden natural-depth">
-                  <div class="relative h-80 flex items-center justify-center">
-                    <!-- Subtle background gradient -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/3 via-accent/3 to-secondary/3 animate-gradient-shift rounded-lg" />
+              <!-- Stories Come Alive Section -->
+              <div class="relative max-w-5xl mx-auto">
+                <!-- Background Glow Effect -->
+                <div class="absolute inset-0 -z-10">
+                  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 rounded-full blur-3xl animate-pulse" />
+                </div>
+                
+                <!-- Main Content Card -->
+                <GlassCard variant="heavy" class="relative overflow-hidden">
+                  <!-- Top Section with Title -->
+                  <div class="relative z-20 px-8 py-6 border-b border-border/10">
+                    <div class="flex items-center justify-center gap-4">
+                      <div class="h-px w-20 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+                      <Heading tag="h3" size="h3" class="text-center">
+                        <span class="text-foreground">Stories</span>
+                        {' '}
+                        <AGradientText
+                          tag="span"
+                          variant="primary"
+                          direction="to-r"
+                          intensity="strong"
+                          class="bg-clip-text text-transparent"
+                        >
+                          Come Alive
+                        </AGradientText>
+                      </Heading>
+                      <div class="h-px w-20 bg-gradient-to-l from-transparent via-accent/40 to-transparent" />
+                    </div>
+                  </div>
+                  
+                  <!-- Animation Area -->
+                  <div class="relative h-[400px] flex items-center justify-center p-8">
+                    <!-- Animated Background Pattern -->
+                    <div class="absolute inset-0 opacity-30">
+                      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 animate-gradient-xy" />
+                      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(var(--primary),0.03)_50%,transparent_100%)] animate-pulse-slow" />
+                    </div>
                     
-                    <!-- Main Animation Container -->
-                    <div class="relative z-10">
-                      <!-- Central Book -->
-                      <div class="relative">
-                        <div class="w-48 h-56 bg-gradient-to-br from-primary to-accent rounded-lg shadow-2xl transform rotate-3 animate-float">
-                          <div class="absolute inset-2 bg-background/95 rounded flex items-center justify-center">
-                            <Icon name="lucide:book-open" class="h-20 w-20 text-primary" />
+                    <!-- Central Interactive Book Scene -->
+                    <div class="relative">
+                      <!-- Book Container with 3D Effect -->
+                      <div class="relative transform-gpu perspective-1000">
+                        <!-- Main Book -->
+                        <div class="relative w-64 h-72 transform rotate-y-15 preserve-3d">
+                          <!-- Book Cover -->
+                          <div class="absolute inset-0 bg-gradient-to-br from-primary via-accent to-secondary rounded-lg shadow-2xl transform rotate-3 animate-book-breathe">
+                            <div class="absolute inset-[3px] bg-background/90 rounded-lg flex flex-col items-center justify-center">
+                              <Icon name="lucide:book-open" class="h-24 w-24 text-primary mb-4" />
+                              <div class="text-center px-4">
+                                <Text size="sm" class="text-foreground font-semibold">Fablecraft</Text>
+                                <Text size="xs" class="text-muted-foreground">Create Magic</Text>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <!-- Animated Pages Turning -->
+                          <div class="absolute inset-0 pointer-events-none">
+                            <!-- Page 1 - Flipping -->
+                            <div class="absolute top-4 right-0 w-[120px] h-[140px] bg-background border border-border/50 rounded shadow-lg origin-left animate-page-turn-1">
+                              <div class="p-3 opacity-70">
+                                <div class="h-2 bg-gradient-to-r from-primary/30 to-accent/30 rounded mb-2 animate-shimmer" />
+                                <div class="space-y-1.5">
+                                  <div class="h-1 bg-muted/40 rounded" />
+                                  <div class="h-1 bg-muted/40 rounded w-4/5" />
+                                  <div class="h-1 bg-muted/40 rounded w-3/5" />
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <!-- Page 2 - Flipping Delayed -->
+                            <div class="absolute top-6 right-2 w-[120px] h-[140px] bg-background border border-border/50 rounded shadow-lg origin-left animate-page-turn-2 animation-delay-2000">
+                              <div class="p-3 opacity-70">
+                                <div class="h-2 bg-gradient-to-r from-accent/30 to-secondary/30 rounded mb-2 animate-shimmer animation-delay-2000" />
+                                <div class="space-y-1.5">
+                                  <div class="h-1 bg-muted/40 rounded w-3/4" />
+                                  <div class="h-1 bg-muted/40 rounded" />
+                                  <div class="h-1 bg-muted/40 rounded w-2/3" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <!-- Magical Elements -->
+                          <div class="absolute inset-0 pointer-events-none">
+                            <!-- Sparkle Trail -->
+                            <div class="absolute top-0 left-1/2 w-1 h-1 bg-primary rounded-full animate-sparkle-trail-1">
+                              <Icon name="lucide:sparkles" class="h-4 w-4 text-primary -translate-x-1/2 -translate-y-1/2" />
+                            </div>
+                            <div class="absolute top-1/3 right-0 w-1 h-1 bg-accent rounded-full animate-sparkle-trail-2 animation-delay-1000">
+                              <Icon name="lucide:sparkles" class="h-3 w-3 text-accent -translate-x-1/2 -translate-y-1/2" />
+                            </div>
+                            <div class="absolute bottom-1/4 left-0 w-1 h-1 bg-secondary rounded-full animate-sparkle-trail-3 animation-delay-2000">
+                              <Icon name="lucide:sparkles" class="h-5 w-5 text-secondary -translate-x-1/2 -translate-y-1/2" />
+                            </div>
+                            
+                            <!-- Glow Orbs -->
+                            <div class="absolute -top-8 -right-8 w-16 h-16 bg-primary/20 rounded-full blur-xl animate-float-slow" />
+                            <div class="absolute -bottom-6 -left-6 w-12 h-12 bg-accent/20 rounded-full blur-xl animate-float-slow animation-delay-2000" />
                           </div>
                         </div>
-                        
-                        <!-- Floating Pages -->
-                        <div class="absolute -top-8 -left-12 w-16 h-20 bg-background border border-border rounded shadow-xl transform -rotate-12 animate-page-float-1">
-                          <div class="p-2">
-                            <div class="h-1.5 bg-gradient-to-r from-primary/20 to-accent/20 rounded mb-2" />
-                            <div class="h-1 bg-muted/60 rounded mb-1.5" />
-                            <div class="h-1 bg-muted/60 rounded mb-1.5 w-3/4" />
-                            <div class="h-1 bg-muted/60 rounded w-1/2" />
-                          </div>
-                        </div>
-                        
-                        <div class="absolute -top-4 -right-16 w-16 h-20 bg-background border border-border rounded shadow-xl transform rotate-6 animate-page-float-2 animation-delay-2000">
-                          <div class="p-2">
-                            <div class="h-1.5 bg-gradient-to-r from-accent/20 to-secondary/20 rounded mb-2" />
-                            <div class="h-1 bg-muted/60 rounded mb-1.5 w-2/3" />
-                            <div class="h-1 bg-muted/60 rounded mb-1.5" />
-                            <div class="h-1 bg-muted/60 rounded w-3/4" />
-                          </div>
-                        </div>
-                        
-                        <div class="absolute -bottom-6 -left-8 w-16 h-20 bg-background border border-border rounded shadow-xl transform rotate-12 animate-page-float-3 animation-delay-4000">
-                          <div class="p-2">
-                            <div class="h-1.5 bg-gradient-to-r from-secondary/20 to-primary/20 rounded mb-2" />
-                            <div class="h-1 bg-muted/60 rounded mb-1.5" />
-                            <div class="h-1 bg-muted/60 rounded mb-1.5 w-1/2" />
-                            <div class="h-1 bg-muted/60 rounded w-2/3" />
-                          </div>
-                        </div>
-                        
-                        <!-- Sparkles -->
-                        <Icon name="lucide:sparkles" class="absolute -top-4 left-1/2 h-6 w-6 text-primary animate-twinkle" />
-                        <Icon name="lucide:sparkles" class="absolute top-1/2 -right-8 h-5 w-5 text-accent animate-twinkle animation-delay-2000" />
-                        <Icon name="lucide:sparkles" class="absolute -bottom-2 -left-4 h-7 w-7 text-secondary animate-twinkle animation-delay-4000" />
-                        <Icon name="lucide:sparkles" class="absolute top-8 right-12 h-4 w-4 text-primary/60 animate-twinkle animation-delay-1000" />
                       </div>
                     </div>
                   </div>
+                  
+                  <!-- Bottom Description -->
+                  <div class="relative z-20 px-8 py-6 border-t border-border/10 bg-muted/5">
+                    <Text size="base" class="text-center text-muted-foreground max-w-2xl mx-auto">
+                      Transform your imagination into immersive experiences with AI-powered creative tools
+                    </Text>
+                  </div>
                 </GlassCard>
-                
-                <!-- Title Text Below Card -->
-                <div class="text-center mt-8">
-                  <Heading tag="h3" size="h3" class="text-foreground mb-3">
-                    Stories 
-                    <AGradientText
-                      tag="span"
-                      variant="primary"
-                      direction="to-r"
-                      intensity="normal"
-                      class="bg-clip-text text-transparent"
-                    >
-                      Come Alive
-                    </AGradientText>
-                  </Heading>
-                  <Text size="base" class="text-muted-foreground max-w-2xl mx-auto">
-                    Where imagination meets creation through magical tools that transform your ideas into immersive experiences
-                  </Text>
-                </div>
               </div>
             </Container>
           </div>
@@ -813,6 +850,180 @@ html {
 
 .animate-gradient-shift {
   animation: gradient-shift 10s ease-in-out infinite;
+}
+
+/* Book breathing animation */
+@keyframes book-breathe {
+  0%, 100% {
+    transform: rotate(3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.02);
+  }
+}
+
+.animate-book-breathe {
+  animation: book-breathe 4s ease-in-out infinite;
+}
+
+/* Page turning animations */
+@keyframes page-turn-1 {
+  0%, 100% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
+  }
+  50% {
+    transform: rotateY(-180deg);
+    opacity: 1;
+  }
+}
+
+@keyframes page-turn-2 {
+  0%, 100% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
+  }
+  50% {
+    transform: rotateY(-180deg);
+    opacity: 1;
+  }
+}
+
+.animate-page-turn-1 {
+  animation: page-turn-1 8s ease-in-out infinite;
+}
+
+.animate-page-turn-2 {
+  animation: page-turn-2 8s ease-in-out infinite;
+}
+
+/* Sparkle trail animations */
+@keyframes sparkle-trail-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-30px, 30px) scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(30px, -30px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sparkle-trail-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(20px, -20px) scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-40px, 20px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes sparkle-trail-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(25px, 25px) scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-25px, -25px) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-sparkle-trail-1 {
+  animation: sparkle-trail-1 4s ease-in-out infinite;
+}
+
+.animate-sparkle-trail-2 {
+  animation: sparkle-trail-2 5s ease-in-out infinite;
+}
+
+.animate-sparkle-trail-3 {
+  animation: sparkle-trail-3 6s ease-in-out infinite;
+}
+
+/* Slow float animation */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Gradient XY animation */
+@keyframes gradient-xy {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10%, 10%);
+  }
+  50% {
+    transform: translate(-10%, 10%);
+  }
+  75% {
+    transform: translate(-10%, -10%);
+  }
+}
+
+.animate-gradient-xy {
+  animation: gradient-xy 20s ease-in-out infinite;
+}
+
+/* Slow pulse */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* 3D transforms */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-15 {
+  transform: rotateY(-15deg);
+}
+
+.origin-left {
+  transform-origin: left center;
 }
 
 /* Enhanced hover effects */
