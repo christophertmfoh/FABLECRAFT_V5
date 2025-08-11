@@ -262,7 +262,9 @@ const handlePlanClick = (plan: PricingPlan) => {
     console.warn('OPricingSection: Invalid plan data in click handler')
     return
   }
-  emit('planClick', plan)
+  
+  // Navigate to pricing page with selected plan
+  navigateTo(`/pricing?plan=${plan.id}`)
 }
 
 const handleCtaClick = (plan: PricingPlan) => {
@@ -271,7 +273,9 @@ const handleCtaClick = (plan: PricingPlan) => {
     console.warn('OPricingSection: Invalid plan data in CTA click handler')
     return
   }
-  emit('ctaClick', plan)
+  
+  // Navigate to pricing page with selected plan
+  navigateTo(`/pricing?plan=${plan.id}`)
 }
 </script>
 
