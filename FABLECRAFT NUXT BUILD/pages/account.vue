@@ -37,7 +37,7 @@
               
               <!-- Use proper heading component with gradient -->
               <MHeroHeading
-                title="Account"
+                title="Account "
                 highlight-text="Settings"
                 subheading="Manage your profile and preferences"
                 heading-tag="h1"
@@ -195,7 +195,7 @@
                               <input
                                 v-model="profileData.full_name"
                                 type="text"
-                                class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+                                class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm text-foreground ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
                                 placeholder="Enter your full name"
                               />
                             </div>
@@ -210,7 +210,7 @@
                               <input
                                 v-model="profileData.username"
                                 type="text"
-                                class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+                                class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm text-foreground ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
                                 placeholder="Choose your display username"
                                 pattern="^[a-zA-Z0-9_-]{3,20}$"
                                 title="Username must be 3-20 characters, letters, numbers, underscore or hyphen only"
@@ -224,11 +224,11 @@
                           <label class="text-sm font-medium text-foreground">Email</label>
                           <div class="relative">
                             <Icon name="lucide:mail" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <input
-                              :value="user?.email"
-                              type="email"
-                              disabled
-                              class="flex h-11 w-full rounded-lg border border-input bg-muted pl-10 pr-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
+                                                          <input
+                                :value="user?.email"
+                                type="email"
+                                disabled
+                                class="flex h-11 w-full rounded-lg border border-input bg-muted pl-10 pr-3 py-2 text-sm text-foreground ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200"
                             />
                           </div>
                           <Text size="xs" class="text-muted-foreground">Email cannot be changed</Text>
@@ -238,10 +238,10 @@
                           <label class="text-sm font-medium text-foreground">Bio</label>
                           <div class="relative">
                             <Icon name="lucide:file-text" class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                            <textarea
-                              v-model="profileData.bio"
-                              rows="4"
-                              class="flex w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all duration-200"
+                                                          <textarea
+                                v-model="profileData.bio"
+                                rows="4"
+                                class="flex w-full rounded-lg border border-input bg-background pl-10 pr-3 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all duration-200"
                               placeholder="Tell us about yourself"
                               maxlength="500"
                             />
@@ -302,11 +302,20 @@
                                 <Text size="sm" class="text-muted-foreground">Select your preferred language</Text>
                               </div>
                             </div>
-                            <select class="px-4 py-2 rounded-lg border border-input bg-background text-sm font-medium transition-colors hover:bg-muted">
-                              <option>English</option>
-                              <option>Spanish</option>
-                              <option>French</option>
-                              <option>German</option>
+                            <select 
+                              v-model="selectedLanguage" 
+                              @change="changeLanguage"
+                              class="px-4 py-2 rounded-lg border border-input bg-background text-sm text-foreground font-medium transition-colors hover:bg-muted cursor-pointer"
+                            >
+                              <option value="en">English</option>
+                              <option value="es">Español</option>
+                              <option value="fr">Français</option>
+                              <option value="de">Deutsch</option>
+                              <option value="it">Italiano</option>
+                              <option value="pt">Português</option>
+                              <option value="ja">日本語</option>
+                              <option value="zh">中文</option>
+                              <option value="ko">한국어</option>
                             </select>
                           </div>
                         </Card>
@@ -323,11 +332,23 @@
                                 <Text size="sm" class="text-muted-foreground">Set your local timezone</Text>
                               </div>
                             </div>
-                            <select class="px-4 py-2 rounded-lg border border-input bg-background text-sm font-medium transition-colors hover:bg-muted">
-                              <option>UTC</option>
-                              <option>EST</option>
-                              <option>PST</option>
-                              <option>GMT</option>
+                            <select 
+                              v-model="selectedTimezone"
+                              @change="changeTimezone"
+                              class="px-4 py-2 rounded-lg border border-input bg-background text-sm text-foreground font-medium transition-colors hover:bg-muted cursor-pointer"
+                            >
+                              <option value="UTC">UTC (Coordinated Universal Time)</option>
+                              <option value="America/New_York">EST/EDT (Eastern Time)</option>
+                              <option value="America/Chicago">CST/CDT (Central Time)</option>
+                              <option value="America/Denver">MST/MDT (Mountain Time)</option>
+                              <option value="America/Los_Angeles">PST/PDT (Pacific Time)</option>
+                              <option value="Europe/London">GMT/BST (London)</option>
+                              <option value="Europe/Paris">CET/CEST (Paris)</option>
+                              <option value="Europe/Berlin">CET/CEST (Berlin)</option>
+                              <option value="Asia/Tokyo">JST (Tokyo)</option>
+                              <option value="Asia/Shanghai">CST (Beijing)</option>
+                              <option value="Asia/Seoul">KST (Seoul)</option>
+                              <option value="Australia/Sydney">AEST/AEDT (Sydney)</option>
                             </select>
                           </div>
                         </Card>
@@ -526,13 +547,13 @@
             
             <form @submit.prevent="changePassword" class="space-y-4">
               <div class="space-y-2">
-                <label class="text-sm font-medium text-foreground">Current Password</label>
+                <Text size="sm" class="font-medium text-foreground">Current Password</Text>
                 <div class="relative">
                   <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
                     v-model="passwordForm.current"
                     :type="showCurrentPassword ? 'text' : 'password'"
-                    class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Enter current password"
                     required
                   />
@@ -547,13 +568,13 @@
               </div>
 
               <div class="space-y-2">
-                <label class="text-sm font-medium text-foreground">New Password</label>
+                <Text size="sm" class="font-medium text-foreground">New Password</Text>
                 <div class="relative">
                   <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
                     v-model="passwordForm.new"
                     :type="showNewPassword ? 'text' : 'password'"
-                    class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Enter new password"
                     minlength="6"
                     required
@@ -569,13 +590,13 @@
               </div>
 
               <div class="space-y-2">
-                <label class="text-sm font-medium text-foreground">Confirm New Password</label>
+                <Text size="sm" class="font-medium text-foreground">Confirm New Password</Text>
                 <div class="relative">
                   <Icon name="lucide:lock" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
                     v-model="passwordForm.confirm"
                     :type="showConfirmPassword ? 'text' : 'password'"
-                    class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="flex h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Confirm new password"
                     minlength="6"
                     required
@@ -631,7 +652,7 @@
               <input
                 v-model="deleteConfirmText"
                 type="text"
-                class="flex h-11 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                class="flex h-11 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 placeholder="Type DELETE to confirm"
               />
 
@@ -728,6 +749,10 @@ const profileData = reactive({
   bio: '',
   avatar_url: '',
 })
+
+// Preferences
+const selectedLanguage = ref('en')
+const selectedTimezone = ref('UTC')
 
 // Original profile data for reset
 const originalProfileData = ref({})
@@ -1003,6 +1028,78 @@ const toggleNotification = (id: string) => {
   }
 }
 
+// Change language
+const changeLanguage = async () => {
+  try {
+    // Store language preference in localStorage
+    if (process.client) {
+      localStorage.setItem('preferred-language', selectedLanguage.value)
+    }
+    
+    // Update user metadata if logged in
+    if (user.value) {
+      await supabase.auth.updateUser({
+        data: { 
+          preferred_language: selectedLanguage.value
+        }
+      })
+    }
+    
+    // Show success message
+    const languageNames: Record<string, string> = {
+      en: 'English',
+      es: 'Español',
+      fr: 'Français',
+      de: 'Deutsch',
+      it: 'Italiano',
+      pt: 'Português',
+      ja: '日本語',
+      zh: '中文',
+      ko: '한국어'
+    }
+    
+    message.value = `Language changed to ${languageNames[selectedLanguage.value]}`
+    messageType.value = 'success'
+    setTimeout(() => message.value = '', 3000)
+    
+    // In a real app, you would trigger i18n locale change here
+    // await $i18n.setLocale(selectedLanguage.value)
+  } catch (error) {
+    logger.error('Error changing language:', error)
+    message.value = 'Failed to change language'
+    messageType.value = 'error'
+    setTimeout(() => message.value = '', 3000)
+  }
+}
+
+// Change timezone
+const changeTimezone = async () => {
+  try {
+    // Store timezone preference
+    if (process.client) {
+      localStorage.setItem('preferred-timezone', selectedTimezone.value)
+    }
+    
+    // Update user metadata if logged in
+    if (user.value) {
+      await supabase.auth.updateUser({
+        data: { 
+          preferred_timezone: selectedTimezone.value
+        }
+      })
+    }
+    
+    message.value = `Timezone changed to ${selectedTimezone.value}`
+    messageType.value = 'success'
+    setTimeout(() => message.value = '', 3000)
+  } catch (error) {
+    logger.error('Error changing timezone:', error)
+    message.value = 'Failed to change timezone'
+    messageType.value = 'error'
+    setTimeout(() => message.value = '', 3000)
+  }
+}
+
 // Navigation handlers
 const handleAuth = () => {
   const { open } = useAuthOverlay()
@@ -1040,9 +1137,32 @@ watch(showDeleteModal, (val) => {
   }
 })
 
+// Load preferences
+const loadPreferences = () => {
+  if (process.client) {
+    // Load from localStorage first
+    const savedLanguage = localStorage.getItem('preferred-language')
+    const savedTimezone = localStorage.getItem('preferred-timezone')
+    
+    if (savedLanguage) selectedLanguage.value = savedLanguage
+    if (savedTimezone) selectedTimezone.value = savedTimezone
+    
+    // Override with user metadata if available
+    if (user.value?.user_metadata) {
+      if (user.value.user_metadata.preferred_language) {
+        selectedLanguage.value = user.value.user_metadata.preferred_language
+      }
+      if (user.value.user_metadata.preferred_timezone) {
+        selectedTimezone.value = user.value.user_metadata.preferred_timezone
+      }
+    }
+  }
+}
+
 // Load profile on mount
 onMounted(() => {
   loadProfile()
+  loadPreferences()
 })
 </script>
 
