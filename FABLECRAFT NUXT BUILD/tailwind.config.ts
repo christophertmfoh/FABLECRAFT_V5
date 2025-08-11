@@ -4,6 +4,7 @@
 type Config = any
 
 export default {
+  darkMode: 'selector',
   content: [
     './app.vue',
     './error.vue',

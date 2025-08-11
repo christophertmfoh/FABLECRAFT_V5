@@ -82,6 +82,14 @@ export const useTheme = () => {
 
     const resolved = resolvedTheme.value
     document.documentElement.setAttribute('data-theme', resolved)
+    
+    // Apply dark class for Tailwind dark mode
+    const darkThemes = ['dark', 'midnight-ink', 'forest-manuscript', 'starlit-prose', 'coffee-house', 'cherry-lacquer', 'dragons-hoard', 'halloween', 'netrunner']
+    if (darkThemes.includes(resolved)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
 
     // Also update localStorage for redundancy
     localStorage.setItem('theme', currentTheme.value)

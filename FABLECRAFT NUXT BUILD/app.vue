@@ -1,11 +1,12 @@
 <script setup lang="ts">
 // SSR-safe theme initialization
-const { resolvedTheme, initializeTheme } = useTheme()
+const { resolvedTheme, initializeTheme, isDark } = useTheme()
 
 // Apply theme from cookie on SSR - use resolved theme for actual CSS variables
 useHead({
   htmlAttrs: {
     'data-theme': () => resolvedTheme.value,
+    'class': () => isDark.value ? 'dark' : '',
   },
   script: [
     {
@@ -20,6 +21,14 @@ useHead({
             }
             
             document.documentElement.setAttribute('data-theme', resolvedTheme);
+            
+            // Apply dark class for Tailwind dark mode
+            var darkThemes = ['dark', 'midnight-ink', 'forest-manuscript', 'starlit-prose', 'coffee-house', 'cherry-lacquer', 'dragons-hoard', 'halloween', 'netrunner'];
+            if (darkThemes.includes(resolvedTheme)) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
           } catch (e) {
             console.error('Theme initialization error:', e);
           }
