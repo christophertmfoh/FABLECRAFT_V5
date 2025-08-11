@@ -98,7 +98,7 @@
                       <div class="h-px w-20 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
                       <Heading tag="h3" size="h3" class="text-center">
                         <span class="text-foreground">Stories</span>
-                        {' '}
+                        <span> </span>
                         <AGradientText
                           tag="span"
                           variant="primary"
