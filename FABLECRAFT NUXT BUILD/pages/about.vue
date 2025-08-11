@@ -326,12 +326,22 @@
                       </Text>
                       
                       <div class="flex justify-center gap-3">
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
-                        </button>
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:mail" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
-                        </button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          class="w-10 h-10 rounded-full hover:bg-primary/10"
+                          aria-label="LinkedIn"
+                        >
+                          <Icon name="lucide:linkedin" class="h-5 w-5" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          class="w-10 h-10 rounded-full hover:bg-primary/10"
+                          aria-label="Email"
+                        >
+                          <Icon name="lucide:mail" class="h-5 w-5" />
+                        </Button>
                       </div>
                     </div>
                   </GlassCard>
@@ -368,12 +378,22 @@
                       </Text>
                       
                       <div class="flex justify-center gap-3">
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-accent/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-accent transition-colors" />
-                        </button>
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-accent/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:twitter" class="h-5 w-5 text-muted-foreground group-hover/btn:text-accent transition-colors" />
-                        </button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          class="w-10 h-10 rounded-full hover:bg-accent/10"
+                          aria-label="LinkedIn"
+                        >
+                          <Icon name="lucide:linkedin" class="h-5 w-5" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          class="w-10 h-10 rounded-full hover:bg-accent/10"
+                          aria-label="Twitter"
+                        >
+                          <Icon name="lucide:twitter" class="h-5 w-5" />
+                        </Button>
                       </div>
                     </div>
                   </GlassCard>
@@ -410,12 +430,22 @@
                       </Text>
                       
                       <div class="flex justify-center gap-3">
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:github" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
-                        </button>
-                        <button class="w-10 h-10 rounded-full bg-muted/50 hover:bg-primary/10 flex items-center justify-center transition-all hover:scale-110 hover:shadow-lg group/btn">
-                          <Icon name="lucide:linkedin" class="h-5 w-5 text-muted-foreground group-hover/btn:text-primary transition-colors" />
-                        </button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          class="w-10 h-10 rounded-full hover:bg-primary/10"
+                          aria-label="GitHub"
+                        >
+                          <Icon name="lucide:github" class="h-5 w-5" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          class="w-10 h-10 rounded-full hover:bg-primary/10"
+                          aria-label="LinkedIn"
+                        >
+                          <Icon name="lucide:linkedin" class="h-5 w-5" />
+                        </Button>
                       </div>
                     </div>
                   </GlassCard>
