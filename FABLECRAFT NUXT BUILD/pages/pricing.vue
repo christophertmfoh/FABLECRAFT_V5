@@ -112,8 +112,15 @@
                   {{ formatPrice(plan, billingPeriod) }}
                 </span>
                 <span v-if="plan.prices[billingPeriod] !== 'custom'" class="text-muted-foreground">
-                  /{{ billingPeriod === 'yearly' ? 'month' : 'year' }}
+                  /month
                 </span>
+                <Text 
+                  v-if="billingPeriod === 'yearly' && plan.prices.yearly !== 'custom' && plan.prices.yearly > 0" 
+                  size="xs" 
+                  class="text-muted-foreground/70 block"
+                >
+                  billed yearly
+                </Text>
               </div>
 
               <!-- Description -->
@@ -134,10 +141,10 @@
               </ul>
 
               <!-- CTA Button -->
-              <div class="mt-auto">
+              <div class="mt-auto text-center">
                 <Text 
                   size="sm" 
-                  class="font-medium text-primary"
+                  class="font-medium"
                   :class="selectedPlan === key ? 'text-primary' : 'text-muted-foreground'"
                 >
                   {{ plan.ctaText }}
@@ -538,7 +545,6 @@ const selectPlan = (planId: string) => {
 const formatPrice = (plan: any, period: string) => {
   const price = plan.prices[period]
   if (typeof price === 'string' && price === 'custom') return 'Custom'
-  if (price === 0) return 'Free'
   
   if (period === 'yearly') {
     const monthlyPrice = price / 12
