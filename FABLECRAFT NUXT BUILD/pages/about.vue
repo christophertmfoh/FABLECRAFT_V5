@@ -49,91 +49,132 @@
           </div>
         </Section>
 
-        <!-- Mission Section -->
+                <!-- Mission Section -->
         <Section spacing="none" class="mission-section">
           <div class="py-16 sm:py-20">
             <Container size="xl">
-              <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                                  <MHeroBadge
+              <div class="text-center max-w-4xl mx-auto mb-12">
+                <!-- Mission Badge -->
+                <MHeroBadge
                   text="Our Mission"
-                  variant="outline"
-                  size="sm"
+                  variant="default"
+                  size="base"
                   dot-color="primary"
+                  dot-speed="normal"
+                  class="mb-6"
                 />
-                  
-                  <Heading tag="h2" size="h2" class="text-foreground">
-                    Democratizing Creative Excellence
-                  </Heading>
-                  
-                  <Text size="lg" class="text-muted-foreground leading-relaxed">
-                    We believe everyone has a story to tell and the potential to create something extraordinary. 
-                    Fablecraft removes the technical barriers between imagination and creation, empowering creators 
-                    of all skill levels to bring their visions to life.
-                  </Text>
-                  
-                  <div class="space-y-4 pt-4">
-                    <div class="flex gap-4">
-                      <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Icon name="lucide:users" class="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <Heading tag="h3" size="h5" class="text-foreground mb-1">Community First</Heading>
-                        <Text size="sm" class="text-muted-foreground">
-                          Building a supportive ecosystem where creators inspire and learn from each other
-                        </Text>
-                      </div>
+                
+                <!-- Mission Heading with Gradient -->
+                <Heading tag="h2" size="h2" class="text-foreground mb-6">
+                  Democratizing 
+                  <AGradientText
+                    tag="span"
+                    variant="primary"
+                    direction="to-r"
+                    intensity="normal"
+                    class="bg-clip-text text-transparent"
+                  >
+                    Creative Excellence
+                  </AGradientText>
+                </Heading>
+                
+                <Text size="lg" class="text-muted-foreground leading-relaxed mb-12">
+                  We believe everyone has a story to tell and the potential to create something extraordinary. 
+                  Fablecraft removes the technical barriers between imagination and creation, empowering creators 
+                  of all skill levels to bring their visions to life.
+                </Text>
+              </div>
+
+              <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Mission Points -->
+                <div class="space-y-6">
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2">
+                      <Icon name="lucide:users" class="h-6 w-6 text-primary" />
                     </div>
-                    
-                    <div class="flex gap-4">
-                      <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Icon name="lucide:zap" class="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <Heading tag="h3" size="h5" class="text-foreground mb-1">Innovation Driven</Heading>
-                        <Text size="sm" class="text-muted-foreground">
-                          Leveraging cutting-edge AI and technology to push creative boundaries
-                        </Text>
-                      </div>
+                    <Heading tag="h3" size="h5" class="text-foreground">Community First</Heading>
+                    <Text size="sm" class="text-muted-foreground">
+                      Building a supportive ecosystem where creators inspire and learn from each other
+                    </Text>
+                  </div>
+                  
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2">
+                      <Icon name="lucide:zap" class="h-6 w-6 text-primary" />
                     </div>
-                    
-                    <div class="flex gap-4">
-                      <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Icon name="lucide:heart" class="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <Heading tag="h3" size="h5" class="text-foreground mb-1">Passion Powered</Heading>
-                        <Text size="sm" class="text-muted-foreground">
-                          Created by creators, for creators, with love for the craft
-                        </Text>
-                      </div>
+                    <Heading tag="h3" size="h5" class="text-foreground">Innovation Driven</Heading>
+                    <Text size="sm" class="text-muted-foreground">
+                      Leveraging cutting-edge AI and technology to push creative boundaries
+                    </Text>
+                  </div>
+                  
+                  <div class="flex flex-col items-center text-center space-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-2">
+                      <Icon name="lucide:heart" class="h-6 w-6 text-primary" />
                     </div>
+                    <Heading tag="h3" size="h5" class="text-foreground">Passion Powered</Heading>
+                    <Text size="sm" class="text-muted-foreground">
+                      Created by creators, for creators, with love for the craft
+                    </Text>
                   </div>
                 </div>
                 
-                <!-- Visual Element with Animation -->
-                <div class="relative flex items-center justify-center">
-                  <div class="relative w-full max-w-md">
-                    <!-- Animated rings -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <div class="w-64 h-64 rounded-full border border-primary/20 animate-ping" />
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center animation-delay-2000">
-                      <div class="w-48 h-48 rounded-full border border-accent/20 animate-ping" />
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center animation-delay-4000">
-                      <div class="w-32 h-32 rounded-full border border-secondary/20 animate-ping" />
-                    </div>
-                    
-                    <!-- Center content -->
-                    <div class="relative z-10 text-center py-20">
-                      <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary to-accent mb-4 animate-pulse">
-                        <Icon name="lucide:sparkles" class="h-12 w-12 text-background" />
+                <!-- Animated Storybook Magic Box -->
+                <div class="flex items-center justify-center">
+                  <GlassCard variant="light" class="p-8 relative overflow-hidden natural-depth">
+                    <div class="relative w-80 h-80 flex items-center justify-center">
+                      <!-- Background gradient animation -->
+                      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 animate-gradient-shift rounded-lg" />
+                      
+                      <!-- Floating pages animation -->
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="relative w-48 h-64">
+                          <!-- Book base -->
+                          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-48 bg-gradient-to-br from-primary to-accent rounded-lg shadow-2xl transform rotate-3 animate-float">
+                            <div class="absolute inset-2 bg-background/90 rounded flex items-center justify-center">
+                              <Icon name="lucide:book-open" class="h-16 w-16 text-primary" />
+                            </div>
+                          </div>
+                          
+                          <!-- Flying pages -->
+                          <div class="absolute top-0 left-1/4 w-12 h-16 bg-background border border-border rounded shadow-lg transform -rotate-12 animate-page-float-1">
+                            <div class="p-1">
+                              <div class="h-1 bg-muted rounded mb-1" />
+                              <div class="h-1 bg-muted rounded mb-1 w-3/4" />
+                              <div class="h-1 bg-muted rounded w-1/2" />
+                            </div>
+                          </div>
+                          
+                          <div class="absolute top-4 right-1/4 w-12 h-16 bg-background border border-border rounded shadow-lg transform rotate-6 animate-page-float-2 animation-delay-2000">
+                            <div class="p-1">
+                              <div class="h-1 bg-muted rounded mb-1" />
+                              <div class="h-1 bg-muted rounded mb-1 w-2/3" />
+                              <div class="h-1 bg-muted rounded w-3/4" />
+                            </div>
+                          </div>
+                          
+                          <div class="absolute -top-2 left-1/2 w-12 h-16 bg-background border border-border rounded shadow-lg transform rotate-12 animate-page-float-3 animation-delay-4000">
+                            <div class="p-1">
+                              <div class="h-1 bg-muted rounded mb-1 w-2/3" />
+                              <div class="h-1 bg-muted rounded mb-1" />
+                              <div class="h-1 bg-muted rounded w-1/2" />
+                            </div>
+                          </div>
+                          
+                          <!-- Sparkles -->
+                          <Icon name="lucide:sparkles" class="absolute top-8 left-8 h-4 w-4 text-primary animate-twinkle" />
+                          <Icon name="lucide:sparkles" class="absolute top-12 right-8 h-3 w-3 text-accent animate-twinkle animation-delay-2000" />
+                          <Icon name="lucide:sparkles" class="absolute bottom-20 left-12 h-5 w-5 text-secondary animate-twinkle animation-delay-4000" />
+                        </div>
                       </div>
-                      <Heading tag="h3" size="h4" class="text-foreground mb-2">Creating Magic</Heading>
-                      <Text size="base" class="text-muted-foreground">Together</Text>
+                      
+                      <!-- Text -->
+                      <div class="absolute bottom-4 left-0 right-0 text-center">
+                        <Heading tag="h3" size="h5" class="text-foreground mb-1">Stories Come Alive</Heading>
+                        <Text size="sm" class="text-muted-foreground">Where imagination meets creation</Text>
+                      </div>
                     </div>
-                  </div>
+                  </GlassCard>
                 </div>
               </div>
             </Container>
@@ -687,6 +728,110 @@ html {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Page floating animations */
+@keyframes page-float-1 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(-12deg);
+  }
+  25% {
+    transform: translateY(-20px) translateX(5px) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-30px) translateX(-5px) rotate(-15deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(3px) rotate(-10deg);
+  }
+}
+
+@keyframes page-float-2 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(6deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(-3px) rotate(10deg);
+  }
+  50% {
+    transform: translateY(-25px) translateX(5px) rotate(4deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-2px) rotate(8deg);
+  }
+}
+
+@keyframes page-float-3 {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(12deg);
+  }
+  25% {
+    transform: translateY(-25px) translateX(3px) rotate(15deg);
+  }
+  50% {
+    transform: translateY(-35px) translateX(-3px) rotate(10deg);
+  }
+  75% {
+    transform: translateY(-20px) translateX(2px) rotate(13deg);
+  }
+}
+
+.animate-page-float-1 {
+  animation: page-float-1 6s ease-in-out infinite;
+}
+
+.animate-page-float-2 {
+  animation: page-float-2 7s ease-in-out infinite;
+}
+
+.animate-page-float-3 {
+  animation: page-float-3 8s ease-in-out infinite;
+}
+
+/* Twinkle animation */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Gradient shift animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    opacity: 0.3;
+    transform: rotate(0deg);
+  }
+  50% {
+    opacity: 0.6;
+    transform: rotate(180deg);
+  }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 10s ease-in-out infinite;
 }
 
 /* Enhanced hover effects */
