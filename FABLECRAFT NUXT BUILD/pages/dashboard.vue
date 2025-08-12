@@ -32,72 +32,59 @@
       <main id="main-content" class="relative z-20 flex-1">
         <!-- Dashboard Hero Section -->
         <Section spacing="none" class="dashboard-hero">
-          <div class="py-12 sm:py-16">
+          <div class="py-8 sm:py-12">
             <Container size="xl">
               <!-- Dashboard Header -->
-              <div class="mb-8">
+              <div class="mb-6">
                 <div class="flex items-center justify-between">
                   <div class="flex items-start gap-4">
                     <!-- User Avatar -->
                     <div v-if="avatarUrl || profileLoading" class="flex-shrink-0">
-                      <div v-if="profileLoading" class="w-16 h-16 rounded-full bg-muted animate-pulse" />
+                      <div v-if="profileLoading" class="w-14 h-14 rounded-full bg-muted animate-pulse" />
                       <img
                         v-else-if="avatarUrl"
                         :src="avatarUrl"
                         :alt="displayName"
-                        class="w-16 h-16 rounded-full object-cover border-2 border-border"
+                        class="w-14 h-14 rounded-full object-cover border-2 border-border"
                       />
                     </div>
                     
                     <!-- Welcome Message -->
                     <div>
-                      <Heading tag="h1" size="h2" class="text-foreground mb-2">
+                      <Heading tag="h1" size="h3" class="text-foreground mb-1">
                         <span v-if="profileLoading" class="inline-flex items-center gap-2">
                           Welcome back
-                          <span class="inline-block w-32 h-8 bg-muted rounded animate-pulse" />
+                          <span class="inline-block w-32 h-6 bg-muted rounded animate-pulse" />
                         </span>
                         <span v-else>
                           Welcome back, {{ displayName }}
                         </span>
                       </Heading>
-                      <Text size="lg" class="text-muted-foreground">
+                      <Text size="sm" class="text-muted-foreground">
                         <span v-if="profile?.bio">{{ profile.bio }}</span>
-                        <span v-else>Your creative workspace awaits</span>
-                      </Text>
-                      <Text v-if="profile?.username" size="sm" class="text-muted-foreground/70 mt-1">
-                        @{{ profile.username }}
+                        <span v-else>Ready to write something amazing today?</span>
                       </Text>
                     </div>
                   </div>
                   
-                  <!-- Quick Actions -->
-                  <div class="hidden sm:flex items-center gap-3">
-                    <Button
-                      variant="outline"
-                      size="default"
-                      @click="handleNewProject"
-                    >
-                      <Icon name="lucide:plus" class="mr-2 h-4 w-4" />
-                      New Project
-                    </Button>
-                    <Button
-                      variant="default"
-                      size="default"
-                      @click="handleQuickWrite"
-                    >
-                      <Icon name="lucide:pen-tool" class="mr-2 h-4 w-4" />
-                      Quick Write
-                    </Button>
-                  </div>
+                  <!-- Create Project Button -->
+                  <Button
+                    variant="default"
+                    size="default"
+                    @click="handleNewProject"
+                  >
+                    <Icon name="lucide:plus" class="mr-2 h-4 w-4" />
+                    Create Project
+                  </Button>
                 </div>
               </div>
 
               <!-- Profile Completion Reminder -->
               <div v-if="!profileLoading && (!profile?.full_name || !profile?.username)" 
-                   class="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                   class="mb-6 p-3 bg-primary/5 border border-primary/20 rounded-lg">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-3">
-                    <Icon name="lucide:info" class="h-5 w-5 text-primary" />
+                    <Icon name="lucide:info" class="h-4 w-4 text-primary" />
                     <div>
                       <Text size="sm" class="text-foreground font-medium">
                         Complete your profile
@@ -116,63 +103,191 @@
                   </Button>
                 </div>
               </div>
-
-              <!-- Dashboard Stats Cards (Placeholder) -->
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                <Card class="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <div class="p-6">
-                    <div class="flex items-center justify-between mb-2">
-                      <Text size="sm" class="text-muted-foreground">Total Projects</Text>
-                      <Icon name="lucide:book" class="h-4 w-4 text-primary" />
-                    </div>
-                    <Heading tag="h3" size="h3" class="text-foreground">
-                      0
-                    </Heading>
-                  </div>
-                </Card>
-
-                <Card class="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <div class="p-6">
-                    <div class="flex items-center justify-between mb-2">
-                      <Text size="sm" class="text-muted-foreground">Words Written</Text>
-                      <Icon name="lucide:file-text" class="h-4 w-4 text-primary" />
-                    </div>
-                    <Heading tag="h3" size="h3" class="text-foreground">
-                      0
-                    </Heading>
-                  </div>
-                </Card>
-
-                <Card class="border-border/50 bg-card/50 backdrop-blur-sm">
-                  <div class="p-6">
-                    <div class="flex items-center justify-between mb-2">
-                      <Text size="sm" class="text-muted-foreground">Writing Streak</Text>
-                      <Icon name="lucide:flame" class="h-4 w-4 text-primary" />
-                    </div>
-                    <Heading tag="h3" size="h3" class="text-foreground">
-                      0 days
-                    </Heading>
-                  </div>
-                </Card>
-              </div>
             </Container>
           </div>
         </Section>
 
-        <!-- Main Dashboard Content Area (Empty for now) -->
-        <Section spacing="none" class="dashboard-content">
+        <!-- Dashboard Widgets -->
+        <Section spacing="none" class="dashboard-widgets">
           <Container size="xl">
-            <div class="py-8 sm:py-12 min-h-[400px]">
-              <!-- Placeholder for future dashboard content -->
-              <div class="flex items-center justify-center h-[400px] border-2 border-dashed border-border/50 rounded-lg">
-                <div class="text-center">
-                  <Icon name="lucide:layout-dashboard" class="h-12 w-12 text-muted-foreground/50 mx-auto mb-4" />
-                  <Text size="lg" class="text-muted-foreground mb-2">
-                    Dashboard content coming soon
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              <!-- Todo Widget -->
+              <TodoWidget />
+              
+              <!-- AI Content Widget -->
+              <AIContentWidget />
+              
+              <!-- Projects Widget -->
+              <ProjectsWidget 
+                @create="handleNewProject"
+                @open="handleOpenProject"
+                @edit="handleEditProject"
+                @view-all="showListView = true"
+              />
+              
+              <!-- Writing Goals Widget -->
+              <WritingGoalsWidget 
+                @view-stats="handleViewStats"
+              />
+            </div>
+          </Container>
+        </Section>
+
+        <!-- Projects Grid/List Section -->
+        <Section spacing="none" class="projects-section">
+          <Container size="xl">
+            <div class="pb-8">
+              <!-- Section Header -->
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <Heading tag="h2" size="h4" class="text-foreground">
+                    All Projects
+                  </Heading>
+                  <Text size="sm" class="text-muted-foreground mt-1">
+                    Manage and organize your creative works
                   </Text>
-                  <Text size="sm" class="text-muted-foreground/70">
-                    Your projects, analytics, and creative tools will appear here
+                </div>
+                
+                <!-- View Toggle -->
+                <div class="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    class="h-8"
+                    :class="{ 'bg-muted': !showListView }"
+                    @click="showListView = false"
+                  >
+                    <Icon name="lucide:layout-grid" class="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    class="h-8"
+                    :class="{ 'bg-muted': showListView }"
+                    @click="showListView = true"
+                  >
+                    <Icon name="lucide:layout-list" class="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+              
+              <!-- Projects Display -->
+              <div v-if="allProjects.length === 0" class="text-center py-12 border-2 border-dashed border-border/50 rounded-lg">
+                <Icon name="lucide:folder-open" class="h-12 w-12 text-muted-foreground/50 mx-auto mb-4" />
+                <Text size="lg" class="text-muted-foreground mb-2">
+                  No projects yet
+                </Text>
+                <Text size="sm" class="text-muted-foreground/70 mb-4">
+                  Start your first writing project to see it here
+                </Text>
+                <Button
+                  variant="outline"
+                  @click="handleNewProject"
+                >
+                  <Icon name="lucide:plus" class="mr-2 h-4 w-4" />
+                  Create Your First Project
+                </Button>
+              </div>
+              
+              <!-- Grid View -->
+              <div v-else-if="!showListView" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div
+                  v-for="project in allProjects"
+                  :key="project.id"
+                  class="group relative p-5 rounded-lg border border-border/50 hover:border-primary/50 bg-card/30 hover:bg-card/50 transition-all cursor-pointer"
+                  @click="handleOpenProject(project)"
+                >
+                  <div class="flex items-start justify-between gap-3 mb-3">
+                    <Icon 
+                      :name="getProjectIcon(project.type)" 
+                      class="h-5 w-5 text-primary flex-shrink-0"
+                    />
+                    <Badge 
+                      :variant="getStatusVariant(project.status)"
+                      class="text-xs"
+                    >
+                      {{ formatStatus(project.status) }}
+                    </Badge>
+                  </div>
+                  
+                  <Heading tag="h3" size="h5" class="text-foreground mb-2">
+                    {{ project.title }}
+                  </Heading>
+                  
+                  <Text size="sm" class="text-muted-foreground line-clamp-2 mb-3">
+                    {{ project.description || 'No description' }}
                   </Text>
+                  
+                  <div class="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{{ formatWordCount(project.word_count) }} words</span>
+                    <span>{{ formatDate(project.updated_at) }}</span>
+                  </div>
+                  
+                  <!-- Progress Bar -->
+                  <div v-if="project.target_word_count" class="mt-3">
+                    <div class="h-1 bg-muted rounded-full overflow-hidden">
+                      <div 
+                        class="h-full bg-primary transition-all"
+                        :style="`width: ${Math.min(100, (project.word_count / project.target_word_count) * 100)}%`"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- List View -->
+              <div v-else class="space-y-2">
+                <div
+                  v-for="project in allProjects"
+                  :key="project.id"
+                  class="group flex items-center gap-4 p-4 rounded-lg border border-border/50 hover:border-primary/50 bg-card/30 hover:bg-card/50 transition-all cursor-pointer"
+                  @click="handleOpenProject(project)"
+                >
+                  <Icon 
+                    :name="getProjectIcon(project.type)" 
+                    class="h-5 w-5 text-primary flex-shrink-0"
+                  />
+                  
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 mb-1">
+                      <Heading tag="h4" size="h5" class="text-foreground">
+                        {{ project.title }}
+                      </Heading>
+                      <Badge 
+                        :variant="getStatusVariant(project.status)"
+                        class="text-xs"
+                      >
+                        {{ formatStatus(project.status) }}
+                      </Badge>
+                    </div>
+                    <Text size="sm" class="text-muted-foreground truncate">
+                      {{ project.description || 'No description' }}
+                    </Text>
+                  </div>
+                  
+                  <div class="flex items-center gap-6 text-sm text-muted-foreground">
+                    <span>{{ formatWordCount(project.word_count) }} words</span>
+                    <span>{{ formatDate(project.updated_at) }}</span>
+                  </div>
+                  
+                  <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      class="h-8 w-8 p-0"
+                      @click.stop="handleEditProject(project)"
+                    >
+                      <Icon name="lucide:edit-3" class="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      class="h-8 w-8 p-0"
+                      @click.stop="handleArchiveProject(project)"
+                    >
+                      <Icon name="lucide:archive" class="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -253,23 +368,127 @@ const handleSocialClick = (platform: string) => {
   console.log('Social click:', platform)
 }
 
+// Dashboard state
+const showListView = ref(false)
+
+// Mock project data (will be replaced with Supabase)
+const allProjects = ref([
+  {
+    id: '1',
+    title: 'The Midnight Garden',
+    description: 'A magical realism novel about a woman who discovers a portal to another world in her grandmother\'s garden.',
+    type: 'novel',
+    status: 'in-progress',
+    word_count: 42567,
+    target_word_count: 80000,
+    created_at: new Date(Date.now() - 30 * 86400000).toISOString(),
+    updated_at: new Date(Date.now() - 86400000).toISOString()
+  },
+  {
+    id: '2',
+    title: 'Coffee Shop Chronicles',
+    description: 'A collection of interconnected short stories set in a local coffee shop.',
+    type: 'short-story',
+    status: 'review',
+    word_count: 15234,
+    target_word_count: 20000,
+    created_at: new Date(Date.now() - 15 * 86400000).toISOString(),
+    updated_at: new Date(Date.now() - 3600000).toISOString()
+  },
+  {
+    id: '3',
+    title: 'Echoes of Tomorrow',
+    description: 'A sci-fi screenplay about time travelers trying to prevent an apocalypse.',
+    type: 'screenplay',
+    status: 'draft',
+    word_count: 8902,
+    created_at: new Date(Date.now() - 7 * 86400000).toISOString(),
+    updated_at: new Date().toISOString()
+  }
+])
+
 // Dashboard specific actions
 const handleNewProject = () => {
-  // TODO: Implement new project creation
-  console.log('New project clicked')
+  // TODO: Implement new project creation modal
+  console.log('Create new project')
 }
 
-const handleQuickWrite = () => {
-  // TODO: Implement quick write feature
-  console.log('Quick write clicked')
+const handleOpenProject = (project: any) => {
+  // TODO: Navigate to project editor
+  console.log('Open project:', project)
+  // navigateTo(`/projects/${project.id}`)
 }
 
-// TEST REAL-TIME UPDATES:
-// 1. Open this dashboard in your browser (must be logged in)
-// 2. Open the /account page in another tab
-// 3. Update your name, username, or bio in the account page
-// 4. Watch the dashboard update automatically without refreshing!
-// The profile data syncs in real-time across all tabs/windows
+const handleEditProject = (project: any) => {
+  // TODO: Open project settings modal
+  console.log('Edit project:', project)
+}
+
+const handleArchiveProject = (project: any) => {
+  // TODO: Archive project
+  console.log('Archive project:', project)
+}
+
+const handleViewStats = () => {
+  // TODO: Navigate to analytics page
+  console.log('View writing stats')
+  // navigateTo('/analytics')
+}
+
+// Helper functions for projects
+const getProjectIcon = (type: string) => {
+  const icons: Record<string, string> = {
+    'novel': 'lucide:book',
+    'short-story': 'lucide:file-text',
+    'poetry': 'lucide:feather',
+    'screenplay': 'lucide:film',
+    'blog': 'lucide:pen-tool',
+    'other': 'lucide:folder'
+  }
+  return icons[type] || icons.other
+}
+
+const getStatusVariant = (status: string): 'default' | 'secondary' | 'outline' | 'destructive' => {
+  const variants: Record<string, 'default' | 'secondary' | 'outline' | 'destructive'> = {
+    'draft': 'outline',
+    'in-progress': 'default',
+    'review': 'secondary',
+    'completed': 'secondary',
+    'published': 'default'
+  }
+  return variants[status] || 'outline'
+}
+
+const formatStatus = (status: string) => {
+  return status.split('-').map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1)
+  ).join(' ')
+}
+
+const formatWordCount = (count: number) => {
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}k`
+  }
+  return count.toString()
+}
+
+const formatDate = (date: string) => {
+  const d = new Date(date)
+  const now = new Date()
+  const diffMs = now.getTime() - d.getTime()
+  const diffHours = Math.floor(diffMs / 3600000)
+  const diffDays = Math.floor(diffMs / 86400000)
+  
+  if (diffHours < 1) {
+    return 'Just now'
+  } else if (diffHours < 24) {
+    return `${diffHours}h ago`
+  } else if (diffDays < 7) {
+    return `${diffDays}d ago`
+  } else {
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  }
+}
 
 // SEO Meta
 useHead({
