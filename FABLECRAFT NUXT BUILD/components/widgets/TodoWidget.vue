@@ -344,33 +344,130 @@
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue'
 
-// Try to use database todos, fallback to local storage if database is not available
-const useDbTodos = () => {
+// Simple local storage todos for now
+const STORAGE_KEY = 'fablecraft_todos_widget'
+
+interface SimpleTodo {
+  id: string
+  text: string
+  completed: boolean
+  due_date?: string | null
+  priority?: 'low' | 'medium' | 'high'
+  category?: string | null
+  created_at: string
+}
+
+// State
+const todos = ref<SimpleTodo[]>([])
+const loading = ref(false)
+const error = ref<string | null>(null)
+
+// Categories
+const categories = ['Personal', 'Work', 'Writing', 'Research', 'Ideas', 'Other']
+
+// Load from localStorage
+const loadTodos = () => {
+  if (!process.client) return
   try {
-    return useTodos()
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) {
+      todos.value = JSON.parse(stored)
+    }
   } catch (err) {
-    console.warn('Database todos not available, using local storage:', err)
-    return useTodosLocal()
+    console.error('Failed to load todos:', err)
   }
 }
 
-// Use the appropriate todos implementation
-const {
-  todos,
-  loading,
-  error,
-  sortedTodos,
-  incompleteTodos,
-  completedTodos,
-  overdueTodos,
-  todayTodos,
-  categories,
-  createTodo,
-  toggleTodo,
-  deleteTodo,
-  updateTodo,
-  clearCompleted
-} = useDbTodos()
+// Save to localStorage
+const saveTodos = () => {
+  if (!process.client) return
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos.value))
+  } catch (err) {
+    console.error('Failed to save todos:', err)
+  }
+}
+
+// Initialize on mount
+onMounted(() => {
+  loadTodos()
+})
+
+// Watch and save
+watch(todos, saveTodos, { deep: true })
+
+// Computed
+const sortedTodos = computed(() => {
+  return [...todos.value].sort((a, b) => {
+    if (a.completed !== b.completed) {
+      return a.completed ? 1 : -1
+    }
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  })
+})
+
+const incompleteTodos = computed(() => 
+  todos.value.filter(t => !t.completed)
+)
+
+const completedTodos = computed(() => 
+  todos.value.filter(t => t.completed)
+)
+
+const overdueTodos = computed(() => 
+  todos.value.filter(t => 
+    !t.completed && 
+    t.due_date && 
+    new Date(t.due_date) < new Date()
+  )
+)
+
+const todayTodos = computed(() => {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  
+  return todos.value.filter(t => {
+    if (!t.due_date || t.completed) return false
+    const dueDate = new Date(t.due_date)
+    return dueDate >= today && dueDate < tomorrow
+  })
+})
+
+// Methods
+const createTodo = async (input: any) => {
+  const newTodo: SimpleTodo = {
+    id: `todo_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    text: input.text,
+    completed: false,
+    due_date: input.due_date,
+    priority: input.priority,
+    category: input.category,
+    created_at: new Date().toISOString()
+  }
+  
+  todos.value.push(newTodo)
+  return newTodo
+}
+
+const updateTodo = async (id: string, updates: Partial<SimpleTodo>) => {
+  const index = todos.value.findIndex(t => t.id === id)
+  if (index !== -1) {
+    todos.value[index] = { ...todos.value[index], ...updates }
+  }
+}
+
+const deleteTodo = async (id: string) => {
+  const index = todos.value.findIndex(t => t.id === id)
+  if (index !== -1) {
+    todos.value.splice(index, 1)
+  }
+}
+
+const clearCompleted = async () => {
+  todos.value = todos.value.filter(t => !t.completed)
+}
 
 // Local state
 const showAddTask = ref(false)

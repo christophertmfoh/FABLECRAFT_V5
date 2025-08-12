@@ -112,13 +112,13 @@
           <Container size="xl">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               <!-- Todo Widget -->
-              <TodoWidget />
+              <LazyTodoWidget />
               
               <!-- AI Content Widget -->
-              <AIContentWidget />
+              <LazyAIContentWidget />
               
               <!-- Projects Widget -->
-              <ProjectsWidget 
+              <LazyProjectsWidget 
                 @create="handleNewProject"
                 @open="handleOpenProject"
                 @edit="handleEditProject"
@@ -126,7 +126,7 @@
               />
               
               <!-- Writing Goals Widget -->
-              <WritingGoalsWidget 
+              <LazyWritingGoalsWidget 
                 @view-stats="handleViewStats"
               />
             </div>
