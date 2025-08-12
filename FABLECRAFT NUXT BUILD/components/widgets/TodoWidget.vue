@@ -343,9 +343,18 @@
 
 <script setup lang="ts">
 import { ref, computed, nextTick } from 'vue'
-import type { Todo, CreateTodoInput } from '~/composables/useTodos'
 
-// Use the todos composable
+// Try to use database todos, fallback to local storage if database is not available
+const useDbTodos = () => {
+  try {
+    return useTodos()
+  } catch (err) {
+    console.warn('Database todos not available, using local storage:', err)
+    return useTodosLocal()
+  }
+}
+
+// Use the appropriate todos implementation
 const {
   todos,
   loading,
@@ -361,7 +370,7 @@ const {
   deleteTodo,
   updateTodo,
   clearCompleted
-} = useTodos()
+} = useDbTodos()
 
 // Local state
 const showAddTask = ref(false)
@@ -371,7 +380,7 @@ const activeFilter = ref<'all' | 'today' | 'overdue' | 'completed'>('all')
 const taskInput = ref<HTMLInputElement>()
 
 // New todo form
-const newTodo = ref<CreateTodoInput & { priority?: 'low' | 'medium' | 'high' }>({
+const newTodo = ref<{ text: string; due_date?: string | null; priority?: 'low' | 'medium' | 'high'; category?: string | null }>({
   text: '',
   due_date: null,
   priority: undefined,

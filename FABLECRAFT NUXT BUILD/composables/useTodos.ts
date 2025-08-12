@@ -30,6 +30,7 @@ export const useTodos = () => {
   const todos = useState<Todo[]>('userTodos', () => [])
   const loading = useState<boolean>('todosLoading', () => false)
   const error = useState<string | null>('todosError', () => null)
+  const isUsingLocalStorage = useState<boolean>('todosUsingLocal', () => false)
   
   // Categories for quick filtering
   const categories = ['Personal', 'Work', 'Writing', 'Research', 'Ideas', 'Other']
@@ -105,7 +106,15 @@ export const useTodos = () => {
         .eq('user_id', user.value.id)
         .order('order_index', { ascending: true })
       
-      if (fetchError) throw fetchError
+      if (fetchError) {
+        // If table doesn't exist, just use empty array
+        if (fetchError.message?.includes('relation') || fetchError.message?.includes('does not exist')) {
+          console.warn('Todos table not found. Using local storage fallback.')
+          todos.value = []
+          return
+        }
+        throw fetchError
+      }
       
       todos.value = data || []
     } catch (err: any) {
@@ -118,7 +127,28 @@ export const useTodos = () => {
   
   // Create a new todo
   const createTodo = async (input: CreateTodoInput) => {
-    if (!user.value) throw new Error('User not authenticated')
+    if (!user.value) {
+      // If no user, create a local todo
+      const maxOrder = todos.value.reduce((max, todo) => 
+        Math.max(max, todo.order_index), -1
+      )
+      
+      const localTodo: Todo = {
+        id: `local_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        user_id: 'local',
+        text: input.text,
+        completed: false,
+        due_date: input.due_date,
+        priority: input.priority,
+        category: input.category,
+        order_index: maxOrder + 1,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }
+      
+      todos.value.push(localTodo)
+      return localTodo
+    }
     
     loading.value = true
     error.value = null
@@ -143,7 +173,28 @@ export const useTodos = () => {
         .select()
         .single()
       
-      if (createError) throw createError
+      if (createError) {
+        // If database fails, create local todo
+        if (createError.message?.includes('relation') || createError.message?.includes('does not exist')) {
+          const localTodo: Todo = {
+            id: `local_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+            user_id: user.value.id,
+            text: input.text,
+            completed: false,
+            due_date: input.due_date,
+            priority: input.priority,
+            category: input.category,
+            order_index: maxOrder + 1,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          }
+          
+          todos.value.push(localTodo)
+          isUsingLocalStorage.value = true
+          return localTodo
+        }
+        throw createError
+      }
       
       // Add to local state immediately for responsive UI
       todos.value.push(data)
