@@ -228,12 +228,12 @@ const handleSubmit = async (event: Event) => {
 
 /* Error message styling */
 .error-message {
-  @apply text-xs text-red-600 bg-red-50 border border-red-200 rounded-md px-3 py-2;
+  @apply text-xs text-destructive bg-destructive/10 border border-destructive/20 rounded-md px-3 py-2;
 }
 
 /* Success message styling */
 .success-message {
-  @apply text-xs text-green-600 bg-green-50 border border-green-200 rounded-md px-3 py-2 flex items-center;
+  @apply text-xs text-success bg-success/10 border border-success/20 rounded-md px-3 py-2 flex items-center;
 }
 
 /* Disclaimer styling */

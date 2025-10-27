@@ -45,7 +45,7 @@
 
       <!-- Footer Bottom -->
       <FooterBottom 
-        class="pt-8 border-t border-border/20"
+        class="pt-8"
         :default-company="companyInfo.name"
         :legal-links="footerLinks.legal"
         :social-links="socialLinks"
@@ -56,7 +56,7 @@
       />
 
       <!-- Made with Love -->
-      <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground mt-8 pt-6 border-t border-border/10">
+      <div class="flex items-center justify-center gap-2 text-sm text-muted-foreground mt-8 pt-6">
         <span>{{ footerBranding.madeWithText }}</span>
         <AnimatedOrb 
           size="md" 
@@ -119,14 +119,17 @@ const tagline = computed(() => {
 })
 
 const footerClasses = computed(() => {
+  const baseClasses = 'relative z-10'
+  
   const variantClasses = {
-    default: 'relative z-10 bg-gradient-to-t from-muted/30 to-transparent border-t border-border',
-    minimal: 'relative z-10 bg-transparent border-t border-border/50',
-    dark: 'relative z-10 bg-background border-t border-border'
+    default: '',  // Removed border-t - no weird line at top
+    minimal: 'bg-transparent',  // Removed border-t
+    dark: ''  // Removed border-t
   }
 
   return cn(
     'footer-organism',
+    baseClasses,
     variantClasses[props.variant],
     props.className
   )
@@ -140,14 +143,12 @@ const handleNavigate = (payload: { text: string; href?: string; category: string
     category: payload.category
   })
   
-  // Analytics tracking
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'footer_navigation', {
-      'link_text': payload.text,
-      'link_category': payload.category,
-      'link_url': payload.href
-    })
-  }
+  // Track navigation event
+  trackEvent('footer_navigation', {
+    'link_text': payload.text,
+    'link_category': payload.category,
+    'link_url': payload.href
+  })
 }
 
 const handleNewsletter = (email: string) => {
@@ -157,50 +158,49 @@ const handleNewsletter = (email: string) => {
 const handleNewsletterSuccess = (email: string) => {
   emit('newsletter:success', email)
   
-  // Analytics tracking
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'newsletter_signup', {
-      'method': 'footer_form'
-    })
-  }
+  // Track newsletter signup
+  trackEvent('newsletter_signup', {
+    'method': 'footer_form'
+  })
 }
 
 const handleNewsletterError = (error: string) => {
   emit('newsletter:error', error)
 }
 
-const handleSocialClick = (payload: { platform: string; href?: string }) => {
-  emit('social:click', payload.platform)
+const handleSocialClick = (platform: string) => {
+  emit('social:click', platform)
   
-  // Analytics tracking
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'social_click', {
-      'social_platform': payload.platform.toLowerCase(),
-      'click_location': 'footer'
-    })
-  }
+  // Track social click
+  trackEvent('social_click', {
+    'platform': platform,
+    'location': 'footer'
+  })
 }
 
-const handleLegalClick = (payload: { text: string; href?: string; type: 'legal' }) => {
-  emit('legal:click', {
-    text: payload.text,
-    href: payload.href
-  })
+const handleLegalClick = (payload: { text: string; href?: string }) => {
+  emit('legal:click', payload)
   
-  // Analytics tracking
+  // Track legal link click
+  trackEvent('legal_click', {
+    'link_text': payload.text,
+    'link_url': payload.href
+  })
+}
+
+// Simple analytics utility
+const trackEvent = (eventName: string, parameters: Record<string, any>) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'legal_link_click', {
-      'link_text': payload.text,
-      'link_url': payload.href
-    })
+    window.gtag('event', eventName, parameters)
   }
 }
 </script>
 
 <style scoped>
-/* Footer organism styling */
+/* Footer organism styling - following header pattern */
 .footer-organism {
   @apply w-full;
+  transition: background-color 300ms ease-in-out, border-color 300ms ease-in-out;
 }
 
 /* Grid responsive behavior */
@@ -224,30 +224,8 @@ const handleLegalClick = (payload: { text: string; href?: string; type: 'legal' 
 /* Made with love section styling */
 .made-with-love {
   @apply flex items-center justify-center gap-2 text-sm text-muted-foreground;
-  @apply mt-8 pt-6 border-t border-border/10;
-}
-
-/* Background gradient variants */
-.footer-organism.bg-gradient-to-t {
-  background: linear-gradient(to top, hsl(var(--muted) / 0.3), transparent);
-}
-
-/* Border styling */
-.border-border {
-  border-color: hsl(var(--border));
-}
-
-.border-border\/20 {
-  border-color: hsl(var(--border) / 0.2);
-}
-
-.border-border\/10 {
-  border-color: hsl(var(--border) / 0.1);
-}
-
-/* Muted foreground color */
-.text-muted-foreground {
-  color: hsl(var(--muted-foreground));
+  @apply mt-8 pt-6;
+  transition: color 300ms ease-in-out;
 }
 
 /* Focus management for accessibility */
@@ -265,18 +243,26 @@ footer:focus-within {
   .footer-organism {
     @apply border-foreground/50;
   }
-  
-  .border-border\/20,
-  .border-border\/10 {
-    @apply border-foreground/30;
-  }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .footer-organism * {
+  .footer-organism,
+  .footer-organism *,
+  .made-with-love {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Print optimization */
+@media print {
+  .footer-organism {
+    @apply bg-white text-black border-black;
+  }
+  
+  .made-with-love {
+    @apply text-black border-black/20;
   }
 }
 </style>

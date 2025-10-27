@@ -9,7 +9,7 @@
     <div class="icon-container">
       <AtomIcon 
         name="lucide:feather" 
-        class="w-7 h-7 text-primary" 
+        class="w-7 h-7 text-primary-foreground" 
         aria-hidden="true" 
       />
     </div>
@@ -30,8 +30,7 @@ interface NavigationLogoProps {
   brandText?: string
   /** Whether to show brand text */
   showText?: boolean
-  /** Icon size variant */
-  iconSize?: 'sm' | 'md' | 'lg' | 'xl'
+  /** Icon size variant (currently unused - removed for simplicity) */
   /** Custom aria-label for accessibility */
   ariaLabel?: string
   /** Additional CSS classes */
@@ -42,7 +41,6 @@ interface NavigationLogoProps {
 const props = withDefaults(defineProps<NavigationLogoProps>(), {
   brandText: 'Fablecraft',
   showText: true,
-  iconSize: 'lg',
   ariaLabel: 'Navigate to homepage',
 })
 
@@ -69,10 +67,15 @@ const logoClasses = computed(() => {
 </script>
 
 <style scoped>
-/* Icon container (exact match to React version) */
+/* Icon container (matching footer solid style) */
 .icon-container {
-  @apply w-14 h-14 bg-primary/10 hover:bg-primary/20 rounded-xl flex items-center justify-center shadow-md;
-  @apply group-hover:shadow-lg group-hover:scale-105 transition-all duration-300;
+  @apply w-14 h-14 rounded-xl flex items-center justify-center shadow-md;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  transition: all 0.3s ease;
+}
+
+.icon-container:hover {
+  @apply shadow-lg scale-105;
 }
 
 /* Brand text (slightly smaller for better proportions) */
@@ -87,7 +90,7 @@ const logoClasses = computed(() => {
     @apply transition-none;
   }
   
-  .group:hover .icon-container {
+  .icon-container:hover {
     @apply scale-100;
   }
 }

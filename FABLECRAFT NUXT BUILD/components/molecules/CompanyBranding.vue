@@ -94,6 +94,7 @@ const brandingClasses = computed(() => {
   margin-bottom: 1.5rem;
 }
 
+/* Theme-reactive logo container */
 .logo-container {
   @apply w-12 h-12 rounded-xl flex items-center justify-center shadow-lg;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
@@ -104,17 +105,20 @@ const brandingClasses = computed(() => {
   @apply shadow-xl scale-105;
 }
 
+/* Theme-reactive company name with enhanced gradient */
 .company-name {
   @apply text-2xl font-bold;
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  transition: background 300ms ease-in-out;
 }
 
-/* Company description styling */
+/* Enhanced company description with theme support */
 .company-description {
   @apply text-foreground/70 text-sm leading-relaxed max-w-xs;
+  transition: color 300ms ease-in-out;
 }
 
 /* Contact section */
@@ -122,7 +126,7 @@ const brandingClasses = computed(() => {
   @apply space-y-3;
 }
 
-/* Variants */
+/* Responsive variants with theme awareness */
 .company-branding.compact {
   @apply space-y-3;
 }
@@ -147,7 +151,7 @@ const brandingClasses = computed(() => {
   @apply text-base max-w-sm;
 }
 
-/* Responsive adjustments */
+/* Enhanced responsive adjustments */
 @media (max-width: 768px) {
   .company-name {
     @apply text-xl;
@@ -159,6 +163,53 @@ const brandingClasses = computed(() => {
   
   .company-description {
     @apply text-xs;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .company-name {
+    background: hsl(var(--primary));
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    @apply text-primary;
+  }
+  
+  .company-description {
+    @apply text-foreground/90;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .logo-container,
+  .company-name,
+  .company-description {
+    transition: none !important;
+  }
+  
+  .group:hover .logo-container {
+    @apply scale-100;
+  }
+}
+
+/* Print styles */
+@media print {
+  .logo-container {
+    @apply shadow-none bg-gray-200;
+  }
+  
+  .company-name {
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    @apply text-black;
+  }
+  
+  .company-description {
+    @apply text-gray-700;
   }
 }
 </style>

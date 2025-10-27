@@ -6,15 +6,19 @@
     :aria-label="ariaLabel"
   >
     <div class="nav-items">
-      <!-- Navigation buttons with theme-responsive colors -->
-      <button
+      <!-- Navigation buttons using Button atom -->
+      <Button
         v-for="item in navigationItems"
         :key="item.id"
-        class="text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 tracking-wide cursor-pointer uppercase"
+        variant="ghost"
+        size="sm"
+        :disabled="item.disabled"
+        :aria-label="item.ariaLabel"
+        class="text-sm font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 tracking-wide uppercase"
         @click="() => handleNavigate(item, item.href)"
       >
         {{ item.label }}
-      </button>
+      </Button>
     </div>
   </nav>
 </template>
