@@ -12,16 +12,15 @@ export const useTheme = () => {
     default: () => 'system', // Default to system theme
   })
 
-  // Current theme state
+  // ✅ FIXED: Simple SSR-safe theme state initialization
   const currentTheme = useState<string>('currentTheme', () => {
-    // SSR: Use cookie value if available, otherwise default to system
     return themeCookie.value || 'system'
   })
 
   // System theme detection
   const systemTheme = ref<'light' | 'dark'>('light')
 
-  // Initialize system theme detection on client
+  // Initialize system theme detection on client only
   if (import.meta.client) {
     // Set initial system theme
     systemTheme.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -44,17 +43,19 @@ export const useTheme = () => {
         mediaQuery.removeEventListener('change', handleSystemThemeChange)
       })
     }
+
   }
 
-  // Resolved theme (what actually gets applied to DOM)
+  // ✅ FIXED: Simple resolved theme with SSR safety
   const resolvedTheme = computed(() => {
     if (currentTheme.value === 'system') {
-      return systemTheme.value
+      // On server, default to light; on client, use actual system preference
+      return import.meta.client ? systemTheme.value : 'light'
     }
     return currentTheme.value
   })
 
-  // Update DOM with current theme
+  // ✅ FIXED: Update DOM with current theme
   const updateDOMTheme = () => {
     if (!import.meta.client) return
 
@@ -77,7 +78,7 @@ export const useTheme = () => {
     updateDOMTheme()
   }
 
-  // Initialize theme on client
+  // ✅ FIXED: Initialize theme on client
   const initializeTheme = () => {
     if (!import.meta.client) return
 
@@ -133,8 +134,8 @@ export const useTheme = () => {
 
   // Auto-initialize theme on client
   if (import.meta.client) {
-    // Use nextTick to ensure DOM is ready
-    nextTick(() => {
+    // Use onMounted to ensure DOM is ready
+    onMounted(() => {
       initializeTheme()
     })
   }
@@ -147,6 +148,7 @@ export const useTheme = () => {
     systemTheme: readonly(systemTheme),
     currentThemeObject: readonly(currentThemeObject),
     isDark: readonly(isDark),
+    // Note: Removed isHydrated - simplified hydration approach
     setTheme,
     setThemeWithTransition,
     toggleTheme,

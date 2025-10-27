@@ -4,26 +4,30 @@
     class="min-h-screen bg-background transition-colors duration-300"
     :class="[currentTheme, { 'theme-transition': isThemeTransitioning }]"
   >
-    <!-- Background Effects Layer -->
-    <div class="fixed inset-0 pointer-events-none z-0">
-      <!-- Paper Texture -->
-      <PaperTexture v-if="paperTextureEnabled" />
-
-      <!-- Background Orbs -->
-      <BackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
-
-      <!-- Firefly Effect -->
-      <FireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
-    </div>
+    <!-- Background Effects Layer - CLIENT ONLY for Performance -->
+    <!-- These are decorative and don't need SSR -->
+    <ClientOnly>
+      <div class="fixed inset-0 pointer-events-none z-0">
+        <!-- Lazy load each effect component -->
+        <LazyPaperTexture v-if="paperTextureEnabled" />
+        <LazyBackgroundOrbs v-if="orbsEnabled" performance-mode="high" />
+        <LazyFireflyEffect v-if="firefliesEnabled" :count="fireflyCount" performance-mode="high" />
+      </div>
+      
+      <!-- Fallback while effects load (invisible placeholder) -->
+      <template #fallback>
+        <div class="fixed inset-0 pointer-events-none z-0" />
+      </template>
+    </ClientOnly>
 
     <!-- Main Content Layer -->
     <div class="relative z-10">
-      <!-- Skip to Content Link (Accessibility) -->
+      <!-- Skip to Content Link (Accessibility) - Keep SSR -->
       <VisuallyHidden>
-        <a href="#main-content" class="skip-link"> Skip to main content </a>
+        <a href="#main-content" class="skip-link">Skip to main content</a>
       </VisuallyHidden>
 
-      <!-- Navigation Header -->
+      <!-- Navigation Header - KEEP SSR (lightweight, needed immediately) -->
       <NavigationHeader
         :is-authenticated="isAuthenticated"
         :user="user"
@@ -35,7 +39,7 @@
 
       <!-- Main Content -->
       <main id="main-content" class="relative z-20">
-        <!-- Hero Section -->
+        <!-- Hero Section - KEEP SSR (critical for SEO and first impression) -->
         <Section spacing="none" class="hero-section">
           <div class="py-20 sm:py-28">
             <OHeroSection
@@ -48,134 +52,158 @@
           </div>
         </Section>
 
-        <!-- Features Section -->
-        <Section spacing="none" class="features-section">
-          <div class="py-20 sm:py-28">
-            <OFeaturesSection
-              id="features"
-              variant="default"
-              :show-trust-indicators="true"
-              :show-key-benefits="true"
-            />
-          </div>
-        </Section>
-
-        <!-- Process Section -->
-        <Section spacing="none" class="process-section">
-          <div class="py-20 sm:py-28">
-            <Container size="xl">
-              <OProcessSection
-                id="process"
-                variant="default"
-                @step-click="handleProcessStepClick"
+        <!-- Below-the-fold Content - LAZY LOAD for Performance -->
+        <!-- All sections still render, just progressively -->
+        <ClientOnly>
+          <!-- Optional: Show subtle loading state while sections load -->
+          <template #fallback>
+            <div class="space-y-20 py-20">
+              <!-- Minimal skeleton that matches your section heights -->
+              <div 
+                v-for="i in 5" 
+                :key="i"
+                class="h-96 bg-gradient-to-r from-transparent via-gray-50/50 to-transparent animate-pulse"
               />
-            </Container>
-          </div>
-        </Section>
+            </div>
+          </template>
 
-        <!-- Testimonials Section -->
-        <Section spacing="none" class="testimonials-section">
-          <div class="py-20 sm:py-28">
-            <OTestimonialsSection
-              id="testimonials"
-              variant="default"
-              @testimonial-click="handleTestimonialClick"
-            />
-          </div>
-        </Section>
+          <!-- Features Section - Lazy Loaded -->
+          <Section spacing="none" class="features-section">
+            <div class="py-20 sm:py-28">
+              <LazyOFeaturesSection
+                id="features"
+                variant="default"
+                :show-trust-indicators="true"
+                :show-key-benefits="true"
+              />
+            </div>
+          </Section>
 
-        <!-- Pricing Section -->
-        <Section spacing="none" class="pricing-section">
-          <div class="py-20 sm:py-28">
-            <OPricingSection
-              id="pricing"
-              variant="default"
-              @plan-click="handlePlanClick"
-              @cta-click="handlePricingCtaClick"
-            />
-          </div>
-        </Section>
+          <!-- Process Section - Lazy Loaded -->
+          <Section spacing="none" class="process-section">
+            <div class="py-20 sm:py-28">
+              <Container size="xl">
+                <LazyOProcessSection
+                  id="process"
+                  variant="default"
+                  @step-click="handleProcessStepClick"
+                />
+              </Container>
+            </div>
+          </Section>
 
-        <!-- CTA Section -->
-        <Section spacing="none" class="cta-section">
-          <div class="py-20 sm:py-28">
-            <OCtaSection
-              id="cta"
-              variant="default"
-              @primary-cta-click="handlePrimaryCtaClick"
-              @secondary-cta-click="handleSecondaryCtaClick"
-            />
-          </div>
-        </Section>
+          <!-- Testimonials Section - Lazy Loaded -->
+          <Section spacing="none" class="testimonials-section">
+            <div class="py-20 sm:py-28">
+              <LazyOTestimonialsSection
+                id="testimonials"
+                variant="default"
+                @testimonial-click="handleTestimonialClick"
+              />
+            </div>
+          </Section>
+
+          <!-- Pricing Section - Lazy Loaded -->
+          <Section spacing="none" class="pricing-section">
+            <div class="py-20 sm:py-28">
+              <LazyOPricingSection
+                id="pricing"
+                variant="default"
+                @plan-click="handlePlanClick"
+                @cta-click="handlePricingCtaClick"
+              />
+            </div>
+          </Section>
+
+          <!-- CTA Section - Lazy Loaded -->
+          <Section spacing="none" class="cta-section">
+            <div class="py-20 sm:py-28">
+              <LazyOCtaSection
+                id="cta"
+                variant="default"
+                @primary-cta-click="handlePrimaryCtaClick"
+                @secondary-cta-click="handleSecondaryCtaClick"
+              />
+            </div>
+          </Section>
+        </ClientOnly>
       </main>
 
-      <!-- Footer Section -->
-      <Footer
-        id="footer"
-        class="relative z-30"
-        :show-branding="true"
-        variant="default"
-        @navigate="handleFooterNavigation"
-        @newsletter:subscribe="handleNewsletterSubscribe"
-        @newsletter:success="handleNewsletterSuccess"
-        @newsletter:error="handleNewsletterError"
-        @social:click="handleSocialClick"
-        @legal:click="handleLegalClick"
-      />
+      <!-- Footer Section - Lazy Loaded (not critical for initial view) -->
+      <ClientOnly>
+        <LazyFooter
+          id="footer"
+          class="relative z-30"
+          :show-branding="true"
+          variant="default"
+          @navigate="handleFooterNavigation"
+          @newsletter:subscribe="handleNewsletterSubscribe"
+          @newsletter:success="handleNewsletterSuccess"
+          @newsletter:error="handleNewsletterError"
+          @social:click="handleSocialClick"
+          @legal:click="handleLegalClick"
+        />
+      </ClientOnly>
     </div>
 
-    <!-- Scroll Progress Indicator (optional) -->
-    <div v-if="showScrollProgress" class="fixed top-0 left-0 w-full h-1 bg-primary/20 z-[100]">
-      <div
-        class="h-full bg-primary transition-all duration-100"
-        :style="{ width: `${scrollProgress}%` }"
-      />
-    </div>
+    <!-- Scroll Progress Indicator - CLIENT ONLY (interactive feature) -->
+    <ClientOnly>
+      <div 
+        v-if="showScrollProgress" 
+        class="fixed top-0 left-0 w-full h-1 bg-primary/20 z-[100]"
+      >
+        <div
+          class="h-full bg-primary transition-all duration-100"
+          :style="{ width: `${scrollProgress}%` }"
+        />
+      </div>
+    </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
 import { logger } from '~/utils/logger'
 
+// ===== PERFORMANCE CRITICAL SECTION =====
+// Avoid blocking operations during SSR
+
 // Core Nuxt 3 composables
 const route = useRoute()
 const router = useRouter()
-const supabase = useSupabaseClient()
 
-// Authentication
-const user = useSupabaseUser()
+// CRITICAL FIX: Only initialize Supabase on client
+// This prevents blocking API calls during SSR
+const supabase = process.client ? useSupabaseClient() : null
+const user = process.client ? useSupabaseUser() : ref(null)
 
-// Compute authentication state
-const isAuthenticated = computed(() => !!user.value)
+// Compute authentication state safely
+const isAuthenticated = computed(() => !!user?.value)
 
-// Theme system
-const { currentTheme, isDark, isThemeTransitioning, setThemeWithTransition } = useTheme()
+// Theme system (lightweight, OK for SSR)
+const { currentTheme, isDark, isThemeTransitioning } = useTheme()
 
 // Visual effects state (using useState for SSR compatibility)
+// Default to false for most effects to improve initial load
 const orbsEnabled = useState('orbs-enabled', () => false)
-const firefliesEnabled = useState('fireflies-enabled', () => true)
+const firefliesEnabled = useState('fireflies-enabled', () => false) // Changed to false by default
 const fireflyCount = useState('firefly-count', () => 15)
-const paperTextureEnabled = useState('paper-texture-enabled', () => true)
+const paperTextureEnabled = useState('paper-texture-enabled', () => false) // Changed to false by default
 
-// Scroll progress
+// Scroll progress (client-only feature)
 const showScrollProgress = ref(false)
 const scrollProgress = ref(0)
 
-// Header classes removed - now handled by ONavigationHeader component
-
-// Analytics composable (ready for implementation)
-// const { trackPageView, trackEvent } = useAnalytics()
-
+// ===== EVENT HANDLERS (No changes needed) =====
 // Navigation handlers
 const handleAuth = () => {
-  // Navigate to auth page or trigger auth modal
   navigateTo('/auth')
 }
 
 const handleLogout = async () => {
+  if (!supabase) return
+  
   try {
     await supabase.auth.signOut()
-    // Optionally show success message
     logger.log('Logged out successfully')
   } catch (error) {
     logger.error('Error during logout:', error)
@@ -196,22 +224,21 @@ const handleHome = () => {
 
 // Hero section event handlers
 const handleNewProject = () => {
-  // Navigate to project creation or open project modal
   navigateTo('/projects/new')
 }
 
 const handleExploreExamples = () => {
-  // Navigate to examples/templates page
   navigateTo('/examples')
 }
 
 const handleBadgeClick = () => {
-  // Optional: Navigate to product announcement or features
   navigateTo('/features')
 }
 
-// Scroll handling
+// Scroll handling (client-only)
 const handleScroll = () => {
+  if (!process.client) return
+  
   const winScroll = document.documentElement.scrollTop
   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
   scrollProgress.value = (winScroll / height) * 100
@@ -220,32 +247,26 @@ const handleScroll = () => {
 // Footer event handlers
 const handleFooterNavigation = (payload: { type: string; item: string; category: string }) => {
   logger.log('Footer navigation:', payload)
-  // Future: Handle footer navigation routing
 }
 
 const handleNewsletterSubscribe = (email: string) => {
   logger.log('Newsletter subscription:', email)
-  // Future: Handle newsletter subscription API call
 }
 
 const handleNewsletterSuccess = (email: string) => {
   logger.log('Newsletter subscription successful:', email)
-  // Future: Show success notification
 }
 
 const handleNewsletterError = (error: string) => {
   logger.log('Newsletter subscription error:', error)
-  // Future: Show error notification
 }
 
 const handleSocialClick = (platform: string) => {
   logger.log('Social media click:', platform)
-  // Future: Handle social media analytics
 }
 
 const handleLegalClick = (payload: { text: string; href?: string }) => {
   logger.log('Legal link click:', payload)
-  // Future: Handle legal page navigation
 }
 
 // Process section event handlers
@@ -254,7 +275,6 @@ const handleProcessStepClick = (
   stepData: { title: string; description: string; detail?: string; category?: string }
 ) => {
   logger.log('Process step click:', { stepNumber, stepData })
-  // Future: Handle process step interactions - could show detailed view, navigate to specific feature, etc.
 }
 
 // Testimonials section event handlers
@@ -266,7 +286,6 @@ const handleTestimonialClick = (testimonial: {
   rating: number
 }) => {
   logger.log('Testimonial click:', testimonial)
-  // Future: Handle testimonial interactions - could show full testimonial, navigate to case study, etc.
 }
 
 // Pricing section event handlers
@@ -277,7 +296,6 @@ const handlePlanClick = (plan: {
   description: string
 }) => {
   logger.log('Pricing plan click:', plan)
-  // Future: Handle plan interactions - could show detailed comparison, features breakdown, etc.
 }
 
 const handlePricingCtaClick = (plan: {
@@ -287,17 +305,12 @@ const handlePricingCtaClick = (plan: {
   ctaText?: string
 }) => {
   logger.log('Pricing CTA click:', plan)
-  // Future: Handle pricing CTA - could navigate to signup, payment flow, contact sales, etc.
-
-  // Example routing based on plan type
+  
   if (plan.id === 'enterprise') {
-    // Could navigate to contact sales page
     logger.log('Navigating to contact sales for enterprise plan')
   } else if (plan.id === 'free') {
-    // Could navigate directly to signup
     logger.log('Navigating to free signup')
   } else {
-    // Could navigate to payment flow
     logger.log('Navigating to payment flow for paid plan')
   }
 }
@@ -305,11 +318,7 @@ const handlePricingCtaClick = (plan: {
 // CTA section event handlers
 const handlePrimaryCtaClick = () => {
   logger.log('Primary CTA click: Start Creating Free')
-  // Future: Navigate to signup flow or dashboard
-  // For now, could navigate to sign up page
-  // navigateTo('/signup')
-
-  // Or if user is already authenticated, go to dashboard
+  
   if (isAuthenticated.value) {
     logger.log('User authenticated, navigating to dashboard')
     // navigateTo('/dashboard')
@@ -321,45 +330,59 @@ const handlePrimaryCtaClick = () => {
 
 const handleSecondaryCtaClick = () => {
   logger.log('Secondary CTA click: Watch Demo')
-  // Future: Open demo video, navigate to demo page, or trigger demo modal
-  // Could be a video modal, YouTube embed, or dedicated demo page
-  // Example: openDemoModal() or navigateTo('/demo')
   logger.log('Opening demo experience')
 }
 
-// Component mount lifecycle
+// ===== LIFECYCLE HOOKS =====
+// Component mount lifecycle - CLIENT ONLY operations
 onMounted(() => {
+  // Enable visual effects after initial load for better UX
+  setTimeout(() => {
+    // Gradually enable effects for smooth experience
+    paperTextureEnabled.value = true
+    
+    setTimeout(() => {
+      firefliesEnabled.value = true
+    }, 500)
+    
+    setTimeout(() => {
+      // Only enable orbs if user doesn't prefer reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!prefersReducedMotion) {
+        orbsEnabled.value = true
+      }
+    }, 1000)
+  }, 100)
+  
   // Add scroll listener if progress bar is enabled
   if (showScrollProgress.value) {
     window.addEventListener('scroll', handleScroll, { passive: true })
   }
-
-  // Track page view
-  // trackPageView({ page: 'landing' })
-
+  
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {
     orbsEnabled.value = false
     firefliesEnabled.value = false
+    paperTextureEnabled.value = false
   }
 })
 
 // Cleanup
 onUnmounted(() => {
-  if (showScrollProgress.value) {
+  if (showScrollProgress.value && process.client) {
     window.removeEventListener('scroll', handleScroll)
   }
 })
 
-// SEO and Meta tags
+// ===== SEO AND META TAGS =====
+// These are important for SSR
 useHead({
-  title: 'Fablecraft - Modern Web Development Foundation',
+  title: 'Fablecraft - Create Amazing Stories with AI',
   meta: [
     {
       name: 'description',
-      content:
-        'A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript.',
+      content: 'Transform your ideas into captivating stories with Fablecraft\'s AI-powered storytelling platform. Create, collaborate, and share your narratives.',
     },
     {
       name: 'viewport',
@@ -368,16 +391,19 @@ useHead({
     // Open Graph
     {
       property: 'og:title',
-      content: 'Fablecraft - Modern Web Development Foundation',
+      content: 'Fablecraft - AI-Powered Storytelling Platform',
     },
     {
       property: 'og:description',
-      content:
-        'A comprehensive foundation for building modern web applications with Nuxt 3, Vue 3, and TypeScript.',
+      content: 'Transform your ideas into captivating stories with AI. Start creating for free.',
     },
     {
       property: 'og:type',
       content: 'website',
+    },
+    {
+      property: 'og:image',
+      content: '/og-image.png',
     },
     // Twitter Card
     {
@@ -386,11 +412,11 @@ useHead({
     },
     {
       name: 'twitter:title',
-      content: 'Fablecraft',
+      content: 'Fablecraft - Create Amazing Stories',
     },
     {
       name: 'twitter:description',
-      content: 'Modern web development foundation',
+      content: 'AI-powered storytelling platform for creators',
     },
   ],
   bodyAttrs: {
@@ -402,10 +428,16 @@ useHead({
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'WebSite',
+        '@type': 'WebApplication',
         name: 'Fablecraft',
-        description: 'Modern web development foundation',
+        description: 'AI-powered storytelling platform',
         url: 'https://fablecraft.dev',
+        applicationCategory: 'CreativeWork',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'USD',
+        },
       }),
     },
   ],
@@ -414,7 +446,8 @@ useHead({
 // Route meta for analytics
 definePageMeta({
   name: 'landing',
-  layout: false, // We're not using a layout wrapper for now
+  layout: false, // No layout wrapper for performance
+  // Keep SSR enabled - we're optimizing it, not disabling it
 })
 
 // Expose utilities for child components
@@ -495,5 +528,21 @@ provide('landingPage', {
   .cta-section > div {
     @apply py-28;
   }
+}
+
+/* Loading skeleton animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  background-size: 1000px 100%;
 }
 </style>
